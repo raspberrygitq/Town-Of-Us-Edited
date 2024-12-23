@@ -1,0 +1,223 @@
+using HarmonyLib;
+using TownOfUs.Roles;
+using System.Linq;
+using Object = UnityEngine.Object;
+using TownOfUs.Patches;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using TownOfUs.CrewmateRoles.MedicMod;
+using TownOfUs.CrewmateRoles.SwapperMod;
+using TownOfUs.CrewmateRoles.VigilanteMod;
+using TownOfUs.NeutralRoles.DoomsayerMod;
+using TownOfUs.Roles.Modifiers;
+using TownOfUs.Extensions;
+using TownOfUs.CrewmateRoles.ImitatorMod;
+using Reactor.Utilities.Extensions;
+using TownOfUs.Modifiers.AssassinMod;
+using Assassin = TownOfUs.Roles.Modifiers.Assassin;
+using Assassin2 = TownOfUs.Roles.Assassin;
+using TownOfUs.Roles.AssassinMod;
+
+namespace TownOfUs.ImpostorRoles.WitchMod
+{
+    public class ApplyCurse
+    {
+        [HarmonyPatch(typeof(ExileController), nameof(ExileController.BeginForGameplay))]
+        public class KillCurse
+        {
+            public static void Postfix(ExileController __instance)
+            {
+                foreach (var role in Role.GetRoles(RoleEnum.Prosecutor))
+                {
+                    var prosecutor = (Prosecutor)role;
+                    if (prosecutor.ProsecuteThisMeeting) return;
+                }
+                var witchs = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Witch && !x.Player.Data.IsDead).Cast<Witch>();
+                foreach (var role in witchs)
+                {
+                    var cursed = role.CursedList;
+                    foreach (var playerid in cursed)
+                    {
+                        var exiled = __instance.initData.networkedPlayer?.Object;
+                        var player = Utils.PlayerById(playerid);
+                        if (exiled == role.Player) return;
+                        if (!player.Data.IsDead && !player.Is(RoleEnum.Pestilence))
+                        {
+                            MurderPlayer(player, role.Player, true);
+                            Utils.Rpc(CustomRPC.WitchMurder, player.PlayerId, role.Player.PlayerId, true);
+                        }
+                    }
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+        public static class AirshipExileController_WrapUpAndSpawn
+        {
+            public static void Postfix(AirshipExileController __instance) => ClearList.ExileControllerPostfix(__instance);
+        }
+
+        [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
+        public class ClearList
+        {
+            public static void ExileControllerPostfix(ExileController __instance)
+            {
+                var witchs = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Witch && !x.Player.Data.IsDead).Cast<Witch>();
+                foreach (var role in witchs)
+                {
+                    var cursed = role.CursedList;
+                    cursed.Clear();
+                }
+            }
+
+            public static void Postfix(ExileController __instance) => ExileControllerPostfix(__instance);
+
+            [HarmonyPatch(typeof(Object), nameof(Object.Destroy), new Type[] { typeof(GameObject) })]
+            public static void Prefix(GameObject obj)
+            {
+                if (!SubmergedCompatibility.Loaded || GameOptionsManager.Instance?.currentNormalGameOptions?.MapId != 6) return;
+                if (obj.name?.Contains("ExileCutscene") == true) ExileControllerPostfix(ExileControllerPatch.lastExiled);
+            }
+        }
+
+        public static void MurderPlayer(PlayerControl player, PlayerControl witch, bool checkLover)
+        {
+            var hudManager = DestroyableSingleton<HudManager>.Instance;
+            var amOwner = player.AmOwner;
+            if (amOwner)
+            {
+                Utils.ShowDeadBodies = true;
+                hudManager.ShadowQuad.gameObject.SetActive(false);
+                player.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
+                player.RpcSetScanner(false);
+                ImportantTextTask importantTextTask = new GameObject("_Player").AddComponent<ImportantTextTask>();
+                importantTextTask.transform.SetParent(AmongUsClient.Instance.transform, false);
+                if (!GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks)
+                {
+                    for (int i = 0;i < player.myTasks.Count;i++)
+                    {
+                        PlayerTask playerTask = player.myTasks.ToArray()[i];
+                        playerTask.OnRemove();
+                        Object.Destroy(playerTask.gameObject);
+                    }
+
+                    player.myTasks.Clear();
+                    importantTextTask.Text = DestroyableSingleton<TranslationController>.Instance.GetString(
+                        StringNames.GhostIgnoreTasks,
+                        new Il2CppReferenceArray<Il2CppSystem.Object>(0)
+                    );
+                }
+                else
+                {
+                    importantTextTask.Text = DestroyableSingleton<TranslationController>.Instance.GetString(
+                        StringNames.GhostDoTasks,
+                        new Il2CppReferenceArray<Il2CppSystem.Object>(0));
+                }
+
+                player.myTasks.Insert(0, importantTextTask);
+
+                if (player.Is(RoleEnum.Swapper))
+                {
+                    var swapper = Role.GetRole<Swapper>(PlayerControl.LocalPlayer);
+                    swapper.ListOfActives.Clear();
+                    swapper.Buttons.Clear();
+                    SwapVotes.Swap1 = null;
+                    SwapVotes.Swap2 = null;
+                    Utils.Rpc(CustomRPC.SetSwaps, sbyte.MaxValue, sbyte.MaxValue);
+                    var buttons = Role.GetRole<Swapper>(player).Buttons;
+                    foreach (var button in buttons)
+                    {
+                        button.SetActive(false);
+                        button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
+                    }
+                }
+
+                if (player.Is(RoleEnum.Imitator))
+                {
+                    var imitator = Role.GetRole<Imitator>(PlayerControl.LocalPlayer);
+                    imitator.ListOfActives.Clear();
+                    imitator.Buttons.Clear();
+                    SetImitate.Imitate = null;
+                    var buttons = Role.GetRole<Imitator>(player).Buttons;
+                    foreach (var button in buttons)
+                    {
+                        button.SetActive(false);
+                        button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
+                    }
+                }
+
+                if (player.Is(RoleEnum.Vigilante))
+                {
+                    var retributionist = Role.GetRole<Vigilante>(PlayerControl.LocalPlayer);
+                    ShowHideButtonsVigi.HideButtonsVigi(retributionist);
+                }
+
+                if (player.Is(RoleEnum.Assassin))
+                {
+                    var assassin = Role.GetRole<Assassin2>(PlayerControl.LocalPlayer);
+                    ShowHideButtonsAssassin.HideButtons(assassin);
+                }
+
+                if (player.Is(AbilityEnum.Assassin))
+                {
+                    var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
+                    ShowHideButtons.HideButtons(assassin);
+                }
+
+                if (player.Is(RoleEnum.Doomsayer))
+                {
+                    var doomsayer = Role.GetRole<Doomsayer>(PlayerControl.LocalPlayer);
+                    ShowHideButtonsDoom.HideButtonsDoom(doomsayer);
+                }
+
+                if (player.Is(RoleEnum.Politician))
+                {
+                    var politician = Role.GetRole<Politician>(PlayerControl.LocalPlayer);
+                    politician.RevealButton.Destroy();
+                }
+
+                if (player.Is(RoleEnum.Mayor))
+                {
+                    var mayor = Role.GetRole<Mayor>(PlayerControl.LocalPlayer);
+                    mayor.RevealButton.Destroy();
+                }
+            }
+            player.Die(DeathReason.Kill, false);
+            SoundManager.Instance.PlaySound(player.KillSfx, false, 0.8f);
+            if (player.IsLover() && CustomGameOptions.BothLoversDie)
+            {
+                var otherLover = Modifier.GetModifier<Lover>(player).OtherLover.Player;
+                if (!otherLover.Is(RoleEnum.Pestilence)) MurderPlayer(otherLover, witch, false);
+            }
+
+            if (checkLover == true)
+            {
+                var playerRole = Role.GetRole(player);
+                playerRole.DeathReason = DeathReasons.Cursed;
+                Utils.Rpc(CustomRPC.SetDeathReason, player.PlayerId, (byte)DeathReasons.Cursed);
+            }
+            else
+            {
+                var playerRole = Role.GetRole(player);
+                playerRole.DeathReason = DeathReasons.Suicided;
+                Utils.Rpc(CustomRPC.SetDeathReason, player.PlayerId, (byte)DeathReasons.Suicided);
+            }
+
+            var deadPlayer = new DeadPlayer
+            {
+                PlayerId = player.PlayerId,
+                KillerId = witch.PlayerId,
+                KillTime = System.DateTime.UtcNow,
+            };
+
+            var witchRole = Role.GetRole<Witch>(witch);
+            witchRole.Kills += 1;
+
+            Murder.KilledPlayers.Add(deadPlayer);
+
+            AddHauntPatch.AssassinatedPlayers.Add(player);
+        }
+    }
+}
