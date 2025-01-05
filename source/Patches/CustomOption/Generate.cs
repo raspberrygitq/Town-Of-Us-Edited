@@ -283,7 +283,7 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption PotionCD;
         public static CustomNumberOption PotionDuration;
         public static CustomNumberOption PotionSpeed;
-        public static CustomNumberOption StrenghtKCD;
+        public static CustomNumberOption StrengthKCD;
         public static CustomNumberOption PotionKCDReset;
 
         public static CustomHeaderOption Fighter;
@@ -1216,15 +1216,6 @@ namespace TownOfUs.CustomOption
             AssassinGuessLovers = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Lovers", false);
             AssassinateAfterVoting = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess After Voting", false);
 
-            Haunter =
-                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#d3d3d3FF>Haunter</color>");
-            HaunterTasksRemainingClicked =
-                 new CustomNumberOption(num++, MultiMenu.crewmate, "Tasks Remaining When Haunter Can Be Clicked", 5, 1, 15, 1);
-            HaunterTasksRemainingAlert =
-                 new CustomNumberOption(num++, MultiMenu.crewmate, "Tasks Remaining When Alert Is Sent", 1, 1, 5, 1);
-            HaunterRevealsNeutrals = new CustomToggleOption(num++, MultiMenu.crewmate, "Haunter Reveals Neutral Roles", false);
-            HaunterCanBeClickedBy = new CustomStringOption(num++, MultiMenu.crewmate, "Who Can Click Haunter", new[] { "All", "Non-Crew", "Imps Only" });
-
             Guardian =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#7cb6c2>Guardian</color>");
             GuardCooldown =
@@ -1233,6 +1224,15 @@ namespace TownOfUs.CustomOption
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Guard Duration", 10f, 10f, 30f, 2.5f, CooldownFormat);
             GuardKCReset =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Kill Cooldown Reset When Guarded", 10f, 5f, 60f, 2.5f, CooldownFormat);
+
+            Haunter =
+                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#d3d3d3FF>Haunter</color>");
+            HaunterTasksRemainingClicked =
+                 new CustomNumberOption(num++, MultiMenu.crewmate, "Tasks Remaining When Haunter Can Be Clicked", 5, 1, 15, 1);
+            HaunterTasksRemainingAlert =
+                 new CustomNumberOption(num++, MultiMenu.crewmate, "Tasks Remaining When Alert Is Sent", 1, 1, 5, 1);
+            HaunterRevealsNeutrals = new CustomToggleOption(num++, MultiMenu.crewmate, "Haunter Reveals Neutral Roles", false);
+            HaunterCanBeClickedBy = new CustomStringOption(num++, MultiMenu.crewmate, "Who Can Click Haunter", new[] { "All", "Non-Crew", "Imps Only" });
 
             Helper =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#7cb6c2>Helper</color>");
@@ -1789,7 +1789,7 @@ namespace TownOfUs.CustomOption
             NewVampCanAssassin =
                 new CustomToggleOption(num++, MultiMenu.neutral, "New Vampire Can Assassinate", false);
             MaxVampiresPerGame =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Maximum Vampires Per Game", 2, 2, 5, 1);
+                new CustomNumberOption(num++, MultiMenu.neutral, "Maximum Vampires Per Game", 2, 1, 3, 1);
             CanBiteNeutralBenign =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Can Convert Neutral Benign Roles", false);
             CanBiteNeutralEvil =
@@ -1983,8 +1983,8 @@ namespace TownOfUs.CustomOption
             PotionDuration =
                 new CustomNumberOption(num++, MultiMenu.coven, "Potion Duration", 10f, 5f, 60f, 2.5f, CooldownFormat);
             PotionSpeed = new CustomNumberOption(num++, MultiMenu.coven, "Speed Potion Boost", 1.25f, 1.05f, 2.5f, 0.05f, MultiplierFormat);
-            StrenghtKCD =
-                new CustomNumberOption(num++, MultiMenu.coven, "Strenght Potion Kill Cooldown", 10f, 2.5f, 60f, 2.5f, CooldownFormat);
+            StrengthKCD =
+                new CustomNumberOption(num++, MultiMenu.coven, "Strength Potion Kill Cooldown", 10f, 2.5f, 60f, 2.5f, CooldownFormat);
             PotionKCDReset =
                 new CustomNumberOption(num++, MultiMenu.coven, "Shield Potion Kill Cooldown Reset", 15f, 5f, 60f, 2.5f, CooldownFormat);
 
@@ -2004,7 +2004,7 @@ namespace TownOfUs.CustomOption
             MadmateHasImpoVision = new CustomToggleOption(num++, MultiMenu.modifiers, "Madmates Have Impostor Vision", false);
             MadmateCanChat = new CustomToggleOption(num++, MultiMenu.modifiers, "Madmates Can Use Impostor Chat");
             MadmateOnImpoDeath = new CustomStringOption(num++, MultiMenu.modifiers, "What Happens On Impostors Death",
-                new[] { "Madmate Dies", "Madmate Gets Its Old Faction Back", "One Madmate Becomes Impostor" });
+                new[] { "Madmates Die", "Madmates Get Their Old Faction Back", "One Madmate Becomes Impostor" });
 
             Flash = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#FF8080FF>Flash</color>");
             FlashSpeed = new CustomNumberOption(num++, MultiMenu.modifiers, "Flash Speed", 1.25f, 1.05f, 2.5f, 0.05f, MultiplierFormat);

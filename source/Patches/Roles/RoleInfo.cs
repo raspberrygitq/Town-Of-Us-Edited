@@ -431,7 +431,7 @@ namespace TownOfUs.Roles
                 }
                 if (pc.Is(RoleEnum.PotionMaster))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#bf5fff>Potion Master</color>, you use your ability to get a random potion effect.\nUsing it will give you one of the following potions:\nSpeed: Make your speed higher\nStrenght: You are able to vent and have a shorter kill cooldown\nShield: You are temporarily immune to direct kills\nInvisibility: You are invisible to other players");
+                    HudManager.Instance.ShowPopUp("You are the <color=#bf5fff>Potion Master</color>, you use your ability to get a random potion effect.\nUsing it will give you one of the following potions:\nSpeed: Make your speed higher\nStrength: You are able to vent and have a shorter kill cooldown\nShield: You are temporarily immune to direct kills\nInvisibility: You are invisible to other players");
                 }
                 //Werewolf Roles info
                 if (pc.Is(RoleEnum.Werewolf))

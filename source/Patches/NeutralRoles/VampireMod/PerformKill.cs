@@ -10,6 +10,7 @@ using System.Linq;
 using TownOfUs.CrewmateRoles.AurialMod;
 using TownOfUs.Roles.Cultist;
 using TownOfUs.Patches.ScreenEffects;
+using TownOfUs.Patches;
 
 namespace TownOfUs.NeutralRoles.VampireMod
 {
@@ -260,6 +261,8 @@ namespace TownOfUs.NeutralRoles.VampireMod
 
             if (CustomGameOptions.NewVampCanAssassin
             && !CustomGameOptions.AssassinImpostorRole) new Roles.Modifiers.Assassin(newVamp);
+
+            PlayerControl_Die.Postfix();
         }
     }
 }

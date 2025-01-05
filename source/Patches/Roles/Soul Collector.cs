@@ -57,6 +57,7 @@ namespace TownOfUs.Roles
         public void Wins()
         {
             CollectedSouls = true;
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
         }
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__38 __instance)

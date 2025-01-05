@@ -30,6 +30,7 @@ namespace TownOfUs.Roles
         {
             //System.Console.WriteLine("Reached Here - Jester edition");
             VotedOut = true;
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
         }
     }
 }

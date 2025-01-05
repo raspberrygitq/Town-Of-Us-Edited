@@ -456,7 +456,8 @@ namespace TownOfUs.Patches
                 if (exe.target == null)
                 {
                     var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.ExecutionerToJester, SendOption.Reliable, -1);
+                        254, SendOption.Reliable, -1);
+                    writer.Write((int)CustomRPC.ExecutionerToJester);
                     writer.Write(exe.Player.PlayerId);
                     AmongUsClient.Instance.FinishRpcImmediately(writer);
 
@@ -584,6 +585,8 @@ namespace TownOfUs.Patches
                     spectator.StartSpectate(spectator.Player);
                 }
             }
+
+            PlayerControl_Die.Postfix();
         }
     }
 }

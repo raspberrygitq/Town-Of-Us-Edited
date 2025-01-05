@@ -60,7 +60,7 @@ namespace TownOfUs
                 return false;
 
             if (player.Is(RoleEnum.Engineer) || player.Is(RoleEnum.CovenLeader) || (player.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(player).UsingPotion &&
-                Role.GetRole<PotionMaster>(player).Potion == "Strenght") || player.Is(RoleEnum.WhiteWolf) || player.Is(Faction.Madmates) || player.Is(RoleEnum.Paranoïac) ||
+                Role.GetRole<PotionMaster>(player).Potion == "Strength") || player.Is(RoleEnum.WhiteWolf) || player.Is(Faction.Madmates) || player.Is(RoleEnum.Paranoïac) ||
                 (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || (player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||
                 (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent) ||
                 (player.Is(RoleEnum.Vampire) && CustomGameOptions.VampVent) || (player.Is(RoleEnum.SerialKiller) && CustomGameOptions.SerialKillerVent) ||

@@ -80,10 +80,6 @@ namespace TownOfUs.Roles
                 hudManager.ShadowQuad.gameObject.SetActive(false);
                 player.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
                 player.RpcSetScanner(false);
-                var importantTextTask = new GameObject("_Player").AddComponent<ImportantTextTask>();
-                importantTextTask.transform.SetParent(AmongUsClient.Instance.transform, false);
-                importantTextTask.Text = "";
-                player.myTasks.Insert(0, importantTextTask);
             }
             var deadBody = new DeadPlayer
             {
@@ -94,6 +90,12 @@ namespace TownOfUs.Roles
 
             Murder.KilledPlayers.Add(deadBody);
             player.MyPhysics.StartCoroutine(player.KillAnimations.Random().CoPerformKill(player, player));
+
+            if (PlayerControl.LocalPlayer == player)
+            {
+                var role = Role.GetRole(player);
+                role.RegenTask();
+            }
         }
 
         public void TurnBack(PlayerControl player)
@@ -151,7 +153,7 @@ namespace TownOfUs.Roles
 
             if (PlayerControl.LocalPlayer == player)
             {
-                player.myTasks.RemoveAt(0);
+                player.myTasks.RemoveAt(1);
                 if (!MeetingHud.Instance)
                 {
                     HudManager.Instance.Chat.gameObject.SetActive(false);

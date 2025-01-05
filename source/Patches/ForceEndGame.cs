@@ -42,6 +42,8 @@ namespace TownOfUs.Patches
             {
                 Role.ForceGameEnd = true;
                 Utils.Rpc(CustomRPC.ForceEndGame);
+                System.Console.WriteLine("GAME OVER REASON: Host Forced End Game");
+                Utils.EndGame();
             }
         }
     }

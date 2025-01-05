@@ -40,7 +40,7 @@ namespace TownOfUs.Roles
             //System.Console.WriteLine("Reached Here - Troll edition");
             if (Player.Data.Disconnected) return;
             TrolledVotedOut = true;
-            Utils.Rpc(CustomRPC.TrollWin, Player.PlayerId);
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
         }
     }
 }

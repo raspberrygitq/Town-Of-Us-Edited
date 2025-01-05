@@ -86,7 +86,6 @@ namespace TownOfUs.Roles.Modifiers
             {
                 Utils.Rpc(CustomRPC.LoveWin, Player.PlayerId);
                 Win();
-                Utils.EndGame();
                 System.Console.WriteLine("GAME OVER REASON: Lovers Win");
                 return;
             }
@@ -111,6 +110,7 @@ namespace TownOfUs.Roles.Modifiers
             if (CustomGameOptions.NeutralEvilWinEndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Jester).Any(x => ((Jester) x).VotedOut)) return;
             LoveCoupleWins = true;
             OtherLover.LoveCoupleWins = true;
+            if (AmongUsClient.Instance.AmHost) Utils.EndGame();
         }
     }
 }

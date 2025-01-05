@@ -97,7 +97,7 @@ namespace TownOfUs.CrewmateRoles.AltruistMod
                     Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == lover.PlayerId));
                 revived.Add(lover);
 
-                if (PlayerControl.LocalPlayer == lover) lover.myTasks.RemoveAt(0);
+                if (PlayerControl.LocalPlayer == lover) lover.myTasks.RemoveAt(1);
 
                 foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
                 {
@@ -125,7 +125,7 @@ namespace TownOfUs.CrewmateRoles.AltruistMod
                 {
                 }
 
-            if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(0);
+            if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(1);
 
             if (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(Faction.NeutralKilling))
             {

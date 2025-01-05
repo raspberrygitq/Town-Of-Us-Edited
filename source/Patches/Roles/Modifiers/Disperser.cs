@@ -47,6 +47,7 @@ namespace TownOfUs.Roles.Modifiers
                 (byte)CustomRPC.Disperse,
                 SendOption.Reliable,
                 -1);
+            writer.Write((int)CustomRPC.Disperse);
             writer.Write((byte)coordinates.Count);
             foreach ((byte key, Vector2 value) in coordinates)
             {

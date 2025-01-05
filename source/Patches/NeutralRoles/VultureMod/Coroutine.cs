@@ -40,6 +40,7 @@ namespace TownOfUs.NeutralRoles.VultureMod
             if (role.BodiesEaten == CustomGameOptions.VultureBodies)
             {
                 role.Wins();
+                Utils.Rpc(CustomRPC.VultureWin, role.Player.PlayerId);
                 if (!CustomGameOptions.NeutralEvilWinEndsGame)
                 {
                     Utils.Interact(role.Player, role.Player, true);

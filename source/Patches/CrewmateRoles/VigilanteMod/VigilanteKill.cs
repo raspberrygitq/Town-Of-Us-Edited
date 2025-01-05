@@ -67,32 +67,7 @@ namespace TownOfUs.CrewmateRoles.VigilanteMod
                 hudManager.ShadowQuad.gameObject.SetActive(false);
                 player.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
                 player.RpcSetScanner(false);
-                ImportantTextTask importantTextTask = new GameObject("_Player").AddComponent<ImportantTextTask>();
-                importantTextTask.transform.SetParent(AmongUsClient.Instance.transform, false);
-                if (!GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks)
-                {
-                    for (int i = 0;i < player.myTasks.Count;i++)
-                    {
-                        PlayerTask playerTask = player.myTasks.ToArray()[i];
-                        playerTask.OnRemove();
-                        Object.Destroy(playerTask.gameObject);
-                    }
-
-                    player.myTasks.Clear();
-                    importantTextTask.Text = DestroyableSingleton<TranslationController>.Instance.GetString(
-                        StringNames.GhostIgnoreTasks,
-                        new Il2CppReferenceArray<Il2CppSystem.Object>(0)
-                    );
-                }
-                else
-                {
-                    importantTextTask.Text = DestroyableSingleton<TranslationController>.Instance.GetString(
-                        StringNames.GhostDoTasks,
-                        new Il2CppReferenceArray<Il2CppSystem.Object>(0));
-                }
-
-                player.myTasks.Insert(0, importantTextTask);
-
+                
                 if (player.Is(AbilityEnum.Assassin))
                 {
                     var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);

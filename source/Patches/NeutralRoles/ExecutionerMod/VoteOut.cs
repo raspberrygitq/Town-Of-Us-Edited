@@ -37,6 +37,7 @@ namespace TownOfUs.NeutralRoles.ExecutionerMod
                 if (player.PlayerId == ((Executioner)role).target.PlayerId)
                 {
                     ((Executioner)role).Wins();
+                    Utils.Rpc(CustomRPC.ExecutionerWin, ((Executioner)role).Player.PlayerId);
 
                     if (CustomGameOptions.NeutralEvilWinEndsGame || !CustomGameOptions.ExecutionerTorment) return;
                     if (PlayerControl.LocalPlayer != ((Executioner)role).Player) return;

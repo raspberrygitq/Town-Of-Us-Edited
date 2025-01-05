@@ -57,7 +57,6 @@ namespace TownOfUs.NeutralRoles.ExecutionerMod
 
         public static void ExeToJes(PlayerControl player)
         {
-            player.myTasks.RemoveAt(0);
             Role.RoleDictionary.Remove(player.PlayerId);
 
 

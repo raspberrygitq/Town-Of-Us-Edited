@@ -87,7 +87,7 @@ namespace TownOfUs.CrewmateRoles.TimeLordMod
                 .FirstOrDefault(b => b.ParentId == player.PlayerId);
             var position = body.TruePosition;
 
-            if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(0);
+            if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(1);
 
             player.NetTransform.SnapTo(new Vector2(position.x, position.y + 0.3636f));
 

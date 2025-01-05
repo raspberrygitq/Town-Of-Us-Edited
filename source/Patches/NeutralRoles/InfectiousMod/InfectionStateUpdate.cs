@@ -1,5 +1,6 @@
 using System;
 using HarmonyLib;
+using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TownOfUs.CrewmateRoles.MedicMod;
 using TownOfUs.Extensions;
@@ -92,10 +93,6 @@ namespace TownOfUs
                     hudManager.ShadowQuad.gameObject.SetActive(false);
                     player.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
                     player.RpcSetScanner(false);
-                    var importantTextTask = new GameObject("_Player").AddComponent<ImportantTextTask>();
-                    importantTextTask.transform.SetParent(AmongUsClient.Instance.transform, false);
-                    importantTextTask.Text = "";
-                    player.myTasks.Insert(0, importantTextTask);
                 }
                 var deadBody = new DeadPlayer
                 {
@@ -106,6 +103,10 @@ namespace TownOfUs
 
                 Murder.KilledPlayers.Add(deadBody);
                 player.MyPhysics.StartCoroutine(player.KillAnimations.Random().CoPerformKill(player, player));
+                if (amOwner)
+                {
+                    Coroutines.Start(Utils.UpdateTaskText(player));
+                }
             }
         }
     }

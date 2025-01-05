@@ -53,41 +53,43 @@ namespace TownOfUs.Roles
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return;
 
+            var alivecrewkiller = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && x.IsCrewKiller() && !x.Data.IsDead && !x.Data.Disconnected).ToList();
+
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven) || x.IsCrewKiller())) == 1)
+                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven))) == 1 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue))
             {
                 VampWin();
-                Utils.EndGame();
                 System.Console.WriteLine("GAME OVER REASON: Vampire Win");
                 return;
             }
             else if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 4 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven) || x.IsCrewKiller()) && !x.Is(RoleEnum.Vampire)) == 0)
+                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven)) && !x.Is(RoleEnum.Vampire)) == 0 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue))
             {
                 var vampsAlives = PlayerControl.AllPlayerControls.ToArray()
                     .Where(x => !x.Data.IsDead && !x.Data.Disconnected && x.Is(RoleEnum.Vampire)).ToList();
                 if (vampsAlives.Count == 1) return;
                 VampWin();
-                Utils.EndGame();
                 System.Console.WriteLine("GAME OVER REASON: Vampire Win");
                 return;
             }
             else
             {
+                var alivelovers = PlayerControl.AllPlayerControls.ToArray()
+                    .Where(x => !x.Data.IsDead && !x.Data.Disconnected && x.Is(ModifierEnum.Lover)).ToList();
                 var vampsAlives = PlayerControl.AllPlayerControls.ToArray()
                     .Where(x => !x.Data.IsDead && !x.Data.Disconnected && x.Is(RoleEnum.Vampire)).ToList();
                 if (vampsAlives.Count == 1 || vampsAlives.Count == 2) return;
                 var alives = PlayerControl.AllPlayerControls.ToArray()
                     .Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
                 var killersAlive = PlayerControl.AllPlayerControls.ToArray()
-                    .Where(x => !x.Data.IsDead && !x.Data.Disconnected && !x.Is(RoleEnum.Vampire) && (x.Is(Faction.Impostors) || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven) || x.IsCrewKiller())).ToList();
+                    .Where(x => !x.Data.IsDead && !x.Data.Disconnected && !x.Is(RoleEnum.Vampire) && (x.Is(Faction.Impostors) || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven))).ToList();
                 if (killersAlive.Count > 0) return;
+                if (alivecrewkiller.Count > 0 && CustomGameOptions.CrewKillersContinue) return;
                 if (alives.Count <= 6)
                 {
                     VampWin();
-                    Utils.EndGame();
                     System.Console.WriteLine("GAME OVER REASON: Vampire Win");
                     return;
                 }

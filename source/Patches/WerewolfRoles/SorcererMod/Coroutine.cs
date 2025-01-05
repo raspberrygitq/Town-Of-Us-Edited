@@ -56,7 +56,7 @@ namespace TownOfUs.WerewolfRoles.SorcererMod
                 {
                 }
 
-            if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(0);
+            if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(1);
 
             if (PlayerControl.LocalPlayer.Data.IsImpostor())
             {

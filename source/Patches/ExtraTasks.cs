@@ -1,7 +1,5 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUs.CustomOption;
-using Random = UnityEngine.Random;
 
 namespace TownOfUs.Patches
 {

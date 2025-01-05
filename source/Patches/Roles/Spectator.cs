@@ -15,6 +15,7 @@ namespace TownOfUs.Roles
             AddToRoleHistory(RoleType);
             Color = Patches.Colors.Spectator;
             DeathReason = DeathReasons.Spectator;
+            Faction = Faction.NeutralBenign;
         }
 
         public void StartSpectate(PlayerControl player)

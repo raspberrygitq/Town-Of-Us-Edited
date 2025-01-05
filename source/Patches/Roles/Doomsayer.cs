@@ -167,7 +167,7 @@ namespace TownOfUs.Roles
         public void Wins()
         {
             WonByGuessing = true;
-            Utils.Rpc(CustomRPC.DoomsayerWin, Player.PlayerId);
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
         }
 
         public int GuessedCorrectly = 0;

@@ -60,7 +60,6 @@ namespace TownOfUs.NeutralRoles.GuardianAngelMod
 
         public static void GAToSurv(PlayerControl player)
         {
-            player.myTasks.RemoveAt(0);
             Role.RoleDictionary.Remove(player.PlayerId);
 
             if (CustomGameOptions.GaOnTargetDeath == BecomeOptions.Jester)

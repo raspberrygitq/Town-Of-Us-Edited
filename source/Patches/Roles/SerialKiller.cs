@@ -11,6 +11,7 @@ using AmongUs.GameOptions;
 using TownOfUs.Roles.Modifiers;
 using TownOfUs.ImpostorRoles.BomberMod;
 using UnityEngine;
+using TownOfUs.Patches;
 
 namespace TownOfUs.Roles
 {
@@ -51,32 +52,25 @@ namespace TownOfUs.Roles
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return;
 
+            var alivecrewkiller = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && x.IsCrewKiller() && !x.Data.IsDead && !x.Data.Disconnected).ToList();
+
             if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
                     PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
-                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven) || x.IsCrewKiller())) == 1)
+                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven))) == 1 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue))
             {
                 SKWin();
-                Utils.EndGame();
                 System.Console.WriteLine("GAME OVER REASON: Serial Killer Win");
                 return;
             }
-            else
+            else if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 4 &&
+                    PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
+                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven)) && !x.Is(RoleEnum.SerialKiller)) == 0 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue))
             {
                 var sksAlives = PlayerControl.AllPlayerControls.ToArray()
                     .Where(x => !x.Data.IsDead && !x.Data.Disconnected && x.Is(RoleEnum.SerialKiller)).ToList();
                 if (sksAlives.Count == 1) return;
-                var alives = PlayerControl.AllPlayerControls.ToArray()
-                    .Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                var killersAlive = PlayerControl.AllPlayerControls.ToArray()
-                    .Where(x => !x.Data.IsDead && !x.Data.Disconnected && !x.Is(RoleEnum.SerialKiller) && (x.Is(Faction.Impostors) || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven) || x.IsCrewKiller())).ToList();
-                if (killersAlive.Count > 0) return;
-                if (alives.Count <= 4)
-                {
-                    SKWin();
-                    Utils.EndGame();
-                    System.Console.WriteLine("GAME OVER REASON: Serial Killer Win");
-                    return;
-                }
+                SKWin();
+                System.Console.WriteLine("GAME OVER REASON: Serial Killer Win");
                 return;
             }
         }
@@ -297,6 +291,8 @@ namespace TownOfUs.Roles
             Role.GetRole<SerialKiller>(newsk).Converted = true;
             if (CustomGameOptions.NewSKCanGuess
             && !CustomGameOptions.AssassinImpostorRole && !newsk.Is(AbilityEnum.Assassin)) new Roles.Modifiers.Assassin(newsk);
+
+            PlayerControl_Die.Postfix();
         }
     }
 }

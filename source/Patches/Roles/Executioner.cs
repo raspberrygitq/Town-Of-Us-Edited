@@ -34,7 +34,7 @@ namespace TownOfUs.Roles
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return;
             TargetVotedOut = true;
-            Utils.Rpc(CustomRPC.ExecutionerWin, Player.PlayerId);
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
         }
     }
 }

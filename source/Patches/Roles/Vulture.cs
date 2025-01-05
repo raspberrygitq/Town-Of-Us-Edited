@@ -47,7 +47,7 @@ namespace TownOfUs.Roles
         public void Wins()
         {
             VultureWins = true;
-            Utils.Rpc(CustomRPC.VultureWin, Player.PlayerId);
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
         }
 
         public void DestroyArrow(byte targetPlayerId)

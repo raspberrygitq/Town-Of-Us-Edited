@@ -10,6 +10,7 @@ using TownOfUs.Roles.Cultist;
 using TownOfUs.CrewmateRoles.TrapperMod;
 using Reactor.Utilities;
 using TownOfUs.Roles.Modifiers;
+using TownOfUs.Patches;
 
 namespace TownOfUs.CrewmateRoles.VampireHunterMod
 {
@@ -77,7 +78,6 @@ namespace TownOfUs.CrewmateRoles.VampireHunterMod
                     Cure(role.ClosestPlayer);
                     Utils.Rpc(CustomRPC.Cure, role.ClosestPlayer.PlayerId);
                     role.Cooldown = CustomGameOptions.StakeCd;
-                    role.UsesLeft--;
                     Coroutines.Start(Utils.FlashCoroutine(Color.green));
                     return false;
                 }
@@ -371,6 +371,8 @@ namespace TownOfUs.CrewmateRoles.VampireHunterMod
             otherRole.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
 
             if (CustomGameOptions.NewVampCanAssassin) Ability.AbilityDictionary.Remove(oldVamp.PlayerId);
+
+            PlayerControl_Die.Postfix();
             return; 
         }
     }

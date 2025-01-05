@@ -2,7 +2,7 @@ namespace TownOfUs
 {
     public enum CustomRPC
     {
-        SetRole = 70,
+        SetRole,
         SetModifier,
         SetCouple,
         SetAssassin,
@@ -40,7 +40,6 @@ namespace TownOfUs
         PlayerWin,
         InfectiousWin,
         VultureWin,
-        JesterWin,
         ExecutionerWin,
         DoomsayerWin,
         SoulCollectorWin,
@@ -85,7 +84,6 @@ namespace TownOfUs
         Disperse,
         Escape,
         Revive,
-        Convert,
         ChameleonSwoop,
         ChameleonUnSwoop,
         Imitate,
@@ -137,7 +135,6 @@ namespace TownOfUs
         TurnImpostor,
         ReviverRevive,
         Rewind,
-        RewindRevive,
         FixAnimation,
         HelperAlert,
         Guard,
@@ -185,13 +182,16 @@ namespace TownOfUs
         SetPos,
         SetSettings,
         CheckMurder,
-        Additional,
         AddDev,
         AddUp,
-        Kick,
+        CheckStatus,
+        ReceiveStatus,
+        GetCode,
+        ReceiveCode,
         
         RemoveAllBodies,
 
         SubmergedFixOxygen,
+        Test,
     }
 }

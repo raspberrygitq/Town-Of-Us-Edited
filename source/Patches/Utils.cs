@@ -244,6 +244,8 @@ namespace TownOfUs
                     Coroutines.Start(FlashCoroutine(Palette.ImpostorRed, 0.5f));
                 }
             }
+
+            PlayerControl_Die.Postfix();
         }
 
         public static void TurnCrewmateTeam(PlayerControl Crewmate)
@@ -1447,31 +1449,6 @@ namespace TownOfUs
                     DestroyableSingleton<HudManager>.Instance.ShadowQuad.gameObject.SetActive(false);
                     target.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
                     target.RpcSetScanner(false);
-                    var importantTextTask = new GameObject("_Player").AddComponent<ImportantTextTask>();
-                    importantTextTask.transform.SetParent(AmongUsClient.Instance.transform, false);
-                    if (!GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks)
-                    {
-                        //GameManager.Instance.LogicFlow.CheckEndCriteria();
-                        for (var i = 0; i < target.myTasks.Count; i++)
-                        {
-                            var playerTask = target.myTasks.ToArray()[i];
-                            playerTask.OnRemove();
-                            Object.Destroy(playerTask.gameObject);
-                        }
-
-                        target.myTasks.Clear();
-                        importantTextTask.Text = DestroyableSingleton<TranslationController>.Instance.GetString(
-                            StringNames.GhostIgnoreTasks,
-                            new Il2CppReferenceArray<Il2CppSystem.Object>(0));
-                    }
-                    else
-                    {
-                        importantTextTask.Text = DestroyableSingleton<TranslationController>.Instance.GetString(
-                            StringNames.GhostDoTasks,
-                            new Il2CppReferenceArray<Il2CppSystem.Object>(0));
-                    }
-
-                    target.myTasks.Insert(0, importantTextTask);
 
                     if (CustomGameOptions.GameMode == GameMode.BattleRoyale || CustomGameOptions.GameMode == GameMode.KillingOnly) Utils.ShowDeadBodies = true;
                 }
@@ -1505,6 +1482,21 @@ namespace TownOfUs
 
                 killer.isKilling = false;
                 target.isKilling = false;
+
+                if (target.AmOwner)
+                {
+                    Coroutines.Start(UpdateTaskText(target));
+                }
+
+                var alivesnonkiller = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors) && !x.Is(Faction.NeutralKilling) && !x.Is(Faction.Madmates) && !x.Is(Faction.Coven) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
+
+                if (alivesnonkiller.Count <= 0 && CustomGameOptions.GameMode == GameMode.Chaos && AmongUsClient.Instance.AmHost)
+                {
+                    Role.ImpostorWins = true;
+                    Rpc(CustomRPC.ImpostorWin);
+                    EndGame(GameOverReason.ImpostorByVote);
+                    System.Console.WriteLine("GAME OVER REASON: Chaos GameMode Impostor Win");
+                }
 
                 if (!killer.AmOwner) return;
 
@@ -1715,6 +1707,14 @@ namespace TownOfUs
             }
         }
 
+        public static IEnumerator UpdateTaskText(PlayerControl player)
+        {
+            var firstText = player.myTasks.ToArray()[0].Cast<ImportantTextTask>();
+            while (!firstText.Text.Contains("You're dead.")) yield return null;
+            var targetRole = Role.GetRole(player);
+            if (targetRole != null) targetRole.RegenTask();
+            yield break;
+        }
         public static void BaitReport(PlayerControl killer, PlayerControl target)
         {
             Coroutines.Start(BaitReportDelay(killer, target));
@@ -2057,13 +2057,16 @@ namespace TownOfUs
             if (data[0] is not CustomRPC) throw new ArgumentException($"first parameter must be a {typeof(CustomRPC).FullName}");
 
             var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)(CustomRPC)data[0], SendOption.Reliable, -1);
+                        254, SendOption.Reliable, -1);
 
             if (data.Length == 1)
             {
+                writer.Write((int)(CustomRPC)data[0]);
                 AmongUsClient.Instance.FinishRpcImmediately(writer);
                 return;
             }
+
+            writer.Write((int)(CustomRPC)data[0]);
 
             foreach (var item in data[1..])
             {

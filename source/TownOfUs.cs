@@ -34,7 +34,7 @@ namespace TownOfUs
         public const string Id = "com.lekillerdesgames.townofusedited";
         public const string VersionString = "0.0.1";
         public static System.Version Version = System.Version.Parse(VersionString);
-        public const string VersionTag = "<color=#00F0FF> Dev 14</color>";
+        public const string VersionTag = "<color=#00F0FF> Dev 15</color>";
 
         public static AssetLoader bundledAssets;
 

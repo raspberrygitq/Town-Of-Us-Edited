@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AmongUs.GameOptions;
+using TownOfUs.Patches;
 using UnityEngine;
 
 namespace TownOfUs.Roles
@@ -101,6 +102,8 @@ namespace TownOfUs.Roles
                 role.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
                 role.RegenTask();
             }
+
+            PlayerControl_Die.Postfix();
         }
     }
 }

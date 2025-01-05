@@ -14,9 +14,9 @@ using TownOfUs.Patches;
 
 namespace TownOfUs.CrewmateRoles.DoctorMod
 {
-    public class Coroutine
+    public class DocRevive
     {
-        public static IEnumerator DoctorRevive(DeadBody target, Doctor role)
+        public static void DoctorRevive(DeadBody target, Doctor role)
         {
             var parentId = target.ParentId;
             var position = target.TruePosition;
@@ -79,7 +79,7 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
                     Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == lover.PlayerId));
                 revived.Add(lover);
 
-                if (PlayerControl.LocalPlayer == lover) lover.myTasks.RemoveAt(0);
+                if (PlayerControl.LocalPlayer == lover) lover.myTasks.RemoveAt(1);
 
                 foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
                 {
@@ -107,11 +107,10 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
                 {
                 }
 
-            if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(0);
-
-            if (PlayerControl.AllPlayerControls.Count <= 1)
+            if (PlayerControl.LocalPlayer == player)
             {
-                yield return Utils.FlashCoroutine(Colors.Doctor, 1f, 0.5f);
+                Utils.FlashCoroutine(Colors.Doctor, 1f, 0.5f);
+                player.myTasks.RemoveAt(1);
             }
         }
     }

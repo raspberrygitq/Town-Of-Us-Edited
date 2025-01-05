@@ -1,9 +1,7 @@
 using HarmonyLib;
-using Reactor.Utilities;
 using TownOfUs.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
-using System;
 
 namespace TownOfUs.CrewmateRoles.DoctorMod
 {
@@ -44,7 +42,7 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
 
             Utils.Rpc(CustomRPC.DoctorRevive, PlayerControl.LocalPlayer.PlayerId, playerId);
 
-            Coroutines.Start(Coroutine.DoctorRevive(role.CurrentTarget, role));
+            DocRevive.DoctorRevive(role.CurrentTarget, role);
             role.UsesLeft--;
             role.Cooldown = CustomGameOptions.DocReviveCooldown;
             }

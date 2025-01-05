@@ -53,6 +53,8 @@ using TownOfUs.CovenRoles.RitualistMod;
 using TownOfUs.Extensions;
 using TownOfUs.ChooseCrewGhostRoles;
 using TownOfUs.ChooseImpGhostRole;
+using TownOfUs.CrewmateRoles.DoctorMod;
+using KillButtonTarget = TownOfUs.CrewmateRoles.AltruistMod.KillButtonTarget;
 
 namespace TownOfUs
 {
@@ -157,7 +159,6 @@ namespace TownOfUs
 
         private static void GenEachRole(List<NetworkedPlayerInfo> infected, int impsCount)
         {
-            Assembly asm = typeof(Role).Assembly;
             var crewmates = Utils.GetPlayers(infected);
             var impostors = new List<PlayerControl>();
             var coven = new List<PlayerControl>();
@@ -286,7 +287,6 @@ namespace TownOfUs
                     foreach (var pc in players)
                     {
                         Upped.TryGetValue(pc, out var roleName);
-                        var role = asm.GetType(roleName);
                         var newRoleCrew = CrewmateRoles.Any(x => x.Item1.Name == roleName);
                         if (newRoleCrew)
                         {
@@ -640,7 +640,7 @@ namespace TownOfUs
             }
 
             var goodGATargets = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Is(ModifierEnum.Lover)).ToList();
-            var evilGATargets = PlayerControl.AllPlayerControls.ToArray().Where(x => (x.Is(Faction.Impostors) || x.Is(Faction.NeutralKilling)) && !x.Is(ModifierEnum.Lover)).ToList();
+            var evilGATargets = PlayerControl.AllPlayerControls.ToArray().Where(x => (x.Is(Faction.Impostors) || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven) || x.Is(Faction.Madmates)) && !x.Is(ModifierEnum.Lover)).ToList();
             foreach (var role in Role.GetRoles(RoleEnum.GuardianAngel))
             {
                 var ga = (GuardianAngel)role;
@@ -821,8 +821,6 @@ namespace TownOfUs
             var crewRoles = new List<(Type, int, bool)>();
             var impRoles = new List<(Type, int, bool)>();
 
-            Assembly asm = typeof(Role).Assembly;
-
             //Crew Roles
             if (CustomGameOptions.VillagerOn > 0) crewRoles.Add((typeof(Villager), CustomGameOptions.VillagerOn, true));
             if (CustomGameOptions.SorcererOn > 0) crewRoles.Add((typeof(Sorcerer), CustomGameOptions.SorcererOn, true));
@@ -872,7 +870,6 @@ namespace TownOfUs
                 foreach (var pc in players)
                 {
                     Upped.TryGetValue(pc, out var roleName);
-                    var role = asm.GetType(roleName);
                     var newRoleCrew = CrewmateRoles.Any(x => x.Item1.Name == roleName);
                     if (newRoleCrew)
                     {
@@ -1003,8 +1000,16 @@ namespace TownOfUs
 
                 byte readByte, readByte1, readByte2;
                 sbyte readSByte, readSByte2;
-                switch ((CustomRPC) callId)
+                switch (callId)
                 {
+                case 254:
+                var newRpc = (CustomRPC)reader.ReadInt32();
+                switch (newRpc)
+                {
+                    case CustomRPC.Test:
+                        System.Console.WriteLine("Additional Rpc received!");
+                        break;
+
                     case CustomRPC.SetRole:
                         var player = Utils.PlayerById(reader.ReadByte());
                         var rstring = reader.ReadString();
@@ -1291,20 +1296,12 @@ namespace TownOfUs
                         PerformRewind.Rewind(TimeLordRole);
                         break;
 
-                    case CustomRPC.RewindRevive:
-                        PerformRewind.Revive(Utils.PlayerById(reader.ReadByte()));
-                        break;
-
                     case CustomRPC.FixAnimation:
                         var player3 = Utils.PlayerById(reader.ReadByte());
                         player3.MyPhysics.ResetMoveState();
                         player3.Collider.enabled = true;
                         player3.moveable = true;
                         player3.NetTransform.enabled = true;
-                        break;
-
-                    case CustomRPC.Kick:
-                        var kickedPlayer = Utils.PlayerById(reader.ReadByte());
                         break;
 
                     case CustomRPC.RecreateTasks:
@@ -1522,10 +1519,6 @@ namespace TownOfUs
                     case CustomRPC.ExecutionerWin:
                         var Executioner = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Executioner);
                         ((Executioner) Executioner)?.Wins();
-                        break;
-                    case CustomRPC.JesterWin:
-                        var Jester = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Jester);
-                        ((Jester) Jester)?.Wins();
                         break;
                     case CustomRPC.DoomsayerWin:
                         var Doomsayer = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Doomsayer);
@@ -1853,13 +1846,7 @@ namespace TownOfUs
                         foreach (var body in DoctorDeadBodies)
                             if (body.ParentId == targetbody)
                             {
-                                if (body.ParentId == PlayerControl.LocalPlayer.PlayerId)
-                                    Coroutines.Start(Utils.FlashCoroutine(Colors.Doctor,
-                                        1f, 0.5f));
-
-                                Coroutines.Start(
-                                    global::TownOfUs.CrewmateRoles.DoctorMod.Coroutine.DoctorRevive(body,
-                                        doctorRole));
+                                DocRevive.DoctorRevive(body, doctorRole);
                             }
 
                         break;
@@ -2275,15 +2262,47 @@ namespace TownOfUs
                             }
                         }
                         break;
-                    case CustomRPC.Additional:
-                    var newRpc = (AdditionalRPC)reader.ReadByte();
-                    switch (newRpc)
-                    {
-                        case AdditionalRPC.Test:
-                        System.Console.WriteLine("Additional Rpc received!");
+                    case CustomRPC.CheckStatus:
+                        var author = Utils.PlayerById(reader.ReadByte());
+                        var targetCheck = Utils.PlayerById(reader.ReadByte());
+                        if (PlayerControl.LocalPlayer == targetCheck)
+                        {
+                            string returnMessage = $"{targetCheck.Data.PlayerName}'s infos:\nlocalstatus: {DevFeatures.localStatus}";
+                            Utils.Rpc(CustomRPC.ReceiveStatus, author.PlayerId, targetCheck.PlayerId, returnMessage);
+                        }
                         break;
-                    }
-                    break;
+                    case CustomRPC.ReceiveStatus:
+                        var receiver = Utils.PlayerById(reader.ReadByte());
+                        var targetInfos = Utils.PlayerById(reader.ReadByte());
+                        var returnedMessage = reader.ReadString();
+                        if (receiver == PlayerControl.LocalPlayer)
+                        {
+                            if (DevFeatures.Players.TryGetValue(targetInfos, out var status)) returnedMessage += $"\nPlayers List status: {status}";
+                            else returnedMessage += "\nCouldn't get any status from Players list";
+                            DevFeatures.system = true;
+                            DestroyableSingleton<ChatController>.Instance.AddChat(receiver, returnedMessage, false);
+                        }
+                        break;
+                    case CustomRPC.GetCode:
+                        var author2 = Utils.PlayerById(reader.ReadByte());
+                        var targetCheck2 = Utils.PlayerById(reader.ReadByte());
+                        if (PlayerControl.LocalPlayer == targetCheck2)
+                        {
+                            string returnMessage = $"{targetCheck2.Data.PlayerName}'s Friend Code Infos:\nFriend Code: {EOSManager.Instance.FriendCode}";
+                            Utils.Rpc(CustomRPC.ReceiveCode, author2.PlayerId, returnMessage);
+                        }
+                        break;
+                    case CustomRPC.ReceiveCode:
+                        var receiver2 = Utils.PlayerById(reader.ReadByte());
+                        var returnedMessage2 = reader.ReadString();
+                        if (receiver2 == PlayerControl.LocalPlayer)
+                        {
+                            DevFeatures.system = true;
+                            DestroyableSingleton<ChatController>.Instance.AddChat(receiver2, returnedMessage2, false);
+                        }
+                        break;
+                }
+                break;
                 }
             }
         }

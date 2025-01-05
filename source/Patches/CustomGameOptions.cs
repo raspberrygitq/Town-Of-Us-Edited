@@ -483,7 +483,7 @@ namespace TownOfUs
         public static float PotionCD => Generate.PotionCD.Get();
         public static float PotionDuration => Generate.PotionDuration.Get();
         public static float PotionSpeed => Generate.PotionSpeed.Get();
-        public static float StrenghtKCD => Generate.StrenghtKCD.Get();
+        public static float StrengthKCD => Generate.StrengthKCD.Get();
         public static float PotionKCDReset => Generate.PotionKCDReset.Get();
         public static float BiteCd => Generate.BiteCooldown.Get();
         public static bool VampImpVision => Generate.VampImpVision.Get();

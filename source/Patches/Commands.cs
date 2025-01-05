@@ -6,6 +6,7 @@ using HarmonyLib;
 using TownOfUs.CrewmateRoles.MedicMod;
 using TownOfUs.Extensions;
 using TownOfUs.Roles;
+using UnityEngine;
 
 namespace TownOfUs.Patches
 {
@@ -19,6 +20,45 @@ namespace TownOfUs.Patches
         [HarmonyPatch(typeof(ChatController), nameof(ChatController.AddChat))]
         public class SpecialChat
         {
+            public static void ForceAddChat(PlayerControl srcPlayer, string chatText)
+            {
+                var Instance = DestroyableSingleton<ChatController>.Instance;
+                ChatBubble pooledBubble = Instance.GetPooledBubble();
+                try
+		        {
+			        pooledBubble.transform.SetParent(Instance.scroller.Inner);
+			        pooledBubble.transform.localScale = Vector3.one;
+			        bool flag = srcPlayer == PlayerControl.LocalPlayer;
+			        if (flag)
+			        {
+				        pooledBubble.SetRight();
+			        }
+			        else
+			        {
+				        pooledBubble.SetLeft();
+			        }
+                    var data2 = srcPlayer.Data;
+			        pooledBubble.SetCosmetics(data2);
+			        Instance.SetChatBubbleName(pooledBubble, data2, false, false, PlayerNameColor.Get(data2), null);
+			        pooledBubble.SetText(chatText);
+			        pooledBubble.AlignChildren();
+			        Instance.AlignAllBubbles();
+			        if (!Instance.IsOpenOrOpening && Instance.notificationRoutine == null)
+			        {
+				        Instance.notificationRoutine = Instance.StartCoroutine(Instance.BounceDot());
+			        }
+			        if (!flag && !Instance.IsOpenOrOpening)
+			        {
+				        SoundManager.Instance.PlaySound(Instance.messageSound, false, 1f, null).pitch = 0.5f + (float)srcPlayer.PlayerId / 15f;
+				        Instance.chatNotification.SetUp(srcPlayer, chatText);
+			        }
+		        }
+		        catch (Exception message)
+		        {
+			        System.Console.WriteLine($"Error forcing send message: {message.ToString()}");
+			        Instance.chatBubblePool.Reclaim(pooledBubble);
+		        }
+            }
             public static bool CheckRole(string role)
             {
                 return role == "Chameleon" || role == "Altruist" || role == "Amnesiac" || role == "Arsonist" ||
@@ -57,12 +97,12 @@ namespace TownOfUs.Patches
                 {
                     if (sourcePlayer.IsDev() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = "<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id\n\nDev Commands:\n\n/fly - Disable / Enable Colliders in Lobby.\n/dmsg [message] - Sends a message that everyone will see.\n/dev - Get a list of all current devs & friendcodes.\n/changecode [friend code] - Changes your friend code account. (Will be reset to normal if you restart Among Us)\n/randomise - Gives you a completely new random username and appearance\n/default - Reset your outfit to default\n/status - Show / Hide your dev status";
+                        chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id\n\nDev Commands:\n\n/fly - Disable / Enable Colliders in Lobby.\n/dmsg [message] - Sends a message that everyone will see.\n/dev - Get a list of all current devs & friendcodes.\n/randomise - Gives you a completely new random username and appearance\n/default - Reset your outfit to default\n/status - Show / Hide your dev status\n/checkstatus [player id] - Check the status of a player (dev, main dev, none...)\n/getcode [player id] - Gets the Friend Code of a player";
                         system = true;
                     }
                     else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = "<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id";
+                        chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id";
                         system = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
@@ -83,7 +123,7 @@ namespace TownOfUs.Patches
                     {
                         var message = chatText[5..];
                         host = true;
-                        DestroyableSingleton<ChatController>.Instance.AddChat(sourcePlayer, message, false);
+                        ForceAddChat(sourcePlayer, message);
                         return false;
                     }
                     else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
@@ -122,6 +162,19 @@ namespace TownOfUs.Patches
                         system = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
+                }
+
+                if (chatText.ToLower().StartsWith("/shrug"))
+                {
+                    if (chatText.Length > 7)
+                    {
+                        chatText = chatText[7..] + @" ¯\_(ツ)_/¯";
+                    }
+                    else
+                    {
+                        chatText = @"¯\_(ツ)_/¯";
+                    }
+                    return true;
                 }
 
                 if (chatText.ToLower().StartsWith("/up "))
@@ -193,7 +246,7 @@ namespace TownOfUs.Patches
 
                 if (chatText.ToLower().StartsWith("/id"))
                 {
-                    if (GameData.Instance.GetHost() == sourcePlayer.Data && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    if ((GameData.Instance.GetHost() == sourcePlayer.Data || sourcePlayer.IsDev()) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         string message = "All players ids:\n";
                         foreach (var player in PlayerControl.AllPlayerControls.ToArray().OrderBy(x => Guid.NewGuid()))

@@ -15,6 +15,7 @@ using TownOfUs.Patches.ScreenEffects;
 using TownOfUs.Roles.Cultist;
 using Assassin = TownOfUs.Roles.Modifiers.Assassin;
 using TownOfUs.ImpostorRoles.ImpostorMod;
+using TownOfUs.Patches;
 
 namespace TownOfUs.NeutralRoles.AmnesiacMod
 {
@@ -746,6 +747,8 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                     }
                 }
             }
+
+            PlayerControl_Die.Postfix();
         }
     }
 }

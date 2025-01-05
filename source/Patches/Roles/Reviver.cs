@@ -71,7 +71,7 @@ namespace TownOfUs.Roles
             player.NetTransform.SnapTo(new Vector2(position.x, position.y + 0.3636f));
             RoleManager.Instance.SetRole(player, RoleTypes.Crewmate);
 
-            if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(0);
+            if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(1);
 
             if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {

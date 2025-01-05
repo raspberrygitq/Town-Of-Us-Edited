@@ -79,8 +79,6 @@ namespace TownOfUs
                            || playerControl.Is(Faction.Coven)
                            || playerControl.Is(RoleEnum.Spectator);
 
-                var flag2 = playerControl.Is(RoleEnum.Spirit);
-
                 // If the console is not a sabotage repair console
                 if (flag && !__instance.AllowImpostor)
                 {
@@ -90,26 +88,7 @@ namespace TownOfUs
                     return false;
                 }
 
-                if (flag2)
-                {
-                    couldUse = __instance.FindTask(playerControl) && (!__instance.onlyFromBelow || playerControl.GetTruePosition().y < __instance.transform.position.y);
-                    canUse = couldUse;
-                    __result = Vector2.Distance(playerControl.GetTruePosition(), __instance.transform.position);
-                    canUse &= (__result <= __instance.UsableDistance);
-				    canUse &= !PhysicsHelpers.AnythingBetween(playerControl.GetTruePosition(), __instance.transform.position, Constants.ShadowMask, false);
-                    return false;
-                }
-
                 return true;
-            }
-        }
-
-        [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CompleteTask))]
-        public class CompleteTask
-        {
-            public static void Postfix(PlayerControl __instance)
-            {
-                if (__instance.Is(RoleEnum.Haunter) || !__instance.Is(Faction.Crewmates)) GameData.Instance.CompletedTasks--;
             }
         }
     }

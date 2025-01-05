@@ -253,6 +253,8 @@ namespace TownOfUs.Roles
             VampireWins = true;
 
             Utils.Rpc(CustomRPC.VampireWin);
+
+            if (AmongUsClient.Instance.AmHost) Utils.EndGame();
         }
 
         public static void SKWin()
@@ -291,6 +293,8 @@ namespace TownOfUs.Roles
             SKWins = true;
 
             Utils.Rpc(CustomRPC.SKwin);
+
+            if (AmongUsClient.Instance.AmHost) Utils.EndGame();
         }
         public static bool NeutralEvilWin()
         {
@@ -493,14 +497,38 @@ namespace TownOfUs.Roles
         public void RegenTask()
         {
             bool createTask;
+            bool CreateDeadTask = false;
+            bool flag = (Player.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(Player).Caught) ||
+            (Player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(Player).Caught) ||
+            (Player.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(Player).Caught) ||
+            (Player.Is(RoleEnum.Astral) && Role.GetRole<Astral>(Player).Enabled);
+            string deadText;
+
+            if (Player.Is(Faction.Crewmates)) deadText = "<color=#FF0000>You're dead. Finish your tasks to win.</color>";
+            else if (Player.Is(Faction.Impostors) || Player.Is(Faction.Coven)) deadText = "<color=#FF0000>You're dead. You can still perform Sabotages.</color>";
+            else deadText = "<color=#FF0000>You're dead. Enjoy the chaos.</color>";
+
             try
             {
                 var firstText = Player.myTasks.ToArray()[0].Cast<ImportantTextTask>();
-                createTask = !firstText.Text.Contains("Role:");
+                createTask = !firstText.Text.Contains("Role:") && !firstText.Text.Contains("You're dead."); // Avoid an issue because of the vanilla death task text
             }
             catch (InvalidCastException)
             {
                 createTask = true;
+            }
+
+            if (Player.Data.IsDead)
+            {
+                try
+                {
+                    var Text = Player.myTasks.ToArray()[1].Cast<ImportantTextTask>();
+                    CreateDeadTask = !Text.Text.Contains("You're dead.");
+                }
+                catch (InvalidCastException)
+                {
+                    CreateDeadTask = true;
+                }
             }
 
             if (createTask)
@@ -509,11 +537,26 @@ namespace TownOfUs.Roles
                 task.transform.SetParent(Player.transform, false);
                 task.Text = $"{ColorString}Role: {Name} (Press F2 for Role infos)\n{TaskText()}</color>";
                 Player.myTasks.Insert(0, task);
-                return;
             }
 
-            Player.myTasks.ToArray()[0].Cast<ImportantTextTask>().Text =
-                $"{ColorString}Role: {Name} (Press F2 for Role infos)\n{TaskText()}</color>";
+            if (CreateDeadTask && !flag)
+            {
+                var task = new GameObject(Name + "Task").AddComponent<ImportantTextTask>();
+                task.transform.SetParent(Player.transform, false);
+                task.Text = deadText;
+                Player.myTasks.Insert(1, task);
+            }
+
+            if (!createTask)
+            {
+                Player.myTasks.ToArray()[0].Cast<ImportantTextTask>().Text =
+                    $"{ColorString}Role: {Name} (Press F2 for Role infos)\n{TaskText()}</color>";
+            }
+            
+            if (Player.Data.IsDead && !CreateDeadTask && !flag)
+            {
+                Player.myTasks.ToArray()[1].Cast<ImportantTextTask>().Text = deadText;
+            }
         }
 
         public static T Gen<T>(Type type, PlayerControl player, CustomRPC rpc)
@@ -1187,140 +1230,13 @@ namespace TownOfUs.Roles
 
                 if (GameData.Instance.TotalTasks <= GameData.Instance.CompletedTasks)
                 {
-                    var crews = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Data.Disconnected).ToList();
+                    var crews = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Data.Disconnected && !x.Is(RoleEnum.Haunter)).ToList();
                     if (crews.Count != 0 && CustomGameOptions.GameMode != GameMode.Werewolf)
                     {
                         CrewmateWins = true;
                         Utils.Rpc(CustomRPC.CrewmateWin);
                         Utils.EndGame(GameOverReason.HumansByVote);
                         System.Console.WriteLine("GAME OVER REASON: Tasks Completed");
-                        return false;
-                    }
-                }
-
-                if (Role.ForceGameEnd == true)
-                {
-                    Utils.EndGame(GameOverReason.ImpostorBySabotage);
-                    System.Console.WriteLine("GAME OVER REASON: Host Forced End Game");
-                    return false;
-                }
-
-                if (NeutralEvilWin())
-                {
-                    Utils.EndGame();
-                    System.Console.WriteLine("GAME OVER REASON: Neutral Evil Win");
-                    return false;
-                }
-
-                foreach (var role in AllRoles)
-                {
-                    var alives = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                    var impsAlive = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected && x.Data.IsImpostor()).ToList();
-                    var traitorIsEnd = false;
-                    foreach (var player in PlayerControl.AllPlayerControls)
-                    {
-                        if (player.Is(RoleEnum.Astral) && Role.GetRole<Astral>(player).Enabled)
-                        {
-                            alives.Add(player);
-                        }
-                    }
-                    if (SetTraitor.WillBeTraitor != null)
-                    {
-                        if (SetTraitor.WillBeTraitor.Data.IsDead || SetTraitor.WillBeTraitor.Data.Disconnected || alives.Count < CustomGameOptions.LatestSpawn || impsAlive.Count * 2 >= alives.Count) traitorIsEnd = false;
-                        else traitorIsEnd = true;
-                    }
-                    if (role.PauseEndCrit || traitorIsEnd || Role.ForceGameEnd || NeutralEvilWin()) return false;
-
-                    var aliveimps = PlayerControl.AllPlayerControls.ToArray().Where(x => (x.Is(Faction.Impostors) || x.Is(Faction.Madmates)) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                    var alivenk = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.NeutralKilling) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                    var alivecoven = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Coven) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                    var alivekillers = PlayerControl.AllPlayerControls.ToArray().Where(x => (x.Is(Faction.NeutralKilling) || x.Is(Faction.Impostors) || x.Is(Faction.Coven)) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                    var alivesnonkiller = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors) && !x.Is(Faction.NeutralKilling) && !x.Is(Faction.Madmates) && !x.Is(Faction.Coven) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                    var alivecrewkiller = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && x.IsCrewKiller() && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                    var alivevamps = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(RoleEnum.Vampire) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                    var alivesks = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(RoleEnum.SerialKiller) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                    var alivelovers = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(ModifierEnum.Lover) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                    foreach (var player in PlayerControl.AllPlayerControls)
-                    {
-                        if (player.Is(RoleEnum.Astral) && Role.GetRole<Astral>(player).Enabled)
-                        {
-                            alivesnonkiller.Add(player);
-                        }
-                    }
-                    if (CheckLoversWin())
-                    {
-                        foreach (var lover in alivelovers)
-                        {
-                            var loverRole = Modifier.GetModifier(lover);
-                            loverRole.ModifierWin(__instance);
-                            Utils.EndGame();
-                            // Lovers win
-                            return false;
-                        }
-                    }
-                    else if (alivenk.Count == 1 && alivecoven.Count <= 0 && aliveimps.Count <= 0 && alivesnonkiller.Count <= 1 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue))
-                    {
-                        foreach (var nk in alivenk)
-                        {
-                            var nkRole = Role.GetRole(nk);
-                            nkRole.NeutralWin(__instance);
-                            Utils.EndGame();
-                            // Nk win
-                            return false;
-                        }
-                    }
-                    else if (alivenk.Count == alivesks.Count && alivecoven.Count <= 0 && aliveimps.Count <= 0 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue) && alivesks.Count >= alivesnonkiller.Count && alivelovers.Count < 2)
-                    {
-                        foreach (var nk in alivenk)
-                        {
-                            var nkRole = Role.GetRole(nk);
-                            nkRole.NeutralWin(__instance);
-                            Utils.EndGame();
-                            // Sk Win
-                            return false;
-                        }
-                    }
-                    else if (alivenk.Count == alivevamps.Count && alivecoven.Count <= 0 && aliveimps.Count <= 0 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue) && alivevamps.Count >= alivesnonkiller.Count && alivelovers.Count < 2)
-                    {
-                        foreach (var nk in alivenk)
-                        {
-                            var nkRole = Role.GetRole(nk);
-                            nkRole.NeutralWin(__instance);
-                            Utils.EndGame();
-                            // Vampires Win
-                            return false;
-                        }
-                    }
-                    else if (alivenk.Count <= 0 && alivecoven.Count <= 0 && alivesnonkiller.Count <= aliveimps.Count && CustomGameOptions.GameMode != GameMode.Chaos && aliveimps.Count > 0 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue))
-                    {
-                        ImpostorWins = true;
-                        Utils.Rpc(CustomRPC.ImpostorWin);
-                        Utils.EndGame(GameOverReason.ImpostorByVote);
-                        System.Console.WriteLine("GAME OVER REASON: Impostor Victory");
-                        return false;
-                    }
-                    else if (alivenk.Count <= 0 && aliveimps.Count <= 0 && alivesnonkiller.Count <= alivecoven.Count && alivecoven.Count > 0 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue))
-                    {
-                        CovenWins = true;
-                        Utils.Rpc(CustomRPC.CovenWin);
-                        Utils.EndGame();
-                        System.Console.WriteLine("GAME OVER REASON: Coven Win");
-                        return false;
-                    }
-                    else if (alivekillers.Count <= 0)
-                    {
-                        CrewmateWins = true;
-                        Utils.Rpc(CustomRPC.CrewmateWin);
-                        Utils.EndGame(GameOverReason.HumansByVote);
-                        System.Console.WriteLine("GAME OVER REASON: No Killers Left");
-                        return false;
-                    }
-                    else if (CustomGameOptions.GameMode == GameMode.Chaos && alivesnonkiller.Count <= 0)
-                    {
-                        ImpostorWins = true;
-                        Utils.Rpc(CustomRPC.ImpostorWin);
-                        Utils.EndGame(GameOverReason.ImpostorByVote);
-                        System.Console.WriteLine("GAME OVER REASON: Chaos GameMode Impostor Win");
                         return false;
                     }
                 }

@@ -61,7 +61,7 @@ namespace TownOfUs.CultistRoles.WhispererMod
                     //role.WhisperConversion -= CustomGameOptions.DecreasedPercentagePerConversion;
                     if (role.WhisperConversion < 5) role.WhisperConversion = 5;
 
-                    Utils.Rpc(CustomRPC.Convert, playerConversion.Item1.PlayerId);
+                    // Utils.Rpc(CustomRPC.Convert, playerConversion.Item1.PlayerId);
                     removals.Add(playerConversion);
                 }
             }

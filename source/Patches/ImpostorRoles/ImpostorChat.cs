@@ -1,6 +1,7 @@
 using HarmonyLib;
 using System;
 using System.Linq;
+using TownOfUs.Roles;
 using UnityEngine;
 
 namespace TownOfUs.Patches.ImpostorRoles.ImpostorChat
@@ -42,6 +43,10 @@ namespace TownOfUs.Patches.ImpostorRoles.ImpostorChat
                     return shouldSeeMessage;
                 }
                 else impchat = false;
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Astral) && Role.GetRole<Astral>(PlayerControl.LocalPlayer).Enabled
+                && !impchat) return false;
+
                 return true;
             }
         }

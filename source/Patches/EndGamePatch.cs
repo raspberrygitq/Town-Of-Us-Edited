@@ -442,40 +442,6 @@ namespace TownOfUs.Patches {
 
                 AdditionalTempData.playerRoles.Add(new AdditionalTempData.PlayerRoleInfo() { PlayerName = playerName, Role = playerRole });
             }
-
-            if (!CustomGameOptions.NeutralEvilWinEndsGame)
-            {
-                foreach (var doomsayer in Role.GetRoles(RoleEnum.Doomsayer))
-                {
-                    var doom = (Doomsayer)doomsayer;
-                    if (doom.WonByGuessing) AdditionalTempData.otherWinners.Add(new AdditionalTempData.Winners() { PlayerName = doom.Player.Data.PlayerName, Role = RoleEnum.Doomsayer });
-                }
-                foreach (var vulture in Role.GetRoles(RoleEnum.Vulture))
-                {
-                    var vult = (Vulture)vulture;
-                    if (vult.VultureWins) AdditionalTempData.otherWinners.Add(new AdditionalTempData.Winners() { PlayerName = vult.Player.Data.PlayerName, Role = RoleEnum.Vulture });
-                }
-                foreach (var executioner in Role.GetRoles(RoleEnum.Executioner))
-                {
-                    var exe = (Executioner)executioner;
-                    if (exe.TargetVotedOut) AdditionalTempData.otherWinners.Add(new AdditionalTempData.Winners() { PlayerName = exe.Player.Data.PlayerName, Role = RoleEnum.Executioner });
-                }
-                foreach (var jester in Role.GetRoles(RoleEnum.Jester))
-                {
-                    var jest = (Jester)jester;
-                    if (jest.VotedOut) AdditionalTempData.otherWinners.Add(new AdditionalTempData.Winners() { PlayerName = jest.Player.Data.PlayerName, Role = RoleEnum.Jester });
-                }
-                foreach (var troll in Role.GetRoles(RoleEnum.Troll))
-                {
-                    var troller = (Troll)troll;
-                    if (troller.TrolledVotedOut) AdditionalTempData.otherWinners.Add(new AdditionalTempData.Winners() { PlayerName = troller.Player.Data.PlayerName, Role = RoleEnum.Troll });
-                }
-                foreach (var phantom in Role.GetRoles(RoleEnum.Phantom))
-                {
-                    var phan = (Phantom)phantom;
-                    if (phan.CompletedTasks) AdditionalTempData.otherWinners.Add(new AdditionalTempData.Winners() { PlayerName = phan.Player.Data.PlayerName, Role = RoleEnum.Phantom });
-                }
-            }
         }
     }
 

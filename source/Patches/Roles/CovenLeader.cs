@@ -5,6 +5,7 @@ using TownOfUs.CrewmateRoles.ImitatorMod;
 using TownOfUs.CrewmateRoles.InvestigatorMod;
 using TownOfUs.CrewmateRoles.TrapperMod;
 using TownOfUs.ImpostorRoles.BomberMod;
+using TownOfUs.Patches;
 using TownOfUs.Patches.ScreenEffects;
 using TownOfUs.Roles.Cultist;
 using TownOfUs.Roles.Modifiers;
@@ -277,6 +278,8 @@ namespace TownOfUs.Roles
                 role.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
                 role.RegenTask();
             }
+            
+            PlayerControl_Die.Postfix();
         }
     }
 }

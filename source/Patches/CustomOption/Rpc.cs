@@ -17,13 +17,15 @@ namespace TownOfUs.CustomOption
                 options = CustomOption.AllOptions;
 
             var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte) CustomRPC.SyncCustomSettings, SendOption.Reliable);
+                254, SendOption.Reliable);
+            writer.Write((int)CustomRPC.SyncCustomSettings);
             foreach (var option in options)
             {
                 if (writer.Position > 1000) {
                     AmongUsClient.Instance.FinishRpcImmediately(writer);
                     writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte) CustomRPC.SyncCustomSettings, SendOption.Reliable);
+                        254, SendOption.Reliable);
+                    writer.Write((int)CustomRPC.SyncCustomSettings);
                 }
                 writer.Write(option.ID);
                 if (option.Type == CustomOptionType.Toggle) writer.Write((bool) option.Value);

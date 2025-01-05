@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using AmongUs.GameOptions;
 using Reactor.Utilities;
 using HarmonyLib;
 using Il2CppSystem;

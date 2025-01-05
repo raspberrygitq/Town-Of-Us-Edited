@@ -54,6 +54,9 @@ namespace TownOfUs
                     cam.orthographicSize = 3f;
             }
 
+            var targetRole = Role.GetRole(PlayerControl.LocalPlayer);
+            if (targetRole != null) targetRole.RegenTask();
+
             ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height, Screen.width, Screen.height, Screen.fullScreen);
         }
     }
@@ -69,6 +72,8 @@ namespace TownOfUs
             {
                 body.gameObject.Destroy();
             }
+            var targetRole = Role.GetRole(PlayerControl.LocalPlayer);
+            if (targetRole != null) targetRole.RegenTask();
         }
     }
 

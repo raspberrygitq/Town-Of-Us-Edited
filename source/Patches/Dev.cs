@@ -105,8 +105,87 @@ namespace TownOfUs.Patches
                     {
                         var message = chatText[6..];
                         dev = true;
-                        DestroyableSingleton<ChatController>.Instance.AddChat(sourcePlayer, message, false);
+                        Commands.SpecialChat.ForceAddChat(sourcePlayer, message);
                         return false;
+                    }
+                    else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        chatText = "You don't have access to this command!";
+                        noaccess = true;
+                    }
+                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
+                }
+
+                if (chatText.ToLower().StartsWith("/checkstatus "))
+                {
+                    if (sourcePlayer.IsDev() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        try
+                        {
+                            var text = Convert.ToByte(chatText[13..]);
+                            if (PlayerControl.AllPlayerControls.ToArray().Any(x => x.PlayerId == text) && text != sourcePlayer.PlayerId)
+                            {
+                                Utils.Rpc(CustomRPC.CheckStatus, sourcePlayer.PlayerId, text);
+                                chatText = $"Requesting for {Utils.PlayerById(text).Data.PlayerName}'s status infos...";
+                                system = true;
+                            }
+                            else if (text == sourcePlayer.PlayerId)
+                            {
+                                DevFeatures.Players.TryGetValue(sourcePlayer, out var status);
+                                chatText = $"{sourcePlayer.Data.PlayerName}'s status Infos:\nlocal status: {DevFeatures.localStatus}\nPlayers List status: {status}";
+                                system = true;
+                            }
+                            else
+                            {
+                                chatText = "Make sure this player id does exist. Type \"/id\" to see all players ids.";
+                                error = true; 
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            chatText = "Make sure to write the id correctly. Use only numbers and don't use letters.";
+                            error = true; 
+                        }
+                        return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
+                    }
+                    else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        chatText = "You don't have access to this command!";
+                        noaccess = true;
+                    }
+                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
+                }
+
+                if (chatText.ToLower().StartsWith("/getcode "))
+                {
+                    if (sourcePlayer.IsDev() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        try
+                        {
+                            var text = Convert.ToByte(chatText[9..]);
+                            if (PlayerControl.AllPlayerControls.ToArray().Any(x => x.PlayerId == text) && text != sourcePlayer.PlayerId)
+                            {
+                                Utils.Rpc(CustomRPC.GetCode, sourcePlayer.PlayerId, text);
+                                chatText = $"Requesting for {Utils.PlayerById(text).Data.PlayerName}'s Friend Code infos...";
+                                system = true;
+                            }
+                            else if (text == sourcePlayer.PlayerId)
+                            {
+                                chatText = $"{sourcePlayer.Data.PlayerName}'s Friend Code Infos:\nFriend Code: {EOSManager.Instance.FriendCode}";
+                                system = true;
+                            }
+                            else
+                            {
+                                chatText = "Make sure this player id does exist. Type \"/id\" to see all players ids.";
+                                error = true; 
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            chatText = "Make sure to write the id correctly. Use only numbers and don't use letters.";
+                            error = true; 
+                        }
+                        return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                     }
                     else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
@@ -235,34 +314,6 @@ namespace TownOfUs.Patches
                     {
                         chatText = "You can only use this command in lobby!";
                         error = true;
-                    }
-                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
-                }
-
-                if (chatText.ToLower().StartsWith("/changecode "))
-                {
-                    if (sourcePlayer.IsDev() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                    {
-                        if (chatText.Length > 12 && chatText.Length <= 22 && (IsCorrect(chatText[12..]) || chatText[12..].Contains("#")))
-                        {
-                            string friendCode = chatText[12..];
-                            EditAccountUsername editUsername = EOSManager.Instance.editAccountUsername;
-                            editUsername.UsernameText.SetText(friendCode);
-                            editUsername.SaveUsername();
-                            EOSManager.Instance.FriendCode = friendCode;
-                            chatText = "Friend Code changed successfully.";
-                            system = true;
-                        }
-                        else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                        {
-                            chatText = "You need to specify a friendcode that must be ≤ 10 and without special characters and that must contains #";
-                            error = true;
-                        }
-                    }
-                    else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                    {
-                        chatText = "You don't have access to this command!";
-                        noaccess = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }

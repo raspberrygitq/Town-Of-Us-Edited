@@ -46,9 +46,9 @@ namespace TownOfUs.Roles
             Utils.Interact(PlayerControl.LocalPlayer, target, true);
 
             // Set the last kill time
-            if (UsingPotion && Potion == "Strenght")
+            if (UsingPotion && Potion == "Strength")
             {
-                Cooldown = CustomGameOptions.StrenghtKCD;
+                Cooldown = CustomGameOptions.StrengthKCD;
             }
             else Cooldown = CustomGameOptions.CovenKCD;
         }
@@ -74,7 +74,7 @@ namespace TownOfUs.Roles
         public void GetPotion()
         {
             var random = new System.Random();
-            var randomPotion = new List<string>{"Speed", "Strenght", "Invisibility", "Shield"};
+            var randomPotion = new List<string>{"Speed", "Strength", "Invisibility", "Shield"};
             int index = random.Next(randomPotion.Count);
             var chosenPotion = randomPotion[index];
             randomPotion.RemoveAt(index);
