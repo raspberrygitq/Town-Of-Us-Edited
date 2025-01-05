@@ -56,7 +56,7 @@ Join the [Discord](https://discord.gg/Huen5AqR2t) if you need help or want to fi
 # Releases
 | Among Us - Version| Mod Version | Link |
 |----------|-------------|-----------------|
-| 2024.11.26 | v0.0.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v5.1.2/ToU.v5.1.2.zip) |
+| 2024.11.26 | v0.0.1 | [Download](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v0.0.1/Toue.v0.0.1.zip) |
 
 -----------------------
 # Installation
