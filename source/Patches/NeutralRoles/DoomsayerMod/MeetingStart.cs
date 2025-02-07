@@ -28,7 +28,7 @@ namespace TownOfUs.NeutralRoles.DoomsayerMod
             if (player.Is(RoleEnum.Aurial) || player.Is(RoleEnum.Imitator) || StartImitate.ImitatingPlayer == player
                 || player.Is(RoleEnum.Morphling) || player.Is(RoleEnum.Mystic) || player.Is(RoleEnum.Superstar)
                  || player.Is(RoleEnum.Spy) || player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.TimeLord)
-                 || player.Is(RoleEnum.Doppelganger))
+                 || player.Is(RoleEnum.Doppelganger) || player.Is(RoleEnum.Lookout))
                 return $"You observe that {player.GetDefaultOutfit().PlayerName} has an altered perception of reality";
             else if (player.Is(RoleEnum.Blackmailer) || player.Is(RoleEnum.Detective) || player.Is(RoleEnum.Doomsayer)
                  || player.Is(RoleEnum.Oracle) || player.Is(RoleEnum.Snitch) || player.Is(RoleEnum.Trapper) || player.Is(RoleEnum.Captain)
@@ -61,7 +61,7 @@ namespace TownOfUs.NeutralRoles.DoomsayerMod
                  || player.Is(RoleEnum.Terrorist))
                 return $"You observe that {player.GetDefaultOutfit().PlayerName} is capable of performing relentless attacks";
             else if (player.Is(RoleEnum.Witch) || player.Is(RoleEnum.Manipulator) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Conjurer)
-            || player.Is(RoleEnum.Assassin) || player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.HexMaster))
+            || player.Is(RoleEnum.Assassin) || player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.HexMaster) || player.Is(RoleEnum.VoodooMaster))
                 return $"You observe that {player.GetDefaultOutfit().PlayerName} is associated with dark powers";
             else if (player.Is(RoleEnum.Crewmate) || player.Is(RoleEnum.Impostor) || player.Is(RoleEnum.Coven))
                 return $"You observe that {player.GetDefaultOutfit().PlayerName} appears to have a basic role";
@@ -74,8 +74,8 @@ namespace TownOfUs.NeutralRoles.DoomsayerMod
             if (player.Is(RoleEnum.Aurial) || player.Is(RoleEnum.Imitator) || StartImitate.ImitatingPlayer == player
                 || player.Is(RoleEnum.Morphling) || player.Is(RoleEnum.Mystic) || player.Is(RoleEnum.Superstar)
                  || player.Is(RoleEnum.Spy) || player.Is(RoleEnum.Glitch) || player.Is(RoleEnum.TimeLord)
-                 || player.Is(RoleEnum.Doppelganger))
-                return "(Aurial, Doppelganger, Imitator, Morphling, Mystic, Spy, Superstar, The Glitch or Time Lord)";
+                 || player.Is(RoleEnum.Doppelganger) || player.Is(RoleEnum.Lookout))
+                return "(Aurial, Doppelganger, Imitator, Lookout, Morphling, Mystic, Spy, Superstar, The Glitch or Time Lord)";
             else if (player.Is(RoleEnum.Blackmailer) || player.Is(RoleEnum.Detective) || player.Is(RoleEnum.Doomsayer)
                  || player.Is(RoleEnum.Oracle) || player.Is(RoleEnum.Snitch) || player.Is(RoleEnum.Trapper) || player.Is(RoleEnum.Captain)
                  || player.Is(RoleEnum.Informant) || player.Is(RoleEnum.CovenLeader))
@@ -107,8 +107,8 @@ namespace TownOfUs.NeutralRoles.DoomsayerMod
                  || player.Is(RoleEnum.Terrorist))
                 return "(Bomber, Fighter, Jailor, Juggernaut, Knight, Poisoner, Sheriff, Shooter, Terrorist, Vigilante or Warlock)";
             else if (player.Is(RoleEnum.Witch) || player.Is(RoleEnum.Manipulator) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Conjurer)
-            || player.Is(RoleEnum.Assassin) || player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.HexMaster))
-                return "(Assassin, Conjurer, Hex Master, Manipulator, Pestilence, Ritualist or Witch)";
+            || player.Is(RoleEnum.Assassin) || player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.HexMaster) || player.Is(RoleEnum.VoodooMaster))
+                return "(Assassin, Conjurer, Hex Master, Manipulator, Pestilence, Ritualist, Voodoo Master or Witch)";
             else if (player.Is(RoleEnum.Crewmate) || player.Is(RoleEnum.Impostor) || player.Is(RoleEnum.Coven))
                 return "(Coven, Crewmate or Impostor)";
             else return "Error";

@@ -4,8 +4,6 @@ using UnityEngine;
 using TownOfUs.CrewmateRoles.InvestigatorMod;
 using TownOfUs.CrewmateRoles.TrapperMod;
 using System.Collections.Generic;
-using TownOfUs.CrewmateRoles.AurialMod;
-using TownOfUs.Patches.ScreenEffects;
 
 namespace TownOfUs.CrewmateRoles.ImitatorMod
 {
@@ -81,12 +79,42 @@ namespace TownOfUs.CrewmateRoles.ImitatorMod
                         detecRole.ExamineButton.gameObject.SetActive(false);
                     }
 
+                    if (PlayerControl.LocalPlayer.Is(RoleEnum.Knight))
+                    {
+                        var knightRole = Role.GetRole<Knight>(PlayerControl.LocalPlayer);
+                        UnityEngine.Object.Destroy(knightRole.UsesText);
+                    }
+
+                    if (PlayerControl.LocalPlayer.Is(RoleEnum.Doctor))
+                    {
+                        var docRole = Role.GetRole<Doctor>(PlayerControl.LocalPlayer);
+                        UnityEngine.Object.Destroy(docRole.UsesText);
+                    }
+
                     if (PlayerControl.LocalPlayer.Is(RoleEnum.Aurial))
                     {
                         var aurialRole = Role.GetRole<Aurial>(PlayerControl.LocalPlayer);
                         aurialRole.SenseArrows.Values.DestroyAll();
                         aurialRole.SenseArrows.Clear();
                     }
+
+                    if (PlayerControl.LocalPlayer.Is(RoleEnum.Politician))
+                    {
+                        var politicianRole = Role.GetRole<Politician>(PlayerControl.LocalPlayer);
+                        politicianRole.ClosestPlayer = null;
+                    }
+
+                    if (PlayerControl.LocalPlayer.Is(RoleEnum.Jailor))
+                    {
+                        var jailorRole = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
+                        jailorRole.ClosestPlayer = null;
+                    }
+
+                    try
+                    {
+                        DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                    }
+                    catch { }
 
                     if (!PlayerControl.LocalPlayer.Is(RoleEnum.Investigator) && !PlayerControl.LocalPlayer.Is(RoleEnum.Mystic)
                         && !PlayerControl.LocalPlayer.Is(RoleEnum.Spy)) DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
@@ -97,6 +125,15 @@ namespace TownOfUs.CrewmateRoles.ImitatorMod
                     var medRole = Role.GetRole<Medium>(StartImitate.ImitatingPlayer);
                     medRole.MediatedPlayers.Values.DestroyAll();
                     medRole.MediatedPlayers.Clear();
+                }
+
+                if (StartImitate.ImitatingPlayer.Is(RoleEnum.Snitch))
+                {
+                    var snitchRole = Role.GetRole<Snitch>(StartImitate.ImitatingPlayer);
+                    snitchRole.SnitchArrows.Values.DestroyAll();
+                    snitchRole.SnitchArrows.Clear();
+                    snitchRole.ImpArrows.DestroyAll();
+                    snitchRole.ImpArrows.Clear();
                 }
 
                 var role = Role.GetRole(StartImitate.ImitatingPlayer);
@@ -115,6 +152,7 @@ namespace TownOfUs.CrewmateRoles.ImitatorMod
                 newRole.DeathReason = role.DeathReason;
                 Role.GetRole<Imitator>(StartImitate.ImitatingPlayer).ImitatePlayer = null;
                 StartImitate.ImitatingPlayer = null;
+                Utils.Unmorph(imitator.Player);
             }
             return;
         }

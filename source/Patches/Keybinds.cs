@@ -1,11 +1,11 @@
-﻿using HarmonyLib;
+﻿﻿using HarmonyLib;
 using Rewired;
 using Rewired.Data;
 using System.Linq;
 using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
 using Ability = TownOfUs.Roles.Modifiers.Ability;
 using Assassin = TownOfUs.Roles.Modifiers.Assassin;
+using Assassin2 = TownOfUs.Roles.Assassin;
 
 namespace TownOfUs
 {
@@ -67,6 +67,7 @@ namespace TownOfUs
         public static void Postfix(MeetingHud __instance)
         {
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
+            if (PlayerControl.LocalPlayer.IsJailed()) return;
             if (__instance.state == MeetingHud.VoteStates.Discussion) return;
             var role = Role.GetRole(PlayerControl.LocalPlayer);
 
@@ -80,13 +81,29 @@ namespace TownOfUs
                 else player.SetHighlighted(false);
             }
 
-            if (role is Vigilante || role.Player.Is(AbilityEnum.Assassin) || role.Player.Is(RoleEnum.Doomsayer))
+            if (role is Vigilante || role.Player.Is(AbilityEnum.Assassin) || role.Player.Is(RoleEnum.Doomsayer) || role.Player.Is(RoleEnum.Assassin) || role.Player.Is(RoleEnum.Ritualist))
             {
                 dynamic guesser = role is Vigilante ? Role.GetRole<Vigilante>(role.Player) : Ability.GetAbility<Assassin>(role.Player);
-                if (guesser == null) guesser = Role.GetRole<Doomsayer>(role.Player);
+                if (guesser == null) guesser = role is Doomsayer ? Role.GetRole<Doomsayer>(role.Player) : Role.GetRole<Assassin2>(role.Player);
+                if (guesser == null) guesser = Role.GetRole<Ritualist>(PlayerControl.LocalPlayer);
+                if (role is Vigilante)
+                {
+                    if (Role.GetRole<Vigilante>(role.Player).RemainingKills == 0) return;
+                }
+                if (role.Player.Is(AbilityEnum.Assassin))
+                {
+                    if (Ability.GetAbility<Assassin>(role.Player).RemainingKills == 0) return;
+                }
+                if (role.Player.Is(RoleEnum.Assassin))
+                {
+                    if (Role.GetRole<Assassin2>(role.Player).RemainingKills == 0) return;
+                }
+                if (role.Player.Is(RoleEnum.Ritualist))
+                {
+                    if (Role.GetRole<Ritualist>(role.Player).RemainingKills == 0) return;
+                }
                 var players = __instance.playerStates.Where(x => (guesser as IGuesser).Buttons[x.TargetPlayerId] != (null, null, null, null)
-                                                                  && x.TargetPlayerId != role.Player.PlayerId)
-                                                     .ToList();
+                                                                  && x.TargetPlayerId != role.Player.PlayerId).ToList();
 
                 if (ReInput.players.GetPlayer(0).GetButtonDown("ToU cycle players"))
                 {

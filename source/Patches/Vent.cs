@@ -55,6 +55,7 @@ namespace TownOfUs
                 || player.Is(RoleEnum.Escapist) && !CustomGameOptions.EscapistVent
                 || player.Is(RoleEnum.Bomber) && !CustomGameOptions.BomberVent
                 || player.Is(RoleEnum.Mafioso) && aliveimp.Count > 1
+                || player.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(player).UsingManipulation
                 || (player.Is(RoleEnum.Undertaker) && Role.GetRole<Undertaker>(player).CurrentlyDragging != null && !CustomGameOptions.UndertakerVentWithBody)
                 || CustomGameOptions.GameMode == GameMode.Chaos)
                 return false;

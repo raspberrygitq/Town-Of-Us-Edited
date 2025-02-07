@@ -1,6 +1,7 @@
 using System.Collections;
-using TownOfUs.ImpostorRoles.ImpostorMod;
+using TownOfUs.Modifiers.UnderdogMod;
 using TownOfUs.Roles;
+using TownOfUs.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUs.ImpostorRoles.JanitorMod
@@ -15,19 +16,28 @@ namespace TownOfUs.ImpostorRoles.JanitorMod
             KillButtonTarget.SetTarget(DestroyableSingleton<HudManager>.Instance.KillButton, null, role);
             if (PlayerControl.LocalPlayer == role.Player)
             {
-                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
+                if (PlayerControl.LocalPlayer.Is(ModifierEnum.Underdog))
+                {
+                    var lowerKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - CustomGameOptions.UnderdogKillBonus;
+                    var normalKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay;
+                    var upperKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.UnderdogKillBonus;
+                    Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = PerformKill.LastImp() ? lowerKC : (PerformKill.IncreasedKC() ? normalKC : upperKC);
+                }
+                else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Lucky))
+                {
+                    var num = Random.RandomRange(1f, 60f);
+                    Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
+                }
+                else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Bloodlust))
+                {
+                    var modifier = Modifier.GetModifier<Bloodlust>(PlayerControl.LocalPlayer);
+                    var num = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown / 2;
+                    if (modifier.KilledThisRound >= 2) Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
+                    else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
+                }
+                else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
             }
             SpriteRenderer renderer = null;
-            var player = Utils.PlayerById(body.ParentId);
-            if (player.Is(RoleEnum.Astral))
-            {
-                var astralRole = Role.GetRole<Astral>(player);
-                if (astralRole.Enabled)
-                {
-                    astralRole.TimeRemaining = 0f;
-                    astralRole.Enabled = false;
-                }
-            }
             foreach (var body2 in body.bodyRenderers) renderer = body2;
             var backColor = renderer.material.GetColor(BackColor);
             var bodyColor = renderer.material.GetColor(BodyColor);

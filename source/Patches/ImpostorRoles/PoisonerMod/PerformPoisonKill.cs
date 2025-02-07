@@ -27,11 +27,6 @@ namespace TownOfUs.ImpostorRoles.PoisonerMod
             if (!__instance.isActiveAndEnabled) return false;
             if (role.Cooldown > 0) return false;
             if (role.Enabled == true) return false;
-            if (role.Player.inVent)
-            {
-                role.PoisonButton.SetCoolDown(0.01f, 1f);
-                return false;
-            }
             if (PlayerControl.LocalPlayer.IsJailed()) return false;
             if (PlayerControl.LocalPlayer.IsControlled() && role.ClosestPlayer.Is(Faction.Coven))
             {
@@ -55,12 +50,9 @@ namespace TownOfUs.ImpostorRoles.PoisonerMod
             if (interact[4] == true)
             {
                 role.PoisonedPlayer = target;
-                role.PoisonButton.SetTarget(null);
-                DestroyableSingleton<HudManager>.Instance.KillButton.SetTarget(null);
                 role.TimeRemaining = CustomGameOptions.PoisonDuration;
                 role.PoisonButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.PoisonDuration);
                 Utils.Rpc(CustomRPC.Poison, PlayerControl.LocalPlayer.PlayerId, target.PlayerId);
-                // role.Player.SetKillTimer(0);
             }
             if (interact[0] == true)
             {

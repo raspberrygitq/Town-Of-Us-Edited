@@ -4,6 +4,8 @@ using TownOfUs.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using TownOfUs.Patches;
+using System.Linq;
+using TownOfUs.Extensions;
 
 namespace TownOfUs.CrewmateRoles.ImitatorMod
 {
@@ -40,6 +42,8 @@ namespace TownOfUs.CrewmateRoles.ImitatorMod
             if (!SubmergedCompatibility.Loaded || GameOptionsManager.Instance?.currentNormalGameOptions?.MapId != 6) return;
             if (obj.name?.Contains("ExileCutscene") == true) ExileControllerPostfix(ExileControllerPatch.lastExiled);
         }
+
+        public static Sprite Sprite => TownOfUs.Arrow;
 
         public static void Imitate(Imitator imitator)
         {
@@ -88,6 +92,65 @@ namespace TownOfUs.CrewmateRoles.ImitatorMod
             if (imitatorRole == RoleEnum.Trapper) new Trapper(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Oracle) new Oracle(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Aurial) new Aurial(ImitatingPlayer);
+            if (imitatorRole == RoleEnum.Crewmate) new Crewmate(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Lookout) new Lookout(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Crusader) new Crusader(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Paranoïac) new Paranoïac(ImitatingPlayer);
+
+            
+            else if (imitatorRole == RoleEnum.Snitch)
+            {
+                var snitch = new Snitch(ImitatingPlayer);
+                var taskinfos = ImitatingPlayer.Data.Tasks.ToArray();
+                var tasksLeft = taskinfos.Count(x => !x.Complete);
+                if (tasksLeft <= CustomGameOptions.SnitchTasksRemaining && ((PlayerControl.LocalPlayer.Data.IsImpostor() && (!PlayerControl.LocalPlayer.Is(RoleEnum.Traitor) || CustomGameOptions.SnitchSeesTraitor))
+                            || (PlayerControl.LocalPlayer.Is(Faction.NeutralKilling) && CustomGameOptions.SnitchSeesNeutrals)))
+                {
+                    var gameObj = new GameObject();
+                    var arrow = gameObj.AddComponent<ArrowBehaviour>();
+                    gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
+                    var renderer = gameObj.AddComponent<SpriteRenderer>();
+                    renderer.sprite = Sprite;
+                    arrow.image = renderer;
+                    gameObj.layer = 5;
+                    snitch.ImpArrows.Add(arrow);
+                }
+                else if (tasksLeft == 0 && PlayerControl.LocalPlayer == ImitatingPlayer)
+                {
+                    var impostors = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.IsImpostor());
+                    foreach (var imp in impostors)
+                    {
+                        if (!imp.Is(RoleEnum.Traitor) || CustomGameOptions.SnitchSeesTraitor)
+                        {
+                            var gameObj = new GameObject();
+                            var arrow = gameObj.AddComponent<ArrowBehaviour>();
+                            gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
+                            var renderer = gameObj.AddComponent<SpriteRenderer>();
+                            renderer.sprite = Sprite;
+                            arrow.image = renderer;
+                            gameObj.layer = 5;
+                            snitch.SnitchArrows.Add(imp.PlayerId, arrow);
+                        }
+                    }
+                }
+            }
+            else if (imitatorRole == RoleEnum.Deputy) new Deputy(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Hunter) new Hunter(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Jailor) new Jailor(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Vigilante) new Vigilante(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Warden) new Warden(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Mayor)
+            {
+                var mayor = new Mayor(ImitatingPlayer);
+                if (CustomGameOptions.ImitatorCanBecomeMayor)
+                {
+                    mayor.Revealed = true;
+                    if (PlayerControl.LocalPlayer == ImitatingPlayer) mayor.RegenTask();
+                }
+            }
+            else if (imitatorRole == RoleEnum.Politician) new Politician(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Prosecutor) new Prosecutor(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Swapper) new Swapper(ImitatingPlayer);
             if (imitatorRole == RoleEnum.Medic)
             {
                 var medic = new Medic(ImitatingPlayer);
@@ -100,9 +163,16 @@ namespace TownOfUs.CrewmateRoles.ImitatorMod
                 vh.UsesLeft = CustomGameOptions.MaxFailedStakesPerGame;
                 vh.AddedStakes = true;
             }
+            if (imitatorRole == RoleEnum.Knight)
+            {
+                var knightRole = new Knight(ImitatingPlayer);
+                knightRole.Cooldown = CustomGameOptions.KnightKCD;
+                knightRole.UsesLeft = 0;
+            }
 
             var newRole = Role.GetRole(ImitatingPlayer);
-            newRole.RemoveFromRoleHistory(newRole.RoleType);
+            if (imitatorRole != RoleEnum.Mayor || !CustomGameOptions.ImitatorCanBecomeMayor) newRole.RemoveFromRoleHistory(newRole.RoleType);
+            else ImitatingPlayer = null;
             newRole.Kills = killsList.Kills;
             newRole.CorrectKills = killsList.CorrectKills;
             newRole.IncorrectKills = killsList.IncorrectKills;

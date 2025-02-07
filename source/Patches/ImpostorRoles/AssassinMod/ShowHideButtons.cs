@@ -1,7 +1,11 @@
-﻿using HarmonyLib;
+﻿﻿using HarmonyLib;
+using System.Linq;
+using TownOfUs.Roles.Modifiers;
 using UnityEngine.UI;
+using UnityEngine;
+using Assassin = TownOfUs.Roles.Assassin;
 
-namespace TownOfUs.Roles.AssassinMod
+namespace TownOfUs.Modifiers.AssassinMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Confirm))]
     public class ShowHideButtonsAssassin
@@ -20,6 +24,11 @@ namespace TownOfUs.Roles.AssassinMod
                 cycleForward.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
                 guess.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
                 role.GuessedThisMeeting = true;
+            }
+
+            foreach (var voteArea in MeetingHud.Instance.playerStates)
+            {
+                voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
             }
         }
 
@@ -43,7 +52,6 @@ namespace TownOfUs.Roles.AssassinMod
             byte targetId
         )
         {
-
             var (cycleBack, cycleForward, guess, guessText) = role.Buttons[targetId];
             if (cycleBack == null || cycleForward == null) return;
             cycleBack.SetActive(false);
@@ -56,14 +64,10 @@ namespace TownOfUs.Roles.AssassinMod
             guess.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
             role.Buttons[targetId] = (null, null, null, null);
             role.Guesses.Remove(targetId);
-        }
 
-
-        public static void Prefix(MeetingHud __instance)
-        {
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Assassin)) return;
-            var assassin = Role.GetRole<Assassin>(PlayerControl.LocalPlayer);
-            if (!CustomGameOptions.AssassinateAfterVoting) HideButtons(assassin);
+            PlayerVoteArea voteArea = MeetingHud.Instance.playerStates.First(
+                x => x.TargetPlayerId == targetId);
+            voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
         }
     }
 }

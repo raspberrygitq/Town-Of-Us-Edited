@@ -58,7 +58,6 @@ namespace TownOfUs.CrewmateRoles.SnitchMod
                     {
                         Coroutines.Start(Utils.FlashCoroutine(Color.green));
                         var impostors = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.IsImpostor());
-                        var traitor = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(RoleEnum.Traitor));
                         foreach (var imp in impostors)
                         {
                             if (!imp.Is(RoleEnum.Traitor) || CustomGameOptions.SnitchSeesTraitor)

@@ -9,6 +9,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 using Assassin = TownOfUs.Roles.Modifiers.Assassin;
+using TownOfUs.CrewmateRoles.VigilanteMod;
+using TownOfUs.NeutralRoles.DoomsayerMod;
+using TownOfUs.Roles.AssassinMod;
+using Assassin2 = TownOfUs.Roles.Assassin;
+using TownOfUs.CovenRoles.RitualistMod;
 
 namespace TownOfUs.CrewmateRoles.MayorMod
 {
@@ -57,41 +62,31 @@ namespace TownOfUs.CrewmateRoles.MayorMod
             {
                 var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
                 ShowHideButtons.HideTarget(assassin, voteArea.TargetPlayerId);
-                voteArea.NameText.transform.localPosition += new Vector3(-0.2f, -0.1f, 0f);
+                voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
+            }
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Assassin))
+            {
+                var assassin = Role.GetRole<Assassin2>(PlayerControl.LocalPlayer);
+                ShowHideButtonsAssassin.HideTarget(assassin, voteArea.TargetPlayerId);
+                voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
+            }
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Ritualist))
+            {
+                var rit = Role.GetRole<Ritualist>(PlayerControl.LocalPlayer);
+                ShowHideButtonsRitualist.HideTarget(rit, voteArea.TargetPlayerId);
+                voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Doomsayer))
             {
                 var doomsayer = Role.GetRole<Doomsayer>(PlayerControl.LocalPlayer);
-                var (cycleBack, cycleForward, guess, guessText) = doomsayer.Buttons[voteArea.TargetPlayerId];
-                if (cycleBack == null || cycleForward == null) return;
-                cycleBack.SetActive(false);
-                cycleForward.SetActive(false);
-                guess.SetActive(false);
-                guessText.gameObject.SetActive(false);
-
-                cycleBack.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
-                cycleForward.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
-                guess.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
-                doomsayer.Buttons[voteArea.TargetPlayerId] = (null, null, null, null);
-                doomsayer.Guesses.Remove(voteArea.TargetPlayerId);
-                voteArea.NameText.transform.localPosition += new Vector3(-0.2f, -0.1f, 0f);
+                ShowHideButtonsDoom.HideTarget(doomsayer, voteArea.TargetPlayerId);
+                voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Vigilante))
             {
                 var vigilante = Role.GetRole<Vigilante>(PlayerControl.LocalPlayer);
-                var (cycleBack, cycleForward, guess, guessText) = vigilante.Buttons[voteArea.TargetPlayerId];
-                if (cycleBack == null || cycleForward == null) return;
-                cycleBack.SetActive(false);
-                cycleForward.SetActive(false);
-                guess.SetActive(false);
-                guessText.gameObject.SetActive(false);
-
-                cycleBack.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
-                cycleForward.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
-                guess.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
-                vigilante.Buttons[voteArea.TargetPlayerId] = (null, null, null, null);
-                vigilante.Guesses.Remove(voteArea.TargetPlayerId);
-                voteArea.NameText.transform.localPosition += new Vector3(-0.2f, -0.1f, 0f);
+                ShowHideButtonsVigi.HideTarget(vigilante, voteArea.TargetPlayerId);
+                voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
             }
             return;
         }

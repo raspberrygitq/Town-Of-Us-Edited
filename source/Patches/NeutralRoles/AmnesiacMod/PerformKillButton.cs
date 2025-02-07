@@ -74,7 +74,14 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 var amnesiacRole = Role.GetRole<Amnesiac>(amnesiac);
                 amnesiacRole.BodyArrows.Values.DestroyAll();
                 amnesiacRole.BodyArrows.Clear();
-                foreach (var body in amnesiacRole.CurrentTarget.bodyRenderers) body.material.SetFloat("_Outline", 0f);
+                try
+                {
+                    foreach (var body in amnesiacRole.CurrentTarget.bodyRenderers) body.material.SetFloat("_Outline", 0f);
+                }
+                catch
+                {
+
+                }
             }
 
             switch (role)
@@ -95,6 +102,7 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 case RoleEnum.Vigilante:
                 case RoleEnum.Veteran:
                 case RoleEnum.Astral:
+                case RoleEnum.Lookout:
                 case RoleEnum.Crewmate:
                 case RoleEnum.Tracker:
                 case RoleEnum.Hunter:
@@ -163,6 +171,7 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 case RoleEnum.HexMaster:
                 case RoleEnum.CovenLeader:
                 case RoleEnum.Spiritualist:
+                case RoleEnum.VoodooMaster:
                 case RoleEnum.PotionMaster:
 
                     rememberImp = false;
@@ -302,12 +311,6 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 pnRole.Cooldown = CustomGameOptions.CampaignCd;
             }
 
-            else if (role == RoleEnum.Warden)
-            {
-                var wardenRole = Role.GetRole<Warden>(amnesiac);
-                wardenRole.Cooldown = CustomGameOptions.FortifyCd;
-            }
-
             else if (role == RoleEnum.SoulCollector)
             {
                 var scRole = Role.GetRole<SoulCollector>(amnesiac);
@@ -342,6 +345,12 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 var astralRole = Role.GetRole<Astral>(amnesiac);
                 astralRole.Cooldown = CustomGameOptions.GhostCD;
                 astralRole.Enabled = false;
+            }
+
+            else if (role == RoleEnum.Lookout)
+            {
+                var lookoutRole = Role.GetRole<Lookout>(amnesiac);
+                lookoutRole.Cooldown = CustomGameOptions.WatchCD;
             }
 
             else if (role == RoleEnum.Hunter)
@@ -444,6 +453,14 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 seerRole.Cooldown = CustomGameOptions.SeerCd;
             }
 
+            else if (role == RoleEnum.Deputy)
+            {
+                var deputyRole = Role.GetRole<Deputy>(amnesiac);
+                deputyRole.Camping = null;
+                deputyRole.Killer = null;
+                deputyRole.CampedThisRound = false;
+            }
+
             else if (role == RoleEnum.Oracle)
             {
                 var oracleRole = Role.GetRole<Oracle>(amnesiac);
@@ -541,6 +558,12 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 blackmailerRole.Blackmailed = null;
             }
 
+            else if (role == RoleEnum.Manipulator)
+            {
+                var ManipulatorRole = Role.GetRole<Manipulator>(amnesiac);
+                ManipulatorRole.Cooldown = CustomGameOptions.ManipulateCD;
+            }
+
             else if (role == RoleEnum.Converter)
             {
                 var converterRole = Role.GetRole<Converter>(amnesiac);
@@ -560,41 +583,16 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                 dienerRole.Cooldown = CustomGameOptions.DragCd;
             }
 
-            else if (role == RoleEnum.Coven)
+            else if (role == RoleEnum.PotionMaster)
             {
-                var covenRole = Role.GetRole<Coven>(amnesiac);
-                covenRole.Cooldown = CustomGameOptions.CovenKCD;
-            }
-
-            else if (role == RoleEnum.Ritualist)
-            {
-                var ritualistRole = Role.GetRole<Ritualist>(amnesiac);
-                ritualistRole.Cooldown = CustomGameOptions.CovenKCD;
+                var pmRole = Role.GetRole<PotionMaster>(amnesiac);
+                pmRole.PotionCooldown = CustomGameOptions.PotionCD;
             }
 
             else if (role == RoleEnum.HexMaster)
             {
-                var hexmasterRole = Role.GetRole<HexMaster>(amnesiac);
-                hexmasterRole.Cooldown = CustomGameOptions.CovenKCD;
-            }
-
-            else if (role == RoleEnum.CovenLeader)
-            {
-                var covenleaderRole = Role.GetRole<CovenLeader>(amnesiac);
-                covenleaderRole.Cooldown = CustomGameOptions.CovenKCD;
-            }
-
-            else if (role == RoleEnum.Spiritualist)
-            {
-                var spiritualistRole = Role.GetRole<Spiritualist>(amnesiac);
-                spiritualistRole.Cooldown = CustomGameOptions.CovenKCD;
-            }
-
-            else if (role == RoleEnum.PotionMaster)
-            {
-                var pmRole = Role.GetRole<PotionMaster>(amnesiac);
-                pmRole.Cooldown = CustomGameOptions.CovenKCD;
-                pmRole.PotionCooldown = CustomGameOptions.PotionCD;
+                var hmRole = Role.GetRole<HexMaster>(amnesiac);
+                hmRole.Cooldown = CustomGameOptions.CovenKCD;
             }
 
             else if (role == RoleEnum.Maul)
@@ -746,6 +744,11 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
                         snitchRole.ImpArrows.Add(arrow);
                     }
                 }
+            }
+
+            if (amnesiac.Is(Faction.Coven))
+            {
+                Role.GetRole(amnesiac).KillCooldown = CustomGameOptions.CovenKCD;
             }
 
             PlayerControl_Die.Postfix();

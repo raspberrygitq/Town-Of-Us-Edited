@@ -28,7 +28,6 @@ namespace TownOfUs.Roles
             RoleType = RoleEnum.Ritualist;
             AddToRoleHistory(RoleType);
             Faction = Faction.Coven;
-            Cooldown = CustomGameOptions.CovenKCD;
 
             RemainingKills = CustomGameOptions.RitualistKills;
 
@@ -49,6 +48,7 @@ namespace TownOfUs.Roles
             if (CustomGameOptions.InvestigatorOn > 0) ColorMapping.Add("Investigator", Colors.Investigator);
             if (CustomGameOptions.MedicOn > 0) ColorMapping.Add("Medic", Colors.Medic);
             if (CustomGameOptions.AstralOn > 0) ColorMapping.Add("Astral", Colors.Astral);
+            if (CustomGameOptions.LookoutOn > 0) ColorMapping.Add("Lookout", Colors.Lookout);
             if (CustomGameOptions.SeerOn > 0) ColorMapping.Add("Seer", Colors.Seer);
             if (CustomGameOptions.SpyOn > 0) ColorMapping.Add("Spy", Colors.Spy);
             if (CustomGameOptions.SnitchOn > 0) ColorMapping.Add("Snitch", Colors.Snitch);
@@ -105,7 +105,7 @@ namespace TownOfUs.Roles
                 if (CustomGameOptions.AttackerOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Attacker)) ColorMapping.Add("Attacker", Colors.Attacker);
                 if (CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Vampire)) ColorMapping.Add("Vampire", Colors.Vampire);
                 if (CustomGameOptions.WerewolfOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Maul)) ColorMapping.Add("Maul", Colors.Werewolf);
-                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut) && CustomGameOptions.HiddenRoles) ColorMapping.Add("Juggernaut", Colors.Juggernaut);
+                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggernautOn > 0) ColorMapping.Add("Juggernaut", Colors.Juggernaut);
             }
             if (CustomGameOptions.RitualistGuessImpostors)
             {
@@ -154,45 +154,6 @@ namespace TownOfUs.Roles
         public int RemainingKills { get; set; }
 
         public List<string> PossibleGuesses => SortedColorMapping.Keys.ToList();
-
-        public KillButton _sabotageButton;
-        public PlayerControl ClosestPlayer;
-        public float Cooldown;
-        public bool coolingDown => Cooldown > 0f;
-        public void Kill(PlayerControl target)
-        {
-            // Check if the Ritualist can kill
-            if (Cooldown > 0)
-                return;
-
-            if (target.Is(Faction.Coven))
-                return;
-
-            Utils.Interact(PlayerControl.LocalPlayer, target, true);
-
-            // Set the last kill time
-            Cooldown = CustomGameOptions.CovenKCD;
-        }
-        public KillButton SabotageButton
-        {
-            get => _sabotageButton;
-            set
-            {
-                _sabotageButton = value;
-                ExtraButtons.Clear();
-                ExtraButtons.Add(value);
-            }
-        }
-        public float KillTimer()
-        {
-            if (!coolingDown) return 0f;
-            else if (!PlayerControl.LocalPlayer.inVent)
-            {
-                Cooldown -= Time.deltaTime;
-                return Cooldown;
-            }
-            else return Cooldown;
-        }
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__38 __instance)
         {

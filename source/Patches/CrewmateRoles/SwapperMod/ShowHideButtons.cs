@@ -33,19 +33,6 @@ namespace TownOfUs.CrewmateRoles.SwapperMod
                 }
             }
 
-            foreach (var terrorist in Role.GetRoles(RoleEnum.Terrorist))
-            {
-                var terroristRole = (Terrorist)terrorist;
-                if (terroristRole.Player.Data.IsDead || terroristRole.Player.Data.Disconnected || exiled == null) continue;
-                if (terroristRole.Player.PlayerId == exiled.PlayerId)
-                {
-                    terroristRole.SavedVote = true;
-                    Utils.Rpc(CustomRPC.TerroristSaveVote, terroristRole.Player.PlayerId);
-                    var dictionary = new Dictionary<byte, int>();
-                    return dictionary;
-                }
-            }
-
             return self;
         }
         public static Dictionary<byte, int> CalculateVotesSwap(MeetingHud __instance)
@@ -93,12 +80,12 @@ namespace TownOfUs.CrewmateRoles.SwapperMod
                     button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
                 }
 
-                if (swapper.ListOfActives.Count(x => x) == 2)
+                if (swapper.ListOfActives.Count(x => x.Item2) == 2)
                 {
                     var toSet1 = true;
                     for (var i = 0; i < swapper.ListOfActives.Count; i++)
                     {
-                        if (!swapper.ListOfActives[i]) continue;
+                        if (!swapper.ListOfActives[i].Item2) continue;
 
                         if (toSet1)
                         {

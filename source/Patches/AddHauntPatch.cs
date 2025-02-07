@@ -7,6 +7,7 @@ using TownOfUs.NeutralRoles.PhantomMod;
 using TownOfUs.CrewmateRoles.HaunterMod;
 using TownOfUs.Roles;
 using TownOfUs.ImpostorRoles.SpiritMod;
+using TownOfUs.Roles.Modifiers;
 
 namespace TownOfUs.Patches
 {
@@ -46,6 +47,11 @@ namespace TownOfUs.Patches
                 catch { }
             }
             AssassinatedPlayers.Clear();
+            if (GameOptionsManager.Instance.currentNormalGameOptions?.MapId != 6 && GameOptionsManager.Instance.currentNormalGameOptions?.MapId != 4 && PlayerControl.LocalPlayer.Is(ModifierEnum.Motionless))
+            {
+                var role = Modifier.GetModifier<Motionless>(PlayerControl.LocalPlayer);
+                role.ResetPosition();
+            }
         }
 
         public static void Postfix(ExileController __instance) => ExileControllerPostfix(__instance);
@@ -55,6 +61,33 @@ namespace TownOfUs.Patches
         {
             if (!SubmergedCompatibility.Loaded || GameOptionsManager.Instance?.currentNormalGameOptions?.MapId != 6) return;
             if (obj.name?.Contains("ExileCutscene") == true) ExileControllerPostfix(ExileControllerPatch.lastExiled);
+        }
+
+        // Code from Stellar roles, link: https://github.com/Mr-Fluuff/StellarRolesAU/blob/bad6c0e70557897021fc9b257588b32e29b705b9/StellarRoles/Patches/ExileControllerPatch.cs#L77
+        [HarmonyPatch(typeof(UnityEngine.Object), nameof(UnityEngine.Object.Destroy), [typeof(GameObject)])]
+        class SubmergedExileControllerPatch
+        {
+            public static void Prefix(GameObject obj, ref bool __state)
+            {
+                if (!SubmergedCompatibility.isSubmerged() || GameOptionsManager.Instance.currentNormalGameOptions?.MapId != 6) return;
+                try
+                {
+                    if (obj?.name?.Contains("SpawnInMinigame") == true)
+                    {
+                        __state = true;
+                    }
+                }
+                catch { }
+            }
+            public static void Postfix(bool __state)
+            {
+                if (__state)
+                {
+                    if (!PlayerControl.LocalPlayer.Is(ModifierEnum.Motionless)) return;
+                    var role = Modifier.GetModifier<Motionless>(PlayerControl.LocalPlayer);
+                    role.ResetPosition();
+                }
+            }
         }
     }
 }

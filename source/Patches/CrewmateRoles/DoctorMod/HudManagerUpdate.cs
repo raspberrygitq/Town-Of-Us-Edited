@@ -93,18 +93,6 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
             {
                 var player = Utils.PlayerById(deadBody.ParentId);
                 var playerRole = Role.GetRole(player);
-                if (closestBody != null && player.Is(RoleEnum.Astral) && Role.GetRole<Astral>(player).Enabled == true && closestBody.ParentId == deadBody.ParentId)
-                {
-                    if (!reviveButton.isCoolingDown)
-                    {
-                        var renderer = reviveButton.graphic;
-                        renderer.color = Palette.DisabledClear;
-                        renderer.material.SetFloat("_Desat", 1f);
-                        role.UsesText.color = Palette.DisabledClear;
-                        role.UsesText.material.SetFloat("_Desat", 1f);
-                    }
-                    return;
-                }
                 if (closestBody != null && playerRole.InfectionState == 4 && closestBody.ParentId == deadBody.ParentId)
                 {
                     if (!reviveButton.isCoolingDown)
@@ -198,10 +186,6 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
                 {
                     var player = Utils.PlayerById(deadBody.ParentId);
                     var playerRole = Role.GetRole(player);
-                    if (closestBody != null && player.Is(RoleEnum.Astral) && Role.GetRole<Astral>(player).Enabled == true && closestBody.ParentId == deadBody.ParentId)
-                    {
-                        return;
-                    }
                     if (closestBody != null && playerRole.InfectionState == 4 && closestBody.ParentId == deadBody.ParentId)
                     {
                         return;

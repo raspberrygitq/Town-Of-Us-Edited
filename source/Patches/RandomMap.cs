@@ -134,6 +134,7 @@ namespace TownOfUs
             Generate.SheriffKillCd.Set((float)Generate.SheriffKillCd.Value + change, false);
             Generate.AlertCooldown.Set((float)Generate.AlertCooldown.Value + change, false);
             Generate.GhostCooldown.Set((float)Generate.GhostCooldown.Value + change, false);
+            Generate.WatchCooldown.Set((float)Generate.WatchCooldown.Value + change, false);
             Generate.TransportCooldown.Set((float)Generate.TransportCooldown.Value + change, false);
             Generate.ProtectCd.Set((float)Generate.ProtectCd.Value + change, false);
             Generate.VestCd.Set((float)Generate.VestCd.Value + change, false);

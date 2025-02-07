@@ -13,16 +13,6 @@ namespace TownOfUs.NeutralRoles.VultureMod
         {
             KillButtonTarget.SetTarget(DestroyableSingleton<HudManager>.Instance.KillButton, null, role);
             SpriteRenderer renderer = null;
-            var player = Utils.PlayerById(body.ParentId);
-            if (player.Is(RoleEnum.Astral))
-            {
-                var astralRole = Role.GetRole<Astral>(player);
-                if (astralRole.Enabled)
-                {
-                    astralRole.TimeRemaining = 0f;
-                    astralRole.Enabled = false;
-                }
-            }
             foreach (var body2 in body.bodyRenderers) renderer = body2;
             var backColor = renderer.material.GetColor(BackColor);
             var bodyColor = renderer.material.GetColor(BodyColor);

@@ -22,13 +22,9 @@ namespace TownOfUs.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#00FFFF>Crewmate</color>, do you tasks and find out who the <color=#FF0000>Impostors</color> are!");
                 }
-                if (pc.Is(RoleEnum.Impostor))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Impostor</color>, kill everyone and sabotage without being caught!");
-                }
                 if (pc.Is(RoleEnum.Aurial))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#B34D99FF>Aurial</color>, you can see auras of different players by radiating.\nHowever, you can not see who is who.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#B34D99FF>Aurial</color>, you can see things in your aura.\nIf anyone uses an ability near you, you will get an arrow pointing to where it has been used.");
                 }
                 if (pc.Is(RoleEnum.Captain))
                 {
@@ -48,7 +44,7 @@ namespace TownOfUs.Roles
                 }
                 if (pc.Is(RoleEnum.Detective))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#4D4DFFFF>Detective</color>, inspect dead bodies to find out their killer.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#4D4DFFFF>Detective</color>, you can inspect crime scenes and then examine players to see if they were near the crime scene during the kill (they will show a red flash on your screen).");
                 }
                 if (pc.Is(RoleEnum.Haunter))
                 {
@@ -108,7 +104,7 @@ namespace TownOfUs.Roles
                 }
                 if (pc.Is(RoleEnum.Deputy))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#ed9a47>Deputy</color>, during meetings, you can shoot someone, but only once.\nChoose carefully.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#FFCC00FF>Deputy</color>, you can camp on a player during the round.\nThen, if that player dies, you can try to shoot the killer next meeting.\nIf you shoot correctly, you will kill the killer, else, nothing happens.");
                 }
                 if (pc.Is(RoleEnum.Knight))
                 {
@@ -128,7 +124,11 @@ namespace TownOfUs.Roles
                 }
                 if (pc.Is(RoleEnum.Astral))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#a703ae>Astral</color>, you can use your ability to leave your body behind you and project your spirit.\nHowever, if anyone cleans / eat your body while in ghost form, you die.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#a703ae>Astral</color>, you can use your ability to temporarily become a ghost and leave your body.\nBe careful though because you can still be killed if someone attacks your body!");
+                }
+                if (pc.Is(RoleEnum.Lookout))
+                {
+                    HudManager.Instance.ShowPopUp("You are the <color=#33FF66FF>Lookout</color>, you can use your ability to watch any player in real time.\nBut the player may be alerted when you do so.");
                 }
                 if (pc.Is(RoleEnum.Vigilante))
                 {
@@ -140,7 +140,7 @@ namespace TownOfUs.Roles
                 }
                 if (pc.Is(RoleEnum.Medic))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#006600FF>Medic</color>, you can give a shield to someone which will make him invincible to murder attempts.\nIf the shield break, you may be noticed.\nYou also gain informations by reporting dead bodies.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#006600FF>Medic</color>, you can give a shield to someone which will make him invincible to murder attempts.\nIf the shield break, you may be noticed.\nThe shield will also break if you die.\nYou also gain informations by reporting dead bodies.");
                 }
                 if (pc.Is(RoleEnum.Doctor))
                 {
@@ -304,6 +304,10 @@ namespace TownOfUs.Roles
                     HudManager.Instance.ShowPopUp("You are the <color=#8c004c>Juggernaut</color>, when you use your kill ability, your next kill cooldown decreases etc until 0.");
                 }
                 // Impostors Roles info
+                if (pc.Is(RoleEnum.Impostor))
+                {
+                    HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Impostor</color>, kill everyone and sabotage without being caught!");
+                }
                 if (pc.Is(RoleEnum.Spirit))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Spirit</color>, if you manage to complete all your tasks before getting clicked, you will kill a random non impostor!");
@@ -406,7 +410,7 @@ namespace TownOfUs.Roles
                 }
                 if (pc.Is(RoleEnum.Manipulator))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Manipulator</color>, you can use your Manipulate button to force the closest player to kill the next non-Impostor they find.\nNote that the Manipulation will be reset after a meeting.\nYou can also perform regular kills.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Manipulator</color>, you can use your Manipulate button on a player.\nThen, you can control that player, making you able to control their movements and use their identity to kill.\nNote that the Manipulation will stop if the Manipulated gets killed, if you get killed or if a meeting is called.");
                 }
                 //Coven Roles info
                 if (pc.Is(RoleEnum.Coven))
@@ -427,7 +431,11 @@ namespace TownOfUs.Roles
                 }
                 if (pc.Is(RoleEnum.Spiritualist))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#bf5fff>Spiritualist</color>, you use your ability to control a player.\nIf this player tries to attack a coven members with a direct kill, the attack will reverse.\nThis does not apply to undirect kills (veteran, bomb, poison, guess...).");
+                    HudManager.Instance.ShowPopUp("You are the <color=#bf5fff>Spiritualist</color>, you can use your ability to control a player.\nIf this player tries to attack a coven members with a direct kill, the attack will reverse.\nThis does not apply to undirect kills (veteran, bomb, poison, guess...).");
+                }
+                if (pc.Is(RoleEnum.VoodooMaster))
+                {
+                    HudManager.Instance.ShowPopUp("You are the <color=#bf5fff>Voodoo Master</color>, you can use your ability to force a player to vote someone during the meeting.\nThis player will be forced to vote the player that you are voting.");
                 }
                 if (pc.Is(RoleEnum.PotionMaster))
                 {
@@ -496,6 +504,577 @@ namespace TownOfUs.Roles
                     HudManager.Instance.ShowPopUp("This is <color=#006aff>Battle Royale</color> Mode, as a <color=#006aff>Player</color> your goal is to kill everyone and be the last one standing!\nNo meetings and report allowed.");
                 }
             }
+        }
+
+        public static string GetRoleInfos(string role)
+        {
+            // vanilla
+            if (role == "Crewmate")
+            {
+                return "The <color=#00FFFF>Crewmate</color>'s goal is to either finish all of its Tasks or finding and ejecting all non-crew evil killers (Impostors, Covens, Neutral Killers).";
+            }
+            else if (role == "Impostor")
+            {
+                return "The <color=#FF0000>Impostor</color> can call Sabotages, kill and use the vents. Its goal is to kill everyone besides other Impostors.";
+            }
+            // crewmates
+            else if (role == "Aurial")
+            {
+                return "The <color=#B34D99FF>Aurial</color> can sense events in its aura.\nWhenever a player uses an ability near the Aurial, an arrow pointing to where the ability was used at will appear.";
+            }
+            else if (role == "Captain")
+            {
+                return "The <color=#6B8DE1>Captain</color> can zoom out on the map to catch Impostors.";
+            }
+            else if (role == "Superstar")
+            {
+                return "The <color=#ffca00>Superstar</color> will alert everyone when dying and show an arrow pointing to its dead bodies.";
+            }
+            else if (role == "Avenger")
+            {
+                return "The <color=#216f01>Avenger</color> has an ability usable on a dead bodie.\nWhenever the Avenger uses its Avenge ability, the kill button of the Avenger will activate and target the killer of the dead body.\nThe killer will have its name displayed as black to the Avenger.\nHowever, if someone reports / calls a meeting, the Avenger will no longer see who the killer is.";
+            }
+            else if (role == "Chameleon")
+            {
+                return "The <color=#068c38>Chameleon</color> can turn Invisible temporarily to gain informations.";
+            }
+            else if (role == "Detective")
+            {
+                return "The <color=#4D4DFFFF>Detective</color> can use its ability to inspect crime scenes.\nRight after that, it can examine other players, if that player was near the crime scene during the kill, they will show a red flash on the Detective's screen.";
+            }
+            else if (role == "Haunter")
+            {
+                return "The <color=#D3D3D3FF>Haunter</color> will reveal the Impostors to everyone once its tasks are finished and a meeting is called.\nHowever if the Haunter gets clicked before finishing its tasks, the Impostors wont be revealed.\nThe Haunter's position may be revealed to Impostors after a certain amount of tasks done.";
+            }
+            else if (role == "Helper")
+            {
+                return "The <color=#7cb6c2>Helper</color> is a ghost role obtainable after death.\nThe Helper can use its ability to alert a living Crewmate of a nearby danger.\nThe alerted Crewmate will have a temporary speed boost and will know that they have been alerted through a pop up on their screen.";
+            }
+            else if (role == "Guardian")
+            {
+                return "The <color=#67bb43>Guardian</color> is a ghost role obtainable after death.\nThe Guardian can use its ability to protect a Crewmate from murder attempts for a short amount of time.";
+            }
+            else if (role == "Investigator")
+            {
+                return "The <color=#00B3B3FF>Investigator</color> can see the footprints of each players.";
+            }
+            else if (role == "Mystic")
+            {
+                return "The <color=#4D99E6FF>Mystic</color> will know whenever someone dies by showing a pop up on its screen.";
+            }
+            else if (role == "Oracle")
+            {
+                return "The <color=#BF00BFFF>Oracle</color> can use its ability to force a player to confess informations.\nThe confessed player will temporarily be immune to being voted out and will get its faction revealed to other players if the Oracle dies.";
+            }
+            else if (role == "Seer")
+            {
+                return "The <color=#FFCC80FF>Seer</color> can use its ability to see if a player is evil (their name will be green or red).";
+            }
+            else if (role == "Snitch")
+            {
+                return "The <color=#D4AF37FF>Snitch</color> will know who the Impostors are when finish all of its tasks.\nThe Impostors may know who the Snitch is after a certain amount of tasks completed.";
+            }
+            else if (role == "Spy")
+            {
+                return "The <color=#CCA3CCFF>Spy</color> is able to see the color of each player on the admin map.";
+            }
+            else if (role == "Tracker")
+            {
+                return "The <color=#009900FF>Tracker</color> can place a tracker on a player indicating their position in real time.";
+            }
+            else if (role == "Trapper")
+            {
+                return "The <color=#A7D1B3FF>Trapper</color> can place traps on the map.\nIf players walk in a trap for a certain amount of time, their role will be revealed to the Trapper when the meeting starts.\nBut the Trapper won't know who has what role.";
+            }
+            else if (role == "Fighter")
+            {
+                return "The <color=#9358e6>Fighter</color> can kill like the Sheriff.\nHowever if he mistakenly kills a Crewmate, the Fighter will turn into a <color=#FF0000>Madmate</color> and will now be aligned with the Impostors.";
+            }
+            else if (role == "Hunter")
+            {
+                return "The <color=#29AB87FF>Hunter</color> can stalk a player.\nIf that player interacts with anyone, the Hunter will know it and will be able to kill them.\nIf the Hunter is voted out, the last player who voted for the Hunter will die.";
+            }
+            else if (role == "Jailor")
+            {
+                return "The <color=#61a37a>Jailor</color> can use its ability to Jail someone.\nThe jailed player will not be able to perform direct kills during that round and will not be able to assassinate next meeting.\nDuring the next meeting, the Jailor can choose to execute its target, but the Jailor will lose its abilities if that player was a Crewmate and may also die alongside them.";
+            }
+            else if (role == "Deputy")
+            {
+                return "The <color=#FFCC00FF>Deputy</color> can use its camp ability on a player during the round.\nThen, if the players dies, the Deputy can try to shoot their killer during the next meeting which will either kill the killer if the Deputy is right or do nothing.";
+            }
+            else if (role == "Knight")
+            {
+                return "The <color=#ffd082>Knight</color> can kill someone once during the game without any consequence.\nBut since this can be used once, the Knight has to choose wisely!";
+            }
+            else if (role == "Sheriff")
+            {
+                return "The <color=#FFFF00FF>Sheriff</color> can shoot someone.\nIf that player was an Impostor, the player will die but if the player was a Crewmate, the Sheriff will die instead.";
+            }
+            else if (role == "VampireHunter")
+            {
+                return "The <color=#B3B3E6FF>Vampire Hunter</color> can stake players.\nIf that player is a converted Vampire, the player will get its old role back.\nBut if the player is the original Vampire, the Vampire Hunter will kill them.\nIf that player is not a Vampire, nothing happens and the Vampire Hunter loses a stake.\nIf the Vampire Hunter tries to kill a non Vampire without any stake left, it might end up dying.";
+            }
+            else if (role == "Veteran")
+            {
+                return "The <color=#998040FF>Veteran</color> can use its ability to go on alert.\nWhile alerted, any player that interacts with the Veteran will be killed.";
+            }
+            else if (role == "Astral")
+            {
+                return "The <color=#a703ae>Astral</color> can use its ability to become a ghost and leave its body for a while.\nBut the Astral will still die if anyone attacks their body.";
+            }
+            else if (role == "Lookout")
+            {
+                return "The <color=#33FF66FF>Lookout</color> can use its ability to watch other players in real time.\nDepending on the settings, the Watched player may know when they are being Watched.";
+            }
+            else if (role == "Vigilante")
+            {
+                return "The <color=#FFFF99FF>Vigilante</color> can guess the role of Impostors during the meeting to kill them.";
+            }
+            else if (role == "Altruist")
+            {
+                return "The <color=#660000FF>Altruist</color> can sacrifice himself to revive someone else.";
+            }
+            else if (role == "Medic")
+            {
+                return "The <color=#006600FF>Medic</color> can cast a shield on a player to protect them from murder attempts.\nThe Medic will know if the shield breaks.\nThe Shield will instantly break if the Medic dies.\nThe Medic also gains informations when reporting a dead body.";
+            }
+            else if (role == "Doctor")
+            {
+                return "The <color=#00EE3C>Doctor</color> can revive dead players when they find dead bodies.\nDepending on settings, the Doctor may have to be in a medical area in order to revive someone, in that case, the doctor will have a drag button to drag the body to the area.\nNote that Revived player will not be able to speak anymore.";
+            }
+            else if (role == "Crusader")
+            {
+                return "The <color=#815230>Crusader</color> can crusade a player.\nIf that player gets attacked, the Crusader will instantly teleport and kill the attacker.";
+            }
+            else if (role == "Bodyguard")
+            {
+                return "The <color=#255bc9>Bodyguard</color> will protect players from attacks in a certain radius.\nIf someone gets attacked near the Bodyguard, the Bodyguard will kill the attacker and self-sacrifice instead.";
+            }
+            else if (role == "Paranoïac" || role == "Paranoiac")
+            {
+                return "The <color=#0a7eae>Paranoïac</color> can hide in vents.\nThe Paranoïac can also call a meeting from anywhere on the map.";
+            }
+            else if (role == "Engineer")
+            {
+                return "The <color=#FFA60AFF>Engineer</color> can use the vents and fix sabotages.";
+            }
+            else if (role == "Lighter")
+            {
+                return "The <color=#FFA60AFF>Lighter</color> can use its ability to temporarily get Impostor vision allowing to see in the dark.";
+            }
+            else if (role == "TimeLord")
+            {
+                return "The <color=#0f00b8>Time Lord</color> can freeze the time while also rewinding it and thus, reviving the latest dead players.";
+            }
+            else if (role == "Imitator")
+            {
+                return "The <color=#B3D94DFF>Imitator</color> can imitate the role of dead Crewmates each meeting.";
+            }
+            else if (role == "Warden")
+            {
+                return "The <color=#9900FFFF>Warden</color> can fortify a player, making the Warden and them noticed when someone interacts with them.";
+            }
+            else if (role == "Mayor")
+            {
+                return "The <color=#704FA8FF>Mayor</color> is known to everyone and will have more votes than usual during the meeting.";
+            }
+            else if (role == "Medium")
+            {
+                return "The <color=#A680FFFF>Medium</color> can use its ability to see the ghosts of latest deads.\nDeads will be noticed when the Medium sees them.";
+            }
+            else if (role == "Prosecutor")
+            {
+                return "The <color=#B38000FF>Prosecutor</color> can choose to exile someone whenever they want to resulting in instantly ejecting them.";
+            }
+            else if (role == "Swapper")
+            {
+                return "The <color=#66E666FF>Swapper</color> can swap the votes of two players.";
+            }
+            else if (role == "Transporter")
+            {
+                return "The <color=#00EEFFFF>Transporter</color> can transport two players, making them switch place with each other.";
+            }
+            else if (role == "Informant")
+            {
+                return "The <color=#4CFAAB>Informant</color> can access vitals or admin from anywhere even if the map doesn't have any vitals.";
+            }
+            else if (role == "Politician")
+            {
+                return "The <color=#660099FF>Politician</color> can use its ability to campaign and getting voters.\nThen, during the meeting, the Politician may reveal themselves as the new <color=#704FA8FF>Mayor</color>.\nIf the Politician used its ability on at least half of the Crewmates, the reveal will be successful, else the Politician won't be able to campaign for one round.\nNote that only Crewmates will count as voters.";
+            }
+            // neutrals
+            else if (role == "Amnesiac")
+            {
+                return "The <color=#80B2FFFF>Amnesiac</color> is a roleless Neutral.\nThe goal of the Amnesiac is to find a dead body and Remember its old role by taking the role of the dead player.\nThe Amnesiac may have arrows pointing to dead bodies to help.\nIf the Amnesiac doesn't find any role before the game ends, it loses.";
+            }
+            else if (role == "Shifter")
+            {
+                return "The <color=#AAAAAA>Shifter</color> is a Neutral role which can shift its role with another player.\nThe Shifter will get the shifted's role and the shifted will become a Shifter.\nShifter can't be guessed.";
+            }
+            else if (role == "GuardianAngel")
+            {
+                return "The <color=#B3FFFFFF>Guardian Angel</color> is a Neutral role that is assigned a target that must stay alive in order to win.\nTo help its target, the Guardian Angel can temporarily shield them making them invinsible to murder attempts.";
+            }
+            else if (role == "Survivor")
+            {
+                return "The <color=#FFE64DFF>Survivor</color> is a Neutral role which wins with anyone as long as they stay alive until the game ends.\nThe Survivor has a vest ability to shield them from murder attempts temporarily.";
+            }
+            else if (role == "Doomsayer")
+            {
+                return "The <color=#00FF80FF>Doomsayer</color> is a Neutral role which wins by guessing the role of a certain amount of players during the meeting.";
+            }
+            else if (role == "Executioner")
+            {
+                return "The <color=#8C4005FF>Executioner</color> is a Neutral role which wins by ejecting a target assigned at the start of the game.";
+            }
+            else if (role == "Jester")
+            {
+                return "The <color=#FFBFCCFF>Jester</color> is a Neutral role which wins by being voted out and ejected.";
+            }
+            else if (role == "SoulCollector")
+            {
+                return "The <color=#99FFCCFF>Soul Collector</color> is a Neutral role which wins by collecting a certain amount of souls.\nTo do so, it must reap a player and then collect their soul after they die.\nThe Soul Collector may also passively gain souls each round.";
+            }
+            else if (role == "Vulture")
+            {
+                return "The <color=#916e6e>Vulture</color> is a Neutral role which wins by eating a certain amount of dead bodies.\nDepending on the settings, the vulture will have arrows pointing to dead bodies and may be able to vent.";
+            }
+            else if (role == "Phantom")
+            {
+                return "The <color=#662962FF>Phantom</color> is a Neutral role obtainable after death that will win by finishing all of its tasks without getting clicked by a player.";
+            }
+            else if (role == "Troll")
+            {
+                return "The <color=#c27d5a>Troll</color> is a Neutral role that has a troll ability.\nWhen using it, it will force the closest player to kill the Troll.\nIf that player gets ejected next meeting, the Troll will win and override any other win condition (executioner, jester...).";
+            }
+            else if (role == "Arsonist")
+            {
+                return "The <color=#FF4D00FF>Arsonist</color> is a Neutral role which can douse and then ignite players, killing all doused at the same time.\nThe Arsonist will win when they are the last player standing.";
+            }
+            else if (role == "Mutant")
+            {
+                return "The <color=#b6eb5e>Mutant</color> is a Neutral role which can kill but with a long cooldown.\nHowever, the Mutant can Transform, gaining Impostor vision, a short kill cooldown and maybe vent ability.\nBut everyone will see them as Transformed.\nThe Mutant will win when they are the last player standing.";
+            }
+            else if (role == "Infectious")
+            {
+                return "The <color=#bf9000>Infectious</color> is a Neutral role which can kill and Infect players.\nInfecting a player will slowly kill them by adding one stage of the Infection after ach meeting.\nOn stage 1, nothing happens, on stage 2, the player will be slower, on stage 3, the player's vision will be much reduced, and on stage 4, the player will die.\nThe Infection will stop if the Infectious gets ejected.\nThe Infectious will also have a shofter kill cooldown when killing an infected.\nThe Infectious will win when they are the last player standing.";
+            }
+            else if (role == "Plaguebearer")
+            {
+                return "The <color=#E6FFB3FF>Plaguebearer</color> is a Neutral role which can Infect players.\nThe goal of the Plaguebearer is to infect all players to become a <color=#4c4c4c>Pestilence</color>.";
+            }
+            else if (role == "Attacker")
+            {
+                return "The <color=#c73a00>Attacker</color> is a Neutral role which has no special ability.\nThe goal of the Attacker is to finish all of its tasks to become a <color=#8bce23>Terrorist</color>.";
+            }
+            else if (role == "Terrorist")
+            {
+                return "The <color=#8bce23>Terrorist</color> is a Neutral role which can kill and may be able to vent.\nThe Terrorist is also immune to being voted out and unguessable, meaning that the only way to get rid of the Terrorist is by killing it.\nThe Terrorist wins by being the last player standing.";
+            }
+            else if (role == "Pestilence")
+            {
+                return "The <color=#4c4c4c>Pestilence</color> is the most powerful Neutral role.\nThe Pestilence can kill and is immune to murder attempts.\nIf someone tries to interact with the Pestilence, the attack will reverse and kill the attacker instead.\nThe Pestilence can't even die to lovers death nor be guessed.\nThe only way to kill the Pestilence is by ejection.\nThe Pestilence wins by being the last player standing.";
+            }
+            else if (role == "SerialKiller")
+            {
+                return "The <color=#0c20d5>Serial Killer</color> is a Neutral role which can kill and may be able to vent.\nThe Serial Killer may also be able to Convert someone to Serial Killer depending on the settings.\nThe Serial Killer team wins by being the last players standing.";
+            }
+            else if (role == "Doppelganger")
+            {
+                return "The <color=#fadd84>Doppelganger</color> is a Neutral role which can kill and may be able to vent.\nBut the Doppelganger will switch identity with whoever it kills making it harder to discover the real Doppelganger.\nThe Doppelganger wins by being the last player standing.";
+            }
+            else if (role == "Glitch" || role == "TheGlitch")
+            {
+                return "The <color=#00FF00FF>Glitch</color> is a Neutral role which can kill and may be able to vent.\nThe Glitch can also morph into other players using its mimic abiility and can hack players, making them unable to use their abilities for a while.\nThe Glitch wins by being the last player standing.";
+            }
+            else if (role == "Vampire")
+            {
+                return "The <color=#262626FF>Vampire</color> is a Neutral role which can kill and bite players.\nWhen the Vampire bites someone, it will convert them into Vampire, if successful, else it will just reset its cooldown.\nThe Vampire team wins by being the last players standing.";
+            }
+            else if (role == "Maul")
+            {
+                return "The <color=#A86629FF>Maul</color> is a Neutral role which can only kill when Rampages.\nThe Maul can press its ability to go on Rampage, and will have a short kill cooldown and may even be able to vent during this period of time.\nThe Maul wins by being the last player standing.";
+            }
+            else if (role == "Juggernaut")
+            {
+                return "The <color=#8c004c>Juggernaut</color> is a Neutral role which can kill and will have its cooldown decreased by each kill.\nThe Juggernaut wins by being the last player standing.";
+            }
+            // impostors
+            else if (role == "Spirit")
+            {
+                return "The <color=#FF0000FF>Spirit</color> is an Impostor role obtainable after death.\nAs the Spirit, you will kill a random non-Impostor living player after completing all of your assigned tasks before getting clicked.";
+            }
+            else if (role == "Freezer")
+            {
+                return "The <color=#FF0000FF>Freezer</color> is an Impostor role obtainable after death.\nAs the Freezer, you can freeze alive players in place making them unable to move for a short period of time.";
+            }
+            else if (role == "Blinder")
+            {
+                return "The <color=#FF0000FF>Blinder</color> is an Impostor role obtainable after death.\nAs the Blinder, you can make players temporarily blind and unable to see anything.";
+            }
+            else if (role == "Escapist")
+            {
+                return "The <color=#FF0000FF>Escapist</color> is an Impostor role which can place a point on the map and teleport back to it after.";
+            }
+            else if (role == "Grenadier")
+            {
+                return "The <color=#FF0000FF>Grenadier</color> is an Impostor role which can temporarily blind the vision of all nearby Crewmates by throwing down a grenade.";
+            }
+            else if (role == "Morphling")
+            {
+                return "The <color=#FF0000FF>Morphling</color> is an Impostor role which can morph into another player, taking their identity.";
+            }
+            else if (role == "Hypnotist")
+            {
+                return "The <color=#FF0000FF>Hypnotist</color> is an Impostor role which can hypnotise players.\nThen, during the meeting, the Hypnotist can release mass hysteria making hypnotised players see other players as either camouflaged, invisible or themselves.";
+            }
+            else if (role == "Assassin")
+            {
+                return "The <color=#FF0000FF>Assassin</color> is an either an Impostor role or an ability for killers depending on the settings.\nThe Assassin can guess the role of the players during the meeting, instantly killing them.\nHowever, if the Assassin guesses incorrectly, it will die instead.";
+            }
+            else if (role == "Swooper")
+            {
+                return "The <color=#FF0000FF>Swooper</color> is an Impostor role which can temporarily turn Invisible.";
+            }
+            else if (role == "Venerer")
+            {
+                return "The <color=#FF0000FF>Venerer</color> is an Impostor role which unlocks abilities based on its kill count.\nThe more kills it gets, the more ability it gets too.";
+            }
+            else if (role == "Poisoner")
+            {
+                return "The <color=#FF0000FF>Poisoner</color> is an Impostor role which can Poison players instead of performing regular kills, killing them after a split seconds.";
+            }
+            else if (role == "Shooter")
+            {
+                return "The <color=#FF0000FF>Shooter</color> is an Impostor role which can store bullets instead of instantly killing a player.\nThis will reset the Shooter's kill cooldown but will allow the Shooter to have no kill cooldown the next time it kills and potentially performing multiple kills at once.";
+            }
+            else if (role == "Bomber")
+            {
+                return "The <color=#FF0000FF>Bomber</color> is an Impostor role which can place a bomb on the map, killing all players in its radius.";
+            }
+            else if (role == "Traitor")
+            {
+                return "The <color=#FF0000FF>Traitor</color> is an Impostor role assigned to a random Crewmate if all Impostors die too quickly.\nThe Traitor has no special ability other than regular Impostors.";
+            }
+            else if (role == "Warlock")
+            {
+                return "The <color=#FF0000FF>Warlock</color> is an Impostor role which can charge up its kill cooldown.\nWhen the Warlock kills when its ability is fully charged, the Warlock will be able to perform multiple kills at once until the charge runs out.";
+            }
+            else if (role == "Mafioso")
+            {
+                return "The <color=#FF0000FF>Mafioso</color> is an Impostor role which will start without any ability other than Impostor vision.\nBut if all of the Mafioso's teammates are dead, the Mafioso will unlock all its abilities and will also have a shorter kill cooldown than regular Impostors.";
+            }
+            else if (role == "Reviver")
+            {
+                return "The <color=#FF0000FF>Reviver</color> is an Impostor role which can revive inside of someone else's dead body the round where it dies.\nIf the Reviver manages to find a body, it will take the player's identity.\nThis ability is only usable once and only the round where the Reviver has died.";
+            }
+            else if (role == "Blackmailer")
+            {
+                return "The <color=#FF0000FF>Blackmailer</color> is an Impostor role which can make a player unable to talk during the meeting.";
+            }
+            else if (role == "Converter")
+            {
+                return "The <color=#FF0000FF>Converter</color> is an Impostor role which can use its ability to revive a dead Crewmate and turn them into a <color=#FF0000>Madmate</color>.";
+            }
+            else if (role == "Janitor")
+            {
+                return "The <color=#FF0000FF>Janitor</color> is an Impostor role which can clean dead bodies, erasing any trace of crime.";
+            }
+            else if (role == "Witch")
+            {
+                return "The <color=#FF0000FF>Witch</color> is an Impostor role which can cast a spell on a player instead of regulary killing them.\nEveryone will know who the players with the spells are in the meeting, and they will all die unless the witch is ejected / killed that meeting.";
+            }
+            else if (role == "Conjurer")
+            {
+                return "The <color=#FF0000FF>Conjurer</color> is an Impostor role which can cast a curse on a player.\nThen, the Conjurer can use that player to kill the closest person near that player.\nThis means that the Conjurer will kill using the cursed player's identity.";
+            }
+            else if (role == "BountyHunter")
+            {
+                return "The <color=#FF0000FF>Bounty Hunter</color> is an Impostor role which has a target assigned at the start of the game that switchs after a certain amount of time.\nThe Bounty Hunter will have an arrow pointing to its target.\nIf the Bounty Hunter kills its target, its next cooldown will be short, else it will be long.";
+            }
+            else if (role == "Miner")
+            {
+                return "The <color=#FF0000FF>Miner</color> is an Impostor role which can use its ability to create new vents on the map.";
+            }
+            else if (role == "Undertaker")
+            {
+                return "The <color=#FF0000FF>Undertaker</color> is an Impostor role which can drag dead bodies around to hide them.";
+            }
+            else if (role == "Manipulator")
+            {
+                return "The <color=#FF0000FF>Manipulator</color> is an Impostor role which can use its ability to Manipulate a Crewmate.\nThen, the Manipulator can Control this Crewmate, allowing them to move the player and kill with their identity.\nThe Manipulation will stop if the Manipulator / Manipulated gets killed or a meeting is called.";
+            }
+            else if (role == "Madmate")
+            {
+                return "<color=#FF0000FF>Madmates</color> are old Crewmates who joined the Impostor team.\nIt could be either voluntarily (like the Fighter), or they were forced to (conversion).\nMadmates will now have Impostor vision, venting perks and may even be able to access the Impostor chat.\nMadmates may get special abilities depending on their old role (ex: Mad Engineer can sabotage instead of fixing sabotages).";
+            }
+            // coven
+            else if (role == "Coven")
+            {
+                return "The <color=#bf5fff>Coven</color> is the regular Coven role.\nIt has no special abilities other than killing or sabotaging and Impostor vision.\nThe goal of Covens is to kill or convert every living non-Coven member.";
+            }
+            else if (role == "Ritualist")
+            {
+                return "The <color=#bf5fff>Ritualist</color> is a Coven role which can guess the role of other players during the meeting to kill them so basically, the Ritualist has the <color=#FF0000>Assassin</color> ability.";
+            }
+            else if (role == "HexMaster")
+            {
+                return "The <color=#bf5fff>Hex Master</color> is a Coven role which can hex players.\nThen, the Hex Master can choose to hex bomb them at anytime, killing all the hexed at once.\nEveryone will know who the hexed are in the meeting.";
+            }
+            else if (role == "CovenLeader")
+            {
+                return "The <color=#bf5fff>Coven Leader</color> is a Coven role which can Convert a player to the <color=#bf5fff>Coven</color> Faction.\nThe Coven Leader is also the only Coven role that it passively able to use the vents.";
+            }
+            else if (role == "Spiritualist")
+            {
+                return "The <color=#bf5fff>Spiritualist</color> is a Coven role which can use its button to Control a player.\nIf the Controlled player tries to kill any Coven member, the Spiritualist will kill them instead.";
+            }
+            else if (role == "VoodooMaster")
+            {
+                return "The <color=#bf5fff>Voodoo Master</color> is a Coven role which can use its ability on a player during the round.\nThen, the next meeeting, that player will be forced to vote whoever the Voodoo Master votes for.";
+            }
+            else if (role == "PotionMaster")
+            {
+                return "The <color=#bf5fff>Potion Master</color> is a Coven role which can get a random potion and drink it.\nThe Shield potion will grant the Potion Master a temporary shield, the invisibility potion will make the Potion Master invisible, the Strength potion will make it have a short kill cooldown and able to vent and the Speed potion will grant the Potion Master a temporary speed boost.";
+            }
+            // werewolf
+            else if (role == "Werewolf")
+            {
+                return "The <color=#A86629FF>Werewolf</color> is the default Werewolf role.\nIt can only kill while being Transformed as a Werewolf but has a short kill cooldown.\nThe goal of Werewolves is to kill all living Villagers.";
+            }
+            else if (role == "Villager")
+            {
+                return "The <color=#adf34b>Villager</color> is the default Villager role.\nIt has no special ability.";
+            }
+            else if (role == "Sorcerer")
+            {
+                return "The <color=#9210ff>Sorcerer</color> is a Villager role which can use its first potion to Poison a player, killing them next meeting.\nThe Sorcerer also has a revive potion that, when used on a dead body, will revive it.";
+            }
+            else if (role == "SoulCatcher")
+            {
+                return "The <color=#7b7781>Soul Catcher</color> is a Villager role which can see the ghosts of dead player.\nHowever, the Soul Catcher doesn't know who is who.";
+            }
+            else if (role == "WhiteWolf")
+            {
+                return "The <color=#ffffff>White Wolf</color> is a Neutral role which works the same way as the basic <color=#A86629FF>Werewolf</color> role.\nBut the White Wolf wins alone by killing Villagers and Werewolves.";
+            }
+            else if (role == "Guard")
+            {
+                return "The <color=#0095ff>Guard</color> is a Villager role which can protect someone during the Night by giving this player a shield.";
+            }
+            else if (role == "TalkativeWolf")
+            {
+                return "The <color=#ffa750>Talkative Wolf</color> is a Werewolf role which has to say one specific role each day.\nIf the Talkative Wolf fails to say his word and the Day ends, it will self kill.";
+            }
+            else if (role == "BlackWolf")
+            {
+                return "The <color=#4c4c4c>Black Wolf</color> is a Werewolf role which can Convert a Villager to regular Werewolf once in the game.";
+            }
+            else if (role == "Aftermath")
+            {
+                return "<color#A6FFA6FF>Aftermath</color> is a Crewmate Modifier which forces the killer to use its special ability if the killer does have one when being killed.";
+            }
+            else if (role == "Bait")
+            {
+                return "<color#00B3B3FF>Bait</color> is a Crewmate Modifier which forces the killer to self report when being killed.";
+            }
+            else if (role == "Diseased")
+            {
+                return "<color#808080FF>Diseased</color> is a Crewmate Modifier which multiplies the kill cooldown of the killer when being killed.";
+            }
+            else if (role == "Frosty")
+            {
+                return "<color#99FFFFFF>Frosty</color> is a Crewmate Modifier which makes the killer temporarily slow when being killed.";
+            }
+            else if (role == "Multitasker")
+            {
+                return "<color#FF804DFF>Multitasker</color> is a Crewmate Modifier which makes you see through the task pop up when doing a task.";
+            }
+            else if (role == "Torch")
+            {
+                return "<color#FFFF99FF>Torch</color> is a Crewmate Modifier which allows you to see in the dark.";
+            }
+            else if (role == "Vengeful")
+            {
+                return "<color#8d0000>Vengeful</color> is a Crewmate Modifier which allows you to kill someone once after completing all of your tasks.";
+            }
+            else if (role == "ButtonBarry")
+            {
+                return "<color#E600FFFF>Button Barry</color> is a Global Modifier which allows you to call a meeting from anywhere once.";
+            }
+            else if (role == "Flash")
+            {
+                return "<color#FF8080FF>Flash</color> is a Global Modifier which makes you faster than everyone else.";
+            }
+            else if (role == "Giant")
+            {
+                return "<color#FFB34DFF>Giant</color> is a Global Modifier which makes you bigger and maybe slower than other players.";
+            }
+            else if (role == "Mini")
+            {
+                return "<color#CCFFE6FF>Mini</color> is a Global Modifier which makes you much shorter than other players.";
+            }
+            else if (role == "Lovers")
+            {
+                return "<color=#FF66CCFF>Lovers</color> is a Global Modifier which makes two players fall in lover.\nThe Lovers will now both win together, whatever their side is and may also both die if one of them dies.";
+            }
+            else if (role == "Radar")
+            {
+                return "<color=#FF0080FF>Radar</color> is a Global Modifier which makes you always have an arrow pointing to the nearest player.";
+            }
+            else if (role == "Scientist")
+            {
+                return "<color=#5441b3>Scientist</color> is a Global Modifier which makes you see the players death reasons.";
+            }
+            else if (role == "Shy")
+            {
+                return "<color=#FFB3CCFF>Shy</color> is a Global Modifier which makes you slowly turn invisible when not moving.";
+            }
+            else if (role == "SixthSense")
+            {
+                return "<color=#D9FF8CFF>Sixth Sense</color> is a Global Modifier which makes you know when anyone interacts with you.";
+            }
+            else if (role == "Sleuth")
+            {
+                return "<color=#803333FF>Sleuth</color> is a Global Modifier which makes you know the role of dead players you report.";
+            }
+            else if (role == "Spotter")
+            {
+                return "<color=#c688f2>Spotter</color> is a Global Modifier which makes you see the vote colors of each player when anonymous votes are toggled.";
+            }
+            else if (role == "Motionless")
+            {
+                return "<color=#008591>Motionless</color> is a Global Modifier which makes you not move when a meeting is called.\nThis means that you will respawn where you were before the meeting when the meeting ends.";
+            }
+            else if (role == "Tiebreaker")
+            {
+                return "<color=#99E699FF>Tiebreaker</color> is a Global Modifier which makes your vote count twice whenever there's a tie.";
+            }
+            else if (role == "Disperser")
+            {
+                return "<color=#FF0000>Disperser</color> is an Impostor Modifier which makes you able to Teleport all players to a random vent once in the game.";
+            }
+            else if (role == "Bloodlust")
+            {
+                return "<color=#FF0000>Bloodlust</color> is an Impostor Modifier which makes your kill cooldown divided by two after killing two players in the same round.";
+            }
+            else if (role == "DoubleShot")
+            {
+                return "<color=#FF0000>Double Shot</color> is an Impostor Modifier which makes you able to guess the role of a player wrong as Assassin once in the game without any consequence.";
+            }
+            else if (role == "Lucky")
+            {
+                return "<color=#FF0000>Lucky</color> is an Impostor Modifier which makes your kill cooldowns completely random.";
+            }
+            else if (role == "Saboteur")
+            {
+                return "<color=#FF0000>Saboteur</color> is an Impostor Modifier which reduces the Sabotage cooldown of the Impostor.";
+            }
+            else if (role == "Underdog")
+            {
+                return "<color=#FF0000>Underdog</color> is an Impostor Modifier which makes your kill cooldowns be long when there's more than 1 Impostor alive, but short when your the only Impostor alive.";
+            }
+            else return "The role you have searched for could not be found.\nMake sure you typed the role correctly. (Do not use spaces and use majs ex: /r SerialKiller)";
         }
     }
 }

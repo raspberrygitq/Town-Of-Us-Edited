@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using TownOfUs.Extensions;
 using UnityEngine;
 
 namespace TownOfUs.Roles
@@ -9,7 +7,7 @@ namespace TownOfUs.Roles
     {
         public readonly List<GameObject> Buttons = new List<GameObject>();
 
-        public readonly List<bool> ListOfActives = new List<bool>();
+        public readonly List<(byte, bool)> ListOfActives = new List<(byte, bool)>();
 
 
         public Swapper(PlayerControl player) : base(player)

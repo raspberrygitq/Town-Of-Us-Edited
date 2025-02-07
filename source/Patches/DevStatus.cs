@@ -1,6 +1,7 @@
 using System.Linq;
 using HarmonyLib;
 using TownOfUs.Extensions;
+using UnityEngine;
 
 namespace TownOfUs.Patches
 {
@@ -27,7 +28,17 @@ namespace TownOfUs.Patches
                             player.nameText().text = player.nameText().text + "<size=2>\n(Dev)</size>";
                             player.nameText().color = Palette.ImpostorRed;
                         }
-                        else if ((customId == "None" || customId == "DevHidden") && player.nameText().text.Contains("Dev"))
+                        else if (customId == "Tester" && !player.nameText().text.Contains("Tester"))
+                        {
+                            player.nameText().text = player.nameText().text + "<size=2>\n(Tester)</size>";
+                            player.nameText().color = Color.grey;
+                        }
+                        else if (customId == "Vip" && !player.nameText().text.Contains("VIP"))
+                        {
+                            player.nameText().text = player.nameText().text + "<size=2>\n(VIP)</size>";
+                            player.nameText().color = Color.yellow;
+                        }
+                        else if ((customId == "None" || customId == "DevHidden" || customId == "TesterHidden" || customId == "VipHidden") && (player.nameText().text.Contains("Dev") || player.nameText().text.Contains("Tester") || player.nameText().text.Contains("VIP")))
                         {
                             player.nameText().text = player.Data.PlayerName;
                             player.nameText().color = Palette.White;
@@ -83,6 +94,44 @@ namespace TownOfUs.Patches
                             }
                         }
                     }
+                    else if (PlayerControl.LocalPlayer.IsTester())
+                    {
+                        if (DevFeatures.localStatus == "TesterHidden")
+                        {
+                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
+                            {
+                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "TesterHidden");
+                            }
+                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "TesterHidden");
+                        }
+                        else
+                        {
+                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "Tester");
+                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
+                            {
+                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Tester");
+                            }
+                        }
+                    }
+                    else if (PlayerControl.LocalPlayer.IsVip())
+                    {
+                        if (DevFeatures.localStatus == "VipHidden")
+                        {
+                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
+                            {
+                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "VipHidden");
+                            }
+                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "VipHidden");
+                        }
+                        else
+                        {
+                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "Vip");
+                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
+                            {
+                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Vip");
+                            }
+                        }
+                    }
                     else
                     {
                         Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "None");
@@ -127,6 +176,44 @@ namespace TownOfUs.Patches
                             if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
                             {
                                 DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Dev");
+                            }
+                        }
+                    }
+                    else if (PlayerControl.LocalPlayer.IsTester())
+                    {
+                        if (DevFeatures.localStatus == "TesterHidden")
+                        {
+                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
+                            {
+                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "TesterHidden");
+                            }
+                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "TesterHidden");
+                        }
+                        else
+                        {
+                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "Tester");
+                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
+                            {
+                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Tester");
+                            }
+                        }
+                    }
+                    else if (PlayerControl.LocalPlayer.IsVip())
+                    {
+                        if (DevFeatures.localStatus == "VipHidden")
+                        {
+                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
+                            {
+                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "VipHidden");
+                            }
+                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "VipHidden");
+                        }
+                        else
+                        {
+                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "Vip");
+                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
+                            {
+                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Vip");
                             }
                         }
                     }

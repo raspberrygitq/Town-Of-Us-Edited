@@ -15,6 +15,7 @@ namespace TownOfUs.CustomOption
         neutral,
         imposter,
         coven,
-        modifiers
+        modifiers,
+        external
     }
 }

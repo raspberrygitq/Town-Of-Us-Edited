@@ -18,11 +18,10 @@ namespace TownOfUs.ImpostorRoles.ManipulatorMod
             foreach (var manipulator in manipulators)
             {
                 var role = Role.GetRole<Manipulator>(manipulator);
-                if (manipulator != role.ManipulatedPlayer && role.ManipulatedPlayer != null)
+                if (manipulator != null && role.ManipulatedPlayer != null)
                 {
                     Utils.Rpc(CustomRPC.SetManipulateOff, role.Player.PlayerId);
-                    role.ManipulatedPlayer = null;
-                    role.IsManipulating = false;
+                    role.StopManipulation();
                 }
                 return;
             }

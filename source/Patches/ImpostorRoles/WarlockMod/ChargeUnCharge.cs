@@ -3,6 +3,7 @@ using TownOfUs.Roles;
 using TownOfUs.Modifiers.UnderdogMod;
 using UnityEngine;
 using TownOfUs.ImpostorRoles.ImpostorMod;
+using TownOfUs.Roles.Modifiers;
 
 namespace TownOfUs.ImpostorRoles.WarlockMod
 {
@@ -40,9 +41,16 @@ namespace TownOfUs.ImpostorRoles.WarlockMod
                             var num = Random.RandomRange(1f, 60f);
                             Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
                         }
+                        else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Bloodlust) && PlayerControl.LocalPlayer == warlock.Player)
+                        {
+                            var modifier = Modifier.GetModifier<Bloodlust>(PlayerControl.LocalPlayer);
+                            var num = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown / 2;
+                            if (modifier.KilledThisRound >= 2) Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
+                            else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
+                        }
                         else if (PlayerControl.LocalPlayer == warlock.Player)
                         {
-                            warlock.Player.SetKillTimer(GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+                            Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
                         }
                     }
                 }

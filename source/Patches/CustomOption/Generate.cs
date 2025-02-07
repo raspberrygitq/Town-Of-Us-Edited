@@ -21,6 +21,7 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption BodyguardOn;
         public static CustomNumberOption CrusaderOn;
         public static CustomNumberOption InvestigatorOn;
+        public static CustomNumberOption LookoutOn;
         public static CustomNumberOption MysticOn;
         public static CustomNumberOption OracleOn;
         public static CustomNumberOption SeerOn;
@@ -86,6 +87,7 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption PlaguebearerOn;
         public static CustomNumberOption AttackerOn;
         public static CustomNumberOption GlitchOn;
+        public static CustomNumberOption JuggernautOn;
         public static CustomNumberOption VampireOn;
         public static CustomNumberOption WerewolfOn;
 
@@ -139,6 +141,8 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption FlashOn;
         public static CustomNumberOption GiantOn;
         public static CustomNumberOption LoversOn;
+        public static CustomNumberOption MiniOn;
+        public static CustomNumberOption MotionlessOn;
         public static CustomNumberOption RadarOn;
         public static CustomNumberOption ScientistOn;
         public static CustomNumberOption ShyOn;
@@ -148,9 +152,11 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption TiebreakerOn;
 
         public static CustomHeaderOption ImpostorModifiers;
+        public static CustomNumberOption BloodlustOn;
         public static CustomNumberOption DisperserOn;
         public static CustomNumberOption DoubleShotOn;
         public static CustomNumberOption LuckyOn;
+        public static CustomNumberOption SaboteurOn;
         public static CustomNumberOption UnderdogOn;
 
         public static CustomHeaderOption MapSettings;
@@ -174,11 +180,11 @@ namespace TownOfUs.CustomOption
         public static CustomToggleOption ColourblindComms;
         public static CustomToggleOption CamoCommsKillAnyone;
         public static CustomToggleOption ImpostorSeeRoles;
+        public static CustomToggleOption CovenSeeRoles;
         public static CustomToggleOption DeadSeeRoles;
         public static CustomNumberOption InitialCooldowns;
         public static CustomToggleOption ParallelMedScans;
         public static CustomStringOption SkipButtonDisable;
-        public static CustomToggleOption HiddenRoles;
         public static CustomToggleOption FirstDeathShield;
         public static CustomToggleOption NeutralEvilWinEndsGame;
         public static CustomToggleOption CrewKillersContinue;
@@ -214,15 +220,23 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption MinNeutralKillingRoles;
         public static CustomNumberOption MaxNeutralKillingRoles;
 
-        public static CustomHeaderOption AllAnySettings;
-        public static CustomToggleOption RandomNumberImps;
-
-        public static CustomHeaderOption KillingOnlySettings;
-        public static CustomNumberOption NeutralRoles;
-        public static CustomNumberOption VeteranCount;
-        public static CustomNumberOption VigilanteCount;
-        public static CustomToggleOption AddArsonist;
-        public static CustomToggleOption AddPlaguebearer;
+        public static CustomHeaderOption RoleListSettings;
+        public static CustomToggleOption UniqueRoles;
+        public static CustomStringOption Slot1;
+        public static CustomStringOption Slot2;
+        public static CustomStringOption Slot3;
+        public static CustomStringOption Slot4;
+        public static CustomStringOption Slot5;
+        public static CustomStringOption Slot6;
+        public static CustomStringOption Slot7;
+        public static CustomStringOption Slot8;
+        public static CustomStringOption Slot9;
+        public static CustomStringOption Slot10;
+        public static CustomStringOption Slot11;
+        public static CustomStringOption Slot12;
+        public static CustomStringOption Slot13;
+        public static CustomStringOption Slot14;
+        public static CustomStringOption Slot15;
 
         public static CustomHeaderOption BattleRoyaleSettings;
         public static CustomNumberOption BattleRoyaleKillCD;
@@ -267,6 +281,7 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption CovenLeaderOn;
         public static CustomNumberOption SpiritualistOn;
         public static CustomNumberOption PotionMasterOn;
+        public static CustomNumberOption VoodooMasterOn;
 
         public static CustomHeaderOption Ritualist;
         public static CustomNumberOption RitualistKills;
@@ -277,7 +292,6 @@ namespace TownOfUs.CustomOption
         public static CustomToggleOption RitualistGuessImpostors;
         public static CustomToggleOption RitualistGuessModifiers;
         public static CustomToggleOption RitualistGuessLovers;
-        public static CustomToggleOption RitualistAfterVoting;
 
         public static CustomHeaderOption PotionMaster;
         public static CustomNumberOption PotionCD;
@@ -327,6 +341,9 @@ namespace TownOfUs.CustomOption
         public static CustomHeaderOption Engineer;
         public static CustomNumberOption MaxFixes;
 
+        public static CustomHeaderOption Imitator;
+        public static CustomToggleOption ImitatorCanBecomeMayor;
+
         public static CustomHeaderOption Lighter;
         public static CustomNumberOption LightCooldown;
         public static CustomNumberOption LightDuration;
@@ -349,6 +366,11 @@ namespace TownOfUs.CustomOption
         public static CustomHeaderOption Astral;
         public static CustomNumberOption GhostCooldown;
         public static CustomNumberOption GhostDuration;
+
+        public static CustomHeaderOption Lookout;
+        public static CustomNumberOption WatchCooldown;
+        public static CustomNumberOption WatchDuration;
+        public static CustomToggleOption WatchedKnows;
 
         public static CustomHeaderOption Seer;
         public static CustomNumberOption SeerCooldown;
@@ -493,11 +515,13 @@ namespace TownOfUs.CustomOption
         public static CustomToggleOption AssassinGuessCoven;
         public static CustomToggleOption AssassinGuessModifiers;
         public static CustomToggleOption AssassinGuessLovers;
-        public static CustomToggleOption AssassinateAfterVoting;
 
         public static CustomHeaderOption Underdog;
         public static CustomNumberOption UnderdogKillBonus;
         public static CustomToggleOption UnderdogIncreasedKC;
+
+        public static CustomHeaderOption Saboteur;
+        public static CustomNumberOption ReducedSaboCooldown;
 
         public static CustomHeaderOption Vigilante;
         public static CustomNumberOption VigilanteKills;
@@ -507,7 +531,7 @@ namespace TownOfUs.CustomOption
         public static CustomToggleOption VigilanteGuessNeutralKilling;
         public static CustomToggleOption VigilanteGuessCoven;
         public static CustomToggleOption VigilanteGuessLovers;
-        public static CustomToggleOption VigilanteAfterVoting;
+        public static CustomToggleOption VigilanteGuessImpModifiers;
 
         public static CustomHeaderOption Haunter;
         public static CustomNumberOption HaunterTasksRemainingClicked;
@@ -581,6 +605,7 @@ namespace TownOfUs.CustomOption
         public static CustomHeaderOption Blackmailer;
         public static CustomNumberOption BlackmailCooldown;
         public static CustomToggleOption BlackmailInvisible;
+        public static CustomToggleOption BlackmailedVote;
 
         public static CustomHeaderOption Converter;
         public static CustomNumberOption ConverterCooldown;
@@ -641,6 +666,10 @@ namespace TownOfUs.CustomOption
         public static CustomNumberOption EscapeCooldown;
         public static CustomToggleOption EscapistVent;
 
+        public static CustomHeaderOption Manipulator;
+        public static CustomNumberOption ManipulateCooldown;
+        public static CustomNumberOption ManipulationDuration;
+
         public static CustomHeaderOption Poisoner;
         public static CustomNumberOption PoisonCooldown;
         public static CustomNumberOption PoisonDuration;
@@ -668,7 +697,6 @@ namespace TownOfUs.CustomOption
         public static CustomToggleOption DoomsayerGuessNeutralKilling;
         public static CustomToggleOption DoomsayerGuessImpostors;
         public static CustomToggleOption DoomsayerGuessCoven;
-        public static CustomToggleOption DoomsayerAfterVoting;
         public static CustomNumberOption DoomsayerGuessesToWin;
         public static CustomToggleOption DoomsayerCantObserve;
 
@@ -733,9 +761,6 @@ namespace TownOfUs.CustomOption
 
         public static CustomHeaderOption Politician;
         public static CustomNumberOption CampaignCooldown;
-
-        public static CustomHeaderOption Warden;
-        public static CustomNumberOption FortifyCooldown;
 
         public static CustomHeaderOption Hypnotist;
         public static CustomNumberOption HypnotiseCooldown;
@@ -816,6 +841,8 @@ namespace TownOfUs.CustomOption
                 PercentFormat);
             InvestigatorOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#00B3B3FF>Investigator</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            LookoutOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#33FF66FF>Lookout</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
             MysticOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#4D99E6FF>Mystic</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             OracleOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#BF00BFFF>Oracle</color>", 0f, 0f, 100f, 10f,
@@ -834,7 +861,7 @@ namespace TownOfUs.CustomOption
             CrewKillingRoles = new CustomHeaderOption(num++, MultiMenu.crewmate, "Crewmate Killing Roles");
             AvengerOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#216f01>Avenger</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-            DeputyOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#ed9a47>Deputy</color>", 0f, 0f, 100f, 10f,
+            DeputyOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#FFCC00FF>Deputy</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             FighterOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#9358e6>Fighter</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -926,6 +953,8 @@ namespace TownOfUs.CustomOption
             DoppelgangerOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#fadd84>Doppelganger</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             InfectiousOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#bf9000>Infectious</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
+            JuggernautOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             WerewolfOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#A86629FF>Maul</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -1028,6 +1057,10 @@ namespace TownOfUs.CustomOption
                 PercentFormat);
             LoversOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF66CCFF>Lovers</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            MiniOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#CCFFE6FF>Mini</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
+            MotionlessOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#008591>Motionless</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
             RadarOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF0080FF>Radar</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             ScientistOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#5441b3>Scientist</color>", 0f, 0f, 100f, 10f,
@@ -1044,18 +1077,22 @@ namespace TownOfUs.CustomOption
                 PercentFormat);
 
             ImpostorModifiers = new CustomHeaderOption(num++, MultiMenu.modifiers, "Impostor Modifiers");
+            BloodlustOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Bloodlust</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
             DisperserOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Disperser</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             DoubleShotOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Double Shot</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             LuckyOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Lucky</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            SaboteurOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Saboteur</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
             UnderdogOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Underdog</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
             GameModeSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Game Mode Settings");
-            GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] {"Classic", "All Any", "Killing Only", "Battle Royale", "Cultist", "Werewolf", "Chaos" });
+            GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] {"Classic", "Role List", "Battle Royale", "Cultist", "Werewolf", "Chaos" });
 
             ClassicSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Classic Game Mode Settings");
@@ -1072,20 +1109,131 @@ namespace TownOfUs.CustomOption
             MaxNeutralKillingRoles =
                 new CustomNumberOption(num++, MultiMenu.main, "Max Neutral Killing Roles", 1, 0, 5, 1);
 
-            AllAnySettings =
-                new CustomHeaderOption(num++, MultiMenu.main, "All Any Settings");
-            RandomNumberImps = new CustomToggleOption(num++, MultiMenu.main, "Random Number Of Impostors", true);
 
-            KillingOnlySettings =
-                new CustomHeaderOption(num++, MultiMenu.main, "Killing Only Settings");
-            NeutralRoles =
-                new CustomNumberOption(num++, MultiMenu.main, "Neutral Roles", 1, 0, 5, 1);
-            VeteranCount =
-                new CustomNumberOption(num++, MultiMenu.main, "Veteran Count", 1, 0, 5, 1);
-            VigilanteCount =
-                new CustomNumberOption(num++, MultiMenu.main, "Vigilante Count", 1, 0, 5, 1);
-            AddArsonist = new CustomToggleOption(num++, MultiMenu.main, "Add Arsonist", true);
-            AddPlaguebearer = new CustomToggleOption(num++, MultiMenu.main, "Add Plaguebearer", true);
+            RoleListSettings =
+                new CustomHeaderOption(num++, MultiMenu.main, "Role List Settings");
+            UniqueRoles = new CustomToggleOption(num++, MultiMenu.main, "Roles Are Unique");
+            Slot1 = new CustomStringOption(num++, MultiMenu.main, "Slot 1", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 15);
+            Slot2 = new CustomStringOption(num++, MultiMenu.main, "Slot 2", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 15);
+            Slot3 = new CustomStringOption(num++, MultiMenu.main, "Slot 3", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot4 = new CustomStringOption(num++, MultiMenu.main, "Slot 4", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot5 = new CustomStringOption(num++, MultiMenu.main, "Slot 5", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot6 = new CustomStringOption(num++, MultiMenu.main, "Slot 6", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot7 = new CustomStringOption(num++, MultiMenu.main, "Slot 7", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot8 = new CustomStringOption(num++, MultiMenu.main, "Slot 8", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot9 = new CustomStringOption(num++, MultiMenu.main, "Slot 9", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot10 = new CustomStringOption(num++, MultiMenu.main, "Slot 10", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot11 = new CustomStringOption(num++, MultiMenu.main, "Slot 11", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot12 = new CustomStringOption(num++, MultiMenu.main, "Slot 12", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot13 = new CustomStringOption(num++, MultiMenu.main, "Slot 13", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot14 = new CustomStringOption(num++, MultiMenu.main, "Slot 14", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+            Slot15 = new CustomStringOption(num++, MultiMenu.main, "Slot 15", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 5);
+
 
             BattleRoyaleSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Battle Royale Settings");
@@ -1176,13 +1324,13 @@ namespace TownOfUs.CustomOption
             ColourblindComms = new CustomToggleOption(num++, MultiMenu.main, "Camouflaged Comms", false);
             CamoCommsKillAnyone = new CustomToggleOption(num++, MultiMenu.main, "Kill Anyone During Camouflaged Comms", false);
             ImpostorSeeRoles = new CustomToggleOption(num++, MultiMenu.main, "Impostors Can See The Roles Of Their Team", false);
+            CovenSeeRoles = new CustomToggleOption(num++, MultiMenu.main, "Covens Can See The Roles Of Their Team", false);
             DeadSeeRoles =
                 new CustomToggleOption(num++, MultiMenu.main, "Dead Can See Everyone's Roles/Votes", false);
             InitialCooldowns =
                 new CustomNumberOption(num++, MultiMenu.main, "Game Start Cooldowns", 10f, 10f, 30f, 2.5f, CooldownFormat);
             ParallelMedScans = new CustomToggleOption(num++, MultiMenu.main, "Parallel Medbay Scans", false);
             SkipButtonDisable = new CustomStringOption(num++, MultiMenu.main, "Disable Meeting Skip Button", new[] { "No", "Emergency", "Always" });
-            HiddenRoles = new CustomToggleOption(num++, MultiMenu.main, "Enable Hidden Roles", true);
             FirstDeathShield = new CustomToggleOption(num++, MultiMenu.main, "First Death Shield Next Game", false);
             NeutralEvilWinEndsGame = new CustomToggleOption(num++, MultiMenu.main, "Neutral Evil Win Ends Game", true);
             CrewKillersContinue = new CustomToggleOption(num++, MultiMenu.main, "Crew Killers Continue Game", false);
@@ -1214,7 +1362,6 @@ namespace TownOfUs.CustomOption
             AssassinGuessCoven = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Coven Roles", false);
             AssassinGuessModifiers = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Crewmate Modifiers", false);
             AssassinGuessLovers = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Lovers", false);
-            AssassinateAfterVoting = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess After Voting", false);
 
             Guardian =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#7cb6c2>Guardian</color>");
@@ -1241,6 +1388,13 @@ namespace TownOfUs.CustomOption
             HelperDuration =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Alert Duration", 10f, 5f, 15f, 1f, CooldownFormat);
             HelperSpeed = new CustomNumberOption(num++, MultiMenu.crewmate, "Player Speed On Alert", 1.25f, 1.05f, 2.5f, 0.05f, MultiplierFormat);
+
+            Astral =
+                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#a703ae>Astral</color>");
+            GhostCooldown =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Ghost Ability Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            GhostDuration =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Ghost Time Duration", 5f, 3f, 15f, 1f, CooldownFormat);
             
             Aurial =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#B34D99FF>Aurial</color>");
@@ -1250,13 +1404,6 @@ namespace TownOfUs.CustomOption
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Radiate Max Range", 1.5f, 1f, 5f, 0.25f, MultiplierFormat);
             SenseDuration =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Sense Duration", 10f, 1f, 15f, 1f, CooldownFormat);
-
-            Astral =
-                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#a703ae>Astral</color>");
-            GhostCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Ghost Ability Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            GhostDuration =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Ghost Time Duration", 5f, 3f, 15f, 1f, CooldownFormat);
 
             Captain =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#6B8DE1>Captain</color>");
@@ -1294,6 +1441,15 @@ namespace TownOfUs.CustomOption
             FootprintDuration = new CustomNumberOption(num++, MultiMenu.crewmate, "Footprint Duration", 10f, 1f, 15f, 0.5f, CooldownFormat);
             AnonymousFootPrint = new CustomToggleOption(num++, MultiMenu.crewmate, "Anonymous Footprint", false);
             VentFootprintVisible = new CustomToggleOption(num++, MultiMenu.crewmate, "Footprint Vent Visible", false);
+
+            Lookout =
+                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#33FF66FF>Lookout</color>");
+            WatchCooldown =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Watch Ability Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            WatchDuration =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Watch Duration", 10f, 3f, 30f, 1f, CooldownFormat);
+            WatchedKnows =
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Watched Player Knows They Are Being Watched");
 
             Oracle =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#BF00BFFF>Oracle</color>");
@@ -1457,7 +1613,7 @@ namespace TownOfUs.CustomOption
             VigilanteGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Neutral Killing Roles", false);
             VigilanteGuessCoven = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Coven Roles", false);
             VigilanteGuessLovers = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Lovers", false);
-            VigilanteAfterVoting = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess After Voting", false);
+            VigilanteGuessImpModifiers = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Impostor Modifiers", false);
 
             Altruist = new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#660000FF>Altruist</color>");
             ReviveDuration =
@@ -1503,14 +1659,15 @@ namespace TownOfUs.CustomOption
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Time Where Medic Will Have Color Type", 15f, 0f, 60f, 2.5f,
                     CooldownFormat);
 
-            Warden = new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#9900FFFF>Warden</color>");
-            FortifyCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Fortify Cooldown", 10f, 1f, 15f, 1f, CooldownFormat);
-
             Engineer =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#FFA60AFF>Engineer</color>");
             MaxFixes =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Maximum Number Of Fixes", 5, 1, 15, 1);
+
+            Imitator =
+                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#B3D94DFF>Imitator</color>");
+            ImitatorCanBecomeMayor =
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Imitator Can Become Mayor", true);
 
             Lighter =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#e6c20d>Lighter</color>");
@@ -1619,7 +1776,6 @@ namespace TownOfUs.CustomOption
             DoomsayerGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.neutral, "Doomsayer Can Guess Neutral Killing Roles", false);
             DoomsayerGuessImpostors = new CustomToggleOption(num++, MultiMenu.neutral, "Doomsayer Can Guess Impostor Roles", false);
             DoomsayerGuessCoven = new CustomToggleOption(num++, MultiMenu.neutral, "Doomsayer Can Guess Coven Roles", false);
-            DoomsayerAfterVoting = new CustomToggleOption(num++, MultiMenu.neutral, "Doomsayer Can Guess After Voting", false);
             DoomsayerGuessesToWin = new CustomNumberOption(num++, MultiMenu.neutral, "Number Of Doomsayer Kills To Win", 3, 1, 5, 1);
             DoomsayerCantObserve = new CustomToggleOption(num++, MultiMenu.neutral, "(Experienced) Doomsayer can't observe", false);
 
@@ -1711,6 +1867,13 @@ namespace TownOfUs.CustomOption
             InfectiousVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Infectious Can Vent", false);
 
+            Juggernaut =
+                new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color>");
+            JuggKillCooldown = new CustomNumberOption(num++, MultiMenu.neutral, "Juggernaut Initial Kill Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            ReducedKCdPerKill = new CustomNumberOption(num++, MultiMenu.neutral, "Reduced Kill Cooldown Per Kill", 5f, 2.5f, 10f, 2.5f, CooldownFormat);
+            JuggVent =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Juggernaut Can Vent", false);
+
             Maul = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#A86629FF>Maul</color>");
             RampageCooldown =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Rampage Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
@@ -1731,13 +1894,6 @@ namespace TownOfUs.CustomOption
                 new CustomNumberOption(num++, MultiMenu.neutral, "Kill Cooldown When Transformed", 5f, 2f, 10f, 1f, CooldownFormat);
             MutantVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Mutant Can Vent When Transformed", false);
-
-            Juggernaut =
-                new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color>");
-            JuggKillCooldown = new CustomNumberOption(num++, MultiMenu.neutral, "Juggernaut Initial Kill Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            ReducedKCdPerKill = new CustomNumberOption(num++, MultiMenu.neutral, "Reduced Kill Cooldown Per Kill", 5f, 2.5f, 10f, 2.5f, CooldownFormat);
-            JuggVent =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Juggernaut Can Vent", false);
 
             Plaguebearer = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#E6FFB3FF>Plaguebearer</color>");
             InfectCooldown =
@@ -1883,6 +2039,13 @@ namespace TownOfUs.CustomOption
             TargetDuration =
                 new CustomNumberOption(num++, MultiMenu.imposter, "Time Before Target Switch", 60f, 20f, 80f, 2.5f, CooldownFormat);
 
+            Manipulator =
+                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Manipulator</color>");
+            ManipulateCooldown =
+                new CustomNumberOption(num++, MultiMenu.imposter, "Manipulate Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            ManipulationDuration =
+                new CustomNumberOption(num++, MultiMenu.imposter, "Manipulation Duration", 10f, 5f, 30f, 2.5f, CooldownFormat);
+
             Poisoner =
                 new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Poisoner</color>");
             PoisonCooldown =
@@ -1912,6 +2075,8 @@ namespace TownOfUs.CustomOption
                 new CustomNumberOption(num++, MultiMenu.imposter, "Initial Blackmail Cooldown", 10f, 1f, 15f, 1f, CooldownFormat);
             BlackmailInvisible =
                 new CustomToggleOption(num++, MultiMenu.imposter, "Only Target Sees Blackmail", false);
+            BlackmailedVote =
+                new CustomToggleOption(num++, MultiMenu.imposter, "Blackmailed Player Can't Vote");
 
             Converter = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Converter</color>");
             ConverterCooldown =
@@ -1963,6 +2128,8 @@ namespace TownOfUs.CustomOption
                 PercentFormat);
             SpiritualistOn = new CustomNumberOption(num++, MultiMenu.coven, "<color=#bf5fff>Spiritualist</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            VoodooMasterOn = new CustomNumberOption(num++, MultiMenu.coven, "<color=#bf5fff>Voodoo Master</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
             
             Ritualist =
                 new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Ritualist</color>");
@@ -1974,7 +2141,6 @@ namespace TownOfUs.CustomOption
             RitualistGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Guess Neutral Killing Roles", false);
             RitualistGuessModifiers = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Guess Crewmates Modifiers", false);
             RitualistGuessLovers = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Guess Lovers", false);
-            RitualistAfterVoting = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Guess After Voting", false);
 
             PotionMaster =
                 new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Potion Master</color>");
@@ -2026,6 +2192,9 @@ namespace TownOfUs.CustomOption
             InvisDelay = new CustomNumberOption(num++, MultiMenu.modifiers, "Transparency Delay", 5f, 1f, 15f, 1f, CooldownFormat);
             TransformInvisDuration = new CustomNumberOption(num++, MultiMenu.modifiers, "Turn Transparent Duration", 5f, 1f, 15f, 1f, CooldownFormat);
             FinalTransparency = new CustomNumberOption(num++, MultiMenu.modifiers, "Final Opacity", 20f, 0f, 80f, 10f, PercentFormat);
+
+            Saboteur = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Saboteur</color>");
+            ReducedSaboCooldown = new CustomNumberOption(num++, MultiMenu.modifiers, "Reduced Sabotage Bonus", 10f, 5f, 15f, 1f, CooldownFormat);
 
             Underdog = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Underdog</color>");
             UnderdogKillBonus = new CustomNumberOption(num++, MultiMenu.modifiers, "Kill Cooldown Bonus", 5f, 2.5f, 10f, 2.5f, CooldownFormat);

@@ -47,7 +47,8 @@ namespace TownOfUs.NeutralRoles.ExecutionerMod
                 }
             }
 
-            if (!role.target.Data.IsDead && !role.target.Data.Disconnected && !role.target.Is(RoleEnum.Vampire)) return;
+            if (!role.target.Data.IsDead && !role.target.Data.Disconnected && !role.target.Is(RoleEnum.Vampire)
+            && !role.target.Is(RoleEnum.SerialKiller) && !role.target.Is(Faction.Coven) && !role.target.Is(Faction.Madmates)) return;
             if (role.TargetVotedOut) return;
 
             Utils.Rpc(CustomRPC.ExecutionerToJester, PlayerControl.LocalPlayer.PlayerId);

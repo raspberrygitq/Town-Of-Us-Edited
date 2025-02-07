@@ -125,6 +125,8 @@ namespace TownOfUs
         WhiteWolf,
         Guard,
         TalkativeWolf,
+        VoodooMaster,
+        Lookout,
 
         None
     }
@@ -153,7 +155,11 @@ namespace TownOfUs
         SixthSense,
         Shy,
         Frosty,
-        Spotter
+        Spotter,
+        Motionless,
+        Bloodlust,
+        Mini,
+        Saboteur
     }
 
     public enum AbilityEnum

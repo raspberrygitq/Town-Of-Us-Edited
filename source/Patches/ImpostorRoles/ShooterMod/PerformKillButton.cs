@@ -1,7 +1,5 @@
 using HarmonyLib;
 using TownOfUs.Roles;
-using TownOfUs.Modifiers.UnderdogMod;
-using UnityEngine;
 
 namespace TownOfUs.Patches.ImpostorRoles.ShooterMod
 {

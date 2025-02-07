@@ -20,8 +20,8 @@ namespace TownOfUs.ImpostorRoles.AstralMod
                     var role = Role.GetRole<Astral>(astral);
                     if (role.Enabled)
                     {
+                        role.TimeRemaining = 0f;
                         role.TurnBack(role.Player);
-                        System.Console.WriteLine("Astral Meeting Update (Turn Back)");
                         UsedGhost = true;
                     }
                     return;

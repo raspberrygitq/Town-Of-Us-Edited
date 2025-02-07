@@ -26,6 +26,7 @@ namespace TownOfUs.Modifiers.ShyMod
                     shy.LastMoved = DateTime.UtcNow;
                 }
                 if (shy.Moving) continue;
+                if (player.Data.Disconnected || shy.Moving) continue;
                 if (player.GetCustomOutfitType() == CustomPlayerOutfitType.Swooper)
                 {
                     shy.Opacity = 0f;

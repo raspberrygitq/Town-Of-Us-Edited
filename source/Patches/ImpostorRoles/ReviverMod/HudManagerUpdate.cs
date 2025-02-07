@@ -81,8 +81,7 @@ namespace TownOfUs.ImpostorRoles.ReviverMod
             var player2 = Utils.PlayerById(role.CurrentTarget.ParentId);
             if (role.CurrentTarget && role.ReviveButton.enabled
             && player2 != PlayerControl.LocalPlayer &&
-            (!player2.Is(RoleEnum.Astral) || Role.GetRole<Astral>(player2).Enabled != true)
-            && !role.CurrentTarget.IsDouble())
+            !role.CurrentTarget.IsDouble())
             {
                 SpriteRenderer component = null;
                 foreach (var body in role.CurrentTarget.bodyRenderers) component = body;

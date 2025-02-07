@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Hazel;
@@ -34,6 +35,40 @@ namespace TownOfUs.CustomOption
             }
 
             AmongUsClient.Instance.FinishRpcImmediately(writer);
+        }
+
+        public static IEnumerator SendTargetRpc(PlayerControl target, CustomOption optionn = null)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            List<CustomOption> options;
+            if (optionn != null)
+                options = new List<CustomOption> {optionn};
+            else
+                options = CustomOption.AllOptions;
+
+            var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
+                254, SendOption.Reliable);
+            writer.Write((int)CustomRPC.SyncSettingsTarget);
+            writer.Write(target.PlayerId);
+            foreach (var option in options)
+            {
+                if (writer.Position > 1000) {
+                    AmongUsClient.Instance.FinishRpcImmediately(writer);
+                    writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
+                        254, SendOption.Reliable);
+                    writer.Write((int)CustomRPC.SyncSettingsTarget);
+                    writer.Write(target.PlayerId);
+                }
+                writer.Write(option.ID);
+                if (option.Type == CustomOptionType.Toggle) writer.Write((bool) option.Value);
+                else if (option.Type == CustomOptionType.Number) writer.Write((float) option.Value);
+                else if (option.Type == CustomOptionType.String) writer.Write((int) option.Value);
+            }
+
+            AmongUsClient.Instance.FinishRpcImmediately(writer);
+
+            yield break;
         }
 
         public static void ReceiveRpc(MessageReader reader)

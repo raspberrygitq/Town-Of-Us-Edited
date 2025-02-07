@@ -1,5 +1,4 @@
-﻿using System;
-using HarmonyLib;
+﻿using HarmonyLib;
 using TownOfUs.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
@@ -7,9 +6,7 @@ using TownOfUs.CrewmateRoles.InvestigatorMod;
 using TownOfUs.CrewmateRoles.TrapperMod;
 using TownOfUs.CrewmateRoles.ImitatorMod;
 using System.Linq;
-using TownOfUs.CrewmateRoles.AurialMod;
 using TownOfUs.Roles.Cultist;
-using TownOfUs.Patches.ScreenEffects;
 using TownOfUs.Patches;
 
 namespace TownOfUs.NeutralRoles.VampireMod
@@ -145,8 +142,7 @@ namespace TownOfUs.NeutralRoles.VampireMod
             if (newVamp.Is(RoleEnum.Chameleon))
             {
                 var chamRole = Role.GetRole<Chameleon>(newVamp);
-                if (chamRole.IsSwooped)
-                chamRole.UnSwoop();
+                if (chamRole.IsSwooped) chamRole.UnSwoop();
                 Utils.Rpc(CustomRPC.ChameleonUnSwoop, newVamp.PlayerId);
             }
 

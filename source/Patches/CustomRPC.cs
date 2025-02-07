@@ -109,6 +109,7 @@ namespace TownOfUs
         ImpConvert,
         ConverterRevive,
         SetManipulate,
+        StartManipulate,
         SetManipulateOff,
         UpdateJail,
         UpdateCrusade,
@@ -159,6 +160,9 @@ namespace TownOfUs
         Collect,
         Hypnotise,
         Troll,
+        Camp,
+        StartWatch,
+        StopWatch,
 
         ImpostorWin,
         CrewmateWin,
@@ -173,6 +177,8 @@ namespace TownOfUs
         SetHacked,
         SetJail,
         SetCrusade,
+        SyncManipMovement,
+        SetVoodooPlayer,
 
         ExecutionerToJester,
         GAToSurv,
@@ -188,6 +194,7 @@ namespace TownOfUs
         ReceiveStatus,
         GetCode,
         ReceiveCode,
+        SyncSettingsTarget,
         
         RemoveAllBodies,
 

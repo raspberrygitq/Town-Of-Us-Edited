@@ -111,6 +111,14 @@ namespace TownOfUs.Patches
                 }
             }
 
+            foreach (var player in PlayerControl.AllPlayerControls)
+            {
+                if (player.Is(ModifierEnum.Mini) && player.transform.localPosition.y > 4 && GameOptionsManager.Instance.currentNormalGameOptions.MapId == 1)
+                {
+                    player.transform.localPosition = new Vector3(player.transform.localPosition.x, 4f, player.transform.localPosition.z);
+                }
+            }
+
             if (PlayerControl.LocalPlayer.Is(RoleEnum.TalkativeWolf))
             {
                 var tw = Role.GetRole<TalkativeWolf>(PlayerControl.LocalPlayer);
@@ -201,12 +209,6 @@ namespace TownOfUs.Patches
                 politician.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Warden))
-            {
-                var warden = Role.GetRole<Warden>(PlayerControl.LocalPlayer);
-                warden.Cooldown = CustomGameOptions.InitialCooldowns;
-            }
-
             if (PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector))
             {
                 var sc = Role.GetRole<SoulCollector>(PlayerControl.LocalPlayer);
@@ -283,6 +285,12 @@ namespace TownOfUs.Patches
                 astral.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Lookout))
+            {
+                var lookout = Role.GetRole<Lookout>(PlayerControl.LocalPlayer);
+                lookout.Cooldown = CustomGameOptions.InitialCooldowns;
+            }
+
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Chameleon))
             {
                 var chameleon = Role.GetRole<Chameleon>(PlayerControl.LocalPlayer);
@@ -321,21 +329,18 @@ namespace TownOfUs.Patches
                 blackmailer.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator))
-            {
-                var manip = Role.GetRole<Manipulator>(PlayerControl.LocalPlayer);
-                if (manip.ManipulatedPlayer != null || manip.IsManipulating)
-                {
-                Utils.Rpc(CustomRPC.SetManipulateOff, PlayerControl.LocalPlayer.PlayerId, manip.ManipulatedPlayer.PlayerId);
-                manip.IsManipulating = false;
-                manip.ManipulatedPlayer = null;
-                }
-            }
-
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Converter))
             {
                 var converter = Role.GetRole<Converter>(PlayerControl.LocalPlayer);
                 converter.Cooldown = CustomGameOptions.InitialCooldowns;
+            }
+
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator))
+            {
+                var Manipulator= Role.GetRole<Manipulator>(PlayerControl.LocalPlayer);
+                Manipulator.Cooldown = CustomGameOptions.InitialCooldowns;
+                Manipulator.IsManipulating = false;
+                Manipulator.ManipulatedPlayer = null;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Poisoner))
@@ -395,40 +400,20 @@ namespace TownOfUs.Patches
                 undertaker.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Coven))
+            if (PlayerControl.LocalPlayer.Is(Faction.Coven))
             {
-                var covenRole = Role.GetRole<Coven>(PlayerControl.LocalPlayer);
-                covenRole.Cooldown = CustomGameOptions.InitialCooldowns;
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Ritualist))
-            {
-                var ritualist = Role.GetRole<Ritualist>(PlayerControl.LocalPlayer);
-                ritualist.Cooldown = CustomGameOptions.InitialCooldowns;
+                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.InitialCooldowns;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.HexMaster))
             {
-                var hexmaster = Role.GetRole<HexMaster>(PlayerControl.LocalPlayer);
-                hexmaster.Cooldown = CustomGameOptions.InitialCooldowns;
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.CovenLeader))
-            {
-                var covenleader = Role.GetRole<CovenLeader>(PlayerControl.LocalPlayer);
-                covenleader.Cooldown = CustomGameOptions.InitialCooldowns;
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Spiritualist))
-            {
-                var spiritualist = Role.GetRole<Spiritualist>(PlayerControl.LocalPlayer);
-                spiritualist.Cooldown = CustomGameOptions.InitialCooldowns;
+                var hm = Role.GetRole<HexMaster>(PlayerControl.LocalPlayer);
+                hm.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.PotionMaster))
             {
                 var pm = Role.GetRole<PotionMaster>(PlayerControl.LocalPlayer);
-                pm.Cooldown = CustomGameOptions.InitialCooldowns;
                 pm.PotionCooldown = CustomGameOptions.InitialCooldowns;
             }
 

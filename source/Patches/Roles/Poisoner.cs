@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TownOfUs.Modifiers.UnderdogMod;
+using TownOfUs.Roles.Modifiers;
 
 namespace TownOfUs.Roles
 {
@@ -55,6 +56,7 @@ namespace TownOfUs.Roles
         }
         public void PoisonKill()
         {
+            Enabled = false;
             var target = PoisonedPlayer;
             if (!PoisonedPlayer.Is(RoleEnum.Pestilence) && !PoisonedPlayer.IsOnAlert() && !Player.IsJailed())
             {
@@ -65,7 +67,6 @@ namespace TownOfUs.Roles
                 if (!PoisonedPlayer.Data.IsDead) SoundManager.Instance.PlaySound(PlayerControl.LocalPlayer.KillSfx, false, 0.5f);
             }
             PoisonedPlayer = null;
-            Enabled = false;
             if (target.Is(ModifierEnum.Diseased))
             {
                 Cooldown = CustomGameOptions.PoisonCD * CustomGameOptions.DiseasedMultiplier;
@@ -74,6 +75,14 @@ namespace TownOfUs.Roles
             {
                 Cooldown = PerformKill.LastImp() ? CustomGameOptions.PoisonCD - CustomGameOptions.UnderdogKillBonus :
                 PerformKill.IncreasedKC() ? CustomGameOptions.PoisonCD : (CustomGameOptions.PoisonCD + CustomGameOptions.UnderdogKillBonus);
+            }
+            else if (Player.Is(ModifierEnum.Bloodlust))
+            {
+                var modifier = Modifier.GetModifier<Bloodlust>(PlayerControl.LocalPlayer);
+                var num = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown / 2;
+                modifier.KilledThisRound += 1;
+                if (modifier.KilledThisRound >= 2) Cooldown = num;
+                else Cooldown = CustomGameOptions.PoisonCD;
             }
             else if (Player.Is(ModifierEnum.Lucky))
             {

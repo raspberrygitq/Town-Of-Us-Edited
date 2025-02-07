@@ -83,33 +83,6 @@ namespace TownOfUs.Roles.Modifiers
             return !(a == b);
         }
 
-        public void RegenModifierTask()
-        {
-            bool createTask;
-            try
-            {
-                var firstText = Player.myTasks.ToArray()[0].Cast<ImportantTextTask>();
-                createTask = !firstText.Text.Contains("Modifier:");
-            }
-            catch (InvalidCastException)
-            {
-                createTask = true;
-            }
-
-            var modifier = Modifier.GetModifier(PlayerControl.LocalPlayer);
-            if (createTask)
-            {
-                var task = new GameObject(Name + "Task").AddComponent<ImportantTextTask>();
-                task.transform.SetParent(Player.transform, false);
-                task.Text = $"{modifier.ColorString}Modifier: {modifier.Name}\n{modifier.TaskText()}</color>";
-                Player.myTasks.Insert(0, task);
-                return;
-            }
-
-            Player.myTasks.ToArray()[0].Cast<ImportantTextTask>().Text =
-                $"{modifier.ColorString}Modifier: {modifier.Name}\n{modifier.TaskText()}</color>";
-        }
-
         public static Modifier GetModifier(PlayerControl player)
         {
             return (from entry in ModifierDictionary where entry.Key == player.PlayerId select entry.Value)

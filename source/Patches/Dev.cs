@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
 using AmongUs.Data;
 using HarmonyLib;
 using TownOfUs.Extensions;
@@ -29,6 +31,30 @@ namespace TownOfUs.Patches
             public static string PlayerName;
         }
 
+        public static HttpClient Httpclient = new() 
+        {
+            DefaultRequestHeaders = 
+            {
+                {"User-Agent", "TownOfUsEdited Dev Request"}
+            } 
+        };
+
+        private static List<UpdateData> GetDevs()
+        {
+            var text = Httpclient.GetAsync("https://pastebin.com/raw/mPJssHaY")
+                                 .GetAwaiter().GetResult().Content.ReadAsStringAsync().Result;
+            var data = JsonSerializer.Deserialize<List<UpdateData>>(text, options: new() { ReadCommentHandling = JsonCommentHandling.Skip });
+            return data;
+        }
+
+        public class UpdateData
+        {
+            public string MainDev { get; set; }
+            public List<string> Dev { get; set; }
+            public List<string> Tester { get; set; }
+            public List<string> Vip { get; set; }
+        }
+
         [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.Update))]
         public static class UpdateDevClient
         {
@@ -38,22 +64,50 @@ namespace TownOfUs.Patches
                 {
                     if (localStatus.IsNullOrWhiteSpace())
                     {
-                        if ((EOSManager.Instance.FriendCode == "peaktipple#8186" || EOSManager.Instance.FriendCode == "netpowered#1463"
-                        || EOSManager.Instance.FriendCode == "leftwax#7574") && TownOfUs.HideDevStatus.Value)
+                        var data = GetDevs();
+                        if (data != null)
                         {
-                            if (EOSManager.Instance.FriendCode == "peaktipple#8186") lastStatus = "MainDev";
-                            else if (EOSManager.Instance.FriendCode == "netpowered#1463"
-                            || EOSManager.Instance.FriendCode == "leftwax#7574") lastStatus = "Dev";
-                            localStatus = "DevHidden";
-                        }
-                        else if (EOSManager.Instance.FriendCode == "peaktipple#8186")
-                        {
-                            localStatus = "MainDev";
-                        }
-                        else if (EOSManager.Instance.FriendCode == "netpowered#1463"
-                        || EOSManager.Instance.FriendCode == "leftwax#7574")
-                        {
-                            localStatus = "Dev";
+                            var MainDev = data.FirstOrDefault(x => x.MainDev.Equals(EOSManager.Instance.FriendCode));
+                            var Dev = data.FirstOrDefault(x => x.Dev.Any(y => y.Equals(EOSManager.Instance.FriendCode)));
+                            var Tester = data.FirstOrDefault(x => x.Tester.Any(y => y.Equals(EOSManager.Instance.FriendCode)));
+                            var Vip = data.FirstOrDefault(x => x.Vip.Any(y => y.Equals(EOSManager.Instance.FriendCode)));
+                            if (MainDev != null)
+                            {
+                                if (TownOfUs.HideDevStatus.Value)
+                                {
+                                    lastStatus = "MainDev";
+                                    localStatus = "DevHidden";
+                                }
+                                else localStatus = "MainDev";
+                            }
+                            else if (Dev != null)
+                            {
+                                if (TownOfUs.HideDevStatus.Value)
+                                {
+                                    lastStatus = "Dev";
+                                    localStatus = "DevHidden";
+                                }
+                                else localStatus = "Dev";
+                            }
+                            else if (Tester != null)
+                            {
+                                if (TownOfUs.HideDevStatus.Value)
+                                {
+                                    lastStatus = "Tester";
+                                    localStatus = "TesterHidden";
+                                }
+                                else localStatus = "Tester";
+                            }
+                            else if (Vip != null)
+                            {
+                                if (TownOfUs.HideDevStatus.Value)
+                                {
+                                    lastStatus = "Vip";
+                                    localStatus = "VipHidden";
+                                }
+                                else localStatus = "Vip";
+                            }
+                            else localStatus = "None";
                         }
                         return;
                     }
@@ -197,38 +251,97 @@ namespace TownOfUs.Patches
 
                 if (chatText.ToLower().StartsWith("/status"))
                 {
-                    if (sourcePlayer.IsDev() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        if (localStatus != "DevHidden")
+                        if (sourcePlayer.IsDev())
                         {
-                            chatText = "Dev status hidden.";
-                            system = true;
-                            lastStatus = localStatus;
-                            localStatus = "DevHidden";
-                            if (Players.ContainsKey(sourcePlayer))
+                            if (localStatus != "DevHidden")
                             {
-                                Players.Remove(sourcePlayer);
+                                chatText = "Dev status hidden.";
+                                system = true;
+                                lastStatus = localStatus;
+                                localStatus = "DevHidden";
+                                if (Players.ContainsKey(sourcePlayer))
+                                {
+                                    Players.Remove(sourcePlayer);
+                                }
+                                Players.Add(sourcePlayer, "DevHidden");
+                                Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "DevHidden");
                             }
-                            Players.Add(sourcePlayer, "DevHidden");
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "DevHidden");
+                            else
+                            {
+                                chatText = "Dev status shown.";
+                                system = true;
+                                localStatus = lastStatus;
+                                if (Players.ContainsKey(sourcePlayer))
+                                {
+                                    Players.Remove(sourcePlayer);
+                                }
+                                Players.Add(sourcePlayer, localStatus);
+                                Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, localStatus);
+                            }
+                        }
+                        else if (sourcePlayer.IsTester())
+                        {
+                            if (localStatus != "TesterHidden")
+                            {
+                                chatText = "Tester status hidden.";
+                                system = true;
+                                lastStatus = localStatus;
+                                localStatus = "TesterHidden";
+                                if (Players.ContainsKey(sourcePlayer))
+                                {
+                                    Players.Remove(sourcePlayer);
+                                }
+                                Players.Add(sourcePlayer, "TesterHidden");
+                                Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "TesterHidden");
+                            }
+                            else
+                            {
+                                chatText = "Tester status shown.";
+                                system = true;
+                                localStatus = lastStatus;
+                                if (Players.ContainsKey(sourcePlayer))
+                                {
+                                    Players.Remove(sourcePlayer);
+                                }
+                                Players.Add(sourcePlayer, localStatus);
+                                Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, localStatus);
+                            }
+                        }
+                        else if (sourcePlayer.IsVip())
+                        {
+                            if (localStatus != "VipHidden")
+                            {
+                                chatText = "VIP status hidden.";
+                                system = true;
+                                lastStatus = localStatus;
+                                localStatus = "VipHidden";
+                                if (Players.ContainsKey(sourcePlayer))
+                                {
+                                    Players.Remove(sourcePlayer);
+                                }
+                                Players.Add(sourcePlayer, "VipHidden");
+                                Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "VipHidden");
+                            }
+                            else
+                            {
+                                chatText = "VIP status shown.";
+                                system = true;
+                                localStatus = lastStatus;
+                                if (Players.ContainsKey(sourcePlayer))
+                                {
+                                    Players.Remove(sourcePlayer);
+                                }
+                                Players.Add(sourcePlayer, localStatus);
+                                Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, localStatus);
+                            }
                         }
                         else
                         {
-                            chatText = "Dev status shown.";
-                            system = true;
-                            localStatus = lastStatus;
-                            if (Players.ContainsKey(sourcePlayer))
-                            {
-                                Players.Remove(sourcePlayer);
-                            }
-                            Players.Add(sourcePlayer, localStatus);
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, localStatus);
+                            chatText = "You don't have access to this command!";
+                            noaccess = true;
                         }
-                    }
-                    else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                    {
-                        chatText = "You don't have access to this command!";
-                        noaccess = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
@@ -320,7 +433,7 @@ namespace TownOfUs.Patches
 
                 if (chatText.ToLower().StartsWith("/fly"))
                 {
-                    if (sourcePlayer.IsDev() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    if ((sourcePlayer.IsDev() || sourcePlayer.IsVip()) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         if (LobbyBehaviour.Instance)
                         {

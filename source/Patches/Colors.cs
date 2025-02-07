@@ -49,13 +49,14 @@ namespace TownOfUs.Patches
         public readonly static Color Bodyguard = new Color32(37, 91, 201, 255);
         public readonly static Color Crusader = new Color32(129, 82, 48, 255);
         public readonly static Color Informant = new Color32(76, 250, 171, 255);
-        public readonly static Color Deputy = new Color32(237, 154, 71, 255);
+        public readonly static Color Deputy = new Color(1f, 0.8f, 0f, 1f);
         public readonly static Color TimeLord = new Color32(15, 0, 184, 255);
         public readonly static Color Helper = new Color32(124, 182, 194, 255);
         public readonly static Color Guardian = new Color32(103, 187, 67, 255);
         public readonly static Color Lighter = new Color32(230, 194, 13, 255);
         public readonly static Color Politician = new Color(0.4f, 0f, 0.6f, 1f);
         public readonly static Color Warden = new Color(0.6f, 0f, 1f, 1f);
+        public readonly static Color Lookout = new Color(0.2f, 1f, 0.4f, 1f);
 
         // Neutral Colors
         public readonly static Color Jester = new Color(1f, 0.75f, 0.8f, 1f);
@@ -114,6 +115,8 @@ namespace TownOfUs.Patches
         public readonly static Color Shy = new Color(1f, 0.7f, 0.8f, 1f);
         public readonly static Color Vengeful = new Color32(141, 0, 0, 255);
         public readonly static Color Spotter = new Color32(198, 136, 242, 255);
+        public readonly static Color Motionless = new Color32(0, 133, 145, 255);
+        public readonly static Color Mini = new Color(0.8f, 1f, 0.9f, 1f);
 
     }
 }

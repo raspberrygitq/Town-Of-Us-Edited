@@ -8,30 +8,31 @@ Join the [Discord](https://discord.gg/Huen5AqR2t) if you need help or want to fi
 |:------------------------------:|:---------------------------------:|:---------------------------------:|:-------------------------------:|:-----------------------------:|
 | [Blackmailer](#blackmailer)    | [Altruist](#altruist)             | [Amnesiac](#amnesiac)             | [Coven](#coven)                 | [Aftermath](#aftermath)       |
 | [Blinder](#blinder)            | [Astral](#astral)                 | [Arsonist](#arsonist)             | [Coven Leader](#coven-leader)   | [Bait](#bait)                 |
-| [Bomber](#bomber)              | [Aurial](#aurial)                 | [Attacker](#attacker)             | [Hex Master](#hex-master)       | [Button Barry](#button-barry) |
-| [Bounty Hunter](bounty-hunter) | [Avenger](#avenger)               | [Doomsayer](#doomsayer)           | [Potion Master](#potion-master) | [Diseased](#diseased)         |
-| [Conjurer](#conjurer)          | [Bodyguard](#bodyguard)           | [Doppelganger](#doppelganger)     | [Ritualist](#ritualist)         | [Disperser](#disperser)       |
-| [Converter](#converter)        | [Captain](#captain)               | [Executioner](#executioner)       |                                 | [Double Shot](#double-shot)   |
-| [Escapist](#escapist)          | [Chameleon](#chameleon)           | [Guardian Angel](#guardian-angel) |                                 | [Flash](#flash)               |
-| [Freezer](#freezer)            | [Crusader](#crusader)             | [Infectious](#infectious)         |                                 | [Frosty](#frosty)             |
-| [Grenadier](#grenadier)        | [Deputy](#deputy)                 | [Jester](#jester)                 |                                 | [Giant](#giant)               |
-| [Hypnotist](#hypnotist)        | [Detective](#detective)           | [Juggernaut](#juggernaut)         |                                 | [Lovers](#lovers)             |
-| [Janitor](#janitor)            | [Doctor](#doctor)                 | [Maul](#maul)                     |                                 | [Lucky](#lucky)               |
-| [Mafioso](#mafioso)            | [Engineer](#engineer)             | [Mutant](#mutant)                 |                                 | [Madmate](#madmate)           |
-| [Manipulator](#manipulator)    | [Fighter](#fighter)               | [Phantom](#phantom)               |                                 | [Multitasker](#multitasker)   |
-| [Miner](#miner)                | [Guardian](#guardian)             | [Plaguebearer](#plaguebearer)     |                                 | [Radar](#radar)               |
-| [Morphling](#morphling)        | [Haunter](#haunter)               | [Serial Killer](#serial-killer)   |                                 | [Scientist](#scientist)       |
-| [Poisoner](#poisoner)          | [Helper](#helper)                 | [Shifter](#shifter)               |                                 | [Shy](#shy)                   |
-| [Reviver](#reviver)            | [Hunter](#hunter)                 | [Soul Collector](#soul-collector) |                                 | [Sixth Sense](#sixth-sense)   |
-| [Shooter](#shooter)            | [Imitator](#imitator)             | [Survivor](#survivor)             |                                 | [Sleuth](#sleuth)             |
-| [Spirit](#spirit)              | [Informant](#informant)           | [The Glitch](#the-glitch)         |                                 | [Spotter](#spotter)           |
-| [Swooper](#swooper)            | [Investigator](#investigator)     | [Troll](#troll)                   |                                 | [Tiebreaker](#tiebreaker)     |
-| [Traitor](#traitor)            | [Jailor](#jailor)                 | [Vampire](#vampire)               |                                 | [Torch](#torch)               |
-| [Undertaker](#undertaker)      | [Knight](#knight)                 | [Vulture](#vulture)               |                                 | [Underdog](#underdog)         |
-| [Venerer](#venerer)            | [Lighter](#lighter)               |                                   |                                 | [Vengeful](#vengeful)         |
-| [Warlock](#warlock)            | [Medic](#medic)                   |                                   |                                 |                               |
-| [Witch](#witch)                | [Medium](#medium)                 |                                   |                                 |                               |
-|                                | [Mystic](#mystic)                 |                                   |                                 |                               |
+| [Bomber](#bomber)              | [Aurial](#aurial)                 | [Attacker](#attacker)             | [Hex Master](#hex-master)       | [Bloodlust](#bloodlust)       |
+| [Bounty Hunter](bounty-hunter) | [Avenger](#avenger)               | [Doomsayer](#doomsayer)           | [Potion Master](#potion-master) | [Button Barry](#button-barry) |
+| [Conjurer](#conjurer)          | [Bodyguard](#bodyguard)           | [Doppelganger](#doppelganger)     | [Ritualist](#ritualist)         | [Diseased](#diseased)         |
+| [Converter](#converter)        | [Captain](#captain)               | [Executioner](#executioner)       | [Voodoo Master](#voodoo-master) | [Disperser](#disperser)       |
+| [Escapist](#escapist)          | [Chameleon](#chameleon)           | [Guardian Angel](#guardian-angel) |                                 | [Double Shot](#double-shot)   |
+| [Freezer](#freezer)            | [Crusader](#crusader)             | [Infectious](#infectious)         |                                 | [Flash](#flash)               |
+| [Grenadier](#grenadier)        | [Deputy](#deputy)                 | [Jester](#jester)                 |                                 | [Frosty](#frosty)             |
+| [Hypnotist](#hypnotist)        | [Detective](#detective)           | [Juggernaut](#juggernaut)         |                                 | [Giant](#giant)               |
+| [Janitor](#janitor)            | [Doctor](#doctor)                 | [Maul](#maul)                     |                                 | [Lovers](#lovers)             |
+| [Mafioso](#mafioso)            | [Engineer](#engineer)             | [Mutant](#mutant)                 |                                 | [Lucky](#lucky)               |
+| [Manipulator](#manipulator)    | [Fighter](#fighter)               | [Phantom](#phantom)               |                                 | [Madmate](#madmate)           |
+| [Miner](#miner)                | [Guardian](#guardian)             | [Plaguebearer](#plaguebearer)     |                                 | [Mini](#mini)                 |
+| [Morphling](#morphling)        | [Haunter](#haunter)               | [Serial Killer](#serial-killer)   |                                 | [Motionless](#motionless)     |
+| [Poisoner](#poisoner)          | [Helper](#helper)                 | [Shifter](#shifter)               |                                 | [Multitasker](#multitasker)   |
+| [Reviver](#reviver)            | [Hunter](#hunter)                 | [Soul Collector](#soul-collector) |                                 | [Radar](#radar)               |
+| [Shooter](#shooter)            | [Imitator](#imitator)             | [Survivor](#survivor)             |                                 | [Saboteur](#saboteur)         |
+| [Spirit](#spirit)              | [Informant](#informant)           | [The Glitch](#the-glitch)         |                                 | [Scientist](#scientist)       |
+| [Swooper](#swooper)            | [Investigator](#investigator)     | [Troll](#troll)                   |                                 | [Shy](#shy)                   |
+| [Traitor](#traitor)            | [Jailor](#jailor)                 | [Vampire](#vampire)               |                                 | [Sixth Sense](#sixth-sense)   |
+| [Undertaker](#undertaker)      | [Knight](#knight)                 | [Vulture](#vulture)               |                                 | [Sleuth](#sleuth)             |
+| [Venerer](#venerer)            | [Lighter](#lighter)               |                                   |                                 | [Spotter](#spotter)           |
+| [Warlock](#warlock)            | [Lookout](#lookout)               |                                   |                                 | [Tiebreaker](#tiebreaker)     |
+| [Witch](#witch)                | [Medic](#medic)                   |                                   |                                 | [Torch](#torch)               |
+|                                | [Medium](#medium)                 |                                   |                                 | [Underdog](#underdog)         |
+|                                | [Mystic](#mystic)                 |                                   |                                 | [Vengeful](#vengeful)         |
 |                                | [Oracle](#oracle)                 |                                   |                                 |                               |
 |                                | [Paranoïac](#paranoïac)           |                                   |                                 |                               |
 |                                | [Politician](#politician)         |                                   |                                 |                               |
@@ -56,6 +57,7 @@ Join the [Discord](https://discord.gg/Huen5AqR2t) if you need help or want to fi
 # Releases
 | Among Us - Version| Mod Version | Link |
 |----------|-------------|-----------------|
+| 2024.11.26 | v1.0.0 | [Download](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.0/Toue.v1.0.0.zip) |
 | 2024.11.26 | v0.0.1 | [Download](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v0.0.1/Toue.v0.0.1.zip) |
 
 -----------------------
@@ -164,6 +166,30 @@ If there any problems with the script please check the [faq](https://github.com/
 If you have issues installing Town of Us Edited, you can join the [Discord](https://discord.gg/Huen5AqR2t) to receive help.
 
 -----------------------
+# Commands
+Here are all the in-game commands implemented in Town Of Us Edited:
+
+## Everyone
+| Name | Description |
+|----------|:-------------:|
+| /help | Displays the help menu containing all the commands infos |
+| /r [modifier / role name] | Displays the description of any role / modifier in the game |
+| /infoup | Displays informations about the /up command |
+| /up [role name] | Choose the role you want for the next game if allowed by the host |
+| /allup | See all currently chosen roles by the players using /up |
+| /death | Displays your death reason in-game |
+| /shrug | Adds "`¯\_(ツ)_/¯`" to your message |
+
+## Host Only
+| Name | Description |
+|----------|:-------------:|
+| /msg | Displays a message to everyone (dead or alive) marked as a Host message |
+| /id | See all the player's ids (used for /ban and /kick) |
+| /kick [player id] | Kicks the provided player |
+| /ban [player id] | Bans the provided player |
+| Shift + G + ENTER | Forces the game to end (in case of a critical issue) |
+
+-----------------------
 # Roles
 # Crewmate Roles
 ## Crewmate
@@ -220,8 +246,7 @@ When alerted, the player will see a pop up indicating that they have been alerte
 ### **Team: Crewmates**
 The Astral has an ability which is to turn into Astral form.\
 While in Astral form, the Astral can go through walls and will leave their body behind.\
-Note that their body can't be reported, the Astral can also not be killed while in Astral form.\
-But if the Astral's body get cleaned, eaten or remembered by an Amnesiac, the Astral will die.
+But the Astral can still die if someone attacks its body.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
@@ -309,15 +334,26 @@ Every footprint disappears after a set amount of time.
 | Footprint Vent Visible | Whether footprints near vents are shown | Toggle | False |
 
 -----------------------
+## Lookout
+### **Team: Crewmates**
+The Lookout can use its ability to watch other players and see them in real time for some seconds.
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Lookout | The percentage probability of the Lookout appearing | Percentage | 0% |
+| Watch Cooldown | The cooldown to use the Lookout's watch Button | Time | 25s |
+| Watch Form Duration | The duration of the watch ability | Time | 10s |
+| Watched Player Knows They Are Being Watched | Whether the watched player will know that they are being watched by the Lookout | Toggle | Yes |
+
+-----------------------
 ## Mystic
 ### **Team: Crewmates**
 The Mystic is a Crewmate that gets an alert revealing when someone has died.\
-On top of this, the Mystic briefly gets an arrow pointing in the direction of the body.
+The Mystci will see who is dead through a pop up on their screen.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Mystic | The percentage probability of the Mystic appearing | Percentage | 0% |
-| Arrow Duration | The duration of the arrows pointing to the bodies | Time | 0.1s |
 
 -----------------------
 ## Oracle
@@ -432,9 +468,8 @@ If the Avenger did not find the killer that round or if someone reports before t
 -----------------------
 ## Deputy
 ### **Team: Crewmates**
-The Deputy can decide to shoot someone during the meeting.\
-This player will instantly die but the Deputy can only use the ability once, so they have to choose wisely!
-
+The Deputy can use its camp ability on a player during the round.\
+Then, the next meeting, if that players gets killed, the Deputy can try to shoot their killer, resulting in either killing the killer, or doing nothing if the Deputy shoots the wrong person.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
@@ -574,7 +609,6 @@ During meetings, the Vigilante can choose to kill someone by guessing their role
 | Vigilante Guess Neutral Killing  | Whether the Vigilante can Guess Neutral Killing roles | Toggle | False |
 | Vigilante Guess Coven  | Whether the Vigilante can Guess Coven roles | Toggle | False |
 | Vigilante Guess Lovers  | Whether the Vigilante can Guess Lovers | Toggle | False |
-| Vigilante Guess After Voting  | Whether the Vigilante can Guess after they have voted | Toggle | False |
 
 -----------------------
 ## Altruist
@@ -928,7 +962,6 @@ They have an additional observe ability that hints towards certain player's role
 | Doomsayer Guess Neutral Killing  | Whether the Doomsayer can Guess Neutral Killing roles | Toggle | False |
 | Doomsayer Guess Impostors  | Whether the Doomsayer can Guess Impostor roles | Toggle | False |
 | Doomsayer Guess Coven  | Whether the Doomsayer can Guess Coven roles | Toggle | False |
-| Doomsayer Can Guess After Voting  | Whether the Doomsayer can Guess after voting | Toggle | False |
 | Number Of Doomsayer Guesses Required To Win  | The number of people the Doomsayer has to guess the role of to win | Number | 3 |
 | (Experienced) Doomsayer Can't Observe | The Doomsayer doesn't have the observe feature | Toggle | False |
 
@@ -1006,10 +1039,9 @@ But if the player doesn't get ejected, the troll will lose.
 -----------------------
 ## Vulture
 ### **Team: Neutral**
-The Troll is a Neutral Role with a unique ability.\
-When using its ability, it will force the closest player to kill the Troll.\
-If the player that killed the Troll next meeting gets ejected, the Troll will win and override any other win condition (such as [Jester](#jester) or [Executioner](#executioner) win conditions).\
-But if the player doesn't get ejected, the troll will lose.
+The Vulture is a Neutral role which has to eat a certain amount of dead bodies in order to win.\
+The Vulture may have Impostor vision and be able to use the vents.\
+The Vulture may also have arrows pointing to dead bodies.
 
 ### Game Options
 | Name | Description | Type | Default |
@@ -1211,9 +1243,10 @@ The Glitch can Mimic someone, which results in them looking exactly like the oth
 ### **Team: Neutral**
 
 The Vampire is a Neutral role with its own win condition.\
-The Vampire can convert or kill other players by biting them.\
-If the bitten player was a Crewmate they will turn into a Vampire (unless there are 2 Vampires alive)\
-Else they will kill the bitten player.
+The Vampire can kill or convert other players.\
+If the bitten player was a Crewmate they will turn into a Vampire (unless there are 2 Vampires alive).\
+Else their cooldown will be reset.\
+The Vampire can also perform regular kills.
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
@@ -1411,13 +1444,15 @@ This means that the Conjurer will use the cursed player to kill someone else.
 ### **Team: Impostors**
 
 The Manipulator can Manipulate someone.\
-When someone gets manipulated, they will kill the next person they encounter.\
-If a body is reported or a meeting is called, the Manipulation will be reset.
+After that, the Manipulator can Control the Manipulated player.\
+While being controlled, the Manipulated player can't control their movements and the Manipulator can kill with the player's identity.
 
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Manipulator | The percentage probability of the Manipulator appearing | Percentage | 0% |
+| Manipulation Cooldown | The cooldown of the Mapulator's Manipulation button | Time | 25s |
+| Manipulation Duration | The duration of the Manipulation | Time | 10s |
 
 -----------------------
 ## Poisoner
@@ -1501,6 +1536,7 @@ This prevents the blackmailed person from speaking during the next meeting.
 | Blackmailer | The percentage probability of the Blackmailer appearing | Percentage | 0% |
 | Initial Blackmail Cooldown | The initial cooldown of the Blackmailer's Blackmail button | Time | 10s |
 | Only Target Sees Blackmail | If enabled, only the blackmailed player (and the Blackmailer) will see that the player can't speak. | Toggle | False |
+| Blackmailed Can't Vote | If enabled, the blackmailed player can't vote. | Toggle | False |
 
 -----------------------
 ## Converter
@@ -1674,7 +1710,6 @@ If the Ritualists guesses incorrectly, he will die instead.
 | Ritualist Guess Neutral Killing Roles | Whether the Ritualist can guess the Neutral Killing Roles | Toggle | False |
 | Ritualist Can Guess Crewmate Modifiers | Whether the Ritualist can guess Crewmate Modifiers | Toggle | False |
 | Ritualist Can Guess Lovers | Whether the Ritualist can guess Lovers | Toggle | False |
-| Ritualist Can Guess After Voting | Whether the Ritualist can guess after voting | Toggle | False |
 
 -----------------------
 
@@ -1687,6 +1722,18 @@ When using it, if this player tries to kill any coven member, he will die instea
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Spiritualist | The percentage probability of the Spiritualist appearing | Percentage | 0% |
+
+-----------------------
+
+## Voodoo Master
+### **Team: Coven**
+The Voodoo Master can use their Voodoo magic on a player.\
+Then, the next meeting, that player will be unable to vote and will be forced to vote for whoever the Voodoo Master voted for.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Voodoo Master | The percentage probability of the Voodoo Master appearing | Percentage | 0% |
 
 -----------------------
 
@@ -1830,6 +1877,26 @@ However, they can also win with their respective team, hence why the Lovers do n
 | Impostor Lover Can Kill Teammate | Whether an Impostor Lover can kill another Impostor | Toggle | False |
 
 -----------------------
+## Mini
+### **Applied to: All**
+The Mini is a much shorter and little Crewmate.
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Mini | The percentage probability of the Mini appearing | Percentage | 0% |
+
+-----------------------
+## Motionless
+### **Applied to: All**
+The Motionless will not teleport to the meeting table when a meeting is called.\
+This means that the Motionless will respawn wherever they were before the meeting when it ends.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Motionless | The percentage probability of the Motionless appearing | Percentage | 0% |
+
+-----------------------
 ## Radar
 ### **Applied to: All**
 The Radar is a crewmate who knows where the closest player is to them.
@@ -1901,6 +1968,17 @@ If they voted another player, they will get voted out.
 | Tiebreaker | The percentage probability of the Tiebreaker appearing | Percentage | 0% |
 
 -----------------------
+## Bloodlust
+### **Applied to: Impostors**
+The Bloodlust modifier will make your kill cooldown divided by two after getting 2 kills in the same round.\
+Note that it resets every round.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Bloodlust | The percentage probability of the Bloodlust appearing | Percentage | 0% |
+
+-----------------------
 ## Disperser
 ### **Applied to: Impostors**
 The Disperser is an Impostor who has a 1 time use ability to send all players to a random vent.\
@@ -1934,6 +2012,18 @@ Each time the Lucky kills, or a meeting ends, the lucky will get a random new ki
 | Lucky | The percentage probability of the Lucky appearing | Percentage | 0% |
 
 -----------------------
+## Saboteur
+### **Applied to: Impostors**
+The Saboteur modifier reduces the Impostor's Sabotage cooldown.\
+Note that it resets every round.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Saboteur | The percentage probability of the Saboteur appearing | Percentage | 0% |
+| Reduced Sabotage Bonus | The amount of time removed from the Saboteur's sabotage cooldowns | Time | 10s |
+
+-----------------------
 ## Underdog
 ### **Applied to: Impostors**
 
@@ -1951,7 +2041,7 @@ When they are the only remaining Impostor, they will have their kill cooldown sh
 # Game Mode Settings
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Game Mode | What game mode the next game will be | Classic / All Any / Killing Only / Battle Royale / Cultist / Chaos / Werewolf | Classic |
+| Game Mode | What game mode the next game will be | Classic / Role List / Battle Royale / Cultist / Chaos / Werewolf | Classic |
 
 -----------------------
 # Classic Game Mode Settings
@@ -1967,24 +2057,55 @@ The Classic game mode is the default Town Of Us Edited experience with lots of R
 | Max Neutral Killing Roles | The maximum number of Neutral Killing roles a game can have | Number | 1 |
 
 -----------------------
-# All Any Settings
-In All Any game mode, some roles may spawn multiple times making the game pretty random.
+# Role List Settings
+The Role List dictates what roles will spawn in game.\
+However many players there are in a game, will dictate the last slot used,\
+for example, if there are 9 players, only the first 9 slots will be used.\
+Common buckets, only take in roles which are not a killing role in that faction.\
+Auto adjustments will be made if there are not enough crewmates or impostors to make a more balanced game.
+### Buckets
+- Crewmate Investigative
+- Crewmate Killing
+- Crewmate Protective
+- Crewmate Support
+- Common Crewmate
+- Random Crewmate
+- Neutral Benign
+- Neutral Evil
+- Neutral Killing
+- Common Neutral
+- Random Neutral
+- Impostor Concealing
+- Impostor Killing
+- Impostor Support
+- Common Impostor
+- Random Impostor
+- Coven Killing
+- Coven Support
+- Common Coven
+- Random Coven
+- Non-Impostor / Coven
+- Any
 
+### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Random Number of Impostors | Whether there are a random number of Impostors | Toggle | True |
-
------------------------
-# Killing Only Settings
-In Killing Only game mode, only killers roles will spawn such as Impostors, Neutral Killers, Sheriffs, Veteran... They will fight until one faction is left.
-
-| Name | Description | Type | Default |
-|----------|:-------------:|:------:|:------:|
-| Neutral Roles | How many neutrals roles will spawn | Number | 1 |
-| Veteran Count | How many Veterans will spawn | Number | 1 |
-| Vigilante Count | How many Vigilantes will spawn | Number | 1 |
-| Add Arsonist | Whether Arsonist will be added to the role list | Toggle | True |
-| Add Plaguebearer | Whether Plaguebearer will be added to the role list | Toggle | True |
+| Unique Roles  | Whether all roles can appear a maximum of 1 time | Toggle | True |
+| Slot 1 | What role type can appear in Slot 1 | See Above for Buckets | Random Impostor |
+| Slot 2 | What role type can appear in Slot 2 | See Above for Buckets | Random Impostor |
+| Slot 3 | What role type can appear in Slot 3 | See Above for Buckets | Random Crewmate |
+| Slot 4 | What role type can appear in Slot 4 | See Above for Buckets | Random Crewmate |
+| Slot 5 | What role type can appear in Slot 5 | See Above for Buckets | Random Crewmate |
+| Slot 6 | What role type can appear in Slot 6 | See Above for Buckets | Random Crewmate |
+| Slot 7 | What role type can appear in Slot 7 | See Above for Buckets | Random Crewmate |
+| Slot 8 | What role type can appear in Slot 8 | See Above for Buckets | Random Crewmate |
+| Slot 9 | What role type can appear in Slot 9 | See Above for Buckets | Random Crewmate |
+| Slot 10 | What role type can appear in Slot 10 | See Above for Buckets | Random Crewmate |
+| Slot 11 | What role type can appear in Slot 11 | See Above for Buckets | Random Crewmate |
+| Slot 12 | What role type can appear in Slot 12 | See Above for Buckets | Random Crewmate |
+| Slot 13 | What role type can appear in Slot 13 | See Above for Buckets | Random Crewmate |
+| Slot 14 | What role type can appear in Slot 14 | See Above for Buckets | Random Crewmate |
+| Slot 15 | What role type can appear in Slot 15 | See Above for Buckets | Random Crewmate |
 
 -----------------------
 # Battle Royale Settings
@@ -2091,7 +2212,6 @@ The goal of this game mode is just to enjoy pure <b>Chaos</b>.
 | Game Start Cooldowns | The cooldown for all roles at the start of the game | Time | 10s |
 | Parallel Medbay Scans | Whether players have to wait for others to scan | Toggle | False |
 | Disable Meeting Skip Button | Whether the meeting button is disabled | No / Emergency / Always | No |
-| Enable Hidden Roles | Whether hidden roles are added to the role selections | Toggle | True |
 | First Death Shield Next Game | Whether the first player to die gets a shield for the first round next game | Toggle | False |
 | Neutral Evils Win Ends Game | Whether a Neutral Evil role winning ends the game | Toggle | True |
 | Crew Killers Continue Game | Whether the game will continue if crewmates can fight back | Toggle | False |
@@ -2134,7 +2254,6 @@ If they guess wrong, they die instead.
 | Assassin Guess Coven  | Whether the Assassin can Guess Coven roles | Toggle | False |
 | Assassin Guess Crewmate Modifiers  | Whether the Assassin can Guess Crewmate Modifiers | Toggle | False |
 | Assassin Can Guess Lovers  | Whether the Assassin can Guess Lovers | Toggle | False |
-| Assassin Can Guess After Voting  | Whether the Assassin can Guess after voting | Toggle | False |
 
 -----------------------
 # Extras
@@ -2145,7 +2264,7 @@ A rainbow color has also been added. Anyone who equips this color will constantl
 ## Custom Hats!
 Custom hats have been added, made by some very talented artists. These are mostly hats for streamers.
 ## In Game Features!
-Features such as unlocking skins, vanilla improvements, custom chat for each faction...
+Features such as vanilla improvements, custom chat for special faction, role descriptions...
 ## And much more!
 
 -----------------------
@@ -2166,8 +2285,8 @@ If you have any bugs or any need to contact me, join the [Discord Server](https:
 [Gunx30](https://github.com/Gunx30) - For helping to add some features in the mod and for some arts.\
 [WanderingPixel](https://github.com/WanderingPix/) - For almost all arts that are not from tour.\
 [BryBry16](https://github.com/Brybry16/BetterPolus) - For the code used for Better Polus.\
-[Alexejhero](https://github.com/SubmergedAmongUs/Submerged) - For the Submerged map.\
-[Malum Menu](https://github.com/scp222thj/MalumMenu/blob/main/src/Cheats/CosmeticsUnlocker.cs) - For the Skin Unlocker code.
+[Stellar Roles](https://github.com/Mr-Fluuff/StellarRolesAU) - For some code used for Manipulator and Motionless.\
+[Alexejhero](https://github.com/SubmergedAmongUs/Submerged) - For the Submerged map.
 
 #
 <p align="center">This mod is not affiliated with Among Us or Innersloth LLC, and the content contained therein is not endorsed or otherwise sponsored by Innersloth LLC. Portions of the materials contained herein are property of Innersloth LLC.</p>

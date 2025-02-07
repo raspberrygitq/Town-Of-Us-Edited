@@ -89,8 +89,7 @@ namespace TownOfUs.ImpostorRoles.ConverterMod
                 var player3Role = Role.GetRole(player3);
                 if (closestBody != null && deadBody.ParentId == closestBody.ParentId)
                 {
-                    if ((!player3.Is(RoleEnum.Astral) || Role.GetRole<Astral>(player3).Enabled != true)
-                    && converter.CurrentTarget && converter.ConvertButton.enabled && player2.Is(Faction.Crewmates)
+                    if (converter.CurrentTarget && converter.ConvertButton.enabled && player2.Is(Faction.Crewmates)
                     && player3Role.InfectionState != 4)
                     {
                         SpriteRenderer component = null;

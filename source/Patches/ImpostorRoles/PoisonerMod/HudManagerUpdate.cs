@@ -66,7 +66,7 @@ namespace TownOfUs.ImpostorRoles.PoisonerMod
                 else
                 {
                     role.PoisonButton.graphic.sprite = PoisonSprite;
-                    if (role.PoisonedPlayer && role.PoisonedPlayer != PlayerControl.LocalPlayer)
+                    if (role.PoisonedPlayer != null && role.PoisonedPlayer != PlayerControl.LocalPlayer)
                     {
                         role.PoisonKill();
                     }

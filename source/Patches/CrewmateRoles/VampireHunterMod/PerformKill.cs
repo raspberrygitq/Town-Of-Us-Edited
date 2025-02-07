@@ -174,12 +174,6 @@ namespace TownOfUs.CrewmateRoles.VampireHunterMod
                 pnRole.Cooldown = CustomGameOptions.CampaignCd;
             }
 
-            else if (roleEnum == RoleEnum.Warden)
-            {
-                var wardenRole = Role.GetRole<Warden>(oldVamp);
-                wardenRole.Cooldown = CustomGameOptions.FortifyCd;
-            }
-
             else if (roleEnum == RoleEnum.SoulCollector)
             {
                 var scRole = Role.GetRole<SoulCollector>(oldVamp);
@@ -206,6 +200,12 @@ namespace TownOfUs.CrewmateRoles.VampireHunterMod
             {
                 var astralRole = Role.GetRole<Astral>(oldVamp);
                 astralRole.Cooldown = CustomGameOptions.GhostCD;
+            }
+
+            else if (roleEnum == RoleEnum.Lookout)
+            {
+                var lookoutRole = Role.GetRole<Lookout>(oldVamp);
+                lookoutRole.Cooldown = CustomGameOptions.WatchCD;
             }
 
             else if (roleEnum == RoleEnum.Hunter)

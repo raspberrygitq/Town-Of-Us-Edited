@@ -1,5 +1,6 @@
 using System.Linq;
 using HarmonyLib;
+using TownOfUs.Roles;
 using UnityEngine;
 
 namespace TownOfUs.Patches
@@ -40,6 +41,11 @@ namespace TownOfUs.Patches
             if (AmongUsClient.Instance.IsGameOver) return;
             if (!__instance.AmOwner) return;
             if (!__instance.CanMove) return;
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation)
+            {
+                DestroyableSingleton<HudManager>.Instance.ReportButton.SetActive(false);
+                return;
+            }
             if (CustomGameOptions.GameMode != GameMode.BattleRoyale &&
             CustomGameOptions.GameMode != GameMode.Chaos) return;
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
@@ -74,8 +80,9 @@ namespace TownOfUs.Patches
             if (LobbyBehaviour.Instance) return false;
             if (AmongUsClient.Instance.IsGameOver) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
-            if (CustomGameOptions.GameMode != GameMode.BattleRoyale
-            && CustomGameOptions.GameMode != GameMode.Chaos) return true;
+            if (CustomGameOptions.GameMode == GameMode.BattleRoyale
+            || CustomGameOptions.GameMode == GameMode.Chaos) return false;
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation) return false;
             foreach (var collider2D in Physics2D.OverlapCircleAll(__instance.GetTruePosition(),
                 __instance.MaxReportDistance, Constants.PlayersOnlyMask))
                 if (!(collider2D.tag != "DeadBody"))
@@ -101,9 +108,10 @@ namespace TownOfUs.Patches
             if (AmongUsClient.Instance.IsGameOver) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
 
-            if (CustomGameOptions.GameMode != GameMode.BattleRoyale &&
-            CustomGameOptions.GameMode != GameMode.Chaos) return true;
-            return false;
+            if (CustomGameOptions.GameMode == GameMode.BattleRoyale ||
+            CustomGameOptions.GameMode == GameMode.Chaos) return false;
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation) return false;
+            return true;
         }
     }
     }

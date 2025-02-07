@@ -51,13 +51,5 @@ namespace TownOfUs.NeutralRoles.DoomsayerMod
             role.Buttons[targetId] = (null, null, null, null);
             role.Guesses.Remove(targetId);
         }
-
-
-        public static void Prefix(MeetingHud __instance)
-        {
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Doomsayer)) return;
-            var doomsayer = Role.GetRole<Doomsayer>(PlayerControl.LocalPlayer);
-            if (!CustomGameOptions.DoomsayerAfterVoting) HideButtonsDoom(doomsayer);
-        }
     }
 }

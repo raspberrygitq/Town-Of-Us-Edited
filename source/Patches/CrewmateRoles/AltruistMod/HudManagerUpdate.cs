@@ -57,10 +57,6 @@ namespace TownOfUs.CrewmateRoles.AltruistMod
             {
                 var player = Utils.PlayerById(deadBody.ParentId);
                 var playerRole = Role.GetRole(player);
-                if (closestBody != null && player.Is(RoleEnum.Astral) && Role.GetRole<Astral>(player).Enabled == true && closestBody.ParentId == deadBody.ParentId)
-                {
-                    return;
-                }
                 if (closestBody != null && playerRole.InfectionState == 4 && closestBody.ParentId == deadBody.ParentId)
                 {
                     return;

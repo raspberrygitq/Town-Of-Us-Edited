@@ -42,7 +42,7 @@ namespace TownOfUs.ImpostorRoles.BomberMod
             {
                 role.PlantButton.graphic.sprite = PlantSprite;
                 if (!role.Detonated) role.DetonateKillStart();
-                if (PlayerControl.LocalPlayer.killTimer > 0)
+                if (role.KillCooldown > 0)
                 {
                     role.PlantButton.graphic.color = Palette.DisabledClear;
                     role.PlantButton.graphic.material.SetFloat("_Desat", 1f);
@@ -52,13 +52,13 @@ namespace TownOfUs.ImpostorRoles.BomberMod
                     role.PlantButton.graphic.color = Palette.EnabledColor;
                     role.PlantButton.graphic.material.SetFloat("_Desat", 0f);
                 }
-                role.PlantButton.SetCoolDown(PlayerControl.LocalPlayer.killTimer,
+                role.PlantButton.SetCoolDown(role.KillCooldown,
                     GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
             }
 
             role.PlantButton.graphic.color = Palette.EnabledColor;
             role.PlantButton.graphic.material.SetFloat("_Desat", 0f);
-            if (role.PlantButton.graphic.sprite == PlantSprite) role.PlantButton.SetCoolDown(PlayerControl.LocalPlayer.killTimer, 
+            if (role.PlantButton.graphic.sprite == PlantSprite) role.PlantButton.SetCoolDown(role.KillCooldown, 
                 GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
             else role.PlantButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.DetonateDelay);
         }

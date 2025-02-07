@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using TownOfUs.Roles;
+using TownOfUs.Roles.Modifiers;
 using UnityEngine.UI;
 
 namespace TownOfUs.CovenRoles.RitualistMod
@@ -34,7 +35,7 @@ namespace TownOfUs.CovenRoles.RitualistMod
             if (
                 (killedSelf ||
                 role.RemainingKills == 0 ||
-                (!CustomGameOptions.RitualistMultiKill))
+                (!CustomGameOptions.AssassinMultiKill))
                 && doubleshot == false
             ) HideButtons(role);
             else HideTarget(role, targetId);
@@ -57,14 +58,6 @@ namespace TownOfUs.CovenRoles.RitualistMod
             guess.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
             role.Buttons[targetId] = (null, null, null, null);
             role.Guesses.Remove(targetId);
-        }
-
-
-        public static void Prefix(MeetingHud __instance)
-        {
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Ritualist)) return;
-            var ritualist = Role.GetRole<Ritualist>(PlayerControl.LocalPlayer);
-            if (!CustomGameOptions.RitualistAfterVoting) HideButtons(ritualist);
         }
     }
 }

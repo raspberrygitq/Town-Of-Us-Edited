@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using TownOfUs.Extensions;
 using UnityEngine;
 
 namespace TownOfUs.Roles
@@ -9,7 +7,7 @@ namespace TownOfUs.Roles
     {
         public readonly List<GameObject> Buttons = new List<GameObject>();
 
-        public readonly List<bool> ListOfActives = new List<bool>();
+        public readonly List<(byte, bool)> ListOfActives = new List<(byte, bool)>();
         public PlayerControl ImitatePlayer = null;
 
         public List<RoleEnum> trappedPlayers = null;
@@ -23,7 +21,6 @@ namespace TownOfUs.Roles
             TaskText = () => "Use dead roles to benefit the crew";
             Color = Patches.Colors.Imitator;
             RoleType = RoleEnum.Imitator;
-            Faction = Faction.Crewmates;
             Alignment = Alignment.CrewmateSupport;
             AddToRoleHistory(RoleType);
         }

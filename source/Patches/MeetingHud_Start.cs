@@ -4,6 +4,7 @@ using Reactor.Utilities.Extensions;
 using UnityEngine;
 using TownOfUs.Patches;
 using TownOfUs.Roles;
+using TownOfUs.Roles.Modifiers;
 
 namespace TownOfUs
 {
@@ -20,6 +21,12 @@ namespace TownOfUs
             else
             {
                 Utils.ShowDeadBodies = PlayerControl.LocalPlayer.Data.IsDead;
+            }
+
+            if (PlayerControl.LocalPlayer.Is(ModifierEnum.Bloodlust))
+            {
+                var modifier = Modifier.GetModifier<Bloodlust>(PlayerControl.LocalPlayer);
+                modifier.KilledThisRound = 0;
             }
 
             foreach (var player in PlayerControl.AllPlayerControls)

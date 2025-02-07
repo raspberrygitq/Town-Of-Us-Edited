@@ -76,7 +76,12 @@ namespace TownOfUs.ImpostorRoles.ConjurerMod
             }
             else
             {
-                if (!role.CursedPlayer.Data.IsDead && !MeetingHud.Instance)
+                if (role.CursedPlayer.Data.Disconnected || role.CursedPlayer.Data.IsDead)
+                {
+                    role.CursedPlayer = null;
+                    role.CurseButton.graphic.sprite = TownOfUs.Curse;
+                }
+                else if (!role.CursedPlayer.Data.IsDead && !MeetingHud.Instance)
                 {
                     var notdead = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead).ToList();
                     var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];

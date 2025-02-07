@@ -1,4 +1,5 @@
 using HarmonyLib;
+using TownOfUs.Modifiers.AssassinMod;
 
 namespace TownOfUs.Roles.AssassinMod
 {

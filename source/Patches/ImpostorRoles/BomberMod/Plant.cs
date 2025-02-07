@@ -3,6 +3,7 @@ using TownOfUs.Roles;
 using UnityEngine;
 using TownOfUs.Modifiers.UnderdogMod;
 using TownOfUs.ImpostorRoles.ImpostorMod;
+using TownOfUs.Roles.Modifiers;
 
 namespace TownOfUs.ImpostorRoles.BomberMod
 {
@@ -48,6 +49,13 @@ namespace TownOfUs.ImpostorRoles.BomberMod
                     {
                         var num = Random.RandomRange(1f, 60f);
                         Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
+                    }
+                    else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Bloodlust))
+                    {
+                        var modifier = Modifier.GetModifier<Bloodlust>(PlayerControl.LocalPlayer);
+                        var num = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown / 2 + CustomGameOptions.DetonateDelay;
+                        if (modifier.KilledThisRound >= 2) Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
+                        else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay;
                     }
                     else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay;
                     DestroyableSingleton<HudManager>.Instance.KillButton.SetTarget(null);

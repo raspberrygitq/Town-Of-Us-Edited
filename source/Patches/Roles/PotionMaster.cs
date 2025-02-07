@@ -16,16 +16,10 @@ namespace TownOfUs.Roles
             RoleType = RoleEnum.PotionMaster;
             AddToRoleHistory(RoleType);
             Faction = Faction.Coven;
-            Cooldown = CustomGameOptions.CovenKCD;
             PotionCooldown = CustomGameOptions.PotionCD;
         }
 
-        public KillButton _sabotageButton;
         public KillButton _potionButton;
-        public PlayerControl ClosestPlayer;
-        public PlayerControl ControlledPlayer;
-        public float Cooldown;
-        public bool coolingDown => Cooldown > 0f;
         public float PotionCooldown;
         public bool PotioncoolingDown => PotionCooldown > 0f;
         public float TimeRemaining;
@@ -34,24 +28,6 @@ namespace TownOfUs.Roles
         public string PotionType = "None";
         public bool Enabled;
 
-        public void Kill(PlayerControl target)
-        {
-            // Check if the Coven can kill
-            if (Cooldown > 0)
-                return;
-
-            if (target.Is(Faction.Coven))
-                return;
-
-            Utils.Interact(PlayerControl.LocalPlayer, target, true);
-
-            // Set the last kill time
-            if (UsingPotion && Potion == "Strength")
-            {
-                Cooldown = CustomGameOptions.StrengthKCD;
-            }
-            else Cooldown = CustomGameOptions.CovenKCD;
-        }
         public void UsePotion()
         {
             Enabled = true;
@@ -95,16 +71,6 @@ namespace TownOfUs.Roles
             Utils.Unmorph(Player);
             Player.myRend().color = Color.white;
         }
-        public KillButton SabotageButton
-        {
-            get => _sabotageButton;
-            set
-            {
-                _sabotageButton = value;
-                ExtraButtons.Clear();
-                ExtraButtons.Add(value);
-            }
-        }
         public KillButton PotionButton
         {
             get => _potionButton;
@@ -114,16 +80,6 @@ namespace TownOfUs.Roles
                 ExtraButtons.Clear();
                 ExtraButtons.Add(value);
             }
-        }
-        public float KillTimer()
-        {
-            if (!coolingDown) return 0f;
-            else if (!PlayerControl.LocalPlayer.inVent)
-            {
-                Cooldown -= Time.deltaTime;
-                return Cooldown;
-            }
-            else return Cooldown;
         }
         public float PotionTimer()
         {

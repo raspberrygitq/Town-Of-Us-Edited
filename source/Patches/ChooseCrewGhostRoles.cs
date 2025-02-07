@@ -21,7 +21,7 @@ namespace TownOfUs.ChooseCrewGhostRoles
 
         public static void PickGhostRole(PlayerControl exiled)
         {
-            if (CustomGameOptions.GameMode != GameMode.Classic && CustomGameOptions.GameMode != GameMode.AllAny) return;
+            if (CustomGameOptions.GameMode != GameMode.Classic) return;
             if (!AmongUsClient.Instance.AmHost) return;
             var random = new System.Random();
             if (RpcHandling.Check(CustomGameOptions.GuardianOn) && SetGuardian.WillBeGuardian == null && !ranlist && !GhostRoles.Contains("Guardian")) GhostRoles.Add("Guardian");

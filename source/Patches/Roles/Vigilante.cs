@@ -32,8 +32,7 @@ namespace TownOfUs.Roles
 
             RemainingKills = CustomGameOptions.VigilanteKills;
 
-            if (CustomGameOptions.GameMode == GameMode.Classic || CustomGameOptions.GameMode == GameMode.AllAny ||
-            CustomGameOptions.GameMode == GameMode.Cultist)
+            if (CustomGameOptions.GameMode == GameMode.Classic || CustomGameOptions.GameMode == GameMode.Cultist)
             {
                 ColorMapping.Add("Impostor", Colors.Impostor);
                 if (CustomGameOptions.JanitorOn > 0) ColorMapping.Add("Janitor", Colors.Impostor);
@@ -88,7 +87,7 @@ namespace TownOfUs.Roles
                     if (CustomGameOptions.AttackerOn > 0) ColorMapping.Add("Attacker", Colors.Attacker);
                     if (CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0) ColorMapping.Add("Vampire", Colors.Vampire);
                     if (CustomGameOptions.WerewolfOn > 0) ColorMapping.Add("Maul", Colors.Werewolf);
-                    if (CustomGameOptions.HiddenRoles) ColorMapping.Add("Juggernaut", Colors.Juggernaut);
+                    if (CustomGameOptions.JuggernautOn > 0) ColorMapping.Add("Juggernaut", Colors.Juggernaut);
                 }
                 if (CustomGameOptions.VigilanteGuessCoven)
                 {
@@ -97,28 +96,17 @@ namespace TownOfUs.Roles
                     if (CustomGameOptions.HexMasterOn > 0) ColorMapping.Add("Hex Master", Colors.Coven);
                     if (CustomGameOptions.CovenLeaderOn > 0) ColorMapping.Add("Coven Leader", Colors.Coven);
                     if (CustomGameOptions.SpiritualistOn > 0) ColorMapping.Add("Spiritualist", Colors.Coven);
+                    if (CustomGameOptions.VoodooMasterOn > 0) ColorMapping.Add("Voodoo Master", Colors.Coven);
                     if (CustomGameOptions.PotionMasterOn > 0) ColorMapping.Add("Potion Master", Colors.Coven);
                 }
                 if (CustomGameOptions.VigilanteGuessLovers && CustomGameOptions.LoversOn > 0) ColorMapping.Add("Lover", Colors.Lovers);
-            }
-            else if (CustomGameOptions.GameMode == GameMode.KillingOnly)
-            {
-                ColorMapping.Add("Morphling", Colors.Impostor);
-                ColorMapping.Add("Miner", Colors.Impostor);
-                ColorMapping.Add("Swooper", Colors.Impostor);
-                ColorMapping.Add("Undertaker", Colors.Impostor);
-                ColorMapping.Add("Grenadier", Colors.Impostor);
-                ColorMapping.Add("Traitor", Colors.Impostor);
-                ColorMapping.Add("Escapist", Colors.Impostor);
-
-                if (CustomGameOptions.VigilanteGuessNeutralKilling)
-                {
-                    if (CustomGameOptions.AddArsonist) ColorMapping.Add("Arsonist", Colors.Arsonist);
-                    if (CustomGameOptions.AddPlaguebearer) ColorMapping.Add("Plaguebearer", Colors.Plaguebearer);
-                    ColorMapping.Add("The Glitch", Colors.Glitch);
-                    ColorMapping.Add("Maul", Colors.Werewolf);
-                    if (CustomGameOptions.HiddenRoles) ColorMapping.Add("Juggernaut", Colors.Juggernaut);
-                }
+                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.BloodlustOn > 0) ColorMapping.Add("Bloodlust", Colors.Impostor);
+                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.DisperserOn > 0) ColorMapping.Add("Disperser", Colors.Impostor);
+                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.LuckyOn > 0) ColorMapping.Add("Lucky", Colors.Impostor);
+                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.DoubleShotOn > 0) ColorMapping.Add("Double Shot", Colors.Impostor);
+                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.UnderdogOn > 0) ColorMapping.Add("Underdog", Colors.Impostor);
+                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.SaboteurOn > 0) ColorMapping.Add("Saboteur", Colors.Impostor);
+                
             }
 
             SortedColorMapping = ColorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);

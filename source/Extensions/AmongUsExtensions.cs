@@ -4,7 +4,8 @@ using TownOfUs.Roles.Modifiers;
 using UnityEngine;
 using System;
 using TownOfUs.Patches;
-using System.Linq;
+using System.Linq.Expressions;
+using Il2CppInterop.Runtime.InteropTypes;
 
 namespace TownOfUs.Extensions
 {
@@ -93,6 +94,20 @@ namespace TownOfUs.Extensions
             return false;
         }
 
+        public static bool IsTester(this PlayerControl player)
+        {
+            if (player == PlayerControl.LocalPlayer) return DevFeatures.localStatus == "Tester" || DevFeatures.localStatus == "TesterHidden";
+            else if (DevFeatures.Players.ContainsKey(player) && DevFeatures.Players.TryGetValue(player, out var customId)) return customId == "Tester" || customId == "TesterHidden";
+            return false;
+        }
+
+        public static bool IsVip(this PlayerControl player)
+        {
+            if (player == PlayerControl.LocalPlayer) return DevFeatures.localStatus == "Vip" || DevFeatures.localStatus == "VipHidden";
+            else if (DevFeatures.Players.ContainsKey(player) && DevFeatures.Players.TryGetValue(player, out var customId)) return customId == "Vip" || customId == "VipHidden";
+            return false;
+        }
+
         public static NetworkedPlayerInfo.PlayerOutfit GetDefaultOutfit(this PlayerControl playerControl)
         {
             return playerControl.Data.DefaultOutfit;
@@ -145,6 +160,30 @@ namespace TownOfUs.Extensions
         public static Texture2D CreateEmptyTexture(int width = 0, int height = 0)
         {
             return new Texture2D(width, height, TextureFormat.RGBA32, Texture.GenerateAllMips, false, IntPtr.Zero);
+        }
+
+        private static class CastExtension<T> where T : Il2CppObjectBase
+        {
+            public static Func<IntPtr, T> Cast;
+            static CastExtension()
+            {
+                var constructor = typeof(T).GetConstructor(new[] { typeof(IntPtr) });
+                var ptr = Expression.Parameter(typeof(IntPtr));
+                var create = Expression.New(constructor!, ptr);
+                var lambda = Expression.Lambda<Func<IntPtr, T>>(create, ptr);
+                Cast = lambda.Compile();
+            }
+        }
+
+        public static T Caster<T>(this Il2CppObjectBase obj) where T : Il2CppObjectBase
+        {
+            if (obj is T casted) return casted;
+            return obj.Pointer.Caster<T>();
+        }
+
+        public static T Caster<T>(this IntPtr ptr) where T : Il2CppObjectBase
+        {
+            return CastExtension<T>.Cast(ptr);
         }
 
         public static TMPro.TextMeshPro nameText(this PlayerControl p) => p?.cosmetics?.nameText;

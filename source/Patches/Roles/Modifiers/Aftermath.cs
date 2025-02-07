@@ -7,6 +7,9 @@ using UnityEngine;
 using TownOfUs.Modifiers.UnderdogMod;
 using Object = UnityEngine.Object;
 using TownOfUs.ImpostorRoles.ImpostorMod;
+using Hazel;
+using System.Linq;
+using TownOfUs.Patches;
 
 namespace TownOfUs.Roles.Modifiers
 {
@@ -74,9 +77,19 @@ namespace TownOfUs.Roles.Modifiers
             {
                 if (!grenadier.Enabled)
                 {
-                    Utils.Rpc(CustomRPC.FlashGrenade, PlayerControl.LocalPlayer.PlayerId);
                     grenadier.TimeRemaining = CustomGameOptions.GrenadeDuration;
-                    grenadier.Flash();
+                    grenadier.StartFlash();
+
+                    var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
+                    254, SendOption.Reliable, -1);
+                    writer.Write((int)CustomRPC.FlashGrenade);
+                    writer.Write((byte)grenadier.Player.PlayerId);
+                    writer.Write((byte)grenadier.flashedPlayers.Count);
+                    foreach (var player2 in grenadier.flashedPlayers)
+                    {
+                        writer.Write(player2.PlayerId);
+                    }
+                    AmongUsClient.Instance.FinishRpcImmediately(writer);
                 }
             }
             else if (role is Janitor janitor)
@@ -108,11 +121,18 @@ namespace TownOfUs.Roles.Modifiers
             }
             else if (role is Miner miner)
             {
-                var position = PlayerControl.LocalPlayer.transform.position;
-                var id = ImpostorRoles.MinerMod.PlaceVent.GetAvailableId();
-                Utils.Rpc(CustomRPC.Mine, id, PlayerControl.LocalPlayer.PlayerId, position, position.z + 0.001f);
-                ImpostorRoles.MinerMod.PlaceVent.SpawnVent(id, miner, position, position.z + 0.001f);
-                miner.Cooldown = CustomGameOptions.MineCd;
+                var hits = Physics2D.OverlapBoxAll(PlayerControl.LocalPlayer.transform.position, miner.VentSize, 0);
+                hits = hits.ToArray().Where(c =>
+                        (c.name.Contains("Vent") || !c.isTrigger) && c.gameObject.layer != 8 && c.gameObject.layer != 5)
+                    .ToArray();
+                if (hits.Count == 0 && !SubmergedCompatibility.GetPlayerElevator(PlayerControl.LocalPlayer).Item1)
+                {
+                    var position = PlayerControl.LocalPlayer.transform.position;
+                    var id = ImpostorRoles.MinerMod.PlaceVent.GetAvailableId();
+                    Utils.Rpc(CustomRPC.Mine, id, PlayerControl.LocalPlayer.PlayerId, position, position.z + 0.0004f);
+                    ImpostorRoles.MinerMod.PlaceVent.SpawnVent(id, miner, position, position.z + 0.0004f);
+                    miner.Cooldown = CustomGameOptions.MineCd;
+                }
             }
             else if (role is Converter converter)
             {

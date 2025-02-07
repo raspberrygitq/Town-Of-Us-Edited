@@ -8,6 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace TownOfUs.Patches
 {
+    // This Partches don't work for now, I might try fixing that later, but for now, it's not my priority
     public static class FreePlayerPatch
     {
         private static Scroller Scroller;

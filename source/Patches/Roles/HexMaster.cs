@@ -21,7 +21,6 @@ namespace TownOfUs.Roles
         }
 
         public List<byte> Hexed = new List<byte>();
-        public KillButton _sabotageButton;
         public KillButton _hexBombButton;
         public PlayerControl ClosestPlayer;
         public float Cooldown;
@@ -54,16 +53,6 @@ namespace TownOfUs.Roles
                 return;
             }
             else if (interact[3] == true) return;
-        }
-        public KillButton SabotageButton
-        {
-            get => _sabotageButton;
-            set
-            {
-                _sabotageButton = value;
-                ExtraButtons.Clear();
-                ExtraButtons.Add(value);
-            }
         }
         public KillButton HexBombButton
         {

@@ -1,6 +1,7 @@
 using System.Linq;
 using HarmonyLib;
 using TownOfUs.Extensions;
+using TownOfUs.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUs
@@ -34,7 +35,7 @@ namespace TownOfUs
                             playerInfo._object.Is(RoleEnum.Terrorist) || playerInfo._object.Is(RoleEnum.Vulture) ||
                             playerInfo._object.Is(Faction.Coven) || playerInfo._object.Is(RoleEnum.Infectious) ||
                             playerInfo._object.Is(RoleEnum.Doppelganger) || playerInfo._object.Is(Faction.Impostors) ||
-                            playerInfo._object.Is(RoleEnum.Spectator)
+                            playerInfo._object.Is(RoleEnum.Spectator) || (playerInfo._object.Is(ModifierEnum.Lover) && !Modifier.GetModifier<Lover>(playerInfo._object).OtherLover.Player.Is(Faction.Crewmates))
                         ))
                         for (var j = 0; j < playerInfo.Tasks.Count; j++)
                         {
@@ -77,7 +78,8 @@ namespace TownOfUs
                            || playerControl.Is(RoleEnum.Vulture)
                            || (playerControl.Is(Faction.Impostors) && !playerControl.Is(RoleEnum.Spirit))
                            || playerControl.Is(Faction.Coven)
-                           || playerControl.Is(RoleEnum.Spectator);
+                           || playerControl.Is(RoleEnum.Spectator)
+                           || playerControl.Is(Faction.NeutralBenign);
 
                 // If the console is not a sabotage repair console
                 if (flag && !__instance.AllowImpostor)

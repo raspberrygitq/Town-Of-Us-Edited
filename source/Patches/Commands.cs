@@ -86,7 +86,7 @@ namespace TownOfUs.Patches
                 || role == "Troll" || role == "Undertaker" || role == "Vampire" || role == "Vigilante"
                 || role == "Villager" || role == "Vulture" || role == "Warden" || role == "Warlock"
                 || role == "Werewolf" || role == "WhiteWolf" || role == "Witch" || role == "Sorcerer"
-                || role == "Veteran";
+                || role == "Veteran" || role == "VoodooMaster" || role == "Lookout";
             }
             public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl sourcePlayer , ref string chatText)
             {
@@ -97,12 +97,22 @@ namespace TownOfUs.Patches
                 {
                     if (sourcePlayer.IsDev() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id\n\nDev Commands:\n\n/fly - Disable / Enable Colliders in Lobby.\n/dmsg [message] - Sends a message that everyone will see.\n/dev - Get a list of all current devs & friendcodes.\n/randomise - Gives you a completely new random username and appearance\n/default - Reset your outfit to default\n/status - Show / Hide your dev status\n/checkstatus [player id] - Check the status of a player (dev, main dev, none...)\n/getcode [player id] - Gets the Friend Code of a player";
+                        chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/r [modifier / role name] - Displays the description of any role / modifier\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id\n\nDev Commands:\n\n/fly - Disable / Enable Colliders in Lobby\n/dmsg [message] - Sends a message that everyone will see\n/dev - Get a list of all current devs & friendcodes\n/randomise - Gives you a completely new random username and appearance\n/default - Reset your outfit to default\n/status - Show / Hide your dev status\n/checkstatus [player id] - Check the status of a player (dev, main dev, none...)\n/getcode [player id] - Gets the Friend Code of a player";
+                        system = true;
+                    }
+                    else if (sourcePlayer.IsTester() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/r [modifier / role name] - Displays the description of any role / modifier\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id\n\nTester Commands:\n\n/status - Show / Hide your Tester status";
+                        system = true;
+                    }
+                    else if (sourcePlayer.IsVip() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/r [modifier / role name] - Displays the description of any role / modifier\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id\n\nVip Commands:\n\n/status - Show / Hide your Vip status\n/fly - Enabled / Disable colliders in Lobby";
                         system = true;
                     }
                     else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id";
+                        chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/r [modifier / role name] - Displays the description of any role / modifier\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id";
                         system = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
@@ -240,6 +250,16 @@ namespace TownOfUs.Patches
                     {
                         chatText = "This command was disabled by the host.";
                         noaccess = true;
+                    }
+                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
+                }
+
+                if (chatText.ToLower().StartsWith("/r "))
+                {
+                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        chatText = UpdateRoleInfo.GetRoleInfos(chatText[3..]);
+                        system = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }

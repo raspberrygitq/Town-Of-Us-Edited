@@ -53,6 +53,8 @@ namespace TownOfUs
         private static Sprite Confess => TownOfUs.ConfessSprite;
         private static Sprite Radiate => TownOfUs.RadiateSprite;
         private static Sprite Hex => TownOfUs.Hex;
+        private static Sprite Camp => TownOfUs.CampSprite;
+        private static Sprite Watch => TownOfUs.WatchSprite;
 
         private static Sprite Kill;
 
@@ -249,6 +251,16 @@ namespace TownOfUs
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector))
             {
                 __instance.KillButton.graphic.sprite = Collect;
+                flag = true;
+            }
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Deputy))
+            {
+                __instance.KillButton.graphic.sprite = Camp;
+                flag = true;
+            }
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Lookout))
+            {
+                __instance.KillButton.graphic.sprite = Watch;
                 flag = true;
             }
             else

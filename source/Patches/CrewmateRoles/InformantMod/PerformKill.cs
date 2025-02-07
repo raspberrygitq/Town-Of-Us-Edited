@@ -22,6 +22,7 @@ namespace TownOfUs.CrewmateRoles.InformantMod
                 {
                     Mode = MapOptions.Modes.CountOverlay
                 });
+                PlayerControl.LocalPlayer.NetTransform.Halt();
                 return false;
             }
             else if (__instance == role.VitalsButton)

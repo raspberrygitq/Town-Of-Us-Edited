@@ -21,6 +21,8 @@ namespace TownOfUs.Patches {
                 HostManager.starting = false;
                 Coroutines.Start(HostManager.AutoStart());
             }
+            // Welcome message
+            ResetChatSent.welcomesent = false;
         }
     }
     public class FixScreen

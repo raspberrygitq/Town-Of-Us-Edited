@@ -2,11 +2,12 @@ using TownOfUs.Patches;
 using HarmonyLib;
 using TownOfUs.Extensions;
 
-namespace ChatStartPatch
+namespace TownOfUs.Patches
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class ResetChatSent
     {
+        public static bool welcomesent = false;
         public static void Prefix()
         {
             if (LobbyBehaviour.Instance && Start.impsent != false)
@@ -32,6 +33,17 @@ namespace ChatStartPatch
             if (LobbyBehaviour.Instance && Start.lovsent != false)
             {
                 Start.lovsent = false;
+            }
+
+            // Welcome message
+            if (PlayerControl.LocalPlayer != null && LobbyBehaviour.Instance && !welcomesent)
+            {
+                var message = $"Welcome to <color=#EE9D01>Town Of Us </color><b><color=#AA00FF>Edited</color></b> {PlayerControl.LocalPlayer.Data.PlayerName}!\n\nTo view the commands list, type /help.\nTo know more about the mod, visit the github.\nTo see roles / modifiers descriptions, type /r [role/modifier name].\n\nFeel free to join the discord if you need any help! link: https://discord.gg/Huen5AqR2t";
+                if (!string.IsNullOrWhiteSpace(message))
+                {
+                    DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, message, false);
+                    welcomesent = true;
+                }
             }
 
             if (LobbyBehaviour.Instance && PlayerControl.LocalPlayer.IsDev() && DevFeatures.isRandom

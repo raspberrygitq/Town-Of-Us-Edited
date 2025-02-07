@@ -21,7 +21,7 @@ namespace TownOfUs.ChooseImpGhostRole
 
         public static void PickGhostRole(PlayerControl exiled)
         {
-            if (CustomGameOptions.GameMode != GameMode.Classic && CustomGameOptions.GameMode != GameMode.AllAny) return;
+            if (CustomGameOptions.GameMode != GameMode.Classic) return;
             if (!AmongUsClient.Instance.AmHost) return;
             var random = new System.Random();
             if (RpcHandling.Check(CustomGameOptions.SpiritOn) && SetSpirit.WillBeSpirit == null && !ranlist && !GhostRoles.Contains("Spirit")) GhostRoles.Add("Spirit");

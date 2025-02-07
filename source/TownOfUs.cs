@@ -32,9 +32,9 @@ namespace TownOfUs
     public class TownOfUs : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "0.0.1";
+        public const string VersionString = "1.0.0";
         public static System.Version Version = System.Version.Parse(VersionString);
-        public const string VersionTag = "";
+        public const string VersionTag = "<color=#00F0FF></color>";
 
         public static AssetLoader bundledAssets;
 
@@ -61,6 +61,7 @@ namespace TownOfUs
         public static Sprite WerewolfConvertSprite;
         public static Sprite StoreSprite;
         public static Sprite ManipulateSprite;
+        public static Sprite ControlSprite;
         public static Sprite JailSprite;
         public static Sprite PoisonSprite;
         public static Sprite PoisonedSprite;
@@ -145,6 +146,10 @@ namespace TownOfUs
         public static Sprite CollectSprite;
         public static Sprite ReapSprite;
         public static Sprite SoulSprite;
+        public static Sprite Voodoo;
+        public static Sprite CampSprite;
+        public static Sprite ShootSprite;
+        public static Sprite WatchSprite;
 
         public static Sprite ToUBanner;
         public static Sprite UpdateTOUButton;
@@ -177,7 +182,11 @@ namespace TownOfUs
 
             bundledAssets = new();
 
+            WatchSprite = CreateSprite("TownOfUs.Resources.Watch.png");
+            ShootSprite = CreateSprite("TownOfUs.Resources.Shoot.png");
+            CampSprite = CreateSprite("TownOfUs.Resources.Camp.png");
             JanitorClean = CreateSprite("TownOfUs.Resources.Janitor.png");
+            Voodoo = CreateSprite("TownOfUs.Resources.Voodoo.png");
             Potion = CreateSprite("TownOfUs.Resources.Potion.png");
             Drink = CreateSprite("TownOfUs.Resources.Drink.png");
             SabotageCoven = CreateSprite("TownOfUs.Resources.SabotageCoven.png");
@@ -200,6 +209,7 @@ namespace TownOfUs
             WerewolfConvertSprite = CreateSprite("TownOfUs.Resources.WerewolfConvert.png");
             StoreSprite = CreateSprite("TownOfUs.Resources.Store.png");
             ManipulateSprite = CreateSprite("TownOfUs.Resources.ManipulateButton.png");
+            ControlSprite = CreateSprite("TownOfUs.Resources.Control2.png");
             JailSprite = CreateSprite("TownOfUs.Resources.JailButton.png");
             PoisonSprite = CreateSprite("TownOfUs.Resources.Poison.png");
             PoisonedSprite = CreateSprite("TownOfUs.Resources.Poisoned.png");
@@ -300,11 +310,27 @@ namespace TownOfUs
             ClassInjector.RegisterTypeInIl2Cpp<CrimeScene>();
             ClassInjector.RegisterTypeInIl2Cpp<Soul>();
 
+            for (int i = 1; i <= 5; i++)
+            {
+                try
+                {
+                    var filePath = Application.persistentDataPath;
+                    var file = filePath + $"/GameSettings-Slot{i}";
+                    if (File.Exists(file))
+                    {
+                        string newFile = Path.Combine(filePath, $"Saved Settings {i}.txt");
+                        File.Move(file, newFile);
+                    }
+                }
+                catch { }
+            }
+
+
             // RegisterInIl2CppAttribute.Register();
 
             DeadSeeGhosts = Config.Bind("Settings", "Dead See Other Ghosts", true, "Whether you see other dead player's ghosts while your dead");
 
-            HideDevStatus = Config.Bind("Settings", "Hide Dev Status", false, "Toggle this to hide your dev status when launching if you're a dev. You will still have access to dev perks.");
+            HideDevStatus = Config.Bind("Settings", "Hide Special Status", false, "Toggle this to hide your special status when launching if you have one. You will still have access to your special perks.");
 
             _harmony.PatchAll();
             SubmergedCompatibility.Initialize();

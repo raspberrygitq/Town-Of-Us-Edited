@@ -5,6 +5,7 @@ using TownOfUs.Modifiers.UnderdogMod;
 using TownOfUs.Roles;
 using UnityEngine;
 using TownOfUs.CrewmateRoles.SheriffMod;
+using TownOfUs.Roles.Modifiers;
 
 namespace TownOfUs
 {
@@ -48,6 +49,14 @@ namespace TownOfUs
             {
                 Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.GuardKCReset;
                 return false; 
+            }
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation)
+            {
+                var role = Role.GetRole<Manipulator>(PlayerControl.LocalPlayer);
+                Utils.Interact(role.ManipulatedPlayer, target, true);
+                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
+                SoundManager.Instance.PlaySound(PlayerControl.LocalPlayer.KillSfx, false, 0.5f);
+                return false;
             }
             var interact = Utils.Interact(PlayerControl.LocalPlayer, target, true);
             if (interact[4] == true) return false;

@@ -23,8 +23,7 @@ namespace TownOfUs
                     ? "<color=#00FF00FF>Modded By: <color=#FF0000>le killer</color> </color>\n" +
                     "<color=#00FF00FF>help from: <color=#FFBAEA>Windyways</color>, <color=#2FD6AF>Gun</color>, <color=#9900ff>whichTwix</color> & <color=#D16002>Det</color></color>\n" : "") +
                 (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started
-                    ? "<color=#00FF00FF>Formerly: <color=#1B01EE>Slushiegoose & Polus.gg</color></color>\n" +
-                     $"Host: {host?.PlayerName}" : "") +
+                    ? "<color=#00FF00FF>Formerly: <color=#1B01EE>Slushiegoose & Polus.gg</color></color>\n" : "") +
                     "</size>";
             if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started && CustomGameOptions.GameMode == GameMode.Werewolf)
             {

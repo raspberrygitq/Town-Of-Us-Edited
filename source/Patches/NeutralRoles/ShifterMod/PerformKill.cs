@@ -117,6 +117,7 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
                 case RoleEnum.Vigilante:
                 case RoleEnum.Veteran:
                 case RoleEnum.Astral:
+                case RoleEnum.Lookout:
                 case RoleEnum.Crewmate:
                 case RoleEnum.Tracker:
                 case RoleEnum.Transporter:
@@ -185,6 +186,7 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
                 case RoleEnum.HexMaster:
                 case RoleEnum.CovenLeader:
                 case RoleEnum.Spiritualist:
+                case RoleEnum.VoodooMaster:
                 case RoleEnum.PotionMaster:
 
                     shiftImp = false;
@@ -206,6 +208,20 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
                         button.gameObject.SetActive(false);
                     }
                 }
+            }
+
+            if (role == RoleEnum.Manipulator)
+            {
+                var manipRole = Role.GetRole<Manipulator>(other);
+                manipRole.StopManipulation();
+                Utils.Rpc(CustomRPC.SetManipulateOff, other.PlayerId);
+            }
+
+            if (role == RoleEnum.Lookout)
+            {
+                var lookoutRole = Role.GetRole<Lookout>(other);
+                lookoutRole.StopWatching();
+                Utils.Rpc(CustomRPC.StopWatch, other.PlayerId);
             }
 
             if (role == RoleEnum.Engineer)
@@ -400,7 +416,7 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
                         player.nameText().color = Patches.Colors.Impostor;
                     }
                 }
-                if (other.Is(ModifierEnum.Disperser) || other.Is(ModifierEnum.DoubleShot) || other.Is(ModifierEnum.Underdog) || other.Is(ModifierEnum.Lucky))
+                if (other.Is(ModifierEnum.Disperser) || other.Is(ModifierEnum.DoubleShot) || other.Is(ModifierEnum.Underdog) || other.Is(ModifierEnum.Lucky) || other.Is(ModifierEnum.Bloodlust))
                 {
                     Modifier.ModifierDictionary.Remove(other.PlayerId);
                 }
@@ -424,7 +440,7 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
                         player.nameText().color = Patches.Colors.Impostor;
                     }
                 }
-                if (other.Is(ModifierEnum.Disperser) || other.Is(ModifierEnum.DoubleShot) || other.Is(ModifierEnum.Underdog) || other.Is(ModifierEnum.Lucky))
+                if (other.Is(ModifierEnum.Disperser) || other.Is(ModifierEnum.DoubleShot) || other.Is(ModifierEnum.Underdog) || other.Is(ModifierEnum.Lucky) || other.Is(ModifierEnum.Bloodlust))
                 {
                     Modifier.ModifierDictionary.Remove(other.PlayerId);
                 }
@@ -513,17 +529,19 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
                 pnRole.Cooldown = CustomGameOptions.CampaignCd;
             }
 
-            else if (role == RoleEnum.Warden)
-            {
-                var wardenRole = Role.GetRole<Warden>(shifter);
-                wardenRole.Cooldown = CustomGameOptions.FortifyCd;
-            }
-
             else if (role == RoleEnum.Prosecutor)
             {
                 var prosRole = Role.GetRole<Prosecutor>(shifter);
                 prosRole.Prosecuted = false;
                 DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+            }
+
+            else if (role == RoleEnum.Deputy)
+            {
+                var deputyRole = Role.GetRole<Deputy>(shifter);
+                deputyRole.Camping = null;
+                deputyRole.Killer = null;
+                deputyRole.CampedThisRound = false;
             }
 
             else if (role == RoleEnum.Vigilante)
@@ -545,6 +563,12 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
                 var astralRole = Role.GetRole<Astral>(shifter);
                 astralRole.Cooldown = CustomGameOptions.GhostCD;
                 astralRole.Enabled = false;
+            }
+
+            else if (role == RoleEnum.Lookout)
+            {
+                var lookoutRole = Role.GetRole<Lookout>(shifter);
+                lookoutRole.Cooldown = CustomGameOptions.WatchCD;
             }
 
             else if (role == RoleEnum.Hunter)
@@ -771,6 +795,12 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
                 blackmailerRole.Blackmailed = null;
             }
 
+            else if (role == RoleEnum.Manipulator)
+            {
+                var ManipulatorRole = Role.GetRole<Manipulator>(shifter);
+                ManipulatorRole.Cooldown = CustomGameOptions.ManipulateCD;
+            }
+
             else if (role == RoleEnum.Converter)
             {
                 var converterRole = Role.GetRole<Converter>(shifter);
@@ -790,41 +820,16 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
                 dienerRole.Cooldown = CustomGameOptions.DragCd;
             }
 
-            else if (role == RoleEnum.Coven)
+            else if (role == RoleEnum.PotionMaster)
             {
-                var covenRole = Role.GetRole<Coven>(shifter);
-                covenRole.Cooldown = CustomGameOptions.CovenKCD;
-            }
-
-            else if (role == RoleEnum.Ritualist)
-            {
-                var ritualistRole = Role.GetRole<Ritualist>(shifter);
-                ritualistRole.Cooldown = CustomGameOptions.CovenKCD;
+                var pmRole = Role.GetRole<PotionMaster>(shifter);
+                pmRole.PotionCooldown = CustomGameOptions.PotionCD;
             }
 
             else if (role == RoleEnum.HexMaster)
             {
-                var hexmasterRole = Role.GetRole<HexMaster>(shifter);
-                hexmasterRole.Cooldown = CustomGameOptions.CovenKCD;
-            }
-
-            else if (role == RoleEnum.CovenLeader)
-            {
-                var covenleaderRole = Role.GetRole<CovenLeader>(shifter);
-                covenleaderRole.Cooldown = CustomGameOptions.CovenKCD;
-            }
-
-            else if (role == RoleEnum.Spiritualist)
-            {
-                var spiritualistRole = Role.GetRole<Spiritualist>(shifter);
-                spiritualistRole.Cooldown = CustomGameOptions.CovenKCD;
-            }
-
-            else if (role == RoleEnum.PotionMaster)
-            {
-                var pmRole = Role.GetRole<PotionMaster>(shifter);
-                pmRole.Cooldown = CustomGameOptions.CovenKCD;
-                pmRole.PotionCooldown = CustomGameOptions.PotionCD;
+                var hmRole = Role.GetRole<HexMaster>(shifter);
+                hmRole.Cooldown = CustomGameOptions.CovenKCD;
             }
 
             else if (role == RoleEnum.Maul)
@@ -972,6 +977,11 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
             }
 
             shiftRole.Cooldown = CustomGameOptions.ShiftCD;
+
+            if (shifter.Is(Faction.Coven))
+            {
+                Role.GetRole(shifter).KillCooldown = CustomGameOptions.CovenKCD;
+            }
 
             yield return false;
         }

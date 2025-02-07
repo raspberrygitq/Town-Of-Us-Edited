@@ -3,6 +3,7 @@ using System;
 using TownOfUs.ImpostorRoles.BomberMod;
 using TownOfUs.CrewmateRoles.MedicMod;
 using TownOfUs.Patches;
+using TownOfUs.Roles.Modifiers;
 
 namespace TownOfUs.Roles
 {
@@ -79,6 +80,16 @@ namespace TownOfUs.Roles
                     var medic = player.GetMedic().Player.PlayerId;
                     Utils.Rpc(CustomRPC.AttemptSound, medic, player.PlayerId);
                     StopKill.BreakShield(medic, player.PlayerId, CustomGameOptions.ShieldBreaks);
+                }
+            }
+            if (PlayerControl.LocalPlayer.Is(ModifierEnum.Bloodlust) && playersToDie.Count > 0)
+            {
+                var modifier = Modifier.GetModifier<Bloodlust>(PlayerControl.LocalPlayer);
+                var diedPlayers = playersToDie.Count;
+                while (diedPlayers > 0)
+                {
+                    modifier.KilledThisRound++;
+                    diedPlayers--;
                 }
             }
         }

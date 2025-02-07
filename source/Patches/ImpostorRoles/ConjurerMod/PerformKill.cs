@@ -4,7 +4,8 @@ using TownOfUs.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 using System.Linq;
-using TownOfUs.ImpostorRoles.ImpostorMod;
+using TownOfUs.Modifiers.UnderdogMod;
+using TownOfUs.Roles.Modifiers;
 
 namespace TownOfUs.ImpostorRoles.ConjurerMod
 {
@@ -57,7 +58,26 @@ namespace TownOfUs.ImpostorRoles.ConjurerMod
                     role.Kills += 1;
                     role.CursedPlayer = null;
                     __instance.graphic.sprite = TownOfUs.Curse;
-                    Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown; 
+                    if (PlayerControl.LocalPlayer.Is(ModifierEnum.Underdog))
+                    {
+                        var lowerKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - CustomGameOptions.UnderdogKillBonus;
+                        var normalKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay;
+                        var upperKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.UnderdogKillBonus;
+                        Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = PerformKill.LastImp() ? lowerKC : (PerformKill.IncreasedKC() ? normalKC : upperKC);
+                    }
+                    else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Lucky))
+                    {
+                        var num = Random.RandomRange(1f, 60f);
+                        Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
+                    }
+                    else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Bloodlust))
+                    {
+                        var modifier = Modifier.GetModifier<Bloodlust>(PlayerControl.LocalPlayer);
+                        var num = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown / 2;
+                        if (modifier.KilledThisRound >= 2) Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
+                        else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
+                    }
+                    else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown; 
                     return false;
                 }
             }

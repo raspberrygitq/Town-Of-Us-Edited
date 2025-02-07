@@ -67,9 +67,7 @@ namespace TownOfUs.CrewmateRoles.TimeLordMod
                 PlayerControl.LocalPlayer.MyPhysics.RpcExitVent(Vent.currentVent.Id);
                 PlayerControl.LocalPlayer.MyPhysics.ExitAllVents();
             }
-            var position = PlayerControl.LocalPlayer.GetTruePosition();
-
-            PlayerControl.LocalPlayer.NetTransform.SnapTo(new Vector2(position.x, position.y + 0.3636f));
+            PlayerControl.LocalPlayer.NetTransform.Halt();
             PlayerControl.LocalPlayer.moveable = false;
         }
 

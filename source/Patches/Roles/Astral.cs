@@ -15,6 +15,7 @@ namespace TownOfUs.Roles
         public float TimeRemaining;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
+        public PlayerControl AstralBody;
 
         public Astral(PlayerControl player) : base(player)
         {
@@ -54,10 +55,13 @@ namespace TownOfUs.Roles
 
         public void Die(PlayerControl player)
         {
+            Utils.CreateDummy(player, player);
+            var role = Role.GetRole<Astral>(player);
+            new Astral(role.AstralBody);
+
             var hudManager = DestroyableSingleton<HudManager>.Instance;
             var amOwner = player.AmOwner;
-            player.gameObject.layer = LayerMask.NameToLayer("Ghost");
-            player.Visible = false;
+            RoleManager.Instance.SetRole(player, RoleTypes.CrewmateGhost);
             if (amOwner)
             {
                 try
@@ -81,19 +85,10 @@ namespace TownOfUs.Roles
                 player.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
                 player.RpcSetScanner(false);
             }
-            var deadBody = new DeadPlayer
-            {
-                PlayerId = player.PlayerId,
-                KillerId = player.PlayerId,
-                KillTime = DateTime.UtcNow
-            };
-
-            Murder.KilledPlayers.Add(deadBody);
-            player.MyPhysics.StartCoroutine(player.KillAnimations.Random().CoPerformKill(player, player));
 
             if (PlayerControl.LocalPlayer == player)
             {
-                var role = Role.GetRole(player);
+                HudManager.Instance.Chat.gameObject.SetActive(false);
                 role.RegenTask();
             }
         }
@@ -110,23 +105,9 @@ namespace TownOfUs.Roles
 
         public void Revive(PlayerControl player)
         {
-            Vector2 position;
-            foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
-            {
-                if (!GameObject.FindObjectsOfType<DeadBody>().Any(x => x.ParentId == player.PlayerId) && !MeetingHud.Instance) return;
-            }
-            foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
-            {
-                if (deadBody.ParentId == player.PlayerId)
-                {
-                    position = deadBody.TruePosition;
-                    player.NetTransform.SnapTo(new Vector2(position.x, position.y + 0.3636f));
-                }
-            }
-            foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
-            {
-                if (deadBody.ParentId == player.PlayerId) deadBody.gameObject.Destroy();
-            }
+            var role = Role.GetRole<Astral>(player);
+            Role.RoleDictionary.Remove(role.AstralBody.PlayerId);
+            var position = role.AstralBody.GetTruePosition();
 
             var revived = new List<PlayerControl>();
 
@@ -135,6 +116,8 @@ namespace TownOfUs.Roles
             RoleManager.Instance.SetRole(player, RoleTypes.Crewmate);
             Murder.KilledPlayers.Remove(
                     Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == player.PlayerId));
+
+            player.NetTransform.SnapTo(new Vector2(position.x, position.y + 0.3636f));
 
             if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
@@ -157,6 +140,7 @@ namespace TownOfUs.Roles
                 if (!MeetingHud.Instance)
                 {
                     HudManager.Instance.Chat.gameObject.SetActive(false);
+                    PlayerControl.LocalPlayer.NetTransform.Halt();
                 }
                 else
                 {
@@ -171,6 +155,12 @@ namespace TownOfUs.Roles
                     }
                 }
             }
+
+            role.AstralBody.Data.Disconnected = true;
+            GameData.Instance.AllPlayers.Remove(role.AstralBody.Data);
+            role.AstralBody.gameObject.Destroy();
+            role.AstralBody = null;
+
             return;
         }
     }

@@ -16,8 +16,9 @@ namespace TownOfUs.CrewmateRoles.WardenMod
             if (!flag) return true;
             var role = Role.GetRole<Warden>(PlayerControl.LocalPlayer);
             if (!PlayerControl.LocalPlayer.CanMove || role.ClosestPlayer == null) return false;
-            if (role.Cooldown > 0) return false;
             if (!__instance.enabled) return false;
+            if (!PlayerControl.LocalPlayer.CanMove) return false;
+            if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (Vector2.Distance(role.ClosestPlayer.GetTruePosition(),
                 PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
@@ -30,17 +31,6 @@ namespace TownOfUs.CrewmateRoles.WardenMod
                 Utils.Rpc(CustomRPC.Fortify, (byte)0, PlayerControl.LocalPlayer.PlayerId, role.Fortified.PlayerId);
                 return false;
             }
-            if (interact[0] == true)
-            {
-                role.Cooldown = CustomGameOptions.FortifyCd;
-                return false;
-            }
-            else if (interact[1] == true)
-            {
-                role.Cooldown = CustomGameOptions.ProtectKCReset;
-                return false;
-            }
-            else if (interact[3] == true) return false;
             return false;
         }
     }

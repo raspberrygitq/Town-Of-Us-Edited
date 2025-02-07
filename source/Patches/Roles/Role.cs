@@ -164,7 +164,7 @@ namespace TownOfUs.Roles
 
         internal virtual bool CovenCriteria()
         {
-            if (Faction == Faction.Coven && PlayerControl.LocalPlayer.Is(Faction.Coven)) return true;
+            if (Faction == Faction.Coven && PlayerControl.LocalPlayer.Is(Faction.Coven) && CustomGameOptions.CovenSeeRoles) return true;
             return false;
         }
 
@@ -390,24 +390,6 @@ namespace TownOfUs.Roles
                 }
             }
             return true;
-        }
-
-        private static bool CheckLoversWin()
-        {
-            //System.Console.WriteLine("CHECKWIN");
-            var players = PlayerControl.AllPlayerControls.ToArray();
-            var alives = players.Where(x => !x.Data.IsDead).ToList();
-
-            var firstlover = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(ModifierEnum.Lover)).ToList();
-            foreach (var lover1 in firstlover)
-            {
-                var lover2 = Modifier.GetModifier<Lover>(lover1).OtherLover.Player;
-                {
-                    return !lover1.Data.IsDead && !lover1.Data.Disconnected && !lover2.Data.IsDead && !lover2.Data.Disconnected &&
-                        (alives.Count == 3) | (alives.Count == 2);
-                }
-            }
-            return false;
         }
 
         internal virtual void NeutralWin(LogicGameFlowNormal __instance)
@@ -683,7 +665,7 @@ namespace TownOfUs.Roles
                         __instance.teamToShow = impTeam;
                     }
                 }
-                public static void Postfix(IntroCutscene._ShowRole_d__41 __instance)
+                public static void Postfix(IntroCutscene._ShowTeam_d__38 __instance)
                 {
                     var role = GetRole(PlayerControl.LocalPlayer);
                     // var alpha = __instance.__4__this.RoleText.color.a;
@@ -807,7 +789,6 @@ namespace TownOfUs.Roles
                         }
                         ModifierText.color = modifier.Color;
 
-                        //
                         ModifierText.transform.position =
                             __instance.__4__this.transform.position - new Vector3(0f, 1.6f, 0f);
                         if (!PlayerControl.LocalPlayer.Is(Faction.Madmates))
@@ -947,9 +928,7 @@ namespace TownOfUs.Roles
                     var coven = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Coven)).ToList();
                     var imps = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors)).ToList();
 
-                    if (CustomGameOptions.GameMode == GameMode.AllAny && CustomGameOptions.RandomNumberImps)
-                        __instance.__4__this.ImpostorText.text = "There are an <color=#FF0000FF>Unknown Number of Impostors</color> among us";
-                    else if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count == 1)
+                    if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count == 1)
                         __instance.__4__this.ImpostorText.text = "There is <color=#A86629FF>1 Werewolf</color> among us";
                     else if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count > 1)
                         __instance.__4__this.ImpostorText.text = $"There are <color=#A86629FF>{imps.Count} Werewolves</color> among us";
@@ -962,20 +941,20 @@ namespace TownOfUs.Roles
                     else if (imps.Count > 1)
                         __instance.__4__this.ImpostorText.text = $"There are <color=#FF0000>{imps.Count} Impostors</color> among us";
 
-                    if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count > 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    if (coven.Count > 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
                         __instance.__4__this.ImpostorText.text += $"\nAnd also <color=#bf5fff>{coven.Count} Coven Members</color>";
-                    else if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count == 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    else if (coven.Count == 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
                         __instance.__4__this.ImpostorText.text += $"\nAnd also <color=#bf5fff>{coven.Count} Coven Member</color>";
-                    else if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count > 1 && imps.Count == 0)
+                    else if (coven.Count > 1 && imps.Count == 0)
                         __instance.__4__this.ImpostorText.text = $"There are <color=#bf5fff>{coven.Count} Coven Members</color> among us";
-                    else if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count == 1 && imps.Count == 0)
+                    else if (coven.Count == 1 && imps.Count == 0)
                         __instance.__4__this.ImpostorText.text = $"There is <color=#bf5fff>{coven.Count} Coven Member</color> among us";
-                    else if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count > 1 && imps.Count != 0 && PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    else if (coven.Count > 1 && imps.Count != 0 && PlayerControl.LocalPlayer.Is(Faction.Impostors))
                     {
                         __instance.__4__this.ImpostorText.gameObject.SetActive(true);
                         __instance.__4__this.ImpostorText.text += $"There are <color=#bf5fff>{coven.Count} Coven Members</color> among us";
                     }
-                    else if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count == 1 && imps.Count != 0 && PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    else if (coven.Count == 1 && imps.Count != 0 && PlayerControl.LocalPlayer.Is(Faction.Impostors))
                     {
                         __instance.__4__this.ImpostorText.gameObject.SetActive(true);
                         __instance.__4__this.ImpostorText.text += $"\nThere is <color=#bf5fff>{coven.Count} Coven Member</color> among us";
@@ -1113,9 +1092,7 @@ namespace TownOfUs.Roles
                     var coven = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Coven)).ToList();
                     var imps = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors)).ToList();
 
-                    if (CustomGameOptions.GameMode == GameMode.AllAny && CustomGameOptions.RandomNumberImps)
-                        __instance.__4__this.ImpostorText.text = "There are an <color=#FF0000FF>Unknown Number of Impostors</color> among us";
-                    else if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count == 1)
+                    if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count == 1)
                         __instance.__4__this.ImpostorText.text = "There is <color=#A86629FF>1 Werewolf</color> among us";
                     else if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count > 1)
                         __instance.__4__this.ImpostorText.text = $"There are <color=#A86629FF>{imps.Count} Werewolves</color> among us";
@@ -1128,20 +1105,20 @@ namespace TownOfUs.Roles
                     else if (imps.Count > 1)
                         __instance.__4__this.ImpostorText.text = $"There are <color=#FF0000>{imps.Count} Impostors</color> among us";
 
-                    if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count > 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    if (coven.Count > 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
                         __instance.__4__this.ImpostorText.text += $"\nAnd also <color=#bf5fff>{coven.Count} Coven Members</color>";
-                    else if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count == 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    else if (coven.Count == 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
                         __instance.__4__this.ImpostorText.text += $"\nAnd also <color=#bf5fff>{coven.Count} Coven Member</color>";
-                    else if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count > 1 && imps.Count == 0)
+                    else if (coven.Count > 1 && imps.Count == 0)
                         __instance.__4__this.ImpostorText.text = $"There are <color=#bf5fff>{coven.Count} Coven Members</color> among us";
-                    else if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count == 1 && imps.Count == 0)
+                    else if (coven.Count == 1 && imps.Count == 0)
                         __instance.__4__this.ImpostorText.text = $"There is <color=#bf5fff>{coven.Count} Coven Member</color> among us";
-                    else if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count > 1 && imps.Count != 0 && PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    else if (coven.Count > 1 && imps.Count != 0 && PlayerControl.LocalPlayer.Is(Faction.Impostors))
                     {
                         __instance.__4__this.ImpostorText.gameObject.SetActive(true);
                         __instance.__4__this.ImpostorText.text += $"There are <color=#bf5fff>{coven.Count} Coven Members</color> among us";
                     }
-                    else if (CustomGameOptions.GameMode == GameMode.Classic && coven.Count == 1 && imps.Count != 0 && PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    else if (coven.Count == 1 && imps.Count != 0 && PlayerControl.LocalPlayer.Is(Faction.Impostors))
                     {
                         __instance.__4__this.ImpostorText.gameObject.SetActive(true);
                         __instance.__4__this.ImpostorText.text += $"\nThere is <color=#bf5fff>{coven.Count} Coven Member</color> among us";
@@ -1328,6 +1305,42 @@ namespace TownOfUs.Roles
                             }
                         }
                         return;
+                    case StringNames.ImpostorsRemainP:
+                    case StringNames.ImpostorsRemainS:
+                    {
+                        var imps = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
+                        var covens = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Coven) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
+                        string text = "";
+                        if (imps.Count > 0)
+                        {
+                            if (imps.Count > 1)
+                            {
+                                text = $"{imps.Count} Impostors Remain.";
+                            }
+                            else text = $"{imps.Count} Impostor Remains.";
+                        }
+                        if (covens.Count > 0)
+                        {
+                            if (imps.Count <= 0)
+                            {
+                                if (covens.Count > 1)
+                                {
+                                    text = $"{covens.Count} Coven Members Remain.";
+                                }
+                                else text = $"{covens.Count} Coven Member Remains.";
+                            }
+                            else
+                            {
+                                if (covens.Count > 1)
+                                {
+                                    text += $"\nAnd {covens.Count} Coven Members Remain.";
+                                }
+                                else text += $"\nAnd {covens.Count} Coven Member Remains.";
+                            }
+                        }
+                        __result = text;
+                        return;
+                    }
                     case StringNames.ExileTextPN:
                     case StringNames.ExileTextSN:
                     case StringNames.ExileTextPP:
@@ -1447,6 +1460,7 @@ namespace TownOfUs.Roles
                             if (role.ColorCriteria())
                                 player.nameText().color = role.Color;
                         }
+                        else player.nameText().transform.localPosition = new Vector3(0f, 0f, 0f);
                     }
                 }
             }

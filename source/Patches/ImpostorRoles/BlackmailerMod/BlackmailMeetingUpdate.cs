@@ -96,6 +96,28 @@ namespace TownOfUs.ImpostorRoles.BlackmailerMod
             }
         }
 
+        [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Update))]
+        public class CantVote
+        {
+            public static void Postfix(MeetingHud __instance)
+            {
+                var bmers = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(RoleEnum.Blackmailer)).ToList();
+                foreach (var bm in bmers)
+                {
+                    var role = Role.GetRole<Blackmailer>(bm);
+                    if (role.Blackmailed != null && role.Blackmailed == PlayerControl.LocalPlayer && !PlayerControl.LocalPlayer.Data.IsDead
+                    && CustomGameOptions.BlackmailedVote)
+                    {
+                        __instance.SkipVoteButton.gameObject.SetActive(false);
+                        foreach (var votearea in __instance.playerStates)
+                        {
+                            votearea.Buttons.SetActive(false);
+                        }
+                    }
+                }
+            }
+        }
+
         [HarmonyPatch]
         public class StopChatting
         {

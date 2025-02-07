@@ -58,13 +58,5 @@ namespace TownOfUs.Modifiers.AssassinMod
             role.Buttons[targetId] = (null, null, null, null);
             role.Guesses.Remove(targetId);
         }
-
-
-        public static void Prefix(MeetingHud __instance)
-        {
-            if (!PlayerControl.LocalPlayer.Is(AbilityEnum.Assassin)) return;
-            var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
-            if (!CustomGameOptions.AssassinateAfterVoting) HideButtons(assassin);
-        }
     }
 }

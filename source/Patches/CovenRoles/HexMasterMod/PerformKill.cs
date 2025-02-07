@@ -16,15 +16,6 @@ namespace TownOfUs.Patches.CovenRoles.HexMasterMod
 
             var role = Role.GetRole<HexMaster>(PlayerControl.LocalPlayer);
             var killbutton = DestroyableSingleton<HudManager>.Instance.KillButton;
-                
-            if (__instance == role.SabotageButton) 
-            {
-                DestroyableSingleton<HudManager>.Instance.ToggleMapVisible(new MapOptions
-                {
-                    Mode = MapOptions.Modes.Sabotage
-                });
-                return false;
-            }
             
             if (PlayerControl.LocalPlayer.Data.IsDead)
                 return false;

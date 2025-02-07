@@ -1,4 +1,5 @@
 using HarmonyLib;
+using Hazel;
 using TownOfUs.Roles;
 
 namespace TownOfUs.ImpostorRoles.GrenadierMod
@@ -24,9 +25,21 @@ namespace TownOfUs.ImpostorRoles.GrenadierMod
                 var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
                 if (!abilityUsed) return false;
 
-                Utils.Rpc(CustomRPC.FlashGrenade, PlayerControl.LocalPlayer.PlayerId);
                 role.TimeRemaining = CustomGameOptions.GrenadeDuration;
-                role.Flash();
+
+                role.StartFlash();
+
+                var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
+                254, SendOption.Reliable, -1);
+                writer.Write((int)CustomRPC.FlashGrenade);
+                writer.Write((byte)role.Player.PlayerId);
+                writer.Write((byte)role.flashedPlayers.Count);
+                foreach (var player in role.flashedPlayers)
+                {
+                    writer.Write(player.PlayerId);
+                }
+                AmongUsClient.Instance.FinishRpcImmediately(writer);
+
                 return false;
             }
 
