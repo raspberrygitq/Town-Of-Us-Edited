@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using HarmonyLib;
 using Reactor.Utilities.Extensions;
 using TownOfUs.Modifiers.AssassinMod;
 using TownOfUs.Roles;
@@ -11,13 +10,11 @@ using Object = UnityEngine.Object;
 using Assassin = TownOfUs.Roles.Modifiers.Assassin;
 using TownOfUs.CrewmateRoles.VigilanteMod;
 using TownOfUs.NeutralRoles.DoomsayerMod;
-using TownOfUs.Roles.AssassinMod;
 using Assassin2 = TownOfUs.Roles.Assassin;
 using TownOfUs.CovenRoles.RitualistMod;
 
 namespace TownOfUs.CrewmateRoles.MayorMod
 {
-    [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class AddRevealButton
     {
         public static Sprite RevealSprite => TownOfUs.RevealSprite;
@@ -91,7 +88,7 @@ namespace TownOfUs.CrewmateRoles.MayorMod
             return;
         }
 
-        public static void Postfix(MeetingHud __instance)
+        public static void AddMayorButtons(MeetingHud __instance)
         {
             foreach (var role in Role.GetRoles(RoleEnum.Mayor))
             {

@@ -2991,7 +2991,7 @@ namespace TownOfUs
                     if (CustomGameOptions.SeerOn > 0)
                         CrewmateRoles.Add((typeof(Seer), CustomGameOptions.SeerOn, false));
 
-                    if (CustomGameOptions.SpyOn > 0)
+                    if (CustomGameOptions.SpyOn > 0 && GameOptionsManager.Instance.currentNormalGameOptions.MapId != 5)
                         CrewmateRoles.Add((typeof(Spy), CustomGameOptions.SpyOn, false));
 
                     if (CustomGameOptions.SnitchOn > 0)
@@ -3211,7 +3211,7 @@ namespace TownOfUs
                         CovenRoles.Add((typeof(PotionMaster), CustomGameOptions.PotionMasterOn, true));
                     #endregion
                     #region Crewmate Modifiers
-                    if (Check(CustomGameOptions.TorchOn))
+                    if (Check(CustomGameOptions.TorchOn) && GameOptionsManager.Instance.currentNormalGameOptions.MapId != 5)
                         CrewmateModifiers.Add((typeof(Torch), CustomGameOptions.TorchOn));
 
                     if (Check(CustomGameOptions.VengefulOn))
@@ -3358,7 +3358,7 @@ namespace TownOfUs
                         if (CustomGameOptions.SeerOn > 0)
                             CrewmateInvestigativeRoles.Add((typeof(Seer), CustomGameOptions.SeerOn, false || CustomGameOptions.UniqueRoles));
 
-                        if (CustomGameOptions.SpyOn > 0)
+                        if (CustomGameOptions.SpyOn > 0 && GameOptionsManager.Instance.currentNormalGameOptions.MapId != 5)
                             CrewmateInvestigativeRoles.Add((typeof(Spy), CustomGameOptions.SpyOn, false || CustomGameOptions.UniqueRoles));
 
                         if (CustomGameOptions.SnitchOn > 0)

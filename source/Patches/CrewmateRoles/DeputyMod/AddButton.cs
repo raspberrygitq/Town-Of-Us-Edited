@@ -1,7 +1,5 @@
 using System;
 using System.Linq;
-using HarmonyLib;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Reactor.Utilities.Extensions;
 using TownOfUs.CrewmateRoles.ImitatorMod;
 using TownOfUs.CrewmateRoles.MedicMod;
@@ -23,7 +21,6 @@ using TownOfUs.CovenRoles.RitualistMod;
 
 namespace TownOfUs.CrewmateRoles.DeputyMod
 {
-    [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class AddButtonDeputy
     {
         private static Sprite ShootSprite => TownOfUs.ShootSprite;
@@ -362,7 +359,7 @@ namespace TownOfUs.CrewmateRoles.DeputyMod
             AddHauntPatch.AssassinatedPlayers.Add(player);
         }
 
-        public static void Postfix(MeetingHud __instance)
+        public static void AddDepButtons(MeetingHud __instance)
         {
             foreach (var role in Role.GetRoles(RoleEnum.Deputy))
             {

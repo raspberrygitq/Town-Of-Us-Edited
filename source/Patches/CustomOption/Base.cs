@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Reactor.Localization.Utilities;
+using Reactor.Utilities;
 
 namespace TownOfUs.CustomOption
 {
@@ -54,7 +55,7 @@ namespace TownOfUs.CustomOption
 
             Value = value;
 
-            if (Setting != null && AmongUsClient.Instance.AmHost && SendRpc) Rpc.SendRpc(this);
+            if (Setting != null && AmongUsClient.Instance.AmHost && SendRpc) Coroutines.Start(Rpc.SendRpc(this));
 
             try
             {

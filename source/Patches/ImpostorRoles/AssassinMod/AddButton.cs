@@ -1,5 +1,4 @@
 ﻿using System;
-using HarmonyLib;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TMPro;
@@ -13,8 +12,7 @@ using TownOfUs.Patches;
 
 namespace TownOfUs.Roles.AssassinMod
 {
-    [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
-    public class AddButton
+    public class AddButtonAssassin2
     {
         private static Sprite CycleBackSprite => TownOfUs.CycleBackSprite;
         private static Sprite CycleForwardSprite => TownOfUs.CycleForwardSprite;
@@ -214,7 +212,7 @@ namespace TownOfUs.Roles.AssassinMod
             return Listener;
         }
 
-        public static void Postfix(MeetingHud __instance)
+        public static void AddAssassinButtons(MeetingHud __instance)
         {
             foreach (var role in Role.GetRoles(RoleEnum.Assassin))
             {

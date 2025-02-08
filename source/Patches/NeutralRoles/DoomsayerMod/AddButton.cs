@@ -1,5 +1,4 @@
 ﻿using System;
-using HarmonyLib;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TMPro;
@@ -11,8 +10,7 @@ using Object = UnityEngine.Object;
 
 namespace TownOfUs.NeutralRoles.DoomsayerMod
 {
-    [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
-    public class AddButton
+    public class AddButtonDoom
     {
         private static Sprite CycleBackSprite => TownOfUs.CycleBackSprite;
         private static Sprite CycleForwardSprite => TownOfUs.CycleForwardSprite;
@@ -168,7 +166,7 @@ namespace TownOfUs.NeutralRoles.DoomsayerMod
             return Listener;
         }
 
-        public static void Postfix(MeetingHud __instance)
+        public static void AddDoomsayerButtons(MeetingHud __instance)
         {
             foreach (var role in Role.GetRoles(RoleEnum.Doomsayer))
             {

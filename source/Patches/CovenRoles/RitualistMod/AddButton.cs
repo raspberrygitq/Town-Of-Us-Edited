@@ -1,5 +1,4 @@
 ﻿using System;
-using HarmonyLib;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TMPro;
@@ -13,8 +12,7 @@ using TownOfUs.Patches;
 
 namespace TownOfUs.CovenRoles.RitualistMod
 {
-    [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
-    public class AddButton
+    public class AddButtonRitualist
     {
         private static Sprite CycleBackSprite => TownOfUs.CycleBackSprite;
         private static Sprite CycleForwardSprite => TownOfUs.CycleForwardSprite;
@@ -202,7 +200,7 @@ namespace TownOfUs.CovenRoles.RitualistMod
             return Listener;
         }
 
-        public static void Postfix(MeetingHud __instance)
+        public static void AddRitualistButtons(MeetingHud __instance)
         {
             foreach (var role in Role.GetRoles(RoleEnum.Ritualist))
             {

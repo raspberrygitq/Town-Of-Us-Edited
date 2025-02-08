@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿﻿using System.Collections.Generic;
 
 namespace TownOfUs.Patches.CustomHats
 {
     public static class HatCache
     {
-        public static Dictionary<string, Sprite> hatViewDatas= new Dictionary<string, Sprite>();
+        public static SortedList<string, List<HatData>> SortedHats = null;
 
-        
+        public static Dictionary<int, string> StoreNames = [];
     }
 }

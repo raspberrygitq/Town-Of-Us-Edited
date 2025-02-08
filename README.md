@@ -57,6 +57,7 @@ Join the [Discord](https://discord.gg/Huen5AqR2t) if you need help or want to fi
 # Releases
 | Among Us - Version| Mod Version | Link |
 |----------|-------------|-----------------|
+| 2024.11.26 | v1.0.1 | [Download](https://github.com/eDonnes124/Town-Of-Us/releases/download/v1.0.1/Toue.v1.0.1.zip) |
 | 2024.11.26 | v1.0.0 | [Download](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.0/Toue.v1.0.0.zip) |
 | 2024.11.26 | v0.0.1 | [Download](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v0.0.1/Toue.v0.0.1.zip) |
 
@@ -359,7 +360,7 @@ The Mystci will see who is dead through a pop up on their screen.
 ## Oracle
 ### **Team: Crewmates**
 The Oracle is a Crewmate that can get another player to confess information to them.\
-The Oracle has 3 abilities, the first is that when they die, the person confessin to them will reveal their alignment.\
+The Oracle has 3 abilities, the first is that when they die, the person confessing to them will reveal their alignment.\
 The second, is that every meeting the Oracle receives a confession about who might be evil.\
 The final ability is giving a blessing to the person confessing to them, with this the confessing player gains vote immunity!
 ### Game Options
