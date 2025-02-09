@@ -20,7 +20,6 @@ namespace TownOfUs.Roles
             ImpostorText = () => "Convert someone to your side";
             TaskText = () => "Convert an innocent to help you killing\nFake Tasks:";
             Color = Patches.Colors.Impostor;
-            Cooldown = CustomGameOptions.ConverterCD;
             RoleType = RoleEnum.Converter;
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
@@ -29,8 +28,6 @@ namespace TownOfUs.Roles
 
         public DeadBody CurrentTarget;
         public KillButton _convertButton;
-        public float Cooldown;
-        public bool coolingDown => Cooldown > 0f;
         public bool AbilityUsed { get; set; } = false;
         public KillButton ConvertButton
         {
@@ -79,16 +76,6 @@ namespace TownOfUs.Roles
                 else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
             }
             else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
-        }
-        public float ConvertTimer()
-        {
-            if (!coolingDown) return 0f;
-            else if (!PlayerControl.LocalPlayer.inVent)
-            {
-                Cooldown -= Time.deltaTime;
-                return Cooldown;
-            }
-            else return Cooldown;
         }
 
         public static void Revive(DeadBody target)

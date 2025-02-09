@@ -144,7 +144,7 @@ namespace TownOfUs.Roles
                 }
                 if (pc.Is(RoleEnum.Doctor))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#00EE3C>Doctor</color>, use your abilities to resurect other players!\nYou can resurect anyone so be careful while using your powers.\nNote that revived players can't chat.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#00EE3C>Doctor</color>, use your abilities to resurect other players!\nYou can resurect anyone so be careful while using your powers.\nYou may also be only able to resurect someone in MedBay / Laboratory depending on settings. If so, you have a drag button to drag the body to a medical area.\nNote that revived players can't chat.");
                 }
                 if (pc.Is(RoleEnum.Crusader))
                 {

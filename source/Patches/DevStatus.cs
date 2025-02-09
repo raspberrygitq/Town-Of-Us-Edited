@@ -62,7 +62,6 @@ namespace TownOfUs.Patches
                         {
                             if (RpcHandling.Upped.TryGetValue(player, out var role))
                             {
-                                System.Console.WriteLine("Up Rpc Sent");
                                 Utils.Rpc(CustomRPC.AddUp, player.PlayerId, role);
                             }
                         }

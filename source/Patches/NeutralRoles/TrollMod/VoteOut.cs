@@ -30,7 +30,6 @@ namespace TownOfUs.NeutralRoles.TrollMod
                 if (((Troll)role).TrolledPlayer != null && player.PlayerId == ((Troll)role).TrolledPlayer.PlayerId && ((Troll)role).UsedTroll == true)
                 {
                     ((Troll)role).Wins();
-                    Utils.Rpc(CustomRPC.TrollWin, ((Troll)role).Player.PlayerId);
 
                     if (CustomGameOptions.NeutralEvilWinEndsGame || !CustomGameOptions.TrollHaunts) return;
                     if (PlayerControl.LocalPlayer != player) return;

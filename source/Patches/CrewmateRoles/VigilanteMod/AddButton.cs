@@ -2,7 +2,6 @@
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TMPro;
-using TownOfUs.Extensions;
 using TownOfUs.Patches;
 using TownOfUs.Roles;
 using TownOfUs.Roles.Modifiers;
@@ -23,23 +22,11 @@ namespace TownOfUs.CrewmateRoles.VigilanteMod
         {
             if (voteArea.AmDead) return true;
             var player = Utils.PlayerById(voteArea.TargetPlayerId);
-            if (!PlayerControl.LocalPlayer.Is(Faction.Impostors))
-            {
-                if (
+            if (
                     player == null ||
                     player.Data.IsDead ||
                     player.Data.Disconnected
                 ) return true;
-            }
-            else
-            {
-                if (
-                    player == null ||
-                    player.Data.IsImpostor() ||
-                    player.Data.IsDead ||
-                    player.Data.Disconnected
-                ) return true;
-            }
             var role = Role.GetRole(player);
             return role != null && role.Criteria();
         }
@@ -161,14 +148,6 @@ namespace TownOfUs.CrewmateRoles.VigilanteMod
                 var toDie = ((playerRole.Name.Contains(currentGuess) && !playerRole.Player.Is(RoleEnum.Hunter)) || playerRole.Name == currentGuess || playerRole.Name.Contains("Mad") && currentGuess == "Madmate") ? playerRole.Player : role.Player;
                 if (playerModifier != null)
                     toDie = (playerRole.Name == currentGuess || playerModifier.Name == currentGuess || playerRole.Name.Contains("Mad") && currentGuess == "Madmate") ? playerRole.Player : role.Player;
-                
-                if (toDie.Is(RoleEnum.Necromancer) || toDie.Is(RoleEnum.Whisperer))
-                {
-                    foreach (var player in PlayerControl.AllPlayerControls)
-                    {
-                        if (player.Data.IsImpostor()) Utils.RpcMurderPlayer(player, player);
-                    }
-                }
 
                 var fortified = toDie.IsFortified() && PlayerControl.LocalPlayer != toDie;
 

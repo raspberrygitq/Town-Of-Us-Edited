@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Reactor.Utilities;
 using TMPro;
 using TownOfUs.NeutralRoles.SoulCollectorMod;
 using UnityEngine;
@@ -57,7 +58,7 @@ namespace TownOfUs.Roles
         public void Wins()
         {
             CollectedSouls = true;
-            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Coroutines.Start(WaitForEnd());
         }
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__38 __instance)

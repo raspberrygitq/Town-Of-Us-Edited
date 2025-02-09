@@ -12,6 +12,7 @@ using Random = UnityEngine.Random;
 using TownOfUs.Extensions;
 using AmongUs.GameOptions;
 using TownOfUs.ImpostorRoles.TraitorMod;
+using System.Collections;
 
 namespace TownOfUs.Roles
 {
@@ -295,6 +296,13 @@ namespace TownOfUs.Roles
             Utils.Rpc(CustomRPC.SKwin);
 
             if (AmongUsClient.Instance.AmHost) Utils.EndGame();
+        }
+
+        public static IEnumerator WaitForEnd()
+        {
+            if (!AmongUsClient.Instance.AmHost) yield break;
+            yield return new WaitForSeconds(0.5f);
+            Utils.EndGame();
         }
         public static bool NeutralEvilWin()
         {

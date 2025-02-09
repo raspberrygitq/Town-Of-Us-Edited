@@ -567,7 +567,6 @@ namespace TownOfUs.NeutralRoles.AmnesiacMod
             else if (role == RoleEnum.Converter)
             {
                 var converterRole = Role.GetRole<Converter>(amnesiac);
-                converterRole.Cooldown = CustomGameOptions.ConverterCD;
                 converterRole.AbilityUsed = false;
             }
 

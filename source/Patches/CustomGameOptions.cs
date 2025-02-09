@@ -455,7 +455,6 @@ namespace TownOfUs
         public static float BlackmailCd => Generate.BlackmailCooldown.Get();
         public static bool BlackmailInvisible => Generate.BlackmailInvisible.Get();
         public static bool BlackmailedVote => Generate.BlackmailedVote.Get();
-        public static float ConverterCD => Generate.ConverterCooldown.Get();
         public static float GiantSlow => Generate.GiantSlow.Get();
         public static float FlashSpeed => Generate.FlashSpeed.Get();
         public static float HelperSpeed => Generate.HelperSpeed.Get();

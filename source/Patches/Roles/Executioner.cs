@@ -1,4 +1,5 @@
 using Il2CppSystem.Collections.Generic;
+using Reactor.Utilities;
 
 namespace TownOfUs.Roles
 {
@@ -34,7 +35,7 @@ namespace TownOfUs.Roles
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return;
             TargetVotedOut = true;
-            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Coroutines.Start(WaitForEnd());
         }
     }
 }

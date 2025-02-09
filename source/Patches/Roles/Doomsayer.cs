@@ -7,6 +7,7 @@ using TownOfUs.NeutralRoles.ExecutionerMod;
 using TownOfUs.NeutralRoles.GuardianAngelMod;
 using System;
 using TownOfUs.CrewmateRoles.VampireHunterMod;
+using Reactor.Utilities;
 
 namespace TownOfUs.Roles
 {
@@ -169,7 +170,7 @@ namespace TownOfUs.Roles
         public void Wins()
         {
             WonByGuessing = true;
-            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Coroutines.Start(WaitForEnd());
         }
 
         public int GuessedCorrectly = 0;

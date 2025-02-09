@@ -38,6 +38,10 @@ namespace TownOfUs.NeutralRoles.PhantomMod
                         });
                         Coroutines.Start(pk.Open(1f));
                     }
+                    else
+                    {
+                        if (AmongUsClient.Instance.AmHost) Coroutines.Start(Role.WaitForEnd());
+                    }
                 }
             }
         }

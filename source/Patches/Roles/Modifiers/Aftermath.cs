@@ -137,9 +137,7 @@ namespace TownOfUs.Roles.Modifiers
             else if (role is Converter converter)
             {
                 var dead = Utils.PlayerById(db.ParentId);
-                Utils.Rpc(CustomRPC.ImpConvert, db.ParentId);
-                Utils.TurnMadmate(dead, false);
-                converter.Cooldown = CustomGameOptions.ConverterCD;
+                converter.ConvertAbility(db);
             }
             else if (role is Morphling morphling)
             {

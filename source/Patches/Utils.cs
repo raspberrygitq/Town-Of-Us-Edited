@@ -216,7 +216,7 @@ namespace TownOfUs
             }
             else if (Madmate.Is(RoleEnum.Sheriff))
             {
-                madmate.TaskText = () => "Help the Impostors killing everyone";
+                madmate.TaskText = () => "Help the Impostors to kill crewmates";
             }
             else if (Madmate.Is(RoleEnum.Snitch))
             {
@@ -2766,11 +2766,6 @@ namespace TownOfUs
             {
                 var hypno = Role.GetRole<Hypnotist>(PlayerControl.LocalPlayer);
                 hypno.Cooldown = CustomGameOptions.InitialCooldowns;
-            }
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Converter))
-            {
-                var converterRole = Role.GetRole<Converter>(PlayerControl.LocalPlayer);
-                converterRole.Cooldown = CustomGameOptions.ConverterCD;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Escapist))
             {

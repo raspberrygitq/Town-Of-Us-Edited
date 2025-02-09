@@ -1941,29 +1941,24 @@ namespace TownOfUs
                         var Infectious = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Infectious);
                         ((Infectious) Infectious)?.Wins();
                         break;
-                    case CustomRPC.TrollWin:
-                        var Troll = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Troll);
-                        ((Troll) Troll)?.Wins();
-                        break;
                     case CustomRPC.VultureWin:
-                        var Vulture = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Vulture);
-                        ((Vulture) Vulture)?.Wins();
-                        break;
-                    case CustomRPC.ExecutionerWin:
-                        var Executioner = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Executioner);
-                        ((Executioner) Executioner)?.Wins();
+                        var Vulture = Utils.PlayerById(reader.ReadByte());
+                        var VultureRole = Role.GetRole<Vulture>(Vulture);
+                        VultureRole.Wins();
                         break;
                     case CustomRPC.DoomsayerWin:
-                        var Doomsayer = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Doomsayer);
-                        ((Doomsayer) Doomsayer)?.Wins();
+                        var Doomsayer = Utils.PlayerById(reader.ReadByte());
+                        var DoomRole = Role.GetRole<Doomsayer>(Doomsayer);
+                        DoomRole.Wins();
                         break;
                     case CustomRPC.SoulCollectorWin:
-                        var soulcollector = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.SoulCollector);
-                        ((SoulCollector) soulcollector)?.Wins();
+                        var sc2 = Utils.PlayerById(reader.ReadByte());
+                        var scRole = Role.GetRole<SoulCollector>(sc2);
+                        scRole.Wins();
                         if (!CustomGameOptions.NeutralEvilWinEndsGame)
                         {
-                            KillButtonTarget.DontRevive = soulcollector.Player.PlayerId;
-                            soulcollector.Player.Exiled();
+                            KillButtonTarget.DontRevive = scRole.Player.PlayerId;
+                            scRole.Player.Exiled();
                         }
                         break;
                     case CustomRPC.JuggernautWin:
@@ -2444,6 +2439,10 @@ namespace TownOfUs
                                 return toKill.Contains(y.PlayerId);
                             });
                             Coroutines.Start(pk.Open(1f));
+                        }
+                        else
+                        {
+                            if (AmongUsClient.Instance.AmHost) Coroutines.Start(Role.WaitForEnd());
                         }
                         break;
                     case CustomRPC.SetHaunter:

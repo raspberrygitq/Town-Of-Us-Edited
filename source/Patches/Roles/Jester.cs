@@ -1,4 +1,5 @@
 using Il2CppSystem.Collections.Generic;
+using Reactor.Utilities;
 
 namespace TownOfUs.Roles
 {
@@ -30,7 +31,7 @@ namespace TownOfUs.Roles
         {
             //System.Console.WriteLine("Reached Here - Jester edition");
             VotedOut = true;
-            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Coroutines.Start(WaitForEnd());
         }
     }
 }

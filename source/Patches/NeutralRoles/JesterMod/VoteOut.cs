@@ -38,7 +38,6 @@ namespace TownOfUs.NeutralRoles.JesterMod
             if (role.RoleType == RoleEnum.Jester)
             {
                 ((Jester)role).Wins();
-                
 
                 if (CustomGameOptions.NeutralEvilWinEndsGame || !CustomGameOptions.JesterHaunt) return;
                 if (PlayerControl.LocalPlayer != player) return;

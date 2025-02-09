@@ -1,6 +1,9 @@
 ﻿﻿using HarmonyLib;
 using System.Linq;
+using TownOfUs.CrewmateRoles.MedicMod;
 using TownOfUs.Extensions;
+using TownOfUs.Roles;
+using TownOfUs.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUs.Patches
@@ -62,7 +65,16 @@ namespace TownOfUs.Patches
             foreach (var body in bodies)
             {
                 try {
-                    body.transform.localScale = playerBindings[body.ParentId].GetAppearance().SizeFactor;
+                    if (!body.IsDouble()) body.transform.localScale = playerBindings[body.ParentId].GetAppearance().SizeFactor;
+                    else
+                    {
+                        var modifier = Modifier.GetModifier(Utils.PlayerById(body.ParentId));
+                        if (modifier != null && modifier is IVisualAlteration alteration)
+                        {
+                            alteration.TryGetModifiedAppearance(out VisualAppearance appearance);
+                            body.transform.localScale = appearance.SizeFactor;
+                        }
+                    }
                 } catch {
                 }
             }

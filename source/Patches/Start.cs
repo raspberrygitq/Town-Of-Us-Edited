@@ -329,12 +329,6 @@ namespace TownOfUs.Patches
                 blackmailer.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Converter))
-            {
-                var converter = Role.GetRole<Converter>(PlayerControl.LocalPlayer);
-                converter.Cooldown = CustomGameOptions.InitialCooldowns;
-            }
-
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator))
             {
                 var Manipulator= Role.GetRole<Manipulator>(PlayerControl.LocalPlayer);

@@ -27,7 +27,6 @@ namespace TownOfUs.NeutraleRoles.SoulCollectorMod
                 if (sc.SoulsCollected >= CustomGameOptions.SoulsToWin)
                 {
                     sc.Wins();
-                    Utils.Rpc(CustomRPC.SoulCollectorWin, role.Player.PlayerId);
 
                     if (!CustomGameOptions.NeutralEvilWinEndsGame)
                     {

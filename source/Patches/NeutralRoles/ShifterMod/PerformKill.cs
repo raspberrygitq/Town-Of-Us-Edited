@@ -804,7 +804,6 @@ namespace TownOfUs.Patches.NeutralRoles.ShifterMod
             else if (role == RoleEnum.Converter)
             {
                 var converterRole = Role.GetRole<Converter>(shifter);
-                converterRole.Cooldown = CustomGameOptions.ConverterCD;
                 converterRole.AbilityUsed = true;
             }
 

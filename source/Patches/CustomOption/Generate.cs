@@ -607,9 +607,6 @@ namespace TownOfUs.CustomOption
         public static CustomToggleOption BlackmailInvisible;
         public static CustomToggleOption BlackmailedVote;
 
-        public static CustomHeaderOption Converter;
-        public static CustomNumberOption ConverterCooldown;
-
         public static CustomHeaderOption Attacker;
         public static CustomNumberOption TerroristKillCooldown;
         public static CustomToggleOption TerroristVent;
@@ -2077,10 +2074,6 @@ namespace TownOfUs.CustomOption
                 new CustomToggleOption(num++, MultiMenu.imposter, "Only Target Sees Blackmail", false);
             BlackmailedVote =
                 new CustomToggleOption(num++, MultiMenu.imposter, "Blackmailed Player Can't Vote");
-
-            Converter = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Converter</color>");
-            ConverterCooldown =
-                new CustomNumberOption(num++, MultiMenu.imposter, "Convert Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
 
             Hypnotist = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Hypnotist</color>");
             HypnotiseCooldown =

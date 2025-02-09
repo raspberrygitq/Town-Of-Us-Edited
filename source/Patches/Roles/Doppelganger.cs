@@ -4,12 +4,13 @@ using Il2CppSystem.Collections.Generic;
 using Reactor.Utilities.Extensions;
 using TownOfUs.CrewmateRoles.MedicMod;
 using TownOfUs.Extensions;
+using TownOfUs.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace TownOfUs.Roles
 {
-    public class Doppelganger : Role
+    public class Doppelganger : Role, IVisualAlteration
     {
         public Doppelganger(PlayerControl owner) : base(owner)
         {
@@ -103,7 +104,7 @@ namespace TownOfUs.Roles
 
             Murder.KilledPlayers.Add(deadBody3);
             OldTransformed = (TransformedPlayer != null) ? TransformedPlayer : doppel;
-            // Assigning it a value just to the code doesn't create any error but it won't be used
+            // Assigning it a value just so the code doesn't create any error but it won't be used
             NetworkedPlayerInfo.PlayerOutfit outfit = target.GetDefaultOutfit();
             if (Players.Contains(target.PlayerId)) outfit = target.GetOutfit(CustomPlayerOutfitType.Morph);
             Utils.Unmorph(target);
@@ -142,6 +143,21 @@ namespace TownOfUs.Roles
                 return Cooldown;
             }
             else return Cooldown;
+        }
+
+        public bool TryGetModifiedAppearance(out VisualAppearance appearance)
+        {
+            if (TransformedPlayer != null)
+            {
+                appearance = TransformedPlayer.GetDefaultAppearance();
+                var modifier = Modifier.GetModifier(TransformedPlayer);
+                if (modifier is IVisualAlteration alteration)
+                    alteration.TryGetModifiedAppearance(out appearance);
+                return true;
+            }
+
+            appearance = Player.GetDefaultAppearance();
+            return false;
         }
 
         public void Wins()

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Reactor.Utilities;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -47,7 +48,7 @@ namespace TownOfUs.Roles
         public void Wins()
         {
             VultureWins = true;
-            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Utils.EndGame();
+            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Coroutines.Start(WaitForEnd());
         }
 
         public void DestroyArrow(byte targetPlayerId)

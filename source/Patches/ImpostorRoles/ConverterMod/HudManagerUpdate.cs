@@ -66,7 +66,7 @@ namespace TownOfUs.ImpostorRoles.ConverterMod
                 closestDistance = distance;
             }
 
-            converter.ConvertButton.SetCoolDown(converter.ConvertTimer(), CustomGameOptions.ConverterCD);
+            converter.ConvertButton.SetCoolDown(converter.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
 
             if (converter.CurrentTarget && converter.CurrentTarget != closestBody)
             {

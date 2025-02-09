@@ -1,5 +1,6 @@
 ﻿using AmongUs.GameOptions;
 using HarmonyLib;
+using TownOfUs.Extensions;
 using TownOfUs.Roles;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ namespace TownOfUs.Patches.ImpostorRoles.ConverterMod
                 
             if (__instance == role.ConvertButton) 
             {
-                if (role.Cooldown > 0)
+                if (PlayerControl.LocalPlayer.coolingDown())
                     return false;
 
                 if (!__instance.isActiveAndEnabled) return false;
