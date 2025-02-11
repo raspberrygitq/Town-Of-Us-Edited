@@ -2098,8 +2098,8 @@ namespace TownOfUs.CustomOption
 
             CovenGameSettings =
                 new CustomHeaderOption(num++, MultiMenu.coven, "Global <color=#bf5fff>Coven</color> Settings");
-            MinCoven = new CustomNumberOption(num++, MultiMenu.coven, "Minimum Coven", 1, 0, 5, 1);
-            MaxCoven = new CustomNumberOption(num++, MultiMenu.coven, "Maximum Coven", 1, 0, 5, 1);
+            MinCoven = new CustomNumberOption(num++, MultiMenu.coven, "Minimum Coven", 0, 0, 5, 1);
+            MaxCoven = new CustomNumberOption(num++, MultiMenu.coven, "Maximum Coven", 0, 0, 5, 1);
             CovenReplaceImps = new CustomToggleOption(num++, MultiMenu.coven, "Coven Replaces Impostors", false);
             CovenKCD =
                 new CustomNumberOption(num++, MultiMenu.coven, "Coven Kill Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);

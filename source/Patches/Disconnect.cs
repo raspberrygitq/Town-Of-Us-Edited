@@ -13,6 +13,8 @@ using TownOfUs.Roles.Modifiers;
 using UnityEngine.UI;
 using TownOfUs.ImpostorRoles.BlackmailerMod;
 using Assassin = TownOfUs.Roles.Modifiers.Assassin;
+using Assassin2 = TownOfUs.Roles.Assassin;
+using TownOfUs.CovenRoles.RitualistMod;
 
 namespace TownOfUs.Patches
 {
@@ -37,6 +39,7 @@ namespace TownOfUs.Patches
 
                     Utils.Rpc(CustomRPC.SetTraitor, pc.PlayerId);
                 }
+                PlayerControl_Die.Postfix();
             }
             if (RpcHandling.Upped.ContainsKey(player))
             {
@@ -113,6 +116,18 @@ namespace TownOfUs.Patches
                 {
                     var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
                     ShowHideButtons.HideTarget(assassin, voteArea.TargetPlayerId);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Assassin) && !PlayerControl.LocalPlayer.Data.IsDead)
+                {
+                    var assassin = Role.GetRole<Assassin2>(PlayerControl.LocalPlayer);
+                    ShowHideButtonsAssassin.HideTarget(assassin, voteArea.TargetPlayerId);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Ritualist) && !PlayerControl.LocalPlayer.Data.IsDead)
+                {
+                    var rit = Role.GetRole<Ritualist>(PlayerControl.LocalPlayer);
+                    ShowHideButtonsRitualist.HideTarget(rit, voteArea.TargetPlayerId);
                 }
 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Doomsayer) && !PlayerControl.LocalPlayer.Data.IsDead)

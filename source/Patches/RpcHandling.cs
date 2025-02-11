@@ -2292,13 +2292,14 @@ namespace TownOfUs
                         var doctorPlayer = Utils.PlayerById(reader.ReadByte());
                         var targetbody = reader.ReadByte();
                         var doctorRole = Role.GetRole<Doctor>(doctorPlayer);
-                        var DoctorDeadBodies = Object.FindObjectsOfType<DeadBody>();
+                        var DoctorDeadBodies = GameObject.FindObjectsOfType<DeadBody>();
                         foreach (var body in DoctorDeadBodies)
+                        {
                             if (body.ParentId == targetbody)
                             {
                                 DocRevive.DoctorRevive(body, doctorRole);
                             }
-
+                        }
                         break;
                     case CustomRPC.StartWatch:
                         var lookout = Utils.PlayerById(reader.ReadByte());

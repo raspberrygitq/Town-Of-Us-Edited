@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Reactor.Utilities.Extensions;
 using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
 using TownOfUs.Roles;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using TownOfUs.Roles.Modifiers;
 using AmongUs.GameOptions;
 using TownOfUs.Patches;
@@ -35,13 +30,13 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
 
             var revived = role.RevivedList;
 
-                if (target != null)
+            if (target != null)
+            {
+                foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
                 {
-                    foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
-                    {
-                        if (deadBody.ParentId == target.ParentId) deadBody.gameObject.Destroy();
-                    }
+                    if (deadBody.ParentId == target.ParentId) deadBody.gameObject.Destroy();
                 }
+            }
 
             var player = Utils.PlayerById(parentId);
 
@@ -67,7 +62,6 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
             {
                 Patches.SubmergedCompatibility.ChangeFloor(player.transform.position.y > -7);
             }
-            if (target != null) Object.Destroy(target.gameObject);
 
             if (player.IsLover() && CustomGameOptions.BothLoversDie)
             {
@@ -110,7 +104,7 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
             if (PlayerControl.LocalPlayer == player)
             {
                 Utils.FlashCoroutine(Colors.Doctor, 1f, 0.5f);
-                player.myTasks.RemoveAt(1);
+                PlayerControl.LocalPlayer.myTasks.RemoveAt(1);
             }
         }
     }

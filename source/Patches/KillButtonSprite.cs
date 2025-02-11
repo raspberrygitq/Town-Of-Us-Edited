@@ -144,7 +144,7 @@ namespace TownOfUs
                 __instance.KillButton.graphic.sprite = Infect;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) && CustomGameOptions.GameMode != GameMode.Cultist)
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer))
             {
                 __instance.KillButton.graphic.sprite = Fix;
                 flag = true;

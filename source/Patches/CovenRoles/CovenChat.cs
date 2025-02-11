@@ -26,7 +26,7 @@ namespace TownOfUs.Patches.CovenRoles.CovenChat
                 if (__instance != HudManager.Instance.Chat)
                     return true;
 
-                if ((MeetingHud.Instance || LobbyBehaviour.Instance) && !chatText.ToLower().StartsWith("/ic "))
+                if ((MeetingHud.Instance || LobbyBehaviour.Instance) && !chatText.ToLower().StartsWith("/cc "))
                 {
                     covenchat = false;
                     return true;

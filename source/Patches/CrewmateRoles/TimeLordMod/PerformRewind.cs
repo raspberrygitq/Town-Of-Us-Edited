@@ -73,6 +73,22 @@ namespace TownOfUs.CrewmateRoles.TimeLordMod
 
         public static void Revive(PlayerControl player)
         {
+            DeadBody target = null;
+            foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
+            {
+                if (deadBody.ParentId == player.PlayerId) target = deadBody;
+            }
+            if (target != null && target.IsDouble())
+            {
+                var matches = Murder.KilledPlayers.ToArray().Where(x => x.KillerId == target.ParentId && x.isDoppel == true).ToList();
+                if (matches.Any())
+                {
+                    foreach (var killedPlayer in matches)
+                    {
+                        player = Utils.PlayerById(killedPlayer.PlayerId);
+                    }
+                }
+            }
             foreach (var poisoner in Role.GetRoles(RoleEnum.Poisoner))
             {
                 var poisonerRole = (Poisoner)poisoner;
