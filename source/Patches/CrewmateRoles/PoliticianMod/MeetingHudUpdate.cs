@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.PoliticianMod
+namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Update))]
     public static class MeetingHudUpdate

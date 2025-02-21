@@ -1,19 +1,19 @@
 ﻿using System;
 using HarmonyLib;
 using Hazel;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Reactor;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Patches;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.ImpostorRoles.PoisonerMod
+namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformPoisonKill
     {
-        public static Sprite PoisonSprite => TownOfUs.PoisonSprite;
-        public static Sprite PoisonedSprite => TownOfUs.PoisonedSprite;
+        public static Sprite PoisonSprite => TownOfUsEdited.PoisonSprite;
+        public static Sprite PoisonedSprite => TownOfUsEdited.PoisonedSprite;
 
         public static bool Prefix(KillButton __instance)
         {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Miner : Role
     {

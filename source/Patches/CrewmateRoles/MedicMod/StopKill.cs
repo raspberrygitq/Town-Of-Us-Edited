@@ -1,10 +1,10 @@
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.MedicMod
+namespace TownOfUsEdited.CrewmateRoles.MedicMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class StopKill

@@ -1,10 +1,10 @@
 ﻿using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.CrewmateRoles.SeerMod
+namespace TownOfUsEdited.CrewmateRoles.SeerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
-using TownOfUs.Patches;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Arsonist : Role
     {

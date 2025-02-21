@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 using TMPro;
 using System.Linq;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Veteran : Role
     {

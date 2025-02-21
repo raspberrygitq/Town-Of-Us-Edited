@@ -1,9 +1,9 @@
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.Extensions;
-using TownOfUs.Patches;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.CrewmateRoles.InvestigatorMod
+namespace TownOfUsEdited.CrewmateRoles.InvestigatorMod
 {
     public class Footprint
     {
@@ -78,7 +78,7 @@ namespace TownOfUs.CrewmateRoles.InvestigatorMod
             _gameObject.transform.SetParent(Player.transform.parent);
 
             _spriteRenderer = _gameObject.AddComponent<SpriteRenderer>();
-            _spriteRenderer.sprite = TownOfUs.Footprint;
+            _spriteRenderer.sprite = TownOfUsEdited.Footprint;
             _spriteRenderer.color = Color;
             _gameObject.transform.localScale *= new Vector2(1.2f, 1f) * (CustomGameOptions.FootprintSize / 10);
 

@@ -1,23 +1,23 @@
 using System;
 using System.Linq;
 using Reactor.Utilities.Extensions;
-using TownOfUs.Modifiers.AssassinMod;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
-using TownOfUs.CrewmateRoles.VigilanteMod;
-using TownOfUs.NeutralRoles.DoomsayerMod;
-using Assassin2 = TownOfUs.Roles.Assassin;
-using TownOfUs.CovenRoles.RitualistMod;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using Assassin2 = TownOfUsEdited.Roles.Assassin;
+using TownOfUsEdited.CovenRoles.RitualistMod;
 
-namespace TownOfUs.CrewmateRoles.MayorMod
+namespace TownOfUsEdited.CrewmateRoles.MayorMod
 {
     public class AddRevealButton
     {
-        public static Sprite RevealSprite => TownOfUs.RevealSprite;
+        public static Sprite RevealSprite => TownOfUsEdited.RevealSprite;
 
         public static void GenButton(Mayor role, int index)
         {

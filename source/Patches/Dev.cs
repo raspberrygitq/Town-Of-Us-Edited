@@ -5,10 +5,10 @@ using System.Net.Http;
 using System.Text.Json;
 using AmongUs.Data;
 using HarmonyLib;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     public class DevFeatures
     {
@@ -35,7 +35,7 @@ namespace TownOfUs.Patches
         {
             DefaultRequestHeaders = 
             {
-                {"User-Agent", "TownOfUsEdited Dev Request"}
+                {"User-Agent", "TownOfUsEditedEdited Dev Request"}
             } 
         };
 
@@ -55,12 +55,12 @@ namespace TownOfUs.Patches
             public List<string> Vip { get; set; }
         }
 
-        [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.Update))]
+        [HarmonyPatch(typeof(AccountTab), nameof(AccountTab.UpdateFriendCodeUI))] // Yes, patching the ui change of the friend code cuz it runs after logging lmao
         public static class UpdateDevClient
         {
             public static void Postfix()
             {
-                if (EOSManager.Instance.loginFlowFinished)
+                if (DataManager.Player.Account.LoginStatus == EOSManager.AccountLoginStatus.LoggedIn)
                 {
                     if (localStatus.IsNullOrWhiteSpace())
                     {
@@ -73,7 +73,7 @@ namespace TownOfUs.Patches
                             var Vip = data.FirstOrDefault(x => x.Vip.Any(y => y.Equals(EOSManager.Instance.FriendCode)));
                             if (MainDev != null)
                             {
-                                if (TownOfUs.HideDevStatus.Value)
+                                if (TownOfUsEdited.HideDevStatus.Value)
                                 {
                                     lastStatus = "MainDev";
                                     localStatus = "DevHidden";
@@ -82,7 +82,7 @@ namespace TownOfUs.Patches
                             }
                             else if (Dev != null)
                             {
-                                if (TownOfUs.HideDevStatus.Value)
+                                if (TownOfUsEdited.HideDevStatus.Value)
                                 {
                                     lastStatus = "Dev";
                                     localStatus = "DevHidden";
@@ -91,7 +91,7 @@ namespace TownOfUs.Patches
                             }
                             else if (Tester != null)
                             {
-                                if (TownOfUs.HideDevStatus.Value)
+                                if (TownOfUsEdited.HideDevStatus.Value)
                                 {
                                     lastStatus = "Tester";
                                     localStatus = "TesterHidden";
@@ -100,7 +100,7 @@ namespace TownOfUs.Patches
                             }
                             else if (Vip != null)
                             {
-                                if (TownOfUs.HideDevStatus.Value)
+                                if (TownOfUsEdited.HideDevStatus.Value)
                                 {
                                     lastStatus = "Vip";
                                     localStatus = "VipHidden";

@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 using System.Linq;
 
-namespace TownOfUs.ImpostorRoles.WitchMod
+namespace TownOfUsEdited.ImpostorRoles.WitchMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class PlayerControlUpdate
@@ -27,7 +27,7 @@ namespace TownOfUs.ImpostorRoles.WitchMod
             role.SpellButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
-            role.SpellButton.graphic.sprite = TownOfUs.Spell;
+            role.SpellButton.graphic.sprite = TownOfUsEdited.Spell;
             role.SpellButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             var killButton = role.SpellButton;

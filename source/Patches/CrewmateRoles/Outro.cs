@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.Patches.CrewmateRoles
+namespace TownOfUsEdited.Patches.CrewmateRoles
 {
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.Start))]
     public class Outro

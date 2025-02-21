@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CovenRoles.PotionMasterMod
+namespace TownOfUsEdited.CovenRoles.PotionMasterMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
@@ -42,9 +42,9 @@ namespace TownOfUs.CovenRoles.PotionMasterMod
 
             if (role.Potion == "null")
             {
-                role.PotionButton.graphic.sprite = TownOfUs.Potion;
+                role.PotionButton.graphic.sprite = TownOfUsEdited.Potion;
             }
-            else role.PotionButton.graphic.sprite = TownOfUs.Drink;
+            else role.PotionButton.graphic.sprite = TownOfUsEdited.Drink;
             role.PotionButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             // Set KillButton's cooldown

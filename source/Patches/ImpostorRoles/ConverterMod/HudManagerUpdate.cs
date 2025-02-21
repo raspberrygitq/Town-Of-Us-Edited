@@ -1,10 +1,10 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.ConverterMod
+namespace TownOfUsEdited.ImpostorRoles.ConverterMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class ConverterHudManagerUpdate
@@ -33,7 +33,7 @@ namespace TownOfUs.ImpostorRoles.ConverterMod
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
                     && converter.AbilityUsed == false && !player.Data.Disconnected);
                     
-            converter.ConvertButton.graphic.sprite = TownOfUs.Revive2Sprite;
+            converter.ConvertButton.graphic.sprite = TownOfUsEdited.Revive2Sprite;
             converter.ConvertButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             if (!converter.ConvertButton.isActiveAndEnabled) return;

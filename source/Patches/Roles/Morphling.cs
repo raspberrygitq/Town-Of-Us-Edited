@@ -1,9 +1,9 @@
 using System;
-using TownOfUs.Extensions;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Morphling : Role, IVisualAlteration
 

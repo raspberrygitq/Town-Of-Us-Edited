@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TownOfUs.Modifiers.AssassinMod;
-using TownOfUs.Roles;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.HunterMod
+namespace TownOfUsEdited.CrewmateRoles.HunterMod
 {
     public static class Retribution
     {

@@ -1,25 +1,25 @@
 ﻿using System.Linq;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.CrewmateRoles.SwapperMod;
-using TownOfUs.CrewmateRoles.VigilanteMod;
-using TownOfUs.NeutralRoles.DoomsayerMod;
-using TownOfUs.ImpostorRoles.BlackmailerMod;
-using TownOfUs.Roles.Modifiers;
-using TownOfUs.Extensions;
-using TownOfUs.CrewmateRoles.ImitatorMod;
-using TownOfUs.Patches;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
+using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.Patches;
 using Reactor.Utilities.Extensions;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
-using Assassin2 = TownOfUs.Roles.Assassin;
-using TownOfUs.Roles.AssassinMod;
-using TownOfUs.CovenRoles.RitualistMod;
-using TownOfUs.CrewmateRoles.DeputyMod;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin2 = TownOfUsEdited.Roles.Assassin;
+using TownOfUsEdited.Roles.AssassinMod;
+using TownOfUsEdited.CovenRoles.RitualistMod;
+using TownOfUsEdited.CrewmateRoles.DeputyMod;
 
-namespace TownOfUs.Modifiers.AssassinMod
+namespace TownOfUsEdited.Modifiers.AssassinMod
 {
     public class AssassinKill
     {
@@ -277,7 +277,7 @@ namespace TownOfUs.Modifiers.AssassinMod
                     var button = swapper.Buttons[index];
                     if (button != null)
                     {
-                        if (button.GetComponent<SpriteRenderer>().sprite == TownOfUs.SwapperSwitch)
+                        if (button.GetComponent<SpriteRenderer>().sprite == TownOfUsEdited.SwapperSwitch)
                         {
                             swapper.ListOfActives[index] = (swapper.ListOfActives[index].Item1, false);
                             if (SwapVotes.Swap1 == voteArea) SwapVotes.Swap1 = null;

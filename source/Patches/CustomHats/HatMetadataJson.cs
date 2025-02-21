@@ -1,4 +1,4 @@
-namespace TownOfUs.Patches.CustomHats
+namespace TownOfUsEdited.Patches.CustomHats
 {
     public class HatMetadataJson
     {

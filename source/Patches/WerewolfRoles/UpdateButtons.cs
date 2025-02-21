@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs.WerewolfRoles
+namespace TownOfUsEdited.WerewolfRoles
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class UpdateSabotage

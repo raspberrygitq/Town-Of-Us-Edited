@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Witch : Role
     {

@@ -1,16 +1,16 @@
 using System.Linq;
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.CrewmateRoles.ImitatorMod;
-using TownOfUs.CrewmateRoles.InvestigatorMod;
-using TownOfUs.CrewmateRoles.SnitchMod;
-using TownOfUs.Extensions;
-using TownOfUs.Modifiers.AssassinMod;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
+using TownOfUsEdited.CrewmateRoles.SnitchMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using static TownOfUs.Roles.Modifiers.Madmate;
+using static TownOfUsEdited.Roles.Modifiers.Madmate;
 
-namespace TownOfUs.Patches.Modifiers.MadmateMod
+namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class ImpostorDeathUpdate
@@ -72,7 +72,7 @@ namespace TownOfUs.Patches.Modifiers.MadmateMod
                 }
             }
         }
-        public static Sprite Sprite => TownOfUs.Arrow;
+        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static void TurnImp(PlayerControl player)
         {
             if (PlayerControl.LocalPlayer.PlayerId == player.PlayerId)

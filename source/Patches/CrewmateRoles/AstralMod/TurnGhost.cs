@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.AstralMod
+namespace TownOfUsEdited.CrewmateRoles.AstralMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     [HarmonyPriority(Priority.Last)]

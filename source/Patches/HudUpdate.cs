@@ -3,12 +3,12 @@ using UnityEngine;
 using System;
 using Object = UnityEngine.Object;
 using AmongUs.GameOptions;
-using TownOfUs.Roles;
-using TownOfUs.CrewmateRoles.HaunterMod;
-using TownOfUs.NeutralRoles.PhantomMod;
-using TownOfUs.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.CrewmateRoles.HaunterMod;
+using TownOfUsEdited.NeutralRoles.PhantomMod;
+using TownOfUsEdited.ImpostorRoles.SpiritMod;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudUpdate
@@ -56,8 +56,8 @@ namespace TownOfUs.Patches
                 && GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.Normal && HauntMenuMinigame.Instance == null);
             ZoomButton.transform.localPosition = Pos;
             ZoomButton.transform.Find("Background").localPosition = Vector3.zero;
-            ZoomButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().sprite = Zooming ? TownOfUs.ZoomPlusButton : TownOfUs.ZoomMinusButton;
-            ZoomButton.transform.Find("Active").GetComponent<SpriteRenderer>().sprite = Zooming ? TownOfUs.ZoomPlusActiveButton : TownOfUs.ZoomMinusActiveButton;
+            ZoomButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().sprite = Zooming ? TownOfUsEdited.ZoomPlusButton : TownOfUsEdited.ZoomMinusButton;
+            ZoomButton.transform.Find("Active").GetComponent<SpriteRenderer>().sprite = Zooming ? TownOfUsEdited.ZoomPlusActiveButton : TownOfUsEdited.ZoomMinusActiveButton;
         }
 
         public static void Zoom()

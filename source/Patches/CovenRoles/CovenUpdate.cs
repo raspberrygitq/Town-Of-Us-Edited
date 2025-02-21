@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CovenRoles.CovenMod
+namespace TownOfUsEdited.CovenRoles.CovenMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class CovenUpdate
@@ -62,7 +62,7 @@ namespace TownOfUs.CovenRoles.CovenMod
                     && !MeetingHud.Instance
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
                     
-            SabotageButton.graphic.sprite = TownOfUs.SabotageCoven;
+            SabotageButton.graphic.sprite = TownOfUsEdited.SabotageCoven;
 
             SabotageButton.SetCoolDown(0f, 1f);
 

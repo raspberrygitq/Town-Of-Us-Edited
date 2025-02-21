@@ -1,11 +1,11 @@
 using HarmonyLib;
 using TMPro;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 
-namespace TownOfUs.CrewmateRoles.JailorMod
+namespace TownOfUsEdited.CrewmateRoles.JailorMod
 {
     public class AddJail
     {

@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.Patches.CovenRoles.SpiritualistMod
+namespace TownOfUsEdited.Patches.CovenRoles.SpiritualistMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

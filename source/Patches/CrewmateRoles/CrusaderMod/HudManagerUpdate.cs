@@ -1,8 +1,8 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.CrusaderMod
+namespace TownOfUsEdited.CrewmateRoles.CrusaderMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate

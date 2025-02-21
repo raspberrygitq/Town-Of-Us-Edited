@@ -1,10 +1,10 @@
 ﻿using AmongUs.GameOptions;
 using HarmonyLib;
 using System.Linq;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.SheriffMod
+namespace TownOfUsEdited.CrewmateRoles.SheriffMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HUDKill

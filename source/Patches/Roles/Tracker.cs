@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using TMPro;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Tracker : Role
     {

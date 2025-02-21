@@ -1,13 +1,13 @@
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Patches.NeutralRoles;
-using TownOfUs.Roles;
+using TownOfUsEdited.Patches.NeutralRoles;
+using TownOfUsEdited.Roles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CrewmateRoles.TransporterMod
+namespace TownOfUsEdited.CrewmateRoles.TransporterMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton

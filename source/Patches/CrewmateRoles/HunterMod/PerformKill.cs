@@ -1,9 +1,9 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
 using System;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.HunterMod
+namespace TownOfUsEdited.CrewmateRoles.HunterMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Stalk

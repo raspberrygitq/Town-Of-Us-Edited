@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Collections.Generic;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Patches;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Patches;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class HexMaster : Role
     {

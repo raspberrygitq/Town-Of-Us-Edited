@@ -1,10 +1,10 @@
 using AmongUs.Data;
 using Assets.CoreScripts;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.ImpostorRoles.ReviverMod
+namespace TownOfUsEdited.ImpostorRoles.ReviverMod
 {
     public class MeetingPatch
     {

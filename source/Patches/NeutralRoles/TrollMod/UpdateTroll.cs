@@ -1,10 +1,10 @@
 using System.Collections;
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.TrollMod
+namespace TownOfUsEdited.NeutralRoles.TrollMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class UpdateTroll

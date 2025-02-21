@@ -1,11 +1,11 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using System.Linq;
 using System;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.CrewmateRoles.MediumMod
+namespace TownOfUsEdited.CrewmateRoles.MediumMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HUDMediate

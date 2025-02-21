@@ -2,13 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
-    public class Reviver : Role
+    public class Reviver : Role, IVisualAlteration
     {
         public PlayerControl RevivedPlayer;
         public KillButton _reviveButton;
@@ -37,6 +39,21 @@ namespace TownOfUs.Roles
                 ExtraButtons.Clear();
                 ExtraButtons.Add(value);
             }
+        }
+
+        public bool TryGetModifiedAppearance(out VisualAppearance appearance)
+        {
+            if (UsedRevive)
+            {
+                appearance = RevivedPlayer.GetDefaultAppearance();
+                var modifier = Modifier.GetModifier(RevivedPlayer);
+                if (modifier is IVisualAlteration alteration)
+                    alteration.TryGetModifiedAppearance(out appearance);
+                return true;
+            }
+
+            appearance = Player.GetDefaultAppearance();
+            return false;
         }
 
         public void ReviveAbility(DeadBody target)

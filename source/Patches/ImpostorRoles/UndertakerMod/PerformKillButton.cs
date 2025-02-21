@@ -1,10 +1,10 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.ImpostorRoles.UndertakerMod
+namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton
@@ -19,7 +19,7 @@ namespace TownOfUs.ImpostorRoles.UndertakerMod
 
             if (__instance == role.DragDropButton)
             {
-                if (role.DragDropButton.graphic.sprite == TownOfUs.DragSprite)
+                if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DragSprite)
                 {
                     if (__instance.isCoolingDown) return false;
                     if (!__instance.enabled) return false;
@@ -40,7 +40,7 @@ namespace TownOfUs.ImpostorRoles.UndertakerMod
                     role.CurrentlyDragging = role.CurrentTarget;
 
                     KillButtonTarget.SetTarget(__instance, null, role);
-                    __instance.graphic.sprite = TownOfUs.DropSprite;
+                    __instance.graphic.sprite = TownOfUsEdited.DropSprite;
                     return false;
                 }
                 else
@@ -69,7 +69,7 @@ namespace TownOfUs.ImpostorRoles.UndertakerMod
                     var body = role.CurrentlyDragging;
                     foreach (var body2 in role.CurrentlyDragging.bodyRenderers) body2.material.SetFloat("_Outline", 0f);
                     role.CurrentlyDragging = null;
-                    __instance.graphic.sprite = TownOfUs.DragSprite;
+                    __instance.graphic.sprite = TownOfUsEdited.DragSprite;
                     if (CustomGameOptions.GameMode != GameMode.Chaos)
                     {
                         role.Cooldown = CustomGameOptions.DragCd;

@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CovenRoles.HexMasterMod
+namespace TownOfUsEdited.CovenRoles.HexMasterMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
@@ -34,7 +34,7 @@ namespace TownOfUs.CovenRoles.HexMasterMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
-            role.HexBombButton.graphic.sprite = TownOfUs.HexBomb;
+            role.HexBombButton.graphic.sprite = TownOfUsEdited.HexBomb;
             role.HexBombButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             foreach (var hexed in role.Hexed)

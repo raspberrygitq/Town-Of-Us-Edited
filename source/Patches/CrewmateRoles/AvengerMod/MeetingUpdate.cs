@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System.Linq;
 
-namespace TownOfUs.CrewmateRoles.AvengerMod
+namespace TownOfUsEdited.CrewmateRoles.AvengerMod
 {
 
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.StartMeeting))]

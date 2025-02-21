@@ -1,7 +1,7 @@
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.Roles.Cultist
+namespace TownOfUsEdited.Roles.Cultist
 {
     public class Chameleon : Role
     {

@@ -1,10 +1,10 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.WerewolfRoles.SorcererMod
+namespace TownOfUsEdited.WerewolfRoles.SorcererMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate
@@ -30,7 +30,7 @@ namespace TownOfUs.WerewolfRoles.SorcererMod
             {
                 role.ReviveButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.ReviveButton.graphic.enabled = true;
-                role.ReviveButton.graphic.sprite = TownOfUs.Revive2Sprite;
+                role.ReviveButton.graphic.sprite = TownOfUsEdited.Revive2Sprite;
                 role.ReviveButton.gameObject.SetActive(false);
             }
 

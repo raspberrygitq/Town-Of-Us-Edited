@@ -1,11 +1,11 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.PoliticianMod
+namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate

@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace TownOfUs.Patches.NeutralRoles.SerialKillerChat
+namespace TownOfUsEdited.Patches.NeutralRoles.SerialKillerChat
 {
     public class SerialKillerChat
     {

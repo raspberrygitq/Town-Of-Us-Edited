@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using System;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using System.Linq.Expressions;
 using Il2CppInterop.Runtime.InteropTypes;
 
-namespace TownOfUs.Extensions
+namespace TownOfUsEdited.Extensions
 {
     public static class AmongUsExtensions
     {

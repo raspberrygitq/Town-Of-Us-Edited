@@ -4,7 +4,7 @@ using Reactor.Utilities;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Vulture : Role
     {

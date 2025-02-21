@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.DeputyMod
+namespace TownOfUsEdited.CrewmateRoles.DeputyMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudCamp

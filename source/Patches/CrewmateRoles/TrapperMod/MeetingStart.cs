@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
 using System;
 using System.Linq;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.TrapperMod
+namespace TownOfUsEdited.CrewmateRoles.TrapperMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class MeetingStart

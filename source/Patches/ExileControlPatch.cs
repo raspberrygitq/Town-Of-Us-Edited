@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.BeginForGameplay))]
     [HarmonyPriority(Priority.First)]

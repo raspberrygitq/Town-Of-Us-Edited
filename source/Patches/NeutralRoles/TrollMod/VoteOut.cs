@@ -1,14 +1,14 @@
 using HarmonyLib;
 using Reactor.Utilities;
 using System.Linq;
-using TownOfUs.Patches.NeutralRoles;
-using TownOfUs.Roles;
+using TownOfUsEdited.Patches.NeutralRoles;
+using TownOfUsEdited.Roles;
 using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.NeutralRoles.TrollMod
+namespace TownOfUsEdited.NeutralRoles.TrollMod
 {
     [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn

@@ -1,8 +1,8 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(NormalGameManager), nameof(NormalGameManager.GetBodyType))]
     public class FixBodyType

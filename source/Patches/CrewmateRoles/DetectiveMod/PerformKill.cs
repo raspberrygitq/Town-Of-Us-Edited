@@ -1,12 +1,12 @@
 ﻿using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Reactor.Utilities;
 using AmongUs.GameOptions;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.CrewmateRoles.DetectiveMod
+namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CoSetRole))]
     public class NoButtons

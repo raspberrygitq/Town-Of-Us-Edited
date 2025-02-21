@@ -1,17 +1,17 @@
 ﻿using AmongUs.GameOptions;
 using HarmonyLib;
 using System.Linq;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.SoulCollectorMod
+namespace TownOfUsEdited.NeutralRoles.SoulCollectorMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudReap
     {
-        public static Sprite ReapSprite => TownOfUs.ReapSprite;
+        public static Sprite ReapSprite => TownOfUsEdited.ReapSprite;
 
         [HarmonyPatch(nameof(HudManager.Update))]
         public static void Postfix(HudManager __instance)

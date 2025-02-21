@@ -1,12 +1,12 @@
 using HarmonyLib;
 using Reactor.Utilities;
 using System;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System.Collections;
 using InnerNet;
 using System.Collections.Generic;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     public class DisableAbilities
     {

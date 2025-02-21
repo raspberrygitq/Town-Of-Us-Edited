@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Modifiers.AssassinMod;
-using TownOfUs.Roles;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.WerewolfRoles.TalkativeWolfMod.ChatPatch
+namespace TownOfUsEdited.WerewolfRoles.TalkativeWolfMod.ChatPatch
 {   
     public class ChatPatch
     {

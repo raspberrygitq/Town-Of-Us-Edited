@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Roles;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.WerewolfRoles.GuardMod
+namespace TownOfUsEdited.WerewolfRoles.GuardMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

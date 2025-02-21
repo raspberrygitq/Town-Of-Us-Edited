@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.BountyHunterMod
+namespace TownOfUsEdited.ImpostorRoles.BountyHunterMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class UpdateArrows

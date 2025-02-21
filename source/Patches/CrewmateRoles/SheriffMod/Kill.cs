@@ -1,12 +1,12 @@
 ﻿using System;
 using HarmonyLib;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using AmongUs.GameOptions;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.CrewmateRoles.SheriffMod
+namespace TownOfUsEdited.CrewmateRoles.SheriffMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public static class Kill

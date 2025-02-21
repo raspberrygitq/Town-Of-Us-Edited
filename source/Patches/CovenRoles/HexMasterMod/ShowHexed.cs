@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CovenRoles.HexMasterMod
+namespace TownOfUsEdited.CovenRoles.HexMasterMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class ShowHexed

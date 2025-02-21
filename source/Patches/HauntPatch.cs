@@ -1,9 +1,9 @@
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using HarmonyLib;
 using AmongUs.GameOptions;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch]
 

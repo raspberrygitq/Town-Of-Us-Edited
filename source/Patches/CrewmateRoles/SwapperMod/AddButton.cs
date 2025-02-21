@@ -1,17 +1,17 @@
 using System;
 using System.Linq;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CrewmateRoles.SwapperMod
+namespace TownOfUsEdited.CrewmateRoles.SwapperMod
 {
     public class AddButton
     {
         private static int _mostRecentId;
-        private static Sprite ActiveSprite => TownOfUs.SwapperSwitch;
-        public static Sprite DisabledSprite => TownOfUs.SwapperSwitchDisabled;
+        private static Sprite ActiveSprite => TownOfUsEdited.SwapperSwitch;
+        public static Sprite DisabledSprite => TownOfUsEdited.SwapperSwitchDisabled;
 
         private static bool IsExempt(PlayerVoteArea voteArea)
         {

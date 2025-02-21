@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
-using TownOfUs.Modifiers.UnderdogMod;
+using TownOfUsEdited.Modifiers.UnderdogMod;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Converter : Role
     {

@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
 using System.Linq;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.OracleMod
+namespace TownOfUsEdited.CrewmateRoles.OracleMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class MeetingStartOracle

@@ -1,13 +1,13 @@
 using HarmonyLib;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using AmongUs.GameOptions;
-using TownOfUs.Modifiers.UnderdogMod;
-using TownOfUs.Roles;
+using TownOfUsEdited.Modifiers.UnderdogMod;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.CrewmateRoles.SheriffMod;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.CrewmateRoles.SheriffMod;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class StopImpKill

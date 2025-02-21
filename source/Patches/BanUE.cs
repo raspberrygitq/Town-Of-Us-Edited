@@ -4,7 +4,7 @@ using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using Reactor.Networking.Extensions;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     public class BUE_2249530
     {

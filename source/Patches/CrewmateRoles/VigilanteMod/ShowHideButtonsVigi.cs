@@ -1,11 +1,11 @@
 ﻿
 ﻿using HarmonyLib;
 using System.Linq;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine.UI;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.VigilanteMod
+namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Confirm))]
     public class ShowHideButtonsVigi

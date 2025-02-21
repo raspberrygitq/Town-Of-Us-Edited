@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Patches.NeutralRoles;
-using TownOfUs.Roles;
+using TownOfUsEdited.Patches.NeutralRoles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.NeutralRoles.PhantomMod
+namespace TownOfUsEdited.NeutralRoles.PhantomMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CompleteTask))]
     public class CompleteTask

@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.ImpostorRoles.SpiritMod
+namespace TownOfUsEdited.ImpostorRoles.SpiritMod
 {
     [HarmonyPatch(typeof(PlayerPhysics), nameof(PlayerPhysics.HandleAnimation))]
     public class HandleAnimation

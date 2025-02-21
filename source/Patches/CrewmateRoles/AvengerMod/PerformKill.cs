@@ -2,11 +2,11 @@ using AmongUs.GameOptions;
 using HarmonyLib;
 using System;
 using UnityEngine;
-using TownOfUs.Roles;
-using TownOfUs.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
 using System.Linq;
 
-namespace TownOfUs.CrewmateRoles.AvengerMod
+namespace TownOfUsEdited.CrewmateRoles.AvengerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

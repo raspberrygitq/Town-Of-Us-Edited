@@ -1,14 +1,14 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.ImpostorRoles.GrenadierMod
+namespace TownOfUsEdited.ImpostorRoles.GrenadierMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite FlashSprite => TownOfUs.FlashSprite;
+        public static Sprite FlashSprite => TownOfUsEdited.FlashSprite;
 
         public static void Postfix(HudManager __instance)
         {

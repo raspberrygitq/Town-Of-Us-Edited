@@ -2,20 +2,20 @@
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TMPro;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.NeutralRoles.DoomsayerMod
+namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
 {
     public class AddButtonDoom
     {
-        private static Sprite CycleBackSprite => TownOfUs.CycleBackSprite;
-        private static Sprite CycleForwardSprite => TownOfUs.CycleForwardSprite;
+        private static Sprite CycleBackSprite => TownOfUsEdited.CycleBackSprite;
+        private static Sprite CycleForwardSprite => TownOfUsEdited.CycleForwardSprite;
 
-        private static Sprite GuessSprite => TownOfUs.GuessSprite;
+        private static Sprite GuessSprite => TownOfUsEdited.GuessSprite;
 
         private static bool IsExempt(PlayerVoteArea voteArea)
         {

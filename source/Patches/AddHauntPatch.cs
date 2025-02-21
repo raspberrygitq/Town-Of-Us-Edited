@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Object = UnityEngine.Object;
-using TownOfUs.NeutralRoles.PhantomMod;
-using TownOfUs.CrewmateRoles.HaunterMod;
-using TownOfUs.Roles;
-using TownOfUs.ImpostorRoles.SpiritMod;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.NeutralRoles.PhantomMod;
+using TownOfUsEdited.CrewmateRoles.HaunterMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipAddHauntPatch

@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 using static Il2CppSystem.TimeZoneInfo;
 
-namespace TownOfUs.CrewmateRoles.DoctorMod
+namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate
@@ -78,7 +78,7 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
                     && CustomGameOptions.GameMode != GameMode.Chaos);
-            reviveButton.graphic.sprite = TownOfUs.DocReviveButton;
+            reviveButton.graphic.sprite = TownOfUsEdited.DocReviveButton;
 
             if (role.ButtonUsable || CustomGameOptions.GameMode == GameMode.Chaos)
             {
@@ -137,15 +137,15 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
             {
                 role.DragDropButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.DragDropButton.graphic.enabled = true;
-                role.DragDropButton.graphic.sprite = TownOfUs.DragSprite;
+                role.DragDropButton.graphic.sprite = TownOfUsEdited.DragSprite;
                 role.DragDropButton.gameObject.SetActive(false);
             }
-            if (role.DragDropButton.graphic.sprite != TownOfUs.DragSprite &&
-                role.DragDropButton.graphic.sprite != TownOfUs.DropSprite)
-                role.DragDropButton.graphic.sprite = TownOfUs.DragSprite;
+            if (role.DragDropButton.graphic.sprite != TownOfUsEdited.DragSprite &&
+                role.DragDropButton.graphic.sprite != TownOfUsEdited.DropSprite)
+                role.DragDropButton.graphic.sprite = TownOfUsEdited.DragSprite;
 
-            if (role.DragDropButton.graphic.sprite == TownOfUs.DropSprite && role.CurrentlyDragging == null)
-                role.DragDropButton.graphic.sprite = TownOfUs.DragSprite;
+            if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DropSprite && role.CurrentlyDragging == null)
+                role.DragDropButton.graphic.sprite = TownOfUsEdited.DragSprite;
 
             role.DragDropButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
             role.DragDropButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
@@ -154,7 +154,7 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
                     && CustomGameOptions.OnlyMedRevive && CustomGameOptions.GameMode != GameMode.Chaos);
 
 
-            if (role.DragDropButton.graphic.sprite == TownOfUs.DragSprite)
+            if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DragSprite)
             {
                 var data = PlayerControl.LocalPlayer.Data;
                 var isDead = data.IsDead;

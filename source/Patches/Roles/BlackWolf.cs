@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using AmongUs.GameOptions;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class BlackWolf : Role
     {

@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CovenRoles.VoodooMasterMod
+namespace TownOfUsEdited.CovenRoles.VoodooMasterMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
@@ -30,7 +30,7 @@ namespace TownOfUs.CovenRoles.VoodooMasterMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
-            role.VoodooButton.graphic.sprite = TownOfUs.Voodoo;
+            role.VoodooButton.graphic.sprite = TownOfUsEdited.Voodoo;
             role.VoodooButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             foreach (var player2 in PlayerControl.AllPlayerControls)

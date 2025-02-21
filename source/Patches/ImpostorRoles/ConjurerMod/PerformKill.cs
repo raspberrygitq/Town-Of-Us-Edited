@@ -1,13 +1,13 @@
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 using System.Linq;
-using TownOfUs.Modifiers.UnderdogMod;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Modifiers.UnderdogMod;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.ImpostorRoles.ConjurerMod
+namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton
@@ -24,7 +24,7 @@ namespace TownOfUs.ImpostorRoles.ConjurerMod
             if (__instance == role.CurseButton)
             {
                 if (!__instance.enabled) return false;
-                if (role.CurseButton.graphic.sprite == TownOfUs.Curse)
+                if (role.CurseButton.graphic.sprite == TownOfUsEdited.Curse)
                 {
                     if (__instance.isCoolingDown) return false;
                     if (role.ClosestPlayer == null) return false;
@@ -57,7 +57,7 @@ namespace TownOfUs.ImpostorRoles.ConjurerMod
                     SoundManager.Instance.PlaySound(role.Player.KillSfx, false, 0.5f);
                     role.Kills += 1;
                     role.CursedPlayer = null;
-                    __instance.graphic.sprite = TownOfUs.Curse;
+                    __instance.graphic.sprite = TownOfUsEdited.Curse;
                     if (PlayerControl.LocalPlayer.Is(ModifierEnum.Underdog))
                     {
                         var lowerKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - CustomGameOptions.UnderdogKillBonus;

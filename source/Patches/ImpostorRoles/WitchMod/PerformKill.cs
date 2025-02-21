@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using TownOfUs.Modifiers.UnderdogMod;
+using TownOfUsEdited.Modifiers.UnderdogMod;
 
-namespace TownOfUs.ImpostorRoles.WitchMod
+namespace TownOfUsEdited.ImpostorRoles.WitchMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton

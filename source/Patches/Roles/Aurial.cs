@@ -3,14 +3,14 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using Object = UnityEngine.Object;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Aurial : Role
     {
         public Dictionary<(Vector3, int), ArrowBehaviour> SenseArrows = new Dictionary<(Vector3, int), ArrowBehaviour>();
-        public static Sprite Sprite => TownOfUs.Arrow;
+        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public Aurial(PlayerControl player) : base(player)
         {
             Name = "Aurial";

@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.MutantMod
+namespace TownOfUsEdited.NeutralRoles.MutantMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate
@@ -60,19 +60,19 @@ namespace TownOfUs.NeutralRoles.MutantMod
             {
                 role.TransformButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.TransformButton.graphic.enabled = true;
-                role.TransformButton.graphic.sprite = TownOfUs.TransformSprite;
+                role.TransformButton.graphic.sprite = TownOfUsEdited.TransformSprite;
                 role.TransformButton.gameObject.SetActive(false);
             }
-            if (role.TransformButton.graphic.sprite != TownOfUs.TransformSprite &&
-                role.TransformButton.graphic.sprite != TownOfUs.UnTransformSprite)
-                role.TransformButton.graphic.sprite = TownOfUs.TransformSprite;
+            if (role.TransformButton.graphic.sprite != TownOfUsEdited.TransformSprite &&
+                role.TransformButton.graphic.sprite != TownOfUsEdited.UnTransformSprite)
+                role.TransformButton.graphic.sprite = TownOfUsEdited.TransformSprite;
 
-            if (role.TransformButton.graphic.sprite == TownOfUs.UnTransformSprite && role.IsTransformed == false)
-                role.TransformButton.graphic.sprite = TownOfUs.TransformSprite;
+            if (role.TransformButton.graphic.sprite == TownOfUsEdited.UnTransformSprite && role.IsTransformed == false)
+                role.TransformButton.graphic.sprite = TownOfUsEdited.TransformSprite;
 
             if (role.IsTransformed == true)
             {
-                role.TransformButton.graphic.sprite = TownOfUs.UnTransformSprite;
+                role.TransformButton.graphic.sprite = TownOfUsEdited.UnTransformSprite;
             }
 
             role.TransformButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
@@ -85,7 +85,7 @@ namespace TownOfUs.NeutralRoles.MutantMod
                 role.TransformButton.SetCoolDown(role.TransformTimer(), CustomGameOptions.TransformCD);
             }
 
-            if (role.TransformButton.graphic.sprite == TownOfUs.TransformSprite)
+            if (role.TransformButton.graphic.sprite == TownOfUsEdited.TransformSprite)
             {
 
                 var renderer = role.TransformButton.graphic;

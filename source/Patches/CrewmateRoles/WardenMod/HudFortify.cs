@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.WardenMod
+namespace TownOfUsEdited.CrewmateRoles.WardenMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudFortify

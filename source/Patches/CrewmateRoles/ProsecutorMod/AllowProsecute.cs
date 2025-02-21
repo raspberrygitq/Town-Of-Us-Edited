@@ -1,12 +1,12 @@
 using System.Collections;
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.CrewmateRoles.AltruistMod;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.CrewmateRoles.AltruistMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.ProsecutorMod
+namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
 {
     public class AllowExtraVotes
     {

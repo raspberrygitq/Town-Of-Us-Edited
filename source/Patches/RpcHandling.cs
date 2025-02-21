@@ -6,58 +6,58 @@ using Hazel;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using Reactor.Networking.Extensions;
-using TownOfUs.CrewmateRoles.TimeLordMod;
-using TownOfUs.CrewmateRoles.AltruistMod;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.CrewmateRoles.SwapperMod;
-using TownOfUs.CrewmateRoles.VigilanteMod;
-using TownOfUs.CrewmateRoles.ProsecutorMod;
-using TownOfUs.NeutralRoles.DoomsayerMod;
-using TownOfUs.CultistRoles.NecromancerMod;
-using TownOfUs.ImpostorRoles.ConverterMod;
-using TownOfUs.CustomOption;
-using TownOfUs.Modifiers.AssassinMod;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
-using TownOfUs.NeutralRoles.ExecutionerMod;
-using TownOfUs.NeutralRoles.GuardianAngelMod;
-using TownOfUs.ImpostorRoles.MinerMod;
-using TownOfUs.CrewmateRoles.HaunterMod;
-using TownOfUs.CrewmateRoles.HelperMod;
-using TownOfUs.NeutralRoles.PhantomMod;
-using TownOfUs.ImpostorRoles.TraitorMod;
-using TownOfUs.CrewmateRoles.ImitatorMod;
-using TownOfUs.ImpostorRoles.WitchMod;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Cultist;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.CrewmateRoles.TimeLordMod;
+using TownOfUsEdited.CrewmateRoles.AltruistMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.CrewmateRoles.ProsecutorMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.CultistRoles.NecromancerMod;
+using TownOfUsEdited.ImpostorRoles.ConverterMod;
+using TownOfUsEdited.CustomOption;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
+using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
+using TownOfUsEdited.ImpostorRoles.MinerMod;
+using TownOfUsEdited.CrewmateRoles.HaunterMod;
+using TownOfUsEdited.CrewmateRoles.HelperMod;
+using TownOfUsEdited.NeutralRoles.PhantomMod;
+using TownOfUsEdited.ImpostorRoles.TraitorMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.ImpostorRoles.WitchMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Cultist;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using PerformKillButton = TownOfUs.NeutralRoles.AmnesiacMod.PerformKillButton;
-using PerformKill = TownOfUs.Patches.NeutralRoles.ShifterMod.PerformKill;
-using PerformStake = TownOfUs.CrewmateRoles.VampireHunterMod.PerformKill;
+using PerformKillButton = TownOfUsEdited.NeutralRoles.AmnesiacMod.PerformKillButton;
+using PerformKill = TownOfUsEdited.Patches.NeutralRoles.ShifterMod.PerformKill;
+using PerformStake = TownOfUsEdited.CrewmateRoles.VampireHunterMod.PerformKill;
 using Random = UnityEngine.Random;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using AmongUs.GameOptions;
-using TownOfUs.NeutralRoles.VampireMod;
-using TownOfUs.CrewmateRoles.MayorMod;
+using TownOfUsEdited.NeutralRoles.VampireMod;
+using TownOfUsEdited.CrewmateRoles.MayorMod;
 using System.Reflection;
-using TownOfUs.Patches.NeutralRoles;
+using TownOfUsEdited.Patches.NeutralRoles;
 using BepInEx.Unity.IL2CPP;
 using BepInEx;
-using TownOfUs.CrewmateRoles.GuardianMod;
-using TownOfUs.Patches.Modifiers.MadmateMod;
-using TownOfUs.ImpostorRoles.SpiritMod;
-using TownOfUs.ImpostorRoles.BlinderMod;
-using TownOfUs.ImpostorRoles.FreezerMod;
-using TownOfUs.CovenRoles.RitualistMod;
-using TownOfUs.Extensions;
-using TownOfUs.ChooseCrewGhostRoles;
-using TownOfUs.ChooseImpGhostRole;
-using TownOfUs.CrewmateRoles.DoctorMod;
-using KillButtonTarget = TownOfUs.CrewmateRoles.AltruistMod.KillButtonTarget;
-using TownOfUs.CrewmateRoles.DeputyMod;
+using TownOfUsEdited.CrewmateRoles.GuardianMod;
+using TownOfUsEdited.Patches.Modifiers.MadmateMod;
+using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.ImpostorRoles.BlinderMod;
+using TownOfUsEdited.ImpostorRoles.FreezerMod;
+using TownOfUsEdited.CovenRoles.RitualistMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.ChooseCrewGhostRoles;
+using TownOfUsEdited.ChooseImpGhostRole;
+using TownOfUsEdited.CrewmateRoles.DoctorMod;
+using KillButtonTarget = TownOfUsEdited.CrewmateRoles.AltruistMod.KillButtonTarget;
+using TownOfUsEdited.CrewmateRoles.DeputyMod;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     public static class RpcHandling
     {
@@ -1434,7 +1434,7 @@ namespace TownOfUs
                 switch (newRpc)
                 {
                     case CustomRPC.Test:
-                        System.Console.WriteLine("Additional Rpc received!");
+                        System.Console.WriteLine("Rpc received!");
                         break;
 
                     case CustomRPC.SetRole:
@@ -1523,7 +1523,7 @@ namespace TownOfUs
                         var deadBodies = Object.FindObjectsOfType<DeadBody>();
                         foreach (var body in deadBodies)
                             if (body.ParentId == readByte)
-                                Coroutines.Start(global::TownOfUs.ImpostorRoles.JanitorMod.Coroutine.CleanCoroutine(body, 
+                                Coroutines.Start(global::TownOfUsEdited.ImpostorRoles.JanitorMod.Coroutine.CleanCoroutine(body, 
                                 janitorRole));
 
                         break;
@@ -1533,7 +1533,7 @@ namespace TownOfUs
                         var ThedeadBodies = Object.FindObjectsOfType<DeadBody>();
                         foreach (var body in ThedeadBodies)
                             if (body.ParentId == reader.ReadByte())
-                                Coroutines.Start(global::TownOfUs.NeutralRoles.VultureMod.Coroutine.EatCoroutine(body, 
+                                Coroutines.Start(global::TownOfUsEdited.NeutralRoles.VultureMod.Coroutine.EatCoroutine(body, 
                                 vultureRole));
 
                         break;
@@ -1767,7 +1767,7 @@ namespace TownOfUs
                         readSByte2 = reader.ReadSByte();
                         SwapVotes.Swap2 =
                             MeetingHud.Instance.playerStates.FirstOrDefault(x => x.TargetPlayerId == readSByte2);
-                        PluginSingleton<TownOfUs>.Instance.Log.LogMessage("Bytes received - " + readSByte + " - " +
+                        PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("Bytes received - " + readSByte + " - " +
                                                                           readSByte2);
                         break;
 
@@ -2265,7 +2265,7 @@ namespace TownOfUs
                                         CustomGameOptions.ReviveDuration, 0.5f));
 
                                 Coroutines.Start(
-                                    global::TownOfUs.CrewmateRoles.AltruistMod.Coroutine.AltruistRevive(body,
+                                    global::TownOfUsEdited.CrewmateRoles.AltruistMod.Coroutine.AltruistRevive(body,
                                         altruistRole));
                             }
 
@@ -2283,7 +2283,7 @@ namespace TownOfUs
                                         1f, 0.5f));
 
                                 Coroutines.Start(
-                                    global::TownOfUs.WerewolfRoles.SorcererMod.Coroutine.SorcererRevive(body,
+                                    global::TownOfUsEdited.WerewolfRoles.SorcererMod.Coroutine.SorcererRevive(body,
                                         sorcererRole));
                             }
 
@@ -2825,7 +2825,7 @@ namespace TownOfUs
                     AmongUsClient.Instance.DisconnectWithReason("You were kicked for cheating, please stop.");
                     return;
                 }
-                PluginSingleton<TownOfUs>.Instance.Log.LogMessage("RPC SET ROLE");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("RPC SET ROLE");
                 var infected = GameData.Instance.AllPlayers.ToArray();
 
                 // Get Impostors Count

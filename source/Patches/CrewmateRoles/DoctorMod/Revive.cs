@@ -1,13 +1,13 @@
 using System.Linq;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles.Modifiers;
 using AmongUs.GameOptions;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.CrewmateRoles.DoctorMod
+namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 {
     public class DocRevive
     {

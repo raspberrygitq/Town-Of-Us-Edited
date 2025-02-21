@@ -4,7 +4,7 @@ using Reactor.Utilities;
 using HarmonyLib;
 using Il2CppSystem;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     public class HostManager
     {

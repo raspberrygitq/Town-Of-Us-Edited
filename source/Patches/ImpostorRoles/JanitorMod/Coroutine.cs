@@ -1,10 +1,10 @@
 using System.Collections;
-using TownOfUs.Modifiers.UnderdogMod;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Modifiers.UnderdogMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.JanitorMod
+namespace TownOfUsEdited.ImpostorRoles.JanitorMod
 {
     public class Coroutine
     {

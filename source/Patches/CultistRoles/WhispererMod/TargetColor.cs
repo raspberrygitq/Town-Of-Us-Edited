@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Cultist;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Cultist;
 using UnityEngine;
 
-namespace TownOfUs.CultistRoles.WhispererMod
+namespace TownOfUsEdited.CultistRoles.WhispererMod
 {
 
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]

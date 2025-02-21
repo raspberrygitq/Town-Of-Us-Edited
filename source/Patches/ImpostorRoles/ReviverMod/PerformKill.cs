@@ -1,9 +1,9 @@
 ﻿using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.Patches.ImpostorRoles.ReviverMod
+namespace TownOfUsEdited.Patches.ImpostorRoles.ReviverMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

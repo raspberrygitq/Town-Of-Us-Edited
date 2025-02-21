@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.NeutraleRoles.ShifterMod
+namespace TownOfUsEdited.NeutraleRoles.ShifterMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate
@@ -26,7 +26,7 @@ namespace TownOfUs.NeutraleRoles.ShifterMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
                     && PlayerControl.LocalPlayer.Is(RoleEnum.Shifter));
-            shiftButton.graphic.sprite = TownOfUs.ShiftButton;
+            shiftButton.graphic.sprite = TownOfUsEdited.ShiftButton;
             HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
             shiftButton.SetCoolDown(role.ShiftTimer(), CustomGameOptions.ShiftCD);
             Utils.SetTarget(ref role.ClosestPlayer, shiftButton, float.NaN);

@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TownOfUs.CovenRoles.RitualistMod
+namespace TownOfUsEdited.CovenRoles.RitualistMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Confirm))]
     public class ShowHideButtonsRitualist

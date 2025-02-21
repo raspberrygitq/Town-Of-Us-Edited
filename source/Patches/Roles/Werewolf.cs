@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Werewolf : Role
     {

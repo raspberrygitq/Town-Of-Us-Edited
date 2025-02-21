@@ -1,18 +1,18 @@
 ﻿using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 using System.Linq;
-using TownOfUs.CrewmateRoles.SnitchMod;
-using TownOfUs.CrewmateRoles.ImitatorMod;
-using TownOfUs.Roles.Cultist;
-using TownOfUs.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.CrewmateRoles.SnitchMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.Roles.Cultist;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using Reactor.Utilities;
-using TownOfUs.Roles.Modifiers;
-using TownOfUs.Patches;
+using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.CrewmateRoles.VampireHunterMod
+namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

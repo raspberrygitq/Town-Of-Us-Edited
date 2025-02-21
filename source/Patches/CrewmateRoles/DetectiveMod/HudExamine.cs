@@ -1,14 +1,14 @@
 ﻿using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.DetectiveMod
+namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudExamine
     {
-        public static Sprite ExamineSprite => TownOfUs.ExamineSprite;
+        public static Sprite ExamineSprite => TownOfUsEdited.ExamineSprite;
 
         [HarmonyPatch(nameof(HudManager.Update))]
         public static void Postfix(HudManager __instance)

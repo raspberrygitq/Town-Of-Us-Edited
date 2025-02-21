@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Spiritualist : Role
     {

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfUsEdited.Roles.Modifiers
 {
     public class Lover : Modifier
     {

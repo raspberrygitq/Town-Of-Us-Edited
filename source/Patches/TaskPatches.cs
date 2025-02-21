@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     internal static class TaskPatches
     {

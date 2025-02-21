@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.Patches {
+namespace TownOfUsEdited.Patches {
     [HarmonyPatch(typeof(LobbyBehaviour), nameof(LobbyBehaviour.Start))]
     static class LobbyBehaviourPatch {
         [HarmonyPostfix]

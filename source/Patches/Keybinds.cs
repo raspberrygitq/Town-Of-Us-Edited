@@ -2,12 +2,12 @@
 using Rewired;
 using Rewired.Data;
 using System.Linq;
-using TownOfUs.Roles;
-using Ability = TownOfUs.Roles.Modifiers.Ability;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
-using Assassin2 = TownOfUs.Roles.Assassin;
+using TownOfUsEdited.Roles;
+using Ability = TownOfUsEdited.Roles.Modifiers.Ability;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin2 = TownOfUsEdited.Roles.Assassin;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     //thanks to TheOtherRolesAU/TheOtherRoles/pull/347 by dadoum for the patch and extension
     [HarmonyPatch(typeof(InputManager_Base), nameof(InputManager_Base.Awake))]

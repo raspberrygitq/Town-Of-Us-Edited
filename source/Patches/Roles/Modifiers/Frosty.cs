@@ -1,6 +1,6 @@
 using System;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfUsEdited.Roles.Modifiers
 {
     public class Frosty : Modifier
     {

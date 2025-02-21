@@ -1,16 +1,16 @@
 using HarmonyLib;
 using System.Linq;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.HunterMod
+namespace TownOfUsEdited.CrewmateRoles.HunterMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate
     {
-        public static Sprite StalkSprite => TownOfUs.StalkSprite;
+        public static Sprite StalkSprite => TownOfUsEdited.StalkSprite;
         [HarmonyPatch(nameof(HudManager.Update))]
         public static void Postfix(HudManager __instance)
         {

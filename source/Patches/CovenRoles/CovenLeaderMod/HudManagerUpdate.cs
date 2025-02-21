@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CovenRoles.CovenLeaderMod
+namespace TownOfUsEdited.CovenRoles.CovenLeaderMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
@@ -30,7 +30,7 @@ namespace TownOfUs.CovenRoles.CovenLeaderMod
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
                     && !role.Converted);
 
-            role.RecruitButton.graphic.sprite = TownOfUs.Recruit;
+            role.RecruitButton.graphic.sprite = TownOfUsEdited.Recruit;
             role.RecruitButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             role.RecruitButton.SetCoolDown(role.KillCooldown, CustomGameOptions.CovenKCD);

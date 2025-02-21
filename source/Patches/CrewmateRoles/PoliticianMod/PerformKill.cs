@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.CrewmateRoles.PoliticianMod
+namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

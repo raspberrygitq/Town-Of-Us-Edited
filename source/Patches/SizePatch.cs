@@ -1,12 +1,12 @@
 ﻿﻿using HarmonyLib;
 using System.Linq;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch]
     public static class SizePatch
@@ -65,7 +65,21 @@ namespace TownOfUs.Patches
             foreach (var body in bodies)
             {
                 try {
-                    if (!body.IsDouble()) body.transform.localScale = playerBindings[body.ParentId].GetAppearance().SizeFactor;
+                    var matches = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(RoleEnum.Reviver) && Role.GetRole<Reviver>(x).UsedRevive && x.PlayerId == body.ParentId).ToList();
+                    if (matches != null)
+                    {
+                        var modifier = Modifier.GetModifier(Utils.PlayerById(body.ParentId));
+                        if (modifier != null && modifier is IVisualAlteration alteration)
+                        {
+                            alteration.TryGetModifiedAppearance(out VisualAppearance appearance);
+                            body.transform.localScale = appearance.SizeFactor;
+                        }
+                        else
+                        {
+                            body.transform.localScale = playerBindings[body.ParentId].GetDefaultAppearance().SizeFactor;
+                        }
+                    }
+                    else if (!body.IsDouble()) body.transform.localScale = playerBindings[body.ParentId].GetAppearance().SizeFactor;
                     else
                     {
                         var modifier = Modifier.GetModifier(Utils.PlayerById(body.ParentId));

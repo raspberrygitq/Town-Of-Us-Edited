@@ -3,14 +3,14 @@ using System.Linq;
 using HarmonyLib;
 using Object = UnityEngine.Object;
 using Reactor.Utilities;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Patches;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
 using AmongUs.GameOptions;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace TownOfUs.CrewmateRoles.TimeLordMod
+namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformRewind

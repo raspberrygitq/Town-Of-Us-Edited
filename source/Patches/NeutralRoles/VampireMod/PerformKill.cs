@@ -1,15 +1,15 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
-using TownOfUs.CrewmateRoles.InvestigatorMod;
-using TownOfUs.CrewmateRoles.TrapperMod;
-using TownOfUs.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using System.Linq;
-using TownOfUs.Roles.Cultist;
-using TownOfUs.Patches;
+using TownOfUsEdited.Roles.Cultist;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.NeutralRoles.VampireMod
+namespace TownOfUsEdited.NeutralRoles.VampireMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Bite

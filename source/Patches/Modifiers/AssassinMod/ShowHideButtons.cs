@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TownOfUs.Modifiers.AssassinMod
+namespace TownOfUsEdited.Modifiers.AssassinMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Confirm))]
     public class ShowHideButtons

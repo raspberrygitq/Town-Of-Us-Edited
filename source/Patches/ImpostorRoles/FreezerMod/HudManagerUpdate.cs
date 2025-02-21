@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.FreezerMod
+namespace TownOfUsEdited.ImpostorRoles.FreezerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
@@ -28,7 +28,7 @@ namespace TownOfUs.ImpostorRoles.FreezerMod
                 role.FreezeButton.gameObject.SetActive(false);
             }
 
-            role.FreezeButton.graphic.sprite = TownOfUs.Freeze;
+            role.FreezeButton.graphic.sprite = TownOfUsEdited.Freeze;
             role.FreezeButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);

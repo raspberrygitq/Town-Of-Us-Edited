@@ -1,11 +1,11 @@
 using HarmonyLib;
-using TownOfUs.CrewmateRoles.AltruistMod;
-using TownOfUs.Roles.Modifiers;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.AltruistMod;
+using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.Roles;
 using System;
-using TownOfUs.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
 
-namespace TownOfUs.Modifiers.LoversMod
+namespace TownOfUsEdited.Modifiers.LoversMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.Die))]
     public class Die

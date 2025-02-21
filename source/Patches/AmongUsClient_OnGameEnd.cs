@@ -1,9 +1,9 @@
 using HarmonyLib;
 using Il2CppSystem.Collections.Generic;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.OnGameEnd))]
     public class AmongUsClientGameEnd

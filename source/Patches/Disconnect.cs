@@ -1,22 +1,22 @@
 using HarmonyLib;
 using System.Linq;
 using UnityEngine;
-using TownOfUs.ImpostorRoles.TraitorMod;
-using TownOfUs.Roles;
-using TownOfUs.NeutralRoles.SoulCollectorMod;
-using TownOfUs.CrewmateRoles.ImitatorMod;
-using TownOfUs.CrewmateRoles.SwapperMod;
-using TownOfUs.CrewmateRoles.VigilanteMod;
-using TownOfUs.Modifiers.AssassinMod;
-using TownOfUs.NeutralRoles.DoomsayerMod;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.ImpostorRoles.TraitorMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine.UI;
-using TownOfUs.ImpostorRoles.BlackmailerMod;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
-using Assassin2 = TownOfUs.Roles.Assassin;
-using TownOfUs.CovenRoles.RitualistMod;
+using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin2 = TownOfUsEdited.Roles.Assassin;
+using TownOfUsEdited.CovenRoles.RitualistMod;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(GameData))]
     public class DisconnectHandler
@@ -153,7 +153,7 @@ namespace TownOfUs.Patches
                         var button = swapper.Buttons[index];
                         if (button != null)
                         {
-                            if (button.GetComponent<SpriteRenderer>().sprite == TownOfUs.SwapperSwitch)
+                            if (button.GetComponent<SpriteRenderer>().sprite == TownOfUsEdited.SwapperSwitch)
                             {
                                 swapper.ListOfActives[index] = (swapper.ListOfActives[index].Item1, false);
                                 if (SwapVotes.Swap1 == voteArea) SwapVotes.Swap1 = null;
@@ -208,7 +208,7 @@ namespace TownOfUs.Patches
                         var button = imitatorRole.Buttons[index];
                         if (button != null)
                         {
-                            if (button.GetComponent<SpriteRenderer>().sprite == TownOfUs.ImitateSelectSprite)
+                            if (button.GetComponent<SpriteRenderer>().sprite == TownOfUsEdited.ImitateSelectSprite)
                             {
                                 imitatorRole.ListOfActives[index] = (imitatorRole.ListOfActives[index].Item1, false);
                                 if (SetImitate.Imitate == voteArea) SetImitate.Imitate = null;

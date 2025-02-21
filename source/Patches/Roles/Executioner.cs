@@ -1,7 +1,7 @@
 using Il2CppSystem.Collections.Generic;
 using Reactor.Utilities;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Executioner : Role
     {

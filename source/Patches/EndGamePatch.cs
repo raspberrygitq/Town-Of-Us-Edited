@@ -4,14 +4,14 @@ using UnityEngine;
 using System.Text;
 using System.Linq;
 using Reactor.Utilities.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Extensions;
 using AmongUs.GameOptions;
-using TownOfUs.Patches.ScreenEffects;
-using TownOfUs.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Patches.ScreenEffects;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
 using Reactor.Utilities;
 
-namespace TownOfUs.Patches {
+namespace TownOfUsEdited.Patches {
 
     static class AdditionalTempData {
         public static List<PlayerRoleInfo> playerRoles = new List<PlayerRoleInfo>();

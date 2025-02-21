@@ -1,14 +1,14 @@
 using HarmonyLib;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Cultist;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Cultist;
 using UnityEngine;
 
-namespace TownOfUs.CultistRoles.WhispererMod
+namespace TownOfUsEdited.CultistRoles.WhispererMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite WhisperSprite => TownOfUs.WhisperSprite;
+        public static Sprite WhisperSprite => TownOfUsEdited.WhisperSprite;
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;

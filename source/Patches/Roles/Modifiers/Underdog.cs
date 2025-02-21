@@ -1,6 +1,6 @@
-﻿using TownOfUs.Modifiers.UnderdogMod;
+﻿using TownOfUsEdited.Modifiers.UnderdogMod;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfUsEdited.Roles.Modifiers
 {
     public class Underdog : Modifier
     {

@@ -2,7 +2,7 @@ using System.Linq;
 using Il2CppSystem.Data.Common;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class VoodooMaster : Role
     {

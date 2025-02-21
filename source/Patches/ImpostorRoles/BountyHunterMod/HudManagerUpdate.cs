@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.ImpostorRoles.BountyHunterMod
+namespace TownOfUsEdited.ImpostorRoles.BountyHunterMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite Arrow => TownOfUs.Arrow;
+        public static Sprite Arrow => TownOfUsEdited.Arrow;
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -29,7 +29,7 @@ namespace TownOfUs.ImpostorRoles.BountyHunterMod
             role.TimerButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
-            role.TimerButton.graphic.sprite = TownOfUs.Bounty;
+            role.TimerButton.graphic.sprite = TownOfUsEdited.Bounty;
 
             role.TimerButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 

@@ -1,14 +1,14 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.MinerMod
+namespace TownOfUsEdited.ImpostorRoles.MinerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite MineSprite => TownOfUs.MineSprite;
+        public static Sprite MineSprite => TownOfUsEdited.MineSprite;
 
         public static void Postfix(HudManager __instance)
         {

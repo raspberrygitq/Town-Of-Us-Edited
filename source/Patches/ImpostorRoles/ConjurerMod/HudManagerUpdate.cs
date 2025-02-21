@@ -1,10 +1,10 @@
 using System.Linq;
 using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.ConjurerMod
+namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
@@ -23,16 +23,16 @@ namespace TownOfUs.ImpostorRoles.ConjurerMod
             {
                 role.CurseButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.CurseButton.graphic.enabled = true;
-                role.CurseButton.graphic.sprite = TownOfUs.Curse;
+                role.CurseButton.graphic.sprite = TownOfUsEdited.Curse;
                 role.CurseButton.gameObject.SetActive(false);
             }
 
-            if (role.CurseButton.graphic.sprite != TownOfUs.Curse &&
+            if (role.CurseButton.graphic.sprite != TownOfUsEdited.Curse &&
                 role.CurseButton.graphic.sprite != Kill)
-                role.CurseButton.graphic.sprite = TownOfUs.Curse;
+                role.CurseButton.graphic.sprite = TownOfUsEdited.Curse;
 
             if (role.CurseButton.graphic.sprite == Kill && (role.CursedPlayer == null || role.CursedPlayer.Data.IsDead))
-                role.CurseButton.graphic.sprite = TownOfUs.Curse;
+                role.CurseButton.graphic.sprite = TownOfUsEdited.Curse;
 
             if (role.CursedPlayer != null && !role.CursedPlayer.Data.IsDead)
             {
@@ -64,7 +64,7 @@ namespace TownOfUs.ImpostorRoles.ConjurerMod
                 .Where(x => !x.Is(Faction.Impostors))
                 .ToList();
 
-            if (role.CurseButton.graphic.sprite == TownOfUs.Curse)
+            if (role.CurseButton.graphic.sprite == TownOfUsEdited.Curse)
             {
                 var killButton = role.CurseButton;
                 if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, killButton);
@@ -79,7 +79,7 @@ namespace TownOfUs.ImpostorRoles.ConjurerMod
                 if (role.CursedPlayer.Data.Disconnected || role.CursedPlayer.Data.IsDead)
                 {
                     role.CursedPlayer = null;
-                    role.CurseButton.graphic.sprite = TownOfUs.Curse;
+                    role.CurseButton.graphic.sprite = TownOfUsEdited.Curse;
                 }
                 else if (!role.CursedPlayer.Data.IsDead && !MeetingHud.Instance)
                 {

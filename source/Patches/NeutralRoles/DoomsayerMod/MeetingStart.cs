@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
-using TownOfUs.CrewmateRoles.ImitatorMod;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.NeutralRoles.DoomsayerMod
+namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class MeetingStart

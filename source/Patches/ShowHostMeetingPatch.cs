@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch]
     public class ShowHostMeetingPatch

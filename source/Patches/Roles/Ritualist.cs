@@ -2,12 +2,12 @@ using System.Linq;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using TownOfUs.Patches;
-using TownOfUs.CrewmateRoles.VampireHunterMod;
-using TownOfUs.NeutralRoles.ExecutionerMod;
-using TownOfUs.NeutralRoles.GuardianAngelMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
+using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Ritualist : Role, IGuesser
     {

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.VampireMod
+namespace TownOfUsEdited.NeutralRoles.VampireMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
@@ -50,7 +50,7 @@ namespace TownOfUs.NeutralRoles.VampireMod
                     && vamps.Count < CustomGameOptions.MaxVampiresPerGame
                     && alivevamps.Count == 1);
                     
-            role.BiteButton.graphic.sprite = TownOfUs.BiteSprite;
+            role.BiteButton.graphic.sprite = TownOfUsEdited.BiteSprite;
             role.BiteButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
 
             var notvamps = PlayerControl.AllPlayerControls

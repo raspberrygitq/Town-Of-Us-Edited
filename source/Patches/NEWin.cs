@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.NeutralRoles.SoulCollectorMod;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.Start))]
     public static class NEWin

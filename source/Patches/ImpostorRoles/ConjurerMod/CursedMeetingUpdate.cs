@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System.Linq;
 
-namespace TownOfUs.ImpostorRoles.ConjurerMod
+namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
 {
 
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.StartMeeting))]

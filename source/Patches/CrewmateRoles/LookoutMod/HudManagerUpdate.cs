@@ -1,11 +1,11 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using System.Linq;
 using TMPro;
 
-namespace TownOfUs.Patches.CrewmateRoles.LookoutMod
+namespace TownOfUsEdited.Patches.CrewmateRoles.LookoutMod
 {
     public class LookoutPatches
     {

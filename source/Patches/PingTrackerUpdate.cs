@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     //[HarmonyPriority(Priority.VeryHigh)] // to show this message first, or be overrided if any plugins do
     [HarmonyPatch(typeof(PingTracker), nameof(PingTracker.Update))]
@@ -17,7 +17,7 @@ namespace TownOfUs
             var host = GameData.Instance.GetHost();
 
             __instance.text.text =
-                "<size=2><color=#00FF00FF><color=#EE9D01>TownOfUs</color><b><color=#AA00FF>Edited</color></b> v" + TownOfUs.VersionString + "</color>" + TownOfUs.VersionTag + "\n" +
+                "<size=2><color=#00FF00FF><color=#EE9D01>TownOfUsEdited</color><b><color=#AA00FF>Edited</color></b> v" + TownOfUsEdited.VersionString + "</color>" + TownOfUsEdited.VersionTag + "\n" +
                 $"Ping: {AmongUsClient.Instance.Ping}ms\n" +
                 (!MeetingHud.Instance
                     ? "<color=#00FF00FF>Modded By: <color=#FF0000>le killer</color> </color>\n" +

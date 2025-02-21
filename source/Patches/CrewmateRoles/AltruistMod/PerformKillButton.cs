@@ -1,10 +1,10 @@
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.CrewmateRoles.AltruistMod
+namespace TownOfUsEdited.CrewmateRoles.AltruistMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton

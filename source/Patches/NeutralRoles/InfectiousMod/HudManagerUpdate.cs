@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.InfectiousMod
+namespace TownOfUsEdited.NeutralRoles.InfectiousMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
@@ -30,7 +30,7 @@ namespace TownOfUs.NeutralRoles.InfectiousMod
                 role.InfectButton.gameObject.SetActive(false);
             }
 
-            role.InfectButton.graphic.sprite = TownOfUs.InfectSprite;
+            role.InfectButton.graphic.sprite = TownOfUsEdited.InfectSprite;
             role.InfectButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
             role.InfectButton.SetCoolDown(role.Cooldown, CustomGameOptions.InfectiousCD);
 

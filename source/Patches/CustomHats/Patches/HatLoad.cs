@@ -3,7 +3,7 @@ using PowerTools;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.Patches.CustomHats.Patches
+namespace TownOfUsEdited.Patches.CustomHats.Patches
 {
     public class HatLoad
     {

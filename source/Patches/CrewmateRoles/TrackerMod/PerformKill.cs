@@ -1,16 +1,16 @@
 ﻿using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.CrewmateRoles.TrackerMod
+namespace TownOfUsEdited.CrewmateRoles.TrackerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite Sprite => TownOfUs.Arrow;
+        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static bool Prefix(KillButton __instance)
         {
             if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;

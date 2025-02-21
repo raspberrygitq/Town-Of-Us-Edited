@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs.Patches.Modifiers.MadmateMod
+namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate

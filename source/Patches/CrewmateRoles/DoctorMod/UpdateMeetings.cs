@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System.Linq;
 using AmongUs.QuickChat;
 
-namespace TownOfUs.CrewmateRoles.DoctorMod
+namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 {
     public class ReviveMeetingUpdate
     {

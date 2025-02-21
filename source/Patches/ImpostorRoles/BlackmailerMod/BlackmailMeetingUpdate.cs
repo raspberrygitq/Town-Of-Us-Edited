@@ -1,12 +1,12 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using System.Linq;
 using System.Collections;
 using Reactor.Utilities;
 using AmongUs.QuickChat;
 
-namespace TownOfUs.ImpostorRoles.BlackmailerMod
+namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
 {
     public class BlackmailMeetingUpdate
     {
@@ -20,7 +20,7 @@ namespace TownOfUs.ImpostorRoles.BlackmailerMod
         [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
         public class MeetingHudStart
         {
-            public static Sprite Letter => TownOfUs.BlackmailLetterSprite;
+            public static Sprite Letter => TownOfUsEdited.BlackmailLetterSprite;
 
             public static void Postfix(MeetingHud __instance)
             {
@@ -73,7 +73,7 @@ namespace TownOfUs.ImpostorRoles.BlackmailerMod
         [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Update))]
         public class MeetingHud_Update
         {
-            public static Sprite Overlay => TownOfUs.BlackmailOverlaySprite;
+            public static Sprite Overlay => TownOfUsEdited.BlackmailOverlaySprite;
 
             public static void Postfix(MeetingHud __instance)
             {

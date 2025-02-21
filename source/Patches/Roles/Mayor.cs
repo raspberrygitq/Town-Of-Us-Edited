@@ -1,8 +1,8 @@
 using System.Linq;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Mayor : Role
     {

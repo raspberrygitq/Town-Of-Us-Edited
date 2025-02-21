@@ -1,8 +1,8 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.ImpostorRoles.SpiritMod
+namespace TownOfUsEdited.ImpostorRoles.SpiritMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
     public class UpdateArrows

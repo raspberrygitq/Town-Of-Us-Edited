@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
-using TownOfUs.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
 
-namespace TownOfUs.CrewmateRoles.AltruistMod
+namespace TownOfUsEdited.CrewmateRoles.AltruistMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate

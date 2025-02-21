@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System;
 using Reactor.Utilities;
 
-namespace TownOfUs.Patches.NeutralRoles.MutantMod
+namespace TownOfUsEdited.Patches.NeutralRoles.MutantMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
@@ -24,7 +24,7 @@ namespace TownOfUs.Patches.NeutralRoles.MutantMod
                 
             if (__instance == role.TransformButton)
             {
-                if (role.TransformButton.graphic.sprite == TownOfUs.TransformSprite)
+                if (role.TransformButton.graphic.sprite == TownOfUsEdited.TransformSprite)
                 {
                     if (__instance.isCoolingDown) return false;
                     if (!__instance.enabled) return false;
@@ -35,7 +35,7 @@ namespace TownOfUs.Patches.NeutralRoles.MutantMod
                     Coroutines.Start(Utils.FlashCoroutine(Colors.Mutant, 0.5f));
                     Utils.Rpc(CustomRPC.Transform, PlayerControl.LocalPlayer.PlayerId);
                     role.IsTransformed = true;
-                    __instance.graphic.sprite = TownOfUs.UnTransformSprite;
+                    __instance.graphic.sprite = TownOfUsEdited.UnTransformSprite;
                     return false;
                 }
                 else
@@ -47,7 +47,7 @@ namespace TownOfUs.Patches.NeutralRoles.MutantMod
                     PlayerControl.LocalPlayer.MyPhysics.SetBodyType(PlayerBodyTypes.Normal);
                     Utils.Rpc(CustomRPC.UnTransform, PlayerControl.LocalPlayer.PlayerId);
                     role.IsTransformed = false;
-                    __instance.graphic.sprite = TownOfUs.TransformSprite;
+                    __instance.graphic.sprite = TownOfUsEdited.TransformSprite;
                     role.TransformCooldown = CustomGameOptions.TransformCD;
                     return false;
                 }

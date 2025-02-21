@@ -7,12 +7,12 @@ using Reactor.Utilities;
 using System.Linq;
 using UnityEngine.AddressableAssets;
 
-namespace TownOfUs.Patches.CustomHats
+namespace TownOfUsEdited.Patches.CustomHats
 {
     internal static class HatLoader
     {
-        private static ManualLogSource Log => PluginSingleton<TownOfUs>.Instance.Log;
-        private static Assembly Assembly => typeof(TownOfUs).Assembly;
+        private static ManualLogSource Log => PluginSingleton<TownOfUsEdited>.Instance.Log;
+        private static Assembly Assembly => typeof(TownOfUsEdited).Assembly;
 
         private static bool LoadedHats = false;
 
@@ -53,7 +53,7 @@ namespace TownOfUs.Patches.CustomHats
         private static List<HatData> DiscoverHatBehaviours()
         {
             var hatBehaviours = new List<HatData>();
-            var path = TownOfUs.RuntimeLocation + "\\touhats.catalog";
+            var path = TownOfUsEdited.RuntimeLocation + "\\touhats.catalog";
             Addressables.AddResourceLocator(Addressables.LoadContentCatalog(path).WaitForCompletion());
             var all_hat_locations = Addressables.LoadResourceLocationsAsync("touhats").WaitForCompletion();
             var assets = Addressables.LoadAssetsAsync<HatData>(all_hat_locations, null, false).WaitForCompletion();

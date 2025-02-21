@@ -1,17 +1,17 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.Modifiers.UnderdogMod;
-using TownOfUs.ImpostorRoles.ImpostorMod;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Modifiers.UnderdogMod;
+using TownOfUsEdited.ImpostorRoles.ImpostorMod;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.ImpostorRoles.BomberMod
+namespace TownOfUsEdited.ImpostorRoles.BomberMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Plant
     {
-        public static Sprite PlantSprite => TownOfUs.PlantSprite;
-        public static Sprite DetonateSprite => TownOfUs.DetonateSprite;
+        public static Sprite PlantSprite => TownOfUsEdited.PlantSprite;
+        public static Sprite DetonateSprite => TownOfUsEdited.DetonateSprite;
         public static bool Prefix(KillButton __instance)
         {
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Bomber);

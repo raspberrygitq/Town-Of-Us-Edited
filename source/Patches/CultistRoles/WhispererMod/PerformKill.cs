@@ -1,11 +1,11 @@
 using HarmonyLib;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Cultist;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Cultist;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-namespace TownOfUs.CultistRoles.WhispererMod
+namespace TownOfUsEdited.CultistRoles.WhispererMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Whisper

@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.SerialKillerMod
+namespace TownOfUsEdited.NeutralRoles.SerialKillerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     [HarmonyPriority(Priority.Last)]
@@ -41,7 +41,7 @@ namespace TownOfUs.NeutralRoles.SerialKillerMod
                     && sk.Converted == false && CustomGameOptions.SerialKillerCanConvert
                     && !player.Data.Disconnected);
                     
-            sk.skconvertButton.graphic.sprite = TownOfUs.SKConvertSprite;
+            sk.skconvertButton.graphic.sprite = TownOfUsEdited.SKConvertSprite;
             sk.skconvertButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
 
             // Set KillButton's cooldown

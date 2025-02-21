@@ -1,14 +1,14 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch(typeof(MainMenuManager), nameof(MainMenuManager.Start))]
     public static class LogoPatch
     {
-        private static Sprite Sprite => TownOfUs.ToUBanner;
+        private static Sprite Sprite => TownOfUsEdited.ToUBanner;
         static void Postfix(PingTracker __instance) {
-            var touLogo = new GameObject("bannerLogo_TownOfUsEdited");
+            var touLogo = new GameObject("bannerLogo_TownOfUsEditedEdited");
             touLogo.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
 
             var renderer = touLogo.AddComponent<SpriteRenderer>();

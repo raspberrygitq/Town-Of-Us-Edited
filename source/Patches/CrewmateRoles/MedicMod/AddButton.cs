@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.CrewmateRoles.MedicMod
+namespace TownOfUsEdited.CrewmateRoles.MedicMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class AddButton
     {
-        private static Sprite LighterSprite => TownOfUs.LighterSprite;
-        public static Sprite DarkerSprite => TownOfUs.DarkerSprite;
+        private static Sprite LighterSprite => TownOfUsEdited.LighterSprite;
+        public static Sprite DarkerSprite => TownOfUsEdited.DarkerSprite;
 
         private static bool IsExempt(PlayerVoteArea voteArea)
         {

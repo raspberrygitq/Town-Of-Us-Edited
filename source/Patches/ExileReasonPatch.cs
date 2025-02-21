@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {    
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.BeginForGameplay))]
     internal class CustomExileController

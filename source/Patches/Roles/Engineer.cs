@@ -1,6 +1,6 @@
 using TMPro;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Engineer : Role
     {

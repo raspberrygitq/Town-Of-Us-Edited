@@ -1,11 +1,11 @@
 using HarmonyLib;
 using System.Linq;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using UnityEngine;
 using System;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.CultistRoles
+namespace TownOfUsEdited.CultistRoles
 {
     [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn

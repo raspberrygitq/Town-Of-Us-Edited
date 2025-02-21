@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.NeutralRoles.GuardianAngelMod
+namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
 {
     public enum ProtectOptions
     {

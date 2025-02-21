@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
 using Reactor.Utilities;
 using UnityEngine;
-using TownOfUs.CustomOption;
+using TownOfUsEdited.CustomOption;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch]
     class CancelCountdownStart

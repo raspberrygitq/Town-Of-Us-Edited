@@ -1,10 +1,10 @@
 using HarmonyLib;
 using System;
 using System.Linq;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.Patches.ImpostorRoles.ImpostorChat
+namespace TownOfUsEdited.Patches.ImpostorRoles.ImpostorChat
 {
     public class ImpostorChat
     {

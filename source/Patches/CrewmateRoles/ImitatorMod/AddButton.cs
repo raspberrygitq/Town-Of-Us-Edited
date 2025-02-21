@@ -1,18 +1,18 @@
 
 using System;
 using System.Linq;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CrewmateRoles.ImitatorMod
+namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
 {
     public class AddButtonImitator
     {
         private static int _mostRecentId;
-        private static Sprite ActiveSprite => TownOfUs.ImitateSelectSprite;
-        public static Sprite DisabledSprite => TownOfUs.ImitateDeselectSprite;
+        private static Sprite ActiveSprite => TownOfUsEdited.ImitateSelectSprite;
+        public static Sprite DisabledSprite => TownOfUsEdited.ImitateDeselectSprite;
 
         private static bool IsExempt(PlayerVoteArea voteArea)
         {

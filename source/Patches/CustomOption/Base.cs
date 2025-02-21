@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Reactor.Localization.Utilities;
 using Reactor.Utilities;
 
-namespace TownOfUs.CustomOption
+namespace TownOfUsEdited.CustomOption
 {
     public class CustomOption
     {

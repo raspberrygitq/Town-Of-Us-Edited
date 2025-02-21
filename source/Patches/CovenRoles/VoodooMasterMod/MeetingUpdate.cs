@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System.Linq;
 
-namespace TownOfUs.CovenRoles.VoodooMasterModMod
+namespace TownOfUsEdited.CovenRoles.VoodooMasterModMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Update))]
     class MeetingUpdatePatch

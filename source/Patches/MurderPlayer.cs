@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch]
     public class MurderPlayer

@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.ImpostorRoles.PoisonerMod
+namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.SetTarget))]
     public class SetTarget

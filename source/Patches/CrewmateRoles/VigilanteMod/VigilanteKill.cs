@@ -1,23 +1,23 @@
 ﻿using System.Linq;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Modifiers.AssassinMod;
-using TownOfUs.ImpostorRoles.BlackmailerMod;
-using TownOfUs.Extensions;
-using TownOfUs.NeutralRoles.DoomsayerMod;
-using TownOfUs.CrewmateRoles.SwapperMod;
-using TownOfUs.Patches;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
-using Assassin2 = TownOfUs.Roles.Assassin;
-using TownOfUs.Roles.AssassinMod;
-using TownOfUs.CovenRoles.RitualistMod;
-using TownOfUs.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.Patches;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin2 = TownOfUsEdited.Roles.Assassin;
+using TownOfUsEdited.Roles.AssassinMod;
+using TownOfUsEdited.CovenRoles.RitualistMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 
-namespace TownOfUs.CrewmateRoles.VigilanteMod
+namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
 {
     public class VigilanteKill
     {
@@ -209,7 +209,7 @@ namespace TownOfUs.CrewmateRoles.VigilanteMod
                     var button = swapper.Buttons[index];
                     if (button != null)
                     {
-                        if (button.GetComponent<SpriteRenderer>().sprite == TownOfUs.SwapperSwitch)
+                        if (button.GetComponent<SpriteRenderer>().sprite == TownOfUsEdited.SwapperSwitch)
                         {
                             swapper.ListOfActives[index] = (swapper.ListOfActives[index].Item1, false);
                             if (SwapVotes.Swap1 == voteArea) SwapVotes.Swap1 = null;

@@ -6,31 +6,31 @@ using System.Collections.Generic;
 using System.Linq;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
-using TownOfUs.Patches;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Cultist;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Cultist;
+using TownOfUsEdited.Roles.Modifiers;
 using Il2CppInterop.Runtime.InteropTypes;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using PerformKill = TownOfUs.Modifiers.UnderdogMod.PerformKill;
+using PerformKill = TownOfUsEdited.Modifiers.UnderdogMod.PerformKill;
 using Random = UnityEngine.Random;
 using AmongUs.GameOptions;
-using TownOfUs.CrewmateRoles.TrapperMod;
-using TownOfUs.ImpostorRoles.BomberMod;
-using TownOfUs.CrewmateRoles.VampireHunterMod;
-using TownOfUs.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.ImpostorRoles.BomberMod;
+using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using Reactor.Networking;
 using Reactor.Networking.Extensions;
-using static TownOfUs.Roles.Glitch;
-using TownOfUs.Patches.NeutralRoles;
-using TownOfUs.CrewmateRoles.DetectiveMod;
-using TownOfUs.NeutralRoles.SoulCollectorMod;
+using static TownOfUsEdited.Roles.Glitch;
+using TownOfUsEdited.Patches.NeutralRoles;
+using TownOfUsEdited.CrewmateRoles.DetectiveMod;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch]
     public static class Utils
@@ -2352,7 +2352,7 @@ namespace TownOfUs
                 }
                 else
                 {
-                    Logger<TownOfUs>.Error($"unknown data type entered for rpc write: item - {nameof(item)}, {item.GetType().FullName}, rpc - {data[0]}");
+                    Logger<TownOfUsEdited>.Error($"unknown data type entered for rpc write: item - {nameof(item)}, {item.GetType().FullName}, rpc - {data[0]}");
                 }
             }
             AmongUsClient.Instance.FinishRpcImmediately(writer);
@@ -2771,7 +2771,7 @@ namespace TownOfUs
             {
                 var escapist = Role.GetRole<Escapist>(PlayerControl.LocalPlayer);
                 escapist.Cooldown = CustomGameOptions.EscapeCd;
-                escapist.EscapeButton.graphic.sprite = TownOfUs.MarkSprite;
+                escapist.EscapeButton.graphic.sprite = TownOfUsEdited.MarkSprite;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Blackmailer))
             {
@@ -2790,7 +2790,7 @@ namespace TownOfUs
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Bomber))
             {
                 var bomber = Role.GetRole<Bomber>(PlayerControl.LocalPlayer);
-                bomber.PlantButton.graphic.sprite = TownOfUs.PlantSprite;
+                bomber.PlantButton.graphic.sprite = TownOfUsEdited.PlantSprite;
                 bomber.Bomb.ClearBomb();
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Grenadier))
@@ -2807,7 +2807,7 @@ namespace TownOfUs
             {
                 var morphling = Role.GetRole<Morphling>(PlayerControl.LocalPlayer);
                 morphling.Cooldown = CustomGameOptions.MorphlingCd;
-                morphling.MorphButton.graphic.sprite = TownOfUs.SampleSprite;
+                morphling.MorphButton.graphic.sprite = TownOfUsEdited.SampleSprite;
                 morphling.SampledPlayer = null;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Swooper))
@@ -2824,7 +2824,7 @@ namespace TownOfUs
             {
                 var undertaker = Role.GetRole<Undertaker>(PlayerControl.LocalPlayer);
                 undertaker.Cooldown = CustomGameOptions.DragCd;
-                undertaker.DragDropButton.graphic.sprite = TownOfUs.DragSprite;
+                undertaker.DragDropButton.graphic.sprite = TownOfUsEdited.DragSprite;
                 undertaker.CurrentlyDragging = null;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Necromancer))

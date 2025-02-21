@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfUsEdited.Roles.Modifiers
 {
     public class Radar : Modifier
     {

@@ -1,10 +1,10 @@
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.ImpostorRoles.JanitorMod
+namespace TownOfUsEdited.ImpostorRoles.JanitorMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton

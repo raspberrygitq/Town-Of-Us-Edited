@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using UnityEngine;
-using TownOfUs.NeutralRoles.ExecutionerMod;
-using TownOfUs.NeutralRoles.GuardianAngelMod;
-using TownOfUs.CrewmateRoles.VampireHunterMod;
-using TownOfUs.Extensions;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
+using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
+using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfUsEdited.Roles.Modifiers
 {
     public class Assassin : Ability, IGuesser
     {

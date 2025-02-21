@@ -1,11 +1,11 @@
 using HarmonyLib;
 using System.Linq;
-using TownOfUs.CrewmateRoles.HaunterMod;
-using TownOfUs.CrewmateRoles.HelperMod;
+using TownOfUsEdited.CrewmateRoles.HaunterMod;
+using TownOfUsEdited.CrewmateRoles.HelperMod;
 using System.Collections.Generic;
-using TownOfUs.CrewmateRoles.GuardianMod;
+using TownOfUsEdited.CrewmateRoles.GuardianMod;
 
-namespace TownOfUs.ChooseCrewGhostRoles
+namespace TownOfUsEdited.ChooseCrewGhostRoles
 {
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.BeginForGameplay))]
     public class PickCrewRole

@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     [HarmonyPatch(typeof(HudManager))]
     public class UpdateRoleInfo

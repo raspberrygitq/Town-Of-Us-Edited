@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.ImpostorRoles.UndertakerMod
+namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class PlayerControlUpdate
@@ -20,15 +20,15 @@ namespace TownOfUs.ImpostorRoles.UndertakerMod
             {
                 role.DragDropButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.DragDropButton.graphic.enabled = true;
-                role.DragDropButton.graphic.sprite = TownOfUs.DragSprite;
+                role.DragDropButton.graphic.sprite = TownOfUsEdited.DragSprite;
                 role.DragDropButton.gameObject.SetActive(false);
             }
-            if (role.DragDropButton.graphic.sprite != TownOfUs.DragSprite &&
-                role.DragDropButton.graphic.sprite != TownOfUs.DropSprite)
-                role.DragDropButton.graphic.sprite = TownOfUs.DragSprite;
+            if (role.DragDropButton.graphic.sprite != TownOfUsEdited.DragSprite &&
+                role.DragDropButton.graphic.sprite != TownOfUsEdited.DropSprite)
+                role.DragDropButton.graphic.sprite = TownOfUsEdited.DragSprite;
 
-            if (role.DragDropButton.graphic.sprite == TownOfUs.DropSprite && role.CurrentlyDragging == null)
-                role.DragDropButton.graphic.sprite = TownOfUs.DragSprite;
+            if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DropSprite && role.CurrentlyDragging == null)
+                role.DragDropButton.graphic.sprite = TownOfUsEdited.DragSprite;
 
             role.DragDropButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
@@ -37,7 +37,7 @@ namespace TownOfUs.ImpostorRoles.UndertakerMod
             role.DragDropButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
 
-            if (role.DragDropButton.graphic.sprite == TownOfUs.DragSprite)
+            if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DragSprite)
             {
                 var data = PlayerControl.LocalPlayer.Data;
                 var isDead = data.IsDead;
@@ -69,7 +69,7 @@ namespace TownOfUs.ImpostorRoles.UndertakerMod
                 KillButtonTarget.SetTarget(killButton, closestBody, role);
             }
 
-            if (role.DragDropButton.graphic.sprite == TownOfUs.DragSprite)
+            if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DragSprite)
             {
                 role.DragDropButton.SetCoolDown(role.DragTimer(), CustomGameOptions.DragCd);
             }

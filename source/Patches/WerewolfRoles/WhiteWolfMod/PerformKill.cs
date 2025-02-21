@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System;
 
-namespace TownOfUs.Patches.WerewolfRoles.WhiteWolfMod
+namespace TownOfUsEdited.Patches.WerewolfRoles.WhiteWolfMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
@@ -23,7 +23,7 @@ namespace TownOfUs.Patches.WerewolfRoles.WhiteWolfMod
                 
             if (__instance == role.RampageButton)
             {
-                if (role.RampageButton.graphic.sprite == TownOfUs.RampageSprite)
+                if (role.RampageButton.graphic.sprite == TownOfUsEdited.RampageSprite)
                 {
                     if (__instance.isCoolingDown) return false;
                     if (!__instance.enabled) return false;
@@ -40,7 +40,7 @@ namespace TownOfUs.Patches.WerewolfRoles.WhiteWolfMod
                     PlayerControl.LocalPlayer.MyPhysics.SetBodyType(PlayerBodyTypes.Normal);
                     Utils.Rpc(CustomRPC.WerewolfUnRampage, PlayerControl.LocalPlayer.PlayerId);
                     role.Rampaged = false;
-                    __instance.graphic.sprite = TownOfUs.RampageSprite;
+                    __instance.graphic.sprite = TownOfUsEdited.RampageSprite;
                     role.RampageCooldown = CustomGameOptions.RampageCD;
                     return false;
                 }

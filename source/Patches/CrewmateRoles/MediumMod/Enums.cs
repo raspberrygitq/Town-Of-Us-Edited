@@ -1,5 +1,5 @@
 
-namespace TownOfUs.CrewmateRoles.MediumMod
+namespace TownOfUsEdited.CrewmateRoles.MediumMod
 {
     public enum DeadRevealed
     {

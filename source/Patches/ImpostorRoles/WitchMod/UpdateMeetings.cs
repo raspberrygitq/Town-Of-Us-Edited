@@ -1,26 +1,26 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System.Linq;
 using Object = UnityEngine.Object;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.CrewmateRoles.SwapperMod;
-using TownOfUs.CrewmateRoles.VigilanteMod;
-using TownOfUs.NeutralRoles.DoomsayerMod;
-using TownOfUs.Roles.Modifiers;
-using TownOfUs.Extensions;
-using TownOfUs.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using Reactor.Utilities.Extensions;
-using TownOfUs.Modifiers.AssassinMod;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
-using Assassin2 = TownOfUs.Roles.Assassin;
-using TownOfUs.Roles.AssassinMod;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin2 = TownOfUsEdited.Roles.Assassin;
+using TownOfUsEdited.Roles.AssassinMod;
 
-namespace TownOfUs.ImpostorRoles.WitchMod
+namespace TownOfUsEdited.ImpostorRoles.WitchMod
 {
     public class ApplyCurse
     {

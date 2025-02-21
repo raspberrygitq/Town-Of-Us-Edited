@@ -2,11 +2,11 @@ using System.Linq;
 using HarmonyLib;
 using Il2CppSystem;
 using Il2CppSystem.Text;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     // This Partches don't work for now, I might try fixing that later, but for now, it's not my priority
     public static class FreePlayerPatch
@@ -216,7 +216,7 @@ namespace TownOfUs.Patches
                 hitbox.transform.localPosition = new Vector3(2.8f, -2.2f, 0);
 
                 var mask = hitbox.AddComponent<SpriteMask>();
-                mask.sprite = TownOfUs.NextButton;
+                mask.sprite = TownOfUsEdited.NextButton;
                 mask.alphaCutoff = 0.0f;
 
                 var collider = hitbox.AddComponent<BoxCollider2D>();

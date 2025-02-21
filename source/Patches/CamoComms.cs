@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class CamouflageUnCamouflage

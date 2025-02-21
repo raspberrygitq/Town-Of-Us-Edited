@@ -1,17 +1,17 @@
 using System.Linq;
 using AmongUs.GameOptions;
-using TownOfUs.CrewmateRoles.AurialMod;
-using TownOfUs.CrewmateRoles.ImitatorMod;
-using TownOfUs.CrewmateRoles.InvestigatorMod;
-using TownOfUs.CrewmateRoles.TrapperMod;
-using TownOfUs.ImpostorRoles.BomberMod;
-using TownOfUs.Patches;
-using TownOfUs.Patches.ScreenEffects;
-using TownOfUs.Roles.Cultist;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.CrewmateRoles.AurialMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.ImpostorRoles.BomberMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Patches.ScreenEffects;
+using TownOfUsEdited.Roles.Cultist;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class CovenLeader : Role
     {

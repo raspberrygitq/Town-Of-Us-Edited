@@ -1,9 +1,9 @@
 using System.Collections;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.ProsecutorMod
+namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
 {
 
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.StartMeeting))]

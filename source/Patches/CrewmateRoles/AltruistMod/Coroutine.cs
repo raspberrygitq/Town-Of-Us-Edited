@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles.Modifiers;
 using AmongUs.GameOptions;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.CrewmateRoles.AltruistMod
+namespace TownOfUsEdited.CrewmateRoles.AltruistMod
 {
     public class Coroutine
     {
         public static Dictionary<PlayerControl, ArrowBehaviour> Revived = new();
-        public static Sprite Sprite => TownOfUs.Arrow;
+        public static Sprite Sprite => TownOfUsEdited.Arrow;
 
         public static IEnumerator AltruistRevive(DeadBody target, Altruist role)
         {

@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using System;
 
-namespace TownOfUs.CrewmateRoles.TrackerMod
+namespace TownOfUsEdited.CrewmateRoles.TrackerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class UpdateTrackerArrows

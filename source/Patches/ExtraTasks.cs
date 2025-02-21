@@ -1,7 +1,7 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(ShipStatus))]
     public class ShipStatusPatch

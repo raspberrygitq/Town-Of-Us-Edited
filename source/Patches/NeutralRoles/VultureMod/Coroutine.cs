@@ -1,8 +1,8 @@
 using System.Collections;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.VultureMod
+namespace TownOfUsEdited.NeutralRoles.VultureMod
 {
     public class Coroutine
     {

@@ -2,13 +2,13 @@ using System;
 using System.Linq;
 using Il2CppSystem.Collections.Generic;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Doppelganger : Role, IVisualAlteration
     {

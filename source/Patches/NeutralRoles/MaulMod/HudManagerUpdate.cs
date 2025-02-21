@@ -1,14 +1,14 @@
 ﻿using HarmonyLib;
 using System.Linq;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.MaulMod
+namespace TownOfUsEdited.NeutralRoles.MaulMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
     {
-        public static Sprite RampageSprite => TownOfUs.RampageSprite;
+        public static Sprite RampageSprite => TownOfUsEdited.RampageSprite;
         
         public static void Postfix(HudManager __instance)
         {

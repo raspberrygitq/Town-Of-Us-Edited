@@ -5,7 +5,7 @@ using Reactor.Utilities.Extensions;
 using TMPro;
 using UnityEngine;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch]
 

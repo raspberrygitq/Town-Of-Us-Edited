@@ -1,13 +1,13 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using System.Linq;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.CrewmateRoles.ImitatorMod
+namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
 {
     [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn
@@ -43,7 +43,7 @@ namespace TownOfUs.CrewmateRoles.ImitatorMod
             if (obj.name?.Contains("ExileCutscene") == true) ExileControllerPostfix(ExileControllerPatch.lastExiled);
         }
 
-        public static Sprite Sprite => TownOfUs.Arrow;
+        public static Sprite Sprite => TownOfUsEdited.Arrow;
 
         public static void Imitate(Imitator imitator)
         {

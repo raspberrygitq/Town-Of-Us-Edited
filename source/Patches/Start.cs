@@ -1,17 +1,17 @@
 using System;
 using HarmonyLib;
 using Hazel;
-using TownOfUs.NeutralRoles.ExecutionerMod;
-using TownOfUs.NeutralRoles.GuardianAngelMod;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Cultist;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
+using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Cultist;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System.Linq;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__35), nameof(IntroCutscene._CoBegin_d__35.MoveNext))]
     public static class Start
@@ -22,7 +22,7 @@ namespace TownOfUs.Patches
         public static bool sksent = false;
         public static bool lovsent = false;
         public static bool covensent = false;
-        public static Sprite Sprite => TownOfUs.Arrow;
+        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static void Postfix(IntroCutscene._CoBegin_d__35 __instance)
         {
             var lovers = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.IsLover() && !x.Data.IsDead).ToList();

@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs.RainbowMod
+namespace TownOfUsEdited.RainbowMod
 {
     [HarmonyPatch(typeof(PlayerMaterial), nameof(PlayerMaterial.SetColors), typeof(int), typeof(Renderer))]
     public class SetPlayerMaterialPatch

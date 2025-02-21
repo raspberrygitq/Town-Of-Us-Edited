@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System.Linq;
 
-namespace TownOfUs.CovenRoles.SpiritualistMod
+namespace TownOfUsEdited.CovenRoles.SpiritualistMod
 {
 
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.StartMeeting))]

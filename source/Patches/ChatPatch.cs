@@ -2,9 +2,9 @@ using HarmonyLib;
 using AmongUs.Data;
 using InnerNet;
 using System.Linq;
-using TownOfUs.WerewolfRoles.TalkativeWolfMod.ChatPatch;
+using TownOfUsEdited.WerewolfRoles.TalkativeWolfMod.ChatPatch;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     // Also Patched the chat Cooldown because its damn annoying
     [HarmonyPatch(typeof(ChatController), nameof(ChatController.SendChat))]

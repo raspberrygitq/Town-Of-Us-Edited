@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs.ImpostorRoles.FreezerMod
+namespace TownOfUsEdited.ImpostorRoles.FreezerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class FixMovement

@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     internal class MedScan
 	{

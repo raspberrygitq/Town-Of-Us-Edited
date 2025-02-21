@@ -1,8 +1,8 @@
 ﻿using AmongUs.Data.Player;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.NeutralRoles.InfectiousMod
+namespace TownOfUsEdited.NeutralRoles.InfectiousMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class MeetingStart

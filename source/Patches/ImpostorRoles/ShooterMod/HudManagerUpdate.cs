@@ -1,13 +1,13 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.Patches.ImpostorRoles.ShooterMod
+namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite StoreSprite => TownOfUs.StoreSprite;
+        public static Sprite StoreSprite => TownOfUsEdited.StoreSprite;
         public static void Postfix(HudManager __instance)
         {
             var player = PlayerControl.LocalPlayer;

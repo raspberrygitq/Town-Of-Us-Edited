@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.DetectiveMod
+namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
 {
     public class CrimeScene : MonoBehaviour
     {
@@ -48,7 +48,7 @@ namespace TownOfUs.CrewmateRoles.DetectiveMod
             bloodSplat.transform.position = location;
             bloodSplat.layer = LayerMask.NameToLayer("Players");
             SpriteRenderer render = bloodSplat.AddComponent<SpriteRenderer>();
-            render.sprite = TownOfUs.CrimeSceneSprite;
+            render.sprite = TownOfUsEdited.CrimeSceneSprite;
             Vector3 scale = render.transform.localScale;
             scale.x *= 0.5f;
             scale.y *= 0.5f;

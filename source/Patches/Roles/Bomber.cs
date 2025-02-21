@@ -1,11 +1,11 @@
 using UnityEngine;
 using System;
-using TownOfUs.ImpostorRoles.BomberMod;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Patches;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.ImpostorRoles.BomberMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Bomber : Role
 
@@ -16,7 +16,7 @@ namespace TownOfUs.Roles
         public bool Detonated = true;
         public Vector3 DetonatePoint;
         public Bomb Bomb = new Bomb();
-        public static Material bombMaterial = TownOfUs.bundledAssets.Get<Material>("bomb");
+        public static Material bombMaterial = TownOfUsEdited.bundledAssets.Get<Material>("bomb");
         public DateTime StartingCooldown { get; set; }
 
         public Bomber(PlayerControl player) : base(player)

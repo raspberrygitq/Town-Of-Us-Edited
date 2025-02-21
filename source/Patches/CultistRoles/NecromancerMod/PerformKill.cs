@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Cultist;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Cultist;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 using System;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.CultistRoles.NecromancerMod
+namespace TownOfUsEdited.CultistRoles.NecromancerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformRevive

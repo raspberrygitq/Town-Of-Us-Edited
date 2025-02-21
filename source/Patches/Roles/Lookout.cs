@@ -1,7 +1,7 @@
-using TownOfUs.Patches.CrewmateRoles.LookoutMod;
+using TownOfUsEdited.Patches.CrewmateRoles.LookoutMod;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Lookout : Role
 

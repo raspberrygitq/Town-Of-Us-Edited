@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CovenRoles.RitualistMod
+namespace TownOfUsEdited.CovenRoles.RitualistMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.VotingComplete))] // BBFDNCCEJHI
     public static class VotingComplete

@@ -1,4 +1,4 @@
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class SoulCatcher : Role
     {

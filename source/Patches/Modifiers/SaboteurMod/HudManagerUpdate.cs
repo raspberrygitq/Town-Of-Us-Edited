@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.Modifiers.SaboteurMod
+namespace TownOfUsEdited.Modifiers.SaboteurMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate

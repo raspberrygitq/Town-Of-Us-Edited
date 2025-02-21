@@ -2,10 +2,10 @@ using System;
 using System.Linq;
 using AmongUs.Data;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.Modifiers.ShyMod
+namespace TownOfUsEdited.Modifiers.ShyMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate

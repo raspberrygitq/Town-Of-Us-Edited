@@ -1,16 +1,16 @@
 using System;
 using System.Linq;
 using Reactor.Utilities.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CrewmateRoles.PoliticianMod
+namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
 {
     public class AddRevealButtonPolitician
     {
-        public static Sprite RevealSprite => TownOfUs.RevealSprite;
+        public static Sprite RevealSprite => TownOfUsEdited.RevealSprite;
 
         public static void GenButton(Politician role, int index)
         {

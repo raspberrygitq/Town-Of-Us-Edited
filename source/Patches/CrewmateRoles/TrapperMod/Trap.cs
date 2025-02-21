@@ -2,11 +2,11 @@
 using Reactor.Utilities;
 using System.Collections;
 using System.Collections.Generic;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CrewmateRoles.TrapperMod
+namespace TownOfUsEdited.CrewmateRoles.TrapperMod
 {
     public class Trap
     {
@@ -27,7 +27,7 @@ namespace TownOfUs.CrewmateRoles.TrapperMod
             foreach (PlayerControl player in PlayerControl.AllPlayerControls)
             {
                 if (player.Data.IsDead) continue;
-                //PluginSingleton<TownOfUs>.Instance.Log.LogMessage($"player with byte {player.PlayerId} is {Vector2.Distance(transform.position, player.GetTruePosition())} away");
+                //PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage($"player with byte {player.PlayerId} is {Vector2.Distance(transform.position, player.GetTruePosition())} away");
                 if (Vector2.Distance(transform.position, player.GetTruePosition()) < (CustomGameOptions.TrapSize + 0.01f) * ShipStatus.Instance.MaxLightRadius)
                 {
                     if (!players.ContainsKey(player.PlayerId)) players.Add(player.PlayerId, 0f);
@@ -40,7 +40,7 @@ namespace TownOfUs.CrewmateRoles.TrapperMod
                 if (players.ContainsKey(entry.PlayerId))
                 {
                     players[entry.PlayerId] += Time.deltaTime;
-                    //PluginSingleton<TownOfUs>.Instance.Log.LogMessage($"player with byte {entry} is logged with time {players[entry]}");
+                    //PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage($"player with byte {entry} is logged with time {players[entry]}");
                     if (players[entry.PlayerId] > CustomGameOptions.MinAmountOfTimeInTrap)
                     {
                         foreach (Trapper t in Role.GetRoles(RoleEnum.Trapper))

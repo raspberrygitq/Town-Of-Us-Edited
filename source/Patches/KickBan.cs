@@ -2,7 +2,7 @@ using Hazel;
 using InnerNet;
 using Reactor.Networking;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     // Code stolen from Reactor (:
     public static class KickBan

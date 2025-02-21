@@ -1,7 +1,7 @@
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using UnityEngine;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfUsEdited.Roles.Modifiers
 {
     public class Motionless : Modifier
     {

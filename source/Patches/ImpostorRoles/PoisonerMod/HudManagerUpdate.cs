@@ -1,17 +1,17 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using System.Linq;
-using TownOfUs.Extensions;
-using TownOfUs.CrewmateRoles.SheriffMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.CrewmateRoles.SheriffMod;
 
-namespace TownOfUs.ImpostorRoles.PoisonerMod
+namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite PoisonSprite => TownOfUs.PoisonSprite;
-        public static Sprite PoisonedSprite => TownOfUs.PoisonedSprite;
+        public static Sprite PoisonSprite => TownOfUsEdited.PoisonSprite;
+        public static Sprite PoisonedSprite => TownOfUsEdited.PoisonedSprite;
 
         [HarmonyPriority(Priority.Last)]
         public static void Postfix(HudManager __instance)

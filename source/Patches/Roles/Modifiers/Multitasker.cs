@@ -1,4 +1,4 @@
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfUsEdited.Roles.Modifiers
 {
     public class Multitasker : Modifier
     {

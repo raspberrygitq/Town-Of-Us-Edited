@@ -1,4 +1,4 @@
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     public enum CustomRPC
     {

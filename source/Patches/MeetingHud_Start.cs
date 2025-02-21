@@ -2,11 +2,11 @@ using HarmonyLib;
 using Object = UnityEngine.Object;
 using Reactor.Utilities.Extensions;
 using UnityEngine;
-using TownOfUs.Patches;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class MeetingHud_Start

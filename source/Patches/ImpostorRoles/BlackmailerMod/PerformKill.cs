@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Roles;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.BlackmailerMod
+namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

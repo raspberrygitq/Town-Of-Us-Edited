@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     class Colors {
 

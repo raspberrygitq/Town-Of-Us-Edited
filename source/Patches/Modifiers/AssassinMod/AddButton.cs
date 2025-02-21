@@ -2,23 +2,23 @@
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TMPro;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
-using TownOfUs.Patches;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.Modifiers.AssassinMod
+namespace TownOfUsEdited.Modifiers.AssassinMod
 {
     public class AddButtonAssassin
     {
-        private static Sprite CycleBackSprite => TownOfUs.CycleBackSprite;
-        private static Sprite CycleForwardSprite => TownOfUs.CycleForwardSprite;
+        private static Sprite CycleBackSprite => TownOfUsEdited.CycleBackSprite;
+        private static Sprite CycleForwardSprite => TownOfUsEdited.CycleForwardSprite;
 
-        private static Sprite GuessSprite => TownOfUs.GuessSprite;
+        private static Sprite GuessSprite => TownOfUsEdited.GuessSprite;
 
         private static bool IsExempt(PlayerVoteArea voteArea)
         {

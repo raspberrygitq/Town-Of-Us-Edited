@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
+using TownOfUsEdited.Roles;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 
-namespace TownOfUs.CrewmateRoles.JailorMod
+namespace TownOfUsEdited.CrewmateRoles.JailorMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class UpdateJailButton

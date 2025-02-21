@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System;
 using System.Linq;
-using TownOfUs.CrewmateRoles.OracleMod;
+using TownOfUsEdited.CrewmateRoles.OracleMod;
 
-namespace TownOfUs.CrewmateRoles.ImitatorMod
+namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class MeetingStart

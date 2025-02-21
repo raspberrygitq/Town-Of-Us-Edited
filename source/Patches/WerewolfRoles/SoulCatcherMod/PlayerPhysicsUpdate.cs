@@ -1,9 +1,9 @@
 using HarmonyLib;
 using UnityEngine;
 using System;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.WerewolfRoles.SoulCatcherMod
+namespace TownOfUsEdited.WerewolfRoles.SoulCatcherMod
 {
     [HarmonyPatch(typeof(PlayerPhysics), nameof(PlayerPhysics.LateUpdate))]
     public static class PlayerPhysics_LateUpdate

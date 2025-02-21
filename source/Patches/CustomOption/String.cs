@@ -1,4 +1,4 @@
-namespace TownOfUs.CustomOption
+namespace TownOfUsEdited.CustomOption
 {
     public class CustomStringOption : CustomOption
     {

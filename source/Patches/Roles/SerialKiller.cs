@@ -1,17 +1,17 @@
 using System.Linq;
 using Il2CppSystem.Collections.Generic;
-using TownOfUs.Extensions;
-using TownOfUs.CrewmateRoles.InvestigatorMod;
-using TownOfUs.CrewmateRoles.TrapperMod;
-using TownOfUs.CrewmateRoles.ImitatorMod;
-using TownOfUs.Roles.Cultist;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.Roles.Cultist;
 using AmongUs.GameOptions;
-using TownOfUs.Roles.Modifiers;
-using TownOfUs.ImpostorRoles.BomberMod;
+using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.ImpostorRoles.BomberMod;
 using UnityEngine;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class SerialKiller : Role
     {

@@ -2,7 +2,7 @@ using HarmonyLib;
 using System;
 using System.Linq;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     //Code given by Det, thanks to him (:
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.ReportDeadBody))]

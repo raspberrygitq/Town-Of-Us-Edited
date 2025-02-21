@@ -1,10 +1,10 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.BlinderMod
+namespace TownOfUsEdited.ImpostorRoles.BlinderMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
@@ -28,7 +28,7 @@ namespace TownOfUs.ImpostorRoles.BlinderMod
                 role.BlindButton.gameObject.SetActive(false);
             }
 
-            role.BlindButton.graphic.sprite = TownOfUs.Blind;
+            role.BlindButton.graphic.sprite = TownOfUsEdited.Blind;
             role.BlindButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);

@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
 using Reactor.Utilities.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.HaunterMod
+namespace TownOfUsEdited.CrewmateRoles.HaunterMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
     public class UpdateArrows

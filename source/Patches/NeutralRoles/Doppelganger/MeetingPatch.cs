@@ -2,11 +2,11 @@ using AmongUs.Data;
 using Assets.CoreScripts;
 using HarmonyLib;
 using System;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutraleRoles.DoppelgangerMod
+namespace TownOfUsEdited.NeutraleRoles.DoppelgangerMod
 {
     public class MeetingPatch
     {

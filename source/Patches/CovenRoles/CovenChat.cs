@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace TownOfUs.Patches.CovenRoles.CovenChat
+namespace TownOfUsEdited.Patches.CovenRoles.CovenChat
 {
     public class CovenChat
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.CrewmateRoles.MedicMod
+namespace TownOfUsEdited.CrewmateRoles.MedicMod
 {
     public class DeadPlayer
     {

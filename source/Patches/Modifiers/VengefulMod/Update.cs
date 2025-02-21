@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using TMPro;
 using System.Linq;
 
-namespace TownOfUs.Modifiers.VengefulMod
+namespace TownOfUsEdited.Modifiers.VengefulMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class Update

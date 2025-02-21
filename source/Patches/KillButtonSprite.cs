@@ -1,11 +1,11 @@
 ﻿using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.Start))]
     public static class KillButtonAwake
@@ -19,42 +19,42 @@ namespace TownOfUs
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class KillButtonSprite
     {
-        private static Sprite Dissociate => TownOfUs.Dissociate;
-        private static Sprite Rewind => TownOfUs.Rewind;
-        private static Sprite Campaign => TownOfUs.CampaignSprite;
-        private static Sprite Fortify => TownOfUs.FortifySprite;
-        private static Sprite Collect => TownOfUs.CollectSprite;
-        private static Sprite Eat => TownOfUs.Eat;
-        private static Sprite Fix => TownOfUs.EngineerFix;
-        private static Sprite Light => TownOfUs.Light;
-        private static Sprite Protect2 => TownOfUs.Protect2Sprite;
-        private static Sprite Poison => TownOfUs.PoisonSprite;
-        private static Sprite RevealRole => TownOfUs.RevealRoleSprite;
-        private static Sprite Jail => TownOfUs.JailSprite;
-        private static Sprite ZoomButton => TownOfUs.CapZoomButton;
-        private static Sprite DocReviveButton => TownOfUs.DocReviveButton;
-        private static Sprite Medic => TownOfUs.MedicSprite;
-        private static Sprite Seer => TownOfUs.SeerSprite;
-        private static Sprite Douse => TownOfUs.DouseSprite;
-        private static Sprite Revive => TownOfUs.ReviveSprite;
-        private static Sprite Alert => TownOfUs.AlertSprite;
-        private static Sprite Remember => TownOfUs.RememberSprite;
-        private static Sprite Track => TownOfUs.TrackSprite;
-        private static Sprite Transport => TownOfUs.TransportSprite;
-        private static Sprite Mediate => TownOfUs.MediateSprite;
-        private static Sprite Vest => TownOfUs.VestSprite;
-        private static Sprite Protect => TownOfUs.ProtectSprite;
-        private static Sprite Infect => TownOfUs.InfectSprite;
-        private static Sprite Trap => TownOfUs.TrapSprite;
-        private static Sprite Inspect => TownOfUs.InspectSprite;
-        private static Sprite Swoop => TownOfUs.SwoopSprite;
-        private static Sprite Observe => TownOfUs.ObserveSprite;
-        private static Sprite Stake => TownOfUs.StakeSprite;
-        private static Sprite Confess => TownOfUs.ConfessSprite;
-        private static Sprite Radiate => TownOfUs.RadiateSprite;
-        private static Sprite Hex => TownOfUs.Hex;
-        private static Sprite Camp => TownOfUs.CampSprite;
-        private static Sprite Watch => TownOfUs.WatchSprite;
+        private static Sprite Dissociate => TownOfUsEdited.Dissociate;
+        private static Sprite Rewind => TownOfUsEdited.Rewind;
+        private static Sprite Campaign => TownOfUsEdited.CampaignSprite;
+        private static Sprite Fortify => TownOfUsEdited.FortifySprite;
+        private static Sprite Collect => TownOfUsEdited.CollectSprite;
+        private static Sprite Eat => TownOfUsEdited.Eat;
+        private static Sprite Fix => TownOfUsEdited.EngineerFix;
+        private static Sprite Light => TownOfUsEdited.Light;
+        private static Sprite Protect2 => TownOfUsEdited.Protect2Sprite;
+        private static Sprite Poison => TownOfUsEdited.PoisonSprite;
+        private static Sprite RevealRole => TownOfUsEdited.RevealRoleSprite;
+        private static Sprite Jail => TownOfUsEdited.JailSprite;
+        private static Sprite ZoomButton => TownOfUsEdited.CapZoomButton;
+        private static Sprite DocReviveButton => TownOfUsEdited.DocReviveButton;
+        private static Sprite Medic => TownOfUsEdited.MedicSprite;
+        private static Sprite Seer => TownOfUsEdited.SeerSprite;
+        private static Sprite Douse => TownOfUsEdited.DouseSprite;
+        private static Sprite Revive => TownOfUsEdited.ReviveSprite;
+        private static Sprite Alert => TownOfUsEdited.AlertSprite;
+        private static Sprite Remember => TownOfUsEdited.RememberSprite;
+        private static Sprite Track => TownOfUsEdited.TrackSprite;
+        private static Sprite Transport => TownOfUsEdited.TransportSprite;
+        private static Sprite Mediate => TownOfUsEdited.MediateSprite;
+        private static Sprite Vest => TownOfUsEdited.VestSprite;
+        private static Sprite Protect => TownOfUsEdited.ProtectSprite;
+        private static Sprite Infect => TownOfUsEdited.InfectSprite;
+        private static Sprite Trap => TownOfUsEdited.TrapSprite;
+        private static Sprite Inspect => TownOfUsEdited.InspectSprite;
+        private static Sprite Swoop => TownOfUsEdited.SwoopSprite;
+        private static Sprite Observe => TownOfUsEdited.ObserveSprite;
+        private static Sprite Stake => TownOfUsEdited.StakeSprite;
+        private static Sprite Confess => TownOfUsEdited.ConfessSprite;
+        private static Sprite Radiate => TownOfUsEdited.RadiateSprite;
+        private static Sprite Hex => TownOfUsEdited.Hex;
+        private static Sprite Camp => TownOfUsEdited.CampSprite;
+        private static Sprite Watch => TownOfUsEdited.WatchSprite;
 
         private static Sprite Kill;
 

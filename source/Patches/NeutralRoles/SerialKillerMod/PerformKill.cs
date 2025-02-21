@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.Patches.NeutralRoles.SerialKillerMod
+namespace TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class SerialKillerKillPatch

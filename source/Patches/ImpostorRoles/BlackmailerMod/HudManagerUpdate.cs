@@ -1,17 +1,17 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using System.Linq;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using AmongUs.GameOptions;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.ImpostorRoles.BlackmailerMod
+namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite Blackmail => TownOfUs.BlackmailSprite;
+        public static Sprite Blackmail => TownOfUsEdited.BlackmailSprite;
 
         public static void Postfix(HudManager __instance)
         {

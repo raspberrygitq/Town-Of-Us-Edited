@@ -1,10 +1,10 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {    
     //Code from Among Us Salem with authorisation of 50 iq 
     public class DayNightMechanic

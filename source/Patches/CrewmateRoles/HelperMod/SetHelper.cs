@@ -1,13 +1,13 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUs.Patches;
-using TownOfUs.CrewmateRoles.AurialMod;
-using TownOfUs.Patches.ScreenEffects;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.CrewmateRoles.AurialMod;
+using TownOfUsEdited.Patches.ScreenEffects;
 
-namespace TownOfUs.CrewmateRoles.HelperMod
+namespace TownOfUsEdited.CrewmateRoles.HelperMod
 {
     [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn

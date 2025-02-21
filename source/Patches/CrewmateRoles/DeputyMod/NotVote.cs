@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine.UI;
 
-namespace TownOfUs.CrewmateRoles.DeputyMod
+namespace TownOfUsEdited.CrewmateRoles.DeputyMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.VotingComplete))]
     public static class RemoveButtons

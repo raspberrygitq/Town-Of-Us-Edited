@@ -1,4 +1,4 @@
-﻿namespace TownOfUs.Extensions
+﻿namespace TownOfUsEdited.Extensions
 {
     public enum CustomPlayerOutfitType 
     {

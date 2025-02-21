@@ -1,18 +1,18 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using System.Linq;
 using AmongUs.GameOptions;
 using TMPro;
 
-namespace TownOfUs.Patches.ImpostorRoles.ManipulatorMod
+namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite ManipulateSprite => TownOfUs.ManipulateSprite;
-        public static Sprite ControlSprite => TownOfUs.ControlSprite;
+        public static Sprite ManipulateSprite => TownOfUsEdited.ManipulateSprite;
+        public static Sprite ControlSprite => TownOfUsEdited.ControlSprite;
         public static void Postfix(HudManager __instance)
         {
             var player = PlayerControl.LocalPlayer;

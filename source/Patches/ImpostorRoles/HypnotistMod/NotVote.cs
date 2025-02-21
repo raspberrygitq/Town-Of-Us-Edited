@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Reactor.Utilities.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.ImpostorRoles.HypnotistMod
+namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.VotingComplete))]
     public static class VotingComplete

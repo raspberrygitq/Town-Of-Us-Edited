@@ -7,11 +7,11 @@ using Reactor.Utilities.Extensions;
 using Object = UnityEngine.Object;
 using Reactor.Networking.Extensions;
 using System;
-using TownOfUs.Modifiers.ShyMod;
-using TownOfUs.Patches;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Modifiers.ShyMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Roles.Modifiers
+namespace TownOfUsEdited.Roles.Modifiers
 {
     public class Disperser : Modifier
     {

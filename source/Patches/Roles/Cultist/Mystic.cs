@@ -1,4 +1,4 @@
-namespace TownOfUs.Roles.Cultist
+namespace TownOfUsEdited.Roles.Cultist
 {
     public class CultistMystic : Role
     {

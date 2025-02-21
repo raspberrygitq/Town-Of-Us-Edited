@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
-using TownOfUs.Modifiers.UnderdogMod;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Modifiers.UnderdogMod;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Poisoner : Role
 

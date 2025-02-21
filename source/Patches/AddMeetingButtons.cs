@@ -1,24 +1,24 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUs.CrewmateRoles.InvestigatorMod;
-using TownOfUs.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using System.Collections.Generic;
-using TownOfUs.CrewmateRoles.DeputyMod;
-using TownOfUs.CrewmateRoles.ImitatorMod;
-using TownOfUs.CrewmateRoles.MayorMod;
-using TownOfUs.CrewmateRoles.PoliticianMod;
-using TownOfUs.CrewmateRoles.ProsecutorMod;
-using TownOfUs.CrewmateRoles.SwapperMod;
-using TownOfUs.CrewmateRoles.VigilanteMod;
-using TownOfUs.ImpostorRoles.HypnotistMod;
-using TownOfUs.Modifiers.AssassinMod;
-using TownOfUs.NeutralRoles.DoomsayerMod;
-using AddButton = TownOfUs.CrewmateRoles.SwapperMod.AddButton;
-using TownOfUs.CovenRoles.RitualistMod;
-using TownOfUs.Roles.AssassinMod;
+using TownOfUsEdited.CrewmateRoles.DeputyMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.MayorMod;
+using TownOfUsEdited.CrewmateRoles.PoliticianMod;
+using TownOfUsEdited.CrewmateRoles.ProsecutorMod;
+using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.ImpostorRoles.HypnotistMod;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using AddButton = TownOfUsEdited.CrewmateRoles.SwapperMod.AddButton;
+using TownOfUsEdited.CovenRoles.RitualistMod;
+using TownOfUsEdited.Roles.AssassinMod;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
 
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]

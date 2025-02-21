@@ -1,8 +1,8 @@
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using HarmonyLib;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class ResetChatSent

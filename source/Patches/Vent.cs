@@ -1,12 +1,12 @@
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using System.Linq;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch(typeof(HudManager))]
     public static class HudManagerVentPatch

@@ -1,17 +1,17 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System.Linq;
-using TownOfUs.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.NeutralRoles.AmnesiacMod
+namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite Arrow => TownOfUs.Arrow;
+        public static Sprite Arrow => TownOfUsEdited.Arrow;
 
         public static void Postfix(HudManager __instance)
         {

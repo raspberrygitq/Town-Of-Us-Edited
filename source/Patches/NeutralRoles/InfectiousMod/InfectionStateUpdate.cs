@@ -2,14 +2,14 @@ using System;
 using HarmonyLib;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
-using TownOfUs.Patches;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {    
     public class InfectionStateUpdate
     {

@@ -1,15 +1,15 @@
 ﻿using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.MorphlingMod
+namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite SampleSprite => TownOfUs.SampleSprite;
-        public static Sprite MorphSprite => TownOfUs.MorphSprite;
+        public static Sprite SampleSprite => TownOfUsEdited.SampleSprite;
+        public static Sprite MorphSprite => TownOfUsEdited.MorphSprite;
 
         public static bool Prefix(KillButton __instance)
         {

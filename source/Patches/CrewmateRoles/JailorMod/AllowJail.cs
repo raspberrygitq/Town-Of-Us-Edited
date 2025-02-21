@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
-using TownOfUs.Modifiers.AssassinMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Modifiers.AssassinMod;
 
-namespace TownOfUs.CrewmateRoles.JailorMod
+namespace TownOfUsEdited.CrewmateRoles.JailorMod
 {
     [HarmonyPatch(typeof(PlayerVoteArea))]
     public class AllowExtraVotes

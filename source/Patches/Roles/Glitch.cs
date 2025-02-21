@@ -5,22 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
-using TownOfUs.Extensions;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using AmongUs.GameOptions;
-using TownOfUs.Patches;
-using static TownOfUs.DisableAbilities;
-using TownOfUs.Patches.NeutralRoles;
+using TownOfUsEdited.Patches;
+using static TownOfUsEdited.DisableAbilities;
+using TownOfUsEdited.Patches.NeutralRoles;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Glitch : Role, IVisualAlteration
     {
-        public static Sprite MimicSprite = TownOfUs.MimicSprite;
-        public static Sprite HackSprite = TownOfUs.HackSprite;
-        public static Sprite LockSprite = TownOfUs.LockSprite;
+        public static Sprite MimicSprite = TownOfUsEdited.MimicSprite;
+        public static Sprite HackSprite = TownOfUsEdited.HackSprite;
+        public static Sprite LockSprite = TownOfUsEdited.LockSprite;
 
         public Glitch(PlayerControl owner) : base(owner)
         {

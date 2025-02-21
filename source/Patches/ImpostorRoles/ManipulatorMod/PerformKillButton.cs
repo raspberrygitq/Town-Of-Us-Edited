@@ -1,11 +1,11 @@
 using System.Collections;
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Patches.ImpostorRoles.ManipulatorMod;
-using TownOfUs.Roles;
+using TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.ManipulatorMod
+namespace TownOfUsEdited.ImpostorRoles.ManipulatorMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton

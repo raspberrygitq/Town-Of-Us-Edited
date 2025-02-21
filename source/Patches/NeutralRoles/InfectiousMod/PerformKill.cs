@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.NeutralRoles.InfectiousMod
+namespace TownOfUsEdited.NeutralRoles.InfectiousMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

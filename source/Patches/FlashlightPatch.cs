@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs;
+using TownOfUsEdited;
 using AmongUs.GameOptions;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 
 namespace FlashlightPatch
 {

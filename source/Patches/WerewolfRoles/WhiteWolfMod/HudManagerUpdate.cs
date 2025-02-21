@@ -1,14 +1,14 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.WerewolfRoles.WhiteWolfMod
+namespace TownOfUsEdited.WerewolfRoles.WhiteWolfMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite RampageSprite => TownOfUs.RampageSprite;
-        public static Sprite UnRampageSprite => TownOfUs.UnRampageSprite;
+        public static Sprite RampageSprite => TownOfUsEdited.RampageSprite;
+        public static Sprite UnRampageSprite => TownOfUsEdited.UnRampageSprite;
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;

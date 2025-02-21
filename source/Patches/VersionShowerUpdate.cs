@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPriority(Priority.VeryHigh)] // to show this message first, or be overrided if any plugins do
     [HarmonyPatch(typeof(VersionShower), nameof(VersionShower.Start))]
@@ -10,7 +10,7 @@ namespace TownOfUs
         public static void Postfix(VersionShower __instance)
         {
             var text = __instance.text;
-            text.text += " - <color=#00FF00FF><color=#EE9D01>TownOfUs</color><b><color=#AA00FF>Edited</color></b> v" + TownOfUs.VersionString + "</color>" + TownOfUs.VersionTag;
+            text.text += " - <color=#00FF00FF><color=#EE9D01>TownOfUsEdited</color><b><color=#AA00FF>Edited</color></b> v" + TownOfUsEdited.VersionString + "</color>" + TownOfUsEdited.VersionTag;
             text.transform.localPosition += new Vector3(-0.8f, -0.08f, 0f);
 
             if (GameObject.Find("RightPanel"))

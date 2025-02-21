@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.WerewolfRoles.GuardMod
+namespace TownOfUsEdited.WerewolfRoles.GuardMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate

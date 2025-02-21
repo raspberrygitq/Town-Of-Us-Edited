@@ -1,8 +1,8 @@
 using HarmonyLib;
 using System.Linq;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.NeutralRoles.PestilenceMod
+namespace TownOfUsEdited.NeutralRoles.PestilenceMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate

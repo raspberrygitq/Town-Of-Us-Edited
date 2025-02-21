@@ -1,9 +1,9 @@
 using HarmonyLib;
 using System.Linq;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.HunterMod
+namespace TownOfUsEdited.CrewmateRoles.HunterMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Update))]
     public static class MeetingHudUpdate

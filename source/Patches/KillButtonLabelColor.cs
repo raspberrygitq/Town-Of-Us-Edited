@@ -1,5 +1,5 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
 namespace KillButtonLabelColor
 {

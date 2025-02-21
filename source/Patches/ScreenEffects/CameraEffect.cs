@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Reactor.Utilities.Extensions;
 
-namespace TownOfUs.Patches.ScreenEffects
+namespace TownOfUsEdited.Patches.ScreenEffects
 {
 
     public class CameraEffect : MonoBehaviour

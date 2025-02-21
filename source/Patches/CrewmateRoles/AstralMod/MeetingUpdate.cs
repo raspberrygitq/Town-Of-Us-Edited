@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using System.Linq;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 
-namespace TownOfUs.ImpostorRoles.AstralMod
+namespace TownOfUsEdited.ImpostorRoles.AstralMod
 {
     public class MeetingUpdate
     {

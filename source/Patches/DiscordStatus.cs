@@ -1,6 +1,6 @@
 ﻿using Discord;
 using HarmonyLib;
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch]
     public class DiscordStatus
@@ -11,8 +11,8 @@ namespace TownOfUs.Patches
         {
             if (activity == null) return;
 
-            var details = $"Town of Us Edited v{TownOfUs.VersionString}";
-            if (TownOfUs.VersionTag != "<color=#00F0FF></color>") details += " Dev 5";
+            var details = $"Town of Us Edited v{TownOfUsEdited.VersionString}";
+            if (TownOfUsEdited.VersionTag != "<color=#00F0FF></color>") details += " Dev 5";
             activity.Details = details;
         }
     }

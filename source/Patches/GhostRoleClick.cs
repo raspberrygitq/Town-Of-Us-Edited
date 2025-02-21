@@ -1,10 +1,10 @@
 using HarmonyLib;
 using System.Linq;
-using TownOfUs.CrewmateRoles.HaunterMod;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.HaunterMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.OnClick))]
     public class ClickGhostRole

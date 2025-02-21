@@ -1,5 +1,5 @@
 using HarmonyLib;
-using TownOfUs;
+using TownOfUsEdited;
 
 namespace ChaosMode
 {

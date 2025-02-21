@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Cultist;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Cultist;
 
-namespace TownOfUs.CultistRoles.ChameleonMod
+namespace TownOfUsEdited.CultistRoles.ChameleonMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate

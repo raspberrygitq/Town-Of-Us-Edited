@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.GuardianAngelMod
+namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate

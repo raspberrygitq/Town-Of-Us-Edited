@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.GuardianAngelMod
+namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
 {
     public enum BecomeOptions
     {

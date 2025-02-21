@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using Reactor.Utilities;
 using AmongUs.GameOptions;
 using UnityEngine;
 
-namespace TownOfUs.WerewolfRoles.SorcererMod
+namespace TownOfUsEdited.WerewolfRoles.SorcererMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

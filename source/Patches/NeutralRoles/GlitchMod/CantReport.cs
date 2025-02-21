@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Reactor.Utilities;
-using static TownOfUs.Roles.Glitch;
+using static TownOfUsEdited.Roles.Glitch;
 
-namespace TownOfUs.NeutralRoles.GlitchMod
+namespace TownOfUsEdited.NeutralRoles.GlitchMod
 {
     [HarmonyPatch(typeof(ReportButton), nameof(ReportButton.DoClick))]
     public class StopReport

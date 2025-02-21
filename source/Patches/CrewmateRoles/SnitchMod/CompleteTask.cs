@@ -1,17 +1,17 @@
 using System.Linq;
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Extensions;
-using TownOfUs.Patches;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.SnitchMod
+namespace TownOfUsEdited.CrewmateRoles.SnitchMod
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CompleteTask))]
     public class CompleteTask
     {
-        public static Sprite Sprite => TownOfUs.Arrow;
+        public static Sprite Sprite => TownOfUsEdited.Arrow;
 
         public static void Postfix(PlayerControl __instance)
         {

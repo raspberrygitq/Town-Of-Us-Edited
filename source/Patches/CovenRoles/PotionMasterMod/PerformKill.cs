@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.Patches.CovenRoles.PotionMasterMod
+namespace TownOfUsEdited.Patches.CovenRoles.PotionMasterMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
@@ -24,11 +24,11 @@ namespace TownOfUs.Patches.CovenRoles.PotionMasterMod
                 if (role.PotionCooldown > 0)
                 return false;
 
-                if (__instance.graphic.sprite == TownOfUs.Potion)
+                if (__instance.graphic.sprite == TownOfUsEdited.Potion)
                 {
                     role.GetPotion();
                     role.PotionCooldown = 5f;
-                    __instance.graphic.sprite = TownOfUs.Drink;
+                    __instance.graphic.sprite = TownOfUsEdited.Drink;
                 }
                 else
                 {

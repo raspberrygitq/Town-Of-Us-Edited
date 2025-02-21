@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.ParanoïacMod
+namespace TownOfUsEdited.CrewmateRoles.ParanoïacMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate
@@ -40,7 +40,7 @@ namespace TownOfUs.CrewmateRoles.ParanoïacMod
                 role.UsesText.text = role.UsesLeft + "";
             }
 
-            PanicButton.graphic.sprite = TownOfUs.ButtonSprite;
+            PanicButton.graphic.sprite = TownOfUsEdited.ButtonSprite;
             PanicButton.buttonLabelText.gameObject.SetActive(false);
 
             PanicButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)

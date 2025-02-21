@@ -1,7 +1,7 @@
 using System;
 using TMPro;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Paranoïac : Role
     {

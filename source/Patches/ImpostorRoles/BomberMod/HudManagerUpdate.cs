@@ -1,14 +1,14 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.BomberMod
+namespace TownOfUsEdited.ImpostorRoles.BomberMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite PlantSprite => TownOfUs.PlantSprite;
-        public static Sprite DetonateSprite => TownOfUs.DetonateSprite;
+        public static Sprite PlantSprite => TownOfUsEdited.PlantSprite;
+        public static Sprite DetonateSprite => TownOfUsEdited.DetonateSprite;
 
         [HarmonyPriority(Priority.Last)]
         public static void Postfix(HudManager __instance)

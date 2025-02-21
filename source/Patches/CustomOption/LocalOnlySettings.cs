@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using static UnityEngine.UI.Button;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.CustomOption
+namespace TownOfUsEdited.CustomOption
 {
     [HarmonyPatch]
 
@@ -16,8 +16,8 @@ namespace TownOfUs.CustomOption
             new()
             {
                 Title = "Other Ghosts Visible When Dead",
-                OnClick = () => { return TownOfUs.DeadSeeGhosts.Value = !TownOfUs.DeadSeeGhosts.Value; },
-                DefaultValue = TownOfUs.DeadSeeGhosts.Value
+                OnClick = () => { return TownOfUsEdited.DeadSeeGhosts.Value = !TownOfUsEdited.DeadSeeGhosts.Value; },
+                DefaultValue = TownOfUsEdited.DeadSeeGhosts.Value
             }
         };
 

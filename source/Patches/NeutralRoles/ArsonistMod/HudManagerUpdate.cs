@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
-namespace TownOfUs.NeutralRoles.ArsonistMod
+namespace TownOfUsEdited.NeutralRoles.ArsonistMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
     {
-        public static Sprite IgniteSprite => TownOfUs.IgniteSprite;
+        public static Sprite IgniteSprite => TownOfUsEdited.IgniteSprite;
         
         public static void Postfix(HudManager __instance)
         {

@@ -1,8 +1,8 @@
 using AmongUs.GameOptions;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Spectator : Role
     {

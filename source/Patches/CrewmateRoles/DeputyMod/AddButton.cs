@@ -1,29 +1,29 @@
 using System;
 using System.Linq;
 using Reactor.Utilities.Extensions;
-using TownOfUs.CrewmateRoles.ImitatorMod;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.CrewmateRoles.SwapperMod;
-using TownOfUs.CrewmateRoles.VigilanteMod;
-using TownOfUs.Extensions;
-using TownOfUs.ImpostorRoles.BlackmailerMod;
-using TownOfUs.Modifiers.AssassinMod;
-using TownOfUs.NeutralRoles.DoomsayerMod;
-using TownOfUs.Patches;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
-using Assassin2 = TownOfUs.Roles.Assassin;
-using TownOfUs.CovenRoles.RitualistMod;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin2 = TownOfUsEdited.Roles.Assassin;
+using TownOfUsEdited.CovenRoles.RitualistMod;
 
-namespace TownOfUs.CrewmateRoles.DeputyMod
+namespace TownOfUsEdited.CrewmateRoles.DeputyMod
 {
     public class AddButtonDeputy
     {
-        private static Sprite ShootSprite => TownOfUs.ShootSprite;
+        private static Sprite ShootSprite => TownOfUsEdited.ShootSprite;
 
         private static bool IsExempt(PlayerVoteArea voteArea)
         {
@@ -317,7 +317,7 @@ namespace TownOfUs.CrewmateRoles.DeputyMod
                     var button = swapper.Buttons[index];
                     if (button != null)
                     {
-                        if (button.GetComponent<SpriteRenderer>().sprite == TownOfUs.SwapperSwitch)
+                        if (button.GetComponent<SpriteRenderer>().sprite == TownOfUsEdited.SwapperSwitch)
                         {
                             swapper.ListOfActives[index] = (swapper.ListOfActives[index].Item1, false);
                             if (SwapVotes.Swap1 == voteArea) SwapVotes.Swap1 = null;

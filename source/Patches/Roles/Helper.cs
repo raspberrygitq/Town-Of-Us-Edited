@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Helper : Role
     {

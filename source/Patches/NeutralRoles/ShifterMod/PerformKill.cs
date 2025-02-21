@@ -1,31 +1,31 @@
 using HarmonyLib;
-using TownOfUs.CrewmateRoles.InvestigatorMod;
-using TownOfUs.CrewmateRoles.SnitchMod;
-using TownOfUs.CrewmateRoles.TrapperMod;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
+using TownOfUsEdited.CrewmateRoles.SnitchMod;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using System;
-using TownOfUs.Extensions;
-using TownOfUs.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using AmongUs.GameOptions;
-using TownOfUs.Roles.Modifiers;
-using TownOfUs.ImpostorRoles.BomberMod;
-using TownOfUs.CrewmateRoles.AurialMod;
-using TownOfUs.Patches.ScreenEffects;
-using TownOfUs.Roles.Cultist;
-using Assassin = TownOfUs.Roles.Modifiers.Assassin;
+using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.ImpostorRoles.BomberMod;
+using TownOfUsEdited.CrewmateRoles.AurialMod;
+using TownOfUsEdited.Patches.ScreenEffects;
+using TownOfUsEdited.Roles.Cultist;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 using Reactor.Utilities;
 using System.Collections;
-using TownOfUs.ImpostorRoles.ImpostorMod;
+using TownOfUsEdited.ImpostorRoles.ImpostorMod;
 using System.Linq;
 using Reactor.Networking.Extensions;
 
-namespace TownOfUs.Patches.NeutralRoles.ShifterMod
+namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite Sprite => TownOfUs.Arrow;
+        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static bool Prefix(KillButton __instance)
         {
             if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;

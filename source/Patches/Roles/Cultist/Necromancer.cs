@@ -1,6 +1,6 @@
 using System;
 
-namespace TownOfUs.Roles.Cultist
+namespace TownOfUsEdited.Roles.Cultist
 {
     public class Necromancer : Role
     {

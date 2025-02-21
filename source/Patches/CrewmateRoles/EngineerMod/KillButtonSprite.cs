@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.EngineerMod
+namespace TownOfUsEdited.CrewmateRoles.EngineerMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class KillButtonSprite

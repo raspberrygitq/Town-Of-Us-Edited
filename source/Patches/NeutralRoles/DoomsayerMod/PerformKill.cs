@@ -1,9 +1,9 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.NeutralRoles.DoomsayerMod
+namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

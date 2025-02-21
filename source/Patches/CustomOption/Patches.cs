@@ -11,7 +11,7 @@ using Il2CppSystem.Text;
 using Reactor.Utilities;
 using System.Collections;
 
-namespace TownOfUs.CustomOption
+namespace TownOfUsEdited.CustomOption
 {
     public static class Patches
     {
@@ -634,7 +634,7 @@ namespace TownOfUs.CustomOption
             public static void Postfix(PlayerPhysics __instance)
             {
                 if (PlayerControl.AllPlayerControls.Count < 2 || !AmongUsClient.Instance ||
-                    !PlayerControl.LocalPlayer || !AmongUsClient.Instance.AmHost) return;
+                    !PlayerControl.LocalPlayer || !AmongUsClient.Instance.AmHost || __instance.myPlayer.isDummy) return;
 
                 Coroutines.Start(Rpc.SendRpc(RecipientId: __instance.myPlayer.OwnerId));
             }

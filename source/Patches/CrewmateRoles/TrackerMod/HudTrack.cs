@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.TrackerMod
+namespace TownOfUsEdited.CrewmateRoles.TrackerMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudTrack

@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Modifiers.AssassinMod;
+using TownOfUsEdited.Modifiers.AssassinMod;
 
-namespace TownOfUs.Roles.AssassinMod
+namespace TownOfUsEdited.Roles.AssassinMod
 {
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.VotingComplete))] // BBFDNCCEJHI
     public static class VotingComplete

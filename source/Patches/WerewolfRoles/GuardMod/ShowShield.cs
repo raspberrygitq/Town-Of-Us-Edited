@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.WerewolfRoles.GuardMod
+namespace TownOfUsEdited.WerewolfRoles.GuardMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class ShowShield

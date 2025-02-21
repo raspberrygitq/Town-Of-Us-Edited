@@ -1,16 +1,16 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.WerewolfRoles.BlackWolfMod
+namespace TownOfUsEdited.WerewolfRoles.BlackWolfMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite RampageSprite => TownOfUs.RampageSprite;
-        public static Sprite UnRampageSprite => TownOfUs.UnRampageSprite;
-        private static Sprite WerewolfConvertSprite => TownOfUs.WerewolfConvertSprite;
+        public static Sprite RampageSprite => TownOfUsEdited.RampageSprite;
+        public static Sprite UnRampageSprite => TownOfUsEdited.UnRampageSprite;
+        private static Sprite WerewolfConvertSprite => TownOfUsEdited.WerewolfConvertSprite;
         
         [HarmonyPriority(Priority.Last)]
         public static void Postfix(HudManager __instance)

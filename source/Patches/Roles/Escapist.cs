@@ -1,9 +1,9 @@
 using Reactor.Utilities;
 using System;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Escapist : Role
     {

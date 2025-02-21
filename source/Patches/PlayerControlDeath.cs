@@ -1,15 +1,15 @@
 using HarmonyLib;
-using TownOfUs.Roles.Modifiers;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.Roles;
 using System.Linq;
-using TownOfUs.ImpostorRoles.TraitorMod;
+using TownOfUsEdited.ImpostorRoles.TraitorMod;
 using System.Collections;
 using UnityEngine;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 using AmongUs.GameOptions;
 using Reactor.Utilities;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.Die))]
     public class PlayerControl_Die

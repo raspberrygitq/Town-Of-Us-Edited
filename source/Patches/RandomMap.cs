@@ -1,11 +1,11 @@
 using HarmonyLib;
 using System;
-using TownOfUs.Patches;
-using TownOfUs.CustomOption;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.CustomOption;
 using AmongUs.GameOptions;
 using BepInEx.Unity.IL2CPP;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch]
     class RandomMap

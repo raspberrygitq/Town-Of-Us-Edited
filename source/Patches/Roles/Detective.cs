@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using TownOfUs.CrewmateRoles.DetectiveMod;
+using TownOfUsEdited.CrewmateRoles.DetectiveMod;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Detective : Role
     {

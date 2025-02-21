@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 
-namespace TownOfUs.CrewmateRoles.InvestigatorMod
+namespace TownOfUsEdited.CrewmateRoles.InvestigatorMod
 {
     public class EndGame
     {

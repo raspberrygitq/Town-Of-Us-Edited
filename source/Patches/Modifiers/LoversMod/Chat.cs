@@ -3,7 +3,7 @@ using System.Linq;
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs.Modifiers.LoversMod
+namespace TownOfUsEdited.Modifiers.LoversMod
 {
     public static class Chat
     {

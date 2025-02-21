@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using TMPro;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Survivor : Role
     {

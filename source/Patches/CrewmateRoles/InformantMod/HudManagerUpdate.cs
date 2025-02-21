@@ -1,8 +1,8 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.InformantMod
+namespace TownOfUsEdited.CrewmateRoles.InformantMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate
@@ -29,7 +29,7 @@ namespace TownOfUs.CrewmateRoles.InformantMod
                 role.VitalsButton.gameObject.SetActive(false);
             }
 
-            role.VitalsButton.graphic.sprite = TownOfUs.VitalsSprite;
+            role.VitalsButton.graphic.sprite = TownOfUsEdited.VitalsSprite;
             role.VitalsButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
 
             role.VitalsButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
@@ -39,7 +39,7 @@ namespace TownOfUs.CrewmateRoles.InformantMod
             __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
-            __instance.KillButton.graphic.sprite = TownOfUs.AdminSprite;
+            __instance.KillButton.graphic.sprite = TownOfUsEdited.AdminSprite;
 
             var renderer = __instance.KillButton.graphic;
             var renderer2 = role.VitalsButton.graphic;

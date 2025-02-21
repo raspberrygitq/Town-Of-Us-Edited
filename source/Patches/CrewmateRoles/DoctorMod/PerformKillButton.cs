@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 
-namespace TownOfUs.CrewmateRoles.DoctorMod
+namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton
@@ -48,7 +48,7 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
             }
             else if (__instance == role.DragDropButton)
             {
-                if (role.DragDropButton.graphic.sprite == TownOfUs.DragSprite)
+                if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DragSprite)
                 {
                     if (role.CurrentTarget == null) return false;
                     if (!__instance.enabled) return false;
@@ -67,7 +67,7 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
                     role.CurrentlyDragging = role.CurrentTarget;
 
                     KillButtonTarget.SetTarget(__instance, null, role);
-                    __instance.graphic.sprite = TownOfUs.DropSprite;
+                    __instance.graphic.sprite = TownOfUsEdited.DropSprite;
                     return false;
                 }
                 else
@@ -96,7 +96,7 @@ namespace TownOfUs.CrewmateRoles.DoctorMod
                     var body = role.CurrentlyDragging;
                     foreach (var body2 in role.CurrentlyDragging.bodyRenderers) body2.material.SetFloat("_Outline", 0f);
                     role.CurrentlyDragging = null;
-                    __instance.graphic.sprite = TownOfUs.DragSprite;
+                    __instance.graphic.sprite = TownOfUsEdited.DragSprite;
 
                     body.transform.position = position;
 

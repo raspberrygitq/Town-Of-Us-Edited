@@ -1,6 +1,6 @@
 ﻿﻿using System.Collections.Generic;
 
-namespace TownOfUs.Patches.CustomHats
+namespace TownOfUsEdited.Patches.CustomHats
 {
     public static class HatCache
     {

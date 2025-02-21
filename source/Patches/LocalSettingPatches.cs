@@ -1,8 +1,8 @@
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch]
     public class LocalSettings
@@ -24,7 +24,7 @@ namespace TownOfUs.Patches
                 if (player.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(player).Caught) continue;
                 if (player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(player).Caught) continue;
 
-                bool show = TownOfUs.DeadSeeGhosts.Value;
+                bool show = TownOfUsEdited.DeadSeeGhosts.Value;
                 var bodyforms = player.gameObject.transform.GetChild(1).gameObject;
 
                 foreach (var form in bodyforms.GetAllChilds())

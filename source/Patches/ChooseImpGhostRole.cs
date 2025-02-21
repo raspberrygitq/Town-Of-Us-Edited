@@ -1,11 +1,11 @@
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
-using TownOfUs.ImpostorRoles.BlinderMod;
-using TownOfUs.ImpostorRoles.FreezerMod;
-using TownOfUs.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.ImpostorRoles.BlinderMod;
+using TownOfUsEdited.ImpostorRoles.FreezerMod;
+using TownOfUsEdited.ImpostorRoles.SpiritMod;
 
-namespace TownOfUs.ChooseImpGhostRole
+namespace TownOfUsEdited.ChooseImpGhostRole
 {
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.BeginForGameplay))]
     public class PickImpRole

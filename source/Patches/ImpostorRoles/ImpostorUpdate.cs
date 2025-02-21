@@ -1,12 +1,12 @@
 using System.Linq;
 using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUs.CrewmateRoles.SheriffMod;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.SheriffMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.ImpostorMod
+namespace TownOfUsEdited.ImpostorRoles.ImpostorMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class ImpostorUpdate

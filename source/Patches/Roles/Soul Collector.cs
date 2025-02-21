@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using Reactor.Utilities;
 using TMPro;
-using TownOfUs.NeutralRoles.SoulCollectorMod;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class SoulCollector : Role
     {

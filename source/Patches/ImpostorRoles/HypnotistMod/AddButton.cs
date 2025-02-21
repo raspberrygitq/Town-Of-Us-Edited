@@ -1,15 +1,15 @@
 using System;
 using Reactor.Utilities.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace TownOfUs.ImpostorRoles.HypnotistMod
+namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
 {
     public class AddHysteriaButton
     {
-        public static Sprite HysteriaSprite => TownOfUs.HysteriaSprite;
+        public static Sprite HysteriaSprite => TownOfUsEdited.HysteriaSprite;
 
         public static void GenButton(Hypnotist role, int index)
         {

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.Patches.Modifiers.MotionlessMod
+namespace TownOfUsEdited.Patches.Modifiers.MotionlessMod
 {
     // Code from stellar roles, link: https://github.com/Mr-Fluuff/StellarRolesAU/blob/bad6c0e70557897021fc9b257588b32e29b705b9/StellarRoles/Patches/SleepwalkerPatches.cs
     public class PositionPatches

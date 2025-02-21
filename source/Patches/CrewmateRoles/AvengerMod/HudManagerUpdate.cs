@@ -1,12 +1,12 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
 using System.Linq;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Extensions;
-using TownOfUs.Roles;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.AvengerMod
+namespace TownOfUsEdited.CrewmateRoles.AvengerMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate
@@ -40,7 +40,7 @@ namespace TownOfUs.CrewmateRoles.AvengerMod
                 role.AvengeButton.gameObject.SetActive(false);
             }
 
-            role.AvengeButton.graphic.sprite = TownOfUs.Avenge;
+            role.AvengeButton.graphic.sprite = TownOfUsEdited.Avenge;
             role.AvengeButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
 
             role.AvengeButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)

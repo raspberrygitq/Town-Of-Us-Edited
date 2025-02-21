@@ -1,8 +1,8 @@
 using System.Linq;
 using Reactor.Utilities;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Attacker : Role
     {

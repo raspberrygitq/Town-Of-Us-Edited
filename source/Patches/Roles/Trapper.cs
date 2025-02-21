@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using TMPro;
-using TownOfUs.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using UnityEngine;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Trapper : Role
     {
-        public static Material trapMaterial = TownOfUs.bundledAssets.Get<Material>("trap");
+        public static Material trapMaterial = TownOfUsEdited.bundledAssets.Get<Material>("trap");
 
         public List<Trap> traps = new List<Trap>();
         public float Cooldown;

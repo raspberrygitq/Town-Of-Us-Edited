@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using AmongUs.GameOptions;
 using HarmonyLib;
 using TMPro;
-using TownOfUs.CustomOption;
+using TownOfUsEdited.CustomOption;
 using UnityEngine;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     internal static class DisplayRoleList

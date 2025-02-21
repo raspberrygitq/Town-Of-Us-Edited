@@ -1,16 +1,16 @@
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using System.Linq;
-using TownOfUs.Extensions;
-using TownOfUs.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUs.ImpostorRoles.HypnotistMod
+namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite Hypnotise => TownOfUs.HypnotiseSprite;
+        public static Sprite Hypnotise => TownOfUsEdited.HypnotiseSprite;
 
         public static void Postfix(HudManager __instance)
         {

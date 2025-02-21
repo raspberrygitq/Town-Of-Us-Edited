@@ -57,6 +57,7 @@ Join the [Discord](https://discord.gg/Huen5AqR2t) if you need help or want to fi
 # Releases
 | Among Us - Version| Mod Version | Link |
 |----------|-------------|-----------------|
+| 2024.11.26 | v1.0.4 | [Download](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.4/Toue.v1.0.4.zip) |
 | 2024.11.26 | v1.0.3 | [Download](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.3/Toue.v1.0.3.zip) |
 | 2024.11.26 | v1.0.2 | [Download](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.2/Toue.v1.0.2.zip) |
 | 2024.11.26 | v1.0.1 | [Download](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.1/Toue.v1.0.1.zip) |
@@ -1145,12 +1146,12 @@ The Maul needs to be the last killer alive to win the game.
 ## Mutant
 ### **Team: Neutral**
 
-The Infectious is a Neutral Role which's goal is to kill every other players.\
-They can perform regular kills or Infect other people.\
-When killing an infected, their next cooldown will be shorter.\
-The Infected players will know that they have been infected.\
-On stage 1 of the Infection, nothing happens, on stage 2, the infected will lose a bit of their speed, on stage 3, their vision will reduce as max as possible and on stage 4, they will die if the Infectious doesn't get ejected.\
-The stage of the Infection grows by one after each meeting.
+The Mutant is a Neutral Role which's goal is to kill every other players.\
+The Mutant firsts starts as a regular player that has a long kill cooldown, crewmate vision and can't use the vents.\
+But if the Mutant presses its Transform Button, it will transform into a Mutated player and will have Impostor vision and a really short kill cooldown.\
+The Mutant may also be able to vent while transformed depending on settings.\
+Note that everyone will be alerted if the Mutant transforms with a flash on their screen.\
+The Mutant can press its button again to turn back into a regular player.
 
 ### Game Options
 | Name | Description | Type | Default |

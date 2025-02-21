@@ -5,15 +5,15 @@ using System.Linq;
 using TMPro;
 using Reactor.Utilities;
 using System.Collections.Generic;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using System.Collections;
-using TownOfUs.CrewmateRoles.MedicMod;
-using TownOfUs.Modifiers.ShyMod;
-using TownOfUs.Patches.NeutralRoles;
-using TownOfUs.Roles.Modifiers;
-using TownOfUs.Extensions;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Modifiers.ShyMod;
+using TownOfUsEdited.Patches.NeutralRoles;
+using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Transporter : Role
     {

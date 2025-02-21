@@ -12,19 +12,19 @@ using System.Collections.Generic;
 using Twitch;
 using Reactor.Utilities;
 
-namespace TownOfUs
+namespace TownOfUsEdited
 {
     [HarmonyPatch(typeof(MainMenuManager), nameof(MainMenuManager.Start))]
     public class ModUpdaterButton
     {
-        private static Sprite TOUUpdateSprite => TownOfUs.UpdateTOUButton;
-        private static Sprite SubmergedUpdateSprite => TownOfUs.UpdateSubmergedButton;
+        private static Sprite TOUUpdateSprite => TownOfUsEdited.UpdateTOUButton;
+        private static Sprite SubmergedUpdateSprite => TownOfUsEdited.UpdateSubmergedButton;
         private static void Prefix(MainMenuManager __instance)
         {
             //Check if there's a ToU update
             ModUpdater.LaunchUpdater();
 
-            var data = GetVersioning().FirstOrDefault(x => x.ModVersion.Equals(TownOfUs.VersionString));
+            var data = GetVersioning().FirstOrDefault(x => x.ModVersion.Equals(TownOfUsEdited.VersionString));
             if (data != null)
             {
                 var RequiredVersions = data.InternalVersions;
@@ -33,7 +33,7 @@ namespace TownOfUs
                 {
                     string action = AUversion > RequiredVersions.Keys.Max() ? "downgrade" : "update";
                     string info =
-                        $"ALERT\nTown of Us Edited {TownOfUs.VersionString} requires {RequiredVersions.Values.Last()}\nyou have {Application.version}\nPlease {action} your among us version"
+                        $"ALERT\nTown of Us Edited {TownOfUsEdited.VersionString} requires {RequiredVersions.Values.Last()}\nyou have {Application.version}\nPlease {action} your among us version"
                         + "\nvisit Github or Discord for any help";
                     TwitchManager man = DestroyableSingleton<TwitchManager>.Instance;
                     ModUpdater.InfoPopup = UnityEngine.Object.Instantiate(man.TwitchPopup);
@@ -129,7 +129,7 @@ namespace TownOfUs
         {
             DefaultRequestHeaders = 
             {
-                {"User-Agent", "TownOfUs Updater"}
+                {"User-Agent", "TownOfUsEdited Updater"}
             } 
         };
 
@@ -144,7 +144,7 @@ namespace TownOfUs
             //Only check of Submerged update if Submerged is already installed
             string codeBase = Assembly.GetExecutingAssembly().Location;
             UriBuilder uri = new(codeBase);
-            string submergedPath = Uri.UnescapeDataString(uri.Path.Replace("TownOfUs", "Submerged"));
+            string submergedPath = Uri.UnescapeDataString(uri.Path.Replace("TownOfUsEdited", "Submerged"));
             if (File.Exists(submergedPath))
             {
                 checkForUpdate("Submerged").GetAwaiter().GetResult();
@@ -210,12 +210,12 @@ namespace TownOfUs
             }
             catch (Exception e)
             {
-                PluginSingleton<TownOfUs>.Instance.Log.LogMessage("Exception occured when clearing old versions:\n" + e);
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("Exception occured when clearing old versions:\n" + e);
             }
         }
         public static async Task<bool> checkForUpdate(string updateType = "TOU")
         {
-            //Checks the github api for Town Of Us tags. Compares current version (from VersionString in TownOfUs.cs) to the latest tag version(on GitHub)
+            //Checks the github api for Town Of Us tags. Compares current version (from VersionString in TownOfUsEdited.cs) to the latest tag version(on GitHub)
             try
             {
                 string githubURI = "";
@@ -231,7 +231,7 @@ namespace TownOfUs
 
                 if (response.StatusCode != HttpStatusCode.OK || response.Content == null)
                 {
-                    PluginSingleton<TownOfUs>.Instance.Log.LogMessage("Server returned no data: " + response.StatusCode.ToString());
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("Server returned no data: " + response.StatusCode.ToString());
                     return false;
                 }
                 string json = await response.Content.ReadAsStringAsync();
@@ -247,7 +247,7 @@ namespace TownOfUs
                 Version ver = Version.Parse(tagname.Replace("v", ""));
                 if (updateType == "TOU")
                 { //Check TOU version
-                    diff = TownOfUs.Version.CompareTo(ver);
+                    diff = TownOfUsEdited.Version.CompareTo(ver);
                     if (diff < 0)
                     { // TOU update required
                         HasTOUUpdate = true;
@@ -288,14 +288,14 @@ namespace TownOfUs
             }
             catch (Exception ex)
             {
-                PluginSingleton<TownOfUs>.Instance.Log.LogMessage(ex);
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage(ex);
             }
             return false;
         }
 
         public static async Task<bool> downloadUpdate(string updateType = "TOU")
         {
-            //Downloads the new TownOfUs/Submerged dll from GitHub into the plugins folder
+            //Downloads the new TownOfUsEdited/Submerged dll from GitHub into the plugins folder
             string downloadDLL = "";
             string info = "";
             if (updateType == "TOU")
@@ -313,7 +313,7 @@ namespace TownOfUs
                 var response = await  Httpclient.GetAsync(new System.Uri(downloadDLL), HttpCompletionOption.ResponseContentRead);
                 if (response.StatusCode != HttpStatusCode.OK || response.Content == null)
                 {
-                    PluginSingleton<TownOfUs>.Instance.Log.LogMessage("Server returned no data: " + response.StatusCode.ToString());
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("Server returned no data: " + response.StatusCode.ToString());
                     return false;
                 }
                 string codeBase = Assembly.GetExecutingAssembly().Location;
@@ -321,7 +321,7 @@ namespace TownOfUs
                 string fullname = System.Uri.UnescapeDataString(uri.Path);
                 if (updateType == "Submerged")
                 {
-                    fullname = fullname.Replace("TownOfUs", "Submerged"); //TODO A better solution than this to correctly name the dll files
+                    fullname = fullname.Replace("TownOfUsEdited", "Submerged"); //TODO A better solution than this to correctly name the dll files
                 }
                 if (File.Exists(fullname + ".old")) // Clear old file in case it wasnt;
                     File.Delete(fullname + ".old");
@@ -338,7 +338,7 @@ namespace TownOfUs
             }
             catch (Exception ex)
             {
-                PluginSingleton<TownOfUs>.Instance.Log.LogMessage(ex);
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage(ex);
             }
             showPopup("Update wasn't successful\nTry again later,\nor update manually.");
             return false;

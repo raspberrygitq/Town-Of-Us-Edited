@@ -1,11 +1,11 @@
 using HarmonyLib;
 using Reactor.Utilities;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 using System;
 
-namespace TownOfUs.NeutralRoles.VultureMod
+namespace TownOfUsEdited.NeutralRoles.VultureMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill

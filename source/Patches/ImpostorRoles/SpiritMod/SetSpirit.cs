@@ -1,14 +1,14 @@
 using System;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using System.Collections.Generic;
 using System.Linq;
 using Random = UnityEngine.Random;
 
-namespace TownOfUs.ImpostorRoles.SpiritMod
+namespace TownOfUsEdited.ImpostorRoles.SpiritMod
 {
     [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn

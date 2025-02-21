@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TownOfUs.RainbowMod
+namespace TownOfUsEdited.RainbowMod
 {
     public static class PalettePatch
     {

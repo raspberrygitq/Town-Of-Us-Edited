@@ -1,10 +1,10 @@
 using System.Linq;
 using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.ImpostorRoles.ReviverMod
+namespace TownOfUsEdited.ImpostorRoles.ReviverMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class ReviverHudManagerUpdate
@@ -34,7 +34,7 @@ namespace TownOfUs.ImpostorRoles.ReviverMod
                     && role.UsedRevive == false && !player.Data.Disconnected
                     && role.CanRevive == true);
                     
-            role.ReviveButton.graphic.sprite = TownOfUs.Revive2Sprite;
+            role.ReviveButton.graphic.sprite = TownOfUsEdited.Revive2Sprite;
             role.ReviveButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             if (!role.ReviveButton.isActiveAndEnabled) return;

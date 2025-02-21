@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace TownOfUs.CrewmateRoles.ImitatorMod
+namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class OverrideKillText

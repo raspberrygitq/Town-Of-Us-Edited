@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace TownOfUs.Patches.NeutralRoles.VampireChat
+namespace TownOfUsEdited.Patches.NeutralRoles.VampireChat
 {
     public class VampireChat
     {

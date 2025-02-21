@@ -1,9 +1,9 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.CrewmateRoles.InvestigatorMod
+namespace TownOfUsEdited.CrewmateRoles.InvestigatorMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class AddPrints

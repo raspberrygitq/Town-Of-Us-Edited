@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using TownOfUs.Patches;
+using TownOfUsEdited.Patches;
 using UnityEngine;
-using TownOfUs.NeutralRoles.ExecutionerMod;
-using TownOfUs.NeutralRoles.GuardianAngelMod;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
+using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
 using System;
-using TownOfUs.CrewmateRoles.VampireHunterMod;
+using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
 using Reactor.Utilities;
 
-namespace TownOfUs.Roles
+namespace TownOfUsEdited.Roles
 {
     public class Doomsayer : Role, IGuesser
     {

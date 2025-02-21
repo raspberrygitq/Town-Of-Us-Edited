@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Reactor.Networking.Extensions;
-using TownOfUs.Extensions;
+using TownOfUsEdited.Extensions;
 
-namespace TownOfUs.Patches
+namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class AntiCheat

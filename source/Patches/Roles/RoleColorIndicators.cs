@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using TownOfUs.Roles;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUs.Patches.Roles
+namespace TownOfUsEdited.Patches.Roles
 {
     public class RoleColorIndicators
     {
