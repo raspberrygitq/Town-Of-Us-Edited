@@ -21,27 +21,38 @@ namespace TownOfUsEdited.NeutralRoles.PhantomMod
             if (tasksLeft == 0 && !role.Caught)
             {
                 role.CompletedTasks = true;
-                if (AmongUsClient.Instance.AmHost)
+                if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
                 {
-                    Utils.Rpc(CustomRPC.PhantomWin, role.Player.PlayerId);
-                    if (!CustomGameOptions.NeutralEvilWinEndsGame)
+                    if (AmongUsClient.Instance.AmHost)
                     {
-                        role.Caught = true;
-                        if (!PlayerControl.LocalPlayer.Is(RoleEnum.Phantom) || !CustomGameOptions.PhantomSpook) return;
-                        byte[] toKill = MeetingHud.Instance.playerStates.Where(x => !Utils.PlayerById(x.TargetPlayerId).Is(RoleEnum.Pestilence)).Select(x => x.TargetPlayerId).ToArray();
-                        role.PauseEndCrit = true;
-                        var pk = new PlayerMenu((x) => {
-                            Utils.RpcMultiMurderPlayer(PlayerControl.LocalPlayer, x);
-                            role.PauseEndCrit = false;
-                        }, (y) => {
-                            return toKill.Contains(y.PlayerId);
-                        });
-                        Coroutines.Start(pk.Open(1f));
+                        Utils.Rpc(CustomRPC.PhantomWin, role.Player.PlayerId);
+                        if (!CustomGameOptions.NeutralEvilWinEndsGame)
+                        {
+                            role.Caught = true;
+                            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Phantom) || !CustomGameOptions.PhantomSpook) return;
+                            byte[] toKill = MeetingHud.Instance.playerStates.Where(x => !Utils.PlayerById(x.TargetPlayerId).Is(RoleEnum.Pestilence)).Select(x => x.TargetPlayerId).ToArray();
+                            role.PauseEndCrit = true;
+                            var pk = new PlayerMenu((x) =>
+                            {
+                                Utils.RpcMultiMurderPlayer(PlayerControl.LocalPlayer, x);
+                                role.PauseEndCrit = false;
+                            }, (y) =>
+                            {
+                                return toKill.Contains(y.PlayerId);
+                            });
+                            Coroutines.Start(pk.Open(1f));
+                        }
+                        else
+                        {
+                            Coroutines.Start(Role.WaitForEnd());
+                            PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Phantom Win");
+                        }
                     }
-                    else
-                    {
-                        if (AmongUsClient.Instance.AmHost) Coroutines.Start(Role.WaitForEnd());
-                    }
+                }
+                else if (!role.Caught)
+                {
+                    HudManager.Instance.ShowPopUp("Normally, the game would've ended and the Phantom would've won. In Freeplay, nothing happens.");
+                    role.Caught = true;
                 }
             }
         }

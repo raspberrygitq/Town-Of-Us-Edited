@@ -1,25 +1,11 @@
-using HarmonyLib;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.AvengerMod
 {
-    [HarmonyPatch(typeof(KillButton), nameof(KillButton.SetTarget))]
     public class KillButtonTarget
     {
         public static byte DontRevive = byte.MaxValue;
-
-        public static bool Prefix(KillButton __instance)
-        {
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Avenger)) return true;
-            else
-            {
-                var role = Role.GetRole<Avenger>(PlayerControl.LocalPlayer);
-                if (__instance == role.AvengeButton) return true;
-                else return false;
-            }
-        }
 
         public static void SetTarget(KillButton __instance, DeadBody target, Avenger role)
         {
@@ -39,11 +25,15 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
                 component.material.SetColor("_OutlineColor", Color.red);
                 __instance.graphic.color = Palette.EnabledColor;
                 __instance.graphic.material.SetFloat("_Desat", 0f);
+                role.AvengeText.color = Palette.EnabledColor;
+                role.AvengeText.material.SetFloat("_Desat", 0f);
                 return;
             }
 
             __instance.graphic.color = Palette.DisabledClear;
             __instance.graphic.material.SetFloat("_Desat", 1f);
+            role.AvengeText.color = Palette.DisabledClear;
+            role.AvengeText.material.SetFloat("_Desat", 1f);
         }
     }
 }

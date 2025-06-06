@@ -35,84 +35,84 @@ namespace TownOfUsEdited.Patches
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
         public class CantReport
         {
-        public static void Postfix(PlayerControl __instance)
-        {
-            if (LobbyBehaviour.Instance) return;
-            if (AmongUsClient.Instance.IsGameOver) return;
-            if (!__instance.AmOwner) return;
-            if (!__instance.CanMove) return;
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation)
+            public static void Postfix(PlayerControl __instance)
             {
-                DestroyableSingleton<HudManager>.Instance.ReportButton.SetActive(false);
-                return;
+                if (LobbyBehaviour.Instance) return;
+                if (AmongUsClient.Instance.IsGameOver) return;
+                if (!__instance.AmOwner) return;
+                if (!__instance.CanMove) return;
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation)
+                {
+                    DestroyableSingleton<HudManager>.Instance.ReportButton.SetActive(false);
+                    return;
+                }
+                if (CustomGameOptions.GameMode != GameMode.BattleRoyale &&
+                CustomGameOptions.GameMode != GameMode.Chaos) return;
+                if (PlayerControl.LocalPlayer.Data.IsDead) return;
+                var truePosition = __instance.GetTruePosition();
+
+                var data = __instance.Data;
+                var stuff = Physics2D.OverlapCircleAll(truePosition, __instance.MaxReportDistance, Constants.Usables);
+                var flag = (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !data.IsDead) &&
+                           (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) && __instance.CanMove;
+                var flag2 = false;
+
+                foreach (var collider2D in stuff)
+                    if (flag && !data.IsDead && !flag2 && collider2D.tag == "DeadBody")
+                    {
+                        var component = collider2D.GetComponent<DeadBody>();
+
+                        if (Vector2.Distance(truePosition, component.TruePosition) <= __instance.MaxReportDistance)
+                        {
+                            if (!PhysicsHelpers.AnythingBetween(__instance.Collider, truePosition, component.TruePosition, Constants.ShipOnlyMask, false)) flag2 = true;
+                        }
+                    }
+
+                DestroyableSingleton<HudManager>.Instance.ReportButton.SetActive(flag2);
             }
-            if (CustomGameOptions.GameMode != GameMode.BattleRoyale &&
-            CustomGameOptions.GameMode != GameMode.Chaos) return;
-            if (PlayerControl.LocalPlayer.Data.IsDead) return;
-            var truePosition = __instance.GetTruePosition();
-
-            var data = __instance.Data;
-            var stuff = Physics2D.OverlapCircleAll(truePosition, __instance.MaxReportDistance, Constants.Usables);
-            var flag = (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !data.IsDead) &&
-                       (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) && __instance.CanMove;
-            var flag2 = false;
-
-            foreach (var collider2D in stuff)
-                if (flag && !data.IsDead && !flag2 && collider2D.tag == "DeadBody")
-                {
-                    var component = collider2D.GetComponent<DeadBody>();
-
-                    if (Vector2.Distance(truePosition, component.TruePosition) <= __instance.MaxReportDistance)
-                    {
-                        if (!PhysicsHelpers.AnythingBetween(__instance.Collider, truePosition, component.TruePosition, Constants.ShipOnlyMask, false)) flag2 = true; 
-                    }
-                }
-
-            DestroyableSingleton<HudManager>.Instance.ReportButton.SetActive(flag2);
         }
-    }
 
-    [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.ReportClosest))]
-    public static class DontReport
-    {
-        public static bool Prefix(PlayerControl __instance)
+        [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.ReportClosest))]
+        public static class DontReport
         {
-            if (LobbyBehaviour.Instance) return false;
-            if (AmongUsClient.Instance.IsGameOver) return false;
-            if (PlayerControl.LocalPlayer.Data.IsDead) return false;
-            if (CustomGameOptions.GameMode == GameMode.BattleRoyale
-            || CustomGameOptions.GameMode == GameMode.Chaos) return false;
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation) return false;
-            foreach (var collider2D in Physics2D.OverlapCircleAll(__instance.GetTruePosition(),
-                __instance.MaxReportDistance, Constants.PlayersOnlyMask))
-                if (!(collider2D.tag != "DeadBody"))
-                {
-                    var component = collider2D.GetComponent<DeadBody>();
-                    if (component && !component.Reported)
+            public static bool Prefix(PlayerControl __instance)
+            {
+                if (LobbyBehaviour.Instance) return false;
+                if (AmongUsClient.Instance.IsGameOver) return false;
+                if (PlayerControl.LocalPlayer.Data.IsDead) return false;
+                if (CustomGameOptions.GameMode == GameMode.BattleRoyale
+                || CustomGameOptions.GameMode == GameMode.Chaos) return false;
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation) return false;
+                foreach (var collider2D in Physics2D.OverlapCircleAll(__instance.GetTruePosition(),
+                    __instance.MaxReportDistance, Constants.PlayersOnlyMask))
+                    if (!(collider2D.tag != "DeadBody"))
                     {
-                        component.OnClick();
-                        if (component.Reported) break;
+                        var component = collider2D.GetComponent<DeadBody>();
+                        if (component && !component.Reported)
+                        {
+                            component.OnClick();
+                            if (component.Reported) break;
+                        }
                     }
-                }
 
-            return false;
+                return false;
+            }
         }
-    }
 
-    [HarmonyPatch(typeof(DeadBody), nameof(DeadBody.OnClick))]
-    public static class DontClick
-    {
-        public static bool Prefix(DeadBody __instance)
+        [HarmonyPatch(typeof(DeadBody), nameof(DeadBody.OnClick))]
+        public static class DontClick
         {
-            if (LobbyBehaviour.Instance) return false;
-            if (AmongUsClient.Instance.IsGameOver) return false;
-            if (PlayerControl.LocalPlayer.Data.IsDead) return false;
+            public static bool Prefix(DeadBody __instance)
+            {
+                if (LobbyBehaviour.Instance) return false;
+                if (AmongUsClient.Instance.IsGameOver) return false;
+                if (PlayerControl.LocalPlayer.Data.IsDead) return false;
 
-            if (CustomGameOptions.GameMode == GameMode.BattleRoyale ||
-            CustomGameOptions.GameMode == GameMode.Chaos) return false;
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation) return false;
-            return true;
+                if (CustomGameOptions.GameMode == GameMode.BattleRoyale ||
+                CustomGameOptions.GameMode == GameMode.Chaos) return false;
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation) return false;
+                return true;
+            }
         }
-    }
     }
 }

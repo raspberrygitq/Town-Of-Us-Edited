@@ -1,4 +1,3 @@
-using TownOfUsEdited.Patches;
 using HarmonyLib;
 using TownOfUsEdited.Extensions;
 
@@ -10,31 +9,6 @@ namespace TownOfUsEdited.Patches
         public static bool welcomesent = false;
         public static void Prefix()
         {
-            if (LobbyBehaviour.Instance && Start.impsent != false)
-            {
-                Start.impsent = false;
-            }
-            if (LobbyBehaviour.Instance && Start.vampsent != false)
-            {
-                Start.vampsent = false;
-            }
-            if (LobbyBehaviour.Instance && Start.sksent != false)
-            {
-                Start.sksent = false;
-            }
-            if (LobbyBehaviour.Instance && Start.covensent != false)
-            {
-                Start.covensent = false;
-            }
-            if (LobbyBehaviour.Instance && Start.madsent != false)
-            {
-                Start.madsent = false;
-            }
-            if (LobbyBehaviour.Instance && Start.lovsent != false)
-            {
-                Start.lovsent = false;
-            }
-
             // Welcome message
             if (PlayerControl.LocalPlayer != null && LobbyBehaviour.Instance && !welcomesent)
             {

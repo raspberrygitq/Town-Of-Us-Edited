@@ -28,7 +28,8 @@ namespace TownOfUsEdited.ImpostorRoles.BomberMod
 
             role.PlantButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.PlantButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 

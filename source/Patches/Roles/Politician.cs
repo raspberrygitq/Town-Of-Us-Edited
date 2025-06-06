@@ -25,6 +25,7 @@ namespace TownOfUsEdited.Roles
             CanCampaign = true;
             Alignment = Alignment.CrewmateSupport;
             Cooldown = CustomGameOptions.CampaignCd;
+            Alignment = Alignment.CrewmatePower;
         }
         public GameObject RevealButton = new GameObject();
 

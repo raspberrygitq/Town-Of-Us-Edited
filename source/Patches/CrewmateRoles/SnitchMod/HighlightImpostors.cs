@@ -1,4 +1,5 @@
 using HarmonyLib;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
@@ -11,6 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.SnitchMod
     {
         private static void UpdateMeeting(MeetingHud __instance)
         {
+            if (StartImitate.ImitatingPlayers.Contains(PlayerControl.LocalPlayer.PlayerId)) return;
             foreach (var player in PlayerControl.AllPlayerControls)
             {
                 foreach (var state in __instance.playerStates)
@@ -46,7 +48,7 @@ namespace TownOfUsEdited.CrewmateRoles.SnitchMod
             if (!role.TasksDone) return;
             if (MeetingHud.Instance && CustomGameOptions.SnitchSeesImpInMeeting) UpdateMeeting(MeetingHud.Instance);
 
-            if (!PlayerControl.LocalPlayer.IsHypnotised() && !PlayerControl.LocalPlayer.Is(Faction.Madmates))
+            if (!PlayerControl.LocalPlayer.IsHypnotised() && !PlayerControl.LocalPlayer.Is(Faction.Madmates) && !Utils.CommsCamouflaged())
             {
                 foreach (var player in PlayerControl.AllPlayerControls)
                 {

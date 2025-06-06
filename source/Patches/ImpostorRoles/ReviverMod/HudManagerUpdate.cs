@@ -30,7 +30,8 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
 
             role.ReviveButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && role.UsedRevive == false && !player.Data.Disconnected
                     && role.CanRevive == true);
                     
@@ -40,7 +41,7 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
             if (!role.ReviveButton.isActiveAndEnabled) return;
 
             var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             var flag = GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks &&
                        (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                        PlayerControl.LocalPlayer.CanMove;

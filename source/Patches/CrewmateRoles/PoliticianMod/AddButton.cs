@@ -36,6 +36,8 @@ namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
         {
             void Listener()
             {
+                bool isMadmate = false;
+                if (role.Player.Is(Faction.Madmates)) isMadmate = true;
                 role.RevealButton.Destroy();
                 if (role.CampaignedPlayers.ToArray().Where(x => Utils.PlayerById(x) != null && Utils.PlayerById(x).Data != null && !Utils.PlayerById(x).Data.IsDead && !Utils.PlayerById(x).Data.Disconnected && Utils.PlayerById(x).Is(Faction.Crewmates)).ToList().Count * 2 >= 
                     PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected && x.Is(Faction.Crewmates) && !x.Is(RoleEnum.Politician)).ToList().Count)
@@ -44,6 +46,7 @@ namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
                     var mayorRole = new Mayor(role.Player);
                     mayorRole.Revealed = true;
                     mayorRole.RegenTask();
+                    if (isMadmate) Utils.TurnMadmate(role.Player, false);
                     Utils.Rpc(CustomRPC.Elect, role.Player.PlayerId);
                 }
                 else

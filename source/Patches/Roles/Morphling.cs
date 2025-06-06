@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using TMPro;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
@@ -10,18 +12,20 @@ namespace TownOfUsEdited.Roles
     {
         public KillButton _morphButton;
         public PlayerControl ClosestPlayer;
+        public TextMeshPro MorphText;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
         public PlayerControl MorphedPlayer;
 
         public PlayerControl SampledPlayer;
         public float TimeRemaining;
+        public bool Enabled;
 
         public Morphling(PlayerControl player) : base(player)
         {
             Name = "Morphling";
             ImpostorText = () => "Transform Into Crewmates";
-            TaskText = () => "Morph into <color=#00FFFF>Crewmates</color> to be disguised\nFake Tasks:";
+            TaskText = () => "Morph into <color=#00FFFF>Crewmates</color> to disguise yourself\nFake Tasks:";
             Color = Patches.Colors.Impostor;
             Cooldown = CustomGameOptions.MorphlingCd;
             RoleType = RoleEnum.Morphling;
@@ -45,6 +49,7 @@ namespace TownOfUsEdited.Roles
 
         public void Morph()
         {
+            Enabled = true;
             TimeRemaining -= Time.deltaTime;
             Utils.Morph(Player, MorphedPlayer);
             if (Player.Data.IsDead)
@@ -55,6 +60,7 @@ namespace TownOfUsEdited.Roles
 
         public void Unmorph()
         {
+            Enabled = false;
             MorphedPlayer = null;
             Utils.Unmorph(Player);
             Cooldown = CustomGameOptions.MorphlingCd;
@@ -76,7 +82,8 @@ namespace TownOfUsEdited.Roles
             if (Morphed)
             {
                 appearance = MorphedPlayer.GetDefaultAppearance();
-                var modifier = Modifier.GetModifier(MorphedPlayer);
+                var modifiers = Modifier.GetModifiers(MorphedPlayer);
+                var modifier = modifiers.FirstOrDefault(x => x is IVisualAlteration);
                 if (modifier is IVisualAlteration alteration)
                     alteration.TryGetModifiedAppearance(out appearance);
                 return true;

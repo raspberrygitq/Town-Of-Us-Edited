@@ -12,7 +12,7 @@ namespace TownOfUsEdited.Patches
             if (activity == null) return;
 
             var details = $"Town of Us Edited v{TownOfUsEdited.VersionString}";
-            if (TownOfUsEdited.VersionTag != "<color=#00F0FF></color>") details += " Dev 5";
+            if (TownOfUsEdited.VersionTag != "<color=#00F0FF></color>") details += " Dev 15";
             activity.Details = details;
         }
     }

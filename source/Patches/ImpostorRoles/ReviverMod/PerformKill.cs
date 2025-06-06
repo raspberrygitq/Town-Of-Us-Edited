@@ -30,7 +30,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ReviverMod
                     return false;
                     
                 if (!__instance.isActiveAndEnabled) return false;
-                var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
 
                 if (Vector2.Distance(role.CurrentTarget.TruePosition,
                     PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;

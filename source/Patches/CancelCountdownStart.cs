@@ -37,7 +37,7 @@ namespace TownOfUsEdited.Patches
             CancelStartButton.OnClick = new();
             CancelStartButton.OnClick.AddListener((UnityEngine.Events.UnityAction)(() =>
             {
-                __instance.ResetStartState();
+                if (__instance.countDownTimer < 4f) __instance.ResetStartState();
             }));
             CancelStartButton.gameObject.SetActive(false);
         }
@@ -47,8 +47,6 @@ namespace TownOfUsEdited.Patches
         public static void PrefixUpdate(GameStartManager __instance)
         {
             if (__instance == null || !AmongUsClient.Instance.AmHost) return;
-
-            __instance.MinPlayers = 4;
 
             CancelStartButton.gameObject.SetActive(__instance.startState is GameStartManager.StartingStates.Countdown);
 

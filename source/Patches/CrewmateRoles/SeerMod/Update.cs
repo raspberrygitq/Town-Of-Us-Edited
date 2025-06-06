@@ -21,8 +21,8 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
                     switch (roleType)
                     {
                         default:
-                            if ((player.Is(Faction.Crewmates) && !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.Vigilante) || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Jailor) || player.Is(RoleEnum.Knight))) ||
-                            ((player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.Vigilante) || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Jailor) || player.Is(RoleEnum.Knight)) && !CustomGameOptions.CrewKillingRed) ||
+                            if ((player.Is(Faction.Crewmates) && !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.VampireHunter) || player.Is(RoleEnum.Deputy) || player.Is(RoleEnum.Fighter) || player.Is(RoleEnum.Avenger) || player.Is(RoleEnum.Vigilante) || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Jailor) || player.Is(RoleEnum.Knight))) ||
+                            ((player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.VampireHunter) || player.Is(RoleEnum.Vigilante) || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Deputy) || player.Is(RoleEnum.Fighter) || player.Is(RoleEnum.Avenger) || player.Is(RoleEnum.Jailor) || player.Is(RoleEnum.Knight)) && !CustomGameOptions.CrewKillingRed) ||
                             (player.Is(Faction.NeutralBenign) && !CustomGameOptions.NeutBenignRed) ||
                             (player.Is(Faction.NeutralEvil) && !CustomGameOptions.NeutEvilRed) ||
                             (player.Is(Faction.NeutralKilling) && !CustomGameOptions.NeutKillingRed))
@@ -63,7 +63,7 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
             var seer = Role.GetRole<Seer>(PlayerControl.LocalPlayer);
             if (MeetingHud.Instance != null) UpdateMeeting(MeetingHud.Instance, seer);
 
-            if (!PlayerControl.LocalPlayer.IsHypnotised())
+            if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())
             {
                 foreach (var player in PlayerControl.AllPlayerControls)
                 {
@@ -73,8 +73,8 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
                     {
                         default:
                             var colour = Color.red;
-                            if ((player.Is(Faction.Crewmates) && !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.Vigilante) || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Jailor))) ||
-                                ((player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.Vigilante) || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Jailor)) && !CustomGameOptions.CrewKillingRed) ||
+                            if ((player.Is(Faction.Crewmates) && !(player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.VampireHunter) || player.Is(RoleEnum.Deputy) || player.Is(RoleEnum.Fighter) || player.Is(RoleEnum.Avenger) || player.Is(RoleEnum.Vigilante) || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Jailor))) ||
+                                ((player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Veteran) || player.Is(RoleEnum.VampireHunter) || player.Is(RoleEnum.Deputy) || player.Is(RoleEnum.Fighter) || player.Is(RoleEnum.Avenger) || player.Is(RoleEnum.Vigilante) || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Jailor)) && !CustomGameOptions.CrewKillingRed) ||
                                 (player.Is(Faction.NeutralBenign) && !CustomGameOptions.NeutBenignRed) ||
                                 (player.Is(Faction.NeutralEvil) && !CustomGameOptions.NeutEvilRed) ||
                                 (player.Is(Faction.NeutralKilling) && !CustomGameOptions.NeutKillingRed))

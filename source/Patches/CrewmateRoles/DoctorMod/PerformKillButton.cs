@@ -22,7 +22,7 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             if (flag2) return false;
             if (!__instance.enabled) return false;
             if (role.CanRevive() != true && CustomGameOptions.GameMode != GameMode.Chaos) return false;
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (role.Cooldown > 0 && CustomGameOptions.GameMode != GameMode.Chaos)
                 return false;
             if (!role.ButtonUsable && CustomGameOptions.GameMode != GameMode.Chaos)
@@ -33,6 +33,8 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                 return false;
             if (Vector2.Distance(role.CurrentTarget.TruePosition,
                 PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
+            var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
+            if (!abilityUsed) return false;
             var playerId = role.CurrentTarget.ParentId;
             var player = Utils.PlayerById(playerId);
             if (player.IsInfected() || role.Player.IsInfected())
@@ -48,11 +50,13 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             }
             else if (__instance == role.DragDropButton)
             {
+                var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
+                if (!abilityUsed) return false;
                 if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DragSprite)
                 {
                     if (role.CurrentTarget == null) return false;
                     if (!__instance.enabled) return false;
-                    var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                    var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
                     if (Vector2.Distance(role.CurrentTarget.TruePosition,
                         PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
                     var playerId = role.CurrentTarget.ParentId;
@@ -73,8 +77,6 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                 else
                 {
                     if (!__instance.enabled) return false;
-                    var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-                    if (!abilityUsed) return false;
                     Vector3 position = PlayerControl.LocalPlayer.transform.position;
 
                     if (Patches.SubmergedCompatibility.isSubmerged())

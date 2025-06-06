@@ -21,7 +21,7 @@ namespace TownOfUsEdited.NeutralRoles.PestilenceMod
             if (role.ClosestPlayer == null) return false;
             var distBetweenPlayers = Utils.GetDistBetweenPlayers(PlayerControl.LocalPlayer, role.ClosestPlayer);
             var flag3 = distBetweenPlayers <
-                        GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                        LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (!flag3) return false;
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer, true);
             if (interact[4] == true) return false;
@@ -32,12 +32,7 @@ namespace TownOfUsEdited.NeutralRoles.PestilenceMod
             }
             else if (interact[1] == true)
             {
-                role.Cooldown = CustomGameOptions.ProtectKCReset;
-                return false;
-            }
-            else if (interact[2] == true)
-            {
-                role.Cooldown = CustomGameOptions.VestKCReset;
+                role.Cooldown = CustomGameOptions.TempSaveCdReset;
                 return false;
             }
             else if (interact[3] == true) return false;

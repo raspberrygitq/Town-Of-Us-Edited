@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using TownOfUsEdited.Extensions;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles

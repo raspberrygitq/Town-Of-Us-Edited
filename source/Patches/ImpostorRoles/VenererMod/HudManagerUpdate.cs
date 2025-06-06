@@ -24,6 +24,9 @@ namespace TownOfUsEdited.ImpostorRoles.VenererMod
                 role.AbilityButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.AbilityButton.graphic.enabled = true;
                 role.AbilityButton.gameObject.SetActive(false);
+                role.AbilityText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.AbilityButton.transform);
+                role.AbilityText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.AbilityText);
             }
             if (role.Kills == 0) role.AbilityButton.graphic.sprite = NoneSprite;
             else if (role.Kills == 1) role.AbilityButton.graphic.sprite = CamoSprite;
@@ -31,7 +34,16 @@ namespace TownOfUsEdited.ImpostorRoles.VenererMod
             else role.AbilityButton.graphic.sprite = CamoSprintFreezeSprite;
             role.AbilityButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.AbilityText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.AbilityText.text = "Ability";
+            role.AbilityText.SetOutlineColor(Palette.ImpostorRed);
 
             role.AbilityButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
@@ -41,17 +53,22 @@ namespace TownOfUsEdited.ImpostorRoles.VenererMod
                 return;
             }
 
+            var labelrender = role.AbilityText;
             if (role.Kills > 0)
             {
                 role.AbilityButton.SetCoolDown(role.AbilityTimer(), CustomGameOptions.AbilityCd);
                 role.AbilityButton.graphic.color = Palette.EnabledColor;
                 role.AbilityButton.graphic.material.SetFloat("_Desat", 0f);
+                labelrender.color = Palette.EnabledColor;
+                labelrender.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 role.AbilityButton.SetCoolDown(0, CustomGameOptions.AbilityCd);
                 role.AbilityButton.graphic.color = Palette.DisabledClear;
                 role.AbilityButton.graphic.material.SetFloat("_Desat", 1f);
+                labelrender.color = Palette.DisabledClear;
+                labelrender.material.SetFloat("_Desat", 1f);
             }
 
         }

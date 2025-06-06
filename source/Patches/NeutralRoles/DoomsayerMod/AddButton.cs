@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TMPro;
@@ -142,9 +143,11 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
                 if (currentGuess == "None") return;
 
                 var playerRole = Role.GetRole(voteArea);
-                var playerModifier = Modifier.GetModifier(voteArea);
+                var playerModifiers = Modifier.GetModifiers(voteArea);
 
                 var toDie = ((playerRole.Name.Contains(currentGuess) && !playerRole.Player.Is(RoleEnum.Hunter)) || playerRole.Name == currentGuess || playerRole.Name.Contains("Mad") && currentGuess == "Madmate") ? playerRole.Player : role.Player;
+                if (playerModifiers != null && playerModifiers.Length != 0)
+                    toDie = (playerRole.Name == currentGuess || playerModifiers.Any(x => x.Name == currentGuess) || playerRole.Name.Contains("Mad") && currentGuess == "Madmate") ? playerRole.Player : role.Player;
 
                 if (toDie == playerRole.Player)
                 {
@@ -152,7 +155,8 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
                     ShowHideButtonsDoom.HideSingle(role, targetId, toDie == role.Player);
                     if (toDie.IsLover() && CustomGameOptions.BothLoversDie)
                     {
-                        var lover = ((Lover)playerModifier).OtherLover.Player;
+                        var playerModifier = Modifier.GetModifier<Lover>(voteArea);
+                        var lover = playerModifier.OtherLover.Player;
                         if (!lover.Is(RoleEnum.Pestilence)) ShowHideButtonsDoom.HideSingle(role, lover.PlayerId, false);
                     }
                 }

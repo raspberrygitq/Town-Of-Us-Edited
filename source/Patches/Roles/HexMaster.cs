@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Patches;
 using UnityEngine;
+using TMPro;
+using TownOfUsEdited.CrewmateRoles.ClericMod;
 
 namespace TownOfUsEdited.Roles
 {
@@ -25,6 +27,7 @@ namespace TownOfUsEdited.Roles
         public PlayerControl ClosestPlayer;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
+        public TextMeshPro BombText;
         public void Hex(PlayerControl target)
         {
             // Check if the Hex Master can hex
@@ -44,12 +47,7 @@ namespace TownOfUsEdited.Roles
             }
             if (interact[0] == true)
             {
-                Cooldown = CustomGameOptions.ProtectKCReset;
-                return;
-            }
-            else if (interact[1] == true)
-            {
-                Cooldown = CustomGameOptions.VestKCReset;
+                Cooldown = CustomGameOptions.TempSaveCdReset;
                 return;
             }
             else if (interact[3] == true) return;
@@ -92,15 +90,24 @@ namespace TownOfUsEdited.Roles
             foreach (var playerId in Hexed)
             {
                 var player = Utils.PlayerById(playerId);
-                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsProtected() && player != ShowRoundOneShield.FirstRoundShielded)
+                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsProtected() && !player.IsBarriered() && player != ShowShield.FirstRoundShielded)
                 {
                     Utils.RpcMultiMurderPlayer(Player, player);
                 }
                 else if (player.IsShielded())
                 {
-                    var medic = player.GetMedic().Player.PlayerId;
-                    Utils.Rpc(CustomRPC.AttemptSound, medic, player.PlayerId);
-                    StopKill.BreakShield(medic, player.PlayerId, CustomGameOptions.ShieldBreaks);
+                    foreach (var medic in player.GetMedic())
+                    {
+                        Utils.Rpc(CustomRPC.AttemptSound, medic.Player.PlayerId, player.PlayerId);
+                        StopKill.BreakShield(medic.Player.PlayerId, player.PlayerId, CustomGameOptions.ShieldBreaks);
+                    }
+                }
+                else if (player.IsBarriered())
+                {
+                    foreach (var cleric in player.GetCleric())
+                    {
+                        StopAttack.NotifyCleric(cleric.Player.PlayerId, false);
+                    }
                 }
             }
             //Making sure the Hexed list is cleared to prevent issues

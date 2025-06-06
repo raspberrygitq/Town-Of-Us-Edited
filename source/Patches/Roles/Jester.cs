@@ -30,8 +30,19 @@ namespace TownOfUsEdited.Roles
         public void Wins()
         {
             //System.Console.WriteLine("Reached Here - Jester edition");
-            VotedOut = true;
-            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Coroutines.Start(WaitForEnd());
+            if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
+            {
+                VotedOut = true;
+                if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame)
+                {
+                    Coroutines.Start(WaitForEnd());
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Jester Win");
+                }
+            }
+            else
+            {
+                HudManager.Instance.ShowPopUp("Normally, the game would've ended and the Jester would've won. In Freeplay, nothing happens.");
+            }
         }
     }
 }

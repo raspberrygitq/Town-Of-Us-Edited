@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
 namespace TownOfUsEdited.Patches.NeutralRoles
@@ -70,7 +71,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles
             {
                 var menu = PlayerMenu.singleton;
 
-                if (menu == null)
+                if (menu == null || PlayerControl.LocalPlayer.Is(RoleEnum.Traitor))
                     return true;
 
                 __instance.potentialVictims = new();
@@ -93,6 +94,26 @@ namespace TownOfUsEdited.Patches.NeutralRoles
 
                 ControllerManager.Instance.OpenOverlayMenu(__instance.name, __instance.BackButton, __instance.DefaultButtonSelected, list2);
                 return false;
+            }
+        }
+        [HarmonyPatch(typeof(ShapeshifterPanel), nameof(ShapeshifterPanel.SetPlayer))]
+        public static class DoppelgangerPatch
+        {
+            public static void Postfix(ShapeshifterPanel __instance, [HarmonyArgument(1)] NetworkedPlayerInfo playerInfo)
+            {
+                var doppels = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(RoleEnum.Doppelganger) && !x.Data.IsDead && !x.Data.Disconnected && Role.GetRole<Doppelganger>(x).TransformedPlayer != null);
+                if (doppels == null) return;
+                foreach (var doppel in doppels)
+                {
+                    if (doppel.Data == playerInfo)
+                    {
+                        var role = Role.GetRole<Doppelganger>(doppel);
+                        __instance.PlayerIcon.UpdateFromEitherPlayerDataOrCache(role.TransformedPlayer.Data, PlayerOutfitType.Default, PlayerMaterial.MaskType.ComplexUI, false, null);
+                        __instance.LevelNumberText.text = ProgressionManager.FormatVisualLevel(role.TransformedPlayer.Data.PlayerLevel);
+                        __instance.Background.sprite = ShipStatus.Instance.CosmeticsCache.GetNameplate(role.TransformedPlayer.Data.DefaultOutfit.NamePlateId).Image;
+                        __instance.NameText.text = role.TransformedPlayer.Data.PlayerName;
+                    }
+                }
             }
         }
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.StartMeeting))]

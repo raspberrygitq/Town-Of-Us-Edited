@@ -16,8 +16,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
-using Assassin2 = TownOfUsEdited.Roles.Assassin;
 using TownOfUsEdited.CovenRoles.RitualistMod;
+using Reactor.Utilities;
+using System.Collections.Generic;
 
 namespace TownOfUsEdited.CrewmateRoles.DeputyMod
 {
@@ -76,13 +77,21 @@ namespace TownOfUsEdited.CrewmateRoles.DeputyMod
             void Listener()
             {
                 var target = Utils.PlayerById(voteArea.TargetPlayerId);
-                if (target == role.Killer && !target.Is(RoleEnum.Pestilence))
+                if (target == role.Killer && !target.Is(RoleEnum.Pestilence) && !target.IsBlessed())
                 {
                     Shoot(role, target);
                     if (target.Is(Faction.Crewmates)) role.IncorrectKills += 1;
                     else role.CorrectKills += 1;
                 }
-                else DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "You missed your shot! They are either not the killer or are invincible (Pestilence).");
+                else if (target == role.Killer && target.IsBlessed())
+                {
+                    Coroutines.Start(Utils.FlashCoroutine(Colors.Oracle));
+                    foreach (var oracle in target.GetOracle())
+                    {
+                        Utils.Rpc(CustomRPC.Bless, oracle.Player.PlayerId, (byte)2);
+                    }
+                }
+                else HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "You missed your shot! They are either not the killer or are invincible (Pestilence).");
                 Utils.Rpc(CustomRPC.Camp, role.Player.PlayerId, (byte)2, target.PlayerId);
                 role.Killer = null;
                 RemoveButtons.HideButtons(role);
@@ -157,12 +166,6 @@ namespace TownOfUsEdited.CrewmateRoles.DeputyMod
                 {
                     var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
                     ShowHideButtons.HideButtons(assassin);
-                }
-
-                if (player.Is(RoleEnum.Assassin))
-                {
-                    var assassin = Role.GetRole<Assassin2>(PlayerControl.LocalPlayer);
-                    ShowHideButtonsAssassin.HideButtons(assassin);
                 }
 
                 if (player.Is(RoleEnum.Ritualist))
@@ -256,19 +259,33 @@ namespace TownOfUsEdited.CrewmateRoles.DeputyMod
             }
 
             var blackmailers = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Blackmailer && x.Player != null).Cast<Blackmailer>();
+            var blackmailed = new List<PlayerControl>();
             foreach (var role in blackmailers)
             {
-                if (role.Blackmailed != null && voteArea.TargetPlayerId == role.Blackmailed.PlayerId)
+                if (role.Blackmailed != null && !blackmailed.Contains(role.Blackmailed))
                 {
-                    if (BlackmailMeetingUpdate.PrevXMark != null && BlackmailMeetingUpdate.PrevOverlay != null)
+                    blackmailed.Add(role.Blackmailed);
+                    if (voteArea.TargetPlayerId == role.Blackmailed.PlayerId)
                     {
-                        voteArea.XMark.sprite = BlackmailMeetingUpdate.PrevXMark;
-                        voteArea.Overlay.sprite = BlackmailMeetingUpdate.PrevOverlay;
-                        voteArea.XMark.transform.localPosition = new Vector3(
-                            voteArea.XMark.transform.localPosition.x - BlackmailMeetingUpdate.LetterXOffset,
-                            voteArea.XMark.transform.localPosition.y - BlackmailMeetingUpdate.LetterYOffset,
-                            voteArea.XMark.transform.localPosition.z);
+                        if (BlackmailMeetingUpdate.PrevXMark != null && BlackmailMeetingUpdate.PrevOverlay != null)
+                        {
+                            voteArea.XMark.sprite = BlackmailMeetingUpdate.PrevXMark;
+                            voteArea.Overlay.sprite = BlackmailMeetingUpdate.PrevOverlay;
+                            voteArea.XMark.transform.localPosition = new Vector3(
+                                voteArea.XMark.transform.localPosition.x - BlackmailMeetingUpdate.LetterXOffset,
+                                voteArea.XMark.transform.localPosition.y - BlackmailMeetingUpdate.LetterYOffset,
+                                voteArea.XMark.transform.localPosition.z);
+                        }
                     }
+                }
+            }
+
+            var jailors = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Jailor && x.Player != null).Cast<Jailor>();
+            foreach (var role in jailors)
+            {
+                if (role.JailedPlayer == player || role.Player == player)
+                {
+                    role.JailCell.Destroy();
                 }
             }
 
@@ -369,7 +386,6 @@ namespace TownOfUsEdited.CrewmateRoles.DeputyMod
 
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Deputy)) return;
-            if (PlayerControl.LocalPlayer.IsJailed()) return;
             var deputyrole = Role.GetRole<Deputy>(PlayerControl.LocalPlayer);
             if (deputyrole.Killer == null) return;
             foreach (var voteArea in __instance.playerStates)

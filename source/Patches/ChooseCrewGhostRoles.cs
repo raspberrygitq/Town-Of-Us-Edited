@@ -15,13 +15,14 @@ namespace TownOfUsEdited.ChooseCrewGhostRoles
 
         public static void Postfix(ExileController __instance)
         {
-            var exiled = __instance.initData.networkedPlayer?.Object;
+            var exiled = __instance.initData?.networkedPlayer?.Object;
             PickGhostRole(exiled);
         }
 
         public static void PickGhostRole(PlayerControl exiled)
         {
             if (CustomGameOptions.GameMode != GameMode.Classic) return;
+            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return;
             if (!AmongUsClient.Instance.AmHost) return;
             var random = new System.Random();
             if (RpcHandling.Check(CustomGameOptions.GuardianOn) && SetGuardian.WillBeGuardian == null && !ranlist && !GhostRoles.Contains("Guardian")) GhostRoles.Add("Guardian");

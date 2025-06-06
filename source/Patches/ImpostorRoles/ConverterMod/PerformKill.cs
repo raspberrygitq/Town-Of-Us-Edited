@@ -1,6 +1,5 @@
 ﻿using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -27,11 +26,11 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ConverterMod
                 
             if (__instance == role.ConvertButton) 
             {
-                if (PlayerControl.LocalPlayer.coolingDown())
+                if (role.Cooldown > 0)
                     return false;
 
                 if (!__instance.isActiveAndEnabled) return false;
-                var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
 
                 if (Vector2.Distance(role.CurrentTarget.TruePosition,
                     PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
@@ -39,6 +38,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ConverterMod
                 var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
                 if (!abilityUsed) return false;
 
+                role.ReviveCount++;
                 role.ConvertAbility(role.CurrentTarget);
                 return false;
             }

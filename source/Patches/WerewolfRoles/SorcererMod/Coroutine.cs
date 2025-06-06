@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,6 @@ using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUsEdited.Roles.Modifiers;
 using AmongUs.GameOptions;
 using TownOfUsEdited.Patches;
 
@@ -23,13 +21,13 @@ namespace TownOfUsEdited.WerewolfRoles.SorcererMod
 
             var revived = new List<PlayerControl>();
 
-                if (target != null)
+            if (target != null)
+            {
+                foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
                 {
-                    foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
-                    {
-                        if (deadBody.ParentId == target.ParentId) deadBody.gameObject.Destroy();
-                    }
+                    if (deadBody.ParentId == target.ParentId) deadBody.gameObject.Destroy();
                 }
+            }
 
             var player = Utils.PlayerById(parentId);
 
@@ -38,7 +36,8 @@ namespace TownOfUsEdited.WerewolfRoles.SorcererMod
             Murder.KilledPlayers.Remove(
                 Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == player.PlayerId));
             revived.Add(player);
-            player.NetTransform.SnapTo(new Vector2(position.x, position.y + 0.3636f));
+            var usedPosition = new Vector2(position.x, position.y + 0.3636f);
+            player.transform.position = new Vector2(usedPosition.x, usedPosition.y);
 
             if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {

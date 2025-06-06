@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace TownOfUsEdited.Roles
     public class Swooper : Role
     {
         public KillButton _swoopButton;
+        public TextMeshPro SwoopText;
         public bool Enabled;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;

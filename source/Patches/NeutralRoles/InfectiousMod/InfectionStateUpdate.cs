@@ -14,10 +14,10 @@ namespace TownOfUsEdited
     public class InfectionStateUpdate
     {
 
-        [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+        [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
         public static class AirshipExileController_WrapUpAndSpawn
         {
-            public static void Postfix(AirshipExileController __instance) => InfectionUpdate.ExileControllerPostfix(__instance);
+            public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => InfectionUpdate.ExileControllerPostfix(__instance.__4__this);
         }
 
         [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
@@ -32,7 +32,7 @@ namespace TownOfUsEdited
                 }
                 foreach (var player in PlayerControl.AllPlayerControls)
                 {
-                    var exiled = __instance.initData.networkedPlayer;
+                    var exiled = __instance.initData?.networkedPlayer;
                     PlayerControl exiledPlayer = null;
                     if (exiled != null) exiledPlayer = exiled.Object;
                     foreach (var infectious in Role.GetRoles(RoleEnum.Infectious))
@@ -40,17 +40,15 @@ namespace TownOfUsEdited
                         var infectiousRole = (Infectious)infectious;
                         var role = Role.GetRole(player);
                         if (!player.Data.IsDead && role != null && role.InfectionState == 4 && !infectiousRole.Player.Data.IsDead &&
-                        infectiousRole.Infected.Contains(player.PlayerId))
+                        infectiousRole.Infected.Contains(player.PlayerId) && exiledPlayer != infectiousRole.Player && !player.Is(RoleEnum.Pestilence) && !player.Is(RoleEnum.Infectious))
                         {
-                            if (exiledPlayer == null && exiledPlayer != infectiousRole.Player && !player.Is(RoleEnum.Pestilence))
-                            {
-                                Die(player, infectiousRole.Player);
-                                role.DeathReason = DeathReasons.Infected;
-                            }
-                            else if (exiledPlayer == infectiousRole.Player || player.Is(RoleEnum.Pestilence))
-                            {
-                                role.InfectionState = 0;
-                            }
+                            Die(player, infectiousRole.Player);
+                            role.DeathReason = DeathReasons.Infected;
+                        }
+                        else if ((exiledPlayer == infectiousRole.Player || player.Is(RoleEnum.Pestilence)) && infectiousRole.Infected.Contains(player.PlayerId))
+                        {
+                            role.InfectionState = 0;
+                            infectiousRole.Infected.Remove(player.PlayerId);
                         }
                     }
                 }
@@ -105,7 +103,7 @@ namespace TownOfUsEdited
                 player.MyPhysics.StartCoroutine(player.KillAnimations.Random().CoPerformKill(player, player));
                 if (amOwner)
                 {
-                    Coroutines.Start(Utils.UpdateTaskText(player));
+                    Utils.UpdateTaskText(player);
                 }
             }
         }

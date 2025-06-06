@@ -36,7 +36,7 @@ namespace TownOfUsEdited.CovenRoles.RitualistMod
             if (
                 (killedSelf ||
                 role.RemainingKills == 0 ||
-                (!CustomGameOptions.AssassinMultiKill))
+                (!CustomGameOptions.RitualistMultiKill))
                 && doubleshot == false
             ) HideButtons(role);
             else HideTarget(role, targetId);

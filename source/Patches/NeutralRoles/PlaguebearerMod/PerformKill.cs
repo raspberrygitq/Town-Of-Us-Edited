@@ -21,7 +21,7 @@ namespace TownOfUsEdited.NeutralRoles.PlaguebearerMod
             if (role.InfectedPlayers.Contains(role.ClosestPlayer.PlayerId)) return false;
             var distBetweenPlayers = Utils.GetDistBetweenPlayers(PlayerControl.LocalPlayer, role.ClosestPlayer);
             var flag3 = distBetweenPlayers <
-                        GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                        LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (!flag3) return false;
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
             if (interact[0] == true)
@@ -32,7 +32,7 @@ namespace TownOfUsEdited.NeutralRoles.PlaguebearerMod
             else if (interact[1] == true)
             {
                 role.LastInfected = DateTime.UtcNow;
-                role.LastInfected.AddSeconds(CustomGameOptions.ProtectKCReset - CustomGameOptions.InfectCd);
+                role.LastInfected.AddSeconds(CustomGameOptions.TempSaveCdReset - CustomGameOptions.InfectCd);
                 return false;
             }
             else if (interact[3] == true) return false;

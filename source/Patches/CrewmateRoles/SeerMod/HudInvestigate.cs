@@ -27,7 +27,8 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
 
             investigateButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             investigateButton.SetCoolDown(role.SeerTimer(), CustomGameOptions.SeerCd);
 
             var notInvestigated = PlayerControl.AllPlayerControls
@@ -64,7 +65,8 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
 
             revealButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && !role.UsedReveal);
 
             var notInvestigated = PlayerControl.AllPlayerControls

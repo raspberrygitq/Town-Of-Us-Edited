@@ -1,20 +1,11 @@
-﻿using System;
-using HarmonyLib;
-using Hazel;
+﻿using HarmonyLib;
 using TownOfUsEdited.Roles;
-using UnityEngine;
-using Reactor;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
-using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformPoisonKill
     {
-        public static Sprite PoisonSprite => TownOfUsEdited.PoisonSprite;
-        public static Sprite PoisonedSprite => TownOfUsEdited.PoisonedSprite;
-
         public static bool Prefix(KillButton __instance)
         {
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Poisoner);
@@ -25,33 +16,20 @@ namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
             var target = role.ClosestPlayer;
             if (target == null) return false;
             if (!__instance.isActiveAndEnabled) return false;
+            if (__instance != HudManager.Instance.KillButton) return false;
             if (role.Cooldown > 0) return false;
             if (role.Enabled == true) return false;
-            if (PlayerControl.LocalPlayer.IsJailed()) return false;
             if (PlayerControl.LocalPlayer.IsControlled() && role.ClosestPlayer.Is(Faction.Coven))
             {
                 Utils.Interact(role.ClosestPlayer, PlayerControl.LocalPlayer, true);
                 return false;
             }
-            else if (role.ClosestPlayer.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(role.ClosestPlayer).UsingPotion
-            && Role.GetRole<PotionMaster>(role.ClosestPlayer).Potion == "Shield")
-            {
-                role.Cooldown = CustomGameOptions.PotionKCDReset;
-                return false;
-            }
-            if (role.ClosestPlayer.IsGuarded2())
-            {
-                role.Cooldown = CustomGameOptions.GuardKCReset;
-                return false; 
-            }
-            var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-            if (!abilityUsed) return false;
             var interact = Utils.Interact(PlayerControl.LocalPlayer, target);
             if (interact[4] == true)
             {
                 role.PoisonedPlayer = target;
                 role.TimeRemaining = CustomGameOptions.PoisonDuration;
-                role.PoisonButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.PoisonDuration);
+                __instance.SetCoolDown(role.TimeRemaining, CustomGameOptions.PoisonDuration);
                 Utils.Rpc(CustomRPC.Poison, PlayerControl.LocalPlayer.PlayerId, target.PlayerId);
             }
             if (interact[0] == true)
@@ -61,7 +39,7 @@ namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
             }
             else if (interact[1] == true)
             {
-                role.Cooldown = CustomGameOptions.ProtectKCReset;
+                role.Cooldown = CustomGameOptions.TempSaveCdReset;
                 return false;
             }
             else if (interact[3] == true) return false;

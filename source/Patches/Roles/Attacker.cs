@@ -12,7 +12,7 @@ namespace TownOfUsEdited.Roles
         {
             Name = "Attacker";
             ImpostorText = () => "Spread Fear Among The Players";
-            TaskText = () => "Complete Your Tasks To Become Terrorist\nFake Tasks:";
+            TaskText = () => "Complete Your Tasks To Become Terrorist";
             Color = Patches.Colors.Attacker;
             RoleType = RoleEnum.Attacker;
             AddToRoleHistory(RoleType);
@@ -31,7 +31,7 @@ namespace TownOfUsEdited.Roles
             {
                 Utils.Rpc(CustomRPC.AttackerWin, Player.PlayerId);
                 Wins();
-                System.Console.WriteLine("GAME OVER REASON: Attacker Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Attacker Win");
                 return;
             }
 

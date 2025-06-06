@@ -12,9 +12,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Is(Faction.Madmates)) return;
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer)) return;
-            var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Crewmate) || PlayerControl.LocalPlayer.Is(RoleEnum.Superstar) ||
-            PlayerControl.LocalPlayer.Is(RoleEnum.Imitator) || PlayerControl.LocalPlayer.Is(RoleEnum.Investigator) ||
+            var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Crewmate) || PlayerControl.LocalPlayer.Is(RoleEnum.Imitator) || PlayerControl.LocalPlayer.Is(RoleEnum.Investigator) ||
             PlayerControl.LocalPlayer.Is(RoleEnum.Mayor) || PlayerControl.LocalPlayer.Is(RoleEnum.Mystic) ||
             PlayerControl.LocalPlayer.Is(RoleEnum.Prosecutor) || PlayerControl.LocalPlayer.Is(RoleEnum.Snitch) ||
             PlayerControl.LocalPlayer.Is(RoleEnum.Spy) || PlayerControl.LocalPlayer.Is(RoleEnum.Swapper) ||
@@ -25,7 +23,8 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(position.x,
                 position.y, position.z);
             }
-            else if (!PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) && !PlayerControl.LocalPlayer.Is(RoleEnum.Doctor) && !PlayerControl.LocalPlayer.Is(RoleEnum.Paranoïac))
+            else if (!PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) && !PlayerControl.LocalPlayer.Is(RoleEnum.Doctor) && !PlayerControl.LocalPlayer.Is(RoleEnum.Paranoïac)
+            && !PlayerControl.LocalPlayer.Is(RoleEnum.Plumber))
             {
                 __instance.ImpostorVentButton .transform.localPosition = new Vector3(-1f, 1f, 0f);
             }

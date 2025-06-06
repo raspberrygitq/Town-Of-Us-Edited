@@ -6,28 +6,29 @@ using Object = UnityEngine.Object;
 using TownOfUsEdited.Patches;
 using System.Linq;
 using TownOfUsEdited.Extensions;
+using System.Collections.Generic;
 
 namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
 {
-    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+    [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
     public static class AirshipExileController_WrapUpAndSpawn
     {
-        public static void Postfix(AirshipExileController __instance) => StartImitate.ExileControllerPostfix(__instance);
+        public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => StartImitate.ExileControllerPostfix(__instance.__4__this);
     }
     
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
     public class StartImitate
     {
-        public static PlayerControl ImitatingPlayer;
+        public static List<byte> ImitatingPlayers = new List<byte>();
         public static void ExileControllerPostfix(ExileController __instance)
         {
-            var exiled = __instance.initData.networkedPlayer?.Object;
+            var exiled = __instance.initData?.networkedPlayer?.Object;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Imitator)) return;
             if (PlayerControl.LocalPlayer.Data.IsDead || PlayerControl.LocalPlayer.Data.Disconnected) return;
             if (exiled == PlayerControl.LocalPlayer) return;
 
             var imitator = Role.GetRole<Imitator>(PlayerControl.LocalPlayer);
-            if (imitator.ImitatePlayer == null) return;
+            if (imitator.ImitatePlayer == null || imitator.ImitatePlayer.Is(RoleEnum.Imitator)) return;
 
             Imitate(imitator);
 
@@ -47,8 +48,11 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
 
         public static void Imitate(Imitator imitator)
         {
+            bool isMadmate = false;
+            if (imitator.Player.Is(Faction.Madmates)) isMadmate = true;
             if (imitator.ImitatePlayer == null) return;
-            ImitatingPlayer = imitator.Player;
+            var imi = imitator.Player;
+            ImitatingPlayers.Add(imi.PlayerId);
             var imitatorRole = Role.GetRole(imitator.ImitatePlayer).RoleType;
             if (imitatorRole == RoleEnum.Haunter)
             {
@@ -65,45 +69,45 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
                 var guardian = Role.GetRole<Guardian>(imitator.ImitatePlayer);
                 imitatorRole = guardian.formerRole;
             }
-            if (imitatorRole == RoleEnum.Crewmate) return;
-            var role = Role.GetRole(ImitatingPlayer);
+            var role = Role.GetRole(imi);
             var killsList = (role.Kills, role.CorrectKills, role.IncorrectKills, role.CorrectAssassinKills, role.IncorrectAssassinKills);
-            Role.RoleDictionary.Remove(ImitatingPlayer.PlayerId);
-            if (imitatorRole == RoleEnum.Detective) new Detective(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Captain) new Captain(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Doctor) new Doctor(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.TimeLord) new TimeLord(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Superstar) new Superstar(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Avenger) new Avenger(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Investigator) new Investigator(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Mystic) new Mystic(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Seer) new Seer(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Spy) new Spy(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Tracker) new Tracker(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Sheriff) new Sheriff(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Veteran) new Veteran(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Astral) new Astral(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Altruist) new Altruist(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Engineer) new Engineer(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Lighter) new Lighter(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Medium) new Medium(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Transporter) new Transporter(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Informant) new Informant(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Trapper) new Trapper(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Oracle) new Oracle(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Aurial) new Aurial(ImitatingPlayer);
-            if (imitatorRole == RoleEnum.Crewmate) new Crewmate(ImitatingPlayer);
-            else if (imitatorRole == RoleEnum.Lookout) new Lookout(ImitatingPlayer);
-            else if (imitatorRole == RoleEnum.Crusader) new Crusader(ImitatingPlayer);
-            else if (imitatorRole == RoleEnum.Paranoïac) new Paranoïac(ImitatingPlayer);
+            Role.RoleDictionary.Remove(imi.PlayerId);
+            if (imitatorRole == RoleEnum.Detective) new Detective(imi);
+            if (imitatorRole == RoleEnum.Captain) new Captain(imi);
+            if (imitatorRole == RoleEnum.Doctor) new Doctor(imi);
+            if (imitatorRole == RoleEnum.TimeLord) new TimeLord(imi);
+            if (imitatorRole == RoleEnum.Avenger) new Avenger(imi);
+            if (imitatorRole == RoleEnum.Investigator) new Investigator(imi);
+            if (imitatorRole == RoleEnum.Mystic) new Mystic(imi);
+            if (imitatorRole == RoleEnum.Seer) new Seer(imi);
+            if (imitatorRole == RoleEnum.Spy) new Spy(imi);
+            if (imitatorRole == RoleEnum.Tracker) new Tracker(imi);
+            if (imitatorRole == RoleEnum.Sheriff) new Sheriff(imi);
+            if (imitatorRole == RoleEnum.Veteran) new Veteran(imi);
+            if (imitatorRole == RoleEnum.Astral) new Astral(imi);
+            if (imitatorRole == RoleEnum.Altruist) new Altruist(imi);
+            if (imitatorRole == RoleEnum.Engineer) new Engineer(imi);
+            if (imitatorRole == RoleEnum.Medium) new Medium(imi);
+            if (imitatorRole == RoleEnum.Transporter) new Transporter(imi);
+            if (imitatorRole == RoleEnum.Informant) new Informant(imi);
+            if (imitatorRole == RoleEnum.Trapper) new Trapper(imi);
+            if (imitatorRole == RoleEnum.Oracle) new Oracle(imi);
+            if (imitatorRole == RoleEnum.Aurial) new Aurial(imi);
+            if (imitatorRole == RoleEnum.Crewmate) new Crewmate(imi);
+            else if (imitatorRole == RoleEnum.Lookout) new Lookout(imi);
+            else if (imitatorRole == RoleEnum.Crusader) new Crusader(imi);
+            else if (imitatorRole == RoleEnum.Paranoïac) new Paranoïac(imi);
+            else if (imitatorRole == RoleEnum.Chameleon) new Chameleon(imi);
+            else if (imitatorRole == RoleEnum.Bodyguard) new Bodyguard(imi);
+            else if (imitatorRole == RoleEnum.Fighter) new Fighter(imi);
 
             
             else if (imitatorRole == RoleEnum.Snitch)
             {
-                var snitch = new Snitch(ImitatingPlayer);
-                var taskinfos = ImitatingPlayer.Data.Tasks.ToArray();
+                var snitch = new Snitch(imi);
+                var taskinfos = imi.Data.Tasks.ToArray();
                 var tasksLeft = taskinfos.Count(x => !x.Complete);
-                if (tasksLeft <= CustomGameOptions.SnitchTasksRemaining && ((PlayerControl.LocalPlayer.Data.IsImpostor() && (!PlayerControl.LocalPlayer.Is(RoleEnum.Traitor) || CustomGameOptions.SnitchSeesTraitor))
+                if (tasksLeft <= CustomGameOptions.SnitchTasksRemaining && ((PlayerControl.LocalPlayer.Data.IsImpostor() && (Role.GetRole(PlayerControl.LocalPlayer).formerRole == RoleEnum.None || CustomGameOptions.SnitchSeesTraitor))
                             || (PlayerControl.LocalPlayer.Is(Faction.NeutralKilling) && CustomGameOptions.SnitchSeesNeutrals)))
                 {
                     var gameObj = new GameObject();
@@ -115,7 +119,7 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
                     gameObj.layer = 5;
                     snitch.ImpArrows.Add(arrow);
                 }
-                else if (tasksLeft == 0 && PlayerControl.LocalPlayer == ImitatingPlayer)
+                else if (tasksLeft == 0 && PlayerControl.LocalPlayer == imi)
                 {
                     var impostors = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.IsImpostor());
                     foreach (var imp in impostors)
@@ -134,51 +138,42 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
                     }
                 }
             }
-            else if (imitatorRole == RoleEnum.Deputy) new Deputy(ImitatingPlayer);
-            else if (imitatorRole == RoleEnum.Hunter) new Hunter(ImitatingPlayer);
-            else if (imitatorRole == RoleEnum.Jailor) new Jailor(ImitatingPlayer);
-            else if (imitatorRole == RoleEnum.Vigilante) new Vigilante(ImitatingPlayer);
-            else if (imitatorRole == RoleEnum.Warden) new Warden(ImitatingPlayer);
-            else if (imitatorRole == RoleEnum.Mayor)
-            {
-                var mayor = new Mayor(ImitatingPlayer);
-                if (CustomGameOptions.ImitatorCanBecomeMayor)
-                {
-                    mayor.Revealed = true;
-                    if (PlayerControl.LocalPlayer == ImitatingPlayer) mayor.RegenTask();
-                }
-            }
-            else if (imitatorRole == RoleEnum.Politician) new Politician(ImitatingPlayer);
-            else if (imitatorRole == RoleEnum.Prosecutor) new Prosecutor(ImitatingPlayer);
-            else if (imitatorRole == RoleEnum.Swapper) new Swapper(ImitatingPlayer);
+            else if (imitatorRole == RoleEnum.Deputy) new Deputy(imi);
+            else if (imitatorRole == RoleEnum.Hunter) new Hunter(imi);
+            else if (imitatorRole == RoleEnum.Jailor) new Jailor(imi);
+            else if (imitatorRole == RoleEnum.Vigilante) new Vigilante(imi);
+            else if (imitatorRole == RoleEnum.Warden) new Warden(imi);
+            else if (imitatorRole == RoleEnum.Politician) new Politician(imi);
+            else if (imitatorRole == RoleEnum.Prosecutor) new Prosecutor(imi);
+            else if (imitatorRole == RoleEnum.Swapper) new Swapper(imi);
+            else if (imitatorRole == RoleEnum.Mayor) new Mayor(imi);
             if (imitatorRole == RoleEnum.Medic)
             {
-                var medic = new Medic(ImitatingPlayer);
-                medic.UsedAbility = true;
+                var medic = new Medic(imi);
                 medic.StartingCooldown = medic.StartingCooldown.AddSeconds(-10f);
             }
             if (imitatorRole == RoleEnum.VampireHunter)
             {
-                var vh = new VampireHunter(ImitatingPlayer);
+                var vh = new VampireHunter(imi);
                 vh.UsesLeft = CustomGameOptions.MaxFailedStakesPerGame;
                 vh.AddedStakes = true;
             }
             if (imitatorRole == RoleEnum.Knight)
             {
-                var knightRole = new Knight(ImitatingPlayer);
+                var knightRole = new Knight(imi);
                 knightRole.Cooldown = CustomGameOptions.KnightKCD;
                 knightRole.UsesLeft = 0;
             }
 
-            var newRole = Role.GetRole(ImitatingPlayer);
-            if (imitatorRole != RoleEnum.Mayor || !CustomGameOptions.ImitatorCanBecomeMayor) newRole.RemoveFromRoleHistory(newRole.RoleType);
-            else ImitatingPlayer = null;
+            var newRole = Role.GetRole(imi);
+            newRole.RemoveFromRoleHistory(newRole.RoleType);
             newRole.Kills = killsList.Kills;
             newRole.CorrectKills = killsList.CorrectKills;
             newRole.IncorrectKills = killsList.IncorrectKills;
             newRole.CorrectAssassinKills = killsList.CorrectAssassinKills;
             newRole.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
             newRole.DeathReason = role.DeathReason;
+            if (isMadmate) Utils.TurnMadmate(imitator.Player, false);
         }
     }
 }

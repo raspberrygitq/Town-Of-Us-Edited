@@ -21,7 +21,7 @@ namespace TownOfUsEdited.ImpostorRoles.ImpostorMod
 
             var aliveimp = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors) && !x.Data.IsDead).ToList();
 
-            if (!MeetingHud.Instance && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
+            if (!MeetingHud.Instance && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
             && (__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
             && CustomGameOptions.GameMode != GameMode.Chaos && CustomGameOptions.GameMode != GameMode.Werewolf
             && (!PlayerControl.LocalPlayer.Is(RoleEnum.Spirit) || Role.GetRole<Spirit>(PlayerControl.LocalPlayer).Caught)
@@ -35,7 +35,7 @@ namespace TownOfUsEdited.ImpostorRoles.ImpostorMod
             foreach (var player2 in PlayerControl.AllPlayerControls)
             {
                 // Add red color to impostors names
-                if ((player2.Data.IsImpostor() || player2.Is(Faction.Madmates)) && (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(Faction.Madmates)))
+                if ((player2.Data.IsImpostor() || player2.Is(Faction.Madmates)) && (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(Faction.Madmates)) && !Utils.CommsCamouflaged() && !PlayerControl.LocalPlayer.IsHypnotised())
                 {
                     if (CustomGameOptions.GameMode == GameMode.Werewolf)
                     {
@@ -79,7 +79,7 @@ namespace TownOfUsEdited.ImpostorRoles.ImpostorMod
             // Check if the game state allows the KillButton to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
             isKillButtonActive = isKillButtonActive && !MeetingHud.Instance && !player.Data.IsDead;
-            isKillButtonActive = isKillButtonActive && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started;
+            isKillButtonActive = isKillButtonActive && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
 
             // Set KillButton's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
@@ -139,7 +139,7 @@ namespace TownOfUsEdited.ImpostorRoles.ImpostorMod
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Data.IsImpostor()) return;
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(PlayerControl.LocalPlayer).Caught) return;
-            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return;
+            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return;
             if (CustomGameOptions.GameMode == GameMode.Chaos || CustomGameOptions.GameMode == GameMode.Werewolf) return;
             var aliveimp = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors) && !x.Data.IsDead).ToList();
             if (aliveimp.Count > 1 && PlayerControl.LocalPlayer.Is(RoleEnum.Mafioso) && !PlayerControl.LocalPlayer.Data.IsDead) return;

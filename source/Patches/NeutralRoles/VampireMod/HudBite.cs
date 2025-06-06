@@ -22,7 +22,8 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
             // Check if the game state allows the KillButton to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
             isKillButtonActive = isKillButtonActive && !MeetingHud.Instance && !player.Data.IsDead;
-            isKillButtonActive = isKillButtonActive && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started;
+            isKillButtonActive = isKillButtonActive && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+            AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
 
             // Set KillButton's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
@@ -46,7 +47,8 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
 
             role.BiteButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && vamps.Count < CustomGameOptions.MaxVampiresPerGame
                     && alivevamps.Count == 1);
                     

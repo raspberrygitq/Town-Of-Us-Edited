@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Reactor.Utilities;
+using TownOfUsEdited.CrewmateRoles.ClericMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Patches;
@@ -56,7 +57,7 @@ namespace TownOfUsEdited.Roles
             {
                 Utils.Rpc(CustomRPC.ArsonistWin, Player.PlayerId);
                 Wins();
-                System.Console.WriteLine("GAME OVER REASON: Arsonist Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Arsonist Win");
                 return;
             }
 
@@ -88,18 +89,26 @@ namespace TownOfUsEdited.Roles
             foreach (var playerId in DousedPlayers)
             {
                 var player = Utils.PlayerById(playerId);
-                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsProtected() && player != ShowRoundOneShield.FirstRoundShielded)
+                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsProtected() && !player.IsBarriered() && player != ShowShield.FirstRoundShielded)
                 {
                     Utils.RpcMultiMurderPlayer(Player, player);
                 }
                 else if (player.IsShielded())
                 {
-                    var medic = player.GetMedic().Player.PlayerId;
-                    Utils.Rpc(CustomRPC.AttemptSound, medic, player.PlayerId);
-                    StopKill.BreakShield(medic, player.PlayerId, CustomGameOptions.ShieldBreaks);
+                    foreach (var medic in player.GetMedic())
+                    {
+                        Utils.Rpc(CustomRPC.AttemptSound, medic.Player.PlayerId, player.PlayerId);
+                        StopKill.BreakShield(medic.Player.PlayerId, player.PlayerId, CustomGameOptions.ShieldBreaks);
+                    }
+                }
+                else if (player.IsBarriered())
+                {
+                    foreach (var cleric in player.GetCleric())
+                    {
+                        StopAttack.NotifyCleric(cleric.Player.PlayerId, false);
+                    }
                 }
             }
-            DousedPlayers.Clear();
         }
     }
 }

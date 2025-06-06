@@ -17,6 +17,7 @@ namespace TownOfUsEdited.neutralRoles.InfectiousMod
                 var role = Role.GetRole(__instance.myPlayer);
                 if (role == null) return;
                 if (role.InfectionState == 0) return;
+                if (__instance.myPlayer.Is(RoleEnum.Infectious)) return;
                 if (role.InfectionState > 1)
                 {
                     __instance.body.velocity *= CustomGameOptions.InfectedSpeed;

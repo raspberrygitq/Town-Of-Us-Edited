@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Roles
@@ -11,11 +12,16 @@ namespace TownOfUsEdited.Roles
         public KillButton _timerButton;
         public PlayerControl BountyTarget;
         public DateTime TargetSwitch;
+        public TextMeshPro TimerText;
         public BountyHunter(PlayerControl player) : base(player)
         {
             Name = "Bounty Hunter";
             ImpostorText = () => "Hunt Down Your Target";
-            TaskText = () => $"Kill your target to get a short kill cooldown\nCurrent Target: {BountyTarget.name}\nFake Tasks:";
+            if (BountyTarget != null)
+            {
+                TaskText = () => $"Kill your target to get a short kill cooldown\nCurrent Target: {BountyTarget.name}\nFake Tasks:";
+            }
+            else TaskText = () => $"Kill your target to get a short kill cooldown\nYou don't have a target for some reason... weird...\nFake Tasks:";
             Color = Patches.Colors.Impostor;
             RoleType = RoleEnum.BountyHunter;
             Alignment = Alignment.ImpostorKilling;

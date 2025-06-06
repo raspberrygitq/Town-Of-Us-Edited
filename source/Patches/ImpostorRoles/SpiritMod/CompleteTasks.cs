@@ -42,19 +42,20 @@ namespace TownOfUsEdited.ImpostorRoles.SpiritMod
 
             if (tasksLeft == 0 && !role.Caught)
             {
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Spirit))
+                if (__instance == PlayerControl.LocalPlayer)
                 {
                     Coroutines.Start(Utils.FlashCoroutine(Color.green));
+                    var toChooseFromPlayer = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors) && !x.Is(Faction.Madmates) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
+                    var rand = UnityEngine.Random.RandomRangeInt(0, toChooseFromPlayer.Count);
+                    var pc = toChooseFromPlayer[rand];
+                    Utils.MurderPlayer(role.Player, pc, false);
+                    Utils.Rpc(CustomRPC.SpiritKill, role.Player.PlayerId, pc.PlayerId);
                 }
                 else
                 {
                     Coroutines.Start(Utils.FlashCoroutine(Color.green));
                 }
                 role.CompletedTasks = true;
-                var toChooseFromPlayer = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors) && !x.Is(Faction.Madmates) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                var rand = UnityEngine.Random.RandomRangeInt(0, toChooseFromPlayer.Count);
-                var pc = toChooseFromPlayer[rand];
-                Utils.MurderPlayer(role.Player, pc, false);
                 role.Caught = true;
             }
         }

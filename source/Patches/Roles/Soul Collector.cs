@@ -1,47 +1,29 @@
-using System;
 using System.Collections.Generic;
-using Reactor.Utilities;
+using System.Linq;
 using TMPro;
-using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
+using TownOfUsEdited.Extensions;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {
     public class SoulCollector : Role
     {
-        private KillButton _reapButton;
         public PlayerControl ClosestPlayer;
-        public Soul CurrentTarget;
         public List<GameObject> Souls = new List<GameObject>();
-        public bool CollectedSouls = false;
-        public int SoulsCollected = 0;
+        public bool SCWins = false;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
-
-        public List<byte> ReapedPlayers = new List<byte>();
-        public TextMeshPro CollectedText { get; set; }
 
         public SoulCollector(PlayerControl player) : base(player)
         {
             Name = "Soul Collector";
-            ImpostorText = () => "Collect Souls";
-            TaskText = () => "Collect souls to win the game";
+            ImpostorText = () => "Reap Souls";
+            TaskText = () => "Reap all souls\nFake Tasks:";
             Color = Patches.Colors.SoulCollector;
             RoleType = RoleEnum.SoulCollector;
             AddToRoleHistory(RoleType);
-            Faction = Faction.NeutralEvil;
+            Faction = Faction.NeutralKilling;
             Cooldown = CustomGameOptions.ReapCd;
-        }
-
-        public KillButton ReapButton
-        {
-            get => _reapButton;
-            set
-            {
-                _reapButton = value;
-                ExtraButtons.Clear();
-                ExtraButtons.Add(value);
-            }
         }
 
         public float ReapTimer()
@@ -57,8 +39,23 @@ namespace TownOfUsEdited.Roles
 
         public void Wins()
         {
-            CollectedSouls = true;
-            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Coroutines.Start(WaitForEnd());
+            SCWins = true;
+        }
+
+        internal override void NeutralWin(LogicGameFlowNormal __instance)
+        {
+            if (Player.Data.IsDead || Player.Data.Disconnected) return;
+            var alivecrewkiller = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && x.IsCrewKiller() && !x.Data.IsDead && !x.Data.Disconnected).ToList();
+
+            if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 2 &&
+                    PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected &&
+                    (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven))) == 1 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue))
+            {
+                Utils.Rpc(CustomRPC.SoulCollectorWin, Player.PlayerId);
+                Wins();
+                Utils.EndGame();
+                return;
+            }
         }
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__38 __instance)

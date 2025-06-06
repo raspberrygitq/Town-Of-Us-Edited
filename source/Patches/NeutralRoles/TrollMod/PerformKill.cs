@@ -22,8 +22,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.TrollMod
             
             if (troll.ClosestPlayer == null)
                 return false;
-
-            if (PlayerControl.LocalPlayer.IsJailed()) return false;
             
             if (__instance == killbutton)
             {

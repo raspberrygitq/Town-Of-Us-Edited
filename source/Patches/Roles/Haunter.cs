@@ -6,7 +6,6 @@ namespace TownOfUsEdited.Roles
 {
     public class Haunter : Role
     {
-        public RoleEnum formerRole = new RoleEnum();
         public bool Caught;
         public bool Revealed;
         public bool CompletedTasks;
@@ -31,8 +30,11 @@ namespace TownOfUsEdited.Roles
 
         public void Fade()
         {
+            if (Player == null || Player.gameObject == null) return;
             Faded = true;
             Player.Visible = true;
+            Player.Collider.enabled = true;
+            Player.gameObject.layer = LayerMask.NameToLayer("Players");
             var color = new Color(1f, 1f, 1f, 0f);
 
             var maxDistance = ShipStatus.Instance.MaxLightRadius * GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod;

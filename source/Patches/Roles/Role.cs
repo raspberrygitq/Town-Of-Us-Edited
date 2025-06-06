@@ -11,8 +11,8 @@ using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 using TownOfUsEdited.Extensions;
 using AmongUs.GameOptions;
-using TownOfUsEdited.ImpostorRoles.TraitorMod;
 using System.Collections;
+using Reactor.Utilities;
 
 namespace TownOfUsEdited.Roles
 {
@@ -31,6 +31,8 @@ namespace TownOfUsEdited.Roles
         public static bool SeeRoles { get; set; } = false;
 
         public List<KillButton> ExtraButtons = new List<KillButton>();
+        public List<TextMeshPro> ButtonLabels = new List<TextMeshPro>();
+        public RoleEnum formerRole = RoleEnum.None;
 
         public Func<string> ImpostorText;
         public Func<string> TaskText;
@@ -176,13 +178,7 @@ namespace TownOfUsEdited.Roles
                 if (Local) return true;
                 var lover = Modifier.GetModifier<Lover>(PlayerControl.LocalPlayer);
                 if (lover.OtherLover.Player != Player) return false;
-                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Aurial)) return true;
-                if (MeetingHud.Instance || Utils.ShowDeadBodies) return true;
-                if (lover.OtherLover.Player.Is(RoleEnum.Mayor))
-                {
-                    var mayor = GetRole<Mayor>(lover.OtherLover.Player);
-                    if (mayor.Revealed) return true;
-                }
+                return true;
             }
             return false;
         }
@@ -240,11 +236,6 @@ namespace TownOfUsEdited.Roles
                 var doomRole = (Doomsayer)doom;
                 if (doomRole.WonByGuessing) return;
             }
-            foreach (var sc in GetRoles(RoleEnum.SoulCollector))
-            {
-                var scRole = (SoulCollector)sc;
-                if (scRole.CollectedSouls) return;
-            }
             foreach (var vult in GetRoles(RoleEnum.Vulture))
             {
                 var vultureRole = (Vulture)vult;
@@ -280,11 +271,6 @@ namespace TownOfUsEdited.Roles
                 var doomRole = (Doomsayer)doom;
                 if (doomRole.WonByGuessing) return;
             }
-            foreach (var sc in GetRoles(RoleEnum.SoulCollector))
-            {
-                var scRole = (SoulCollector)sc;
-                if (scRole.CollectedSouls) return;
-            }
             foreach (var vult in GetRoles(RoleEnum.Vulture))
             {
                 var vultureRole = (Vulture)vult;
@@ -315,8 +301,7 @@ namespace TownOfUsEdited.Roles
                     GetRoles(RoleEnum.Troll).Any(x => ((Troll)x).TrolledVotedOut) == true ||
                     GetRoles(RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing) == true ||
                     GetRoles(RoleEnum.Vulture).Any(x => ((Vulture)x).VultureWins) == true ||
-                    GetRoles(RoleEnum.Phantom).Any(x => ((Phantom)x).CompletedTasks) == true ||
-                    GetRoles(RoleEnum.SoulCollector).Any(x => ((SoulCollector)x).CollectedSouls) == true);
+                    GetRoles(RoleEnum.Phantom).Any(x => ((Phantom)x).CompletedTasks) == true);
             }
             return false;
         }
@@ -341,7 +326,8 @@ namespace TownOfUsEdited.Roles
                 GetRoles(RoleEnum.Mutant).Any(x => ((Mutant)x).MutantWins) == true ||
                 GetRoles(RoleEnum.Infectious).Any(x => ((Infectious)x).InfectiousWins) == true ||
                 GetRoles(RoleEnum.Maul).Any(x => ((Maul)x).WerewolfWins) == true ||
-                GetRoles(RoleEnum.WhiteWolf).Any(x => ((WhiteWolf)x).WhiteWolfWins) == true;
+                GetRoles(RoleEnum.WhiteWolf).Any(x => ((WhiteWolf)x).WhiteWolfWins) == true ||
+                GetRoles(RoleEnum.SoulCollector).Any(x => ((SoulCollector)x).SCWins) == true;
         }
 
         internal static bool NobodyEndCriteria(LogicGameFlowNormal __instance)
@@ -384,7 +370,7 @@ namespace TownOfUsEdited.Roles
 
                     SurvOnlyWin();
                     Utils.EndGame();
-                    System.Console.WriteLine("GAME OVER REASON: Survivor Only Win");
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Survivor Only Win");
                     return false;
                 }
                 else
@@ -393,7 +379,7 @@ namespace TownOfUsEdited.Roles
 
                     NobodyWinsFunc();
                     Utils.EndGame();
-                    System.Console.WriteLine("GAME OVER REASON: Nobody Wins");
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Nobody Wins");
                     return false;
                 }
             }
@@ -445,13 +431,16 @@ namespace TownOfUsEdited.Roles
                 }
             }
 
-            var modifier = Modifier.GetModifier(Player);
-            if (modifier != null && modifier.GetColoredSymbol() != null)
+            var modifiers = Modifier.GetModifiers(Player);
+            foreach (var modifier in modifiers)
             {
-                if (modifier.ModifierType == ModifierEnum.Lover && (revealModifier || revealLover))
-                    PlayerName += $" {modifier.GetColoredSymbol()}";
-                else if (modifier.ModifierType != ModifierEnum.Lover && revealModifier)
-                    PlayerName += $" {modifier.GetColoredSymbol()}";
+                if (modifier != null && modifier.GetColoredSymbol() != null)
+                {
+                    if (modifier.ModifierType == ModifierEnum.Lover && (revealModifier || revealLover))
+                        PlayerName += $" {modifier.GetColoredSymbol()}";
+                    else if (modifier.ModifierType != ModifierEnum.Lover && revealModifier)
+                        PlayerName += $" {modifier.GetColoredSymbol()}";
+                }
             }
 
             if (revealTasks && (Faction == Faction.Crewmates || RoleType == RoleEnum.Phantom))
@@ -484,14 +473,11 @@ namespace TownOfUsEdited.Roles
             return !(a == b);
         }
 
+
         public void RegenTask()
         {
             bool createTask;
             bool CreateDeadTask = false;
-            bool flag = (Player.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(Player).Caught) ||
-            (Player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(Player).Caught) ||
-            (Player.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(Player).Caught) ||
-            (Player.Is(RoleEnum.Astral) && Role.GetRole<Astral>(Player).Enabled);
             string deadText;
 
             if (Player.Is(Faction.Crewmates)) deadText = "<color=#FF0000>You're dead. Finish your tasks to win.</color>";
@@ -529,7 +515,7 @@ namespace TownOfUsEdited.Roles
                 Player.myTasks.Insert(0, task);
             }
 
-            if (CreateDeadTask && !flag)
+            if (CreateDeadTask)
             {
                 var task = new GameObject(Name + "Task").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(Player.transform, false);
@@ -543,7 +529,7 @@ namespace TownOfUsEdited.Roles
                     $"{ColorString}Role: {Name} (Press F2 for Role infos)\n{TaskText()}</color>";
             }
             
-            if (Player.Data.IsDead && !CreateDeadTask && !flag)
+            if (Player.Data.IsDead && !CreateDeadTask)
             {
                 Player.myTasks.ToArray()[1].Cast<ImportantTextTask>().Text = deadText;
             }
@@ -559,6 +545,8 @@ namespace TownOfUsEdited.Roles
 
         public static T GenRole<T>(Type type, PlayerControl player)
         {
+            if (player.Data.Disconnected) return default;
+
             var role = (T)Activator.CreateInstance(type, new object[] { player });
 
             Utils.Rpc(CustomRPC.SetRole, player.PlayerId, (string)type.FullName);
@@ -567,6 +555,8 @@ namespace TownOfUsEdited.Roles
 
         public static T GenModifier<T>(Type type, PlayerControl player)
         {
+            if (player.Data.Disconnected) return default;
+
             var modifier = (T)Activator.CreateInstance(type, new object[] { player });
 
             Utils.Rpc(CustomRPC.SetModifier, player.PlayerId, (string)type.FullName);
@@ -576,6 +566,11 @@ namespace TownOfUsEdited.Roles
         public static T GenRole<T>(Type type, List<PlayerControl> players)
         {
             var player = players[Random.RandomRangeInt(0, players.Count)];
+            while (player.Data.Disconnected)
+            {
+                players.Remove(player);
+                player = players[Random.RandomRangeInt(0, players.Count)];
+            }
 
             var role = GenRole<T>(type, player);
             players.Remove(player);
@@ -632,8 +627,8 @@ namespace TownOfUsEdited.Roles
             {
                 public static void Postfix(IntroCutscene __instance)
                 {
-                    var modifier = Modifier.GetModifier(PlayerControl.LocalPlayer);
-                    if (modifier != null)
+                    var modifier = Modifier.GetModifiers(PlayerControl.LocalPlayer);
+                    if (modifier != null && modifier.Length != 0)
                         ModifierText = Object.Instantiate(__instance.RoleText, __instance.RoleText.transform.parent, false);
                     else
                         ModifierText = null;
@@ -645,8 +640,8 @@ namespace TownOfUsEdited.Roles
             {
                 public static void Postfix(IntroCutscene __instance)
                 {
-                    var modifier = Modifier.GetModifier(PlayerControl.LocalPlayer);
-                    if (modifier != null)
+                    var modifier = Modifier.GetModifiers(PlayerControl.LocalPlayer);
+                    if (modifier != null && modifier.Length != 0)
                         ModifierText = Object.Instantiate(__instance.RoleText, __instance.RoleText.transform.parent, false);
                     else
                         ModifierText = null;
@@ -695,6 +690,13 @@ namespace TownOfUsEdited.Roles
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Impostor);
                         }
 
+                        if (role.Faction == Faction.Crewmates)
+                        {
+                            __instance.__4__this.TeamTitle.text = "Crewmate";
+                            __instance.__4__this.TeamTitle.color = Palette.CrewmateBlue;
+                            __instance.__4__this.BackgroundBar.material.color = Palette.CrewmateBlue;
+                        }
+
                         if (role.Faction == Faction.NeutralEvil)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
@@ -740,6 +742,12 @@ namespace TownOfUsEdited.Roles
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = HudManager.Instance.TaskCompleteSound;
                         }
 
+                        if (role.Alignment == Alignment.CrewmatePower && role.Faction != Faction.Madmates)
+                        {
+                            var popup = GameManagerCreator.Instance.HideAndSeekManagerPrefab.DeathPopupPrefab;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = popup.sfx;
+                        }
+
                         if (role.Faction == Faction.NeutralKilling && CustomGameOptions.GameMode != GameMode.BattleRoyale)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
@@ -774,35 +782,30 @@ namespace TownOfUsEdited.Roles
                         __instance.__4__this.YouAreText.color = role.Color;
                         __instance.__4__this.RoleBlurbText.color = role.Color;
                         __instance.__4__this.RoleBlurbText.text = role.ImpostorText();
-                        //    __instance.__4__this.ImpostorText.gameObject.SetActive(true);
-                        // __instance.__4__this.BackgroundBar.material.color = role.Color;
-                        //                        TestScale = Mathf.Max(__instance.__this.Title.scale, TestScale);
-                        //                        __instance.__this.Title.scale = TestScale / role.Scale;
                     }
-                    /*else if (!__instance.isImpostor)
-                    {
-                        __instance.__this.ImpostorText.text = "Haha imagine being a boring old crewmate";
-                    }*/
-
                     if (ModifierText != null)
                     {
-                        var modifier = Modifier.GetModifier(PlayerControl.LocalPlayer);
-                        if (modifier.GetType() == typeof(Lover))
+                        var modifiers = Modifier.GetModifiers(PlayerControl.LocalPlayer);
+                        string modifierString = "<size=2>Modifiers: ";
+                        foreach (var modifier in modifiers)
                         {
-                            ModifierText.text = $"<size=3>{modifier.TaskText()}</size>";
+                            if (modifierString != "<size=2>Modifiers: ") modifierString += ", ";
+                            if (modifier.GetType() == typeof(Lover))
+                            {
+                                var lover = Modifier.GetModifier<Lover>(PlayerControl.LocalPlayer);
+                                modifierString += modifier.ColorString + modifier.Name + " (" + lover.OtherLover.PlayerName + ")" + "</color>";
+                            }
+                            else if (modifier.GetType() != typeof(Madmate))
+                            {
+                                modifierString += modifier.ColorString + modifier.Name + "</color>";
+                            }
                         }
-                        else
-                        {
-                            ModifierText.text = "<size=4>Modifier: " + modifier.Name + "</size>";
-                        }
-                        ModifierText.color = modifier.Color;
+                        ModifierText.text = modifierString + "</size>";
+                        ModifierText.color = Color.white;
 
                         ModifierText.transform.position =
                             __instance.__4__this.transform.position - new Vector3(0f, 1.6f, 0f);
-                        if (!PlayerControl.LocalPlayer.Is(Faction.Madmates))
-                        {
-                        ModifierText.gameObject.SetActive(true);
-                        }
+                        if (ModifierText.text != "<size=2>Modifiers: </size>") ModifierText.gameObject.SetActive(true);
                     }
                 }
             }
@@ -837,6 +840,13 @@ namespace TownOfUsEdited.Roles
                             __instance.__4__this.TeamTitle.color = Palette.ImpostorRed;
                             __instance.__4__this.BackgroundBar.material.color = Palette.ImpostorRed;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Impostor);
+                        }
+
+                        if (role.Faction == Faction.Crewmates)
+                        {
+                            __instance.__4__this.TeamTitle.text = "Crewmate";
+                            __instance.__4__this.TeamTitle.color = Palette.CrewmateBlue;
+                            __instance.__4__this.BackgroundBar.material.color = Palette.CrewmateBlue;
                         }
 
                         if (role.Faction == Faction.NeutralBenign)
@@ -875,6 +885,12 @@ namespace TownOfUsEdited.Roles
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = HudManager.Instance.TaskCompleteSound;
                         }
 
+                        if (role.Alignment == Alignment.CrewmatePower && role.Faction != Faction.Madmates)
+                        {
+                            var popup = GameManagerCreator.Instance.HideAndSeekManagerPrefab.DeathPopupPrefab;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = popup.sfx;
+                        }
+
                         else if (role.Faction == Faction.NeutralKilling && CustomGameOptions.GameMode != GameMode.BattleRoyale)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
@@ -909,32 +925,60 @@ namespace TownOfUsEdited.Roles
                         __instance.__4__this.YouAreText.color = role.Color;
                         __instance.__4__this.RoleBlurbText.color = role.Color;
                         __instance.__4__this.RoleBlurbText.text = role.ImpostorText();
-                        // __instance.__4__this.BackgroundBar.material.color = role.Color;
                     }
 
                     if (ModifierText != null)
                     {
-                        var modifier = Modifier.GetModifier(PlayerControl.LocalPlayer);
-                        if (modifier.GetType() == typeof(Lover))
+                        var modifiers = Modifier.GetModifiers(PlayerControl.LocalPlayer);
+                        string modifierString = "<size=2>Modifiers: ";
+                        foreach (var modifier in modifiers)
                         {
-                            ModifierText.text = $"<size=3>{modifier.TaskText()}</size>";
+                            if (modifierString != "<size=2>Modifiers: ") modifierString += ", ";
+                            if (modifier.GetType() == typeof(Lover))
+                            {
+                                var lover = Modifier.GetModifier<Lover>(PlayerControl.LocalPlayer);
+                                modifierString += modifier.ColorString + modifier.Name + " (" + lover.OtherLover.PlayerName + ")" + "</color>";
+                            }
+                            else if (modifier.GetType() != typeof(Madmate))
+                            {
+                                modifierString += modifier.ColorString + modifier.Name + "</color>";
+                            }
                         }
-                        else if (!PlayerControl.LocalPlayer.Is(Faction.Madmates))
-                        {
-                            ModifierText.text = "<size=4>Modifier: " + modifier.Name + "</size>";
-                        }
-                        ModifierText.color = modifier.Color;
+                        ModifierText.text = modifierString + "</size>";
+                        ModifierText.color = Color.white;
 
                         ModifierText.transform.position =
                             __instance.__4__this.transform.position - new Vector3(0f, 1.6f, 0f);
-                        if (!PlayerControl.LocalPlayer.Is(Faction.Madmates))
-                        {
-                        ModifierText.gameObject.SetActive(true);
-                        }
+                        if (ModifierText.text != "<size=2>Modifiers: </size>") ModifierText.gameObject.SetActive(true);
                     }
 
                     var coven = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Coven)).ToList();
                     var imps = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors)).ToList();
+
+                    var players = GameData.Instance.PlayerCount;
+                    bool isAny = false;
+                    if (players > 6)
+                    {
+                        List<RoleOptions> buckets = [CustomGameOptions.Slot1, CustomGameOptions.Slot2, CustomGameOptions.Slot3, CustomGameOptions.Slot4, CustomGameOptions.Slot5, CustomGameOptions.Slot6, CustomGameOptions.Slot7];
+
+                        if (players > 7) buckets.Add(CustomGameOptions.Slot8);
+                        if (players > 8) buckets.Add(CustomGameOptions.Slot9);
+                        if (players > 9) buckets.Add(CustomGameOptions.Slot10);
+                        if (players > 10) buckets.Add(CustomGameOptions.Slot11);
+                        if (players > 11) buckets.Add(CustomGameOptions.Slot12);
+                        if (players > 12) buckets.Add(CustomGameOptions.Slot13);
+                        if (players > 13) buckets.Add(CustomGameOptions.Slot14);
+                        if (players > 14) buckets.Add(CustomGameOptions.Slot15);
+
+                        foreach (var roleOption in buckets)
+                        {
+                            if (roleOption == RoleOptions.Any && CustomGameOptions.GameMode == GameMode.RoleList)
+                            {
+                                isAny = true;
+                                break;
+                            }
+                        }
+                    }
 
                     if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count == 1)
                         __instance.__4__this.ImpostorText.text = "There is <color=#A86629FF>1 Werewolf</color> among us";
@@ -944,18 +988,25 @@ namespace TownOfUsEdited.Roles
                         __instance.__4__this.ImpostorText.text = "";
                     else if (PlayerControl.LocalPlayer.Is(Faction.Impostors))
                         __instance.__4__this.ImpostorText.text = "";
+                    else if (isAny) __instance.__4__this.ImpostorText.text = "There are an <color=#FF0000FF>Unknown Number of Impostors</color> among us";
                     else if (imps.Count == 1)
                         __instance.__4__this.ImpostorText.text = "There is <color=#FF0000>1 Impostor</color> among us";
                     else if (imps.Count > 1)
                         __instance.__4__this.ImpostorText.text = $"There are <color=#FF0000>{imps.Count} Impostors</color> among us";
 
-                    if (coven.Count > 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    if (coven.Count > 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors) && !PlayerControl.LocalPlayer.Is(Faction.Coven))
                         __instance.__4__this.ImpostorText.text += $"\nAnd also <color=#bf5fff>{coven.Count} Coven Members</color>";
-                    else if (coven.Count == 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    else if (coven.Count == 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors) && !PlayerControl.LocalPlayer.Is(Faction.Coven))
                         __instance.__4__this.ImpostorText.text += $"\nAnd also <color=#bf5fff>{coven.Count} Coven Member</color>";
-                    else if (coven.Count > 1 && imps.Count == 0)
+                    else if (imps.Count > 1 && PlayerControl.LocalPlayer.Is(Faction.Coven))
+                        __instance.__4__this.ImpostorText.text = $"There are <color=#FF0000>{imps.Count} Impostors</color> among us";
+                    else if (imps.Count == 1 && PlayerControl.LocalPlayer.Is(Faction.Coven))
+                        __instance.__4__this.ImpostorText.text = $"There is <color=#FF0000>{imps.Count} Impostor</color> among us";
+                    else if (coven.Count > 0 && imps.Count == 0 && PlayerControl.LocalPlayer.Is(Faction.Coven))
+                        __instance.__4__this.ImpostorText.text = "";
+                    else if (coven.Count > 1 && imps.Count == 0 && !PlayerControl.LocalPlayer.Is(Faction.Coven))
                         __instance.__4__this.ImpostorText.text = $"There are <color=#bf5fff>{coven.Count} Coven Members</color> among us";
-                    else if (coven.Count == 1 && imps.Count == 0)
+                    else if (coven.Count == 1 && imps.Count == 0 && !PlayerControl.LocalPlayer.Is(Faction.Coven))
                         __instance.__4__this.ImpostorText.text = $"There is <color=#bf5fff>{coven.Count} Coven Member</color> among us";
                     else if (coven.Count > 1 && imps.Count != 0 && PlayerControl.LocalPlayer.Is(Faction.Impostors))
                     {
@@ -1002,6 +1053,13 @@ namespace TownOfUsEdited.Roles
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Impostor);
                         }
 
+                        if (role.Faction == Faction.Crewmates)
+                        {
+                            __instance.__4__this.TeamTitle.text = "Crewmate";
+                            __instance.__4__this.TeamTitle.color = Palette.CrewmateBlue;
+                            __instance.__4__this.BackgroundBar.material.color = Palette.CrewmateBlue;
+                        }
+
                         if (role.Faction == Faction.Coven)
                         {
                             __instance.__4__this.TeamTitle.text = "Coven";
@@ -1028,6 +1086,12 @@ namespace TownOfUsEdited.Roles
                         if (role.Alignment == Alignment.CrewmateInvestigative && role.Faction != Faction.Madmates)
                         {
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = HudManager.Instance.TaskCompleteSound;
+                        }
+
+                        if (role.Alignment == Alignment.CrewmatePower && role.Faction != Faction.Madmates)
+                        {
+                            var popup = GameManagerCreator.Instance.HideAndSeekManagerPrefab.DeathPopupPrefab;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = popup.sfx;
                         }
 
                         if (role.Faction == Faction.NeutralBenign)
@@ -1078,27 +1142,56 @@ namespace TownOfUsEdited.Roles
 
                     if (ModifierText != null)
                     {
-                        var modifier = Modifier.GetModifier(PlayerControl.LocalPlayer);
-                        if (modifier.GetType() == typeof(Lover))
+                        var modifiers = Modifier.GetModifiers(PlayerControl.LocalPlayer);
+                        string modifierString = "<size=2>Modifiers: ";
+                        foreach (var modifier in modifiers)
                         {
-                            ModifierText.text = $"<size=3>{modifier.TaskText()}</size>";
+                            if (modifierString != "<size=2>Modifiers: ") modifierString += ", ";
+                            if (modifier.GetType() == typeof(Lover))
+                            {
+                                var lover = Modifier.GetModifier<Lover>(PlayerControl.LocalPlayer);
+                                modifierString += modifier.ColorString + modifier.Name + " (" + lover.OtherLover.PlayerName + ")" + "</color>";
+                            }
+                            else if (modifier.GetType() != typeof(Madmate))
+                            {
+                                modifierString += modifier.ColorString + modifier.Name + "</color>";
+                            }
                         }
-                        else if (!PlayerControl.LocalPlayer.Is(Faction.Madmates))
-                        {
-                            ModifierText.text = "<size=4>Modifier: " + modifier.Name + "</size>";
-                        }
-                        ModifierText.color = modifier.Color;
+                        ModifierText.text = modifierString + "</size>";
+                        ModifierText.color = Color.white;
 
                         ModifierText.transform.position =
                             __instance.__4__this.transform.position - new Vector3(0f, 1.6f, 0f);
-                        if (!PlayerControl.LocalPlayer.Is(Faction.Madmates))
-                        {
-                        ModifierText.gameObject.SetActive(true);
-                        }
+                        if (ModifierText.text != "<size=2>Modifiers: </size>") ModifierText.gameObject.SetActive(true);
                     }
 
                     var coven = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Coven)).ToList();
                     var imps = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors)).ToList();
+
+                    var players = GameData.Instance.PlayerCount;
+                    bool isAny = false;
+                    if (players > 6)
+                    {
+                        List<RoleOptions> buckets = [CustomGameOptions.Slot1, CustomGameOptions.Slot2, CustomGameOptions.Slot3, CustomGameOptions.Slot4, CustomGameOptions.Slot5, CustomGameOptions.Slot6, CustomGameOptions.Slot7];
+
+                        if (players > 7) buckets.Add(CustomGameOptions.Slot8);
+                        if (players > 8) buckets.Add(CustomGameOptions.Slot9);
+                        if (players > 9) buckets.Add(CustomGameOptions.Slot10);
+                        if (players > 10) buckets.Add(CustomGameOptions.Slot11);
+                        if (players > 11) buckets.Add(CustomGameOptions.Slot12);
+                        if (players > 12) buckets.Add(CustomGameOptions.Slot13);
+                        if (players > 13) buckets.Add(CustomGameOptions.Slot14);
+                        if (players > 14) buckets.Add(CustomGameOptions.Slot15);
+
+                        foreach (var roleOption in buckets)
+                        {
+                            if (roleOption == RoleOptions.Any && CustomGameOptions.GameMode == GameMode.RoleList)
+                            {
+                                isAny = true;
+                                break;
+                            }
+                        }
+                    }
 
                     if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count == 1)
                         __instance.__4__this.ImpostorText.text = "There is <color=#A86629FF>1 Werewolf</color> among us";
@@ -1108,18 +1201,25 @@ namespace TownOfUsEdited.Roles
                         __instance.__4__this.ImpostorText.text = "";
                     else if (PlayerControl.LocalPlayer.Is(Faction.Impostors))
                         __instance.__4__this.ImpostorText.text = "";
+                    else if (isAny) __instance.__4__this.ImpostorText.text = "There are an <color=#FF0000FF>Unknown Number of Impostors</color> among us";
                     else if (imps.Count == 1)
                         __instance.__4__this.ImpostorText.text = "There is <color=#FF0000>1 Impostor</color> among us";
                     else if (imps.Count > 1)
                         __instance.__4__this.ImpostorText.text = $"There are <color=#FF0000>{imps.Count} Impostors</color> among us";
 
-                    if (coven.Count > 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    if (coven.Count > 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors) && !PlayerControl.LocalPlayer.Is(Faction.Coven))
                         __instance.__4__this.ImpostorText.text += $"\nAnd also <color=#bf5fff>{coven.Count} Coven Members</color>";
-                    else if (coven.Count == 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors))
+                    else if (coven.Count == 1 && imps.Count != 0 && !PlayerControl.LocalPlayer.Is(Faction.Impostors) && !PlayerControl.LocalPlayer.Is(Faction.Coven))
                         __instance.__4__this.ImpostorText.text += $"\nAnd also <color=#bf5fff>{coven.Count} Coven Member</color>";
-                    else if (coven.Count > 1 && imps.Count == 0)
+                    else if (imps.Count > 1 && PlayerControl.LocalPlayer.Is(Faction.Coven))
+                        __instance.__4__this.ImpostorText.text = $"There are <color=#FF0000>{imps.Count} Impostors</color> among us";
+                    else if (imps.Count == 1 && PlayerControl.LocalPlayer.Is(Faction.Coven))
+                        __instance.__4__this.ImpostorText.text = $"There is <color=#FF0000>{imps.Count} Impostor</color> among us";
+                    else if (coven.Count > 0 && imps.Count == 0 && PlayerControl.LocalPlayer.Is(Faction.Coven))
+                        __instance.__4__this.ImpostorText.text = "";
+                    else if (coven.Count > 1 && imps.Count == 0 && !PlayerControl.LocalPlayer.Is(Faction.Coven))
                         __instance.__4__this.ImpostorText.text = $"There are <color=#bf5fff>{coven.Count} Coven Members</color> among us";
-                    else if (coven.Count == 1 && imps.Count == 0)
+                    else if (coven.Count == 1 && imps.Count == 0 && !PlayerControl.LocalPlayer.Is(Faction.Coven))
                         __instance.__4__this.ImpostorText.text = $"There is <color=#bf5fff>{coven.Count} Coven Member</color> among us";
                     else if (coven.Count > 1 && imps.Count != 0 && PlayerControl.LocalPlayer.Is(Faction.Impostors))
                     {
@@ -1135,23 +1235,24 @@ namespace TownOfUsEdited.Roles
             }
         }
 
-        [HarmonyPatch(typeof(PlayerControl._CoSetTasks_d__141), nameof(PlayerControl._CoSetTasks_d__141.MoveNext))]
+        [HarmonyPatch(typeof(PlayerControl._CoSetTasks_d__103), nameof(PlayerControl._CoSetTasks_d__103.MoveNext))]
         public static class PlayerControl_SetTasks
         {
-            public static void Postfix(PlayerControl._CoSetTasks_d__141 __instance)
+            public static void Postfix(PlayerControl._CoSetTasks_d__103 __instance)
             {
                 if (__instance == null) return;
                 var player = __instance.__4__this;
                 var role = GetRole(player);
-                var modifier = Modifier.GetModifier(player);
-
-                if (modifier != null)
+                var modifiers = Modifier.GetModifiers(player);
+                foreach (var modifier in modifiers)
                 {
-                    var modTask = new GameObject(modifier.Name + "Task").AddComponent<ImportantTextTask>();
-                    modTask.transform.SetParent(player.transform, false);
-                    modTask.Text =
-                        $"{modifier.ColorString}Modifier: {modifier.Name}\n{modifier.TaskText()}</color>";
-                    player.myTasks.Insert(0, modTask);
+                    if (modifier != null)
+                    {
+                        var modTask = new GameObject(modifier.Name + "Task").AddComponent<ImportantTextTask>();
+                        modTask.transform.SetParent(player.transform, false);
+                        modTask.Text = modifier.FullModifierTaskText();
+                        player.myTasks.Insert(0, modTask);
+                    }
                 }
 
                 if (role == null || role.Hidden) return;
@@ -1169,45 +1270,48 @@ namespace TownOfUsEdited.Roles
             public static bool Prefix(LogicGameFlowNormal __instance)
             {
                 if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return true;
-                if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return false;
+                if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return false;
                 if (!AmongUsClient.Instance.AmHost) return false;
                 if (ShipStatus.Instance.Systems != null)
                 {
-                    if (ShipStatus.Instance.Systems.ContainsKey(SystemTypes.LifeSupp))
+                    ISystemType systemType;
+                    if (ShipStatus.Instance.Systems.TryGetValue(SystemTypes.LifeSupp, out systemType))
                     {
-                        var lifeSuppSystemType = ShipStatus.Instance.Systems[SystemTypes.LifeSupp].Cast<LifeSuppSystemType>();
+                        LifeSuppSystemType lifeSuppSystemType = systemType.Cast<LifeSuppSystemType>();
                         if (lifeSuppSystemType.Countdown < 0f)
                         {
-                            ImpostorWins = true;
-                            Utils.Rpc(CustomRPC.ImpostorWin);
-                            Utils.EndGame(GameOverReason.ImpostorByVote);
-                            System.Console.WriteLine("GAME OVER REASON: Sabotage");
+                            if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
+                            {
+                                ImpostorWins = true;
+                                Utils.Rpc(CustomRPC.ImpostorWin);
+                                Utils.EndGame(GameOverReason.ImpostorsByVote);
+                                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Impostor Win (Sabotage)");
+                            }
+                            else
+                            {
+                                lifeSuppSystemType.Countdown = 10000f;
+                                HudManager.Instance.ShowPopUp("Normally, the game would've ended and the Impostors should've won. In freeplay, we just stop the Sabotage instead.");
+                            }
                             return false;
                         }
                     }
-
-                    if (ShipStatus.Instance.Systems.ContainsKey(SystemTypes.Laboratory))
+                    foreach (ISystemType systemType2 in ShipStatus.Instance.Systems.Values)
                     {
-                        var reactorSystemType = ShipStatus.Instance.Systems[SystemTypes.Laboratory].Cast<ReactorSystemType>();
-                        if (reactorSystemType.Countdown < 0f)
+                        ICriticalSabotage criticalSabotage = systemType2.TryCast<ICriticalSabotage>();
+                        if (criticalSabotage != null && criticalSabotage.Countdown < 0f)
                         {
-                            ImpostorWins = true;
-                            Utils.Rpc(CustomRPC.ImpostorWin);
-                            Utils.EndGame(GameOverReason.ImpostorByVote);
-                            System.Console.WriteLine("GAME OVER REASON: Sabotage");
-                            return false;
-                        }
-                    }
-
-                    if (ShipStatus.Instance.Systems.ContainsKey(SystemTypes.Reactor))
-                    {
-                        var reactorSystemType = ShipStatus.Instance.Systems[SystemTypes.Reactor].Cast<ICriticalSabotage>();
-                        if (reactorSystemType.Countdown < 0f)
-                        {
-                            ImpostorWins = true;
-                            Utils.Rpc(CustomRPC.ImpostorWin);
-                            Utils.EndGame(GameOverReason.ImpostorByVote);
-                            System.Console.WriteLine("GAME OVER REASON: Sabotage");
+                            if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
+                            {
+                                ImpostorWins = true;
+                                Utils.Rpc(CustomRPC.ImpostorWin);
+                                Utils.EndGame(GameOverReason.ImpostorsByVote);
+                                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Impostor Win (Sabotage)");
+                            }
+                            else
+                            {
+                                criticalSabotage.ClearSabotage();
+                                HudManager.Instance.ShowPopUp("Normally, the game would've ended and the Impostors should've won. In freeplay, we just stop the Sabotage instead.");
+                            }
                             return false;
                         }
                     }
@@ -1218,13 +1322,23 @@ namespace TownOfUsEdited.Roles
                     var crews = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Data.Disconnected && !x.Is(RoleEnum.Haunter)).ToList();
                     if (crews.Count != 0 && CustomGameOptions.GameMode != GameMode.Werewolf)
                     {
-                        CrewmateWins = true;
-                        Utils.Rpc(CustomRPC.CrewmateWin);
-                        Utils.EndGame(GameOverReason.HumansByVote);
-                        System.Console.WriteLine("GAME OVER REASON: Tasks Completed");
+                        if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
+                        {
+                            CrewmateWins = true;
+                            Utils.Rpc(CustomRPC.CrewmateWin);
+                            Utils.EndGame(GameOverReason.CrewmatesByVote);
+                            PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Crewmate Win (Tasks)");
+                        }
+                        else
+                        {
+                            ShipStatus.Instance.Begin();
+                            HudManager.Instance.ShowPopUp("Normally, the game would've ended and the Crewmates should've won. In freeplay, we just reset all tasks done.");
+                        }
                         return false;
                     }
                 }
+
+                if (AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) return false;
 
                 if (!NobodyEndCriteria(__instance)) return false;
 
@@ -1253,11 +1367,11 @@ namespace TownOfUsEdited.Roles
                     ((Amnesiac)role).BodyArrows.Values.DestroyAll();
                     ((Amnesiac)role).BodyArrows.Clear();
                 }
-                /*foreach (var role in AllRoles.Where(x => x.RoleType == RoleEnum.Aurial))
+                foreach (var modifier in Modifier.AllModifiers.Where(x => x.ModifierType == ModifierEnum.Satellite))
                 {
-                    ((Aurial)role).SenseArrows.Values.DestroyAll();
-                    ((Aurial)role).SenseArrows.Clear();
-                }*/
+                    ((Satellite)modifier).BodyArrows.Values.DestroyAll();
+                    ((Satellite)modifier).BodyArrows.Clear();
+                }
                 foreach (var role in AllRoles.Where(x => x.RoleType == RoleEnum.Medium))
                 {
                     ((Medium)role).MediatedPlayers.Values.DestroyAll();
@@ -1296,10 +1410,10 @@ namespace TownOfUsEdited.Roles
                             foreach (var oracle in GetRoles(RoleEnum.Oracle))
                             {
                                 var oracleRole = (Oracle)oracle;
-                                if (oracleRole.SavedConfessor)
+                                if (oracleRole.SavedBlessed)
                                 {
-                                    oracleRole.SavedConfessor = false;
-                                    __result = $"{oracleRole.Confessor.GetDefaultOutfit().PlayerName} was blessed by an Oracle!";
+                                    oracleRole.SavedBlessed = false;
+                                    __result = $"{oracleRole.Blessed.GetDefaultOutfit().PlayerName} was blessed by an Oracle!";
                                 }
                             }
                             foreach (var terrorist in Role.GetRoles(RoleEnum.Terrorist))
@@ -1411,6 +1525,7 @@ namespace TownOfUsEdited.Roles
                         );
                         if(role.ColorCriteria())
                             player.NameText.color = role.Color;
+                        player.NameText.enableWordWrapping = false;
                     }
                     else
                     {
@@ -1467,6 +1582,7 @@ namespace TownOfUsEdited.Roles
 
                             if (role.ColorCriteria())
                                 player.nameText().color = role.Color;
+                            player.nameText().enableWordWrapping = false;
                         }
                         else player.nameText().transform.localPosition = new Vector3(0f, 0f, 0f);
                     }

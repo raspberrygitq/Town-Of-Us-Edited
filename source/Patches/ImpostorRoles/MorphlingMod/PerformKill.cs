@@ -9,7 +9,6 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
     public class PerformKill
     {
         public static Sprite SampleSprite => TownOfUsEdited.SampleSprite;
-        public static Sprite MorphSprite => TownOfUsEdited.MorphSprite;
 
         public static bool Prefix(KillButton __instance)
         {
@@ -19,20 +18,32 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             var role = Role.GetRole<Morphling>(PlayerControl.LocalPlayer);
             var target = role.ClosestPlayer;
+            var shapeshifter = RoleManager.Instance.GetRole(AmongUs.GameOptions.RoleTypes.Shapeshifter).Cast<ShapeshifterRole>();
+            Sprite MorphSprite = shapeshifter.Ability.Image;
             if (__instance == role.MorphButton)
             {
                 if (!__instance.isActiveAndEnabled) return false;
                 if (role.MorphButton.graphic.sprite == SampleSprite)
                 {
                     if (target == null) return false;
-                    var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-                    if (!abilityUsed) return false;
-                    role.SampledPlayer = target;
-                    role.MorphButton.graphic.sprite = MorphSprite;
-                    role.MorphButton.SetTarget(null);
-                    DestroyableSingleton<HudManager>.Instance.KillButton.SetTarget(null);
-                    if (role.Cooldown < 5f)
-                        role.Cooldown = 5f;
+                    var interact = Utils.Interact(PlayerControl.LocalPlayer, target);
+                    if (interact[4] == true)
+                    {
+                        role.SampledPlayer = target;
+                        role.MorphButton.graphic.sprite = MorphSprite;
+                        role.Cooldown = role.KillCooldown;
+                    }
+                    if (interact[0] == true)
+                    {
+                        role.Cooldown = 1f;
+                        return false;
+                    }
+                    else if (interact[1] == true)
+                    {
+                        role.Cooldown = CustomGameOptions.TempSaveCdReset;
+                        return false;
+                    }
+                    else if (interact[3] == true) return false;
                 }
                 else
                 {

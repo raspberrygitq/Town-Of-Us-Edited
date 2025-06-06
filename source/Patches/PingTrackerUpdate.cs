@@ -14,10 +14,9 @@ namespace TownOfUsEdited
             position.Alignment = AspectPosition.EdgeAlignments.Top;
             position.DistanceFromEdge = new Vector3(0f, 0.1f, 0);
             position.AdjustPosition();
-            var host = GameData.Instance.GetHost();
 
             __instance.text.text =
-                "<size=2><color=#00FF00FF><color=#EE9D01>TownOfUsEdited</color><b><color=#AA00FF>Edited</color></b> v" + TownOfUsEdited.VersionString + "</color>" + TownOfUsEdited.VersionTag + "\n" +
+                "<size=2><color=#00FF00FF><color=#EE9D01>TownOfUs</color><b><color=#AA00FF>Edited</color></b> v" + TownOfUsEdited.VersionString + "</color>" + TownOfUsEdited.VersionTag + "\n" +
                 $"Ping: {AmongUsClient.Instance.Ping}ms\n" +
                 (!MeetingHud.Instance
                     ? "<color=#00FF00FF>Modded By: <color=#FF0000>le killer</color> </color>\n" +

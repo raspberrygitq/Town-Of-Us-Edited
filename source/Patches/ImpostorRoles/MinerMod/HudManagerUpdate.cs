@@ -27,7 +27,8 @@ namespace TownOfUsEdited.ImpostorRoles.MinerMod
             role.MineButton.graphic.sprite = MineSprite;
             role.MineButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.MineButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 

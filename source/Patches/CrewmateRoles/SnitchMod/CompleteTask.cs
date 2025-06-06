@@ -32,7 +32,7 @@ namespace TownOfUsEdited.CrewmateRoles.SnitchMod
                     if (tasksLeft == CustomGameOptions.SnitchTasksRemaining)
                     {
                         role.RegenTask();
-                        if (PlayerControl.LocalPlayer.Is(RoleEnum.Snitch))
+                        if (PlayerControl.LocalPlayer == __instance)
                         {
                             Coroutines.Start(Utils.FlashCoroutine(Colors.Snitch));
                         }
@@ -54,7 +54,7 @@ namespace TownOfUsEdited.CrewmateRoles.SnitchMod
 
                 case 0:
                     role.RegenTask();
-                    if (PlayerControl.LocalPlayer.Is(RoleEnum.Snitch) && !PlayerControl.LocalPlayer.Is(Faction.Madmates))
+                    if (PlayerControl.LocalPlayer == __instance && !PlayerControl.LocalPlayer.Is(Faction.Madmates))
                     {
                         Coroutines.Start(Utils.FlashCoroutine(Color.green));
                         var impostors = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.IsImpostor());

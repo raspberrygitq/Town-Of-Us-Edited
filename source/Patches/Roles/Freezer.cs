@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -5,9 +6,9 @@ namespace TownOfUsEdited.Roles
     public class Freezer : Role
     {
         public KillButton _freezeButton;
-        public RoleEnum formerRole = new RoleEnum();
         public PlayerControl ClosestPlayer;
         public PlayerControl FrozenPlayer;
+        public TextMeshPro FreezeText;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
         public bool Enabled;

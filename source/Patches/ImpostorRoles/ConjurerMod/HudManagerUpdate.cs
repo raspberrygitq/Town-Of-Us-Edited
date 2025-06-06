@@ -41,19 +41,19 @@ namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
 
             if (role.LabelText == null)
             {
-                role.LabelText = Object.Instantiate(__instance.KillButton.buttonLabelText, __instance.KillButton.buttonLabelText.transform.parent);
-                role.LabelText.SetOutlineColor(Palette.Purple);
-                role.LabelText.transform.localPosition = new Vector3(-2.84f, -0.55f, 0f);
+                role.LabelText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.CurseButton.transform);
                 role.LabelText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.LabelText);
             }
 
             role.LabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
-                    && role.CurseButton.graphic.sprite == Kill);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             role.CurseButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.CurseButton.SetCoolDown(role.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
 
@@ -66,6 +66,8 @@ namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
 
             if (role.CurseButton.graphic.sprite == TownOfUsEdited.Curse)
             {
+                role.LabelText.text = "Curse";
+                role.LabelText.SetOutlineColor(Palette.ImpostorRed);
                 var killButton = role.CurseButton;
                 if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, killButton);
                 else if (PlayerControl.LocalPlayer.IsLover() && CustomGameOptions.ImpLoverKillTeammate) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover()).ToList());
@@ -73,6 +75,18 @@ namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
                 else if (PlayerControl.LocalPlayer.IsLover()) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Impostors)).ToList());
                 else if (!CustomGameOptions.MadmateKillEachOther) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Impostors) && !x.Is(Faction.Madmates)).ToList());
                 else Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors)).ToList());
+
+                var labelrender = role.LabelText;
+                if (role.ClosestPlayer != null)
+                {
+                    labelrender.color = Palette.EnabledColor;
+                    labelrender.material.SetFloat("_Desat", 0f);
+                }
+                else
+                {
+                    labelrender.color = Palette.DisabledClear;
+                    labelrender.material.SetFloat("_Desat", 1f);
+                }
             }
             else
             {
@@ -80,11 +94,15 @@ namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
                 {
                     role.CursedPlayer = null;
                     role.CurseButton.graphic.sprite = TownOfUsEdited.Curse;
+                    role.LabelText.text = "Curse";
+                    role.LabelText.SetOutlineColor(Palette.ImpostorRed);
                 }
                 else if (!role.CursedPlayer.Data.IsDead && !MeetingHud.Instance)
                 {
+                    role.LabelText.text = "Kill";
+                    role.LabelText.SetOutlineColor(Palette.Purple);
                     var notdead = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead).ToList();
-                    var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                    var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
                     var playerToDie = Utils.GetClosestPlayer(role.CursedPlayer, notdead);
                     if (playerToDie != null && !playerToDie.Is(Faction.Impostors) && Vector2.Distance(playerToDie.GetTruePosition(),
                     role.CursedPlayer.GetTruePosition()) < maxDistance)

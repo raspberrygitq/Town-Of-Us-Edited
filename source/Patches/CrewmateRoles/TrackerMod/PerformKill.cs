@@ -19,13 +19,12 @@ namespace TownOfUsEdited.CrewmateRoles.TrackerMod
             if (!PlayerControl.LocalPlayer.CanMove || role.ClosestPlayer == null) return false;
             if (role.Cooldown > 0) return false;
             if (!__instance.enabled) return false;
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (Vector2.Distance(role.ClosestPlayer.GetTruePosition(),
                 PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
             if (role.ClosestPlayer == null) return false;
             var target = role.ClosestPlayer;
             if (!role.ButtonUsable) return false;
-            if (PlayerControl.LocalPlayer.IsJailed()) return false;
 
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
             if (interact[4] == true)
@@ -60,7 +59,7 @@ namespace TownOfUsEdited.CrewmateRoles.TrackerMod
             }
             else if (interact[1] == true)
             {
-                role.Cooldown = CustomGameOptions.ProtectKCReset;
+                role.Cooldown = CustomGameOptions.TempSaveCdReset;
                 return false;
             }
             else if (interact[3] == true) return false;

@@ -1,8 +1,6 @@
-using System.Linq;
 using HarmonyLib;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles.Modifiers;
-using UnityEngine;
 
 namespace TownOfUsEdited
 {
@@ -35,6 +33,7 @@ namespace TownOfUsEdited
                             playerInfo._object.Is(RoleEnum.Terrorist) || playerInfo._object.Is(RoleEnum.Vulture) ||
                             playerInfo._object.Is(Faction.Coven) || playerInfo._object.Is(RoleEnum.Infectious) ||
                             playerInfo._object.Is(RoleEnum.Doppelganger) || playerInfo._object.Is(Faction.Impostors) ||
+                            playerInfo._object.Is(RoleEnum.Mercenary) || playerInfo._object.Is(RoleEnum.SoulCollector) ||
                             playerInfo._object.Is(RoleEnum.Spectator) || (playerInfo._object.Is(ModifierEnum.Lover) && !Modifier.GetModifier<Lover>(playerInfo._object).OtherLover.Player.Is(Faction.Crewmates))
                         ))
                         for (var j = 0; j < playerInfo.Tasks.Count; j++)
@@ -43,6 +42,8 @@ namespace TownOfUsEdited
                             if (playerInfo.Tasks.ToArray()[j].Complete) __instance.CompletedTasks++;
                         }
                 }
+
+                if (__instance.TotalTasks == 0) __instance.TotalTasks = 1; // This results in avoiding unfair task wins by essentially defaulting to 0/1 which can never lead to a win
 
                 return false;
             }
@@ -79,7 +80,8 @@ namespace TownOfUsEdited
                            || (playerControl.Is(Faction.Impostors) && !playerControl.Is(RoleEnum.Spirit))
                            || playerControl.Is(Faction.Coven)
                            || playerControl.Is(RoleEnum.Spectator)
-                           || playerControl.Is(Faction.NeutralBenign);
+                           || playerControl.Is(Faction.NeutralBenign)
+                           || playerControl.Is(RoleEnum.SoulCollector);
 
                 // If the console is not a sabotage repair console
                 if (flag && !__instance.AllowImpostor)
@@ -91,6 +93,16 @@ namespace TownOfUsEdited
                 }
 
                 return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CompleteTask))]
+        public class CompleteTask
+        {
+            public static void Postfix(PlayerControl __instance)
+            {
+                if (__instance.Is(RoleEnum.Haunter) || !__instance.Is(Faction.Crewmates) ||
+                    (__instance.Is(ModifierEnum.Lover) && !Modifier.GetModifier<Lover>(__instance).OtherLover.Player.Is(Faction.Crewmates))) GameData.Instance.CompletedTasks--;
             }
         }
     }

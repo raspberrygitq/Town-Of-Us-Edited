@@ -22,16 +22,23 @@ namespace TownOfUsEdited.Modifiers.LoversMod
                 if (prosecutor.ProsecuteThisMeeting) return true;
             }
             var otherLover = Modifier.GetModifier<Lover>(__instance).OtherLover.Player;
-            if (otherLover.Data.IsDead) return true;
+            if (otherLover.Data.IsDead && (!otherLover.Is(RoleEnum.Astral) || !Role.GetRole<Astral>(otherLover).Enabled)) return true;
+            bool isAstralDeath = __instance.Is(RoleEnum.Astral) && Role.GetRole<Astral>(__instance).Enabled;
 
             if (reason == DeathReason.Exile)
             {
                 KillButtonTarget.DontRevive = __instance.PlayerId;
                 if (!otherLover.Is(RoleEnum.Pestilence)) otherLover.Exiled();
             }
-            else if (AmongUsClient.Instance.AmHost && !otherLover.Is(RoleEnum.Pestilence))
+            else if (!otherLover.Is(RoleEnum.Pestilence) && !isAstralDeath)
             {
-                Utils.RpcMurderPlayer(otherLover, otherLover);
+                if (otherLover.Is(RoleEnum.Astral) && Role.GetRole<Astral>(otherLover).Enabled)
+                {
+                    var astralRole = Role.GetRole<Astral>(otherLover);
+                    Utils.MurderPlayer(otherLover, astralRole.AstralBody, false);
+                    System.Console.WriteLine("Astral death (lovers)");
+                }
+                else Utils.MurderPlayer(otherLover, otherLover, false);
                 var deadBody = new DeadPlayer
                 {
                     PlayerId = otherLover.PlayerId,

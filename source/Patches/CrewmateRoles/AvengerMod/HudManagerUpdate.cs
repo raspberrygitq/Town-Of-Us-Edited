@@ -3,6 +3,7 @@ using HarmonyLib;
 using System.Linq;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -38,6 +39,9 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
                 role.AvengeButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.AvengeButton.graphic.enabled = true;
                 role.AvengeButton.gameObject.SetActive(false);
+                role.AvengeText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.AvengeButton.transform);
+                role.AvengeText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.AvengeText);
             }
 
             role.AvengeButton.graphic.sprite = TownOfUsEdited.Avenge;
@@ -45,44 +49,32 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
 
             role.AvengeButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && !role.Avenging);
+
+            role.AvengeText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
+                    && !role.Avenging);
+
+            role.AvengeText.text = "Avenge";
+            role.AvengeText.SetOutlineColor(Colors.Avenger);
 
             var killButton = __instance.KillButton;
 
             __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
-            __instance.KillButton.buttonLabelText.text = "Avenge";
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             var renderer = killButton.graphic;
             var buttontextrender = killButton.buttonLabelText;
-            if (role.killer != null && !role.killer.Data.IsDead)
+            if (role.killer != null)
             {
                 var killer = PlayerControl.AllPlayerControls.ToArray().Where(x => x.PlayerId == role.killer.PlayerId).ToList();
                 Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, killer);
-                if (role.ClosestPlayer != null && role.ClosestPlayer == role.killer)
-                {
-                    buttontextrender.color = Palette.EnabledColor;
-                    buttontextrender.material.SetFloat("_Desat", 0f);
-                    renderer.color = Palette.EnabledColor;
-                    renderer.material.SetFloat("_Desat", 0f);
-                }
-                else
-                {
-                    buttontextrender.color = Palette.DisabledClear;
-                    buttontextrender.material.SetFloat("_Desat", 1f);
-                    renderer.color = Palette.DisabledClear;
-                    renderer.material.SetFloat("_Desat", 1f);
-                }
-            }
-
-            if (role.killer == null)
-            {
-                buttontextrender.color = Palette.DisabledClear;
-                buttontextrender.material.SetFloat("_Desat", 1f);
-                renderer.color = Palette.DisabledClear;
-                renderer.material.SetFloat("_Desat", 1f);
             }
 
             if (PlayerControl.LocalPlayer.Data.IsDead && role.Avenging)
@@ -91,7 +83,7 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
                 role.killer = null;
             }
 
-            if (role.Avenging && role.killer.Data.IsDead)
+            if (role.Avenging && (role.killer.Data.IsDead || role.killer.Data.Disconnected))
             {
                 role.Avenging = false;
                 role.killer = null;
@@ -106,7 +98,7 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;
             var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             var flag = (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !data.IsDead) &&
                        (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                        PlayerControl.LocalPlayer.CanMove;

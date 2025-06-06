@@ -18,19 +18,11 @@ namespace TownOfUsEdited.Patches.CovenRoles.CovenLeaderMod
 
             if (__instance == role.RecruitButton)
             {
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
-
                 if (role.KillCooldown > 0)
                 return false;
 
                 if (role.ClosestPlayer == null)
                 return false;
-
-                if (role.ClosestPlayer.IsGuarded2())
-                {
-                    role.KillCooldown = CustomGameOptions.GuardKCReset;
-                    return false; 
-                }
 
                 role.Recruit(role.ClosestPlayer);
             }

@@ -1,14 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
 using Reactor.Utilities.Extensions;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
-using TownOfUsEdited.Modifiers.UnderdogMod;
 
 namespace TownOfUsEdited.Roles
 {
@@ -24,6 +20,7 @@ namespace TownOfUsEdited.Roles
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
             Alignment = Alignment.ImpostorSupport;
+            Cooldown = CustomGameOptions.ConvertCD;
         }
 
         public DeadBody CurrentTarget;
@@ -38,6 +35,19 @@ namespace TownOfUsEdited.Roles
                 ExtraButtons.Clear();
                 ExtraButtons.Add(value);
             }
+        }
+        public float Cooldown;
+        public bool coolingDown => Cooldown > 0f;
+        public int ReviveCount = 0;
+        public float ConvertTimer()
+        {
+            if (!coolingDown) return 0f;
+            else if (!PlayerControl.LocalPlayer.inVent)
+            {
+                Cooldown -= Time.deltaTime;
+                return Cooldown;
+            }
+            else return Cooldown;
         }
         public void ConvertAbility(DeadBody target)
         {
@@ -56,32 +66,80 @@ namespace TownOfUsEdited.Roles
             Utils.Rpc(CustomRPC.ConverterRevive, PlayerControl.LocalPlayer.PlayerId, target.ParentId);
 
             // Set the last ability use time
-            if (PlayerControl.LocalPlayer.Is(ModifierEnum.Underdog))
+            Cooldown = CustomGameOptions.ConvertCD + ReviveCount * 5f;
+        }
+
+        public static void StopDragging(byte playerId)
+        {
+            foreach (var role in Role.GetRoles(RoleEnum.Undertaker))
             {
-                var lowerKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - CustomGameOptions.UnderdogKillBonus;
-                var normalKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay;
-                var upperKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.UnderdogKillBonus;
-                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = PerformKill.LastImp() ? lowerKC : (PerformKill.IncreasedKC() ? normalKC : upperKC);
+                var undertaker = (Undertaker)role;
+                if (undertaker.CurrentlyDragging != null && undertaker.CurrentlyDragging.ParentId == playerId)
+                {
+                    Vector3 position = undertaker.Player.transform.position;
+
+                    if (Patches.SubmergedCompatibility.isSubmerged())
+                    {
+                        if (position.y > -7f)
+                        {
+                            position.z = 0.0208f;
+                        }
+                        else
+                        {
+                            position.z = -0.0273f;
+                        }
+                    }
+
+                    position.y -= 0.3636f;
+
+                    var body = undertaker.CurrentlyDragging;
+                    if (undertaker.Player == PlayerControl.LocalPlayer)
+                    {
+                        foreach (var body2 in undertaker.CurrentlyDragging.bodyRenderers) body2.material.SetFloat("_Outline", 0f);
+                    }
+                    undertaker.CurrentlyDragging = null;
+
+                    body.transform.position = position;
+                }
             }
-            else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Lucky))
+            foreach (var role in Role.GetRoles(RoleEnum.Doctor))
             {
-                var num = Random.RandomRange(1f, 60f);
-                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
+                var doctor = (Doctor)role;
+                if (doctor.CurrentlyDragging != null && doctor.CurrentlyDragging.ParentId == playerId)
+                {
+                    Vector3 position = doctor.Player.transform.position;
+
+                    if (Patches.SubmergedCompatibility.isSubmerged())
+                    {
+                        if (position.y > -7f)
+                        {
+                            position.z = 0.0208f;
+                        }
+                        else
+                        {
+                            position.z = -0.0273f;
+                        }
+                    }
+
+                    position.y -= 0.3636f;
+
+                    var body = doctor.CurrentlyDragging;
+                    if (doctor.Player == PlayerControl.LocalPlayer)
+                    {
+                        foreach (var body2 in doctor.CurrentlyDragging.bodyRenderers) body2.material.SetFloat("_Outline", 0f);
+                    }
+                    doctor.CurrentlyDragging = null;
+
+                    body.transform.position = position;
+                }
             }
-            else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Bloodlust))
-            {
-                var modifier = Modifier.GetModifier<Bloodlust>(PlayerControl.LocalPlayer);
-                var num = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown / 2;
-                if (modifier.KilledThisRound >= 2) Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
-                else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
-            }
-            else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
         }
 
         public static void Revive(DeadBody target)
         {
             var playerId = target.ParentId;
             var player = Utils.PlayerById(playerId);
+            StopDragging(playerId);
             var position = target.TruePosition;
 
             if (target.IsDouble())
@@ -109,14 +167,15 @@ namespace TownOfUsEdited.Roles
             foreach (var poisoner in Role.GetRoles(RoleEnum.Poisoner))
             {
                 var poisonerRole = (Poisoner)poisoner;
-                if (poisonerRole.PoisonedPlayer == player) poisonerRole.PoisonedPlayer = poisonerRole.Player;
+                if (poisonerRole.PoisonedPlayer == player) poisonerRole.PoisonedPlayer = null;
             }
 
             player.Revive();
             Murder.KilledPlayers.Remove(
                 Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == target.ParentId));
             revived.Add(player);
-            player.NetTransform.SnapTo(new Vector2(position.x, position.y + 0.3636f));
+            var usedPosition = new Vector2(position.x, position.y + 0.3636f);
+            player.transform.position = new Vector2(usedPosition.x, usedPosition.y);
             RoleManager.Instance.SetRole(player, RoleTypes.Crewmate);
 
             if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(1);

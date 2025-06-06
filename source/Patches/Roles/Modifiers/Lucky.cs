@@ -5,7 +5,7 @@ namespace TownOfUsEdited.Roles.Modifiers
         public Lucky(PlayerControl player) : base(player)
         {
             Name = "Lucky";
-            TaskText = () => "Your Cooldown is Random";
+            TaskText = () => "Your Kill Cooldown is Random";
             Color = Patches.Colors.Impostor;
             ModifierType = ModifierEnum.Lucky;
         }

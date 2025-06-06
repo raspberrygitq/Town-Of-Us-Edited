@@ -3,7 +3,6 @@ using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Modifiers.AssassinMod;
 using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
@@ -12,10 +11,10 @@ using TownOfUsEdited.NeutralRoles.DoomsayerMod;
 using TownOfUsEdited.CrewmateRoles.SwapperMod;
 using TownOfUsEdited.Patches;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
-using Assassin2 = TownOfUsEdited.Roles.Assassin;
-using TownOfUsEdited.Roles.AssassinMod;
 using TownOfUsEdited.CovenRoles.RitualistMod;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using System.Collections.Generic;
+using Reactor.Utilities.Extensions;
 
 namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
 {
@@ -75,12 +74,6 @@ namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
                     ShowHideButtons.HideButtons(assassin);
                 }
 
-                if (player.Is(RoleEnum.Assassin))
-                {
-                    var assassin = Role.GetRole<Assassin2>(PlayerControl.LocalPlayer);
-                    ShowHideButtonsAssassin.HideButtons(assassin);
-                }
-
                 if (player.Is(RoleEnum.Ritualist))
                 {
                     var ritualist = Role.GetRole<Ritualist>(PlayerControl.LocalPlayer);
@@ -136,19 +129,33 @@ namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
             }
 
             var blackmailers = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Blackmailer && x.Player != null).Cast<Blackmailer>();
+            var blackmailed = new List<PlayerControl>();
             foreach (var role in blackmailers)
             {
-                if (role.Blackmailed != null && voteArea.TargetPlayerId == role.Blackmailed.PlayerId)
+                if (role.Blackmailed != null && !blackmailed.Contains(role.Blackmailed))
                 {
-                    if (BlackmailMeetingUpdate.PrevXMark != null && BlackmailMeetingUpdate.PrevOverlay != null)
+                    blackmailed.Add(role.Blackmailed);
+                    if (voteArea.TargetPlayerId == role.Blackmailed.PlayerId)
                     {
-                        voteArea.XMark.sprite = BlackmailMeetingUpdate.PrevXMark;
-                        voteArea.Overlay.sprite = BlackmailMeetingUpdate.PrevOverlay;
-                        voteArea.XMark.transform.localPosition = new Vector3(
-                            voteArea.XMark.transform.localPosition.x - BlackmailMeetingUpdate.LetterXOffset,
-                            voteArea.XMark.transform.localPosition.y - BlackmailMeetingUpdate.LetterYOffset,
-                            voteArea.XMark.transform.localPosition.z);
+                        if (BlackmailMeetingUpdate.PrevXMark != null && BlackmailMeetingUpdate.PrevOverlay != null)
+                        {
+                            voteArea.XMark.sprite = BlackmailMeetingUpdate.PrevXMark;
+                            voteArea.Overlay.sprite = BlackmailMeetingUpdate.PrevOverlay;
+                            voteArea.XMark.transform.localPosition = new Vector3(
+                                voteArea.XMark.transform.localPosition.x - BlackmailMeetingUpdate.LetterXOffset,
+                                voteArea.XMark.transform.localPosition.y - BlackmailMeetingUpdate.LetterYOffset,
+                                voteArea.XMark.transform.localPosition.z);
+                        }
                     }
+                }
+            }
+
+            var jailors = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Jailor && x.Player != null).Cast<Jailor>();
+            foreach (var role in jailors)
+            {
+                if (role.JailedPlayer == player || role.Player == player)
+                {
+                    role.JailCell.Destroy();
                 }
             }
 
@@ -156,12 +163,6 @@ namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
             {
                 var vigi = Role.GetRole<Vigilante>(PlayerControl.LocalPlayer);
                 ShowHideButtonsVigi.HideTarget(vigi, voteArea.TargetPlayerId);
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Assassin) && !PlayerControl.LocalPlayer.Data.IsDead)
-            {
-                var assassin = Role.GetRole<Assassin2>(PlayerControl.LocalPlayer);
-                ShowHideButtonsAssassin.HideTarget(assassin, voteArea.TargetPlayerId);
             }
 
             if (PlayerControl.LocalPlayer.Is(AbilityEnum.Assassin) && !PlayerControl.LocalPlayer.Data.IsDead)

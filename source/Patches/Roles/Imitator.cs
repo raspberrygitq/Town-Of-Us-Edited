@@ -17,8 +17,8 @@ namespace TownOfUsEdited.Roles
         public Imitator(PlayerControl player) : base(player)
         {
             Name = "Imitator";
-            ImpostorText = () => "Use The True-Hearted Dead To Benefit The Crew";
-            TaskText = () => "Use dead roles to benefit the crew";
+            ImpostorText = () => "Use The True-Hearted Dead To Benefit <color=#00FFFF>Crewmates</color>";
+            TaskText = () => "Use dead roles to benefit <color=#00FFFF>Crewmates</color>";
             Color = Patches.Colors.Imitator;
             RoleType = RoleEnum.Imitator;
             Alignment = Alignment.CrewmateSupport;

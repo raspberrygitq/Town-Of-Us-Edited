@@ -1,7 +1,5 @@
-using System.Collections;
 using HarmonyLib;
 using TownOfUsEdited.Roles;
-using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
 {

@@ -1,5 +1,6 @@
 using Reactor.Utilities;
 using System;
+using TownOfUsEdited.CrewmateRoles.TimeLordMod;
 using TownOfUsEdited.Patches;
 using UnityEngine;
 
@@ -52,6 +53,8 @@ namespace TownOfUsEdited.Roles
             escapist.MyPhysics.ResetMoveState();
             var escapistRole = Role.GetRole<Escapist>(escapist);
             if (escapistRole.EscapePoint == Vector3.zero) return;
+            var position2 = PlayerControl.LocalPlayer.transform.position;
+            TimeLordPatches.Positions.Add((Vector2.zero, Time.time, "Teleport", position2, 0, null));
             var position = escapistRole.EscapePoint;
             escapist.NetTransform.SnapTo(new Vector2(position.x, position.y));
 

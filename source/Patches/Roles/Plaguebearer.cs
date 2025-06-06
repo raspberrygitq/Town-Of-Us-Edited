@@ -42,7 +42,7 @@ namespace TownOfUsEdited.Roles
                 Utils.Rpc(CustomRPC.PlaguebearerWin, Player.PlayerId);
                 Wins();
                 Utils.EndGame();
-                System.Console.WriteLine("GAME OVER REASON: Plaguebearer Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Plaguebearer Win");
                 return;
             }
 

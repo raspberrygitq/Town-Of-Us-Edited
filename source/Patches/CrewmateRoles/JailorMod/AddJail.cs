@@ -1,9 +1,9 @@
 using HarmonyLib;
+using Reactor.Utilities.Extensions;
 using TMPro;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using UnityEngine.UI;
 
 namespace TownOfUsEdited.CrewmateRoles.JailorMod
 {
@@ -11,40 +11,46 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
     {
         public static void UpdateButton(Jailor role, MeetingHud __instance)
         {
-            if (!role.CanJail) return;
-            if (role.JailedPlayer == null || role.JailedPlayer.Data.IsDead || role.JailedPlayer.Data.Disconnected) return;
             var skip = __instance.SkipVoteButton;
-            role.Jailed.gameObject.SetActive(skip.gameObject.active);
+            role.Jailed.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !skip.voteComplete && !role.Player.IsJailed() && role.CanJail
+            && role.JailedPlayer != null);
             role.Jailed.voteComplete = skip.voteComplete;
             role.Jailed.GetComponent<SpriteRenderer>().enabled = skip.GetComponent<SpriteRenderer>().enabled;
             role.Jailed.GetComponent<SpriteRenderer>().color = Patches.Colors.Jailor;
             role.Jailed.GetComponentsInChildren<TextMeshPro>()[0].text = "Execute";
         }
 
-
-        [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
-        public class MeetingHudStart
+        public class AddJailButtons
         {
-            public static void GenButton(Jailor role, MeetingHud __instance)
+            public static void AddJailorButtons(MeetingHud __instance)
             {
-                if (role.CanJail && role.JailedPlayer != null && !role.JailedPlayer.Data.IsDead && !role.JailedPlayer.Data.Disconnected)
+                foreach (var role in Role.GetRoles(RoleEnum.Jailor))
                 {
-                    var skip = __instance.SkipVoteButton;
-                    role.Jailed = Object.Instantiate(skip, skip.transform.parent);
-                    role.Jailed.Parent = __instance;
-                    role.Jailed.SetTargetPlayerId(251);
-                    role.Jailed.transform.localPosition = skip.transform.localPosition +
-                                                        new Vector3(0f, -0.17f, 0f);
-                    skip.transform.localPosition += new Vector3(0f, 0.20f, 0f);
-                    UpdateButton(role, __instance);
+                    var jailor = (Jailor)role;
+                    jailor.JailCell.Destroy();
+                    if (jailor.JailedPlayer != null && !jailor.JailedPlayer.Data.IsDead && !jailor.JailedPlayer.Data.Disconnected
+                    && !jailor.Player.Data.IsDead && !jailor.Player.Data.Disconnected)
+                    {
+                        foreach (var voteArea in __instance.playerStates)
+                        {
+                            if (jailor.JailedPlayer.PlayerId == voteArea.TargetPlayerId)
+                            {
+                                GenCell(jailor, voteArea);
+                            }
+                        }
+                        if (jailor.Player == PlayerControl.LocalPlayer && jailor.CanJail && !jailor.Player.IsJailed())
+                        {
+                            var skip = __instance.SkipVoteButton;
+                            jailor.Jailed = Object.Instantiate(skip, skip.transform.parent);
+                            jailor.Jailed.Parent = __instance;
+                            jailor.Jailed.SetTargetPlayerId(251);
+                            jailor.Jailed.transform.localPosition = skip.transform.localPosition +
+                                                                new Vector3(0f, -0.17f, 0f);
+                            skip.transform.localPosition += new Vector3(0f, 0.20f, 0f);
+                            UpdateButton(jailor, __instance);
+                        }
+                    }
                 }
-            }
-
-            public static void Postfix(MeetingHud __instance)
-            {
-                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Jailor)) return;
-                var jailRole = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
-                GenButton(jailRole, __instance);
             }
         }
 
@@ -55,6 +61,7 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             {
                 if (!PlayerControl.LocalPlayer.Is(RoleEnum.Jailor)) return;
                 var jailRole = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
+                if (jailRole.Jailed == null) return;
                 UpdateButton(jailRole, __instance);
             }
         }
@@ -66,7 +73,8 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             {
                 if (!PlayerControl.LocalPlayer.Is(RoleEnum.Jailor)) return;
                 var jailRole = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
-                jailRole.Jailed.ClearButtons();
+                if (jailRole.Jailed == null) return;
+                jailRole.Jailed.gameObject.SetActive(false);
             }
         }
 
@@ -77,6 +85,7 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             {
                 if (!PlayerControl.LocalPlayer.Is(RoleEnum.Jailor)) return;
                 var jailRole = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
+                if (jailRole.Jailed == null) return;
                 UpdateButton(jailRole, __instance);
             }
         }
@@ -86,15 +95,11 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
         {
             public static void Postfix(MeetingHud __instance)
             {
-                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Jailor)) return;
-                var jailRole = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
-                if (jailRole.JailedAssassin == true)
+                foreach (var role in Role.GetRoles(RoleEnum.Jailor))
                 {
-                    new Assassin(jailRole.JailedPlayer);
-                    Utils.Rpc(CustomRPC.SetJailorAssassin, jailRole.JailedPlayer.PlayerId);
+                    var jailor = (Jailor)role;
+                    jailor.JailedPlayer = null;
                 }
-                jailRole.JailedPlayer = null;
-                Utils.Rpc(CustomRPC.UpdateJail, PlayerControl.LocalPlayer.PlayerId);
             }
         }
 
@@ -105,23 +110,43 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             {
                 if (!PlayerControl.LocalPlayer.Is(RoleEnum.Jailor)) return;
                 var jailRole = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
+                if (!jailRole.CanJail) return;
+                if (jailRole.Jailed == null) return;
                 switch (__instance.state)
                 {
                     case MeetingHud.VoteStates.Discussion:
                         if (__instance.discussionTimer < GameOptionsManager.Instance.currentNormalGameOptions.DiscussionTime)
                         {
-                            if (!jailRole.CanJail) return;
                             jailRole.Jailed.SetDisabled();
                             break;
                         }
 
-                        if (!jailRole.CanJail) return;
                         jailRole.Jailed.SetEnabled();
                         break;
                 }
 
                 UpdateButton(jailRole, __instance);
             }
+        }
+        public static Sprite CellSprite => TownOfUsEdited.InJailSprite;
+
+        public static void GenCell(Jailor role, PlayerVoteArea voteArea)
+        {
+            var confirmButton = voteArea.Buttons.transform.GetChild(0).gameObject;
+            var parent = confirmButton.transform.parent.parent;
+
+            var jailCell = Object.Instantiate(confirmButton, voteArea.transform);
+            var cellRenderer = jailCell.GetComponent<SpriteRenderer>();
+            var passive = jailCell.GetComponent<PassiveButton>();
+            cellRenderer.sprite = CellSprite;
+            jailCell.transform.localPosition = new Vector3(-0.95f, 0f, -2f);
+            jailCell.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+            jailCell.layer = 5;
+            jailCell.transform.parent = parent;
+            jailCell.transform.GetChild(0).gameObject.Destroy();
+
+            passive.OnClick = new Button.ButtonClickedEvent();
+            role.JailCell = jailCell;
         }
     }
 }

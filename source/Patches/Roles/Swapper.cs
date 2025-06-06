@@ -14,11 +14,11 @@ namespace TownOfUsEdited.Roles
         {
             Name = "Swapper";
             ImpostorText = () => "Swap The Votes Of Two People";
-            TaskText = () => "Swap two people's votes to save the Crew!";
+            TaskText = () => "Swap two people's votes to save <color=#00FFFF>Crewmates</color>!";
             Color = Patches.Colors.Swapper;
             RoleType = RoleEnum.Swapper;
             Faction = Faction.Crewmates;
-            Alignment = Alignment.CrewmateSupport;
+            Alignment = Alignment.CrewmatePower;
             AddToRoleHistory(RoleType);
         }
     }

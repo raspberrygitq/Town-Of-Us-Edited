@@ -1,13 +1,15 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using TownOfUsEdited.Extensions;
+using Reactor.Utilities;
+using TMPro;
 
 namespace TownOfUsEdited.Roles
 {
     public class Maul : Role
     {
         private KillButton _rampageButton;
+        public TextMeshPro RampageText;
         public bool Enabled;
         public bool WerewolfWins;
         public PlayerControl ClosestPlayer;
@@ -55,7 +57,7 @@ namespace TownOfUsEdited.Roles
                 Utils.Rpc(CustomRPC.WerewolfWin, Player.PlayerId);
                 Wins();
                 Utils.EndGame();
-                System.Console.WriteLine("GAME OVER REASON: Maul Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Maul Win");
                 return;
             }
 

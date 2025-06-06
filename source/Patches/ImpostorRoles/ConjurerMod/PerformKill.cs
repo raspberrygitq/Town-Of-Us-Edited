@@ -28,8 +28,6 @@ namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
                 {
                     if (__instance.isCoolingDown) return false;
                     if (role.ClosestPlayer == null) return false;
-                    var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-                    if (!abilityUsed) return false;
 
                     var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
                     if (interact[4] == true)
@@ -45,7 +43,7 @@ namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
                     if (__instance.isCoolingDown) return false;
                     if (role.CursedPlayer == null) return false;
                     var notdead = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead).ToList();
-                    var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                    var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
                     var playerToDie = Utils.GetClosestPlayer(role.CursedPlayer, notdead);
                     if (playerToDie == null || playerToDie.Is(Faction.Impostors)) return false;
                     if (Vector2.Distance(playerToDie.GetTruePosition(),

@@ -6,7 +6,6 @@ using TownOfUsEdited.Patches;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.CrewmateRoles.SwapperMod;
 using TownOfUsEdited.CrewmateRoles.VigilanteMod;
@@ -17,8 +16,6 @@ using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using Reactor.Utilities.Extensions;
 using TownOfUsEdited.Modifiers.AssassinMod;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
-using Assassin2 = TownOfUsEdited.Roles.Assassin;
-using TownOfUsEdited.Roles.AssassinMod;
 
 namespace TownOfUsEdited.ImpostorRoles.WitchMod
 {
@@ -40,7 +37,7 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
                     var cursed = role.CursedList;
                     foreach (var playerid in cursed)
                     {
-                        var exiled = __instance.initData.networkedPlayer?.Object;
+                        var exiled = __instance.initData?.networkedPlayer?.Object;
                         var player = Utils.PlayerById(playerid);
                         if (exiled == role.Player) return;
                         if (!player.Data.IsDead && !player.Is(RoleEnum.Pestilence))
@@ -53,10 +50,10 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
             }
         }
 
-        [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+        [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
         public static class AirshipExileController_WrapUpAndSpawn
         {
-            public static void Postfix(AirshipExileController __instance) => ClearList.ExileControllerPostfix(__instance);
+            public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => ClearList.ExileControllerPostfix(__instance.__4__this);
         }
 
         [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
@@ -127,12 +124,6 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
                 {
                     var retributionist = Role.GetRole<Vigilante>(PlayerControl.LocalPlayer);
                     ShowHideButtonsVigi.HideButtonsVigi(retributionist);
-                }
-
-                if (player.Is(RoleEnum.Assassin))
-                {
-                    var assassin = Role.GetRole<Assassin2>(PlayerControl.LocalPlayer);
-                    ShowHideButtonsAssassin.HideButtons(assassin);
                 }
 
                 if (player.Is(AbilityEnum.Assassin))

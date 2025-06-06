@@ -57,7 +57,7 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
                 }
                 else if (interact[1] == true)
                 {
-                    Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.ProtectKCReset + 0.01f;
+                    Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.TempSaveCdReset + 0.01f;
                     return false;
                 }
                 else if (interact[3] == true) return false;

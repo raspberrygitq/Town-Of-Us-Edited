@@ -9,6 +9,7 @@ namespace TownOfUsEdited.Roles
         public KillButton _manipulateButton;
         public PlayerControl ClosestPlayer;
         public PlayerControl ManipulatedPlayer;
+        public TextMeshPro ManipulateText;
         public bool IsManipulating = false;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;

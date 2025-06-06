@@ -14,7 +14,6 @@ namespace TownOfUsEdited.WerewolfRoles
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Is(Faction.Impostors)) return;
-            __instance.SabotageButton.Hide();
             __instance.KillButton.transform.localPosition = new Vector3(0f, 1f, 0f);
         }
     }

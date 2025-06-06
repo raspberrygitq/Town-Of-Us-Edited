@@ -13,6 +13,40 @@ namespace TownOfUsEdited.ImpostorRoles.DoctorMod
             var role = Role.GetRole<Doctor>(__instance);
             var body = role.CurrentlyDragging;
             if (body == null) return;
+            if (__instance == PlayerControl.LocalPlayer)
+            {
+                foreach (var doctor in Role.GetRoles(RoleEnum.Doctor))
+                {
+                    if (doctor.Player == __instance) continue;
+                    var doctorRole = (Doctor)doctor;
+                    if (body == doctorRole.CurrentlyDragging)
+                    {
+                        Vector3 position = PlayerControl.LocalPlayer.transform.position;
+
+                        if (Patches.SubmergedCompatibility.isSubmerged())
+                        {
+                            if (position.y > -7f)
+                            {
+                                position.z = 0.0208f;
+                            }
+                            else
+                            {
+                                position.z = -0.0273f;
+                            }
+                        }
+
+                        position.y -= 0.3636f;
+
+                        Utils.Rpc(CustomRPC.DoctorDrop, PlayerControl.LocalPlayer.PlayerId, position, position.z);
+
+                        foreach (var body2 in role.CurrentlyDragging.bodyRenderers) body2.material.SetFloat("_Outline", 0f);
+                        role.CurrentlyDragging = null;
+                        role.DragDropButton.graphic.sprite = TownOfUsEdited.DragSprite;
+
+                        body.transform.position = position;
+                    }
+                }
+            }
             if (__instance.Data.IsDead)
             {
                 role.CurrentlyDragging = null;

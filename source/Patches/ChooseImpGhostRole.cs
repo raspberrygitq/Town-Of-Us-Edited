@@ -15,13 +15,14 @@ namespace TownOfUsEdited.ChooseImpGhostRole
 
         public static void Postfix(ExileController __instance)
         {
-            var exiled = __instance.initData.networkedPlayer?.Object;
+            var exiled = __instance.initData?.networkedPlayer?.Object;
             PickGhostRole(exiled);
         }
 
         public static void PickGhostRole(PlayerControl exiled)
         {
             if (CustomGameOptions.GameMode != GameMode.Classic) return;
+            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return;
             if (!AmongUsClient.Instance.AmHost) return;
             var random = new System.Random();
             if (RpcHandling.Check(CustomGameOptions.SpiritOn) && SetSpirit.WillBeSpirit == null && !ranlist && !GhostRoles.Contains("Spirit")) GhostRoles.Add("Spirit");

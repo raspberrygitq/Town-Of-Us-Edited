@@ -24,9 +24,10 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
 
             protectButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             protectButton.SetCoolDown(role.StartTimer(), 10f);
-            if (role.UsedAbility) return;
+            if (role.ShieldedPlayer != null) return;
             Utils.SetTarget(ref role.ClosestPlayer, protectButton);
         }
     }

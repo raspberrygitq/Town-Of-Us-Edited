@@ -26,6 +26,7 @@ namespace TownOfUsEdited.ImpostorRoles.SpiritMod
                     spirit.Player.myRend().color = Color.white;
                     spirit.Player.gameObject.layer = LayerMask.NameToLayer("Ghost");
                     spirit.Faded = false;
+                    spirit.Player.Collider.enabled = false;
                     spirit.Player.MyPhysics.ResetMoveState();
                 }
             }

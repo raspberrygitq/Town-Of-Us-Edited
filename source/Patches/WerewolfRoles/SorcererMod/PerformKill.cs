@@ -40,7 +40,7 @@ namespace TownOfUsEdited.WerewolfRoles.SorcererMod
             if (__instance == role.ReviveButton)
             {
                 if (!__instance.enabled) return false;
-                var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
                 if (role == null)
                 return false;
                 if (role.CurrentTarget == null)

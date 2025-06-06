@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using AmongUs.GameOptions;
 using TownOfUsEdited.Patches;
+using TownOfUsEdited.Patches.ImpostorRoles;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -72,6 +73,7 @@ namespace TownOfUsEdited.Roles
             var oldRole = Role.GetRole(newwolf);
             var killsList = (oldRole.CorrectKills, oldRole.IncorrectKills, oldRole.CorrectAssassinKills, oldRole.IncorrectAssassinKills);
             Role.RoleDictionary.Remove(newwolf.PlayerId);
+            HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
 
             if (oldRole.ExtraButtons.Any())
             {
@@ -80,6 +82,17 @@ namespace TownOfUsEdited.Roles
                     if (PlayerControl.LocalPlayer == newwolf)
                     {
                         button.gameObject.SetActive(false);
+                    }
+                }
+            }
+
+            if (oldRole.ButtonLabels.Any())
+            {
+                foreach (var label in oldRole.ButtonLabels)
+                {
+                    if (PlayerControl.LocalPlayer == newwolf)
+                    {
+                        label.gameObject.SetActive(false);
                     }
                 }
             }
@@ -103,7 +116,7 @@ namespace TownOfUsEdited.Roles
                 role.RegenTask();
             }
 
-            PlayerControl_Die.Postfix();
+            PlayerControl_Die.CheckEnd();
         }
     }
 }

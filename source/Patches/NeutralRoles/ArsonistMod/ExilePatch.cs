@@ -7,10 +7,10 @@ using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited.NeutralRoles.ArsonistMod
 {
-    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+    [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
     public static class AirshipExileController_WrapUpAndSpawn
     {
-        public static void Postfix(AirshipExileController __instance) => SetLastKillerBool.ExileControllerPostfix(__instance);
+        public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => SetLastKillerBool.ExileControllerPostfix(__instance.__4__this);
     }
 
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
@@ -19,7 +19,7 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
 
         public static void ExileControllerPostfix(ExileController __instance)
         {
-            var exiled = __instance.initData.networkedPlayer?.Object;
+            var exiled = __instance.initData?.networkedPlayer?.Object;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)) return;
             var alives = PlayerControl.AllPlayerControls.ToArray()
                     .Where(x => !x.Data.IsDead && !x.Data.Disconnected && !x == PlayerControl.LocalPlayer).ToList();

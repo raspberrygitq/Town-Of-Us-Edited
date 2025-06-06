@@ -22,8 +22,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.DoppelgangerMod
             
             if (role.ClosestPlayer == null)
                 return false;
-
-            if (PlayerControl.LocalPlayer.IsJailed()) return false;
             
             if (__instance == killbutton)
             {
@@ -34,18 +32,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.DoppelgangerMod
                 {
                     Utils.Interact(role.ClosestPlayer, PlayerControl.LocalPlayer, true);
                     return false;
-                }
-                else if (role.ClosestPlayer.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(role.ClosestPlayer).UsingPotion
-                && Role.GetRole<PotionMaster>(role.ClosestPlayer).Potion == "Shield")
-                {
-                    role.Cooldown = CustomGameOptions.PotionKCDReset;
-                    return false;
-                }
-
-                if (role.ClosestPlayer.IsGuarded2())
-                {
-                    role.Cooldown = CustomGameOptions.GuardKCReset;
-                    return false; 
                 }
 
                 // Kill the closest player

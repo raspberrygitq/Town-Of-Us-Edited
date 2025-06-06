@@ -22,19 +22,11 @@ namespace TownOfUsEdited.Patches.CovenRoles.HexMasterMod
 
             if (__instance == killbutton)
             {
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
-
                 if (role.ClosestPlayer == null)
                 return false;
                 
                 if (role.Cooldown > 0)
                 return false;
-
-                if (role.ClosestPlayer.IsGuarded2())
-                {
-                    role.Cooldown = CustomGameOptions.GuardKCReset;
-                    return false; 
-                }
 
                 // Hex the closest player
                 role.Hex(role.ClosestPlayer);
@@ -42,8 +34,6 @@ namespace TownOfUsEdited.Patches.CovenRoles.HexMasterMod
 
             else if (__instance == role.HexBombButton)
             {
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
-
                 if (role.Cooldown > 0)
                 return false;
 

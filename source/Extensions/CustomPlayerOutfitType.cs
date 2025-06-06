@@ -6,6 +6,6 @@
         Morph,
         Camouflage,
         Swooper,
-        PlayerNameOnly,
+        PlayerNameOnly
     }
 }

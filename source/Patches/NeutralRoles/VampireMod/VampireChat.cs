@@ -1,49 +1,239 @@
-using HarmonyLib;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+using AmongUs.Data;
+using AmongUs.QuickChat;
+using Assets.CoreScripts;
+using HarmonyLib;
+using Reactor.Utilities;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-namespace TownOfUsEdited.Patches.NeutralRoles.VampireChat
+namespace TownOfUsEdited.Patches.NeutralRoles.VampireMod
 {
     public class VampireChat
     {
-        public static bool vampchat = false;
-        [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
-        public class EnableChat
+        public static ChatController VampireChatButton;
+        public static Transform Background;
+        public static List<(PlayerControl, string, bool)> Messages = new List<(PlayerControl, string, bool)>();
+        public static void UpdateVampireChat()
         {
-            public static void Postfix(HudManager __instance)
+            if (VampireChatButton && PlayerControl.LocalPlayer.Data.IsDead)
             {
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Vampire) && !__instance.Chat.isActiveAndEnabled)
-                    __instance.Chat.SetVisible(true);
+                if (VampireChatButton.IsOpenOrOpening) ControllerManager.Instance.CloseOverlayMenu(VampireChatButton.name);
+                Object.Destroy(VampireChatButton.gameObject);
+                Object.Destroy(Background.gameObject);
             }
+            if (PlayerControl.LocalPlayer.Data.IsDead) return;
+            if (!CustomGameOptions.VampireChat) return;
+            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Vampire))
+            {
+                if (VampireChatButton)
+                {
+                    if (VampireChatButton.IsOpenOrOpening) ControllerManager.Instance.CloseOverlayMenu(VampireChatButton.name);
+                    Object.Destroy(VampireChatButton.gameObject);
+                    Object.Destroy(Background.gameObject);
+                }
+                return;
+            }
+            if (CustomGameOptions.GameMode == GameMode.Chaos) return;
+            if (AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) return;
+            List<PlayerControl> VampTeam = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(RoleEnum.Vampire) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
+            if (VampTeam.Count < 2)
+            {
+                if (VampireChatButton)
+                {
+                    if (VampireChatButton.IsOpenOrOpening) ControllerManager.Instance.CloseOverlayMenu(VampireChatButton.name);
+                    Object.Destroy(VampireChatButton.gameObject);
+                    Object.Destroy(Background.gameObject);
+                }
+                return;
+            }
+            if (!VampireChatButton)
+            {
+                VampireChatButton = Object.Instantiate(HudManager.Instance.Chat, HudManager.Instance.Chat.transform.parent);
+                VampireChatButton.name = "VampChat";
+                foreach (var bubble in VampireChatButton.chatBubblePool.activeChildren)
+                {
+                    Object.Destroy(bubble.gameObject);
+                }
+                VampireChatButton.chatBubblePool.activeChildren.Clear();
+                VampireChatButton.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().color = Colors.Vampire;
+                VampireChatButton.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().color = Colors.Vampire;
+                VampireChatButton.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().color = Colors.Vampire;
+                var container = VampireChatButton.chatScreen.transform.Find("ChatScreenContainer");
+                container.transform.FindChild("Background").GetComponent<SpriteRenderer>().color = Colors.Vampire;
+            }
+            if (!Background)
+            {
+                Background = Object.Instantiate(HudManager.Instance.SettingsButton.transform.GetChild(2), HudManager.Instance.SettingsButton.transform.GetChild(2).transform.parent);
+                Background.name = "VampireChatBackground";
+                var position2 = Background.transform.localPosition;
+                Background.transform.localPosition = new Vector3(position2.x - 1.2f, position2.y, position2.z);
+            }
+            VampireChatButton.gameObject.SetActive(true);
+            Background.gameObject.SetActive(true);
+            var position = HudManager.Instance.Chat.transform.localPosition;
+            if (!HudManager.Instance.Chat.isActiveAndEnabled)
+            {
+                VampireChatButton.transform.localPosition = position;
+                Background.gameObject.SetActive(false);
+                VampireChatButton.chatButton.transform.GetChild(3).gameObject.SetActive(true);
+                return;
+            }
+            VampireChatButton.transform.localPosition = new Vector3(position.x - 0.85f, position.y, position.z);
+            Background.gameObject.SetActive(true);
+            VampireChatButton.chatButton.transform.GetChild(3).gameObject.SetActive(false);
         }
 
-        [HarmonyPatch(typeof(ChatController), nameof(ChatController.AddChat))]
-        public class AddChat
+        [HarmonyPatch(typeof(ChatController), nameof(ChatController.Toggle))]
+        public class ToggleChat
         {
-            public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl sourcePlayer, ref string chatText)
+            public static bool Prefix(ChatController __instance)
             {
-                if (__instance != HudManager.Instance.Chat)
-                    return true;
-
-                if ((MeetingHud.Instance || LobbyBehaviour.Instance) && !chatText.ToLower().StartsWith("/vc "))
+                if (VampireChatButton == null) return true;
+                if (!VampireChatButton.isActiveAndEnabled) return true;
+                if (VampireChatButton.IsOpenOrOpening && __instance != VampireChatButton) return false;
+                if (__instance == VampireChatButton && !VampireChatButton.IsOpenOrOpening) //Open chat
                 {
-                    vampchat = false;
-                    return true;
+                    Coroutines.Start(WaitForSend(__instance));
                 }
-                
-                if (chatText.ToLower().StartsWith("/vc "))
-                {
-                    vampchat = true;
-                    chatText = $"<color=#FFFFFF>{chatText[4..]}</color>";
-                    Boolean shouldSeeMessage = (PlayerControl.LocalPlayer.Data.IsDead && Utils.ShowDeadBodies == true) || PlayerControl.LocalPlayer.Is(RoleEnum.Vampire) ||
-                    sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
-                    return shouldSeeMessage;
-                }
-                else vampchat = false;
                 return true;
             }
+
+            public static IEnumerator WaitForSend(ChatController __instance)
+            {
+                yield return new WaitForSeconds(0.1f);
+                while (Messages.Count > 0)
+                {
+                    var message = Messages[0];
+                    ForceAddChat(__instance, message.Item1, message.Item2, message.Item3);
+                    Messages.Remove(message);
+                    yield return null;
+                }
+                yield break;
+            }
+
+            public static void ForceAddChat(ChatController __instance, PlayerControl srcPlayer, string chatText, bool censor)
+            {
+                NetworkedPlayerInfo data = PlayerControl.LocalPlayer.Data;
+                NetworkedPlayerInfo data2 = srcPlayer.Data;
+                if (data2 == null || data == null || (data2.IsDead && !data.IsDead))
+                {
+                    return;
+                }
+                ChatBubble pooledBubble = __instance.GetPooledBubble();
+                try
+                {
+                    pooledBubble.transform.SetParent(__instance.scroller.Inner);
+                    pooledBubble.transform.localScale = Vector3.one;
+                    bool flag = srcPlayer == PlayerControl.LocalPlayer;
+                    if (flag)
+                    {
+                        pooledBubble.SetRight();
+                    }
+                    else
+                    {
+                        pooledBubble.SetLeft();
+                    }
+                    bool didVote = MeetingHud.Instance && MeetingHud.Instance.DidVote(srcPlayer.PlayerId);
+                    pooledBubble.SetCosmetics(data2);
+                    __instance.SetChatBubbleName(pooledBubble, data2, data2.IsDead, didVote, PlayerNameColor.Get(data2), null);
+                    if (censor && DataManager.Settings.Multiplayer.CensorChat)
+                    {
+                        chatText = BlockedWords.CensorWords(chatText, false);
+                    }
+                    pooledBubble.SetText(chatText);
+                    pooledBubble.AlignChildren();
+                    __instance.AlignAllBubbles();
+                }
+                catch (Exception message)
+                {
+                    ChatController.Logger.Error(message.ToString(), null);
+                    __instance.chatBubblePool.Reclaim(pooledBubble);
+                }
+            }
         }
+
+        [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSendChat))]
+		public static class SendChat
+		{
+			public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] ref string chatText)
+			{
+				if (VampireChatButton == null) return true;
+                if (!VampireChatButton.isActiveAndEnabled) return true;
+                if (!VampireChatButton.IsOpenOrOpening) return true;
+                if (!__instance.AmOwner) return true;
+                chatText = Regex.Replace(chatText, "<.*?>", string.Empty);
+                if (string.IsNullOrWhiteSpace(chatText))
+                {
+                    return false;
+                }
+                if (DestroyableSingleton<HudManager>.Instance)
+                {
+                    VampireChatButton.AddChat(__instance, chatText, true);
+                }
+                if (chatText.IndexOf("who", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    DestroyableSingleton<UnityTelemetry>.Instance.SendWho();
+                }
+                Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, chatText, "VampChat");
+                return false;
+			}
+		}
+
+        [HarmonyPatch(typeof(ChatController), nameof(ChatController.AddChat))]
+		public static class AddChat
+		{
+			public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl srcPlayer, [HarmonyArgument(1)] string chatText, [HarmonyArgument(2)] bool censor)
+            {
+                if (VampireChatButton == null) return true;
+                if (!VampireChatButton.isActiveAndEnabled) return true;
+                if (__instance != VampireChatButton) return true;
+                if (VampireChatButton.IsOpenOrOpening) return true;
+                Messages.Add((srcPlayer, chatText, censor)); // Avoids weird SetFlipXWithoutPet error, really sketchy fix, but couldn't find any better way :sob:
+                var flag = srcPlayer == PlayerControl.LocalPlayer;
+                if (__instance.notificationRoutine == null)
+                {
+                    __instance.notificationRoutine = __instance.StartCoroutine(__instance.BounceDot());
+                }
+                if (!flag)
+                {
+                    SoundManager.Instance.PlaySound(__instance.messageSound, false, 1f, null).pitch = 0.5f + (float)srcPlayer.PlayerId / 15f;
+                    __instance.chatNotification.SetUp(srcPlayer, chatText);
+                }
+                return false;
+            }
+        }
+
+        [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSendQuickChat))]
+		public static class SendQuickChat
+		{
+			public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] QuickChatPhraseBuilderResult data)
+            {
+                if (VampireChatButton == null) return true;
+                if (!VampireChatButton.isActiveAndEnabled) return true;
+                if (!VampireChatButton.IsOpenOrOpening) return true;
+                if (!__instance.AmOwner) return true;
+                string text = data.ToChatText();
+                if (string.IsNullOrWhiteSpace(text) || data == null || !data.IsValid())
+                {
+                    return false;
+                }
+                if (DestroyableSingleton<HudManager>.Instance)
+                {
+                    VampireChatButton.AddChat(__instance, text, false);
+                }
+                if (data.ToChatText().IndexOf("who", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    DestroyableSingleton<UnityTelemetry>.Instance.SendWho();
+                }
+                Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, text, "VampChat");
+                return false;
+            }
+		}
 
         [HarmonyPatch(typeof(ChatBubble), nameof(ChatBubble.SetText))]
         public class ChatColor
@@ -51,29 +241,11 @@ namespace TownOfUsEdited.Patches.NeutralRoles.VampireChat
             public static void Postfix(ChatBubble __instance)
             {
                 if (LobbyBehaviour.Instance) return;
-                if (vampchat)
+                if ((VampireChatButton != null && VampireChatButton.isActiveAndEnabled && VampireChatButton.chatBubblePool.activeChildren.Contains(__instance)) || (__instance.TextArea.text.Contains("[Vampire Chat]") && PlayerControl.LocalPlayer.Data.IsDead))
                 {
-                    __instance.transform.FindChild("Background").GetComponent<SpriteRenderer>().color = Patches.Colors.Vampire;
-                    vampchat = false;
-                }
-                return;
-            }
-        }
-
-        [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Close))]
-        public class ChatMessage
-        {
-            public static void Postfix()
-            {
-                var vamps = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(RoleEnum.Vampire) && !x.Data.IsDead).ToList();
-                foreach (var player in vamps)
-                {
-                    var playerResults = "As a Vampire, use /vc to send messages to your teammates.\nUsage: /vc [message]";
-                    if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer)
-                    {
-                        DestroyableSingleton<HudManager>.Instance.Chat.AddChat(player, playerResults);
-                        return;
-                    }
+                    __instance.Background.color = Colors.Vampire;
+                    __instance.NameText.color = Colors.Vampire;
+                    __instance.TextArea.color = Color.white;
                 }
             }
         }

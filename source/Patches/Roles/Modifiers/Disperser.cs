@@ -10,6 +10,7 @@ using System;
 using TownOfUsEdited.Modifiers.ShyMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.CrewmateRoles.TimeLordMod;
 
 namespace TownOfUsEdited.Roles.Modifiers
 {
@@ -22,7 +23,7 @@ namespace TownOfUsEdited.Roles.Modifiers
         public Disperser(PlayerControl player) : base(player)
         {
             Name = "Disperser";
-            TaskText = () => "Separate the Crew";
+            TaskText = () => "Separate the <color=#00FFFF>Crewmates</color>";
             Color = Patches.Colors.Impostor;
             StartingCooldown = DateTime.UtcNow;
             ModifierType = ModifierEnum.Disperser;
@@ -42,9 +43,7 @@ namespace TownOfUsEdited.Roles.Modifiers
             Dictionary<byte, Vector2> coordinates = GenerateDisperseCoordinates();
 
             var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                (byte)CustomRPC.Disperse,
-                SendOption.Reliable,
-                -1);
+                254, SendOption.Reliable, -1);
             writer.Write((int)CustomRPC.Disperse);
             writer.Write((byte)coordinates.Count);
             foreach ((byte key, Vector2 value) in coordinates)
@@ -74,10 +73,16 @@ namespace TownOfUsEdited.Roles.Modifiers
                     }
                 }
 
-                if (PlayerControl.LocalPlayer.inVent)
+                if (PlayerControl.LocalPlayer.inVent && !PlayerControl.LocalPlayer.Is(ModifierEnum.Motionless))
                 {
                     PlayerControl.LocalPlayer.MyPhysics.RpcExitVent(Vent.currentVent.Id);
                     PlayerControl.LocalPlayer.MyPhysics.ExitAllVents();
+                }
+
+                if (!PlayerControl.LocalPlayer.Is(ModifierEnum.Motionless))
+                {
+                    var position = PlayerControl.LocalPlayer.transform.position;
+                    TimeLordPatches.Positions.Add((Vector2.zero, Time.time, "Teleport", position, 0, null));
                 }
             }
 
@@ -90,8 +95,11 @@ namespace TownOfUsEdited.Roles.Modifiers
                 {
                     position = new Vector2(position.x, position.y - SizePatch.Radius * 0.75f);
                 }
-                player.transform.position = position;
-                if (PlayerControl.LocalPlayer == player) PlayerControl.LocalPlayer.NetTransform.RpcSnapTo(position);
+                if (!player.Is(ModifierEnum.Motionless))
+                {
+                    player.transform.position = position;
+                    if (PlayerControl.LocalPlayer == player) PlayerControl.LocalPlayer.NetTransform.RpcSnapTo(position);
+                }
                 if (player.Is(ModifierEnum.Shy) && player.GetCustomOutfitType() == CustomPlayerOutfitType.Default)
                 {
                     var shy = GetModifier<Shy>(player);
@@ -101,7 +109,7 @@ namespace TownOfUsEdited.Roles.Modifiers
                 }
             }
 
-            if (PlayerControl.LocalPlayer.walkingToVent)
+            if (PlayerControl.LocalPlayer.walkingToVent && !PlayerControl.LocalPlayer.Is(ModifierEnum.Motionless))
             {
                 PlayerControl.LocalPlayer.inVent = false;
                 Vent.currentVent = null;

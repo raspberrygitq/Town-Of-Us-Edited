@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Reactor.Utilities;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ namespace TownOfUsEdited.Roles
                 Utils.Rpc(CustomRPC.JuggernautWin, Player.PlayerId);
                 Wins();
                 Utils.EndGame();
-                System.Console.WriteLine("GAME OVER REASON: Juggernaut Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Juggernaut Win");
                 return;
             }
 

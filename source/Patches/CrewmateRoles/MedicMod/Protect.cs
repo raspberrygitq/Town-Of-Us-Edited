@@ -14,9 +14,8 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
             var role = Role.GetRole<Medic>(PlayerControl.LocalPlayer);
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
-            if (role.UsedAbility || role.ClosestPlayer == null) return false;
+            if (role.ShieldedPlayer != null || role.ClosestPlayer == null) return false;
             if (role.StartTimer() > 0) return false;
-            if (PlayerControl.LocalPlayer.IsJailed()) return false;
 
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
             if (interact[4] == true)
@@ -24,7 +23,6 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
                 Utils.Rpc(CustomRPC.Protect, PlayerControl.LocalPlayer.PlayerId, role.ClosestPlayer.PlayerId);
 
                 role.ShieldedPlayer = role.ClosestPlayer;
-                role.UsedAbility = true;
                 return false;
             }
             return false;

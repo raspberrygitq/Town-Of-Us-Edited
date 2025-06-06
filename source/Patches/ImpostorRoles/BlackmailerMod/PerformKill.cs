@@ -21,23 +21,26 @@ namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
                 if (__instance.isCoolingDown) return false;
                 if (!__instance.isActiveAndEnabled) return false;
                 if (role.Cooldown > 0) return false;
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
 
                 var interact = Utils.Interact(PlayerControl.LocalPlayer, target);
                 if (interact[4] == true)
                 {
-                    role.Blackmailed?.myRend().material.SetFloat("_Outline", 0f);
-                    if (role.Blackmailed != null && role.Blackmailed.Data.IsImpostor())
+                    if (AmongUsClient.Instance.AmHost)
                     {
-                        if (role.Blackmailed.GetCustomOutfitType() != CustomPlayerOutfitType.Camouflage &&
-                            role.Blackmailed.GetCustomOutfitType() != CustomPlayerOutfitType.Swooper)
-                            role.Blackmailed.nameText().color = Patches.Colors.Impostor;
-                        else role.Blackmailed.nameText().color = Color.clear;
+                        role.Blackmailed?.myRend().material.SetFloat("_Outline", 0f);
+                        if (role.Blackmailed != null && role.Blackmailed.Data.IsImpostor())
+                        {
+                            if (role.Blackmailed.GetCustomOutfitType() != CustomPlayerOutfitType.Camouflage &&
+                                role.Blackmailed.GetCustomOutfitType() != CustomPlayerOutfitType.Swooper)
+                                role.Blackmailed.nameText().color = Patches.Colors.Impostor;
+                            else role.Blackmailed.nameText().color = Color.clear;
+                        }
+                        role.Blackmailed = target;
+                        Utils.Rpc(CustomRPC.Blackmail, PlayerControl.LocalPlayer.PlayerId, target.PlayerId, (byte)1);
                     }
-                    role.Blackmailed = target;
-                    Utils.Rpc(CustomRPC.Blackmail, PlayerControl.LocalPlayer.PlayerId, target.PlayerId);
+                    else Utils.Rpc(CustomRPC.Blackmail, PlayerControl.LocalPlayer.PlayerId, target.PlayerId, (byte)0);
                 }
-                role.BlackmailButton.SetCoolDown(0.01f, 1f);
+                role.Cooldown = CustomGameOptions.BlackmailCd;
                 return false;
             }
             return true;

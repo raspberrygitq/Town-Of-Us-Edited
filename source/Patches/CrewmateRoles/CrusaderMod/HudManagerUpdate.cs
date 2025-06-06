@@ -20,7 +20,8 @@ namespace TownOfUsEdited.CrewmateRoles.CrusaderMod
 
             crusadeButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             crusadeButton.SetCoolDown(role.CrusadeTimer(), CustomGameOptions.CrusadeCD);
 

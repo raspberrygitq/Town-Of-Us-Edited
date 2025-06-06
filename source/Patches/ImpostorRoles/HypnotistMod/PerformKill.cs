@@ -33,7 +33,7 @@ namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
                 }
                 else if (interact[1] == true)
                 {
-                    role.Cooldown = CustomGameOptions.ProtectKCReset;
+                    role.Cooldown = CustomGameOptions.TempSaveCdReset;
                     return false;
                 }
                 else if (interact[3] == true) return false;

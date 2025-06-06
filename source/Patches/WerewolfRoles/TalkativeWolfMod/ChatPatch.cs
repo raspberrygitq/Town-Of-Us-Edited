@@ -20,14 +20,16 @@ namespace TownOfUsEdited.WerewolfRoles.TalkativeWolfMod.ChatPatch
                 if (!talkwolf.Any(x => !x.Data.Disconnected && !x.Data.IsDead)) return;
 
                 WordSaid = false;
-                Word = "";
-                var impos = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(Faction.Impostors)).ToArray();
-                RandomWord();
-
-                foreach (var player in impos)
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.TalkativeWolf))
                 {
-                    var playerResults = $"Today's word is {Word}, if the Talkative Wolf doesn't say it before the day ends, he will die!";
-                    if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(player, playerResults);
+                    var impos = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(Faction.Impostors)).ToArray();
+                    RandomWord();
+                    foreach (var player in impos)
+                    {
+                        var playerResults = $"Today's word is {Word}, if the Talkative Wolf doesn't say it before the day ends, he will die!";
+                        if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(player, playerResults);
+                    }
+                    Utils.Rpc(CustomRPC.SetTalkativeWord, Word);
                 }
             }
 

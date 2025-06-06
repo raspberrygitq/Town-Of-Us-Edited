@@ -11,6 +11,7 @@ namespace TownOfUsEdited.Roles
         public PlayerControl Blackmailed;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
+        public bool ShookAlready = false;
 
         public Blackmailer(PlayerControl player) : base(player)
         {

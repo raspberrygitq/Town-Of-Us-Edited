@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {
@@ -13,7 +12,7 @@ namespace TownOfUsEdited.Roles
             Color = Patches.Colors.TimeLord;
             Cooldown = CustomGameOptions.RewindCooldown;
             RoleType = RoleEnum.TimeLord;
-            Alignment = Alignment.CrewmateSupport;
+            Alignment = Alignment.CrewmatePower;
             AddToRoleHistory(RoleType);
             Scale = 1.4f;
         }

@@ -6,6 +6,7 @@ using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.SnitchMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using static TownOfUsEdited.Roles.Modifiers.Madmate;
@@ -75,6 +76,33 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
         public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static void TurnImp(PlayerControl player)
         {
+            if (player.Is(RoleEnum.Warden))
+            {
+                var warden = Role.GetRole<Warden>(player);
+                if (warden.Fortified != null) ShowShield.ResetVisor(warden.Fortified, warden.Player);
+            }
+
+            if (player.Is(RoleEnum.Medic))
+            {
+                var medic = Role.GetRole<Medic>(player);
+                if (medic.ShieldedPlayer != null) ShowShield.ResetVisor(medic.ShieldedPlayer, medic.Player);
+            }
+
+            if (player.Is(RoleEnum.Cleric))
+            {
+                var cleric = Role.GetRole<Cleric>(player);
+                if (cleric.Barriered != null) cleric.UnBarrier();
+            }
+
+            if (player.Is(RoleEnum.Plumber))
+            {
+                var plumberRole = Role.GetRole<Plumber>(player);
+                foreach (GameObject barricade in plumberRole.Barricades)
+                {
+                    UnityEngine.Object.Destroy(barricade);
+                }
+            }
+
             if (PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Snitch))
@@ -87,6 +115,42 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                 }
 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Investigator)) Footprint.DestroyAll(Role.GetRole<Investigator>(PlayerControl.LocalPlayer));
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Cleric))
+                {
+                    var clericRole = Role.GetRole<Cleric>(PlayerControl.LocalPlayer);
+                    clericRole.CleanseButton.SetTarget(null);
+                    clericRole.CleanseButton.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Oracle))
+                {
+                    var oracleRole = Role.GetRole<Oracle>(PlayerControl.LocalPlayer);
+                    oracleRole.BlessButton.SetTarget(null);
+                    oracleRole.BlessButton.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Hunter))
+                {
+                    var hunterRole = Role.GetRole<Hunter>(PlayerControl.LocalPlayer);
+                    UnityEngine.Object.Destroy(hunterRole.UsesText);
+                    hunterRole.StalkButton.SetTarget(null);
+                    hunterRole.StalkButton.gameObject.SetActive(false);
+                    HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector))
+                {
+                    var sc = Role.GetRole<SoulCollector>(PlayerControl.LocalPlayer);
+                    SoulExtensions.ClearSouls(sc.Souls);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Plumber))
+                {
+                    var plumberRole = Role.GetRole<Plumber>(PlayerControl.LocalPlayer);
+                    plumberRole.Vent = null;
+                    UnityEngine.Object.Destroy(plumberRole.UsesText);
+                }
 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer))
                 {
@@ -134,7 +198,16 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                     aurialRole.SenseArrows.Clear();
                 }
 
-                if (PlayerControl.LocalPlayer == StartImitate.ImitatingPlayer) StartImitate.ImitatingPlayer = null;
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
+                {
+                    var mercRole = Role.GetRole<Mercenary>(PlayerControl.LocalPlayer);
+                    mercRole.GuardButton.SetTarget(null);
+                    mercRole.GuardButton.gameObject.SetActive(false);
+                    UnityEngine.Object.Destroy(mercRole.UsesText);
+                    UnityEngine.Object.Destroy(mercRole.GoldText);
+                }
+
+                if (StartImitate.ImitatingPlayers.Contains(PlayerControl.LocalPlayer.PlayerId)) StartImitate.ImitatingPlayers.Remove(PlayerControl.LocalPlayer.PlayerId);
 
                 var oldRole = Role.GetRole(PlayerControl.LocalPlayer);
                 var killsList = (oldRole.CorrectKills, oldRole.IncorrectKills, oldRole.CorrectAssassinKills, oldRole.IncorrectAssassinKills);

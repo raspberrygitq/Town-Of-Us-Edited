@@ -26,12 +26,24 @@ namespace TownOfUsEdited.ImpostorRoles.FreezerMod
                 role.FreezeButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.FreezeButton.graphic.enabled = true;
                 role.FreezeButton.gameObject.SetActive(false);
+                role.FreezeText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.FreezeButton.transform);
+                role.FreezeText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.FreezeText);
             }
 
             role.FreezeButton.graphic.sprite = TownOfUsEdited.Freeze;
             role.FreezeButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.FreezeText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.FreezeText.text = "Freeze";
+            role.FreezeText.SetOutlineColor(Palette.ImpostorRed);
 
             var position = __instance.KillButton.transform.localPosition;
             role.FreezeButton.transform.localPosition = new Vector3(position.x,
@@ -43,8 +55,21 @@ namespace TownOfUsEdited.ImpostorRoles.FreezerMod
             else role.FreezeButton.SetCoolDown(role.FreezeTimer(), CustomGameOptions.BlindCD);
             Utils.SetTarget(ref role.ClosestPlayer, role.FreezeButton, float.NaN, notimps);
 
-            return;
-            
+            var labelrender = role.FreezeText;
+            if (role.ClosestPlayer != null || role.Freezing)
+            {
+                role.FreezeButton.graphic.color = Palette.EnabledColor;
+                role.FreezeButton.graphic.material.SetFloat("_Desat", 0f);
+                labelrender.color = Palette.EnabledColor;
+                labelrender.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                role.FreezeButton.graphic.color = Palette.DisabledClear;
+                role.FreezeButton.graphic.material.SetFloat("_Desat", 1f);
+                labelrender.color = Palette.DisabledClear;
+                labelrender.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

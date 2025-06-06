@@ -17,7 +17,8 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
                     var playerRole = Role.GetRole(player);
                     if (!player.Data.IsDead && playerRole != null && playerRole.InfectionState != 0 
                     && playerRole.InfectionState > 0 && playerRole.InfectionState != 4
-                    && infectiousRole.Infected.Contains(player.PlayerId) && !infectiousRole.Player.Data.IsDead)
+                    && infectiousRole.Infected.Contains(player.PlayerId) && !infectiousRole.Player.Data.IsDead
+                    && !player.Is(RoleEnum.Infectious))
                     {
                         playerRole.InfectionState += 1;
                     }
@@ -32,7 +33,7 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
                     {
                         var player = Utils.PlayerById(playerid);
                         var playerRole = Role.GetRole(player);
-                        if (playerRole.InfectionState == 0) playerRole.InfectionState = 1;
+                        if (playerRole.InfectionState == 0 && !player.Is(RoleEnum.Infectious)) playerRole.InfectionState = 1;
                     }
                 }
             }
@@ -40,6 +41,7 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
             var role = Role.GetRole(PlayerControl.LocalPlayer);
             if (role == null) return;
             if (role.InfectionState == 0) return;
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Infectious)) return;
             if (role.InfectionState == 1)
             {
                 DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "You have been Infected by an <color=#bf9000>Infectious</color> and entered the stage 1 of the infection.\nEject the Infectious before it's too late!");

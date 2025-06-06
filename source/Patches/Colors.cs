@@ -43,7 +43,6 @@ namespace TownOfUsEdited.Patches
         public readonly static Color SoulCatcher = new Color32(123, 119, 129, 255);
         public readonly static Color WhiteWolf = Color.white;
         public readonly static Color Guard = new Color32(0, 149, 255, 255);
-        public readonly static Color Superstar = new Color32(255, 202, 0, 255);
         public readonly static Color Avenger = new Color32(33, 111, 1, 255);
         public readonly static Color Astral = new Color32(167, 3, 174, 255);
         public readonly static Color Bodyguard = new Color32(37, 91, 201, 255);
@@ -53,10 +52,11 @@ namespace TownOfUsEdited.Patches
         public readonly static Color TimeLord = new Color32(15, 0, 184, 255);
         public readonly static Color Helper = new Color32(124, 182, 194, 255);
         public readonly static Color Guardian = new Color32(103, 187, 67, 255);
-        public readonly static Color Lighter = new Color32(230, 194, 13, 255);
         public readonly static Color Politician = new Color(0.4f, 0f, 0.6f, 1f);
         public readonly static Color Warden = new Color(0.6f, 0f, 1f, 1f);
         public readonly static Color Lookout = new Color(0.2f, 1f, 0.4f, 1f);
+        public readonly static Color Plumber = new Color(0.8f, 0.4f, 0f, 1f);
+        public readonly static Color Cleric = new Color(0f, 1f, 0.7f, 1f);
 
         // Neutral Colors
         public readonly static Color Jester = new Color(1f, 0.75f, 0.8f, 1f);
@@ -84,6 +84,7 @@ namespace TownOfUsEdited.Patches
         public readonly static Color Infectious = new Color32(191, 144, 0, 255);
         public readonly static Color Doppelganger = new Color32(250, 221, 132, 255);
         public readonly static Color SoulCollector = new Color(0.6f, 1f, 0.8f, 1f);
+        public readonly static Color Mercenary = new Color(0.55f, 0.4f, 0.6f, 1f);
 
         //Imposter Colors
         public readonly static Color Impostor = Palette.ImpostorRed;
@@ -117,6 +118,8 @@ namespace TownOfUsEdited.Patches
         public readonly static Color Spotter = new Color32(198, 136, 242, 255);
         public readonly static Color Motionless = new Color32(0, 133, 145, 255);
         public readonly static Color Mini = new Color(0.8f, 1f, 0.9f, 1f);
-
+        public readonly static Color Taskmaster = new Color(0.4f, 0.6f, 0.4f, 1f);
+        public readonly static Color Satellite = new Color(0f, 0.6f, 0.8f, 1f);
+        public readonly static Color Superstar = new Color32(255, 202, 0, 255);
     }
 }

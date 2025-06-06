@@ -22,14 +22,6 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
                 if (role.Cooldown > 0) return false;
                 if (!__instance.isActiveAndEnabled || __instance.isCoolingDown) return false;
                 if (role.ClosestPlayerInfect == null) return false;
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
-                var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-                if (!abilityUsed) return false;
-                if (role.ClosestPlayerInfect.IsGuarded2())
-                {
-                    role.Cooldown = CustomGameOptions.GuardKCReset;
-                    return false; 
-                }
                 var interact1 = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayerInfect);
                 if (interact1[4] == true)
                 {
@@ -45,7 +37,7 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
                 }
                 else if (interact1[1] == true)
                 {
-                    role.Cooldown = CustomGameOptions.ProtectKCReset;
+                    role.Cooldown = CustomGameOptions.TempSaveCdReset;
                     return false;
                 }
                 else if (interact1[3] == true) return false;
@@ -56,23 +48,10 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
                 if (role.Cooldown > 0) return false;
                 if (!__instance.isActiveAndEnabled || __instance.isCoolingDown) return false;
                 if (role.ClosestPlayer == null) return false;
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
                 if (PlayerControl.LocalPlayer.IsControlled() && role.ClosestPlayer.Is(Faction.Coven))
                 {
                     Utils.Interact(role.ClosestPlayer, PlayerControl.LocalPlayer, true);
                     return false;
-                }
-                else if (role.ClosestPlayer.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(role.ClosestPlayer).UsingPotion
-                && Role.GetRole<PotionMaster>(role.ClosestPlayer).Potion == "Shield")
-                {
-                    role.Cooldown = CustomGameOptions.PotionKCDReset;
-                    return false;
-                }
-
-                if (role.ClosestPlayer.IsGuarded2())
-                {
-                    role.Cooldown = CustomGameOptions.GuardKCReset;
-                    return false; 
                 }
                 
                 Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer, true);

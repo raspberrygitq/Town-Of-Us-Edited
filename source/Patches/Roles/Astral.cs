@@ -1,10 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
 using Reactor.Utilities.Extensions;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.TimeLordMod;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -31,6 +32,7 @@ namespace TownOfUsEdited.Roles
         }
 
         public bool UsingGhost => TimeRemaining > 0f;
+        public bool died = false;
 
         public float AstralTimer()
         {
@@ -45,12 +47,12 @@ namespace TownOfUsEdited.Roles
 
         public void TurnGhost(PlayerControl player)
         {
-            if (!Enabled)
+            TimeRemaining -= Time.deltaTime;
+            Enabled = true;
+            if (!died)
             {
                 Die(player);
             }
-            TimeRemaining -= Time.deltaTime;
-            Enabled = true;
         }
 
         public void Die(PlayerControl player)
@@ -91,11 +93,14 @@ namespace TownOfUsEdited.Roles
                 HudManager.Instance.Chat.gameObject.SetActive(false);
                 role.RegenTask();
             }
+
+            died = true;
         }
 
         public void TurnBack(PlayerControl player)
         {
-            if (Enabled)
+            TimeRemaining = 0f;
+            if (died)
             {
                 Revive(player);
             }
@@ -107,6 +112,7 @@ namespace TownOfUsEdited.Roles
         {
             var role = Role.GetRole<Astral>(player);
             Role.RoleDictionary.Remove(role.AstralBody.PlayerId);
+            if (Modifier.ModifierDictionary.ContainsKey(role.AstralBody.PlayerId)) Modifier.ModifierDictionary.Remove(role.AstralBody.PlayerId);
             var position = role.AstralBody.GetTruePosition();
 
             var revived = new List<PlayerControl>();
@@ -116,8 +122,9 @@ namespace TownOfUsEdited.Roles
             RoleManager.Instance.SetRole(player, RoleTypes.Crewmate);
             Murder.KilledPlayers.Remove(
                     Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == player.PlayerId));
-
-            player.NetTransform.SnapTo(new Vector2(position.x, position.y + 0.3636f));
+                    
+            var usedPosition = new Vector2(position.x, position.y + 0.3636f);
+            player.transform.position = new Vector2(usedPosition.x, usedPosition.y);
 
             if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
@@ -160,8 +167,7 @@ namespace TownOfUsEdited.Roles
             GameData.Instance.AllPlayers.Remove(role.AstralBody.Data);
             role.AstralBody.gameObject.Destroy();
             role.AstralBody = null;
-
-            return;
+            died = false;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using HarmonyLib;
 using Il2CppSystem.Collections.Generic;
 using TownOfUsEdited.Roles;
@@ -8,7 +9,7 @@ namespace TownOfUsEdited
     [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.OnGameEnd))]
     public class AmongUsClientGameEnd
     {
-        public static void Postfix(EndGameManager __instance)
+        public static void Postfix()
         {
             if (Role.NobodyWins)
             {
@@ -144,26 +145,6 @@ namespace TownOfUsEdited
                             return;
                         }
                     }
-                    else if (type == RoleEnum.SoulCollector)
-                    {
-                        var sc = (SoulCollector)role;
-                        if (sc.CollectedSouls)
-                        {
-                            EndGameResult.CachedWinners = new List<CachedPlayerData>();
-                            var scData = new CachedPlayerData(sc.Player.Data);
-                            if (PlayerControl.LocalPlayer != sc.Player) scData.IsYou = false;
-                            EndGameResult.CachedWinners.Add(scData);
-                            if (sc.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
-                            {
-                                var loverModifier = Modifier.GetModifier<Lover>(sc.Player);
-                                var otherLover = loverModifier.OtherLover;
-                                var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
-                                if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
-                                EndGameResult.CachedWinners.Add(otherLoverData);
-                            }
-                            return;
-                        }
-                    }
                     else if (type == RoleEnum.Phantom)
                     {
                         var phantom = (Phantom)role;
@@ -282,6 +263,17 @@ namespace TownOfUsEdited
                         var glitchData = new CachedPlayerData(glitch.Player.Data);
                         if (PlayerControl.LocalPlayer != glitch.Player) glitchData.IsYou = false;
                         EndGameResult.CachedWinners.Add(glitchData);
+                    }
+                }
+                else if (type == RoleEnum.SoulCollector)
+                {
+                    var sc = (SoulCollector)role;
+                    if (sc.SCWins)
+                    {
+                        EndGameResult.CachedWinners = new List<CachedPlayerData>();
+                        var scData = new CachedPlayerData(sc.Player.Data);
+                        if (PlayerControl.LocalPlayer != sc.Player) scData.IsYou = false;
+                        EndGameResult.CachedWinners.Add(scData);
                     }
                 }
                 else if (type == RoleEnum.Player)
@@ -443,6 +435,24 @@ namespace TownOfUsEdited
                         if (isImp) gaWinData.IsImpostor = true;
                         if (PlayerControl.LocalPlayer != ga.Player) gaWinData.IsYou = false;
                         EndGameResult.CachedWinners.Add(gaWinData);
+                    }
+                }
+            }
+            foreach (var role in Role.GetRoles(RoleEnum.Mercenary))
+            {
+                var merc = (Mercenary)role;
+                foreach (var bribeId in merc.Bribed)
+                {
+                    var bribe = Utils.PlayerById(bribeId);
+                    if (bribe == null || bribe.Data == null || bribe.Data.IsDead || bribe.Data.Disconnected || bribe.Is(RoleEnum.Mercenary)) continue;
+                    var bribedData = new CachedPlayerData(bribe.Data);
+                    if (EndGameResult.CachedWinners.ToArray().Where(x => x.PlayerName == bribedData.PlayerName).ToList().Count > 0)
+                    {
+                        var isImp = EndGameResult.CachedWinners[0].IsImpostor;
+                        var mercWinData = new CachedPlayerData(merc.Player.Data);
+                        if (isImp) mercWinData.IsImpostor = true;
+                        if (PlayerControl.LocalPlayer != merc.Player) mercWinData.IsYou = false;
+                        EndGameResult.CachedWinners.Add(mercWinData);
                     }
                 }
             }

@@ -7,10 +7,10 @@ using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited.ImpostorRoles.FreezerMod
 {
-    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+    [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
     public static class AirshipExileController_WrapUpAndSpawn
     {
-        public static void Postfix(AirshipExileController __instance) => SetFreezer.ExileControllerPostfix(__instance);
+        public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => SetFreezer.ExileControllerPostfix(__instance.__4__this);
     }
 
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]

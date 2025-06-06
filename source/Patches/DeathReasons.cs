@@ -38,27 +38,27 @@ namespace TownOfUsEdited.Patches
 
         public static void Postfix()
         {
-                foreach (var player in PlayerControl.AllPlayerControls)
+            foreach (var player in PlayerControl.AllPlayerControls)
+            {
+                if (player.Data.IsDead && Utils.ShowDeadBodies && CustomGameOptions.DeadSeeRoles)
                 {
-                    if (player.Data.IsDead && Utils.ShowDeadBodies && CustomGameOptions.DeadSeeRoles)
-                    {
-                        var role = Role.GetRole(player);
-                        if (role.DeathReason == DeathReasons.Misfired) player.nameText().text = player.nameText().text + "<color=#FFFF00FF><size=2>\n(Misfired)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Suicided) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Suicided)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Executed) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Executed)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Guessed) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Guessed)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Poisoned) player.nameText().text = player.nameText().text + "<color=#A020F0><size=2>\n(Poisoned)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Burned) player.nameText().text = player.nameText().text + "<color=#FF4D00FF><size=2>\n(Burned)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Hexed) player.nameText().text = player.nameText().text + "<color=#bf5fff><size=2>\n(Hexed)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Infected) player.nameText().text = player.nameText().text + "<color=#bf9000><size=2>\n(Infected)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Cursed) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Cursed)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Exploded) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Exploded)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Won) player.nameText().text = player.nameText().text + "<color=#00FFFF><size=2>\n(Won)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Killed) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Killed)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Exiled) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Exiled)</size></color>";
-                        else if (role.DeathReason == DeathReasons.Spectator) player.nameText().text = player.nameText().text + "<color=#da6f00><size=2>\n(Spectator)</size></color>";
-                    }
-                } 
+                    var role = Role.GetRole(player);
+                    if (role.DeathReason == DeathReasons.Misfired) player.nameText().text = player.nameText().text + "<color=#FFFF00FF><size=2>\n(Misfired)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Suicided) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Suicided)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Executed) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Executed)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Guessed) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Guessed)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Poisoned) player.nameText().text = player.nameText().text + "<color=#A020F0><size=2>\n(Poisoned)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Burned) player.nameText().text = player.nameText().text + "<color=#FF4D00FF><size=2>\n(Burned)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Hexed) player.nameText().text = player.nameText().text + "<color=#bf5fff><size=2>\n(Hexed)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Infected) player.nameText().text = player.nameText().text + "<color=#bf9000><size=2>\n(Infected)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Cursed) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Cursed)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Exploded) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Exploded)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Won) player.nameText().text = player.nameText().text + "<color=#00FFFF><size=2>\n(Won)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Killed) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Killed)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Exiled) player.nameText().text = player.nameText().text + "<color=#FF0000><size=2>\n(Exiled)</size></color>";
+                    else if (role.DeathReason == DeathReasons.Spectator) player.nameText().text = player.nameText().text + "<color=#da6f00><size=2>\n(Spectator)</size></color>";
+                }
+            }
             if (!MeetingHud.Instance) return;
             UpdateMeeting(MeetingHud.Instance);
         }

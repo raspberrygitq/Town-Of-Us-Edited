@@ -13,8 +13,8 @@ namespace TownOfUsEdited.CustomOption
 
         public Func<object, string> Format;
         public string Name;
-        public StringNames StringName;
 
+        public StringNames StringName;
 
         protected internal CustomOption(int id, MultiMenu menu, string name, CustomOptionType type, object defaultValue,
             Func<object, string> format = null)
@@ -49,7 +49,7 @@ namespace TownOfUsEdited.CustomOption
         }
 
 
-        protected internal void Set(object value, bool SendRpc = true)
+        protected internal void Set(object value, bool SendRpc = true, bool Notify = false)
         {
             System.Console.WriteLine($"{Name} set to {value}");
 
@@ -84,9 +84,10 @@ namespace TownOfUsEdited.CustomOption
             {
             }
 
-            if (HudManager.InstanceExists && Type != CustomOptionType.Header)
+            if (HudManager.InstanceExists && Type != CustomOptionType.Header && Notify)
             {
-                HudManager.Instance.Notifier.AddSettingsChangeMessage(StringName, ToString());
+                HudManager.Instance.Notifier.
+                    AddSettingsChangeMessage(StringName, ToString(), HudManager.Instance.Notifier.lastMessageKey != (int)StringName);
             }
         }
     }

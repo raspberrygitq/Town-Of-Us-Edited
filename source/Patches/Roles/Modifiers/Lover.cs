@@ -3,6 +3,7 @@ using System.Linq;
 using TownOfUsEdited.Patches;
 using UnityEngine;
 using TownOfUsEdited.Extensions;
+using Reactor.Utilities;
 
 namespace TownOfUsEdited.Roles.Modifiers
 {
@@ -86,7 +87,7 @@ namespace TownOfUsEdited.Roles.Modifiers
             {
                 Utils.Rpc(CustomRPC.LoveWin, Player.PlayerId);
                 Win();
-                System.Console.WriteLine("GAME OVER REASON: Lovers Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Lovers Win");
                 return;
             }
 

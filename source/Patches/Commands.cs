@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using HarmonyLib;
+using Reactor.Utilities;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
@@ -20,7 +19,7 @@ namespace TownOfUsEdited.Patches
         [HarmonyPatch(typeof(ChatController), nameof(ChatController.AddChat))]
         public class SpecialChat
         {
-            public static void ForceAddChat(PlayerControl srcPlayer, string chatText)
+            public static void ForceAddChat(PlayerControl srcPlayer, string chatText, string Id)
             {
                 var Instance = DestroyableSingleton<ChatController>.Instance;
                 ChatBubble pooledBubble = Instance.GetPooledBubble();
@@ -38,6 +37,7 @@ namespace TownOfUsEdited.Patches
 				        pooledBubble.SetLeft();
 			        }
                     var data2 = srcPlayer.Data;
+                    pooledBubble.name = Id;
 			        pooledBubble.SetCosmetics(data2);
 			        Instance.SetChatBubbleName(pooledBubble, data2, false, false, PlayerNameColor.Get(data2), null);
 			        pooledBubble.SetText(chatText);
@@ -55,7 +55,7 @@ namespace TownOfUsEdited.Patches
 		        }
 		        catch (Exception message)
 		        {
-			        System.Console.WriteLine($"Error forcing send message: {message.ToString()}");
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogError($"Error forcing send message: {message.ToString()}");
 			        Instance.chatBubblePool.Reclaim(pooledBubble);
 		        }
             }
@@ -73,13 +73,13 @@ namespace TownOfUsEdited.Patches
                 || role == "HexMaster" || role == "Hunter" || role == "Hypnotist" || role == "Imitator"
                 || role == "Infectious" || role == "Informant" || role == "Investigator" || role == "Jailor"
                 || role == "Janitor" || role == "Jester" || role == "Juggernaut" || role == "Knight"
-                || role == "Lighter" || role == "Mafioso" || role == "Manipulator" || role == "Maul"
+                || role == "Mafioso" || role == "Manipulator" || role == "Maul"
                 || role == "Mayor" || role == "Medic" || role == "Medium" || role == "Miner"
                 || role == "Morphling" || role == "Mutant" || role == "Mystic" || role == "Oracle"
                 || role == "Paranoïac" || role == "Plaguebearer" || role == "Poisoner" || role == "Politician"
                 || role == "PotionMaster" || role == "Prosecutor" || role == "Reviver" || role == "Ritualist"
                 || role == "Seer" || role == "SerialKiller" || role == "Sheriff" || role == "Shifter"
-                || role == "Shooter" || role == "Snitch" || role == "SoulCollector" || role == "Superstar"
+                || role == "Shooter" || role == "Snitch" || role == "SoulCollector"
                 || role == "SoulCatcher" || role == "BlackWolf" || role == "Spiritualist" || role == "Spy"
                 || role == "Survivor" || role == "Swapper" || role == "Swooper" || role == "TalkativeWolf"
                 || role == "TimeLord" || role == "Tracker" || role == "Transporter" || role == "Trapper"
@@ -105,6 +105,11 @@ namespace TownOfUsEdited.Patches
                         chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/r [modifier / role name] - Displays the description of any role / modifier\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id\n\nTester Commands:\n\n/status - Show / Hide your Tester status";
                         system = true;
                     }
+                    else if (sourcePlayer.IsArtist() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/r [modifier / role name] - Displays the description of any role / modifier\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id\n\nArtist Commands:\n\n/status - Show / Hide your Artist status";
+                        system = true;
+                    }
                     else if (sourcePlayer.IsVip() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         chatText = $"<b><size=3>COMMANDS</size></b>\n\nEveryone:\n\n/help - Displays this menu\n/r [modifier / role name] - Displays the description of any role / modifier\n/infoup - See infos about /up command\n/up - Choose any role in the game (if enabled)\n/allup - See all currently chosen roles\n/death - Shows your death reason\n/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\nHost only:\n\nShift + G + ENTER - Force the game to end\n/msg [message] - Send a message as host\n/id - See players ids\n/kick [id] - Kick a player by its id\n/ban [id] - Ban a player by its id\n\nVip Commands:\n\n/status - Show / Hide your Vip status\n/fly - Enabled / Disable colliders in Lobby";
@@ -120,11 +125,7 @@ namespace TownOfUsEdited.Patches
 
                 if (chatText.ToLower().StartsWith("/secret") && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId) // Real secret fr fr
                 {
-                    System.Diagnostics.Process.Start(new ProcessStartInfo
-                    {
-                        FileName = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley",
-                        UseShellExecute = true
-                    });
+                    Application.OpenURL("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
                 }
 
                 if (chatText.ToLower().StartsWith("/msg "))
@@ -133,7 +134,7 @@ namespace TownOfUsEdited.Patches
                     {
                         var message = chatText[5..];
                         host = true;
-                        ForceAddChat(sourcePlayer, message);
+                        ForceAddChat(sourcePlayer, message, "HostBubble");
                         return false;
                     }
                     else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
@@ -266,7 +267,7 @@ namespace TownOfUsEdited.Patches
 
                 if (chatText.ToLower().StartsWith("/id"))
                 {
-                    if ((GameData.Instance.GetHost() == sourcePlayer.Data || sourcePlayer.IsDev()) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         string message = "All players ids:\n";
                         foreach (var player in PlayerControl.AllPlayerControls.ToArray().OrderBy(x => Guid.NewGuid()))
@@ -276,11 +277,6 @@ namespace TownOfUsEdited.Patches
                         message.Remove(message.Length - 1, 1);
                         chatText = message;
                         system = true;
-                    }
-                    else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                    {
-                        chatText = "You don't have access to this command!";
-                        noaccess = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
@@ -312,7 +308,7 @@ namespace TownOfUsEdited.Patches
                             {
                                 foreach (var player in playerWithId)
                                 {
-                                    AmongUsClient.Instance.KickWithReason(player.OwnerId, "You were kicked from the lobby.");
+                                    AmongUsClient.Instance.KickPlayer(player.OwnerId, false);
                                 }
                                 chatText = "The player was kicked successfully.";
                                 system = true;
@@ -354,7 +350,7 @@ namespace TownOfUsEdited.Patches
                             {
                                 foreach (var player in playerWithId)
                                 {
-                                    AmongUsClient.Instance.Ban(player.OwnerId);
+                                    AmongUsClient.Instance.KickPlayer(player.OwnerId, true);
                                 }
                                 chatText = "The player was banned successfully.";
                                 system = true;
@@ -371,7 +367,7 @@ namespace TownOfUsEdited.Patches
                 
                 if (chatText.ToLower().StartsWith("/death"))
                 {
-                    if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    if ((AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         var playerRole = Role.GetRole(PlayerControl.LocalPlayer);
                         if (!sourcePlayer.Data.IsDead)
@@ -429,6 +425,18 @@ namespace TownOfUsEdited.Patches
                 }
 
                 return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(PoolablePlayer), nameof(PoolablePlayer.UpdateFromPlayerOutfit))]
+        public class ChatFixAlive
+        {
+            public static void Prefix(PoolablePlayer __instance, ref bool forceAlive)
+            {
+                var AllBubbles = GameObject.FindObjectsOfType<ChatBubble>();
+                var CustomBubbles = AllBubbles.Where(x => x.name == "HostBubble" || x.name == "DevBubble");
+                if (!CustomBubbles.Any(x => x.Player == __instance)) return;
+                forceAlive = true;
             }
         }
 

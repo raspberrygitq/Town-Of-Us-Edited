@@ -5,8 +5,9 @@ using Object = UnityEngine.Object;
 using System.Linq;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using System.Collections.Generic;
+using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUsEdited.CrewmateRoles.SuperstarMod
+namespace TownOfUsEdited.Modifiers.SuperstarMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class ArrowUpdate
@@ -32,7 +33,7 @@ namespace TownOfUsEdited.CrewmateRoles.SuperstarMod
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Vulture) && CustomGameOptions.VultureArrow) return;
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Amnesiac) && CustomGameOptions.RememberArrows) return;
 
-            foreach (var role in Role.AllRoles.Where(x => x.RoleType == RoleEnum.Superstar))
+            foreach (var role in Modifier.GetModifiers(ModifierEnum.Superstar))
             {
                 var superstar = (Superstar)role;
                 if (superstar.Player.Data.IsDead && superstar.Reported == false)

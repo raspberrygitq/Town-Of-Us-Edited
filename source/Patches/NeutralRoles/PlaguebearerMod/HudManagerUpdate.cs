@@ -20,7 +20,7 @@ namespace TownOfUsEdited.NeutralRoles.PlaguebearerMod
             var infectButton = __instance.KillButton;
             var role = Role.GetRole<Plaguebearer>(PlayerControl.LocalPlayer);
 
-            if (!PlayerControl.LocalPlayer.IsHypnotised())
+            if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())
             {
                 foreach (var playerId in role.InfectedPlayers)
                 {
@@ -39,7 +39,8 @@ namespace TownOfUsEdited.NeutralRoles.PlaguebearerMod
 
             infectButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             infectButton.SetCoolDown(role.InfectTimer(), CustomGameOptions.InfectCd);
 
             var notInfected = PlayerControl.AllPlayerControls.ToArray().Where(

@@ -1,8 +1,11 @@
+using TMPro;
+
 namespace TownOfUsEdited.Roles
 {
     public class Informant : Role
     {
         public KillButton _vitalsButton;
+        public TextMeshPro VitalsText;
 
         public Informant(PlayerControl player) : base(player)
         {

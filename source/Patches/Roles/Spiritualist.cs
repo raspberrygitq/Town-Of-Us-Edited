@@ -1,4 +1,5 @@
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -19,6 +20,7 @@ namespace TownOfUsEdited.Roles
         public KillButton _controlButton;
         public PlayerControl ClosestPlayer;
         public PlayerControl ControlledPlayer;
+        public TextMeshPro ControlText;
         public void Control(PlayerControl target)
         {
             var interact = Utils.Interact(PlayerControl.LocalPlayer, target);
@@ -30,12 +32,7 @@ namespace TownOfUsEdited.Roles
             }
             if (interact[0] == true)
             {
-                KillCooldown = CustomGameOptions.ProtectKCReset;
-                return;
-            }
-            else if (interact[1] == true)
-            {
-                KillCooldown = CustomGameOptions.VestKCReset;
+                KillCooldown = CustomGameOptions.TempSaveCdReset;
                 return;
             }
             else if (interact[3] == true) return;

@@ -4,96 +4,21 @@ using Hazel;
 using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Cultist;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using System.Linq;
 using TownOfUsEdited.Extensions;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 
 namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__35), nameof(IntroCutscene._CoBegin_d__35.MoveNext))]
     public static class Start
     {
-        public static bool impsent = false;
-        public static bool vampsent = false;
-        public static bool madsent = false;
-        public static bool sksent = false;
-        public static bool lovsent = false;
-        public static bool covensent = false;
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static void Postfix(IntroCutscene._CoBegin_d__35 __instance)
         {
-            var lovers = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.IsLover() && !x.Data.IsDead).ToList();
-            foreach (var player in lovers)
-            {
-                var playerResults = "As a Lover, use /lc to send messages to your second part.\nUsage: /lc [message]";
-                if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer && lovsent == false)
-                {
-                    DestroyableSingleton<HudManager>.Instance.Chat.AddChat(player, playerResults);
-                    lovsent = true;
-                    return;
-                }
-            }
-            var impos = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(Faction.Impostors) && !x.Data.IsDead).ToList();
-            foreach (var player in impos)
-            {
-                var playerResults = "As an Impostor, use /ic to send messages to your teammates.\nUsage: /ic [message]";
-                if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer && impsent == false)
-                {
-                    DestroyableSingleton<HudManager>.Instance.Chat.AddChat(player, playerResults);
-                    impsent = true;
-                    return;
-                }
-            }
-            var madmates = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(Faction.Madmates) && !x.Data.IsDead).ToList();
-            if (CustomGameOptions.MadmateCanChat)
-            {
-                foreach (var player in madmates)
-                {
-                    var playerResults = "You are in the Impostors team, use /ic to send messages to your teammates.\nUsage: /ic [message]";
-                    if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer && madsent == false)
-                    {
-                        DestroyableSingleton<HudManager>.Instance.Chat.AddChat(player, playerResults);
-                        madsent = true;
-                        return;
-                    }
-                }
-            }
-            var vamps = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(RoleEnum.Vampire) && !x.Data.IsDead).ToList();
-            foreach (var player in vamps)
-            {
-                var playerResults = "As a Vampire, use /vc to send messages to your teammates.\nUsage: /vc [message]";
-                if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer && vampsent == false)
-                {
-                    DestroyableSingleton<HudManager>.Instance.Chat.AddChat(player, playerResults);
-                    vampsent = true;
-                    return;
-                }
-            }
-            var sks = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(RoleEnum.SerialKiller) && !x.Data.IsDead).ToList();
-            foreach (var player in sks)
-            {
-                var playerResults = "As a Serial Killer, use /skc to send messages to your teammates.\nUsage: /skc [message]";
-                if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer && sksent == false)
-                {
-                    DestroyableSingleton<HudManager>.Instance.Chat.AddChat(player, playerResults);
-                    sksent = true;
-                    return;
-                }
-            }
-            var coven = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(Faction.Coven) && !x.Data.IsDead).ToList();
-            foreach (var player in coven)
-            {
-                var playerResults = "As a Coven member, use /cc to send messages to your teammates.\nUsage: /cc [message]";
-                if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer && covensent == false)
-                {
-                    DestroyableSingleton<HudManager>.Instance.Chat.AddChat(player, playerResults);
-                    covensent = true;
-                    return;
-                }
-            }
+            HudUpdate.Zooming = false;
+            HudUpdate.ZoomStart();
+
             if (CustomGameOptions.GameMode == GameMode.Werewolf)
             {
                 DayNightMechanic.DayCount = 0;
@@ -155,10 +80,16 @@ namespace TownOfUsEdited.Patches
                 cap.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Plumber))
+            {
+                var plumber = Role.GetRole<Plumber>(PlayerControl.LocalPlayer);
+                plumber.Cooldown = CustomGameOptions.InitialCooldowns;
+            }
+
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Player))
             {
                 var playerRole = Role.GetRole<Player>(PlayerControl.LocalPlayer);
-                playerRole.Cooldown = CustomGameOptions.BattleRoyaleKillCD;
+                playerRole.Cooldown = CustomGameOptions.BattleRoyaleStartingCD;
             }
             
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Jailor))
@@ -182,7 +113,7 @@ namespace TownOfUsEdited.Patches
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Detective))
             {
                 var detective = Role.GetRole<Detective>(PlayerControl.LocalPlayer);
-                detective.Cooldown = CustomGameOptions.ExamineCd;
+                detective.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Medium))
@@ -201,6 +132,7 @@ namespace TownOfUsEdited.Patches
             {
                 var oracle = Role.GetRole<Oracle>(PlayerControl.LocalPlayer);
                 oracle.Cooldown = CustomGameOptions.InitialCooldowns;
+                oracle.BlessCooldown = CustomGameOptions.InitialCooldowns;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Politician))
@@ -261,6 +193,12 @@ namespace TownOfUsEdited.Patches
                 }
             }
 
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Cleric))
+            {
+                var cleric = Role.GetRole<Cleric> (PlayerControl.LocalPlayer);
+                cleric.Cooldown = CustomGameOptions.InitialCooldowns;
+            }
+
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Transporter))
             {
                 var transporter = Role.GetRole<Transporter>(PlayerControl.LocalPlayer);
@@ -297,30 +235,15 @@ namespace TownOfUsEdited.Patches
                 chameleon.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Necromancer))
-            {
-                var necro = Role.GetRole<Necromancer>(PlayerControl.LocalPlayer);
-                necro.LastRevived = DateTime.UtcNow;
-                // necro.LastRevived = necro.LastRevived.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.ReviveCooldown);
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.CultistSeer))
-            {
-                var seer = Role.GetRole<CultistSeer>(PlayerControl.LocalPlayer);
-                seer.LastInvestigated = DateTime.UtcNow;
-                seer.LastInvestigated = seer.LastInvestigated.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.SeerCd);
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Whisperer))
-            {
-                var whisperer = Role.GetRole<Whisperer>(PlayerControl.LocalPlayer);
-                whisperer.LastWhispered = DateTime.UtcNow;
-                // whisperer.LastWhispered = whisperer.LastWhispered.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.WhisperCooldown);
-            }
 
             if (PlayerControl.LocalPlayer.Data.IsImpostor())
             {
                 Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.InitialCooldowns;
+            }
+
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Assassin) && !PlayerControl.LocalPlayer.Is(AbilityEnum.Assassin))
+            {
+                new Assassin(PlayerControl.LocalPlayer);
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Blackmailer))
@@ -368,6 +291,12 @@ namespace TownOfUsEdited.Patches
             {
                 var morphling = Role.GetRole<Morphling>(PlayerControl.LocalPlayer);
                 morphling.Cooldown = CustomGameOptions.InitialCooldowns;
+            }
+
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Converter))
+            {
+                var converter = Role.GetRole<Converter>(PlayerControl.LocalPlayer);
+                converter.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Swooper))
@@ -459,7 +388,8 @@ namespace TownOfUsEdited.Patches
                 if (ga.target == null)
                 {
                     var writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
-                        (byte)CustomRPC.GAToSurv, SendOption.Reliable, -1);
+                        254, SendOption.Reliable, -1);
+                    writer.Write((int)CustomRPC.GAToSurv);
                     writer.Write(ga.Player.PlayerId);
                     AmongUsClient.Instance.FinishRpcImmediately(writer);
 
@@ -492,6 +422,12 @@ namespace TownOfUsEdited.Patches
                 var surv = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);
                 surv.LastVested = DateTime.UtcNow;
                 surv.LastVested = surv.LastVested.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.VestCd);
+            }
+
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
+            {
+                var merc = Role.GetRole<Mercenary>(PlayerControl.LocalPlayer);
+                merc.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Shifter))
@@ -541,21 +477,6 @@ namespace TownOfUsEdited.Patches
                 infectious.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
-            if (PlayerControl.LocalPlayer.Is(ModifierEnum.Radar))
-            {
-                var radar = Modifier.GetModifier<Radar>(PlayerControl.LocalPlayer);
-                var gameObj = new GameObject();
-                var arrow = gameObj.AddComponent<ArrowBehaviour>();
-                gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
-                var renderer = gameObj.AddComponent<SpriteRenderer>();
-                renderer.sprite = Sprite;
-                renderer.color = Colors.Radar;
-                arrow.image = renderer;
-                gameObj.layer = 5;
-                arrow.target = PlayerControl.LocalPlayer.transform.position;
-                radar.RadarArrow.Add(arrow);
-            }
-
             foreach (var role in Role.GetRoles(RoleEnum.Spectator))
             {
                 var spectator = (Spectator)role;
@@ -565,7 +486,7 @@ namespace TownOfUsEdited.Patches
                 }
             }
 
-            PlayerControl_Die.Postfix();
+            PlayerControl_Die.CheckEnd();
         }
     }
 }

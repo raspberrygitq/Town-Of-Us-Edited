@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Reactor.Utilities;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -37,7 +38,7 @@ namespace TownOfUsEdited.Roles
                 Utils.Rpc(CustomRPC.PestilenceWin, Player.PlayerId);
                 Wins();
                 Utils.EndGame();
-                System.Console.WriteLine("GAME OVER REASON: Pestilence Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Pestilence Win");
                 return;
             }
 

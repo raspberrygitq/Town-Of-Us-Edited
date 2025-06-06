@@ -1,14 +1,13 @@
-using System;
 using UnityEngine;
 using TownOfUsEdited.Modifiers.UnderdogMod;
 using TownOfUsEdited.Roles.Modifiers;
+using TMPro;
 
 namespace TownOfUsEdited.Roles
 {
     public class Poisoner : Role
 
     {
-        public KillButton _poisonButton;
         public PlayerControl ClosestPlayer;
         public bool coolingDown => Cooldown > 0f;
         public float Cooldown;
@@ -29,21 +28,11 @@ namespace TownOfUsEdited.Roles
             Alignment = Alignment.ImpostorKilling;
             PoisonedPlayer = null;
         }
-        public KillButton PoisonButton
-        {
-            get => _poisonButton;
-            set
-            {
-                _poisonButton = value;
-                ExtraButtons.Clear();
-                ExtraButtons.Add(value);
-            }
-        }
         public bool Poisoned => TimeRemaining > 0f;
         public void Poison()
         {
             Enabled = true;
-            TimeRemaining -= Time.deltaTime;
+            if (!Utils.Rewinding()) TimeRemaining -= Time.deltaTime;
             if (MeetingHud.Instance)
             {
                 TimeRemaining = 0;

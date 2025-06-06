@@ -23,18 +23,11 @@ namespace TownOfUsEdited.CrewmateRoles.SheriffMod
             if (role.Cooldown > 0) return false;
             if (!__instance.enabled || role.ClosestPlayer == null) return false;
             var distBetweenPlayers = Utils.GetDistBetweenPlayers(PlayerControl.LocalPlayer, role.ClosestPlayer);
-            var flag3 = distBetweenPlayers < GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var flag3 = distBetweenPlayers < LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (!flag3) return false;
-            if (PlayerControl.LocalPlayer.IsJailed()) return false;
             if (PlayerControl.LocalPlayer.IsControlled() && role.ClosestPlayer.Is(Faction.Coven))
             {
                 Utils.Interact(role.ClosestPlayer, PlayerControl.LocalPlayer, true);
-                return false;
-            }
-            else if (role.ClosestPlayer.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(role.ClosestPlayer).UsingPotion
-            && Role.GetRole<PotionMaster>(role.ClosestPlayer).Potion == "Shield")
-            {
-                role.Cooldown = CustomGameOptions.PotionKCDReset;
                 return false;
             }
 
@@ -44,9 +37,6 @@ namespace TownOfUsEdited.CrewmateRoles.SheriffMod
                         role.ClosestPlayer.Is(Faction.Coven) && CustomGameOptions.SheriffKillsCoven ||
                         role.ClosestPlayer.Is(Faction.NeutralEvil) && CustomGameOptions.SheriffKillsNE ||
                         role.ClosestPlayer.Is(Faction.NeutralBenign) && CustomGameOptions.SheriffKillsNB;
-
-            var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-            if (!abilityUsed) return false;
 
             if (!flag4 && !PlayerControl.LocalPlayer.Is(Faction.Madmates))
             {

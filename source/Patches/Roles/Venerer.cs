@@ -1,4 +1,4 @@
-using System;
+using TMPro;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -7,11 +7,11 @@ namespace TownOfUsEdited.Roles
     public class Venerer : Role
     {
         public KillButton _abilityButton;
+        public TextMeshPro AbilityText;
         public bool Enabled;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
         public float TimeRemaining;
-        public float KillsAtStartAbility;
 
         public Venerer(PlayerControl player) : base(player)
         {

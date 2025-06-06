@@ -30,8 +30,6 @@ namespace TownOfUsEdited.ImpostorRoles.ManipulatorMod
                         return false;
                     var playerId = role.ClosestPlayer.PlayerId;
                     var player = Utils.PlayerById(playerId);
-                    var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-                    if (!abilityUsed) return false;
                     if (player.IsInfected() || role.Player.IsInfected())
                     {
                         foreach (var pb in Role.GetRoles(RoleEnum.Plaguebearer)) ((Plaguebearer)pb).RpcSpreadInfection(player, role.Player);

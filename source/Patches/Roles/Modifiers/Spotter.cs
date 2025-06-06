@@ -5,7 +5,7 @@ namespace TownOfUsEdited.Roles.Modifiers
         public Spotter(PlayerControl player) : base(player)
         {
             Name = "Spotter";
-            TaskText = () => "You see votes color";
+            TaskText = () => "You see votes' color";
             Color = Patches.Colors.Spotter;
             ModifierType = ModifierEnum.Spotter;
         }

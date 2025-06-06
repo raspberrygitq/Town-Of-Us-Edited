@@ -19,7 +19,8 @@ namespace TownOfUsEdited.NeutralRoles.TrollMod
             // Check if the game state allows the Button to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
             isKillButtonActive = isKillButtonActive && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead;
-            isKillButtonActive = isKillButtonActive && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started;
+            isKillButtonActive = isKillButtonActive && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
             isKillButtonActive = isKillButtonActive && troll.TrolledPlayer == null;
 
             // Set Button's graphics

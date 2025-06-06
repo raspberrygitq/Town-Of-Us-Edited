@@ -21,19 +21,11 @@ namespace TownOfUsEdited.Patches.CovenRoles.VoodooMasterMod
 
             if (__instance == role.VoodooButton)
             {
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
-
                 if (role.KillCooldown > 0)
                 return false;
 
                 if (role.ClosestPlayer == null)
                 return false;
-
-                if (role.ClosestPlayer.IsGuarded2())
-                {
-                    role.KillCooldown = CustomGameOptions.GuardKCReset;
-                    return false; 
-                }
 
                 role.VoodooPlayer = role.ClosestPlayer;
                 Utils.Rpc(CustomRPC.SetVoodooPlayer, PlayerControl.LocalPlayer.PlayerId, role.ClosestPlayer.PlayerId);

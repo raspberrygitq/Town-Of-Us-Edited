@@ -21,19 +21,11 @@ namespace TownOfUsEdited.Patches.CovenRoles.SpiritualistMod
 
             if (__instance == role.ControlButton)
             {
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
-
                 if (role.KillCooldown > 0)
                 return false;
 
                 if (role.ClosestPlayer == null)
                 return false;
-
-                if (role.ClosestPlayer.IsGuarded2())
-                {
-                    role.KillCooldown = CustomGameOptions.GuardKCReset;
-                    return false; 
-                }
 
                 role.Control(role.ClosestPlayer);
                 Utils.Rpc(CustomRPC.SpiritualistControl, PlayerControl.LocalPlayer.PlayerId, role.ClosestPlayer.PlayerId);

@@ -1,6 +1,9 @@
 using HarmonyLib;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Modifiers.AssassinMod;
+using Reactor.Utilities;
+using TownOfUsEdited.Patches;
+using Reactor.Utilities.Extensions;
 
 namespace TownOfUsEdited.CrewmateRoles.JailorMod
 {
@@ -21,38 +24,58 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
 
                 if (__instance == role.Jailed)
                 {
-                    if (role.JailedPlayer.Is(Faction.Crewmates) || (role.JailedPlayer.Is(Faction.NeutralBenign) && !CustomGameOptions.CanJailNB)
-                    || (role.JailedPlayer.Is(Faction.NeutralKilling) && !CustomGameOptions.CanJailNK)
-                    || (role.JailedPlayer.Is(Faction.Coven) && !CustomGameOptions.CanJailCoven)
-                    || (role.JailedPlayer.Is(Faction.NeutralEvil) && !CustomGameOptions.CanJailNE)
-                    || (role.JailedPlayer.Is(Faction.Madmates) && !CustomGameOptions.CanJailMad))
+                    if (!role.CanJail) return false;
+                    if (role.JailedPlayer != null && !role.JailedPlayer.IsBlessed())
                     {
-                        role.CanJail = false;
-                        if (CustomGameOptions.JailorDies && !PlayerControl.LocalPlayer.Is(Faction.Madmates) && !role.JailedPlayer.Is(RoleEnum.Pestilence))
+                        if (!role.JailedPlayer.Is(RoleEnum.Pestilence))
+                        {
+                            AssassinKill.MurderPlayer(role.JailedPlayer, PlayerControl.LocalPlayer);
+                            Utils.Rpc(CustomRPC.Execution, role.JailedPlayer.PlayerId, PlayerControl.LocalPlayer.PlayerId);
+                        }
+                        else
                         {
                             AssassinKill.MurderPlayer(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer);
                             Utils.Rpc(CustomRPC.Execution, PlayerControl.LocalPlayer.PlayerId, PlayerControl.LocalPlayer.PlayerId);
                         }
+                        if ((role.JailedPlayer.Is(Faction.Crewmates) || (role.JailedPlayer.Is(Faction.NeutralBenign) && !CustomGameOptions.CanJailNB)
+                        || (role.JailedPlayer.Is(Faction.NeutralKilling) && !CustomGameOptions.CanJailNK)
+                        || (role.JailedPlayer.Is(Faction.Coven) && !CustomGameOptions.CanJailCoven)
+                        || (role.JailedPlayer.Is(Faction.NeutralEvil) && !CustomGameOptions.CanJailNE)
+                        || (role.JailedPlayer.Is(Faction.Madmates) && !CustomGameOptions.CanJailMad)) && !PlayerControl.LocalPlayer.Is(Faction.Madmates)
+                        && !role.Player.Data.IsDead)
+                        {
+                            role.CanJail = false;
+                            role.IncorrectKills++;
+                            if (CustomGameOptions.JailorDies && !role.JailedPlayer.Is(RoleEnum.Pestilence))
+                            {
+                                AssassinKill.MurderPlayer(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer);
+                                Utils.Rpc(CustomRPC.Execution, PlayerControl.LocalPlayer.PlayerId, PlayerControl.LocalPlayer.PlayerId);
+                            }
+                        }
+                        else if (PlayerControl.LocalPlayer.Is(Faction.Madmates) && !role.Player.Data.IsDead)
+                        {
+                            role.CanJail = false;
+                            role.Kills++;
+                        }
+                        else if (!role.Player.Data.IsDead)
+                        {
+                            role.CorrectKills++;
+                        }
+                        var jailedPlayerRole = Role.GetRole(role.JailedPlayer);
+                        jailedPlayerRole.DeathReason = DeathReasons.Executed;
+                        Utils.Rpc(CustomRPC.SetDeathReason, role.JailedPlayer.PlayerId, (byte)DeathReasons.Executed);
+                        role.JailedPlayer = null;
+                        role.JailCell.Destroy();
+                        role.Jailed.gameObject.SetActive(false);
                     }
-                    if (PlayerControl.LocalPlayer.Is(Faction.Madmates))
+                    else if (role.JailedPlayer.IsBlessed())
                     {
-                        role.CanJail = false;
+                        Coroutines.Start(Utils.FlashCoroutine(Colors.Oracle));
+                        foreach (var oracle in role.JailedPlayer.GetOracle())
+                        {
+                            Utils.Rpc(CustomRPC.Bless, oracle.Player.PlayerId, (byte)2);
+                        }
                     }
-                    if (!role.JailedPlayer.Is(RoleEnum.Pestilence))
-                    {
-                        AssassinKill.MurderPlayer(role.JailedPlayer, PlayerControl.LocalPlayer);
-                        Utils.Rpc(CustomRPC.Execution, role.JailedPlayer.PlayerId, PlayerControl.LocalPlayer.PlayerId);
-                    }
-                    else
-                    {
-                        AssassinKill.MurderPlayer(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer);
-                        Utils.Rpc(CustomRPC.Execution,  PlayerControl.LocalPlayer.PlayerId, PlayerControl.LocalPlayer.PlayerId);
-                    }
-                    var jailedPlayerRole = Role.GetRole(role.JailedPlayer);
-                    jailedPlayerRole.DeathReason = DeathReasons.Executed;
-                    Utils.Rpc(CustomRPC.SetDeathReason, role.JailedPlayer.PlayerId, (byte)DeathReasons.Executed);
-                    role.Jailed.gameObject.SetActive(false);
-                    role.Jailed.ClearButtons();
                     return false;
                 }
                 else return true;

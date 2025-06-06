@@ -14,7 +14,7 @@ namespace TownOfUsEdited.Roles
             RoleType = RoleEnum.Prosecutor;
             AddToRoleHistory(RoleType);
             Faction = Faction.Crewmates;
-            Alignment = Alignment.CrewmateSupport;
+            Alignment = Alignment.CrewmatePower;
             StartProsecute = false;
             Prosecuted = false;
             ProsecuteThisMeeting = false;

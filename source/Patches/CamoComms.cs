@@ -9,40 +9,18 @@ namespace TownOfUsEdited
 
         public static bool IsCamoed => CommsEnabled;
 
-        public static void Postfix(HudManager __instance)
+        public static void Postfix()
         {
             if (CustomGameOptions.ColourblindComms)
             {
                 if (ShipStatus.Instance != null)
-                    switch (GameOptionsManager.Instance.currentNormalGameOptions.MapId)
+                {
+                    if (Utils.CommsCamouflaged())
                     {
-                        default:
-                        case 0:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 6:
-                            var comms1 = ShipStatus.Instance.Systems[SystemTypes.Comms].Cast<HudOverrideSystemType>();
-                            if (comms1.IsActive)
-                            {
-                                CommsEnabled = true;
-                                Utils.GroupCamouflage();
-                                return;
-                            }
-
-                            break;
-                        case 1:
-                        case 5:
-                            var comms2 = ShipStatus.Instance.Systems[SystemTypes.Comms].Cast<HqHudSystemType>();
-                            if (comms2.IsActive)
-                            {
-                                CommsEnabled = true;
-                                Utils.GroupCamouflage();
-                                return;
-                            }
-
-                            break;
+                        CommsEnabled = true;
+                        Utils.GroupCamouflage();
                     }
+                }
 
                 if (CommsEnabled)
                 {

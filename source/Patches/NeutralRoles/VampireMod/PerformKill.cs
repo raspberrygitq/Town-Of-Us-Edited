@@ -4,10 +4,10 @@ using UnityEngine;
 using AmongUs.GameOptions;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using System.Linq;
-using TownOfUsEdited.Roles.Cultist;
 using TownOfUsEdited.Patches;
+using TownOfUsEdited.CrewmateRoles.PlumberMod;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 
 namespace TownOfUsEdited.NeutralRoles.VampireMod
 {
@@ -22,7 +22,7 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
             if (!PlayerControl.LocalPlayer.CanMove || role.ClosestPlayer == null) return false;
             if (role.Cooldown > 0) return false;
             if (!__instance.enabled) return false;
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (Vector2.Distance(role.ClosestPlayer.GetTruePosition(),
                 PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
             if (role.ClosestPlayer == null) return false;
@@ -41,9 +41,6 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                     role.Cooldown = CustomGameOptions.BiteCd;
                     return false;
                 }
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
-                var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-                if (!abilityUsed) return false;
                 else if ((role.ClosestPlayer.Is(Faction.Crewmates) || (role.ClosestPlayer.Is(Faction.NeutralBenign)
                     && CustomGameOptions.CanBiteNeutralBenign) || (role.ClosestPlayer.Is(Faction.NeutralEvil)
                     && CustomGameOptions.CanBiteNeutralEvil)) &&
@@ -52,19 +49,14 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                     var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
                     if (interact[4] == true)
                     {
+                        role.Cooldown = CustomGameOptions.BiteCd;
                         Convert(role.ClosestPlayer);
                         Utils.Rpc(CustomRPC.Bite, role.ClosestPlayer.PlayerId);
-                        role.Cooldown = CustomGameOptions.BiteCd;
                         return false;
                     }
                     if (interact[0] == true)
                     {
-                        role.Cooldown = CustomGameOptions.ProtectKCReset;
-                        return false;
-                    }
-                    else if (interact[1] == true)
-                    {
-                        role.Cooldown = CustomGameOptions.VestKCReset;
+                        role.Cooldown = CustomGameOptions.TempSaveCdReset;
                         return false;
                     }
                     else if (interact[3] == true) return false;
@@ -78,22 +70,10 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
             }
             else
             {
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
                 if (PlayerControl.LocalPlayer.IsControlled() && role.ClosestPlayer.Is(Faction.Coven))
                 {
                     Utils.Interact(role.ClosestPlayer, PlayerControl.LocalPlayer, true);
                     return false;
-                }
-                else if (role.ClosestPlayer.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(role.ClosestPlayer).UsingPotion
-                && Role.GetRole<PotionMaster>(role.ClosestPlayer).Potion == "Shield")
-                {
-                    role.Cooldown = CustomGameOptions.PotionKCDReset;
-                    return false;
-                }
-                if (role.ClosestPlayer.IsGuarded2())
-                {
-                    role.Cooldown = CustomGameOptions.GuardKCReset;
-                    return false; 
                 }
                 var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer, true);
                 if (interact[4] == true) return false;
@@ -104,12 +84,7 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                 }
                 else if (interact[1] == true)
                 {
-                    role.Cooldown = CustomGameOptions.ProtectKCReset;
-                return false;
-                }
-                else if (interact[2] == true)
-                {
-                    role.Cooldown = CustomGameOptions.VestKCReset;
+                    role.Cooldown = CustomGameOptions.TempSaveCdReset;
                     return false;
                 }
                 else if (interact[3] == true) return false;
@@ -131,8 +106,6 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                 snitch.ImpArrows.Clear();
             }
 
-            if (newVamp == StartImitate.ImitatingPlayer) StartImitate.ImitatingPlayer = null;
-
             if (newVamp.Is(RoleEnum.GuardianAngel))
             {
                 var ga = Role.GetRole<GuardianAngel>(newVamp);
@@ -153,11 +126,74 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                 medRole.MediatedPlayers.Clear();
             }
 
+            if (newVamp.Is(RoleEnum.Warden))
+            {
+                var warden = Role.GetRole<Warden>(newVamp);
+                if (warden.Fortified != null) ShowShield.ResetVisor(warden.Fortified, warden.Player);
+            }
+
+            if (newVamp.Is(RoleEnum.Medic))
+            {
+                var medic = Role.GetRole<Medic>(newVamp);
+                if (medic.ShieldedPlayer != null) ShowShield.ResetVisor(medic.ShieldedPlayer, medic.Player);
+            }
+
+            if (newVamp.Is(RoleEnum.Cleric))
+            {
+                var cleric = Role.GetRole<Cleric>(newVamp);
+                if (cleric.Barriered != null) cleric.UnBarrier();
+            }
+
+            if (newVamp.Is(RoleEnum.Plumber))
+            {
+                var plumberRole = Role.GetRole<Plumber>(newVamp);
+                foreach (GameObject barricade in plumberRole.Barricades)
+                {
+                    UnityEngine.Object.Destroy(barricade);
+                }
+            }
+
             if (PlayerControl.LocalPlayer == newVamp)
             {
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Investigator)) Footprint.DestroyAll(Role.GetRole<Investigator>(PlayerControl.LocalPlayer));
 
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff) || PlayerControl.LocalPlayer.Is(RoleEnum.Knight)) HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Cleric))
+                {
+                    var clericRole = Role.GetRole<Cleric>(PlayerControl.LocalPlayer);
+                    clericRole.CleanseButton.SetTarget(null);
+                    clericRole.CleanseButton.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Oracle))
+                {
+                    var oracleRole = Role.GetRole<Oracle>(PlayerControl.LocalPlayer);
+                    oracleRole.BlessButton.SetTarget(null);
+                    oracleRole.BlessButton.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Hunter))
+                {
+                    var hunterRole = Role.GetRole<Hunter>(PlayerControl.LocalPlayer);
+                    UnityEngine.Object.Destroy(hunterRole.UsesText);
+                    hunterRole.StalkButton.SetTarget(null);
+                    hunterRole.StalkButton.gameObject.SetActive(false);
+                    HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector))
+                {
+                    var sc = Role.GetRole<SoulCollector>(PlayerControl.LocalPlayer);
+                    SoulExtensions.ClearSouls(sc.Souls);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Plumber))
+                {
+                    var plumberRole = Role.GetRole<Plumber>(PlayerControl.LocalPlayer);
+                    plumberRole.Vent = null;
+                    UnityEngine.Object.Destroy(plumberRole.UsesText);
+                }
 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer))
                 {
@@ -229,6 +265,37 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                     var gaRole = Role.GetRole<GuardianAngel>(PlayerControl.LocalPlayer);
                     UnityEngine.Object.Destroy(gaRole.UsesText);
                 }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
+                {
+                    var mercRole = Role.GetRole<Mercenary>(PlayerControl.LocalPlayer);
+                    mercRole.GuardButton.SetTarget(null);
+                    mercRole.GuardButton.gameObject.SetActive(false);
+                    UnityEngine.Object.Destroy(mercRole.UsesText);
+                    UnityEngine.Object.Destroy(mercRole.GoldText);
+                }
+            }
+
+            if (oldRole.ExtraButtons.Any())
+            {
+                foreach (var button in oldRole.ExtraButtons)
+                {
+                    if (PlayerControl.LocalPlayer == newVamp)
+                    {
+                        button.gameObject.SetActive(false);
+                    }
+                }
+            }
+
+            if (oldRole.ButtonLabels.Any())
+            {
+                foreach (var label in oldRole.ButtonLabels)
+                {
+                    if (PlayerControl.LocalPlayer == newVamp)
+                    {
+                        label.gameObject.SetActive(false);
+                    }
+                }
             }
 
             Role.RoleDictionary.Remove(newVamp.PlayerId);
@@ -253,12 +320,13 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                 role.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
                 role.SpawnedAs = false;
                 role.OldRole = oldRole;
+                role.RegenTask(); // To see Vampire task text with mci fr fr
             }
 
             if (CustomGameOptions.NewVampCanAssassin
             && !CustomGameOptions.AssassinImpostorRole) new Roles.Modifiers.Assassin(newVamp);
 
-            PlayerControl_Die.Postfix();
+            PlayerControl_Die.CheckEnd();
         }
     }
 }

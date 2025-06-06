@@ -32,7 +32,8 @@ namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
 
             role.DragDropButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.DragDropButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
@@ -42,7 +43,7 @@ namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
                 var data = PlayerControl.LocalPlayer.Data;
                 var isDead = data.IsDead;
                 var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
-                var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
                 var flag = (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !data.IsDead) &&
                            (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                            PlayerControl.LocalPlayer.CanMove;
@@ -61,6 +62,28 @@ namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
 
                     var distance = Vector2.Distance(truePosition, component.TruePosition);
                     if (!(distance < closestDistance)) continue;
+                    bool someoneDragging = false;
+                    foreach (var diener in Role.GetRoles(RoleEnum.Undertaker))
+                    {
+                        if (diener.Player == PlayerControl.LocalPlayer) continue;
+                        var dienerRole = (Undertaker)diener;
+                        if (dienerRole.CurrentlyDragging == component)
+                        {
+                            someoneDragging = true;
+                            continue;
+                        }
+                    }
+                    foreach (var doctor in Role.GetRoles(RoleEnum.Doctor))
+                    {
+                        if (doctor.Player == PlayerControl.LocalPlayer) continue;
+                        var doctorRole = (Doctor)doctor;
+                        if (doctorRole.CurrentlyDragging == component)
+                        {
+                            someoneDragging = true;
+                            continue;
+                        }
+                    }
+                    if (someoneDragging) continue;
                     closestBody = component;
                     closestDistance = distance;
                 }

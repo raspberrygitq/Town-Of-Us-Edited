@@ -24,26 +24,14 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
                     if (role.ClosestPlayerIgnite == null) return false;
                     var distBetweenPlayers2 = Utils.GetDistBetweenPlayers(PlayerControl.LocalPlayer, role.ClosestPlayerIgnite);
                     var flag3 = distBetweenPlayers2 <
-                                GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                                LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
                     if (!flag3) return false;
                     if (!role.DousedPlayers.Contains(role.ClosestPlayerIgnite.PlayerId)) return false;
 
-                    if (PlayerControl.LocalPlayer.IsJailed()) return false;
                     if (PlayerControl.LocalPlayer.IsControlled() && role.ClosestPlayerIgnite.Is(Faction.Coven))
                     {
                         Utils.Interact(role.ClosestPlayerIgnite, PlayerControl.LocalPlayer, true);
                         return false;
-                    }
-                    else if (role.ClosestPlayerIgnite.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(role.ClosestPlayerIgnite).UsingPotion
-                    && Role.GetRole<PotionMaster>(role.ClosestPlayerIgnite).Potion == "Shield")
-                    {
-                        role.Cooldown = CustomGameOptions.PotionKCDReset;
-                        return false;
-                    }
-                    if (role.ClosestPlayerIgnite.IsGuarded2())
-                    {
-                        role.Cooldown = CustomGameOptions.GuardKCReset;
-                        return false; 
                     }
                     var interact2 = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayerIgnite);
                     if (interact2[4] == true) role.Ignite();
@@ -54,7 +42,7 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
                     }
                     else if (interact2[1] == true)
                     {
-                        role.Cooldown = CustomGameOptions.ProtectKCReset;
+                        role.Cooldown = CustomGameOptions.TempSaveCdReset;
                         return false;
                     }
                     else if (interact2[3] == true) return false;
@@ -69,19 +57,12 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
             if (role.Cooldown > 0f) return false;
             var distBetweenPlayers = Utils.GetDistBetweenPlayers(PlayerControl.LocalPlayer, role.ClosestPlayerDouse);
             var flag2 = distBetweenPlayers <
-                        GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                        LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (!flag2) return false;
             if (role.DousedPlayers.Contains(role.ClosestPlayerDouse.PlayerId)) return false;
-            if (PlayerControl.LocalPlayer.IsJailed()) return false;
             if (PlayerControl.LocalPlayer.IsControlled() && role.ClosestPlayerDouse.Is(Faction.Coven))
             {
                 Utils.Interact(role.ClosestPlayerDouse, PlayerControl.LocalPlayer, true);
-                return false;
-            }
-            else if (role.ClosestPlayerDouse.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(role.ClosestPlayerDouse).UsingPotion
-            && Role.GetRole<PotionMaster>(role.ClosestPlayerDouse).Potion == "Shield")
-            {
-                role.Cooldown = CustomGameOptions.PotionKCDReset;
                 return false;
             }
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayerDouse);
@@ -93,7 +74,7 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
             }
             else if (interact[1] == true)
             {
-                role.Cooldown = CustomGameOptions.ProtectKCReset;
+                role.Cooldown = CustomGameOptions.TempSaveCdReset;
                 return false;
             }
             else if (interact[3] == true) return false;

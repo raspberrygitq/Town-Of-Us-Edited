@@ -18,6 +18,12 @@ namespace TownOfUsEdited.CustomOption
                 Title = "Other Ghosts Visible When Dead",
                 OnClick = () => { return TownOfUsEdited.DeadSeeGhosts.Value = !TownOfUsEdited.DeadSeeGhosts.Value; },
                 DefaultValue = TownOfUsEdited.DeadSeeGhosts.Value
+            },
+            new()
+            {
+                Title = "Disable Lobby Music",
+                OnClick = () => { return TownOfUsEdited.DisableLobbyMusic.Value = !TownOfUsEdited.DisableLobbyMusic.Value; },
+                DefaultValue = TownOfUsEdited.DisableLobbyMusic.Value
             }
         };
 
@@ -27,9 +33,10 @@ namespace TownOfUsEdited.CustomOption
         private static ToggleButtonBehaviour buttonPrefab;
         private static Vector3? _origin;
 
+        [HarmonyPatch(typeof(OptionsMenuBehaviour), nameof(OptionsMenuBehaviour.Start))]
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(MainMenuManager), nameof(MainMenuManager.Start))]
-        public static void MainMenuManager_StartPostfix(MainMenuManager __instance)
+
+        public static void OptionsMenuBehaviour_StartPostfix(OptionsMenuBehaviour __instance)
         {
             // Prefab for the title
             var go = new GameObject("TitleText");
@@ -38,15 +45,8 @@ namespace TownOfUsEdited.CustomOption
             tmp.alignment = TextAlignmentOptions.Center;
             tmp.transform.localPosition += Vector3.left * 0.2f;
             titleText = Object.Instantiate(tmp);
-            titleText.gameObject.SetActive(false);
-            Object.DontDestroyOnLoad(titleText);
-        }
+            titleText.gameObject.SetActive(true);
 
-        [HarmonyPatch(typeof(OptionsMenuBehaviour), nameof(OptionsMenuBehaviour.Start))]
-        [HarmonyPostfix]
-
-        public static void OptionsMenuBehaviour_StartPostfix(OptionsMenuBehaviour __instance)
-        {
             if (!__instance.CensorChatButton) return;
 
             if (!popUp)
@@ -142,7 +142,7 @@ namespace TownOfUsEdited.CustomOption
             var title = Object.Instantiate(titleText, popUp.transform);
             title.GetComponent<RectTransform>().localPosition = Vector3.up * 2.3f;
             title.gameObject.SetActive(true);
-            title.text = "TOU options";
+            title.text = "TOUE options";
             title.name = "TitleText";
         }
 

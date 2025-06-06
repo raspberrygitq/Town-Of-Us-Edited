@@ -19,11 +19,15 @@ namespace TownOfUsEdited.Roles.Modifiers
 
         public void ResetPosition()
         {
+            if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (Position != Vector3.zero)
             {
                 PlayerControl.LocalPlayer.NetTransform.RpcSnapTo(Position);
                 if (SubmergedCompatibility.isSubmerged())
-                    SubmergedCompatibility.ChangeFloor(Position.y > -7);
+                {
+                    SubmergedCompatibility.ChangeFloor(PlayerControl.LocalPlayer.GetTruePosition().y > -7);
+                    SubmergedCompatibility.CheckOutOfBoundsElevator(PlayerControl.LocalPlayer);
+                }
 
                 Position = Vector3.zero;
 

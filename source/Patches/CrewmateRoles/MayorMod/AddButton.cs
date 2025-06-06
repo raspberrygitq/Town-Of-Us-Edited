@@ -61,12 +61,6 @@ namespace TownOfUsEdited.CrewmateRoles.MayorMod
                 ShowHideButtons.HideTarget(assassin, voteArea.TargetPlayerId);
                 voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Assassin))
-            {
-                var assassin = Role.GetRole<Assassin2>(PlayerControl.LocalPlayer);
-                ShowHideButtonsAssassin.HideTarget(assassin, voteArea.TargetPlayerId);
-                voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
-            }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Ritualist))
             {
                 var rit = Role.GetRole<Ritualist>(PlayerControl.LocalPlayer);

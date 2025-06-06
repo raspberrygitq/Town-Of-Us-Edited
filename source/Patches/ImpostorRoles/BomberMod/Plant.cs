@@ -33,6 +33,7 @@ namespace TownOfUsEdited.ImpostorRoles.BomberMod
                     if (!abilityUsed) return false;
                     role.Detonated = false;
                     var pos = PlayerControl.LocalPlayer.transform.position;
+                    pos.y -= 0.2727f;
                     pos.z += 0.001f;
                     role.DetonatePoint = pos;
                     role.PlantButton.graphic.sprite = DetonateSprite;

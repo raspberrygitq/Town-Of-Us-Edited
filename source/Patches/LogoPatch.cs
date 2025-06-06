@@ -8,7 +8,7 @@ namespace TownOfUsEdited
     {
         private static Sprite Sprite => TownOfUsEdited.ToUBanner;
         static void Postfix(PingTracker __instance) {
-            var touLogo = new GameObject("bannerLogo_TownOfUsEditedEdited");
+            var touLogo = new GameObject("bannerLogo_TownOfUsEdited");
             touLogo.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
 
             var renderer = touLogo.AddComponent<SpriteRenderer>();

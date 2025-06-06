@@ -20,7 +20,8 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
 
             __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             __instance.KillButton.SetCoolDown(role.KillTimer(), CustomGameOptions.InfectiousCD);
 
             if (role.InfectButton == null)
@@ -36,16 +37,20 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
 
             role.InfectButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             foreach (var player in PlayerControl.AllPlayerControls)
             {
-                var playerRole = Role.GetRole(player);
-                if (role.Infected.Contains(player.PlayerId) && playerRole.InfectionState == 0) player.nameText().color = Color.blue;
-                else if (playerRole.InfectionState == 1) player.nameText().color = Color.yellow;
-                else if (playerRole.InfectionState == 2) player.nameText().color = Palette.Orange;
-                else if (playerRole.InfectionState == 3) player.nameText().color = Color.red;
-                else if (playerRole.InfectionState == 4) player.nameText().color = Color.black;
+                if (!player.Is(RoleEnum.Infectious))
+                {
+                    var playerRole = Role.GetRole(player);
+                    if (role.Infected.Contains(player.PlayerId) && playerRole.InfectionState == 0) player.nameText().color = Color.blue;
+                    else if (playerRole.InfectionState == 1) player.nameText().color = Color.yellow;
+                    else if (playerRole.InfectionState == 2) player.nameText().color = Palette.Orange;
+                    else if (playerRole.InfectionState == 3) player.nameText().color = Color.red;
+                    else if (playerRole.InfectionState == 4) player.nameText().color = Color.black;
+                }
             }
 
             var notinfected = PlayerControl.AllPlayerControls

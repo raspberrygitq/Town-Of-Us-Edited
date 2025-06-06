@@ -15,7 +15,6 @@ using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
-using TownOfUsEdited.Patches.ScreenEffects;
 using System.IO;
 using TownOfUsEdited.CrewmateRoles.DetectiveMod;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
@@ -27,18 +26,20 @@ namespace TownOfUsEdited
     [BepInDependency(SubmergedCompatibility.SUBMERGED_GUID, BepInDependency.DependencyFlags.SoftDependency)]
     [ReactorModFlags(Reactor.Networking.ModFlags.RequireOnAllClients)]
     [BepInIncompatibility("MalumMenu")]
-    [BepInIncompatibility("com.sinai.unityexplorer")]
 
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "1.0.4";
+        public const string VersionString = "1.1.0";
         public static System.Version Version = System.Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
         public static AssetLoader bundledAssets;
 
         public static Sprite JanitorClean;
+        public static Sprite SwitchRole;
+        public static Sprite ReleaseSprite;
+        public static Sprite PlaceHolder;
         public static Sprite SabotageCoven;
         public static Sprite Potion;
         public static Sprite Drink;
@@ -49,8 +50,6 @@ namespace TownOfUsEdited
         public static Sprite Freeze;
         public static Sprite Blind;
         public static Sprite Rewind;
-        public static Sprite AdminSprite;
-        public static Sprite VitalsSprite;
         public static Sprite Dissociate;
         public static Sprite Eat;
         public static Sprite Avenge;
@@ -61,15 +60,12 @@ namespace TownOfUsEdited
         public static Sprite WerewolfConvertSprite;
         public static Sprite StoreSprite;
         public static Sprite ManipulateSprite;
-        public static Sprite ControlSprite;
         public static Sprite JailSprite;
         public static Sprite PoisonSprite;
-        public static Sprite PoisonedSprite;
         public static Sprite ShiftButton;
         public static Sprite DocReviveButton;
         public static Sprite CapZoomButton;
         public static Sprite EngineerFix;
-        public static Sprite Light;
         public static Sprite SwapperSwitch;
         public static Sprite SwapperSwitchDisabled;
         public static Sprite Footprint;
@@ -77,10 +73,8 @@ namespace TownOfUsEdited
         public static Sprite MedicSprite;
         public static Sprite SeerSprite;
         public static Sprite SampleSprite;
-        public static Sprite MorphSprite;
         public static Sprite Arrow;
         public static Sprite MineSprite;
-        public static Sprite SwoopSprite;
         public static Sprite DouseSprite;
         public static Sprite IgniteSprite;
         public static Sprite ReviveSprite;
@@ -96,7 +90,6 @@ namespace TownOfUsEdited
         public static Sprite FlashSprite;
         public static Sprite AlertSprite;
         public static Sprite RememberSprite;
-        public static Sprite TrackSprite;
         public static Sprite PlantSprite;
         public static Sprite DetonateSprite;
         public static Sprite TransportSprite;
@@ -112,11 +105,13 @@ namespace TownOfUsEdited
         public static Sprite RampageSprite;
         public static Sprite UnRampageSprite;
         public static Sprite TrapSprite;
+        public static Sprite TrackSprite;
         public static Sprite InspectSprite;
         public static Sprite ExamineSprite;
         public static Sprite EscapeSprite;
         public static Sprite MarkSprite;
         public static Sprite Revive2Sprite;
+        public static Sprite ChameleonSwoop;
         public static Sprite WhisperSprite;
         public static Sprite ImitateSelectSprite;
         public static Sprite ImitateDeselectSprite;
@@ -143,13 +138,22 @@ namespace TownOfUsEdited
         public static Sprite HysteriaSprite;
         public static Sprite InJailSprite;
         public static Sprite ExecuteSprite;
-        public static Sprite CollectSprite;
         public static Sprite ReapSprite;
         public static Sprite SoulSprite;
         public static Sprite Voodoo;
         public static Sprite CampSprite;
         public static Sprite ShootSprite;
         public static Sprite WatchSprite;
+        public static Sprite BlessSprite;
+        public static Sprite FlushSprite;
+        public static Sprite BlockSprite;
+        public static Sprite BarricadeSprite;
+        public static Sprite BlindSprite;
+        public static Sprite GuardSprite;
+        public static Sprite BribeSprite;
+        public static Sprite BarrierSprite;
+        public static Sprite CleanseSprite;
+        public static Sprite DetectSprite;
 
         public static Sprite ToUBanner;
         public static Sprite UpdateTOUButton;
@@ -160,6 +164,7 @@ namespace TownOfUsEdited
         public static Sprite ZoomPlusActiveButton;
         public static Sprite ZoomMinusActiveButton;
         public static Sprite NextButton;
+        public static Sprite heh;
 
         public static Vector3 ButtonPosition { get; private set; } = new Vector3(2.6f, 0.7f, -9f);
 
@@ -168,6 +173,7 @@ namespace TownOfUsEdited
 
         private Harmony _harmony;
         public static ConfigEntry<bool> DeadSeeGhosts { get; set; }
+        public static ConfigEntry<bool> DisableLobbyMusic { get; set; }
         public static ConfigEntry<bool> HideDevStatus { get; set; }
         public static string RuntimeLocation;
         public override void Load()
@@ -182,9 +188,24 @@ namespace TownOfUsEdited
 
             bundledAssets = new();
 
+            PlaceHolder = CreateSprite("TownOfUsEdited.Resources.Placeholder.png");
+            SwitchRole = CreateSprite("TownOfUsEdited.Resources.SwitchRole.png");
+            heh = CreateSprite("TownOfUsEdited.Resources.heh.png");
+            ReleaseSprite = CreateSprite("TownOfUsEdited.Resources.Release.png");
             WatchSprite = CreateSprite("TownOfUsEdited.Resources.Watch.png");
+            BlessSprite = CreateSprite("TownOfUsEdited.Resources.Bless.png");
+            FlushSprite = CreateSprite("TownOfUsEdited.Resources.Flush.png");
+            BlockSprite = CreateSprite("TownOfUsEdited.Resources.Block.png");
+            BarricadeSprite = CreateSprite("TownOfUsEdited.Resources.Barricade.png");
+            BlindSprite = CreateSprite("TownOfUsEdited.Resources.Blind.png");
+            GuardSprite = CreateSprite("TownOfUsEdited.Resources.Guard.png");
+            BribeSprite = CreateSprite("TownOfUsEdited.Resources.Bribe.png");
+            BarrierSprite = CreateSprite("TownOfUsEdited.Resources.Barrier.png");
+            CleanseSprite = CreateSprite("TownOfUsEdited.Resources.Cleanse.png");
+            DetectSprite = CreateSprite("TownOfUsEdited.Resources.Detect.png");
             ShootSprite = CreateSprite("TownOfUsEdited.Resources.Shoot.png");
             CampSprite = CreateSprite("TownOfUsEdited.Resources.Camp.png");
+            ChameleonSwoop = CreateSprite("TownOfUsEdited.Resources.ChameleonSwoop.png");
             JanitorClean = CreateSprite("TownOfUsEdited.Resources.Janitor.png");
             Voodoo = CreateSprite("TownOfUsEdited.Resources.Voodoo.png");
             Potion = CreateSprite("TownOfUsEdited.Resources.Potion.png");
@@ -197,11 +218,10 @@ namespace TownOfUsEdited
             Freeze = CreateSprite("TownOfUsEdited.Resources.Freeze.png");
             Blind = CreateSprite("TownOfUsEdited.Resources.Blind.png");
             Rewind = CreateSprite("TownOfUsEdited.Resources.Rewind.png");
-            AdminSprite = CreateSprite("TownOfUsEdited.Resources.Admin.png");
-            VitalsSprite = CreateSprite("TownOfUsEdited.Resources.Vitals.png");
             Eat = CreateSprite("TownOfUsEdited.Resources.Eat.png");
             Dissociate = CreateSprite("TownOfUsEdited.Resources.Dissociate.png");
             Avenge = CreateSprite("TownOfUsEdited.Resources.Avenge.png");
+            TrackSprite = CreateSprite("TownOfUsEdited.Resources.Track.png");
             Spell = CreateSprite("TownOfUsEdited.Resources.Spell.png");
             Curse = CreateSprite("TownOfUsEdited.Resources.Curse.png");
             Bounty = CreateSprite("TownOfUsEdited.Resources.Bounty.png");
@@ -209,15 +229,12 @@ namespace TownOfUsEdited
             WerewolfConvertSprite = CreateSprite("TownOfUsEdited.Resources.WerewolfConvert.png");
             StoreSprite = CreateSprite("TownOfUsEdited.Resources.Store.png");
             ManipulateSprite = CreateSprite("TownOfUsEdited.Resources.ManipulateButton.png");
-            ControlSprite = CreateSprite("TownOfUsEdited.Resources.Control2.png");
             JailSprite = CreateSprite("TownOfUsEdited.Resources.JailButton.png");
             PoisonSprite = CreateSprite("TownOfUsEdited.Resources.Poison.png");
-            PoisonedSprite = CreateSprite("TownOfUsEdited.Resources.Poisoned.png");
             ShiftButton = CreateSprite("TownOfUsEdited.Resources.Shift.png");
             DocReviveButton = CreateSprite("TownOfUsEdited.Resources.DocReviveButton.png");
             CapZoomButton = CreateSprite("TownOfUsEdited.Resources.CapZoom.png");
             EngineerFix = CreateSprite("TownOfUsEdited.Resources.Engineer.png");
-            Light = CreateSprite("TownOfUsEdited.Resources.Light.png");
             SwapperSwitch = CreateSprite("TownOfUsEdited.Resources.SwapperSwitch.png");
             SwapperSwitchDisabled = CreateSprite("TownOfUsEdited.Resources.SwapperSwitchDisabled.png");
             Footprint = CreateSprite("TownOfUsEdited.Resources.Footprint.png");
@@ -225,10 +242,8 @@ namespace TownOfUsEdited
             MedicSprite = CreateSprite("TownOfUsEdited.Resources.Medic.png");
             SeerSprite = CreateSprite("TownOfUsEdited.Resources.Seer.png");
             SampleSprite = CreateSprite("TownOfUsEdited.Resources.Sample.png");
-            MorphSprite = CreateSprite("TownOfUsEdited.Resources.Morph.png");
             Arrow = CreateSprite("TownOfUsEdited.Resources.Arrow.png");
             MineSprite = CreateSprite("TownOfUsEdited.Resources.Mine.png");
-            SwoopSprite = CreateSprite("TownOfUsEdited.Resources.Swoop.png");
             DouseSprite = CreateSprite("TownOfUsEdited.Resources.Douse.png");
             IgniteSprite = CreateSprite("TownOfUsEdited.Resources.Ignite.png");
             ReviveSprite = CreateSprite("TownOfUsEdited.Resources.Revive.png");
@@ -244,7 +259,6 @@ namespace TownOfUsEdited
             FlashSprite = CreateSprite("TownOfUsEdited.Resources.Flash.png");
             AlertSprite = CreateSprite("TownOfUsEdited.Resources.Alert.png");
             RememberSprite = CreateSprite("TownOfUsEdited.Resources.Remember.png");
-            TrackSprite = CreateSprite("TownOfUsEdited.Resources.Track.png");
             PlantSprite = CreateSprite("TownOfUsEdited.Resources.Plant.png");
             DetonateSprite = CreateSprite("TownOfUsEdited.Resources.Detonate.png");
             TransportSprite = CreateSprite("TownOfUsEdited.Resources.Transport.png");
@@ -258,7 +272,6 @@ namespace TownOfUsEdited
             DarkerSprite = CreateSprite("TownOfUsEdited.Resources.Darker.png");
             InfectSprite = CreateSprite("TownOfUsEdited.Resources.Infect.png");
             RampageSprite = CreateSprite("TownOfUsEdited.Resources.Rampage.png");
-            UnRampageSprite = CreateSprite("TownOfUsEdited.Resources.UnRampage.png");
             TrapSprite = CreateSprite("TownOfUsEdited.Resources.Trap.png");
             InspectSprite = CreateSprite("TownOfUsEdited.Resources.Inspect.png");
             ExamineSprite = CreateSprite("TownOfUsEdited.Resources.Examine.png");
@@ -291,7 +304,6 @@ namespace TownOfUsEdited
             HysteriaSprite = CreateSprite("TownOfUsEdited.Resources.Hysteria.png");
             InJailSprite = CreateSprite("TownOfUsEdited.Resources.InJail.png");
             ExecuteSprite = CreateSprite("TownOfUsEdited.Resources.Execute.png");
-            CollectSprite = CreateSprite("TownOfUsEdited.Resources.Collect.png");
             ReapSprite = CreateSprite("TownOfUsEdited.Resources.Reap.png");
             SoulSprite = CreateSprite("TownOfUsEdited.Resources.Soul.png");
 
@@ -310,30 +322,17 @@ namespace TownOfUsEdited
             ClassInjector.RegisterTypeInIl2Cpp<CrimeScene>();
             ClassInjector.RegisterTypeInIl2Cpp<Soul>();
 
-            for (int i = 1; i <= 5; i++)
-            {
-                try
-                {
-                    var filePath = Application.persistentDataPath;
-                    var file = filePath + $"/GameSettings-Slot{i}";
-                    if (File.Exists(file))
-                    {
-                        string newFile = Path.Combine(filePath, $"Saved Settings {i}.txt");
-                        File.Move(file, newFile);
-                    }
-                }
-                catch { }
-            }
-
-
             // RegisterInIl2CppAttribute.Register();
 
-            DeadSeeGhosts = Config.Bind("Settings", "Dead See Other Ghosts", true, "Whether you see other dead player's ghosts while your dead");
+            DeadSeeGhosts = Config.Bind("Settings", "Dead See Other Ghosts", true, "Whether you see other dead players' ghosts while your dead");
+
+            DisableLobbyMusic = Config.Bind("Settings", "Disable Lobby Music", false, "Whether you want to disable the lobby Music in-game (can be changed in-game with settings)");
 
             HideDevStatus = Config.Bind("Settings", "Hide Special Status", false, "Toggle this to hide your special status when launching if you have one. You will still have access to your special perks.");
 
             _harmony.PatchAll();
             SubmergedCompatibility.Initialize();
+            IL2CPPChainloader.Instance.Finished += LevelImpostorCompatibility.Initialize; // LI has a circular dependency on TOU, so we need to wait for LI to finish loading before we can initialize it
 
             ServerManager.DefaultRegions = new Il2CppReferenceArray<IRegionInfo>(new IRegionInfo[0]);
         }

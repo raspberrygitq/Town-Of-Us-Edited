@@ -16,7 +16,7 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Avenger)) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             var role = Role.GetRole<Avenger>(PlayerControl.LocalPlayer);
 
             if (__instance == role.AvengeButton)
@@ -74,15 +74,9 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
             {
                 if (role.ClosestPlayer == null) return false;
                 if (!__instance.isActiveAndEnabled) return false;
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
                 if (PlayerControl.LocalPlayer.IsControlled() && role.ClosestPlayer.Is(Faction.Coven))
                 {
                     Utils.Interact(role.ClosestPlayer, PlayerControl.LocalPlayer, true);
-                    return false;
-                }
-                else if (role.ClosestPlayer.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(role.ClosestPlayer).UsingPotion
-                && Role.GetRole<PotionMaster>(role.ClosestPlayer).Potion == "Shield")
-                {
                     return false;
                 }
                 if (!role.Avenging) return false;
@@ -90,10 +84,6 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
                 if (Vector2.Distance(role.killer.GetTruePosition(),
                     PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
                 if (role.ClosestPlayer != role.killer) return false;
-                if (role.ClosestPlayer.IsGuarded2())
-                {
-                    return false; 
-                }
                 Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer, true);
                 role.Avenging = false;
                 role.killer = null;

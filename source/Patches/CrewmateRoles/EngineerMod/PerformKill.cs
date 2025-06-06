@@ -24,12 +24,13 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
             if (!abilityUsed) return false;
             role.UsesLeft -= 1;
             Utils.Rpc(CustomRPC.EngineerFix, PlayerControl.LocalPlayer.NetId);
-            switch (GameOptionsManager.Instance.currentNormalGameOptions.MapId)
+            int mapId = GameOptionsManager.Instance.currentNormalGameOptions.MapId;
+            if (AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) mapId = AmongUsClient.Instance.TutorialMapId;
+            switch (mapId)
             {
                 case 0:
                 case 3:
-                    var comms1 = ShipStatus.Instance.Systems[SystemTypes.Comms].Cast<HudOverrideSystemType>();
-                    if (comms1.IsActive) return FixComms();
+                    if (PlayerControl.LocalPlayer.AreCommsAffected()) return FixComms();
                     var reactor1 = ShipStatus.Instance.Systems[SystemTypes.Reactor].Cast<ReactorSystemType>();
                     if (reactor1.IsActive) return FixReactor(SystemTypes.Reactor);
                     var oxygen1 = ShipStatus.Instance.Systems[SystemTypes.LifeSupp].Cast<LifeSuppSystemType>();
@@ -39,8 +40,7 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
 
                     break;
                 case 1:
-                    var comms2 = ShipStatus.Instance.Systems[SystemTypes.Comms].Cast<HqHudSystemType>();
-                    if (comms2.IsActive) return FixMiraComms();
+                    if (PlayerControl.LocalPlayer.AreCommsAffected()) return FixMiraComms();
                     var reactor2 = ShipStatus.Instance.Systems[SystemTypes.Reactor].Cast<ReactorSystemType>();
                     if (reactor2.IsActive) return FixReactor(SystemTypes.Reactor);
                     var oxygen2 = ShipStatus.Instance.Systems[SystemTypes.LifeSupp].Cast<LifeSuppSystemType>();
@@ -50,16 +50,14 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
                     break;
 
                 case 2:
-                    var comms3 = ShipStatus.Instance.Systems[SystemTypes.Comms].Cast<HudOverrideSystemType>();
-                    if (comms3.IsActive) return FixComms();
+                    if (PlayerControl.LocalPlayer.AreCommsAffected()) return FixComms();
                     var seismic = ShipStatus.Instance.Systems[SystemTypes.Laboratory].Cast<ReactorSystemType>();
                     if (seismic.IsActive) return FixReactor(SystemTypes.Laboratory);
                     var lights3 = ShipStatus.Instance.Systems[SystemTypes.Electrical].Cast<SwitchSystem>();
                     if (lights3.IsActive) return FixLights(lights3);
                     break;
                 case 4:
-                    var comms4 = ShipStatus.Instance.Systems[SystemTypes.Comms].Cast<HudOverrideSystemType>();
-                    if (comms4.IsActive) return FixComms();
+                    if (PlayerControl.LocalPlayer.AreCommsAffected()) return FixComms();
                     var reactor = ShipStatus.Instance.Systems[SystemTypes.HeliSabotage].Cast<HeliSabotageSystem>();
                     if (reactor.IsActive) return FixAirshipReactor();
                     var lights4 = ShipStatus.Instance.Systems[SystemTypes.Electrical].Cast<SwitchSystem>();
@@ -68,22 +66,20 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
                 case 5:
                     var reactor7 = ShipStatus.Instance.Systems[SystemTypes.Reactor].Cast<ReactorSystemType>();
                     if (reactor7.IsActive) return FixReactor(SystemTypes.Reactor);
-                    var comms7 = ShipStatus.Instance.Systems[SystemTypes.Comms].Cast<HqHudSystemType>();
-                    if (comms7.IsActive) return FixMiraComms();
+                    if (PlayerControl.LocalPlayer.AreCommsAffected()) return FixMiraComms();
                     var mushroom = ShipStatus.Instance.Systems[SystemTypes.MushroomMixupSabotage].Cast<MushroomMixupSabotageSystem>();
                     if (mushroom.IsActive)
                     {
                         mushroom.currentSecondsUntilHeal = 0.1f;
                         return false;
-                    } 
+                    }
                     break;
                 case 6:
                     var reactor5 = ShipStatus.Instance.Systems[SystemTypes.Reactor].Cast<ReactorSystemType>();
                     if (reactor5.IsActive) return FixReactor(SystemTypes.Reactor);
                     var lights5 = ShipStatus.Instance.Systems[SystemTypes.Electrical].Cast<SwitchSystem>();
                     if (lights5.IsActive) return FixLights(lights5);
-                    var comms5 = ShipStatus.Instance.Systems[SystemTypes.Comms].Cast<HudOverrideSystemType>();
-                    if (comms5.IsActive) return FixComms();
+                    if (PlayerControl.LocalPlayer.AreCommsAffected()) return FixComms();
                     foreach (PlayerTask i in PlayerControl.LocalPlayer.myTasks)
                     {
                         if (i.TaskType == Patches.SubmergedCompatibility.RetrieveOxygenMask)
@@ -93,8 +89,7 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
                     }
                     break;
                 case 7:
-                    var comms6 = ShipStatus.Instance.Systems[SystemTypes.Comms].Cast<HudOverrideSystemType>();
-                    if (comms6.IsActive) return FixComms();
+                    if (PlayerControl.LocalPlayer.AreCommsAffected()) return FixComms();
                     var reactor6 = ShipStatus.Instance.Systems[SystemTypes.Reactor].Cast<ReactorSystemType>();
                     if (reactor6.IsActive) return FixReactor(SystemTypes.Reactor);
                     var oxygen6 = ShipStatus.Instance.Systems[SystemTypes.LifeSupp].Cast<LifeSuppSystemType>();

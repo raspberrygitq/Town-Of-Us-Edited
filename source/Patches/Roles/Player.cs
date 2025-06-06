@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Il2CppSystem.Collections.Generic;
+using Reactor.Utilities;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ namespace TownOfUsEdited.Roles
                 Utils.Rpc(CustomRPC.PlayerWin, Player.PlayerId);
                 Wins();
                 Utils.EndGame();
-                System.Console.WriteLine("GAME OVER REASON: Player Win (Battle Royale)");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Player Win (Battle Royale)");
                 return;
             }
 

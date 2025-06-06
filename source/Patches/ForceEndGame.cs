@@ -1,5 +1,6 @@
 using System.Linq;
 using HarmonyLib;
+using Reactor.Utilities;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -17,7 +18,6 @@ namespace TownOfUsEdited.Patches
                 if (Role.GetRoles(RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut)) return;
                 if (Role.GetRoles(RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing)) return;
                 if (Role.GetRoles(RoleEnum.Vulture).Any(x => ((Vulture)x).VultureWins)) return;
-                if (Role.GetRoles(RoleEnum.SoulCollector).Any(x => ((SoulCollector)x).CollectedSouls)) return;
             }
             if (!Role.ForceGameEnd) return;
             var text = Object.Instantiate(__instance.WinText);
@@ -42,7 +42,7 @@ namespace TownOfUsEdited.Patches
             {
                 Role.ForceGameEnd = true;
                 Utils.Rpc(CustomRPC.ForceEndGame);
-                System.Console.WriteLine("GAME OVER REASON: Host Forced End Game");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Host Forced End Game");
                 Utils.EndGame();
             }
         }

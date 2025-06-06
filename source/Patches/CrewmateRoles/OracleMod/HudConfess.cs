@@ -1,12 +1,15 @@
-﻿using System.Linq;
-using HarmonyLib;
+﻿﻿using HarmonyLib;
 using TownOfUsEdited.Roles;
+using UnityEngine;
+using System.Linq;
 
 namespace TownOfUsEdited.CrewmateRoles.OracleMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudConfess
     {
+        public static Sprite Bless => TownOfUsEdited.BlessSprite;
+
         [HarmonyPatch(nameof(HudManager.Update))]
         public static void Postfix(HudManager __instance)
         {
@@ -18,9 +21,35 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
 
             var role = Role.GetRole<Oracle>(PlayerControl.LocalPlayer);
 
+            if (role.BlessButton == null)
+            {
+                role.BlessButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
+                role.BlessButton.graphic.enabled = true;
+                role.BlessButton.gameObject.SetActive(false);
+            }
+
+            if (PlayerControl.LocalPlayer.Data.IsDead) role.BlessButton.SetTarget(null);
+
+            var notBlessed = PlayerControl.AllPlayerControls
+                .ToArray()
+                .Where(x => x != role.Blessed)
+                .ToList();
+
+            role.BlessButton.graphic.sprite = Bless;
+            role.BlessButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
+
+            role.BlessButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.BlessButton.SetCoolDown(role.BlessTimer(), CustomGameOptions.BlessCD);
+            if (PlayerControl.LocalPlayer.moveable) Utils.SetTarget(ref role.ClosestBlessedPlayer, role.BlessButton, float.NaN, notBlessed);
+            else role.BlessButton.SetTarget(null);
+
             confessButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             confessButton.SetCoolDown(role.ConfessTimer(), CustomGameOptions.ConfessCd);
 
             var notConfessing = PlayerControl.AllPlayerControls
@@ -29,19 +58,6 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
                 .ToList();
 
             Utils.SetTarget(ref role.ClosestPlayer, confessButton, float.NaN, notConfessing);
-
-            var renderer = confessButton.graphic;
-
-            if (role.ClosestPlayer != null)
-            {
-                renderer.color = Palette.EnabledColor;
-                renderer.material.SetFloat("_Desat", 0f);
-            }
-            else
-            {
-                renderer.color = Palette.DisabledClear;
-                renderer.material.SetFloat("_Desat", 1f);
-            }
         }
     }
 }

@@ -28,10 +28,10 @@ namespace TownOfUsEdited.CustomOption
                         if (commonTasks != null) commonTasks.ValidRange = new FloatRange(0f, 4f);
 
                         var shortTasks = __instance.Children.ToArray().FirstOrDefault(x => x.TryCast<NumberOption>()?.intOptionName == Int32OptionNames.NumShortTasks).Cast<NumberOption>();
-                        if (shortTasks != null) shortTasks.ValidRange = new FloatRange(0f, 26f);
+                        if (shortTasks != null) shortTasks.ValidRange = new FloatRange(0f, 8f);
 
                         var longTasks = __instance.Children.ToArray().FirstOrDefault(x => x.TryCast<NumberOption>()?.intOptionName == Int32OptionNames.NumLongTasks).Cast<NumberOption>();
-                        if (longTasks != null) longTasks.ValidRange = new FloatRange(0f, 15f);
+                        if (longTasks != null) longTasks.ValidRange = new FloatRange(0f, 4f);
                     }
                     catch
                     {
@@ -105,17 +105,6 @@ namespace TownOfUsEdited.CustomOption
 
                             else if (option.Type == CustomOptionType.String)
                             {
-                                var playerCount = GameOptionsManager.Instance.currentNormalGameOptions.MaxPlayers;
-                                if (option.Name.StartsWith("Slot "))
-                                {
-                                    try
-                                    {
-                                        int slotNumber = int.Parse(option.Name[5..]);
-                                        if (slotNumber > GameOptionsManager.Instance.currentNormalGameOptions.MaxPlayers) continue;
-                                    }
-                                    catch { }
-                                }
-
                                 var str = option.Setting.Cast<StringOption>();
                                 str.TitleText.text = option.Name;
                                 if (str.TitleText.text.Length > 20)
@@ -160,8 +149,8 @@ namespace TownOfUsEdited.CustomOption
                 __instance.ChangeTab(1, false);
 
                 var settingsButton = GameObject.Find("GameSettingsButton");
-                settingsButton.transform.localPosition += new Vector3(0f, 2f, 0f);
-                settingsButton.transform.localScale *= 0.9f;
+                settingsButton.transform.localPosition += new Vector3(0f, 2.1f, 0f);
+                settingsButton.transform.localScale *= 0.8f;
 
                 CreateSettings(__instance, 3, "ModSettings", "Mod Settings", settingsButton, MultiMenu.main);
                 CreateSettings(__instance, 4, "CrewSettings", "Crewmate Settings", settingsButton, MultiMenu.crewmate);
@@ -232,7 +221,7 @@ namespace TownOfUsEdited.CustomOption
                 if (button == null && menu != MultiMenu.external)
                 {
                     button = GameObject.Instantiate(settingsButton, panel.transform);
-                    button.transform.localPosition += new Vector3(0f, -0.55f * target + 1.1f, 0f);
+                    button.transform.localPosition += new Vector3(0f, -0.5f * target + 1f, 0f);
                     button.name = name;
                     __instance.StartCoroutine(Effects.Lerp(1f, new Action<float>(p => { button.transform.FindChild("FontPlacer").GetComponentInChildren<TextMeshPro>().text = text; })));
                     var passiveButton = button.GetComponent<PassiveButton>();
@@ -308,17 +297,6 @@ namespace TownOfUsEdited.CustomOption
 
                         else if (option.Type == CustomOptionType.String)
                         {
-                            var playerCount = GameOptionsManager.Instance.currentNormalGameOptions.MaxPlayers;
-                            if (option.Name.StartsWith("Slot "))
-                            {
-                                try
-                                {
-                                    int slotNumber = int.Parse(option.Name[5..]);
-                                    if (slotNumber > GameOptionsManager.Instance.currentNormalGameOptions.MaxPlayers) continue;
-                                }
-                                catch { }
-                            }
-
                             OptionBehaviour optionBehaviour = UnityEngine.Object.Instantiate<StringOption>(tabOptions.stringOptionOrigin, Vector3.zero, Quaternion.identity, tabOptions.settingsContainer);
                             optionBehaviour.transform.localPosition = new Vector3(0.95f, num, -2f);
                             optionBehaviour.SetClickMask(tabOptions.ButtonClickMask);
@@ -502,6 +480,10 @@ namespace TownOfUsEdited.CustomOption
                 foreach (var button in SettingsAwake.Buttons) button.SelectButton(false);
                 if (tab > 6) return;
                 __instance.taskTabButton.SelectButton(false);
+                foreach (var settingInfo in __instance.settingsInfo)
+                {
+                    settingInfo.gameObject.SetActive(false);
+                }
 
                 if (tab > 0)
                 {
@@ -537,7 +519,7 @@ namespace TownOfUsEdited.CustomOption
 
                 GameObject.Find("RolesTabs")?.Destroy();
                 var overview = GameObject.Find("OverviewTab");
-                overview.transform.localScale += new Vector3(-0.4f, 0f, 0f);
+                overview.transform.localScale += new Vector3(-0.5f, 0f, 0f);
                 overview.transform.localPosition += new Vector3(-1f, 0f, 0f);
 
                 CreateButton(__instance, 1, "ModTab", "Mod Settings", MultiMenu.main, overview);
@@ -554,7 +536,7 @@ namespace TownOfUsEdited.CustomOption
                 if (tab == null)
                 {
                     tab = GameObject.Instantiate(overview, overview.transform.parent);
-                    tab.transform.localPosition += new Vector3(2.05f, 0f, 0f) * target;
+                    tab.transform.localPosition += new Vector3(1.75f, 0f, 0f) * target;
                     tab.name = name;
                     __instance.StartCoroutine(Effects.Lerp(1f, new Action<float>(p => { tab.transform.FindChild("FontPlacer").GetComponentInChildren<TextMeshPro>().text = text; })));
                     var pTab = tab.GetComponent<PassiveButton>();
@@ -617,8 +599,7 @@ namespace TownOfUsEdited.CustomOption
                             panel.transform.localPosition = new Vector3(-9f, num, -2f);
                         }
                         settingsThisHeader += 1;
-                        panel.SetInfo(StringNames.ImpostorsCategory, option.ToString(), 61);
-                        panel.titleText.text = option.Name;
+                        panel.SetInfo(option.StringName, option.ToString(), 61);
                         __instance.settingsInfo.Add(panel.gameObject);
                     }
                 }
@@ -628,15 +609,21 @@ namespace TownOfUsEdited.CustomOption
             }
         }
 
-        [HarmonyPatch(typeof(PlayerPhysics), nameof(PlayerPhysics.CoSpawnPlayer))]
+        [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.OnPlayerJoined))]
         private class PlayerJoinPatch
         {
-            public static void Postfix(PlayerPhysics __instance)
+            public static void Postfix([HarmonyArgument(0)] InnerNet.ClientData data)
             {
-                if (PlayerControl.AllPlayerControls.Count < 2 || !AmongUsClient.Instance ||
-                    !PlayerControl.LocalPlayer || !AmongUsClient.Instance.AmHost || __instance.myPlayer.isDummy) return;
+                if (!AmongUsClient.Instance || !AmongUsClient.Instance.AmHost) return;
+                Coroutines.Start(SyncSettings(data));
+            }
 
-                Coroutines.Start(Rpc.SendRpc(RecipientId: __instance.myPlayer.OwnerId));
+            public static IEnumerator SyncSettings(InnerNet.ClientData data)
+            {
+                while (data.Character == null) yield return null;
+                if (data.Character.isDummy) yield break;
+                Coroutines.Start(Rpc.SendRpc(RecipientId: data.Character.OwnerId));
+                yield break;
             }
         }
 
@@ -657,6 +644,74 @@ namespace TownOfUsEdited.CustomOption
                 if (GameOptionsManager.Instance.currentGameOptions.GameMode == GameModes.HideNSeek || __instance.boolOptionName == BoolOptionNames.VisualTasks ||
                     __instance.boolOptionName == BoolOptionNames.AnonymousVotes || __instance.boolOptionName == BoolOptionNames.ConfirmImpostor) return true;
                 return false;
+            }
+        }
+
+        [HarmonyPatch(typeof(NumberOption), nameof(NumberOption.Initialize))]
+        public class NumberOptionInitialize
+        {
+            public static bool Prefix(NumberOption __instance)
+            {
+                var option = CustomOption.AllOptions.FirstOrDefault(x => x.Setting == __instance);
+                if (option is CustomNumberOption number)
+                {
+                    __instance.MinusBtn.isInteractable = true;
+                    __instance.PlusBtn.isInteractable = true;
+                    return false;
+                }
+                return true;
+            }
+
+            public static void Postfix(NumberOption __instance)
+            {
+                if (__instance.TitleText.text == DestroyableSingleton<TranslationController>.Instance.GetString(StringNames.GameNumImpostors, string.Empty))
+                {
+                    __instance.ValidRange.min = 0;
+                    __instance.ValidRange.max = 5;
+                    if (__instance.Value == 5)
+                    {
+                        __instance.PlusBtn.SetInteractable(false);
+                        __instance.MinusBtn.SetInteractable(true);
+                    }
+                    else if (__instance.Value == 0)
+                    {
+                        __instance.PlusBtn.SetInteractable(true);
+                        __instance.MinusBtn.SetInteractable(false);
+                    }
+                    else
+                    {
+                        __instance.PlusBtn.SetInteractable(true);
+                        __instance.MinusBtn.SetInteractable(true);
+                    }
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(NumberOption), nameof(NumberOption.AdjustButtonsActiveState))]
+        public class AdjustButtonsActiveState
+        {
+            public static void Postfix(NumberOption __instance)
+            {
+                if (__instance.TitleText.text == DestroyableSingleton<TranslationController>.Instance.GetString(StringNames.GameNumImpostors, string.Empty))
+                {
+                    __instance.ValidRange.min = 0;
+                    __instance.ValidRange.max = 5;
+                    if (__instance.Value == 5)
+                    {
+                        __instance.PlusBtn.SetInteractable(false);
+                        __instance.MinusBtn.SetInteractable(true);
+                    }
+                    else if (__instance.Value == 0)
+                    {
+                        __instance.PlusBtn.SetInteractable(true);
+                        __instance.MinusBtn.SetInteractable(false);
+                    }
+                    else
+                    {
+                        __instance.PlusBtn.SetInteractable(true);
+                        __instance.MinusBtn.SetInteractable(true);
+                    }
+                }
             }
         }
 

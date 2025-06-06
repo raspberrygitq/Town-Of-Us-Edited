@@ -19,6 +19,7 @@ namespace TownOfUsEdited.CrewmateRoles.TransporterMod
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             if (!__instance.enabled) return false;
+            if (__instance != HudManager.Instance.KillButton) return true;
             if (role.Cooldown > 0f) return false;
 
             if (role.ButtonUsable)

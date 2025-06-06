@@ -10,6 +10,7 @@ namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
     {
         Crew,
         Amnesiac,
+        Mercenary,
         Shifter,
         Survivor,
         Jester
@@ -38,7 +39,7 @@ namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
 
             if (MeetingHud.Instance != null) UpdateMeeting(MeetingHud.Instance, role);
 
-            if (!PlayerControl.LocalPlayer.IsHypnotised())
+            if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())
             {
                 if (!CustomGameOptions.GAKnowsTargetRole)
                 {
@@ -73,6 +74,13 @@ namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
                 var amnesiac = new Amnesiac(player);
                 amnesiac.SpawnedAs = false;
                 amnesiac.RegenTask();
+            }
+            else if (CustomGameOptions.GaOnTargetDeath == BecomeOptions.Mercenary)
+            {
+                var merc = new Mercenary(player);
+                merc.SpawnedAs = false;
+                merc.Gold = CustomGameOptions.GoldToBribe;
+                merc.RegenTask();
             }
             else if (CustomGameOptions.GaOnTargetDeath == BecomeOptions.Shifter)
             {

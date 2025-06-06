@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Il2CppSystem.Collections.Generic;
+using Reactor.Utilities;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -60,7 +61,7 @@ namespace TownOfUsEdited.Roles
                     (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven))) == 1 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue))
             {
                 VampWin();
-                System.Console.WriteLine("GAME OVER REASON: Vampire Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Vampire Win");
                 return;
             }
             else if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 4 &&
@@ -71,7 +72,7 @@ namespace TownOfUsEdited.Roles
                     .Where(x => !x.Data.IsDead && !x.Data.Disconnected && x.Is(RoleEnum.Vampire)).ToList();
                 if (vampsAlives.Count == 1) return;
                 VampWin();
-                System.Console.WriteLine("GAME OVER REASON: Vampire Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Vampire Win");
                 return;
             }
             else
@@ -90,7 +91,7 @@ namespace TownOfUsEdited.Roles
                 if (alives.Count <= 6)
                 {
                     VampWin();
-                    System.Console.WriteLine("GAME OVER REASON: Vampire Win");
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Vampire Win");
                     return;
                 }
                 return;

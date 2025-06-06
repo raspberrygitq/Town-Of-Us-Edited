@@ -4,15 +4,13 @@ using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using TownOfUsEdited.Patches;
-using TownOfUsEdited.CrewmateRoles.AurialMod;
-using TownOfUsEdited.Patches.ScreenEffects;
 
 namespace TownOfUsEdited.CrewmateRoles.HelperMod
 {
-    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+    [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
     public static class AirshipExileController_WrapUpAndSpawn
     {
-        public static void Postfix(AirshipExileController __instance) => SetHelper.ExileControllerPostfix(__instance);
+        public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => SetHelper.ExileControllerPostfix(__instance.__4__this);
     }
 
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]

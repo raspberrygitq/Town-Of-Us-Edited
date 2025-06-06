@@ -21,6 +21,7 @@ namespace TownOfUsEdited.CrewmateRoles.TrapperMod
             role.UsesLeft--;
             role.Cooldown = CustomGameOptions.TrapCooldown;
             var pos = PlayerControl.LocalPlayer.transform.position;
+            pos.y -= 0.2727f;
             pos.z += 0.001f;
             role.traps.Add(TrapExtentions.CreateTrap(pos));
 

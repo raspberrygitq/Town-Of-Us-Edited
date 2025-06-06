@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Reactor.Utilities;
+using TMPro;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -12,7 +13,7 @@ namespace TownOfUsEdited.Roles
         {
             Name = "Vulture";
             ImpostorText = () => "Eat All Bodies";
-            TaskText = () => $"Eat {CustomGameOptions.VultureBodies} Dead Bodies to win!";
+            TaskText = () => $"Eat {CustomGameOptions.VultureBodies} Dead Bodies to win!\nFake Tasks:";
             Color = Patches.Colors.Vulture;
             Cooldown = CustomGameOptions.VultureCD;
             RoleType = RoleEnum.Vulture;
@@ -47,8 +48,20 @@ namespace TownOfUsEdited.Roles
 
         public void Wins()
         {
-            VultureWins = true;
-            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Coroutines.Start(WaitForEnd());
+            if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
+            {
+                VultureWins = true;
+                if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame)
+                {
+                    Coroutines.Start(WaitForEnd());
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Vulture Win");
+                }
+            }
+            else
+            {
+                HudManager.Instance.ShowPopUp("Normally, the game would've ended and the Vulture would've won. In Freeplay, we just reset the bodies eaten count.");
+                BodiesEaten = 0;
+            }
         }
 
         public void DestroyArrow(byte targetPlayerId)

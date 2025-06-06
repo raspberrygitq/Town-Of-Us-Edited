@@ -84,6 +84,7 @@ namespace TownOfUsEdited.NeutraleRoles.DoppelgangerMod
                     if (doppelchat)
                     {
                         __instance.NameText.text = role.TransformedPlayer.GetDefaultOutfit().PlayerName;
+                        if (__instance.Player.transform.localScale != ChatBubble.PlayerNotificationScale) __instance.NameText.color = Color.white; // Sometimes its green for some reason
                         __instance.NameText.ForceMeshUpdate(true, true);
                         __instance.Xmark.enabled = false;
 			            __instance.Background.color = Palette.White;
@@ -240,10 +241,10 @@ namespace TownOfUsEdited.NeutraleRoles.DoppelgangerMod
 			                if (flag)
 			                {
 				                __instance.RemainingEmergencies--;
-				                StatsManager.Instance.IncrementStat(StringNames.StatsEmergenciesCalled);
+				                DataManager.Player.Stats.IncrementStat(StatID.EmergenciesCalled);
 				                return false;
 			                }
-			                StatsManager.Instance.IncrementStat(StringNames.StatsBodiesReported);
+			                DataManager.Player.Stats.IncrementStat(StatID.BodiesReported);
 		                }
                         return false;
                     }

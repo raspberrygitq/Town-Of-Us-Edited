@@ -31,17 +31,9 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.FighterMod
                 if (!__instance.isActiveAndEnabled)
                 return false;
 
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
-
                 if (PlayerControl.LocalPlayer.IsControlled() && role.ClosestPlayer.Is(Faction.Coven))
                 {
                     Utils.Interact(role.ClosestPlayer, PlayerControl.LocalPlayer, true);
-                    return false;
-                }
-                else if (role.ClosestPlayer.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(role.ClosestPlayer).UsingPotion
-                && Role.GetRole<PotionMaster>(role.ClosestPlayer).Potion == "Shield")
-                {
-                    role.Cooldown = CustomGameOptions.PotionKCDReset;
                     return false;
                 }
 

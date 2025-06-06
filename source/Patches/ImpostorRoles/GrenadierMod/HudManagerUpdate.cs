@@ -2,6 +2,7 @@ using HarmonyLib;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited.ImpostorRoles.GrenadierMod
 {
@@ -24,21 +25,28 @@ namespace TownOfUsEdited.ImpostorRoles.GrenadierMod
                 role.FlashButton.gameObject.SetActive(false);
             }
 
-            if (CustomGameOptions.GrenadierIndicators) {
+            if (!PlayerControl.LocalPlayer.IsHypnotised())
+            {
                 foreach (var player in PlayerControl.AllPlayerControls)
                 {
-                    if (player != PlayerControl.LocalPlayer && !player.Data.IsImpostor()) {
-                        var tempColour = player.nameText().color;
-                        var data = player?.Data;
-                        if (data == null || data.Disconnected || data.IsDead || PlayerControl.LocalPlayer.Data.IsDead)
-                            continue;
-                        if (role.flashedPlayers.Contains(player)) {
-                            player.myRend().material.SetColor("_VisorColor", Color.black);
-                            player.nameText().color = Color.black;
-                        } else {
-                            player.myRend().material.SetColor("_VisorColor", Palette.VisorColor);
-                            player.nameText().color = tempColour;
-                        }
+                    var data = player?.Data;
+                    if (data == null || data.Disconnected || data.IsDead || player.Data.IsImpostor())
+                        continue;
+
+                    var tempColour = player.nameText().color;
+                    if (player.GetCustomOutfitType() != CustomPlayerOutfitType.Camouflage &&
+                        player.GetCustomOutfitType() != CustomPlayerOutfitType.Swooper &&
+                        role.flashedPlayers.Contains(player))
+                    {
+                        var colour = Color.black;
+                        if (player.Is(ModifierEnum.Shy)) colour.a = Modifier.GetModifier<Shy>(player).Opacity;
+                        player.nameText().color = colour;
+                        player.myRend().material.SetColor("_VisorColor", Color.black);
+                    }
+                    else
+                    {
+                        player.myRend().material.SetColor("_VisorColor", Palette.VisorColor);
+                        player.nameText().color = tempColour;
                     }
                 }
             }
@@ -46,7 +54,8 @@ namespace TownOfUsEdited.ImpostorRoles.GrenadierMod
             role.FlashButton.graphic.sprite = FlashSprite;
             role.FlashButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.FlashButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 

@@ -10,10 +10,10 @@ using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.NeutralRoles.ExecutionerMod
 {
-    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+    [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
     public static class AirshipExileController_WrapUpAndSpawn
     {
-        public static void Postfix(AirshipExileController __instance) => MeetingExiledEnd.ExileControllerPostfix(__instance);
+        public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => MeetingExiledEnd.ExileControllerPostfix(__instance.__4__this);
     }
 
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
@@ -21,7 +21,7 @@ namespace TownOfUsEdited.NeutralRoles.ExecutionerMod
     {
         public static void ExileControllerPostfix(ExileController __instance)
         {
-            var exiled = __instance.initData.networkedPlayer;
+            var exiled = __instance.initData?.networkedPlayer;
             if (exiled == null) return;
             var player = exiled.Object;
 

@@ -30,7 +30,8 @@ namespace TownOfUsEdited.ImpostorRoles.ConverterMod
 
             converter.ConvertButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && converter.AbilityUsed == false && !player.Data.Disconnected);
                     
             converter.ConvertButton.graphic.sprite = TownOfUsEdited.Revive2Sprite;
@@ -41,7 +42,7 @@ namespace TownOfUsEdited.ImpostorRoles.ConverterMod
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;
             var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             var flag = (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !data.IsDead) &&
                        (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                        PlayerControl.LocalPlayer.CanMove;
@@ -66,7 +67,7 @@ namespace TownOfUsEdited.ImpostorRoles.ConverterMod
                 closestDistance = distance;
             }
 
-            converter.ConvertButton.SetCoolDown(converter.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+            converter.ConvertButton.SetCoolDown(converter.ConvertTimer(), CustomGameOptions.ConvertCD);
 
             if (converter.CurrentTarget && converter.CurrentTarget != closestBody)
             {

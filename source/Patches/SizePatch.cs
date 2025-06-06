@@ -1,6 +1,5 @@
 ﻿﻿using HarmonyLib;
 using System.Linq;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
@@ -13,6 +12,7 @@ namespace TownOfUsEdited.Patches
     {
         public static float Radius = 0.2233912f;
         public static float Offset = 0.3636057f;
+        public static GameObject heh;
 
         [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
         [HarmonyPostfix]
@@ -21,7 +21,7 @@ namespace TownOfUsEdited.Patches
             foreach (var player in PlayerControl.AllPlayerControls.ToArray())
             {
                 CircleCollider2D collider = player.Collider.Caster<CircleCollider2D>();
-                if (player.Data != null && !(player.Data.IsDead || player.Data.Disconnected))
+                if (player.Data != null && !(player.Data.IsDead || player.Data.Disconnected) && player.GetCustomOutfitType() != CustomPlayerOutfitType.Camouflage)
                 {
                     if (player.transform.localScale != player.GetAppearance().SizeFactor)
                     {
@@ -68,11 +68,15 @@ namespace TownOfUsEdited.Patches
                     var matches = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(RoleEnum.Reviver) && Role.GetRole<Reviver>(x).UsedRevive && x.PlayerId == body.ParentId).ToList();
                     if (matches != null)
                     {
-                        var modifier = Modifier.GetModifier(Utils.PlayerById(body.ParentId));
-                        if (modifier != null && modifier is IVisualAlteration alteration)
+                        var modifiers = Modifier.GetModifiers(Utils.PlayerById(body.ParentId));
+                        if (modifiers != null && modifiers.Any(x => x is IVisualAlteration))
                         {
-                            alteration.TryGetModifiedAppearance(out VisualAppearance appearance);
-                            body.transform.localScale = appearance.SizeFactor;
+                            var modifier = modifiers.FirstOrDefault(x => x is IVisualAlteration);
+                            if (modifier is IVisualAlteration alteration)
+                            {
+                                alteration.TryGetModifiedAppearance(out VisualAppearance appearance);
+                                body.transform.localScale = appearance.SizeFactor;
+                            }
                         }
                         else
                         {
@@ -82,11 +86,15 @@ namespace TownOfUsEdited.Patches
                     else if (!body.IsDouble()) body.transform.localScale = playerBindings[body.ParentId].GetAppearance().SizeFactor;
                     else
                     {
-                        var modifier = Modifier.GetModifier(Utils.PlayerById(body.ParentId));
-                        if (modifier != null && modifier is IVisualAlteration alteration)
+                        var modifiers = Modifier.GetModifiers(Utils.PlayerById(body.ParentId));
+                        if (modifiers != null && modifiers.Any(x => x is IVisualAlteration))
                         {
-                            alteration.TryGetModifiedAppearance(out VisualAppearance appearance);
-                            body.transform.localScale = appearance.SizeFactor;
+                            var modifier = modifiers.FirstOrDefault(x => x is IVisualAlteration);
+                            if (modifier is IVisualAlteration alteration)
+                            {
+                                alteration.TryGetModifiedAppearance(out VisualAppearance appearance);
+                                body.transform.localScale = appearance.SizeFactor;
+                            }
                         }
                     }
                 } catch {

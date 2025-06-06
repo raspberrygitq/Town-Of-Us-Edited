@@ -21,7 +21,7 @@ namespace TownOfUsEdited.CrewmateRoles.AltruistMod
             var flag2 = __instance.isCoolingDown;
             if (flag2) return false;
             if (!__instance.enabled) return false;
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (role == null)
                 return false;
             if (role.CurrentTarget == null)

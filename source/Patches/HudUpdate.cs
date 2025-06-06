@@ -7,6 +7,7 @@ using TownOfUsEdited.Roles;
 using TownOfUsEdited.CrewmateRoles.HaunterMod;
 using TownOfUsEdited.NeutralRoles.PhantomMod;
 using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using System.Linq;
 
 namespace TownOfUsEdited.Patches
 {
@@ -28,7 +29,9 @@ namespace TownOfUsEdited.Patches
             }
 
             Pos = __instance.MapButton.transform.localPosition + new Vector3(0f, -0.8f, 0f);
-            if (SubmergedCompatibility.Loaded && GameOptionsManager.Instance.currentNormalGameOptions.MapId == 6) Pos = __instance.SettingsButton.transform.localPosition + new Vector3(0f, -0.8f, 0f);
+            int mapId = GameOptionsManager.Instance.currentNormalGameOptions.MapId;
+            if (AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) mapId = AmongUsClient.Instance.TutorialMapId;
+            if (SubmergedCompatibility.Loaded && mapId == 6) Pos = __instance.SettingsButton.transform.localPosition + new Vector3(0f, -0.8f, 0f);
             var dead = false;
             if (Utils.ShowDeadBodies)
             {
@@ -52,8 +55,8 @@ namespace TownOfUsEdited.Patches
                 // this works because if they are already haunter/phantom the code before it will run
                 else dead = true;
             }
-            ZoomButton.SetActive(!MeetingHud.Instance && dead && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
-                && GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.Normal && HauntMenuMinigame.Instance == null);
+            ZoomButton.SetActive(!MeetingHud.Instance && dead && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
+                && GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.Normal && HauntMenuMinigame.Instance == null && PlayerControl.LocalPlayer.Data.IsDead);
             ZoomButton.transform.localPosition = Pos;
             ZoomButton.transform.Find("Background").localPosition = Vector3.zero;
             ZoomButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().sprite = Zooming ? TownOfUsEdited.ZoomPlusButton : TownOfUsEdited.ZoomMinusButton;

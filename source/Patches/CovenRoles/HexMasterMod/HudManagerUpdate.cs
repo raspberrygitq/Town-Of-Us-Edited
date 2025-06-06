@@ -1,5 +1,6 @@
 using System.Linq;
 using HarmonyLib;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -18,21 +19,40 @@ namespace TownOfUsEdited.CovenRoles.HexMasterMod
 
             var role = Role.GetRole<HexMaster>(PlayerControl.LocalPlayer);
             var HexButton = __instance.KillButton;
+            var HexText = __instance.KillButton.buttonLabelText;
 
             if (role.HexBombButton == null)
             {
                 role.HexBombButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.HexBombButton.graphic.enabled = true;
                 role.HexBombButton.gameObject.SetActive(false);
+                role.BombText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.HexBombButton.transform);
+                role.BombText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.BombText);
             }
 
             HexButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            HexText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.HexBombButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.BombText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.BombText.text = "Hex Bomb";
+            role.BombText.SetOutlineColor(Colors.Coven);
 
             role.HexBombButton.graphic.sprite = TownOfUsEdited.HexBomb;
             role.HexBombButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
@@ -60,13 +80,29 @@ namespace TownOfUsEdited.CovenRoles.HexMasterMod
 
             if (role.Hexed.Count > 0)
             {
+                role.BombText.color = Palette.EnabledColor;
+                role.BombText.material.SetFloat("_Desat", 0f);
                 role.HexBombButton.graphic.color = Palette.EnabledColor;
                 role.HexBombButton.graphic.material.SetFloat("_Desat", 0f);
             }
             else
             {
+                role.BombText.color = Palette.DisabledClear;
+                role.BombText.material.SetFloat("_Desat", 1f);
                 role.HexBombButton.graphic.color = Palette.DisabledClear;
                 role.HexBombButton.graphic.material.SetFloat("_Desat", 1f);
+            }
+
+            var labelrender = HexText;
+            if (role.ClosestPlayer != null)
+            {
+                labelrender.color = Palette.EnabledColor;
+                labelrender.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                labelrender.color = Palette.DisabledClear;
+                labelrender.material.SetFloat("_Desat", 1f);
             }
         }
     }

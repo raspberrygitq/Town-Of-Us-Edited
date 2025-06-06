@@ -32,7 +32,8 @@ namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
             role.BlackmailButton.graphic.sprite = Blackmail;
             role.BlackmailButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             var notBlackmailed = PlayerControl.AllPlayerControls.ToArray().Where(
                 player => role.Blackmailed?.PlayerId != player.PlayerId
@@ -44,7 +45,7 @@ namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
 
             role.BlackmailButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
-            if (!PlayerControl.LocalPlayer.IsHypnotised())
+            if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())
             {
                 if (role.Blackmailed != null && !role.Blackmailed.Data.IsDead && !role.Blackmailed.Data.Disconnected)
                 {

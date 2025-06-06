@@ -30,7 +30,8 @@ namespace TownOfUsEdited
         {
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return false;
 
-            if (PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList().Count <= 2 && !player.Is(RoleEnum.Haunter) && !player.Is(RoleEnum.Phantom) && !player.Is(RoleEnum.Spirit))
+            if (PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList().Count <= 2 && !player.Is(RoleEnum.Haunter) && !player.Is(RoleEnum.Phantom) && !player.Is(RoleEnum.Spirit)
+            && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
             {
                 if (player.inVent)
                 {
@@ -67,7 +68,8 @@ namespace TownOfUsEdited
                 (player.Is(RoleEnum.Vampire) && CustomGameOptions.VampVent) || (player.Is(RoleEnum.SerialKiller) && CustomGameOptions.SerialKillerVent) ||
                 (player.Is(RoleEnum.Player) && !CustomGameOptions.BattleDisableVent) || (player.Is(RoleEnum.Terrorist) && CustomGameOptions.TerroristVent) ||
                 (player.Is(RoleEnum.Vulture) && CustomGameOptions.VultureVent) || (player.Is(RoleEnum.Infectious) && CustomGameOptions.InfectiousVent) ||
-                (player.Is(RoleEnum.Doppelganger) && CustomGameOptions.DoppelVent))
+                (player.Is(RoleEnum.Doppelganger) && CustomGameOptions.DoppelVent) || (player.Is(RoleEnum.SoulCollector) && CustomGameOptions.SCVent) ||
+                (player.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoVent))
                 return true;
 
             if (player.Is(RoleEnum.Maul) && CustomGameOptions.WerewolfVent)
@@ -94,6 +96,13 @@ namespace TownOfUsEdited
             float num = float.MaxValue;
             PlayerControl playerControl = playerInfo.Object;
 
+            if (Utils.Rewinding())
+            {
+                canUse = true;
+                couldUse = true;
+                return;
+            }
+
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.Normal) couldUse = CanVent(playerControl, playerInfo) && (!playerInfo.IsDead || playerControl.inVent) && (playerControl.CanMove || playerControl.inVent);
             else if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek && playerControl.Data.IsImpostor()) couldUse = false;
             else couldUse = canUse;
@@ -103,6 +112,17 @@ namespace TownOfUsEdited
             if (ventitaltionSystem != null && ventitaltionSystem.IsVentCurrentlyBeingCleaned(__instance.Id))
             {
                 couldUse = false;
+            }
+
+            foreach (var role in Role.AllRoles.Where(x => x.RoleType == RoleEnum.Plumber))
+            {
+                var plumber = (Plumber)role;
+                if (plumber.VentsBlocked.Contains((byte)__instance.Id) && (!PlayerControl.LocalPlayer.Is(RoleEnum.Haunter) || Role.GetRole<Haunter>(PlayerControl.LocalPlayer).Caught)
+                && (!PlayerControl.LocalPlayer.Is(RoleEnum.Phantom) || Role.GetRole<Phantom>(PlayerControl.LocalPlayer).Caught)
+                && (!PlayerControl.LocalPlayer.Is(RoleEnum.Spirit) || Role.GetRole<Spirit>(PlayerControl.LocalPlayer).Caught))
+                {
+                    couldUse = false;
+                }
             }
 
             canUse = couldUse;

@@ -8,13 +8,14 @@ using TownOfUsEdited.CrewmateRoles.HaunterMod;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.ImpostorRoles.SpiritMod;
 using TownOfUsEdited.Roles.Modifiers;
+using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.Patches
 {
-    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+    [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
     public static class AirshipAddHauntPatch
     {
-        public static void Postfix(AirshipExileController __instance) => AddHauntPatch.ExileControllerPostfix(__instance);
+        public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => AddHauntPatch.ExileControllerPostfix(__instance.__4__this);
     }
 
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
@@ -43,6 +44,11 @@ namespace TownOfUsEdited.Patches
                 {
                     if (SetPhantom.WillBePhantom != player && SetHaunter.WillBeHaunter != player &&
                     SetSpirit.WillBeSpirit != player && !player.Data.Disconnected) player.Exiled();
+                    if (AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
+                    {
+                        RoleManager.Instance.SetRole(player, RoleTypes.CrewmateGhost);
+                        if (player == PlayerControl.LocalPlayer) Utils.ShowDeadBodies = true;
+                    }
                 }
                 catch { }
             }

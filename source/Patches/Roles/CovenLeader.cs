@@ -1,13 +1,12 @@
 using System.Linq;
-using AmongUs.GameOptions;
-using TownOfUsEdited.CrewmateRoles.AurialMod;
+using TMPro;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
+using TownOfUsEdited.CrewmateRoles.PlumberMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using TownOfUsEdited.ImpostorRoles.BomberMod;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Patches;
-using TownOfUsEdited.Patches.ScreenEffects;
-using TownOfUsEdited.Roles.Cultist;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
@@ -28,6 +27,7 @@ namespace TownOfUsEdited.Roles
         public KillButton _recruitButton;
         public PlayerControl ClosestPlayer;
         public bool Converted = false;
+        public TextMeshPro RecruitText;
         public void Recruit(PlayerControl target)
         {
             // Check if the Hex Master can hex
@@ -40,20 +40,15 @@ namespace TownOfUsEdited.Roles
             var interact = Utils.Interact(PlayerControl.LocalPlayer, target);
             if (interact[4] == true)
             {
-                Convert(target);
                 Converted = true;
-                Utils.Rpc(CustomRPC.CovenConvert, target.PlayerId);
                 KillCooldown = CustomGameOptions.CovenKCD;
+                Convert(target);
+                Utils.Rpc(CustomRPC.CovenConvert, target.PlayerId);
                 return;
             }
             if (interact[0] == true)
             {
-                KillCooldown = CustomGameOptions.ProtectKCReset;
-                return;
-            }
-            else if (interact[1] == true)
-            {
-                KillCooldown = CustomGameOptions.VestKCReset;
+                KillCooldown = CustomGameOptions.TempSaveCdReset;
                 return;
             }
             else if (interact[3] == true) return;
@@ -95,8 +90,8 @@ namespace TownOfUsEdited.Roles
                 snitch.ImpArrows.Clear();
             }
 
-            if (newcoven == StartImitate.ImitatingPlayer) StartImitate.ImitatingPlayer = null;
-
+            if (StartImitate.ImitatingPlayers.Contains(PlayerControl.LocalPlayer.PlayerId)) StartImitate.ImitatingPlayers.Remove(PlayerControl.LocalPlayer.PlayerId);
+            
             if (newcoven.Is(RoleEnum.GuardianAngel))
             {
                 var ga = Role.GetRole<GuardianAngel>(newcoven);
@@ -118,11 +113,74 @@ namespace TownOfUsEdited.Roles
                 medRole.MediatedPlayers.Clear();
             }
 
+            if (newcoven.Is(RoleEnum.Warden))
+            {
+                var warden = Role.GetRole<Warden>(newcoven);
+                if (warden.Fortified != null) ShowShield.ResetVisor(warden.Fortified, warden.Player);
+            }
+
+            if (newcoven.Is(RoleEnum.Medic))
+            {
+                var medic = Role.GetRole<Medic>(newcoven);
+                if (medic.ShieldedPlayer != null) ShowShield.ResetVisor(medic.ShieldedPlayer, medic.Player);
+            }
+
+            if (newcoven.Is(RoleEnum.Cleric))
+            {
+                var cleric = Role.GetRole<Cleric>(newcoven);
+                if (cleric.Barriered != null) cleric.UnBarrier();
+            }
+
+            if (newcoven.Is(RoleEnum.Plumber))
+            {
+                var plumberRole = Role.GetRole<Plumber>(newcoven);
+                foreach (GameObject barricade in plumberRole.Barricades)
+                {
+                    UnityEngine.Object.Destroy(barricade);
+                }
+            }
+
             if (PlayerControl.LocalPlayer == newcoven)
             {
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Investigator)) Footprint.DestroyAll(Role.GetRole<Investigator>(PlayerControl.LocalPlayer));
 
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff) || PlayerControl.LocalPlayer.Is(RoleEnum.Knight)) HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Cleric))
+                {
+                    var clericRole = Role.GetRole<Cleric>(PlayerControl.LocalPlayer);
+                    clericRole.CleanseButton.SetTarget(null);
+                    clericRole.CleanseButton.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Oracle))
+                {
+                    var oracleRole = Role.GetRole<Oracle>(PlayerControl.LocalPlayer);
+                    oracleRole.BlessButton.SetTarget(null);
+                    oracleRole.BlessButton.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector))
+                {
+                    var sc = Role.GetRole<SoulCollector>(PlayerControl.LocalPlayer);
+                    SoulExtensions.ClearSouls(sc.Souls);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Hunter))
+                {
+                    var hunterRole = Role.GetRole<Hunter>(PlayerControl.LocalPlayer);
+                    UnityEngine.Object.Destroy(hunterRole.UsesText);
+                    hunterRole.StalkButton.SetTarget(null);
+                    hunterRole.StalkButton.gameObject.SetActive(false);
+                    HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Plumber))
+                {
+                    var plumberRole = Role.GetRole<Plumber>(PlayerControl.LocalPlayer);
+                    plumberRole.Vent = null;
+                    UnityEngine.Object.Destroy(plumberRole.UsesText);
+                }
 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer))
                 {
@@ -216,6 +274,37 @@ namespace TownOfUsEdited.Roles
                     var bomberRole = Role.GetRole<Bomber>(PlayerControl.LocalPlayer);
                     bomberRole.Bomb.ClearBomb();
                 }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
+                {
+                    var mercRole = Role.GetRole<Mercenary>(PlayerControl.LocalPlayer);
+                    mercRole.GuardButton.SetTarget(null);
+                    mercRole.GuardButton.gameObject.SetActive(false);
+                    UnityEngine.Object.Destroy(mercRole.UsesText);
+                    UnityEngine.Object.Destroy(mercRole.GoldText);
+                }
+            }
+
+            if (oldRole.ExtraButtons.Any())
+            {
+                foreach (var button in oldRole.ExtraButtons)
+                {
+                    if (PlayerControl.LocalPlayer == newcoven)
+                    {
+                        button.gameObject.SetActive(false);
+                    }
+                }
+            }
+
+            if (oldRole.ButtonLabels.Any())
+            {
+                foreach (var label in oldRole.ButtonLabels)
+                {
+                    if (PlayerControl.LocalPlayer == newcoven)
+                    {
+                        label.gameObject.SetActive(false);
+                    }
+                }
             }
 
             Role.RoleDictionary.Remove(newcoven.PlayerId);
@@ -239,7 +328,7 @@ namespace TownOfUsEdited.Roles
                 role.RegenTask();
             }
             
-            PlayerControl_Die.Postfix();
+            PlayerControl_Die.CheckEnd();
         }
     }
 }

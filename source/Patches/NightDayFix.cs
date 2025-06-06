@@ -6,16 +6,16 @@ using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited
 {    
-    //Code from Among Us Salem with authorisation of 50 iq 
+    // Code from Among Us Salem with authorisation of 50 iq 
     public class DayNightMechanic
     {
         public static int DayCount = 0;
         public static int NightCount = 1;
 
-        [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+        [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
         public static class AirshipExileController_WrapUpAndSpawn
         {
-            public static void Postfix(AirshipExileController __instance) => TurnNight.ExileControllerPostfix(__instance);
+            public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => TurnNight.ExileControllerPostfix(__instance.__4__this);
         }
 
         [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]

@@ -5,7 +5,7 @@ namespace TownOfUsEdited.Roles.Modifiers
         public Torch(PlayerControl player) : base(player)
         {
             Name = "Torch";
-            TaskText = () => "You can see in the dark";
+            TaskText = () => "You have the same vision as <color=#FF0000>Impostors</color>";
             Color = Patches.Colors.Torch;
             ModifierType = ModifierEnum.Torch;
         }

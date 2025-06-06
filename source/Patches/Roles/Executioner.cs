@@ -1,5 +1,8 @@
+using System.Linq;
 using Il2CppSystem.Collections.Generic;
 using Reactor.Utilities;
+using TownOfUsEdited.ImpostorRoles.TraitorMod;
+using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {
@@ -34,8 +37,24 @@ namespace TownOfUsEdited.Roles
         public void Wins()
         {
             if (Player.Data.IsDead || Player.Data.Disconnected) return;
-            TargetVotedOut = true;
-            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Coroutines.Start(WaitForEnd());
+            if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
+            {
+                TargetVotedOut = true;
+                if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame)
+                {
+                    Coroutines.Start(WaitForEnd());
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Executioner Win");
+                }
+            }
+            else
+            {
+                HudManager.Instance.ShowPopUp("Normally, the game would've ended and the Executioner would've won. In Freeplay, we just assign a new target to the Executioner.");
+                var exeTargets = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Is(ModifierEnum.Lover) && !x.Is(RoleEnum.Politician) && !x.Is(RoleEnum.Prosecutor) && !x.Is(RoleEnum.Swapper) && !x.Is(RoleEnum.Vigilante) && x != SetTraitor.WillBeTraitor).ToList();
+                if (exeTargets.Count > 0)
+                {
+                    target = exeTargets[Random.RandomRangeInt(0, exeTargets.Count)];
+                }
+            }
         }
     }
 }

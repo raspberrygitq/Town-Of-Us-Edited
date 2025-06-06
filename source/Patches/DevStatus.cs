@@ -1,5 +1,8 @@
+using System.Collections;
 using System.Linq;
+using AmongUs.Data;
 using HarmonyLib;
+using Reactor.Utilities;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -8,224 +11,93 @@ namespace TownOfUsEdited.Patches
     public class DevStatus
     {
         public static bool enabled = true;
+        public static bool hidden = false;
+        public static Color ArtistColor = new Color32(231, 76, 60, 255);
         [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
         public class Title
         {
             public static void Postfix()
             {
+                if (!LobbyBehaviour.Instance || !enabled) return;
                 foreach (var player in PlayerControl.AllPlayerControls)
                 {
-                    if (LobbyBehaviour.Instance && DevFeatures.Players.ContainsKey(player) && enabled)
+                    var friendCode = player.FriendCode;
+                    bool isLocal = player == PlayerControl.LocalPlayer;
+                    if (isLocal) friendCode = EOSManager.Instance.FriendCode;
+                    if (isLocal && hidden) friendCode = "[HIDDEN]" + friendCode;
+                    var data = DevFeatures.Data;
+                    bool hasStatus = friendCode == data.MainDev || data.Dev.Any(x => x == friendCode) ||
+                    data.Artist.Any(x => x == friendCode) || data.Tester.Any(x => x == friendCode) ||
+                    data.Vip.Any(x => x == friendCode);
+                    if (friendCode == data.MainDev)
                     {
-                        DevFeatures.Players.TryGetValue(player, out var customId);
-                        if (customId == "MainDev" && !player.nameText().text.Contains("Dev"))
-                        {
-                            player.nameText().text = player.nameText().text + "<size=2>\n(Main Dev)</size>";
-                            player.nameText().color = Palette.Orange;
-                        }
-                        else if (customId == "Dev" && !player.nameText().text.Contains("Dev"))
-                        {
-                            player.nameText().text = player.nameText().text + "<size=2>\n(Dev)</size>";
-                            player.nameText().color = Palette.ImpostorRed;
-                        }
-                        else if (customId == "Tester" && !player.nameText().text.Contains("Tester"))
-                        {
-                            player.nameText().text = player.nameText().text + "<size=2>\n(Tester)</size>";
-                            player.nameText().color = Color.grey;
-                        }
-                        else if (customId == "Vip" && !player.nameText().text.Contains("VIP"))
-                        {
-                            player.nameText().text = player.nameText().text + "<size=2>\n(VIP)</size>";
-                            player.nameText().color = Color.yellow;
-                        }
-                        else if ((customId == "None" || customId == "DevHidden" || customId == "TesterHidden" || customId == "VipHidden") && (player.nameText().text.Contains("Dev") || player.nameText().text.Contains("Tester") || player.nameText().text.Contains("VIP")))
-                        {
-                            player.nameText().text = player.Data.PlayerName;
-                            player.nameText().color = Palette.White;
-                        }
+                        if (!player.nameText().text.Contains("Dev")) player.nameText().text = player.nameText().text + "<size=2>\n(Main Dev)</size>";
+                        if (player.nameText().color != Palette.Orange) player.nameText().color = Palette.Orange;
                     }
+                    else if (data.Dev.Any(x => x == friendCode))
+                    {
+                        if (!player.nameText().text.Contains("Dev")) player.nameText().text = player.nameText().text + "<size=2>\n(Dev)</size>";
+                        if (player.nameText().color != Palette.ImpostorRed) player.nameText().color = Palette.ImpostorRed;
+                    }
+                    else if (data.Artist.Any(x => x == friendCode))
+                    {
+                        if (!player.nameText().text.Contains("Artist")) player.nameText().text = player.nameText().text + "<size=2>\n(Artist)</size>";
+                        if (player.nameText().color != ArtistColor) player.nameText().color = ArtistColor;
+                    }
+                    else if (data.Tester.Any(x => x == friendCode))
+                    {
+                        if (!player.nameText().text.Contains("Tester")) player.nameText().text = player.nameText().text + "<size=2>\n(Tester)</size>";
+                        if (player.nameText().color != Color.grey) player.nameText().color = Color.grey;
+                    }
+                    else if (data.Vip.Any(x => x == friendCode))
+                    {
+                        if (!player.nameText().text.Contains("VIP")) player.nameText().text = player.nameText().text + "<size=2>\n(VIP)</size>";
+                        if (player.nameText().color != Color.yellow) player.nameText().color = Color.yellow;
+                    }
+                    else if (!hasStatus)
+                    {
+                        player.nameText().text = player.Data.PlayerName;
+                        player.nameText().color = Palette.White;
+                    }
+
+                    if (hasStatus)
+                    {
+                        if (DataManager.Settings.Accessibility.ColorBlindMode) player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
+                        else player.nameText().transform.localPosition = new Vector3(0f, 0f, 0f);
+                    }
+                    else player.nameText().transform.localPosition = new Vector3(0f, 0f, 0f);
                 }
             }
         }
 
-        [HarmonyPatch(typeof(PlayerPhysics), nameof(PlayerPhysics.CoSpawnPlayer))]
-        public class OnPlayerJoined
+        public static IEnumerator CheckForStatus()
         {
-            public static void Prefix()
-            {
-                if (LobbyBehaviour.Instance && PlayerControl.LocalPlayer && enabled)
-                {
-                    if (AmongUsClient.Instance.AmHost && RpcHandling.Upped.Any())
-                    {
-                        var uppedPlayers = RpcHandling.Upped.Keys.ToArray().ToList();
-                        foreach (var player in uppedPlayers)
-                        {
-                            if (RpcHandling.Upped.TryGetValue(player, out var role))
-                            {
-                                Utils.Rpc(CustomRPC.AddUp, player.PlayerId, role);
-                            }
-                        }
-                    }
-                    if (PlayerControl.LocalPlayer.IsDev())
-                    {
-                        if (DevFeatures.localStatus == "MainDev")
-                        {
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "MainDev");
-                            }
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "MainDev");
-                        }
-                        else if (DevFeatures.localStatus == "DevHidden")
-                        {
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "DevHidden");
-                            }
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "DevHidden");
-                        }
-                        else
-                        {
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "Dev");
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Dev");
-                            }
-                        }
-                    }
-                    else if (PlayerControl.LocalPlayer.IsTester())
-                    {
-                        if (DevFeatures.localStatus == "TesterHidden")
-                        {
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "TesterHidden");
-                            }
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "TesterHidden");
-                        }
-                        else
-                        {
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "Tester");
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Tester");
-                            }
-                        }
-                    }
-                    else if (PlayerControl.LocalPlayer.IsVip())
-                    {
-                        if (DevFeatures.localStatus == "VipHidden")
-                        {
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "VipHidden");
-                            }
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "VipHidden");
-                        }
-                        else
-                        {
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "Vip");
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Vip");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "None");
-                        if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                        {
-                            DevFeatures.Players.Add(PlayerControl.LocalPlayer, "None");
-                        }
-                    }
-                }
-                return;
-            }
+            while (PlayerControl.LocalPlayer == null) yield return null;
+            Utils.Rpc(CustomRPC.CheckForStatus, PlayerControl.LocalPlayer.PlayerId);
+            yield break;
         }
 
-        [HarmonyPatch(typeof(LobbyBehaviour), nameof(LobbyBehaviour.Start))]
-        public class FixRpcSend
+        [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.OnPlayerJoined))]
+        public class OnPlayerJoined
         {
             public static void Postfix()
             {
-                if (PlayerControl.LocalPlayer && enabled)
+                if (enabled)
                 {
-                    if (PlayerControl.LocalPlayer.IsDev())
-                    {
-                        if (DevFeatures.localStatus == "MainDev")
-                        {
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "MainDev");
-                            }
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "MainDev");
-                        }
-                        else if (DevFeatures.localStatus == "DevHidden")
-                        {
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "DevHidden");
-                            }
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "DevHidden");
-                        }
-                        else
-                        {
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "Dev");
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Dev");
-                            }
-                        }
-                    }
-                    else if (PlayerControl.LocalPlayer.IsTester())
-                    {
-                        if (DevFeatures.localStatus == "TesterHidden")
-                        {
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "TesterHidden");
-                            }
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "TesterHidden");
-                        }
-                        else
-                        {
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "Tester");
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Tester");
-                            }
-                        }
-                    }
-                    else if (PlayerControl.LocalPlayer.IsVip())
-                    {
-                        if (DevFeatures.localStatus == "VipHidden")
-                        {
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "VipHidden");
-                            }
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "VipHidden");
-                        }
-                        else
-                        {
-                            Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "Vip");
-                            if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                            {
-                                DevFeatures.Players.Add(PlayerControl.LocalPlayer, "Vip");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Utils.Rpc(CustomRPC.AddDev, PlayerControl.LocalPlayer.PlayerId, "None");
-                        if (!DevFeatures.Players.ContainsKey(PlayerControl.LocalPlayer))
-                        {
-                            DevFeatures.Players.Add(PlayerControl.LocalPlayer, "None");
-                        }
-                    }
+                    Coroutines.Start(CheckForStatus());
                 }
-                return;
+            }
+        }
+
+        [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.OnGameJoined))]
+        public class OnGameJoined
+        {
+            public static void Postfix()
+            {
+                if (enabled)
+                {
+                    Coroutines.Start(CheckForStatus());
+                }
             }
         }
     }

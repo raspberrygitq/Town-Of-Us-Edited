@@ -24,7 +24,6 @@ namespace TownOfUsEdited.ImpostorRoles.EscapistMod
                 role.EscapeButton.graphic.enabled = true;
                 role.EscapeButton.graphic.sprite = MarkSprite;
                 role.EscapeButton.gameObject.SetActive(false);
-
             }
 
             if (role.EscapeButton.graphic.sprite != MarkSprite && role.EscapeButton.graphic.sprite != EscapeSprite)
@@ -32,7 +31,8 @@ namespace TownOfUsEdited.ImpostorRoles.EscapistMod
 
             role.EscapeButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.EscapeButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
             role.EscapeButton.graphic.color = Palette.EnabledColor;

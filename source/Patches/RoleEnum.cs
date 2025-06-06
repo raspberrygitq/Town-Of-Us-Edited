@@ -54,7 +54,6 @@ namespace TownOfUsEdited
         Player,
         Bodyguard,
         Crusader,
-        Superstar,
         Avenger,
         Astral,
         Attacker,
@@ -65,13 +64,16 @@ namespace TownOfUsEdited
         Deputy,
         Helper,
         Guardian,
-        Lighter,
+        Chameleon,
         Infectious,
         Doppelganger,
         Politician,
         Warden,
         SoulCollector,
         Spectator,
+        Plumber,
+        Mercenary,
+        Cleric,
 
         Miner,
         Poisoner,
@@ -109,13 +111,6 @@ namespace TownOfUsEdited
 
         Crewmate,
         Impostor,
-
-        Necromancer,
-        Whisperer,
-        CultistSeer,
-        CultistMystic,
-        Chameleon,
-        CultistSnitch,
 
         Werewolf,
         Villager,
@@ -159,7 +154,10 @@ namespace TownOfUsEdited
         Motionless,
         Bloodlust,
         Mini,
-        Saboteur
+        Saboteur,
+        Taskmaster,
+        Satellite,
+        Superstar
     }
 
     public enum AbilityEnum

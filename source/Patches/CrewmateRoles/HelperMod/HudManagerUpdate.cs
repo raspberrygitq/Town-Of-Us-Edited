@@ -22,7 +22,8 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
             // Check if the game state allows the KillButton to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
             isKillButtonActive = isKillButtonActive && !MeetingHud.Instance && player.Data.IsDead;
-            isKillButtonActive = isKillButtonActive && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started;
+            isKillButtonActive = isKillButtonActive && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+            AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
 
             // Set KillButton's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
@@ -31,10 +32,18 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
             var alives = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
             if (role.OnAlert) __instance.KillButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.HelperDuration);
             else __instance.KillButton.SetCoolDown(role.AlertTimer(), CustomGameOptions.HelperCD);
-            Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, alives);
+            if (!role.OnAlert) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, alives);
 
-            return;
-            
+            if (role.ClosestPlayer != null || role.OnAlert)
+            {
+                __instance.KillButton.graphic.color = Palette.EnabledColor;
+                __instance.KillButton.graphic.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                __instance.KillButton.graphic.color = Palette.DisabledClear;
+                __instance.KillButton.graphic.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

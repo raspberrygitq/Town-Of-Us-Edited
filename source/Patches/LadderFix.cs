@@ -9,7 +9,7 @@ namespace TownOfUsEdited.Patches
     public static class LadderFix
     {
         [HarmonyPrefix]
-        [HarmonyPatch(typeof(PlayerControl), "SetKinematic")]
+        [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.SetKinematic))]
         static bool Prefix(PlayerControl __instance, bool b)
         {
             if (__instance != PlayerControl.LocalPlayer) return true;

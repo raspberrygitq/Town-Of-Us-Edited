@@ -94,10 +94,6 @@ namespace TownOfUsEdited
                 {
                     if (Ability.GetAbility<Assassin>(role.Player).RemainingKills == 0) return;
                 }
-                if (role.Player.Is(RoleEnum.Assassin))
-                {
-                    if (Role.GetRole<Assassin2>(role.Player).RemainingKills == 0) return;
-                }
                 if (role.Player.Is(RoleEnum.Ritualist))
                 {
                     if (Role.GetRole<Ritualist>(role.Player).RemainingKills == 0) return;

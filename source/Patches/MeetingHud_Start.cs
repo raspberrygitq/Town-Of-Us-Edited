@@ -5,6 +5,12 @@ using UnityEngine;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.Patches.ImpostorRoles;
+using TownOfUsEdited.Patches.CovenRoles;
+using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
+using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
+using TownOfUsEdited.Patches.Modifiers.LoversMod;
+using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
 
 namespace TownOfUsEdited
 {
@@ -13,6 +19,12 @@ namespace TownOfUsEdited
     {
         public static void Postfix(MeetingHud __instance)
         {
+            ImpostorChat.UpdateImpostorChat();
+            VampireChat.UpdateVampireChat();
+            CovenChat.UpdateCovenChat();
+            SerialKillerChat.UpdateSerialKillerChat();
+            LoversChat.UpdateLoversChat();
+            JailorChat.UpdateJailorChat();
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Astral))
             {
                 var astral = Role.GetRole<Astral>(PlayerControl.LocalPlayer);
@@ -43,7 +55,7 @@ namespace TownOfUsEdited
                 }
             }
 
-            foreach (var role in Role.GetRoles(RoleEnum.Superstar))
+            foreach (var role in Modifier.GetModifiers(ModifierEnum.Superstar))
             {
                 var superstar = (Superstar)role;
                 if (superstar.Player.Data.IsDead && superstar.Reported == false)
@@ -65,6 +77,8 @@ namespace TownOfUsEdited
             if (targetRole != null) targetRole.RegenTask();
 
             ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height, Screen.width, Screen.height, Screen.fullScreen);
+
+            if (!PlayerControl.LocalPlayer.Data.IsDead) HudManager.Instance.ShadowQuad.gameObject.SetActive(true);
         }
     }
 

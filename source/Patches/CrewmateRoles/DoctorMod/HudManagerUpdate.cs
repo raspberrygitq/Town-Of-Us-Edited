@@ -2,7 +2,6 @@ using HarmonyLib;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
-using static Il2CppSystem.TimeZoneInfo;
 
 namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 {
@@ -24,11 +23,12 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Doctor)) return;
 
             var role = Role.GetRole<Doctor>(PlayerControl.LocalPlayer);
+            var ReviveText = __instance.KillButton.buttonLabelText;
 
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;
             var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             var flag = (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !data.IsDead) &&
                        (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                        PlayerControl.LocalPlayer.CanMove;
@@ -73,11 +73,17 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 
             reviveButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             role.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && CustomGameOptions.GameMode != GameMode.Chaos);
+            ReviveText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             reviveButton.graphic.sprite = TownOfUsEdited.DocReviveButton;
 
             if (role.ButtonUsable || CustomGameOptions.GameMode == GameMode.Chaos)
@@ -100,6 +106,8 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                         var renderer = reviveButton.graphic;
                         renderer.color = Palette.DisabledClear;
                         renderer.material.SetFloat("_Desat", 1f);
+                        ReviveText.color = Palette.DisabledClear;
+                        ReviveText.material.SetFloat("_Desat", 1f);
                         role.UsesText.color = Palette.DisabledClear;
                         role.UsesText.material.SetFloat("_Desat", 1f);
                     }
@@ -109,20 +117,22 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 
             if (role.ButtonUsable || CustomGameOptions.GameMode == GameMode.Chaos)
             {
-            if (role.CanRevive() == true || CustomGameOptions.GameMode == GameMode.Chaos)
-            KillButtonTarget.SetTarget(reviveButton, closestBody, role);
-            else
-            KillButtonTarget.SetTarget(reviveButton, null, role);
-            KillButtonTarget.SetTarget(role._dragDropButton, closestBody, role);
+                if (role.CanRevive() == true || CustomGameOptions.GameMode == GameMode.Chaos)
+                    KillButtonTarget.SetTarget(reviveButton, closestBody, role);
+                else
+                    KillButtonTarget.SetTarget(reviveButton, null, role);
+                KillButtonTarget.SetTarget(role._dragDropButton, closestBody, role);
             }
             else
             {
-            reviveButton.SetCoolDown(0f, CustomGameOptions.DocReviveCooldown);
-            var renderer = reviveButton.graphic;
-            renderer.color = Palette.DisabledClear;
-            renderer.material.SetFloat("_Desat", 1f);
-            role.UsesText.color = Palette.DisabledClear;
-            role.UsesText.material.SetFloat("_Desat", 1f);
+                reviveButton.SetCoolDown(0f, CustomGameOptions.DocReviveCooldown);
+                var renderer = reviveButton.graphic;
+                renderer.color = Palette.DisabledClear;
+                renderer.material.SetFloat("_Desat", 1f);
+                ReviveText.color = Palette.DisabledClear;
+                ReviveText.material.SetFloat("_Desat", 1f);
+                role.UsesText.color = Palette.DisabledClear;
+                role.UsesText.material.SetFloat("_Desat", 1f);
             }
         }
         public static void UpdateDragButton (HudManager __instance)
@@ -150,7 +160,8 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             role.DragDropButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
             role.DragDropButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && CustomGameOptions.OnlyMedRevive && CustomGameOptions.GameMode != GameMode.Chaos);
 
 
@@ -159,7 +170,7 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                 var data = PlayerControl.LocalPlayer.Data;
                 var isDead = data.IsDead;
                 var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
-                var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
                 var flag = (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !data.IsDead) &&
                            (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                            PlayerControl.LocalPlayer.CanMove;
@@ -178,6 +189,28 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 
                     var distance = Vector2.Distance(truePosition, component.TruePosition);
                     if (!(distance < closestDistance)) continue;
+                    bool someoneDragging = false;
+                    foreach (var diener in Role.GetRoles(RoleEnum.Undertaker))
+                    {
+                        if (diener.Player == PlayerControl.LocalPlayer) continue;
+                        var dienerRole = (Undertaker)diener;
+                        if (dienerRole.CurrentlyDragging == component)
+                        {
+                            someoneDragging = true;
+                            continue;
+                        }
+                    }
+                    foreach (var doctor in Role.GetRoles(RoleEnum.Doctor))
+                    {
+                        if (doctor.Player == PlayerControl.LocalPlayer) continue;
+                        var doctorRole = (Doctor)doctor;
+                        if (doctorRole.CurrentlyDragging == component)
+                        {
+                            someoneDragging = true;
+                            continue;
+                        }
+                    }
+                    if (someoneDragging) continue;
                     closestBody = component;
                     closestDistance = distance;
                 }

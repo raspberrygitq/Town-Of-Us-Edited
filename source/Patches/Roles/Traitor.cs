@@ -1,8 +1,14 @@
+using System.Collections.Generic;
+using TMPro;
+
 namespace TownOfUsEdited.Roles
 {
     public class Traitor : Role
     {
-        public RoleEnum formerRole = new RoleEnum();
+        public List<RoleEnum> CanBeRoles = new List<RoleEnum>();
+        public List<RoleEnum> SelectedRoles = new List<RoleEnum>();
+        public KillButton _changeRoleButton;
+        public TextMeshPro ChangeText;
         public Traitor(PlayerControl player) : base(player)
         {
             Name = "Traitor";
@@ -13,6 +19,17 @@ namespace TownOfUsEdited.Roles
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
             Alignment = Alignment.ImpostorKilling;
+        }
+
+        public KillButton ChangeRoleButton
+        {
+            get => _changeRoleButton;
+            set
+            {
+                _changeRoleButton = value;
+                ExtraButtons.Clear();
+                ExtraButtons.Add(value);
+            }
         }
     }
 }

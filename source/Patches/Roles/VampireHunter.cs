@@ -28,7 +28,8 @@ namespace TownOfUsEdited.Roles
             Alignment = Alignment.CrewmateKilling;
             AddToRoleHistory(RoleType);
 
-            UsesLeft = 0;
+            if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) UsesLeft = 0;
+            else UsesLeft = CustomGameOptions.MaxFailedStakesPerGame;
             AddedStakes = false;
         }
 

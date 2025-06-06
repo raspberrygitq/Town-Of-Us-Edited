@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 using TMPro;
-using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited.Roles
 {
@@ -26,8 +25,8 @@ namespace TownOfUsEdited.Roles
                 target == null ? "You don't have a target for some reason... weird..." : $"Protect {target.name} With Your Life!";
             TaskText = () =>
                 target == null
-                    ? "You don't have a target for some reason... weird..."
-                    : $"Protect {target.name}!";
+                    ? "You don't have a target for some reason... weird...\nFake Tasks:"
+                    : $"Protect {target.name}!\nFake Tasks:";
             Color = Patches.Colors.GuardianAngel;
             Cooldown = CustomGameOptions.ProtectCd;
             RoleType = RoleEnum.GuardianAngel;
@@ -60,12 +59,8 @@ namespace TownOfUsEdited.Roles
 
         public void UnProtect()
         {
-            var ga = GetRole<GuardianAngel>(Player);
-            if (!ga.target.IsShielded())
-            {
-                ga.target.myRend().material.SetColor("_VisorColor", Palette.VisorColor);
-                ga.target.myRend().material.SetFloat("_Outline", 0f);
-            }
+            TimeRemaining = 0f;
+            ShowShield.ResetVisor(target, Player);
             Enabled = false;
             Cooldown = CustomGameOptions.ProtectCd;
         }

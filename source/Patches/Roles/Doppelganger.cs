@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Il2CppSystem.Collections.Generic;
+using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Extensions;
@@ -46,7 +47,7 @@ namespace TownOfUsEdited.Roles
                 Utils.Rpc(CustomRPC.DoppelgangerWin, Player.PlayerId);
                 Wins();
                 Utils.EndGame();
-                System.Console.WriteLine("GAME OVER REASON: Doppelganger Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Doppelganger Win");
                 return;
             }
 
@@ -150,7 +151,8 @@ namespace TownOfUsEdited.Roles
             if (TransformedPlayer != null)
             {
                 appearance = TransformedPlayer.GetDefaultAppearance();
-                var modifier = Modifier.GetModifier(TransformedPlayer);
+                var modifiers = Modifier.GetModifiers(TransformedPlayer);
+                var modifier = modifiers.FirstOrDefault(x => x is IVisualAlteration);
                 if (modifier is IVisualAlteration alteration)
                     alteration.TryGetModifiedAppearance(out appearance);
                 return true;

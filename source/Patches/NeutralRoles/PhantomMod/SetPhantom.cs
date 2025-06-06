@@ -10,10 +10,10 @@ using System.Collections.Generic;
 
 namespace TownOfUsEdited.NeutralRoles.PhantomMod
 {
-    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
+    [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
     public static class AirshipExileController_WrapUpAndSpawn
     {
-        public static void Postfix(AirshipExileController __instance) => SetPhantom.ExileControllerPostfix(__instance);
+        public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => SetPhantom.ExileControllerPostfix(__instance.__4__this);
     }
 
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
@@ -25,13 +25,11 @@ namespace TownOfUsEdited.NeutralRoles.PhantomMod
         public static void ExileControllerPostfix(ExileController __instance)
         {
             if (WillBePhantom == null) return;
-            var exiled = __instance.initData.networkedPlayer?.Object;
+            var exiled = __instance.initData?.networkedPlayer?.Object;
             if (!WillBePhantom.Data.IsDead && (exiled.Is(Faction.NeutralKilling) || exiled.Is(Faction.NeutralEvil) || exiled.Is(Faction.NeutralBenign)) && !exiled.IsLover() && !exiled.Is(RoleEnum.Troll)) WillBePhantom = exiled;
             if (exiled == WillBePhantom && exiled.Is(RoleEnum.Jester)) return;
             var doomRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Doomsayer && ((Doomsayer)x).WonByGuessing && ((Doomsayer)x).Player == WillBePhantom);
             if (doomRole != null) return;
-            var scRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.SoulCollector && ((SoulCollector)x).CollectedSouls && ((SoulCollector)x).Player == WillBePhantom);
-            if (scRole != null) return;
             var vultRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Vulture && ((Vulture)x).VultureWins && ((Vulture)x).Player == WillBePhantom);
             if (vultRole != null) return;
             var trollRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Troll && ((Troll)x).TrolledVotedOut && ((Troll)x).Player == WillBePhantom);

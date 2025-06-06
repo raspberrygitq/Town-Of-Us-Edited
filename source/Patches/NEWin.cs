@@ -1,6 +1,5 @@
 using System.Linq;
 using HarmonyLib;
-using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 
@@ -15,8 +14,6 @@ namespace TownOfUsEdited.Patches
             var neWin = false;
             var doomRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Doomsayer && ((Doomsayer)x).WonByGuessing && ((Doomsayer)x).Player == PlayerControl.LocalPlayer);
             if (doomRole != null) neWin = true;
-            var scRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.SoulCollector && ((SoulCollector)x).CollectedSouls && ((SoulCollector)x).Player == PlayerControl.LocalPlayer);
-            if (scRole != null) neWin = true;
             var vultureRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Vulture && ((Vulture)x).VultureWins && ((Vulture)x).Player == PlayerControl.LocalPlayer);
             if (vultureRole != null) neWin = true;
             var exeRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Executioner && ((Executioner)x).TargetVotedOut && ((Executioner)x).Player == PlayerControl.LocalPlayer);

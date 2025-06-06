@@ -24,7 +24,8 @@ namespace TownOfUsEdited.CrewmateRoles.AstralMod
 
             ghostButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             if (role.UsingGhost) ghostButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.GhostDuration);
             else ghostButton.SetCoolDown(role.AstralTimer(), CustomGameOptions.GhostCD);
 

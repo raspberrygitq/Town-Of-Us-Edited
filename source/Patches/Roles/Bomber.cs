@@ -4,6 +4,7 @@ using TownOfUsEdited.ImpostorRoles.BomberMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.CrewmateRoles.ClericMod;
 
 namespace TownOfUsEdited.Roles
 {
@@ -71,15 +72,24 @@ namespace TownOfUsEdited.Roles
             while (playersToDie.Count > CustomGameOptions.MaxKillsInDetonation) playersToDie.Remove(playersToDie[playersToDie.Count - 1]);
             foreach (var player in playersToDie)
             {
-                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsProtected() && player != ShowRoundOneShield.FirstRoundShielded && !PlayerControl.LocalPlayer.IsJailed())
+                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsProtected() && !player.IsBarriered() && player != ShowShield.FirstRoundShielded && !PlayerControl.LocalPlayer.IsJailed())
                 {
                     Utils.RpcMultiMurderPlayer(Player, player);
                 }
                 else if (player.IsShielded() && !PlayerControl.LocalPlayer.IsJailed())
                 {
-                    var medic = player.GetMedic().Player.PlayerId;
-                    Utils.Rpc(CustomRPC.AttemptSound, medic, player.PlayerId);
-                    StopKill.BreakShield(medic, player.PlayerId, CustomGameOptions.ShieldBreaks);
+                    foreach (var medic in player.GetMedic())
+                    {
+                        Utils.Rpc(CustomRPC.AttemptSound, medic.Player.PlayerId, player.PlayerId);
+                        StopKill.BreakShield(medic.Player.PlayerId, player.PlayerId, CustomGameOptions.ShieldBreaks);
+                    }
+                }
+                else if (player.IsBarriered())
+                {
+                    foreach (var cleric in player.GetCleric())
+                    {
+                        StopAttack.NotifyCleric(cleric.Player.PlayerId, false);
+                    }
                 }
             }
             if (PlayerControl.LocalPlayer.Is(ModifierEnum.Bloodlust) && playersToDie.Count > 0)

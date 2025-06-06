@@ -9,10 +9,10 @@ using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using AmongUs.GameOptions;
 using TownOfUsEdited.Patches;
 using static TownOfUsEdited.DisableAbilities;
 using TownOfUsEdited.Patches.NeutralRoles;
+using TMPro;
 
 namespace TownOfUsEdited.Roles
 {
@@ -37,6 +37,9 @@ namespace TownOfUsEdited.Roles
             ImpostorText = () => "Murder, Mimic, Hack... Data Lost";
             TaskText = () => "Murder everyone to win\nFake Tasks:";
             Faction = Faction.NeutralKilling;
+            Cooldown = CustomGameOptions.GlitchKillCooldown;
+            HackCooldown = CustomGameOptions.HackCooldown;
+            MimicCooldown = CustomGameOptions.MimicCooldown;
         }
 
         public PlayerControl ClosestPlayer;
@@ -45,7 +48,9 @@ namespace TownOfUsEdited.Roles
         public KillButton MimicButton { get; set; }
         public PlayerControl KillTarget { get; set; }
         public PlayerControl HackTarget { get; set; }
+        public TextMeshPro HackText;
         public bool IsUsingMimic { get; set; }
+        public bool Enabled;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
         public float HackCooldown;
@@ -69,6 +74,7 @@ namespace TownOfUsEdited.Roles
                 Utils.Rpc(CustomRPC.GlitchWin, Player.PlayerId);
                 Wins();
                 Utils.EndGame();
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Glitch Win");
                 return;
             }
 
@@ -163,7 +169,7 @@ namespace TownOfUsEdited.Roles
                 HackButtonHandler.HackButtonPress(this);
             else if (__instance == MimicButton)
                 MimicButtonHandler.MimicButtonPress(this);
-            else
+            else if (__instance == HudManager.Instance.KillButton)
                 KillButtonHandler.KillButtonPress(this);
 
             return false;
@@ -191,7 +197,8 @@ namespace TownOfUsEdited.Roles
             if (IsUsingMimic)
             {
                 appearance = MimicTarget.GetDefaultAppearance();
-                var modifier = Modifier.GetModifier(MimicTarget);
+                var modifiers = Modifier.GetModifiers(MimicTarget);
+                var modifier = modifiers.FirstOrDefault(x => x is IVisualAlteration);
                 if (modifier is IVisualAlteration alteration)
                     alteration.TryGetModifiedAppearance(out appearance);
                 return true;
@@ -288,7 +295,8 @@ namespace TownOfUsEdited.Roles
                                         1000;
                     hackText.Text =
                         $"{"<color=#" + Colors.Glitch.ToHtmlStringRGBA() + ">"}Hacked {hackPlayer.Data.PlayerName} ({CustomGameOptions.HackDuration - Math.Round(totalHacktime)}s)</color>";
-                    if (MeetingHud.Instance || totalHacktime > CustomGameOptions.HackDuration || hackPlayer?.Data.IsDead != false || AmongUsClient.Instance.GameState != InnerNetClient.GameStates.Started)
+                    if (MeetingHud.Instance || totalHacktime > CustomGameOptions.HackDuration || hackPlayer?.Data.IsDead != false || (AmongUsClient.Instance.GameState != InnerNetClient.GameStates.Started &&
+                    AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay))
                     {
                         foreach (var obj in lockImg)
                         {
@@ -327,6 +335,7 @@ namespace TownOfUsEdited.Roles
 
                 while (true)
                 {
+                    __instance.Enabled = true;
                     __instance.IsUsingMimic = true;
                     __instance.MimicTarget = mimicPlayer;
                     var totalMimickTime = (DateTime.UtcNow - mimicActivation).TotalMilliseconds / 1000;
@@ -347,7 +356,7 @@ namespace TownOfUsEdited.Roles
                         __instance.MimicTarget = null;
                         Utils.Unmorph(__instance.Player);
 
-                        Utils.Rpc(CustomRPC.RpcResetAnim, PlayerControl.LocalPlayer.PlayerId, mimicPlayer.PlayerId);
+                        Utils.Rpc(CustomRPC.RpcResetAnim, PlayerControl.LocalPlayer.PlayerId);
                         yield break;
                     }
 
@@ -364,12 +373,13 @@ namespace TownOfUsEdited.Roles
         {
             public static void KillButtonUpdate(Glitch __gInstance, HudManager __instance)
             {
-                if (!__gInstance.Player.Data.IsImpostor() && Rewired.ReInput.players.GetPlayer(0).GetButtonDown(8))
+                if (!__gInstance.Player.Data.IsImpostor() && (Rewired.ReInput.players.GetPlayer(0).GetButtonDown(8) || ConsoleJoystick.player.GetButtonDown(8)))
                     __instance.KillButton.DoClick();
 
                 __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !__gInstance.Player.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
                 __instance.KillButton.SetCoolDown(__gInstance.KillTimer(),
                     CustomGameOptions.GlitchKillCooldown);
 
@@ -403,12 +413,7 @@ namespace TownOfUsEdited.Roles
                     }
                     else if (interact[1])
                     {
-                        __gInstance.Cooldown = CustomGameOptions.ProtectKCReset;
-                        return;
-                    }
-                    else if (interact[2])
-                    {
-                        __gInstance.Cooldown = CustomGameOptions.VestKCReset;
+                        __gInstance.Cooldown = CustomGameOptions.TempSaveCdReset;
                         return;
                     }
                     else if (interact[3])
@@ -429,17 +434,41 @@ namespace TownOfUsEdited.Roles
                     __gInstance.HackButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                     __gInstance.HackButton.gameObject.SetActive(true);
                     __gInstance.HackButton.graphic.enabled = true;
+                    __gInstance.HackText = Object.Instantiate(__instance.KillButton.buttonLabelText, __gInstance.HackButton.transform);
+                    __gInstance.HackText.gameObject.SetActive(false);
+                    __gInstance.ButtonLabels.Add(__gInstance.HackText);
                 }
 
                 __gInstance.HackButton.graphic.sprite = HackSprite;
 
                 __gInstance.HackButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !__gInstance.Player.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started);
-                __gInstance.HackButton.transform.position = new Vector3(__gInstance.MimicButton.transform.position.x,
-                    __gInstance.HackButton.transform.position.y, __instance.ReportButton.transform.position.z);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+                if (__instance.UseButton != null)
+                {
+                    __gInstance.HackButton.transform.position = new Vector3(
+                        __instance.UseButton.transform.position.x - 2f,
+                        __instance.UseButton.transform.position.y + 1f,
+                        __instance.ReportButton.transform.position.z);
+                }
+                else
+                {
+                    __gInstance.HackButton.transform.position = new Vector3(
+                        __instance.PetButton.transform.position.x - 2f,
+                        __instance.PetButton.transform.position.y + 1f,
+                        __instance.ReportButton.transform.position.z);
+                }
                 __gInstance.HackButton.SetCoolDown(__gInstance.HackTimer(),
                     CustomGameOptions.HackCooldown);
+
+                __gInstance.HackText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+                __gInstance.HackText.text = "Hack";
+                __gInstance.HackText.SetOutlineColor(Colors.Glitch);
 
                 __gInstance.HackButton.SetTarget(null);
                 __gInstance.HackTarget = null;
@@ -449,23 +478,35 @@ namespace TownOfUsEdited.Roles
                     PlayerControl closestPlayer = null;
                     Utils.SetTarget(
                         ref closestPlayer,
-                        __gInstance.HackButton,
-                        GameOptionsData.KillDistances[CustomGameOptions.GlitchHackDistance]
+                        __gInstance.HackButton
                     );
                     __gInstance.HackTarget = closestPlayer;
+                }
+
+                var labelrender = __gInstance.HackText;
+                if (__gInstance.HackTarget != null)
+                {
+                    labelrender.color = Palette.EnabledColor;
+                    labelrender.material.SetFloat("_Desat", 0f);
+                }
+                else
+                {
+                    labelrender.color = Palette.DisabledClear;
+                    labelrender.material.SetFloat("_Desat", 1f);
                 }
 
                 if (__gInstance.HackTarget != null)
                 {
                     __gInstance.HackTarget.myRend().material.SetColor("_OutlineColor", __gInstance.Color);
-                    if (Rewired.ReInput.players.GetPlayer(0).GetButtonDown("ToU hack")) __gInstance.HackButton.DoClick();
+                    if (Rewired.ReInput.players.GetPlayer(0).GetButtonDown("ToU hack") || ConsoleJoystick.player.GetButtonDown(21)) // controller RT
+                    {
+                        __gInstance.HackButton.DoClick();
+                    }
                 }
             }
 
             public static void HackButtonPress(Glitch __gInstance)
             {
-                // Bug: Hacking someone with a pet doesn't disable the ability to pet the pet
-                // Bug: Hacking someone doing fuel breaks all their buttons/abilities including the use and report buttons
                 if (__gInstance.HackTarget != null)
                 {
                     if (__gInstance.Player.inVent) return;
@@ -481,7 +522,7 @@ namespace TownOfUsEdited.Roles
                     }
                     else if (interact[1])
                     {
-                        __gInstance.HackCooldown = CustomGameOptions.ProtectKCReset;
+                        __gInstance.HackCooldown = CustomGameOptions.TempSaveCdReset;
                         return;
                     }
                     else if (interact[3])
@@ -508,18 +549,21 @@ namespace TownOfUsEdited.Roles
 
                 __gInstance.MimicButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !__gInstance.Player.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
                 if (__instance.UseButton != null)
                 {
                     __gInstance.MimicButton.transform.position = new Vector3(
-                        Camera.main.ScreenToWorldPoint(new Vector3(0, 0)).x + 0.75f,
-                        __instance.UseButton.transform.position.y, __instance.UseButton.transform.position.z);
+                        __instance.UseButton.transform.position.x - 1f,
+                        __instance.UseButton.transform.position.y + 1f,
+                        __instance.ReportButton.transform.position.z);
                 }
                 else
                 {
                     __gInstance.MimicButton.transform.position = new Vector3(
-                        Camera.main.ScreenToWorldPoint(new Vector3(0, 0)).x + 0.75f,
-                        __instance.PetButton.transform.position.y, __instance.PetButton.transform.position.z);
+                        __instance.PetButton.transform.position.x - 1f,
+                        __instance.PetButton.transform.position.y + 1f,
+                        __instance.ReportButton.transform.position.z);
                 }
 
                 if (__gInstance.IsUsingMimic)
@@ -527,12 +571,15 @@ namespace TownOfUsEdited.Roles
                     __gInstance.MimicButton.graphic.material.SetFloat("_Desat", 0f);
                     __gInstance.MimicButton.graphic.color = Palette.EnabledColor;
                 }
-                else if (!__gInstance.MimicButton.isCoolingDown && __gInstance.Player.moveable)
+                else if (__gInstance.Player.moveable)
                 {
                     __gInstance.MimicButton.isCoolingDown = false;
                     __gInstance.MimicButton.graphic.material.SetFloat("_Desat", 0f);
                     __gInstance.MimicButton.graphic.color = Palette.EnabledColor;
-                    if (Rewired.ReInput.players.GetPlayer(0).GetButtonDown("ToU bb/disperse/mimic")) __gInstance.MimicButton.DoClick();
+                    if (Rewired.ReInput.players.GetPlayer(0).GetButtonDown("ToU bb/disperse/mimic") || ConsoleJoystick.player.GetButtonDown(24)) // controller LT
+                    {
+                        __gInstance.MimicButton.DoClick();
+                    }
                 }
                 else
                 {

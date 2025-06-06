@@ -33,22 +33,21 @@ namespace TownOfUsEdited
                 return false;
             }
 
-            var playerControl = Utils.PlayerByData(player);
-            if (playerControl.IsBlinded())
+            if (player._object.IsBlinded())
             {
                 __result = 0f;
                 return false;
             }
 
-            var switchSystem = GameOptionsManager.Instance.currentNormalGameOptions.MapId == 5 ? null : __instance.Systems[SystemTypes.Electrical]?.TryCast<SwitchSystem>();
+            var switchSystem = (GameOptionsManager.Instance.currentNormalGameOptions.MapId == 5 || (AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay && AmongUsClient.Instance.TutorialMapId == 5)) ? null : __instance.Systems[SystemTypes.Electrical]?.TryCast<SwitchSystem>();
             var t = switchSystem != null ? switchSystem.Value / 255f : 1;
 
-            var playerRole = Role.GetRole(playerControl);
+            var playerRole = Role.GetRole(player._object);
             foreach (var infectious in Role.GetRoles(RoleEnum.Infectious))
             {
                 var infectiousRole = (Infectious)infectious;
-                if (playerRole != null  && playerRole.InfectionState > 2 && infectiousRole.Infected.Contains(playerControl.PlayerId)
-                && !infectiousRole.Player.Data.IsDead)
+                if (playerRole != null  && playerRole.InfectionState > 2 && infectiousRole.Infected.Contains(player.PlayerId)
+                && !infectiousRole.Player.Data.IsDead && !player._object.Is(RoleEnum.Infectious))
                 {
                     if (!player._object.Is(Faction.Crewmates))
                     {
@@ -72,14 +71,14 @@ namespace TownOfUsEdited
                 player._object.Is(RoleEnum.Juggernaut) || player._object.Is(RoleEnum.Pestilence) ||
                 (player._object.Is(RoleEnum.Jester) && CustomGameOptions.JesterImpVision) ||
                 (player._object.Is(RoleEnum.Vulture) && CustomGameOptions.VultureImpVision) ||
-                (player._object.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoImpVision) ||
+                player._object.Is(RoleEnum.Arsonist) || player._object.Is(RoleEnum.SoulCollector) ||
                 (player._object.Is(RoleEnum.Vampire) && CustomGameOptions.VampImpVision) ||
                 (player._object.Is(RoleEnum.SerialKiller) && CustomGameOptions.SkImpVision) ||
                 (player._object.Is(Faction.Madmates) && CustomGameOptions.MadmateHasImpoVision)||
                 player._object.Is(RoleEnum.WhiteWolf) || player._object.Is(RoleEnum.Player) ||
                 player._object.Is(RoleEnum.Terrorist) || player._object.Is(Faction.Coven) ||
-                (player._object.Is(RoleEnum.Lighter) && Role.GetRole<Lighter>(player._object).UsingLight) ||
-                player._object.Is(RoleEnum.Infectious) || player._object.Is(RoleEnum.Doppelganger))
+                player._object.Is(RoleEnum.Infectious) || player._object.Is(RoleEnum.Doppelganger) ||
+                player._object.Is(ModifierEnum.Torch))
             {
                 __result = __instance.MaxLightRadius * GameOptionsManager.Instance.currentNormalGameOptions.ImpostorLightMod;
                 return false;
@@ -103,14 +102,6 @@ namespace TownOfUsEdited
                     return false;
                 }
             }
-
-            if (Patches.SubmergedCompatibility.isSubmerged())
-            {
-                if (player._object.Is(ModifierEnum.Torch)) __result = Mathf.Lerp(__instance.MinLightRadius, __instance.MaxLightRadius, 1) * GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod;
-                return false;
-            }
-
-            if (player._object.Is(ModifierEnum.Torch)) t = 1;
 
             if (player._object.Is(RoleEnum.Mayor))
             {

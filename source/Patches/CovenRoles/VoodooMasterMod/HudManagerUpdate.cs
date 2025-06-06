@@ -1,6 +1,7 @@
 using System.Linq;
 using HarmonyLib;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -24,14 +25,25 @@ namespace TownOfUsEdited.CovenRoles.VoodooMasterMod
                 role.VoodooButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.VoodooButton.graphic.enabled = true;
                 role.VoodooButton.gameObject.SetActive(false);
+                role.VoodooText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.VoodooButton.transform);
+                role.VoodooText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.VoodooText);
             }
 
             role.VoodooButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.VoodooText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.VoodooButton.graphic.sprite = TownOfUsEdited.Voodoo;
             role.VoodooButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
+            role.VoodooText.text = "Voodoo";
+            role.VoodooText.SetOutlineColor(Colors.Coven);
 
             foreach (var player2 in PlayerControl.AllPlayerControls)
             {
@@ -45,6 +57,18 @@ namespace TownOfUsEdited.CovenRoles.VoodooMasterMod
             else if (PlayerControl.LocalPlayer.IsLover() && CustomGameOptions.ImpLoverKillTeammate) Utils.SetTarget(ref role.ClosestPlayer, role.VoodooButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.IsVoodoo()).ToList());
             else if (PlayerControl.LocalPlayer.IsLover()) Utils.SetTarget(ref role.ClosestPlayer, role.VoodooButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Coven) && !x.IsVoodoo()).ToList());
             else Utils.SetTarget(ref role.ClosestPlayer, role.VoodooButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Coven) && !x.IsVoodoo()).ToList());
+
+            var labelrender = role.VoodooText;
+            if (role.ClosestPlayer != null)
+            {
+                labelrender.color = Palette.EnabledColor;
+                labelrender.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                labelrender.color = Palette.DisabledClear;
+                labelrender.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

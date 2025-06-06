@@ -6,6 +6,7 @@ using System;
 using TownOfUsEdited.Patches;
 using System.Linq.Expressions;
 using Il2CppInterop.Runtime.InteropTypes;
+using System.Linq;
 
 namespace TownOfUsEdited.Extensions
 {
@@ -65,7 +66,7 @@ namespace TownOfUsEdited.Extensions
         {
             if (player.TryGetAppearance(Role.GetRole(player) as IVisualAlteration, out var appearance))
                 return appearance;
-            else if (player.TryGetAppearance(Modifier.GetModifier(player) as IVisualAlteration, out appearance))
+            else if (player.TryGetAppearance(Modifier.GetModifiers(player).FirstOrDefault(x => x is IVisualAlteration) as IVisualAlteration, out appearance))
                 return appearance;
             else
                 return player.GetDefaultAppearance();
@@ -89,23 +90,58 @@ namespace TownOfUsEdited.Extensions
 
         public static bool IsDev(this PlayerControl player)
         {
-            if (player == PlayerControl.LocalPlayer) return DevFeatures.localStatus == "Dev" || DevFeatures.localStatus == "MainDev" || DevFeatures.localStatus == "DevHidden";
-            else if (DevFeatures.Players.ContainsKey(player) && DevFeatures.Players.TryGetValue(player, out var customId)) return customId == "Dev" || customId == "MainDev" || customId == "DevHidden";
-            return false;
+            var data = DevFeatures.Data;
+            if (player == PlayerControl.LocalPlayer) return data != null && (data.MainDev == EOSManager.Instance.FriendCode || data.Dev.Any(x => x == EOSManager.Instance.FriendCode));
+            else
+            {
+                bool hidden = false;
+                if (player.FriendCode.StartsWith("[HIDDEN]")) hidden = true;
+                var friendCode = player.FriendCode;
+                if (hidden) friendCode = friendCode[8..];
+                return data != null && (data.MainDev == friendCode || data.Dev.Any(x => x == friendCode));
+            }
         }
 
         public static bool IsTester(this PlayerControl player)
         {
-            if (player == PlayerControl.LocalPlayer) return DevFeatures.localStatus == "Tester" || DevFeatures.localStatus == "TesterHidden";
-            else if (DevFeatures.Players.ContainsKey(player) && DevFeatures.Players.TryGetValue(player, out var customId)) return customId == "Tester" || customId == "TesterHidden";
-            return false;
+            var data = DevFeatures.Data;
+            if (player == PlayerControl.LocalPlayer) return data != null && data.Tester.Any(x => x == EOSManager.Instance.FriendCode);
+            else
+            {
+                bool hidden = false;
+                if (player.FriendCode.StartsWith("[HIDDEN]")) hidden = true;
+                var friendCode = player.FriendCode;
+                if (hidden) friendCode = friendCode[8..];
+                return data != null && data.Tester.Any(x => x == friendCode);
+            }
+        }
+
+        public static bool IsArtist(this PlayerControl player)
+        {
+            var data = DevFeatures.Data;
+            if (player == PlayerControl.LocalPlayer) return data != null && data.Artist.Any(x => x == EOSManager.Instance.FriendCode);
+            else
+            {
+                bool hidden = false;
+                if (player.FriendCode.StartsWith("[HIDDEN]")) hidden = true;
+                var friendCode = player.FriendCode;
+                if (hidden) friendCode = friendCode[8..];
+                return data != null && data.Artist.Any(x => x == friendCode);
+            }
         }
 
         public static bool IsVip(this PlayerControl player)
         {
-            if (player == PlayerControl.LocalPlayer) return DevFeatures.localStatus == "Vip" || DevFeatures.localStatus == "VipHidden";
-            else if (DevFeatures.Players.ContainsKey(player) && DevFeatures.Players.TryGetValue(player, out var customId)) return customId == "Vip" || customId == "VipHidden";
-            return false;
+            var data = DevFeatures.Data;
+            if (player == PlayerControl.LocalPlayer) return data != null && data.Vip.Any(x => x == EOSManager.Instance.FriendCode);
+            else
+            {
+                bool hidden = false;
+                if (player.FriendCode.StartsWith("[HIDDEN]")) hidden = true;
+                var friendCode = player.FriendCode;
+                if (hidden) friendCode = friendCode[8..];
+                return data != null && data.Vip.Any(x => x == friendCode);
+            }
         }
 
         public static NetworkedPlayerInfo.PlayerOutfit GetDefaultOutfit(this PlayerControl playerControl)
@@ -159,7 +195,7 @@ namespace TownOfUsEdited.Extensions
         }
         public static Texture2D CreateEmptyTexture(int width = 0, int height = 0)
         {
-            return new Texture2D(width, height, TextureFormat.RGBA32, Texture.GenerateAllMips, false, IntPtr.Zero);
+            return new Texture2D(width, height, TextureFormat.RGBA32, Texture.GenerateAllMips, false);
         }
 
         private static class CastExtension<T> where T : Il2CppObjectBase

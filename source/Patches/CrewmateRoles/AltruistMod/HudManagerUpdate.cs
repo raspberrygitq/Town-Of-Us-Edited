@@ -2,7 +2,6 @@ using HarmonyLib;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
 
 namespace TownOfUsEdited.CrewmateRoles.AltruistMod
 {
@@ -22,7 +21,7 @@ namespace TownOfUsEdited.CrewmateRoles.AltruistMod
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;
             var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             var flag = (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !data.IsDead) &&
                        (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                        PlayerControl.LocalPlayer.CanMove;
@@ -50,7 +49,8 @@ namespace TownOfUsEdited.CrewmateRoles.AltruistMod
 
             killButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             __instance.KillButton.SetCoolDown(0f, 1f);
 
             foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())

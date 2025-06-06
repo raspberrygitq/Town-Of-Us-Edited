@@ -8,6 +8,7 @@ using TownOfUsEdited.Roles.Modifiers;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using System.Linq;
 
 namespace TownOfUsEdited.CrewmateRoles.MayorMod
 {
@@ -55,9 +56,9 @@ namespace TownOfUsEdited.CrewmateRoles.MayorMod
                         || player.VotedFor == PlayerVoteArea.MissedVote
                         || player.VotedFor == PlayerVoteArea.DeadVote) continue;
 
-                    var modifier = Modifier.GetModifier(player);
-                    if (modifier == null) continue;
-                    if (modifier.ModifierType == ModifierEnum.Tiebreaker)
+                    var modifiers = Modifier.GetModifiers(player);
+                    if (modifiers == null || modifiers.Length == 0) continue;
+                    if (modifiers.Any(x => x.ModifierType == ModifierEnum.Tiebreaker))
                     {
                         if (dictionary.TryGetValue(player.VotedFor, out var num))
                             dictionary[player.VotedFor] = num + 1;

@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using TownOfUsEdited.Extensions;
+﻿
+using TMPro;
 
 namespace TownOfUsEdited.Roles
 {
@@ -19,6 +19,7 @@ namespace TownOfUsEdited.Roles
 
         public bool Avenging = false;
         private KillButton _avengeButton;
+        public TextMeshPro AvengeText;
         public PlayerControl ClosestPlayer;
         public PlayerControl killer;
         public DeadBody CurrentTarget;

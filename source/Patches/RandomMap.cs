@@ -60,8 +60,8 @@ namespace TownOfUsEdited
         public static void Reset()
         {
             if (CustomGameOptions.SmallMapHalfVision && vision != 0) GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod = vision;
-            if (GameOptionsManager.Instance.currentNormalGameOptions.MapId == 1) AdjustCooldowns(CustomGameOptions.SmallMapDecreasedCooldown);
-            if (GameOptionsManager.Instance.currentNormalGameOptions.MapId >= 4) AdjustCooldowns(-CustomGameOptions.LargeMapIncreasedCooldown);
+            if (GameOptionsManager.Instance.currentNormalGameOptions.MapId == 1 && CustomGameOptions.AutoAdjustCooldowns) AdjustCooldowns(CustomGameOptions.SmallMapDecreasedCooldown);
+            if (GameOptionsManager.Instance.currentNormalGameOptions.MapId >= 4 && CustomGameOptions.AutoAdjustCooldowns) AdjustCooldowns(-CustomGameOptions.LargeMapIncreasedCooldown);
             if (CustomGameOptions.RandomMapEnabled) GameOptionsManager.Instance.currentNormalGameOptions.MapId = previousMap;
             if (!(commonTasks == 0 && shortTasks == 0 && longTasks == 0))
             {
@@ -108,15 +108,21 @@ namespace TownOfUsEdited
             if (map <= 1)
             {
                 if (CustomGameOptions.SmallMapHalfVision) GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod *= 0.5f;
-                GameOptionsManager.Instance.currentNormalGameOptions.NumShortTasks += CustomGameOptions.SmallMapIncreasedShortTasks;
-                GameOptionsManager.Instance.currentNormalGameOptions.NumLongTasks += CustomGameOptions.SmallMapIncreasedLongTasks;
+                if (CustomGameOptions.AutoAdjustCooldowns)
+                {
+                    GameOptionsManager.Instance.currentNormalGameOptions.NumShortTasks += CustomGameOptions.SmallMapIncreasedShortTasks;
+                    GameOptionsManager.Instance.currentNormalGameOptions.NumLongTasks += CustomGameOptions.SmallMapIncreasedLongTasks;
+                }
             }
-            if (map == 1) AdjustCooldowns(-CustomGameOptions.SmallMapDecreasedCooldown);
+            if (map == 1 && CustomGameOptions.AutoAdjustCooldowns) AdjustCooldowns(-CustomGameOptions.SmallMapDecreasedCooldown);
             if (map >= 4)
             {
-                GameOptionsManager.Instance.currentNormalGameOptions.NumShortTasks -= CustomGameOptions.LargeMapDecreasedShortTasks;
-                GameOptionsManager.Instance.currentNormalGameOptions.NumLongTasks -= CustomGameOptions.LargeMapDecreasedLongTasks;
-                AdjustCooldowns(CustomGameOptions.LargeMapIncreasedCooldown);
+                if (CustomGameOptions.AutoAdjustCooldowns)
+                {
+                    GameOptionsManager.Instance.currentNormalGameOptions.NumShortTasks -= CustomGameOptions.LargeMapDecreasedShortTasks;
+                    GameOptionsManager.Instance.currentNormalGameOptions.NumLongTasks -= CustomGameOptions.LargeMapDecreasedLongTasks;
+                    AdjustCooldowns(CustomGameOptions.LargeMapIncreasedCooldown);
+                }
             }
             return;
         }
@@ -134,8 +140,6 @@ namespace TownOfUsEdited
             Generate.DoppelKCD.Set((float)Generate.DoppelKCD.Value + change, false);
             Generate.PoisonCooldown.Set((float)Generate.PoisonCooldown.Value + change, false);
             Generate.SeerCooldown.Set((float)Generate.SeerCooldown.Value + change, false);
-            Generate.TrackCooldown.Set((float)Generate.TrackCooldown.Value + change, false);
-            Generate.TrapCooldown.Set((float)Generate.TrapCooldown.Value + change, false);
             Generate.SheriffKillCd.Set((float)Generate.SheriffKillCd.Value + change, false);
             Generate.AlertCooldown.Set((float)Generate.AlertCooldown.Value + change, false);
             Generate.GhostCooldown.Set((float)Generate.GhostCooldown.Value + change, false);
@@ -157,16 +161,20 @@ namespace TownOfUsEdited
             Generate.DragCooldown.Set((float)Generate.DragCooldown.Value + change, false);
             Generate.EscapeCooldown.Set((float)Generate.EscapeCooldown.Value + change, false);
             Generate.JuggKillCooldown.Set((float)Generate.JuggKillCooldown.Value + change, false);
-            Generate.ObserveCooldown.Set((float)Generate.ObserveCooldown.Value + change, false);
             Generate.BiteCooldown.Set((float)Generate.BiteCooldown.Value + change, false);
             Generate.StakeCooldown.Set((float)Generate.StakeCooldown.Value + change, false);
-            Generate.ConfessCooldown.Set((float)Generate.ConfessCooldown.Value + change, false);
             Generate.ChargeUpDuration.Set((float)Generate.ChargeUpDuration.Value + change, false);
             Generate.AbilityCooldown.Set((float)Generate.AbilityCooldown.Value + change, false);
             Generate.CampaignCooldown.Set((float)Generate.CampaignCooldown.Value + change, false);
             Generate.HypnotiseCooldown.Set((float)Generate.HypnotiseCooldown.Value + change, false);
             Generate.JailCD.Set((float)Generate.JailCD.Value + change, false);
             Generate.ReapCooldown.Set((float)Generate.ReapCooldown.Value + change, false);
+            Generate.FlushCooldown.Set((float)Generate.FlushCooldown.Value + change, false);
+            Generate.BlindCooldown.Set((float)Generate.BlindCooldown.Value + change, false);
+            Generate.BlindDuration.Set((float)Generate.BlindDuration.Value + change, false);
+            Generate.FreezeCooldown.Set((float)Generate.FreezeCooldown.Value + change, false);
+            Generate.FreezeDuration.Set((float)Generate.FreezeDuration.Value + change, false);
+            Generate.BarrierCd.Set((float)Generate.BarrierCd.Value + change, false);
             GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown += change;
             if (change % 5 != 0)
             {

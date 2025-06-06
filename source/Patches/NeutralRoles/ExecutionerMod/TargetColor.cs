@@ -10,6 +10,7 @@ namespace TownOfUsEdited.NeutralRoles.ExecutionerMod
     {
         Crew,
         Amnesiac,
+        Mercenary,
         Shifter,
         Survivor,
         Jester
@@ -37,7 +38,7 @@ namespace TownOfUsEdited.NeutralRoles.ExecutionerMod
 
             if (MeetingHud.Instance != null) UpdateMeeting(MeetingHud.Instance, role);
 
-            if (!PlayerControl.LocalPlayer.IsHypnotised())
+            if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())
             {
                 if (role.target && role.target.nameText())
                 {
@@ -72,6 +73,13 @@ namespace TownOfUsEdited.NeutralRoles.ExecutionerMod
                 var amnesiac = new Amnesiac(player);
                 amnesiac.SpawnedAs = false;
                 amnesiac.RegenTask();
+            }
+            else if (CustomGameOptions.OnTargetDead == OnTargetDead.Mercenary)
+            {
+                var merc = new Mercenary(player);
+                merc.SpawnedAs = false;
+                merc.Gold = CustomGameOptions.GoldToBribe;
+                merc.RegenTask();
             }
             else if (CustomGameOptions.OnTargetDead == OnTargetDead.Shifter)
             {

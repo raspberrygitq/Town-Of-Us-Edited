@@ -20,7 +20,7 @@ namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
             var campaignButton = __instance.KillButton;
             var role = Role.GetRole<Politician>(PlayerControl.LocalPlayer);
 
-            if (!PlayerControl.LocalPlayer.IsHypnotised())
+            if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())
             {
                 foreach (var playerId in role.CampaignedPlayers)
                 {
@@ -37,7 +37,8 @@ namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
 
             campaignButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             campaignButton.SetCoolDown(role.CampaignTimer(), CustomGameOptions.CampaignCd);
 
             if (!role.CanCampaign) return;

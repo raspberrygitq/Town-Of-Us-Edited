@@ -8,7 +8,7 @@ namespace TownOfUsEdited.Patches
     {
         private static void Postfix(ExileController __instance)
         {
-            var exiled = __instance.initData.networkedPlayer;
+            var exiled = __instance.initData?.networkedPlayer;
             if (exiled == null) 
                 return;
 

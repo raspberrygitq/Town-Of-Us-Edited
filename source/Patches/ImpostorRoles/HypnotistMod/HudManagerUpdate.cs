@@ -25,7 +25,7 @@ namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
                 role.HypnotiseButton.graphic.enabled = true;
                 role.HypnotiseButton.gameObject.SetActive(false);
             }
-            if (!PlayerControl.LocalPlayer.IsHypnotised())
+            if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())
             {
                 foreach (var playerId in role.HypnotisedPlayers)
                 {
@@ -50,7 +50,8 @@ namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
             role.HypnotiseButton.graphic.sprite = Hypnotise;
             role.HypnotiseButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead && !role.HysteriaActive
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             var notHypnotised = PlayerControl.AllPlayerControls.ToArray().Where(
                 player => !role.HypnotisedPlayers.Contains(player.PlayerId)

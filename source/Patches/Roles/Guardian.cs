@@ -4,7 +4,6 @@ namespace TownOfUsEdited.Roles
 {
     public class Guardian : Role
     {
-        public RoleEnum formerRole = new RoleEnum();
         public bool Enabled;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;

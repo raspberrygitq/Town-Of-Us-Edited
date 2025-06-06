@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using Reactor.Utilities;
+using TMPro;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -22,6 +24,7 @@ namespace TownOfUsEdited.Roles
 
         public PlayerControl ClosestPlayer;
         public KillButton _transformButton;
+        public TextMeshPro TransformText;
         public bool coolingDown => Cooldown > 0f;
         public float Cooldown;
         public bool TransformcoolingDown => TransformCooldown > 0f;
@@ -52,7 +55,7 @@ namespace TownOfUsEdited.Roles
                 Utils.Rpc(CustomRPC.MutantWin, Player.PlayerId);
                 Wins();
                 Utils.EndGame();
-                System.Console.WriteLine("GAME OVER REASON: Mutant Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Mutant Win");
                 return;
             }
 

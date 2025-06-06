@@ -17,18 +17,10 @@ namespace TownOfUsEdited.CrewmateRoles.CrusaderMod
             if (!PlayerControl.LocalPlayer.CanMove || role.ClosestPlayer == null) return false;
             if (role.Cooldown > 0) return false;
             if (!__instance.enabled) return false;
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (Vector2.Distance(role.ClosestPlayer.GetTruePosition(),
                 PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
             if (role.ClosestPlayer == null) return false;
-            if (PlayerControl.LocalPlayer.IsJailed()) return false;
-            if (role.ClosestPlayer.IsGuarded2())
-            {
-                role.Cooldown = CustomGameOptions.GuardKCReset;
-                return false; 
-            }
-            var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-            if (!abilityUsed) return false;
 
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
             if (interact[4] == true)
@@ -44,7 +36,7 @@ namespace TownOfUsEdited.CrewmateRoles.CrusaderMod
             }
             else if (interact[1] == true)
             {
-                role.Cooldown = CustomGameOptions.ProtectKCReset;
+                role.Cooldown = CustomGameOptions.TempSaveCdReset;
                 return false;
             }
             else if (interact[3] == true) return false;

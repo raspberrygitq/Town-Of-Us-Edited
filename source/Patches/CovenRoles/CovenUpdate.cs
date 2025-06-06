@@ -1,6 +1,8 @@
 using System.Linq;
 using HarmonyLib;
+using TMPro;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -9,10 +11,15 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class CovenUpdate
     {
-        public static KillButton SabotageButton;
+        public static SabotageButton SabotageButton;
         public static void Postfix(HudManager __instance)
         {
             var player = PlayerControl.LocalPlayer;
+            if (SabotageButton != null && !PlayerControl.LocalPlayer.Is(Faction.Coven))
+            {
+                Object.Destroy(SabotageButton.gameObject);
+                SabotageButton = null;
+            }
             // Check if there is only one player or if local player is null or dead
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;
@@ -26,7 +33,7 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
             foreach (var player2 in PlayerControl.AllPlayerControls)
             {
                 // Add purple color to coven names
-                if (player2.Is(Faction.Coven))
+                if (player2.Is(Faction.Coven) && !Utils.CommsCamouflaged() && !PlayerControl.LocalPlayer.IsHypnotised())
                 {
                     player2.nameText().color = Patches.Colors.Coven;
                 }
@@ -53,23 +60,40 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
 
             if (SabotageButton == null)
             {
-                SabotageButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
+                SabotageButton = Object.Instantiate(__instance.SabotageButton, __instance.SabotageButton.transform.parent);
                 SabotageButton.graphic.enabled = true;
                 SabotageButton.gameObject.SetActive(false);
             }
 
+            var SabotageText = SabotageButton.buttonLabelText;
+
             SabotageButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            
+            SabotageText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
                     
             SabotageButton.graphic.sprite = TownOfUsEdited.SabotageCoven;
 
-            SabotageButton.SetCoolDown(0f, 1f);
-
-            SabotageButton.graphic.color = Palette.EnabledColor;
-            SabotageButton.graphic.material.SetFloat("_Desat", 0f);
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.HexMaster)) return;
+            if (!PlayerControl.LocalPlayer.inVent)
+            {
+                SabotageButton.graphic.color = Palette.EnabledColor;
+                SabotageButton.graphic.material.SetFloat("_Desat", 0f);
+                SabotageText.color = Palette.EnabledColor;
+                SabotageText.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                SabotageButton.graphic.color = Palette.DisabledClear;
+                SabotageButton.graphic.material.SetFloat("_Desat", 1f);
+                SabotageText.color = Palette.DisabledClear;
+                SabotageText.material.SetFloat("_Desat", 1f);
+            }
+            SabotageText.SetOutlineColor(Colors.Coven);
 
             if (!PlayerControl.LocalPlayer.Data.IsDead)
             {
@@ -82,10 +106,13 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
                 position.y, position.z);
             }
 
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.HexMaster)) return;
+
             // Check if the game state allows the KillButton to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
             isKillButtonActive = isKillButtonActive && !MeetingHud.Instance && !player.Data.IsDead;
-            isKillButtonActive = isKillButtonActive && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started;
+            isKillButtonActive = isKillButtonActive && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+            AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
 
             // Set KillButton's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
@@ -147,16 +174,8 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
 
             var role = Role.GetRole(PlayerControl.LocalPlayer);
             var killbutton = DestroyableSingleton<HudManager>.Instance.KillButton;
-                
-            if (__instance == CovenUpdate.SabotageButton)
-            {
-                DestroyableSingleton<HudManager>.Instance.ToggleMapVisible(new MapOptions
-                {
-                    Mode = MapOptions.Modes.Sabotage
-                });
-                return false;
-            }
 
+            if (PlayerControl.LocalPlayer.inVent) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             
             if (__instance == killbutton)
@@ -167,22 +186,38 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
                 var target = __instance.currentTarget;
                 if (target == null) return false;
 
-                if (PlayerControl.LocalPlayer.IsJailed()) return false;
-
                 if (PlayerControl.LocalPlayer.coolingDown()) return false;
-
-                if (target.IsGuarded2())
-                {
-                    role.KillCooldown = CustomGameOptions.GuardKCReset;
-                    return false; 
-                }
-
+                
                 Utils.Interact(PlayerControl.LocalPlayer, target, true);
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(PlayerControl.LocalPlayer).Potion == "Strength"
+                && Role.GetRole<PotionMaster>(PlayerControl.LocalPlayer).UsingPotion)
+                {
+                    role.KillCooldown = CustomGameOptions.StrengthKCD;
+                    return false;
+                }
 
                 // Set the last kill time
                 role.KillCooldown = CustomGameOptions.CovenKCD;
             }
 
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(SabotageButton), nameof(SabotageButton.DoClick))]
+    public class SabotageButtonPatch
+    {
+        [HarmonyPriority(Priority.First)]
+        public static bool Prefix(SabotageButton __instance)
+        {
+            if (__instance != CovenUpdate.SabotageButton) return true;
+            if (MeetingHud.Instance) return false;
+            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return false;
+            DestroyableSingleton<HudManager>.Instance.ToggleMapVisible(new MapOptions
+            {
+                Mode = MapOptions.Modes.Sabotage
+            });
             return false;
         }
     }
@@ -197,7 +232,7 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Is(Faction.Coven)) return;
-            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return;
+            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return;
             if (MeetingHud.Instance) return;
             __result = new MapOptions
 		    {
@@ -216,7 +251,7 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
             if (PlayerControl.LocalPlayer == null) return true;
             if (PlayerControl.LocalPlayer.Data == null) return true;
             if (!PlayerControl.LocalPlayer.Is(Faction.Coven)) return true;
-            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return true;
+            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return true;
             return false;
         }
     }
@@ -229,7 +264,7 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
             if (PlayerControl.LocalPlayer == null) return true;
             if (PlayerControl.LocalPlayer.Data == null) return true;
             if (!PlayerControl.LocalPlayer.Is(Faction.Coven)) return true;
-            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return true;
+            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return true;
             return false;
         }
     }
@@ -242,7 +277,7 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
             if (PlayerControl.LocalPlayer == null) return true;
             if (PlayerControl.LocalPlayer.Data == null) return true;
             if (!PlayerControl.LocalPlayer.Is(Faction.Coven)) return true;
-            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return true;
+            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return true;
             return false;
         }
     }
@@ -255,7 +290,7 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
             if (PlayerControl.LocalPlayer == null) return true;
             if (PlayerControl.LocalPlayer.Data == null) return true;
             if (!PlayerControl.LocalPlayer.Is(Faction.Coven)) return true;
-            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return true;
+            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return true;
             return false;
         }
     }

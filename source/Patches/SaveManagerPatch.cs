@@ -18,4 +18,13 @@ namespace TownOfUsEdited.RainbowMod
             __result += "_TOU";
         }
     }
+
+    [HarmonyPatch(typeof(AmongUs.Data.Settings.SettingsData), nameof(AmongUs.Data.Settings.SettingsData.FileName), MethodType.Getter)]
+    public class SettingsFilePatch
+    {
+        public static void Postfix(ref string __result)
+        {
+            __result += "_TOU";
+        }
+    }
 }

@@ -30,10 +30,6 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#6B8DE1>Captain</color>, use your zoom ability to increase your vision.");
                 }
-                if (pc.Is(RoleEnum.Superstar))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#ffca00>Superstar</color>, when you die, all players will get notified with a flash on their screen.");
-                }
                 if (pc.Is(RoleEnum.Avenger))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#216f01>Avenger</color>, you can avenge a dead body if you find one, resulting in being able to kill his killer.");
@@ -68,7 +64,7 @@ namespace TownOfUsEdited.Roles
                 }
                 if (pc.Is(RoleEnum.Oracle))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#BF00BFFF>Oracle</color>, you can gain informations by making a player confess to you.\nAdditionally, the confessed player can not be ejected and his alignement will be revealed to everyone if you die.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#BF00BFFF>Oracle</color>, you can force a player to confess to you giving you an information on one of two players.\nThe confessed player will also reveal their alignment to everyone if you die.\nFinally, you can also use your bless ability on someone, making them immune to being voted out the next meeting.");
                 }
                 if (pc.Is(RoleEnum.Seer) && CustomGameOptions.GameMode != GameMode.Werewolf)
                 {
@@ -100,7 +96,7 @@ namespace TownOfUsEdited.Roles
                 }
                 if (pc.Is(RoleEnum.Jailor))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#61a37a>Jailor</color>, you can jail anyone during the round making them unable to kill or interact with anyone else, then on the next meeting, you will be able to execute them.\nIf you execute a Crewmate, you lose your ability and might even die too.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#61a37a>Jailor</color>, you can use your ability to Jail someone.\nThe Jailed player will instantly be notified and will be totally blocked from using any special ability during the round and the next meeting if they're still jailed.\nYou can then discuss with the Jailed player through a custom chat without revealing your identity to them.\nYou can also choose to release your target at any time by pressing another button and even jail someone else but this will stop the role block on the previous jailed player.\nDuring the meeting, you can choose to execute your target but if you mistakenly execute a Crewmate, you will lose the ability to execute for the rest of the game and might even die depending on settings.");
                 }
                 if (pc.Is(RoleEnum.Deputy))
                 {
@@ -112,7 +108,7 @@ namespace TownOfUsEdited.Roles
                 }
                 if (pc.Is(RoleEnum.Sheriff) && CustomGameOptions.GameMode != GameMode.Werewolf)
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#FFFF00FF>Sheriff</color>, you can kill the <color=#FF0000FF>Impostors</color> but if you try to kill a Crewmate, you will die instead.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#FFFF00FF>Sheriff</color>, you can kill the <color=#FF0000FF>Impostors</color> but if you try to kill a <color=#00FFFF>Crewmate</color>, you will die instead.");
                 }
                 if (pc.Is(RoleEnum.VampireHunter))
                 {
@@ -142,9 +138,17 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#006600FF>Medic</color>, you can give a shield to someone which will make him invincible to murder attempts.\nIf the shield break, you may be noticed.\nThe shield will also break if you die.\nYou also gain informations by reporting dead bodies.");
                 }
+                if (pc.Is(RoleEnum.Cleric))
+                {
+                    HudManager.Instance.ShowPopUp("You are the <color=#00FFB3FF>Cleric</color>, you have two abilities, the first one gives a shield to a player making him protected from murder attempts for a short period of time and the second one lets you cleanse a player removing any bad effect from them (douse, infection, hysteria...).");
+                }
+                if (pc.Is(RoleEnum.Plumber))
+                {
+                    HudManager.Instance.ShowPopUp("You are the <color=#CC6600FF>Plumber</color>, your first ability allows you to eject all the players that are using the vents, you can also block a vent making it unusable for the rest of the game.");
+                }
                 if (pc.Is(RoleEnum.Doctor))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#00EE3C>Doctor</color>, use your abilities to resurect other players!\nYou can resurect anyone so be careful while using your powers.\nYou may also be only able to resurect someone in MedBay / Laboratory depending on settings. If so, you have a drag button to drag the body to a medical area.\nNote that revived players can't chat.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#00EE3C>Doctor</color>, use your abilities to resurect other players!\nYou can resurect anyone so be careful while using your powers.\nYou may also be only able to resurect someone in MedBay / Laboratory depending on settings. If so, you have a drag button to drag the body to a medical area.\nNote that revived players can't chat nor vote in meetings.");
                 }
                 if (pc.Is(RoleEnum.Crusader))
                 {
@@ -162,13 +166,9 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#FFA60AFF>Engineer</color>, you can use vents to catch <color=#FF0000FF>Impostors</color> and you can also fix sabotages.");
                 }
-                if (pc.Is(RoleEnum.Lighter))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#FFA60AFF>Lighter</color>, you can use ability to get an Impostor vision for a short period of time.\nAlso works when lights are off.");
-                }
                 if (pc.Is(RoleEnum.TimeLord))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#0f00b8>Time Lord</color>, you can reverse the time making players currently unable to move and reviving players that died recently.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#0f00b8>Time Lord</color>, you can rewind the time making players go back in time and also reviving latest dead players if their bodies didn't get eaten / cleaned.");
                 }
                 if (pc.Is(RoleEnum.Imitator))
                 {
@@ -180,7 +180,7 @@ namespace TownOfUsEdited.Roles
                 }
                 if (pc.Is(RoleEnum.Mayor) && CustomGameOptions.GameMode != GameMode.Werewolf)
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#704FA8FF>Mayor</color>, you can choose to reveal to other players which will make you unguessable and will safe you.\nYou will also gain an extra vote but your vision will be lower.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#704FA8FF>Mayor</color>, now that you have been revealed to other players, everyone know who you are and you have two extra votes when voting.\nTo balance this, your vision is reduced.");
                 }
                 if (pc.Is(RoleEnum.Medium))
                 {
@@ -215,6 +215,10 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#AAAAAA>Shifter</color>, you can shift your role with anyone and you are not guessable!");
                 }
+                else if (pc.Is(RoleEnum.Mercenary))
+                {
+                    HudManager.Instance.ShowPopUp("You are the <color=#8C6699FF>Mercenary</color>, you can guard player and get rewarded with gold if someone interacts with your target.\nUse then what you've earned to bribe other players.\nIf one of the bribed players wins, you will win too, so make sure to get as much bribed players as possible!.");
+                }
                 if (pc.Is(RoleEnum.GuardianAngel))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#B3FFFFFF>Guardian Angel</color>, you have to protect your target at any cost!\nYou can use your ability to give a shield to your target.\nIf your target dies before you, you role will change depending on the settings.");
@@ -237,7 +241,7 @@ namespace TownOfUsEdited.Roles
                 }
                 if (pc.Is(RoleEnum.SoulCollector))
                 {
-                    HudManager.Instance.ShowPopUp($"You are the <color=#99FFCCFF>Soul Collector</color>, your goal is to collect {CustomGameOptions.SoulsToWin} Souls to win.\nYou can reap players to collect more souls faster.");
+                    HudManager.Instance.ShowPopUp($"You are the <color=#99FFCCFF>Soul Collector</color>, you can reap players, instantly killing them and leaving a soul instead of a body on the ground.\nReap everyone and be the last one standing to win!");
                 }
                 if (pc.Is(RoleEnum.Vulture))
                 {
@@ -301,7 +305,7 @@ namespace TownOfUsEdited.Roles
                 }
                 if (pc.Is(RoleEnum.Juggernaut))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#8c004c>Juggernaut</color>, when you use your kill ability, your next kill cooldown decreases etc until 0.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#8c004c>Juggernaut</color>, when you use your kill ability, your next kill cooldown decreases etc until it reaches 0s.");
                 }
                 // Impostors Roles info
                 if (pc.Is(RoleEnum.Impostor))
@@ -480,7 +484,7 @@ namespace TownOfUsEdited.Roles
                 }
                 if (pc.Is(RoleEnum.Mayor) && CustomGameOptions.GameMode == GameMode.Werewolf)
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#704FA8FF>Mayor</color>, during the day, you can choose to reveal which will safe you and gain you two extra votes.\nAdditionally, your vision will be reduced.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#704FA8FF>Mayor</color>, during the day, you can choose to reveal which will safe you and gain you two extra votes.\nTo balance this, your vision will be reduced.");
                 }
                 if (pc.Is(RoleEnum.TalkativeWolf))
                 {
@@ -526,10 +530,6 @@ namespace TownOfUsEdited.Roles
             {
                 return "The <color=#6B8DE1>Captain</color> can zoom out on the map to catch Impostors.";
             }
-            else if (role == "Superstar")
-            {
-                return "The <color=#ffca00>Superstar</color> will alert everyone when dying and show an arrow pointing to its dead bodies.";
-            }
             else if (role == "Avenger")
             {
                 return "The <color=#216f01>Avenger</color> has an ability usable on a dead bodie.\nWhenever the Avenger uses its Avenge ability, the kill button of the Avenger will activate and target the killer of the dead body.\nThe killer will have its name displayed as black to the Avenger.\nHowever, if someone reports / calls a meeting, the Avenger will no longer see who the killer is.";
@@ -564,7 +564,7 @@ namespace TownOfUsEdited.Roles
             }
             else if (role == "Oracle")
             {
-                return "The <color=#BF00BFFF>Oracle</color> can use its ability to force a player to confess informations.\nThe confessed player will temporarily be immune to being voted out and will get its faction revealed to other players if the Oracle dies.";
+                return "The <color=#BF00BFFF>Oracle</color> has two abilities.\nThe first one forces a player to confess to them, telling them that one of two players is evil.\nThe confessed player will also reveal their alignment to everyone if the Oracle dies.\nThe second ability, bless, makes the player immune to being voted out the next meeting.";
             }
             else if (role == "Seer")
             {
@@ -596,7 +596,7 @@ namespace TownOfUsEdited.Roles
             }
             else if (role == "Jailor")
             {
-                return "The <color=#61a37a>Jailor</color> can use its ability to Jail someone.\nThe jailed player will not be able to perform direct kills during that round and will not be able to assassinate next meeting.\nDuring the next meeting, the Jailor can choose to execute its target, but the Jailor will lose its abilities if that player was a Crewmate and may also die alongside them.";
+                return "The <color=#61a37a>Jailor</color> can use its ability to Jail someone.\nThe Jailed player will instantly be notified and will be totally blocked from using any special ability during the round and the next meeting if they're still jailed.\nThe Jailor can discuss with the Jailed player through a custom chat but the Jailor's identity won't be revealed to them.\nThey can also choose to release its target at any time by pressing another button and can then jail someone else but this will stop the role block on the previous jailed player.\nDuring the meeting, the Jailor can choose to execute their target but if they mistakenly execute a Crewmate, they will lose the ability to execute for the rest of the game and might even die depending on settings.";
             }
             else if (role == "Deputy")
             {
@@ -640,7 +640,7 @@ namespace TownOfUsEdited.Roles
             }
             else if (role == "Doctor")
             {
-                return "The <color=#00EE3C>Doctor</color> can revive dead players when they find dead bodies.\nDepending on settings, the Doctor may have to be in a medical area in order to revive someone, in that case, the doctor will have a drag button to drag the body to the area.\nNote that Revived player will not be able to speak anymore.";
+                return "The <color=#00EE3C>Doctor</color> can revive dead players when they find dead bodies.\nDepending on settings, the Doctor may have to be in a medical area in order to revive someone, in that case, the doctor will have a drag button to drag the body to the area.\nNote that Revived player will not be able to speak anymore nor vote during meetings.";
             }
             else if (role == "Crusader")
             {
@@ -654,17 +654,21 @@ namespace TownOfUsEdited.Roles
             {
                 return "The <color=#0a7eae>Paranoïac</color> can hide in vents.\nThe Paranoïac can also call a meeting from anywhere on the map.";
             }
+            else if (role == "Cleric")
+            {
+                return "the <color=#00FFB3FF>Cleric</color> can protect a player from murder attempts for some seconds and cleanse them to remove all bad effects on them (douse, infect, hysteria...).";
+            }
+            else if (role == "Plumber")
+            {
+                return "The <color=#CC6600FF>Plumber</color>, can flush vents, ejecting all players currently in vent.\nThe Plumber can also barricade a vent making it unusable for the rest of the game.";
+            }
             else if (role == "Engineer")
             {
                 return "The <color=#FFA60AFF>Engineer</color> can use the vents and fix sabotages.";
             }
-            else if (role == "Lighter")
-            {
-                return "The <color=#FFA60AFF>Lighter</color> can use its ability to temporarily get Impostor vision allowing to see in the dark.";
-            }
             else if (role == "TimeLord")
             {
-                return "The <color=#0f00b8>Time Lord</color> can freeze the time while also rewinding it and thus, reviving the latest dead players.";
+                return "The <color=#0f00b8>Time Lord</color> can rewind the time, making you undo your previous movements while also reviving players that died at that moment.";
             }
             else if (role == "Imitator")
             {
@@ -711,6 +715,10 @@ namespace TownOfUsEdited.Roles
             {
                 return "The <color=#AAAAAA>Shifter</color> is a Neutral role which can shift its role with another player.\nThe Shifter will get the shifted's role and the shifted will become a Shifter.\nShifter can't be guessed.";
             }
+            else if (role == "Mercenary")
+            {
+                return "The <color=#8C6699FF>Mercenary</color>, can guard players and get rewarded with gold when someone interacts with one of the guarded players.\nThe currency can then be used to bribe other players.\nIf one of the bribed players then wins, the Mercenary wins too as long as they are not Lovers or Neutral Evil Roles.";
+            }
             else if (role == "GuardianAngel")
             {
                 return "The <color=#B3FFFFFF>Guardian Angel</color> is a Neutral role that is assigned a target that must stay alive in order to win.\nTo help its target, the Guardian Angel can temporarily shield them making them invinsible to murder attempts.";
@@ -733,7 +741,7 @@ namespace TownOfUsEdited.Roles
             }
             else if (role == "SoulCollector")
             {
-                return "The <color=#99FFCCFF>Soul Collector</color> is a Neutral role which wins by collecting a certain amount of souls.\nTo do so, it must reap a player and then collect their soul after they die.\nThe Soul Collector may also passively gain souls each round.";
+                return "The <color=#99FFCCFF>Soul Collector</color> is a Neutral Killing role which can reap players, killing them instantly and leaving a soul on the ground.\nThe Soul Collector will win when thy are the last player standing.";
             }
             else if (role == "Vulture")
             {
@@ -992,7 +1000,11 @@ namespace TownOfUsEdited.Roles
             }
             else if (role == "Torch")
             {
-                return "<color#FFFF99FF>Torch</color> is a Crewmate Modifier which allows you to see in the dark.";
+                return "<color#FFFF99FF>Torch</color> is a Crewmate Modifier which gives you Impostor vision.";
+            }
+            else if (role == "Taskmaster")
+            {
+                return "<color#669966FF>Taskmaster</color> is a Crewmate Modifier which completes a random task after each meeting.";
             }
             else if (role == "Vengeful")
             {
@@ -1005,6 +1017,10 @@ namespace TownOfUsEdited.Roles
             else if (role == "Flash")
             {
                 return "<color#FF8080FF>Flash</color> is a Global Modifier which makes you faster than everyone else.";
+            }
+            else if (role == "Satellite")
+            {
+                return "<color#0099CCFF>Satellite</color> is a Global Modifier which allows you to locate the position of all the dead bodies once.";
             }
             else if (role == "Giant")
             {
@@ -1041,6 +1057,10 @@ namespace TownOfUsEdited.Roles
             else if (role == "Spotter")
             {
                 return "<color=#c688f2>Spotter</color> is a Global Modifier which makes you see the vote colors of each player when anonymous votes are toggled.";
+            }
+            else if (role == "Superstar")
+            {
+                return "The <color=#ffca00>Superstar</color> is a Global Modifier which will alert everyone when dying and show an arrow pointing to its dead bodies.";
             }
             else if (role == "Motionless")
             {

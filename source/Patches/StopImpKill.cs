@@ -5,7 +5,6 @@ using TownOfUsEdited.Modifiers.UnderdogMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using TownOfUsEdited.CrewmateRoles.SheriffMod;
-using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited
 {
@@ -20,19 +19,12 @@ namespace TownOfUsEdited
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             if (!__instance.isActiveAndEnabled || PlayerControl.LocalPlayer.coolingDown()) return false;
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Poisoner)) return false;
-            if (PlayerControl.LocalPlayer.IsJailed()) return false;
             HUDKill.ImpKillTarget(__instance);
             var target = __instance.currentTarget;
             if (target == null) return false;
             if (PlayerControl.LocalPlayer.IsControlled() && target.Is(Faction.Coven))
             {
                 Utils.Interact(target, PlayerControl.LocalPlayer, true);
-                return false;
-            }
-            else if (target.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(target).UsingPotion
-            && Role.GetRole<PotionMaster>(target).Potion == "Shield")
-            {
-                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.PotionKCDReset;
                 return false;
             }
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek)
@@ -44,11 +36,6 @@ namespace TownOfUsEdited
             {
                 Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.WerewolfKillCD;
                 return false;
-            }
-            if (target.IsGuarded2())
-            {
-                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.GuardKCReset;
-                return false; 
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation)
             {
@@ -89,12 +76,7 @@ namespace TownOfUsEdited
             }
             else if (interact[1] == true)
             {
-                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.ProtectKCReset + 0.01f;
-                return false;
-            }
-            else if (interact[2] == true)
-            {
-                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.VestKCReset + 0.01f;
+                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.TempSaveCdReset + 0.01f;
                 return false;
             }
             else if (interact[3] == true)

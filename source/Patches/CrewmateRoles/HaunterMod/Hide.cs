@@ -6,7 +6,7 @@ using UnityEngine;
 namespace TownOfUsEdited.CrewmateRoles.HaunterMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
-    [HarmonyPriority(Priority.Last)]
+    [HarmonyPriority(Priority.First)]
     public class Hide
     {
         public static void Postfix(HudManager __instance)
@@ -26,7 +26,9 @@ namespace TownOfUsEdited.CrewmateRoles.HaunterMod
                     haunter.Player.myRend().color = Color.white;
                     haunter.Player.gameObject.layer = LayerMask.NameToLayer("Ghost");
                     haunter.Faded = false;
+                    haunter.Player.Collider.enabled = false;
                     haunter.Player.MyPhysics.ResetMoveState();
+                    System.Console.WriteLine("Reset Haunter");
                 }
             }
         }

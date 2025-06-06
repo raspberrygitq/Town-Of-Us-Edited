@@ -1,5 +1,9 @@
+using System;
+using Il2CppSystem.Collections.Generic;
 using AmongUs.GameOptions;
 using HarmonyLib;
+using InnerNet;
+using System.Linq;
 
 namespace TownOfUsEdited.Patches
 {
@@ -17,24 +21,13 @@ namespace TownOfUsEdited.Patches
         [HarmonyPatch(typeof(ShipStatus), nameof(ShipStatus.Begin))]
         public static bool Prefix(ShipStatus __instance)
         {
-            var commonTask = __instance.CommonTasks.Count;
-            var normalTask = __instance.ShortTasks.Count;
-            var longTask = __instance.LongTasks.Count;
+            var commonTask = Math.Min(__instance.CommonTasks.Count, 4);
+            var normalTask = Math.Min(__instance.ShortTasks.Count, 8);
+            var longTask = Math.Min(__instance.LongTasks.Count, 4);
             if (GameOptionsManager.Instance.currentNormalGameOptions.NumCommonTasks > commonTask) GameOptionsManager.Instance.currentNormalGameOptions.NumCommonTasks = commonTask;
             if (GameOptionsManager.Instance.currentNormalGameOptions.NumShortTasks > normalTask) GameOptionsManager.Instance.currentNormalGameOptions.NumShortTasks = normalTask;
             if (GameOptionsManager.Instance.currentNormalGameOptions.NumLongTasks > longTask) GameOptionsManager.Instance.currentNormalGameOptions.NumLongTasks = longTask;
             return true;
-        }
-    }
-
-    [HarmonyPatch(typeof(IGameOptionsExtensions), nameof(IGameOptionsExtensions.GetAdjustedNumImpostors))]
-    public class GetAdjustedImposters
-    {
-        public static bool Prefix(IGameOptions __instance, ref int __result)
-        {
-            if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return true;
-            __result = 0;
-            return false;
         }
     }
 }

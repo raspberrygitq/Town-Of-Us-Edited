@@ -23,6 +23,7 @@ namespace TownOfUsEdited.Patches
                 if (!player.Data.IsDead) continue;
                 if (player.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(player).Caught) continue;
                 if (player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(player).Caught) continue;
+                if (player.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(player).Caught) continue;
 
                 bool show = TownOfUsEdited.DeadSeeGhosts.Value;
                 var bodyforms = player.gameObject.transform.GetChild(1).gameObject;

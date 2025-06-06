@@ -11,9 +11,75 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 {
     public class DocRevive
     {
+        public static void StopDragging(byte playerId)
+        {
+            foreach (var role in Role.GetRoles(RoleEnum.Undertaker))
+            {
+                var undertaker = (Undertaker)role;
+                if (undertaker.CurrentlyDragging != null && undertaker.CurrentlyDragging.ParentId == playerId)
+                {
+                    Vector3 position = undertaker.Player.transform.position;
+
+                    if (Patches.SubmergedCompatibility.isSubmerged())
+                    {
+                        if (position.y > -7f)
+                        {
+                            position.z = 0.0208f;
+                        }
+                        else
+                        {
+                            position.z = -0.0273f;
+                        }
+                    }
+
+                    position.y -= 0.3636f;
+
+                    var body = undertaker.CurrentlyDragging;
+                    if (undertaker.Player == PlayerControl.LocalPlayer)
+                    {
+                        foreach (var body2 in undertaker.CurrentlyDragging.bodyRenderers) body2.material.SetFloat("_Outline", 0f);
+                    }
+                    undertaker.CurrentlyDragging = null;
+
+                    body.transform.position = position;
+                }
+            }
+            foreach (var role in Role.GetRoles(RoleEnum.Doctor))
+            {
+                var doctor = (Doctor)role;
+                if (doctor.CurrentlyDragging != null && doctor.CurrentlyDragging.ParentId == playerId)
+                {
+                    Vector3 position = doctor.Player.transform.position;
+
+                    if (Patches.SubmergedCompatibility.isSubmerged())
+                    {
+                        if (position.y > -7f)
+                        {
+                            position.z = 0.0208f;
+                        }
+                        else
+                        {
+                            position.z = -0.0273f;
+                        }
+                    }
+
+                    position.y -= 0.3636f;
+
+                    var body = doctor.CurrentlyDragging;
+                    if (doctor.Player == PlayerControl.LocalPlayer)
+                    {
+                        foreach (var body2 in doctor.CurrentlyDragging.bodyRenderers) body2.material.SetFloat("_Outline", 0f);
+                    }
+                    doctor.CurrentlyDragging = null;
+
+                    body.transform.position = position;
+                }
+            }
+        }
         public static void DoctorRevive(DeadBody target, Doctor role)
         {
             var parentId = target.ParentId;
+            StopDragging(parentId);
             var position = target.TruePosition;
 
             if (target.IsDouble())
@@ -43,7 +109,7 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             foreach (var poisoner in Role.GetRoles(RoleEnum.Poisoner))
             {
                 var poisonerRole = (Poisoner)poisoner;
-                if (poisonerRole.PoisonedPlayer == player) poisonerRole.PoisonedPlayer = poisonerRole.Player;
+                if (poisonerRole.PoisonedPlayer == player) poisonerRole.PoisonedPlayer = null;
             }
 
             if (CustomGameOptions.GameMode != GameMode.Chaos)
@@ -56,7 +122,8 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             Murder.KilledPlayers.Remove(
                 Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == player.PlayerId));
             revived.Add(player);
-            player.NetTransform.SnapTo(new Vector2(position.x, position.y + 0.3636f));
+            var usedPosition = new Vector2(position.x, position.y + 0.3636f);
+            player.transform.position = new Vector2(usedPosition.x, usedPosition.y);
 
             if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
@@ -67,20 +134,19 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             {
                 var lover = Modifier.GetModifier<Lover>(player).OtherLover.Player;
 
-                lover.Revive();
-                RoleManager.Instance.SetRole(player, RoleTypes.Crewmate);
-                Murder.KilledPlayers.Remove(
-                    Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == lover.PlayerId));
-                revived.Add(lover);
-
-                if (PlayerControl.LocalPlayer == lover) lover.myTasks.RemoveAt(1);
-
                 foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
                 {
                     if (deadBody.ParentId == lover.PlayerId)
                     {
+                        lover.Revive();
+                        RoleManager.Instance.SetRole(player, RoleTypes.Crewmate);
+                        Murder.KilledPlayers.Remove(
+                            Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == lover.PlayerId));
+                        revived.Add(lover);
+
                         var position2 = deadBody.TruePosition;
-                        lover.NetTransform.SnapTo(new Vector2(position2.x, position2.y + 0.3636f));
+                        var usedPosition2 = new Vector2(position2.x, position2.y + 0.3636f);
+                        lover.transform.position = new Vector2(usedPosition2.x, usedPosition2.y);
 
                         if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == lover.PlayerId)
                         {

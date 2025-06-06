@@ -26,7 +26,7 @@ namespace TownOfUsEdited.Patches
             innerNetClient.KickPlayer(targetClientId, false);
         }
 
-        public static void Ban(this InnerNetClient innerNetClient, int targetClientId)
+        public static void Ban(this InnerNetClient innerNetClient, int targetClientId, string reason)
         {
             var writer = MessageWriter.Get(SendOption.Reliable);
             writer.StartMessage(Tags.GameDataTo);
@@ -35,6 +35,7 @@ namespace TownOfUsEdited.Patches
             {
                 writer.StartMessage(byte.MaxValue);
                 writer.Write((byte) ReactorGameDataFlag.SetKickReason);
+                writer.Write(reason);
                 writer.EndMessage();
             }
             writer.EndMessage();

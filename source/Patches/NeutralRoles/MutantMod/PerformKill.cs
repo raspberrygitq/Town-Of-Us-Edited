@@ -2,6 +2,7 @@ using HarmonyLib;
 using TownOfUsEdited.Roles;
 using System;
 using Reactor.Utilities;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Patches.NeutralRoles.MutantMod
 {
@@ -33,9 +34,12 @@ namespace TownOfUsEdited.Patches.NeutralRoles.MutantMod
 
                     PlayerControl.LocalPlayer.MyPhysics.SetBodyType(PlayerBodyTypes.Seeker);
                     Coroutines.Start(Utils.FlashCoroutine(Colors.Mutant, 0.5f));
+                    var sound = GameManagerCreator.Instance.HideAndSeekManagerPrefab.FinalHideAlertSFX;
+                    SoundManager.Instance.PlaySound(Object.Instantiate(sound, HudManager.Instance.transform.parent), false, 1f, null);
                     Utils.Rpc(CustomRPC.Transform, PlayerControl.LocalPlayer.PlayerId);
                     role.IsTransformed = true;
                     __instance.graphic.sprite = TownOfUsEdited.UnTransformSprite;
+                    if (role.Cooldown > 5f) role.Cooldown = 5f;
                     return false;
                 }
                 else

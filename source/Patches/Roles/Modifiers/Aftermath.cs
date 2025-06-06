@@ -48,17 +48,20 @@ namespace TownOfUsEdited.Roles.Modifiers
 
             if (role is Blackmailer blackmailer)
             {
-                blackmailer.Blackmailed?.myRend().material.SetFloat("_Outline", 0f);
-                if (blackmailer.Blackmailed != null && blackmailer.Blackmailed.Data.IsImpostor())
+                if (AmongUsClient.Instance.AmHost)
                 {
-                    if (blackmailer.Blackmailed.GetCustomOutfitType() != CustomPlayerOutfitType.Camouflage &&
-                        blackmailer.Blackmailed.GetCustomOutfitType() != CustomPlayerOutfitType.Swooper)
-                        blackmailer.Blackmailed.nameText().color = Patches.Colors.Impostor;
-                    else blackmailer.Blackmailed.nameText().color = Color.clear;
+                    blackmailer.Blackmailed?.myRend().material.SetFloat("_Outline", 0f);
+                    if (blackmailer.Blackmailed != null && blackmailer.Blackmailed.Data.IsImpostor())
+                    {
+                        if (blackmailer.Blackmailed.GetCustomOutfitType() != CustomPlayerOutfitType.Camouflage &&
+                            blackmailer.Blackmailed.GetCustomOutfitType() != CustomPlayerOutfitType.Swooper)
+                            blackmailer.Blackmailed.nameText().color = Patches.Colors.Impostor;
+                        else blackmailer.Blackmailed.nameText().color = Color.clear;
+                    }
+                    blackmailer.Blackmailed = player;
+                    Utils.Rpc(CustomRPC.Blackmail, player.PlayerId, player.PlayerId, (byte)1);
                 }
-                blackmailer.Blackmailed = player;
-
-                Utils.Rpc(CustomRPC.Blackmail, player.PlayerId, player.PlayerId);
+                else Utils.Rpc(CustomRPC.Blackmail, player.PlayerId, player.PlayerId, (byte)0);
             }
             else if (role is Glitch glitch)
             {
@@ -85,9 +88,9 @@ namespace TownOfUsEdited.Roles.Modifiers
                     writer.Write((int)CustomRPC.FlashGrenade);
                     writer.Write((byte)grenadier.Player.PlayerId);
                     writer.Write((byte)grenadier.flashedPlayers.Count);
-                    foreach (var player2 in grenadier.flashedPlayers)
+                    foreach (var flashed in grenadier.flashedPlayers)
                     {
-                        writer.Write(player2.PlayerId);
+                        writer.Write(flashed.PlayerId);
                     }
                     AmongUsClient.Instance.FinishRpcImmediately(writer);
                 }
@@ -145,7 +148,9 @@ namespace TownOfUsEdited.Roles.Modifiers
                 {
                     Utils.Rpc(CustomRPC.Morph, PlayerControl.LocalPlayer.PlayerId, corpse.PlayerId);
                     morphling.TimeRemaining = CustomGameOptions.MorphlingDuration;
-                    if (morphling.SampledPlayer == null) morphling._morphButton.graphic.sprite = TownOfUsEdited.MorphSprite;
+                    var shapeshifter = RoleManager.Instance.GetRole(AmongUs.GameOptions.RoleTypes.Shapeshifter).Cast<ShapeshifterRole>();
+                    Sprite MorphSprite = shapeshifter.Ability.Image;
+                    if (morphling.SampledPlayer == null) morphling._morphButton.graphic.sprite = MorphSprite;
                     morphling.SampledPlayer = corpse;
                     morphling.MorphedPlayer = corpse;
                     Utils.Morph(morphling.Player, corpse, true);
@@ -159,6 +164,13 @@ namespace TownOfUsEdited.Roles.Modifiers
                     swooper.TimeRemaining = CustomGameOptions.SwoopDuration;
                     swooper.Swoop();
                 }
+            }
+            else if (role is Poisoner poisoner)
+            {
+                if (poisoner.PoisonedPlayer != null) poisoner.PoisonedPlayer = null;
+                poisoner.PoisonedPlayer = poisoner.Player;
+                poisoner.TimeRemaining = CustomGameOptions.PoisonDuration;
+                Utils.Rpc(CustomRPC.Poison, PlayerControl.LocalPlayer.PlayerId, poisoner.Player.PlayerId);
             }
             else if (role is Undertaker undertaker)
             {
@@ -191,7 +203,6 @@ namespace TownOfUsEdited.Roles.Modifiers
                 undertaker.CurrentlyDragging = db;
                 ImpostorRoles.UndertakerMod.KillButtonTarget.SetTarget(undertaker._dragDropButton, null, undertaker);
                 undertaker._dragDropButton.graphic.sprite = TownOfUsEdited.DropSprite;
-
             }
             else if (role is Venerer venerer)
             {
@@ -199,7 +210,6 @@ namespace TownOfUsEdited.Roles.Modifiers
                 {
                     Utils.Rpc(CustomRPC.Camouflage, PlayerControl.LocalPlayer.PlayerId, venerer.Kills);
                     venerer.TimeRemaining = CustomGameOptions.AbilityDuration;
-                    venerer.KillsAtStartAbility = venerer.Kills;
                     venerer.Ability();
                 }
             }

@@ -13,7 +13,7 @@ namespace TownOfUsEdited.Roles
         {
             Name = "Amnesiac";
             ImpostorText = () => "Remember A Role Of A Deceased Player";
-            TaskText = () => SpawnedAs ? "Find a dead body to remember a role" : "Your target was killed. Now remember a new role!";
+            TaskText = () => SpawnedAs ? "Find a dead body to remember a role\nFake Tasks:" : "Your target was killed. Now remember a new role!\nFake Tasks:";
             Color = Patches.Colors.Amnesiac;
             RoleType = RoleEnum.Amnesiac;
             AddToRoleHistory(RoleType);

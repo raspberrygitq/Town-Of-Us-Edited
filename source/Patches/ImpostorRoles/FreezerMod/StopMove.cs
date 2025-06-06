@@ -11,7 +11,7 @@ namespace TownOfUsEdited.ImpostorRoles.FreezerMod
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
-            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return;
+            if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return;
             if (PlayerControl.LocalPlayer.IsFrozen())
             {
                 PlayerControl.LocalPlayer.moveable = false;

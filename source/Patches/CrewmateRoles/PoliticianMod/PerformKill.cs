@@ -12,6 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Politician)) return true;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
+            if (__instance != HudManager.Instance.KillButton) return true;
             if (!__instance.enabled) return false;
             var role = Role.GetRole<Politician>(PlayerControl.LocalPlayer);
             if (role.Cooldown > 0 || !role.CanCampaign) return false;
@@ -19,7 +20,7 @@ namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
             if (role.CampaignedPlayers.Contains(role.ClosestPlayer.PlayerId)) return false;
             var distBetweenPlayers = Utils.GetDistBetweenPlayers(PlayerControl.LocalPlayer, role.ClosestPlayer);
             var flag3 = distBetweenPlayers <
-                        GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                        LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (!flag3) return false;
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
             if (interact[4] == true)
@@ -29,11 +30,6 @@ namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
             if (interact[0] == true)
             {
                 role.Cooldown = CustomGameOptions.CampaignCd;
-                return false;
-            }
-            else if (interact[1] == true)
-            {
-                role.Cooldown = CustomGameOptions.VestKCReset;
                 return false;
             }
             else if (interact[3] == true) return false;

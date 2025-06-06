@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Reactor.Utilities;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ namespace TownOfUsEdited.Roles
                 Utils.Rpc(CustomRPC.TerroristWin, Player.PlayerId);
                 Wins();
                 Utils.EndGame();
-                System.Console.WriteLine("GAME OVER REASON: Terrorist Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Terrorist Win");
                 return;
             }
 

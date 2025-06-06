@@ -10,7 +10,9 @@ namespace TownOfUsEdited.Patches
         {
             if (PlayerControl.LocalPlayer.Data.IsDead) return true;
             if ((PlayerControl.LocalPlayer.Is(RoleEnum.Transporter) && !CustomGameOptions.TransporterVitals) ||
-                (PlayerControl.LocalPlayer.Is(RoleEnum.TimeLord) && !CustomGameOptions.TimeLordVitals))
+                (PlayerControl.LocalPlayer.Is(RoleEnum.TimeLord) && !CustomGameOptions.TimeLordVitals) ||
+                (PlayerControl.LocalPlayer.Is(RoleEnum.Lookout) && !CustomGameOptions.LookoutUseVitals) ||
+                CustomGameOptions.GameMode == GameMode.Cultist)
             {
                 Object.Destroy(__instance.gameObject);
                 return false;

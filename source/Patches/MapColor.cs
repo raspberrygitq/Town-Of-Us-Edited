@@ -40,7 +40,7 @@ namespace TownOfUsEdited.Patches
 		    __instance.taskOverlay.Show();
             __instance.ColorControl.baseColor = role.Color;
 		    __instance.ColorControl.SetColor(role.Color);
-		    DestroyableSingleton<HudManager>.Instance.SetHudActive(false);
+			DestroyableSingleton<HudManager>.Instance.SetHudActive(false);
             return false;
         }
     }

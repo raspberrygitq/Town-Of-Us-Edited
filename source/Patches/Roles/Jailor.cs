@@ -1,6 +1,4 @@
-using System;
-using System.Linq;
-using TownOfUsEdited.Extensions;
+using TMPro;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -11,21 +9,33 @@ namespace TownOfUsEdited.Roles
         {
             Name = "Jailor";
             ImpostorText = () => "Execute order 66";
-            TaskText = () => "Execute the <color=#FF0000FF>Impostors</color>";
+            TaskText = () => "Jail and execute the <color=#FF0000FF>Impostors</color>";
             Color = Patches.Colors.Jailor;
             Cooldown = CustomGameOptions.JailCD;
             RoleType = RoleEnum.Jailor;
             AddToRoleHistory(RoleType);
             Faction = Faction.Crewmates;
-            Alignment = Alignment.CrewmateKilling;
+            Alignment = Alignment.CrewmatePower;
         }
         public PlayerVoteArea Jailed { get; set; }
+        public GameObject JailCell = new GameObject();
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
         public bool CanJail = true;
-        public bool JailedAssassin = false;
         public PlayerControl ClosestPlayer;
         public PlayerControl JailedPlayer;
+        public KillButton _releaseButton;
+        public TextMeshPro ReleaseText;
+        public KillButton ReleaseButton
+        {
+            get => _releaseButton;
+            set
+            {
+                _releaseButton = value;
+                ExtraButtons.Clear();
+                ExtraButtons.Add(value);
+            }
+        }
         public float JailTimer()
         {
             if (!coolingDown) return 0f;

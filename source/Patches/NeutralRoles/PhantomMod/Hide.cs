@@ -26,6 +26,7 @@ namespace TownOfUsEdited.NeutralRoles.PhantomMod
                     phantom.Player.myRend().color = Color.white;
                     phantom.Player.gameObject.layer = LayerMask.NameToLayer("Ghost");
                     phantom.Faded = false;
+                    phantom.Player.Collider.enabled = false;
                     phantom.Player.MyPhysics.ResetMoveState();
                 }
             }

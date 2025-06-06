@@ -15,6 +15,7 @@ namespace TownOfUsEdited.Roles
             RoleType = RoleEnum.Mayor;
             AddToRoleHistory(RoleType);
             Revealed = false;
+            Alignment = Alignment.CrewmatePower;
         }
         public bool Revealed { get; set; }
 

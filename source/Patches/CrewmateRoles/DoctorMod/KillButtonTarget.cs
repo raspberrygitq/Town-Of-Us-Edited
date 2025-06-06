@@ -1,17 +1,10 @@
-using HarmonyLib;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 {
-    [HarmonyPatch(typeof(KillButton), nameof(KillButton.SetTarget))]
     public class KillButtonTarget
     {
-
-        public static bool Prefix(KillButton __instance)
-        {
-            return !PlayerControl.LocalPlayer.Is(RoleEnum.Doctor);
-        }
 
         public static void SetTarget(KillButton __instance, DeadBody target, Doctor role)
         {
@@ -21,6 +14,7 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             }
 
             role.CurrentTarget = target;
+            var label = __instance.buttonLabelText;
             if (role.CurrentTarget && __instance.enabled)
             {
                 SpriteRenderer component = null;
@@ -31,6 +25,8 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                 role.DragDropButton.graphic.material.SetFloat("_Desat", 0f);
                 __instance.graphic.color = Palette.EnabledColor;
                 __instance.graphic.material.SetFloat("_Desat", 0f);
+                label.color = Palette.EnabledColor;
+                label.material.SetFloat("_Desat", 0f);
                 return;
             }
 
@@ -38,6 +34,8 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             role.DragDropButton.graphic.material.SetFloat("_Desat", 1f);
             __instance.graphic.color = Palette.DisabledClear;
             __instance.graphic.material.SetFloat("_Desat", 1f);
+            label.color = Palette.DisabledClear;
+            label.material.SetFloat("_Desat", 1f);
         }
     }
 }

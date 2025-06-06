@@ -24,6 +24,9 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
                 role.StoreButton.graphic.enabled = true;
                 role.StoreButton.gameObject.SetActive(false);
                 role.StoreButton.graphic.sprite = StoreSprite;
+                role.StoreText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.StoreButton.transform);
+                role.StoreText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.StoreText);
             }
 
             if (role.UsesText == null)
@@ -46,28 +49,42 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
              // Check if the game state allows the KillButton to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
             isKillButtonActive = isKillButtonActive && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead;
-            isKillButtonActive = isKillButtonActive && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started;
+            isKillButtonActive = isKillButtonActive && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+            AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
 
             role.StoreButton.gameObject.SetActive(isKillButtonActive);
             role.StoreButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             role.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && !player.Data.Disconnected);
+
+             role.StoreText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.StoreText.text = "Store";
+            role.StoreText.SetOutlineColor(Palette.ImpostorRed);
 
             role.StoreButton.SetCoolDown(role.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
 
             var renderer = role.StoreButton.graphic;
-            if (!__instance.KillButton.isCoolingDown && role.ButtonUsable)
+            if (role.ButtonUsable)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
+                role.StoreText.color = Palette.EnabledColor;
+                role.StoreText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
+                role.StoreText.color = Palette.DisabledClear;
+                role.StoreText.material.SetFloat("_Desat", 1f);
             }
 
             role.UsesText.color = Palette.EnabledColor;

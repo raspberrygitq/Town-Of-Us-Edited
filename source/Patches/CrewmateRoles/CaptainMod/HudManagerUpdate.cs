@@ -24,7 +24,8 @@ namespace TownOfUsEdited.CrewmateRoles.CaptainMod
 
             ZoomButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             if (role.Zooming) ZoomButton.SetCoolDown(role.TimeRemainingZoom, CustomGameOptions.ZoomDuration);
             else
             {

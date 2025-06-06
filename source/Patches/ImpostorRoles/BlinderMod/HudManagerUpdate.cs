@@ -26,25 +26,50 @@ namespace TownOfUsEdited.ImpostorRoles.BlinderMod
                 role.BlindButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.BlindButton.graphic.enabled = true;
                 role.BlindButton.gameObject.SetActive(false);
+                role.BlindText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.BlindButton.transform);
+                role.BlindText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.BlindText);
             }
 
             role.BlindButton.graphic.sprite = TownOfUsEdited.Blind;
             role.BlindButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.BlindText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.BlindText.text = "Blind";
+            role.BlindText.SetOutlineColor(Palette.ImpostorRed);
 
             var position = __instance.KillButton.transform.localPosition;
             role.BlindButton.transform.localPosition = new Vector3(position.x,
                 position.y, position.z);
 
             // Set KillButton's cooldown
-            var notimps = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected && !x.Data.IsImpostor() && !x.Is(RoleEnum.Lighter) && !x.Is(Faction.Madmates)).ToList();
+            var notimps = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected && !x.Data.IsImpostor() && !x.Is(Faction.Madmates)).ToList();
             if (role.Blinding) role.BlindButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.BlindDuration);
             else role.BlindButton.SetCoolDown(role.BlindTimer(), CustomGameOptions.BlindCD);
             Utils.SetTarget(ref role.ClosestPlayer, role.BlindButton, float.NaN, notimps);
-
-            return;
             
+            var labelrender = role.BlindText;
+            if (role.ClosestPlayer != null || role.Blinding)
+            {
+                role.BlindButton.graphic.color = Palette.EnabledColor;
+                role.BlindButton.graphic.material.SetFloat("_Desat", 0f);
+                labelrender.color = Palette.EnabledColor;
+                labelrender.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                role.BlindButton.graphic.color = Palette.DisabledClear;
+                role.BlindButton.graphic.material.SetFloat("_Desat", 1f);
+                labelrender.color = Palette.DisabledClear;
+                labelrender.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

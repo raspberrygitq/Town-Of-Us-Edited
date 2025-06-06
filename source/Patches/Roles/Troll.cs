@@ -40,8 +40,19 @@ namespace TownOfUsEdited.Roles
         {
             //System.Console.WriteLine("Reached Here - Troll edition");
             if (Player.Data.Disconnected) return;
-            TrolledVotedOut = true;
-            if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame) Coroutines.Start(WaitForEnd());
+            if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
+            {
+                TrolledVotedOut = true;
+                if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame)
+                {
+                    Coroutines.Start(WaitForEnd());
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Troll Win");
+                }
+            }
+            else
+            {
+                HudManager.Instance.ShowPopUp("Normally, the game would've ended and the Troll would've won. In Freeplay, nothing happens.");
+            }
         }
     }
 }

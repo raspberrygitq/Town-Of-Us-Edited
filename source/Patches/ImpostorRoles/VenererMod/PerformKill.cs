@@ -21,9 +21,8 @@ namespace TownOfUsEdited.ImpostorRoles.VenererMod
                 var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
                 if (!abilityUsed) return false;
 
-                Utils.Rpc(CustomRPC.Camouflage, PlayerControl.LocalPlayer.PlayerId, role.Kills);
+                Utils.Rpc(CustomRPC.Camouflage, PlayerControl.LocalPlayer.PlayerId);
                 role.TimeRemaining = CustomGameOptions.AbilityDuration;
-                role.KillsAtStartAbility = role.Kills;
                 role.Ability();
                 return false;
             }

@@ -23,7 +23,8 @@ namespace TownOfUsEdited.NeutralRoles.SerialKillerMod
             // Check if the game state allows the KillButton to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
             isKillButtonActive = isKillButtonActive && !MeetingHud.Instance && !player.Data.IsDead;
-            isKillButtonActive = isKillButtonActive && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started;
+            isKillButtonActive = isKillButtonActive && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+            AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
 
             // Set KillButton's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
@@ -37,7 +38,8 @@ namespace TownOfUsEdited.NeutralRoles.SerialKillerMod
 
             sk.skconvertButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && sk.Converted == false && CustomGameOptions.SerialKillerCanConvert
                     && !player.Data.Disconnected);
                     

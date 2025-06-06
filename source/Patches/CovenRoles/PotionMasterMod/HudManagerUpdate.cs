@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -23,7 +23,17 @@ namespace TownOfUsEdited.CovenRoles.PotionMasterMod
                 role.PotionButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.PotionButton.graphic.enabled = true;
                 role.PotionButton.gameObject.SetActive(false);
+                role.PotionText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.PotionButton.transform);
+                role.PotionText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.PotionText);
             }
+
+            role.PotionText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.PotionText.SetOutlineColor(Colors.Coven);
 
             if (role.Potion == "null")
             {
@@ -38,13 +48,19 @@ namespace TownOfUsEdited.CovenRoles.PotionMasterMod
 
             role.PotionButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             if (role.Potion == "null")
             {
                 role.PotionButton.graphic.sprite = TownOfUsEdited.Potion;
+                role.PotionText.text = "Potion";
             }
-            else role.PotionButton.graphic.sprite = TownOfUsEdited.Drink;
+            else
+            {
+                role.PotionButton.graphic.sprite = TownOfUsEdited.Drink;
+                role.PotionText.text = "Drink";
+            }
             role.PotionButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             // Set KillButton's cooldown
@@ -56,6 +72,9 @@ namespace TownOfUsEdited.CovenRoles.PotionMasterMod
 
             role.PotionButton.graphic.color = Palette.EnabledColor;
             role.PotionButton.graphic.material.SetFloat("_Desat", 0f);
+            var labelrender = role.PotionText;
+            labelrender.color = Palette.EnabledColor;
+            labelrender.material.SetFloat("_Desat", 0f);
         }
     }
 }

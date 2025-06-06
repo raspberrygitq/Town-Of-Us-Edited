@@ -7,18 +7,13 @@ using UnityEngine;
 using System;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using AmongUs.GameOptions;
 using TownOfUsEdited.Roles.Modifiers;
 using TownOfUsEdited.ImpostorRoles.BomberMod;
-using TownOfUsEdited.CrewmateRoles.AurialMod;
-using TownOfUsEdited.Patches.ScreenEffects;
-using TownOfUsEdited.Roles.Cultist;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 using Reactor.Utilities;
 using System.Collections;
-using TownOfUsEdited.ImpostorRoles.ImpostorMod;
 using System.Linq;
-using Reactor.Networking.Extensions;
+using TownOfUsEdited.CovenRoles.CovenMod;
 
 namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
 {
@@ -42,11 +37,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 return false;
             if (role.ClosestPlayer == null)
                 return false;
-            if (role.ClosestPlayer.Is(RoleEnum.Pestilence) || role.ClosestPlayer.IsOnAlert())
-            {
-                Utils.Interact(role.ClosestPlayer, PlayerControl.LocalPlayer);
-                return false;
-            }
             var playerId = role.ClosestPlayer.PlayerId;
             var player = Utils.PlayerById(playerId);
             var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
@@ -56,27 +46,26 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 foreach (var pb in Role.GetRoles(RoleEnum.Plaguebearer)) ((Plaguebearer)pb).RpcSpreadInfection(player, role.Player);
             }
 
-            if (PlayerControl.LocalPlayer.IsJailed()) return false;
-
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
-                if (interact[4] == true)
-                {
-                    Coroutines.Start(Shift(role, player));
-                    Utils.Rpc(CustomRPC.Shift, PlayerControl.LocalPlayer.PlayerId, playerId);
-                    role.Cooldown = CustomGameOptions.ShiftCD;
-                }
-                if (interact[0] == true)
-                {
-                    role.Cooldown = CustomGameOptions.ShiftCD;
-                    return false;
-                }
-                else if (interact[1] == true)
-                {
-                    role.Cooldown = CustomGameOptions.ProtectKCReset;
-                    return false;
-                }
-                else if (interact[3] == true) return false;
+            if (interact[4] == true)
+            {
+                Coroutines.Start(Shift(role, player));
+                Utils.Rpc(CustomRPC.Shift, PlayerControl.LocalPlayer.PlayerId, playerId);
+                role.Cooldown = CustomGameOptions.ShiftCD;
                 return false;
+            }
+            if (interact[0] == true)
+            {
+                role.Cooldown = CustomGameOptions.ShiftCD;
+                return false;
+            }
+            else if (interact[1] == true)
+            {
+                role.Cooldown = CustomGameOptions.TempSaveCdReset;
+                return false;
+            }
+            else if (interact[3] == true) return false;
+            return false;
         }
 
         public static IEnumerator Shift(Shifter shiftRole, PlayerControl other)
@@ -105,7 +94,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 case RoleEnum.Fighter:
                 case RoleEnum.Knight:
                 case RoleEnum.Engineer:
-                case RoleEnum.Lighter:
                 case RoleEnum.Mayor:
                 case RoleEnum.Swapper:
                 case RoleEnum.Investigator:
@@ -127,7 +115,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 case RoleEnum.Trapper:
                 case RoleEnum.Detective:
                 case RoleEnum.Captain:
-                case RoleEnum.Superstar:
                 case RoleEnum.Avenger:
                 case RoleEnum.Chameleon:
                 case RoleEnum.Jailor:
@@ -145,6 +132,8 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 case RoleEnum.Paranoïac:
                 case RoleEnum.Warden:
                 case RoleEnum.Politician:
+                case RoleEnum.Plumber:
+                case RoleEnum.Cleric:
 
                     shiftImp = false;
                     shiftNeut = false;
@@ -174,6 +163,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 case RoleEnum.Vulture:
                 case RoleEnum.Vampire:
                 case RoleEnum.SoulCollector:
+                case RoleEnum.Mercenary:
 
                     shiftImp = false;
                     shiftNeut = true;
@@ -207,6 +197,25 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                     {
                         button.gameObject.SetActive(false);
                     }
+                }
+            }
+            if (newRole.ButtonLabels.Any())
+            {
+                foreach (var label in newRole.ButtonLabels)
+                {
+                    if (PlayerControl.LocalPlayer == other)
+                    {
+                        label.gameObject.SetActive(false);
+                    }
+                }
+            }
+
+            if ((role == RoleEnum.Arsonist || role == RoleEnum.Plaguebearer || role == RoleEnum.Pestilence
+                 || role == RoleEnum.Grenadier) && PlayerControl.LocalPlayer == other)
+            {
+                foreach (var visor in PlayerControl.AllPlayerControls)
+                {
+                    ShowShield.ClearVisor(visor);
                 }
             }
 
@@ -287,10 +296,22 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 UnityEngine.Object.Destroy(gaRole.UsesText);
             }
 
-            if ((role == RoleEnum.Glitch || role == RoleEnum.SerialKiller || role == RoleEnum.Juggernaut || role == RoleEnum.Pestilence ||
-                role == RoleEnum.Maul || role == RoleEnum.Doppelganger || role == RoleEnum.Infectious) && PlayerControl.LocalPlayer == other)
+            else if (role == RoleEnum.Glitch && PlayerControl.LocalPlayer == other)
+            {
+                var glitch = Role.GetRole<Glitch>(other);
+                glitch.MimicButton.gameObject.SetActive(false);
+                glitch.HackButton.gameObject.SetActive(false);
+            }
+
+            if (PlayerControl.LocalPlayer == other || PlayerControl.LocalPlayer == shifter)
             {
                 HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
+                try
+                {
+                    CovenUpdate.SabotageButton.gameObject.SetActive(false);
+                }
+                catch {}
             }
 
             if (role == RoleEnum.Investigator) Footprint.DestroyAll(Role.GetRole<Investigator>(other));
@@ -303,18 +324,13 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
 
             newRole.RegenTask();
 
-            if (other == StartImitate.ImitatingPlayer)
+            if (StartImitate.ImitatingPlayers.Contains(other.PlayerId))
             {
-                StartImitate.ImitatingPlayer = shiftRole.Player;
+                StartImitate.ImitatingPlayers.Remove(other.PlayerId);
+                StartImitate.ImitatingPlayers.Add(shiftRole.Player.PlayerId);
                 newRole.AddToRoleHistory(RoleEnum.Imitator);
             }
             else newRole.AddToRoleHistory(newRole.RoleType);
-
-            if ((role != RoleEnum.Glitch || role != RoleEnum.Juggernaut || role != RoleEnum.Pestilence ||
-                role != RoleEnum.Maul || role != RoleEnum.SerialKiller || role == RoleEnum.Doppelganger || role == RoleEnum.Infectious) && PlayerControl.LocalPlayer == shifter)
-            {
-                HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
-            }
 
             if (shiftImp == false)
             {
@@ -322,11 +338,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 {
                     if (PlayerControl.LocalPlayer == other)
                     {
-                    if (other.Is(Faction.Madmates))
-                    {
-                        Utils.TurnMadmate(shifter, false);
-                        Utils.Rpc(CustomRPC.ImpConvert, PlayerControl.LocalPlayer.PlayerId);
-                    }
                     var newshifter = new Shifter(other);
                     var newshifterRole = Role.GetRole<Shifter>(other);
                     newshifter.RegenTask();
@@ -334,11 +345,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                     }
                     else
                     {
-                    if (other.Is(Faction.Madmates))
-                    {
-                        Utils.TurnMadmate(shifter, false);
-                        Utils.Rpc(CustomRPC.ImpConvert, other.PlayerId);
-                    }
                     var newshifter = new Shifter(other);
                     var newshifterRole = Role.GetRole<Shifter>(other);
                     newshifter.RegenTask();
@@ -359,9 +365,9 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                              || role == RoleEnum.Attacker || role == RoleEnum.Terrorist || role == RoleEnum.Infectious
                              || role == RoleEnum.Doppelganger)
                     {
+                        if (other.Is(AbilityEnum.Assassin)) Ability.AbilityDictionary.Remove(other.PlayerId);
                         if (CustomGameOptions.ShiftTurnNeutAssassin
                         && !CustomGameOptions.AssassinImpostorRole) new Assassin(shifter);
-                        if (other.Is(AbilityEnum.Assassin)) Ability.AbilityDictionary.Remove(other.PlayerId);
                     }
                     }
                     else
@@ -376,9 +382,9 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                              || role == RoleEnum.Attacker || role == RoleEnum.Terrorist || role == RoleEnum.Infectious
                              || role == RoleEnum.Doppelganger)
                     {
+                        if (other.Is(AbilityEnum.Assassin)) Ability.AbilityDictionary.Remove(other.PlayerId);
                         if (CustomGameOptions.ShiftTurnNeutAssassin
                         && !CustomGameOptions.AssassinImpostorRole) new Assassin(shifter);
-                        if (other.Is(AbilityEnum.Assassin)) Ability.AbilityDictionary.Remove(other.PlayerId);
                     }
                     }
                 }
@@ -459,7 +465,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                         poisonerRole.Cooldown = CustomGameOptions.PoisonCD;
                         poisonerRole.PoisonedPlayer = null;
                         DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
-                        DestroyableSingleton<HudManager>.Instance.KillButton.graphic.enabled = false;
                     }
                 }
             }
@@ -508,11 +513,33 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 crusRole.Cooldown = CustomGameOptions.CrusadeCD;
             }
 
+            else if (role == RoleEnum.Cleric)
+            {
+                var clericRole = Role.GetRole<Cleric>(shifter);
+                clericRole.Cooldown = CustomGameOptions.BarrierCD;
+            }
+
+            else if (role == RoleEnum.Plumber)
+            {
+                var plumberRole = Role.GetRole<Plumber>(shifter);
+                plumberRole.UsesLeft = CustomGameOptions.MaxBarricades;
+                plumberRole.FutureBlocks.Clear();
+                plumberRole.Cooldown = CustomGameOptions.FlushCd;
+            }
+
+            else if (role == RoleEnum.Mercenary)
+            {
+                var mercRole = Role.GetRole<Mercenary>(shifter);
+                mercRole.Cooldown = CustomGameOptions.MercenaryCD;
+                mercRole.Guarded.Clear();
+                mercRole.Bribed.Clear();
+                mercRole.Alert = false;
+            }
+
             else if (role == RoleEnum.Medic)
             {
                 var medicRole = Role.GetRole<Medic>(shifter);
-                if (shifter != StartImitate.ImitatingPlayer) medicRole.UsedAbility = false;
-                else medicRole.UsedAbility = true;
+                medicRole.ShieldedPlayer = null;
             }
 
             else if (role == RoleEnum.Mayor)
@@ -673,7 +700,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             else if (role == RoleEnum.Oracle)
             {
                 var oracleRole = Role.GetRole<Oracle>(shifter);
-                oracleRole.Confessor = null;
+                oracleRole.Blessed = null;
                 oracleRole.Cooldown = CustomGameOptions.ConfessCd;
             }
 
@@ -682,7 +709,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 var aurialRole = Role.GetRole<Aurial>(shifter);
                 aurialRole.SenseArrows.Values.DestroyAll();
                 aurialRole.SenseArrows.Clear();
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                if (PlayerControl.LocalPlayer == aurialRole.Player) DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Arsonist)
@@ -696,8 +723,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 var scRole = Role.GetRole<SoulCollector>(shifter);
                 scRole.Cooldown = CustomGameOptions.ReapCd;
-                scRole.SoulsCollected = 1;
-                scRole.CollectedSouls = false;
             }
 
             else if (role == RoleEnum.Survivor)
@@ -743,6 +768,11 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 grenadeRole.Cooldown = CustomGameOptions.GrenadeCd;
             }
 
+            else if (role == RoleEnum.Assassin)
+            {
+                new Assassin(shifter);
+            }
+
             else if (role == RoleEnum.Morphling)
             {
                 var morphlingRole = Role.GetRole<Morphling>(shifter);
@@ -785,7 +815,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 var venererRole = Role.GetRole<Venerer>(shifter);
                 venererRole.Cooldown = CustomGameOptions.AbilityCd;
-                venererRole.KillsAtStartAbility = 0;
             }
 
             else if (role == RoleEnum.Blackmailer)
@@ -981,6 +1010,10 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 Role.GetRole(shifter).KillCooldown = CustomGameOptions.CovenKCD;
             }
+
+            yield return new WaitForSeconds(0.5f);
+
+            PlayerControl_Die.CheckEnd();
 
             yield return false;
         }

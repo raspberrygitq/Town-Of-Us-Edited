@@ -20,7 +20,7 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
                 var playerData = Utils.PlayerById(targetId)?.Data;
                 var player = Utils.PlayerById(targetId);
                 var playerRole = Role.GetRole(player);
-                if (playerData == null || playerData.Disconnected)
+                if (playerData == null || playerData.Disconnected || player.Is(RoleEnum.Infectious))
                 {
                     role.Infected.Remove(targetId);
                     continue;

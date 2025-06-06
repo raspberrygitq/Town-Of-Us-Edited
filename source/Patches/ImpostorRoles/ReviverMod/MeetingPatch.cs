@@ -3,6 +3,7 @@ using Assets.CoreScripts;
 using HarmonyLib;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
+using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.ReviverMod
 {
@@ -83,6 +84,11 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
                     if (reviverchat)
                     {
                         __instance.NameText.text = role.RevivedPlayer.GetDefaultOutfit().PlayerName;
+                        if (__instance.Player.transform.localScale != ChatBubble.PlayerNotificationScale)
+                        {
+                            if (PlayerControl.LocalPlayer.Is(Faction.Impostors) || PlayerControl.LocalPlayer.Is(Faction.Madmates)) __instance.NameText.color = Palette.ImpostorRed;
+                            else __instance.NameText.color = Color.white; // Sometimes its green for some reason
+                        }
                         __instance.NameText.ForceMeshUpdate(true, true);
                         __instance.Xmark.enabled = false;
 			            __instance.Background.color = Palette.White;
@@ -241,10 +247,10 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
 			                if (flag)
 			                {
 				                __instance.RemainingEmergencies--;
-				                StatsManager.Instance.IncrementStat(StringNames.StatsEmergenciesCalled);
+				                DataManager.Player.Stats.IncrementStat(StatID.EmergenciesCalled);
 				                return false;
 			                }
-			                StatsManager.Instance.IncrementStat(StringNames.StatsBodiesReported);
+			                DataManager.Player.Stats.IncrementStat(StatID.BodiesReported);
 		                }
                         return false;
                     }

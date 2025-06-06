@@ -13,8 +13,11 @@ namespace TownOfUsEdited.NeutralRoles.GlitchMod
                 var glitch = (Glitch) role;
                 if (glitch.IsUsingMimic)
                     Utils.Morph(glitch.Player, glitch.MimicTarget);
-                else if (glitch.MimicTarget)
+                else if (glitch.Enabled)
+                {
+                    glitch.Enabled = false;
                     Utils.Unmorph(glitch.Player);
+                }
             }
         }
     }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using TownOfUsEdited.Extensions;
 using System.Collections.Generic;
+using Reactor.Utilities;
 
 namespace TownOfUsEdited.Roles
 {
@@ -53,7 +54,7 @@ namespace TownOfUsEdited.Roles
                 Utils.Rpc(CustomRPC.InfectiousWin, Player.PlayerId);
                 Wins();
                 Utils.EndGame();
-                System.Console.WriteLine("GAME OVER REASON: Infectious Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Infectious Win");
                 return;
             }
 

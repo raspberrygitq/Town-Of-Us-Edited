@@ -5,48 +5,50 @@ using System.Linq;
 using System.Collections;
 using Reactor.Utilities;
 using AmongUs.QuickChat;
+using System.Collections.Generic;
 
 namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
 {
     public class BlackmailMeetingUpdate
     {
-        public static bool shookAlready = false;
         public static Sprite PrevXMark = null;
         public static Sprite PrevOverlay = null;
 
         public const float LetterXOffset = 0.22f;
         public const float LetterYOffset = -0.32f;
-
-        [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
         public class MeetingHudStart
         {
             public static Sprite Letter => TownOfUsEdited.BlackmailLetterSprite;
 
-            public static void Postfix(MeetingHud __instance)
+            public static void AddBlackmail(MeetingHud __instance)
             {
-                shookAlready = false;
-
                 var blackmailers = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Blackmailer && x.Player != null).Cast<Blackmailer>();
+                var blackmailed = new List<PlayerControl>();
 
                 foreach (var role in blackmailers)
                 {
-                    if (role.Blackmailed?.PlayerId == PlayerControl.LocalPlayer.PlayerId && !role.Blackmailed.Data.IsDead)
+                    role.ShookAlready = false;
+                    if (role.Blackmailed != null && !blackmailed.Contains(role.Blackmailed))
                     {
-                        DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "You are blackmailed, you can't talk");
-                        Coroutines.Start(BlackmailShhh());
-                    }
-                    if (role.Blackmailed != null && !role.Blackmailed.Data.IsDead && role.CanSeeBlackmailed(PlayerControl.LocalPlayer.PlayerId))
-                    {
-                        var playerState = __instance.playerStates.FirstOrDefault(x => x.TargetPlayerId == role.Blackmailed.PlayerId);
+                        blackmailed.Add(role.Blackmailed);
+                        if (PlayerControl.LocalPlayer == role.Blackmailed && !role.Blackmailed.Data.IsDead)
+                        {
+                            HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "You are blackmailed, you can't talk");
+                            Coroutines.Start(BlackmailShhh());
+                        }
+                        if (role.Blackmailed != null && !role.Blackmailed.Data.IsDead && role.CanSeeBlackmailed(PlayerControl.LocalPlayer.PlayerId))
+                        {
+                            var playerState = __instance.playerStates.FirstOrDefault(x => x.TargetPlayerId == role.Blackmailed.PlayerId);
 
-                        playerState.XMark.gameObject.SetActive(true);
-                        if (PrevXMark == null) PrevXMark = playerState.XMark.sprite;
-                        playerState.XMark.sprite = Letter;
-                        playerState.XMark.transform.localScale = playerState.XMark.transform.localScale * 0.75f;
-                        playerState.XMark.transform.localPosition = new Vector3(
-                            playerState.XMark.transform.localPosition.x + LetterXOffset,
-                            playerState.XMark.transform.localPosition.y + LetterYOffset,
-                            playerState.XMark.transform.localPosition.z);
+                            playerState.XMark.gameObject.SetActive(true);
+                            if (PrevXMark == null) PrevXMark = playerState.XMark.sprite;
+                            playerState.XMark.sprite = Letter;
+                            playerState.XMark.transform.localScale = playerState.XMark.transform.localScale * 0.75f;
+                            playerState.XMark.transform.localPosition = new Vector3(
+                                playerState.XMark.transform.localPosition.x + LetterXOffset,
+                                playerState.XMark.transform.localPosition.y + LetterYOffset,
+                                playerState.XMark.transform.localPosition.z);
+                        }
                     }
                 }
             }
@@ -78,19 +80,34 @@ namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
             public static void Postfix(MeetingHud __instance)
             {
                 var blackmailers = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Blackmailer && x.Player != null).Cast<Blackmailer>();
+                var blackmailed = new List<PlayerControl>();
 
                 foreach (var role in blackmailers)
                 {
-                    if (role.Blackmailed != null && !role.Blackmailed.Data.IsDead && role.CanSeeBlackmailed(PlayerControl.LocalPlayer.PlayerId))
+                    if (role.Blackmailed != null && !blackmailed.Contains(role.Blackmailed))
                     {
-                        var playerState = __instance.playerStates.FirstOrDefault(x => x.TargetPlayerId == role.Blackmailed.PlayerId);
-                        playerState.Overlay.gameObject.SetActive(true);
-                        if (PrevOverlay == null) PrevOverlay = playerState.Overlay.sprite;
-                        playerState.Overlay.sprite = Overlay;
-                        if (__instance.state != MeetingHud.VoteStates.Animating && shookAlready == false)
+                        blackmailed.Add(role.Blackmailed);
+                        if (!role.Blackmailed.Data.IsDead)
                         {
-                            shookAlready = true;
-                            (__instance as MonoBehaviour).StartCoroutine(Effects.SwayX(playerState.transform));
+                            var playerState = __instance.playerStates.FirstOrDefault(x => x.TargetPlayerId == role.Blackmailed.PlayerId);
+                            if (__instance.state == MeetingHud.VoteStates.NotVoted && !playerState.DidVote &&
+                                CustomGameOptions.BlackmailedVote)
+                            {
+                                playerState.SetVote(252);
+                                if (CustomGameOptions.BlackmailInvisible) playerState.Flag.enabled = false;
+                                if (role.Blackmailed == PlayerControl.LocalPlayer) __instance.Confirm(252);
+                            }
+                            if (role.CanSeeBlackmailed(PlayerControl.LocalPlayer.PlayerId))
+                            {
+                                playerState.Overlay.gameObject.SetActive(true);
+                                if (PrevOverlay == null) PrevOverlay = playerState.Overlay.sprite;
+                                playerState.Overlay.sprite = Overlay;
+                                if (__instance.state != MeetingHud.VoteStates.Animating && role.ShookAlready == false)
+                                {
+                                    role.ShookAlready = true;
+                                    (__instance as MonoBehaviour).StartCoroutine(Effects.SwayX(playerState.transform));
+                                }
+                            }
                         }
                     }
                 }

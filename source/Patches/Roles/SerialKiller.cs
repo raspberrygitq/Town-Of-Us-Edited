@@ -4,12 +4,15 @@ using TownOfUsEdited.Extensions;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using TownOfUsEdited.Roles.Cultist;
 using AmongUs.GameOptions;
 using TownOfUsEdited.Roles.Modifiers;
 using TownOfUsEdited.ImpostorRoles.BomberMod;
 using UnityEngine;
 using TownOfUsEdited.Patches;
+using TownOfUsEdited.CovenRoles.CovenMod;
+using Reactor.Utilities;
+using TownOfUsEdited.CrewmateRoles.PlumberMod;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 
 namespace TownOfUsEdited.Roles
 {
@@ -57,7 +60,7 @@ namespace TownOfUsEdited.Roles
                     (x.Data.IsImpostor() || x.Is(Faction.NeutralKilling) || x.Is(Faction.Coven))) == 1 && (alivecrewkiller.Count <= 0 || !CustomGameOptions.CrewKillersContinue))
             {
                 SKWin();
-                System.Console.WriteLine("GAME OVER REASON: Serial Killer Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Serial Killer Win");
                 return;
             }
             else if (PlayerControl.AllPlayerControls.ToArray().Count(x => !x.Data.IsDead && !x.Data.Disconnected) <= 4 &&
@@ -68,7 +71,7 @@ namespace TownOfUsEdited.Roles
                     .Where(x => !x.Data.IsDead && !x.Data.Disconnected && x.Is(RoleEnum.SerialKiller)).ToList();
                 if (sksAlives.Count == 1) return;
                 SKWin();
-                System.Console.WriteLine("GAME OVER REASON: Serial Killer Win");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Serial Killer Win");
                 return;
             }
         }
@@ -97,12 +100,13 @@ namespace TownOfUsEdited.Roles
             if (target.Is(Faction.Coven) && !CustomGameOptions.SKConvertCoven)
                 return;
 
-            Convert(target);
-            Utils.Rpc(CustomRPC.SKConvert, target.PlayerId);
             Converted = true;
 
             // Set the last ability use time
             ConvertCooldown = CustomGameOptions.SerialKillerKCD;
+
+            Convert(target);
+            Utils.Rpc(CustomRPC.SKConvert, target.PlayerId);
         }
         public float KillTimer()
         {
@@ -146,8 +150,8 @@ namespace TownOfUsEdited.Roles
                 snitch.ImpArrows.Clear();
             }
 
-            if (newsk == StartImitate.ImitatingPlayer) StartImitate.ImitatingPlayer = null;
-
+            if (StartImitate.ImitatingPlayers.Contains(PlayerControl.LocalPlayer.PlayerId)) StartImitate.ImitatingPlayers.Remove(PlayerControl.LocalPlayer.PlayerId);
+            
             if (newsk.Is(RoleEnum.GuardianAngel))
             {
                 var ga = Role.GetRole<GuardianAngel>(newsk);
@@ -169,11 +173,79 @@ namespace TownOfUsEdited.Roles
                 medRole.MediatedPlayers.Clear();
             }
 
+            if (newsk.Is(RoleEnum.Warden))
+            {
+                var warden = Role.GetRole<Warden>(newsk);
+                if (warden.Fortified != null) ShowShield.ResetVisor(warden.Fortified, warden.Player);
+            }
+
+            if (newsk.Is(RoleEnum.Medic))
+            {
+                var medic = Role.GetRole<Medic>(newsk);
+                if (medic.ShieldedPlayer != null) ShowShield.ResetVisor(medic.ShieldedPlayer, medic.Player);
+            }
+
+            if (newsk.Is(RoleEnum.Cleric))
+            {
+                var cleric = Role.GetRole<Cleric>(newsk);
+                if (cleric.Barriered != null) cleric.UnBarrier();
+            }
+
+            if (newsk.Is(RoleEnum.Plumber))
+            {
+                var plumberRole = Role.GetRole<Plumber>(newsk);
+                foreach (GameObject barricade in plumberRole.Barricades)
+                {
+                    UnityEngine.Object.Destroy(barricade);
+                }
+            }
+
             if (PlayerControl.LocalPlayer == newsk)
             {
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Investigator)) Footprint.DestroyAll(Role.GetRole<Investigator>(PlayerControl.LocalPlayer));
 
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff) || PlayerControl.LocalPlayer.Is(RoleEnum.Knight)) HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+
+                if (PlayerControl.LocalPlayer.Is(Faction.Coven))
+                {
+                    CovenUpdate.SabotageButton.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Cleric))
+                {
+                    var clericRole = Role.GetRole<Cleric>(PlayerControl.LocalPlayer);
+                    clericRole.CleanseButton.SetTarget(null);
+                    clericRole.CleanseButton.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Oracle))
+                {
+                    var oracleRole = Role.GetRole<Oracle>(PlayerControl.LocalPlayer);
+                    oracleRole.BlessButton.SetTarget(null);
+                    oracleRole.BlessButton.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Hunter))
+                {
+                    var hunterRole = Role.GetRole<Hunter>(PlayerControl.LocalPlayer);
+                    UnityEngine.Object.Destroy(hunterRole.UsesText);
+                    hunterRole.StalkButton.SetTarget(null);
+                    hunterRole.StalkButton.gameObject.SetActive(false);
+                    HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector))
+                {
+                    var sc = Role.GetRole<SoulCollector>(PlayerControl.LocalPlayer);
+                    SoulExtensions.ClearSouls(sc.Souls);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Plumber))
+                {
+                    var plumberRole = Role.GetRole<Plumber>(PlayerControl.LocalPlayer);
+                    plumberRole.Vent = null;
+                    UnityEngine.Object.Destroy(plumberRole.UsesText);
+                }
 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer))
                 {
@@ -260,6 +332,37 @@ namespace TownOfUsEdited.Roles
                     var bomberRole = Role.GetRole<Bomber>(PlayerControl.LocalPlayer);
                     bomberRole.Bomb.ClearBomb();
                 }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
+                {
+                    var mercRole = Role.GetRole<Mercenary>(PlayerControl.LocalPlayer);
+                    mercRole.GuardButton.SetTarget(null);
+                    mercRole.GuardButton.gameObject.SetActive(false);
+                    UnityEngine.Object.Destroy(mercRole.UsesText);
+                    UnityEngine.Object.Destroy(mercRole.GoldText);
+                }
+            }
+
+            if (oldRole.ExtraButtons.Any())
+            {
+                foreach (var button in oldRole.ExtraButtons)
+                {
+                    if (PlayerControl.LocalPlayer == newsk)
+                    {
+                        button.gameObject.SetActive(false);
+                    }
+                }
+            }
+
+            if (oldRole.ButtonLabels.Any())
+            {
+                foreach (var label in oldRole.ButtonLabels)
+                {
+                    if (PlayerControl.LocalPlayer == newsk)
+                    {
+                        label.gameObject.SetActive(false);
+                    }
+                }
             }
 
             Role.RoleDictionary.Remove(newsk.PlayerId);
@@ -290,7 +393,7 @@ namespace TownOfUsEdited.Roles
             if (CustomGameOptions.NewSKCanGuess
             && !CustomGameOptions.AssassinImpostorRole && !newsk.Is(AbilityEnum.Assassin)) new Roles.Modifiers.Assassin(newsk);
 
-            PlayerControl_Die.Postfix();
+            PlayerControl_Die.CheckEnd();
         }
     }
 }

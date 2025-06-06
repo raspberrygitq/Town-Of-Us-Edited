@@ -1,6 +1,5 @@
-﻿using AmongUs.GameOptions;
+using AmongUs.GameOptions;
 using HarmonyLib;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,13 +12,13 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
 
         void FixedUpdate()
         {
-            foreach(var player in PlayerControl.AllPlayerControls)
+            foreach (var player in PlayerControl.AllPlayerControls)
             {
                 if (player.Data.IsDead) continue;
                 if (player.PlayerId == PlayerControl.LocalPlayer.PlayerId) continue;
                 Debug.Log(GetComponent<BoxCollider2D>().IsTouching(player.Collider));
                 if (Vector2.Distance(player.GetTruePosition(), gameObject.transform.position) >
-                      GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance]) continue;
+                      LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance]) continue;
                 //if (!GetComponent<BoxCollider2D>().IsTouching(player.Collider)) continue;
                 if (!ScenePlayers.Contains(player.PlayerId) && player.PlayerId != PlayerControl.LocalPlayer.PlayerId)
                 {

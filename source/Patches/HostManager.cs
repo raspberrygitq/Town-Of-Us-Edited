@@ -40,7 +40,7 @@ namespace TownOfUsEdited.Patches
                 if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                 !LobbyBehaviour.Instance)
                 {
-                    System.Console.WriteLine("AutoStart Canceled");
+                    PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("AutoStart Canceled");
                     yield break;
                 }
             }
@@ -50,7 +50,7 @@ namespace TownOfUsEdited.Patches
             {
                 starting = true;
                 Coroutines.Start(StartCountdown());
-                System.Console.WriteLine("Auto Start triggered");
+                PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("AutoStart triggered");
             }
 
             yield break;

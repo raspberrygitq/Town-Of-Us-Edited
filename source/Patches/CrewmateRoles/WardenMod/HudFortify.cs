@@ -19,7 +19,8 @@ namespace TownOfUsEdited.CrewmateRoles.WardenMod
 
             fortifyButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             fortifyButton.SetCoolDown(0f, 1f);
 
             if (role.Fortified == null) Utils.SetTarget(ref role.ClosestPlayer, fortifyButton, float.NaN);

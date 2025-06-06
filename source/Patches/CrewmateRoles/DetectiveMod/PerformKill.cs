@@ -18,7 +18,7 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (!__instance.enabled) return false;
-            var maxDistance = GameOptionsData.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
 
             if (__instance == role.ExamineButton)
             {
@@ -47,7 +47,7 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                 else if (interact[1] == true)
                 {
                     role.LastExamined = DateTime.UtcNow;
-                    role.LastExamined = role.LastExamined.AddSeconds(CustomGameOptions.ProtectKCReset - CustomGameOptions.ExamineCd);
+                    role.LastExamined = role.LastExamined.AddSeconds(CustomGameOptions.TempSaveCdReset - CustomGameOptions.ExamineCd);
                     return false;
                 }
                 else if (interact[3] == true) return false;
@@ -55,6 +55,7 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
             }
             else
             {
+                if (__instance != HudManager.Instance.KillButton) return true;
                 if (role.CurrentTarget == null)
                     return false;
                 if (Vector2.Distance(role.CurrentTarget.gameObject.transform.position,
