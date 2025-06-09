@@ -38,6 +38,8 @@ namespace TownOfUsEdited.Modifiers.VengefulMod
 
             var renderer = role.KillButton.graphic;
 
+            role.KillButton.SetCoolDown(0f, 1f);
+
             if (__instance.UseButton != null)
             {
                 var position1 = __instance.UseButton.transform.position;

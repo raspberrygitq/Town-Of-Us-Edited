@@ -70,6 +70,7 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
             {
                 __instance.KillButton.SetCoolDown(role.DouseTimer(), CustomGameOptions.DouseCd);
             }
+            role.IgniteButton.graphic.SetCooldownNormalizedUvs();
 
             var notDoused = PlayerControl.AllPlayerControls.ToArray().Where(
                 player => !role.DousedPlayers.Contains(player.PlayerId)

@@ -54,6 +54,7 @@ namespace TownOfUsEdited.ImpostorRoles.BlinderMod
             if (role.Blinding) role.BlindButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.BlindDuration);
             else role.BlindButton.SetCoolDown(role.BlindTimer(), CustomGameOptions.BlindCD);
             Utils.SetTarget(ref role.ClosestPlayer, role.BlindButton, float.NaN, notimps);
+            role.BlindButton.graphic.SetCooldownNormalizedUvs();
             
             var labelrender = role.BlindText;
             if (role.ClosestPlayer != null || role.Blinding)

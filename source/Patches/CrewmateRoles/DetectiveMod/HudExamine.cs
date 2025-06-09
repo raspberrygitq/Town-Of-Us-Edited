@@ -43,6 +43,7 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.ExamineButton.SetCoolDown(role.ExamineTimer(), CustomGameOptions.ExamineCd);
+            role.ExamineButton.graphic.SetCooldownNormalizedUvs();
 
             if (role.InvestigatedPlayers.Count > 0)
             {

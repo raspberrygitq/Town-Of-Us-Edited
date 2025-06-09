@@ -101,6 +101,8 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
 
             if (role.UsingManipulation) role.ManipulateButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.ManipulationDuration);
             else role.ManipulateButton.SetCoolDown(role.ManipulateTimer(), CustomGameOptions.ManipulateCD);
+
+            role.ManipulateButton.graphic.SetCooldownNormalizedUvs();
         }
     }
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]

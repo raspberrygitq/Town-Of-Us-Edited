@@ -39,6 +39,7 @@ namespace TownOfUsEdited.Modifiers.ButtonBarryMod
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
             role.ButtonButton.SetCoolDown(role.StartTimer(), 10f);
+            role.ButtonButton.graphic.SetCooldownNormalizedUvs();
             var renderer = role.ButtonButton.graphic;
 
             if (__instance.UseButton != null)

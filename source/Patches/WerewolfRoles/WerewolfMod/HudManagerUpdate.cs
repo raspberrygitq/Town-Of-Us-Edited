@@ -9,7 +9,7 @@ namespace TownOfUsEdited.WerewolfRoles.WerewolfMod
     {
         public static Sprite RampageSprite => TownOfUsEdited.RampageSprite;
         public static Sprite UnRampageSprite => TownOfUsEdited.UnRampageSprite;
-        
+
         [HarmonyPriority(Priority.Last)]
         public static void Postfix(HudManager __instance)
         {
@@ -58,7 +58,7 @@ namespace TownOfUsEdited.WerewolfRoles.WerewolfMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started)
                 {
-                     __instance.KillButton.Show();
+                    __instance.KillButton.Show();
                 }
             }
             if (role.RampageButton.graphic.sprite == RampageSprite)
@@ -67,13 +67,13 @@ namespace TownOfUsEdited.WerewolfRoles.WerewolfMod
                 var renderer = role.RampageButton.graphic;
                 if (role.Rampaged == true || !role.RampageButton.isCoolingDown)
                 {
-                renderer.color = Palette.EnabledColor;
-                renderer.material.SetFloat("_Desat", 0f);
+                    renderer.color = Palette.EnabledColor;
+                    renderer.material.SetFloat("_Desat", 0f);
                 }
                 else
                 {
-                renderer.color = Palette.DisabledClear;
-                renderer.material.SetFloat("_Desat", 1f);
+                    renderer.color = Palette.DisabledClear;
+                    renderer.material.SetFloat("_Desat", 1f);
                 }
             }
             if (role.Rampaged == true && MeetingHud.Instance)
@@ -82,6 +82,7 @@ namespace TownOfUsEdited.WerewolfRoles.WerewolfMod
                 Utils.Rpc(CustomRPC.UnTransform, PlayerControl.LocalPlayer.PlayerId);
                 role.Rampaged = false;
             }
+            role.RampageButton.graphic.SetCooldownNormalizedUvs();
         }
     }
 }

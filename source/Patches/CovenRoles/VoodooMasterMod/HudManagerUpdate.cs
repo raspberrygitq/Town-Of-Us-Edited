@@ -52,6 +52,7 @@ namespace TownOfUsEdited.CovenRoles.VoodooMasterMod
 
             // Set Button's cooldown
             role.VoodooButton.SetCoolDown(role.KillCooldown, CustomGameOptions.CovenKCD);
+            role.VoodooButton.graphic.SetCooldownNormalizedUvs();
 
             if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, role.VoodooButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsVoodoo()).ToList());
             else if (PlayerControl.LocalPlayer.IsLover() && CustomGameOptions.ImpLoverKillTeammate) Utils.SetTarget(ref role.ClosestPlayer, role.VoodooButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.IsVoodoo()).ToList());

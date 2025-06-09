@@ -46,6 +46,8 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
             if (PlayerControl.LocalPlayer.moveable) Utils.SetTarget(ref role.ClosestBlessedPlayer, role.BlessButton, float.NaN, notBlessed);
             else role.BlessButton.SetTarget(null);
 
+            role.BlessButton.graphic.SetCooldownNormalizedUvs();
+
             confessButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||

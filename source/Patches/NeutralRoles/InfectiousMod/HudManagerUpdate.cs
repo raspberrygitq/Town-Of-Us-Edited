@@ -34,6 +34,7 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
             role.InfectButton.graphic.sprite = TownOfUsEdited.InfectSprite;
             role.InfectButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
             role.InfectButton.SetCoolDown(role.Cooldown, CustomGameOptions.InfectiousCD);
+            role.InfectButton.graphic.SetCooldownNormalizedUvs();
 
             role.InfectButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead

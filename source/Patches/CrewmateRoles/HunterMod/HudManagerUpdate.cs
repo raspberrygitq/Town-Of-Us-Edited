@@ -80,6 +80,8 @@ namespace TownOfUsEdited.CrewmateRoles.HunterMod
             else if (role.StalkUsable) role.StalkButton.SetCoolDown(role.StalkTimer(), CustomGameOptions.HunterStalkCd);
             else role.StalkButton.SetCoolDown(0f, CustomGameOptions.HunterStalkCd);
             
+            role.StalkButton.graphic.SetCooldownNormalizedUvs();
+            
             var renderer = role.StalkButton.graphic;
             if (role.Stalking || role.UsesLeft == 0 || !PlayerControl.LocalPlayer.moveable) role.StalkButton.SetTarget(null);
             else

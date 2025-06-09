@@ -59,9 +59,11 @@ namespace TownOfUsEdited.ImpostorRoles.BomberMod
 
             role.PlantButton.graphic.color = Palette.EnabledColor;
             role.PlantButton.graphic.material.SetFloat("_Desat", 0f);
-            if (role.PlantButton.graphic.sprite == PlantSprite) role.PlantButton.SetCoolDown(role.KillCooldown, 
+            if (role.PlantButton.graphic.sprite == PlantSprite) role.PlantButton.SetCoolDown(role.KillCooldown,
                 GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
             else role.PlantButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.DetonateDelay);
+            
+            role.PlantButton.graphic.SetCooldownNormalizedUvs();
         }
     }
 }

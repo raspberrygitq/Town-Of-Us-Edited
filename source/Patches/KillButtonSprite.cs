@@ -70,6 +70,7 @@ namespace TownOfUsEdited
             if (!Kill) Kill = __instance.KillButton.graphic.sprite;
 
             if (!__instance.KillButton.isActiveAndEnabled) return;
+            __instance.KillButton.graphic.SetCooldownNormalizedUvs();
 
             var flag = false;
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Seer))
@@ -199,8 +200,7 @@ namespace TownOfUsEdited
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Chameleon))
             {
-                var phantom = RoleManager.Instance.GetRole(AmongUs.GameOptions.RoleTypes.Phantom).Cast<PhantomRole>();
-                __instance.KillButton.graphic.sprite = phantom.Ability.Image;
+                __instance.KillButton.graphic.sprite = TownOfUsEdited.ChameleonSwoop;
                 __instance.KillButton.buttonLabelText.text = "Swoop";
                 flag = true;
             }

@@ -67,6 +67,7 @@ namespace TownOfUsEdited.CrewmateRoles.PlumberMod
                 role.FlushButton.graphic.sprite = Flush;
                 role.FlushButton.buttonLabelText.text = "";
                 role.FlushButton.SetCoolDown(role.FlushTimer(), CustomGameOptions.FlushCd);
+                role.FlushButton.graphic.SetCooldownNormalizedUvs();
             }
 
             blockButton.SetTarget(null);

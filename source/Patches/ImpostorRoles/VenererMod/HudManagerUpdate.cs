@@ -47,6 +47,7 @@ namespace TownOfUsEdited.ImpostorRoles.VenererMod
 
             role.AbilityButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
+            role.AbilityButton.graphic.SetCooldownNormalizedUvs();
             if (role.IsCamouflaged)
             {
                 role.AbilityButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.AbilityDuration);

@@ -39,6 +39,8 @@ namespace TownOfUsEdited.ImpostorRoles.EscapistMod
             role.EscapeButton.graphic.material.SetFloat("_Desat", 0f);
             if (role.EscapeButton.graphic.sprite == MarkSprite) role.EscapeButton.SetCoolDown(0f, 1f);
             else role.EscapeButton.SetCoolDown(role.EscapeTimer(), CustomGameOptions.EscapeCd);
+
+            role.EscapeButton.graphic.SetCooldownNormalizedUvs();
         }
     }
 }

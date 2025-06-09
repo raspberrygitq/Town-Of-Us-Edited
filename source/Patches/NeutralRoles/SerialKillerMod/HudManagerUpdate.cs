@@ -70,10 +70,7 @@ namespace TownOfUsEdited.NeutralRoles.SerialKillerMod
             else Utils.SetTarget(ref sk.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(RoleEnum.SerialKiller)).ToList());
             
             sk.skconvertButton.SetCoolDown(sk.SKTimer(), CustomGameOptions.SerialKillerKCD);
-            sk.skconvertButton.graphic.color = Palette.EnabledColor;
-
-            return;
-            
+            sk.skconvertButton.graphic.SetCooldownNormalizedUvs();
         }
     }
 }

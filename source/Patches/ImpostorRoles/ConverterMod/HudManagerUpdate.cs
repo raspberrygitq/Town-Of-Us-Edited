@@ -68,6 +68,7 @@ namespace TownOfUsEdited.ImpostorRoles.ConverterMod
             }
 
             converter.ConvertButton.SetCoolDown(converter.ConvertTimer(), CustomGameOptions.ConvertCD);
+            converter.ConvertButton.graphic.SetCooldownNormalizedUvs();
 
             if (converter.CurrentTarget && converter.CurrentTarget != closestBody)
             {

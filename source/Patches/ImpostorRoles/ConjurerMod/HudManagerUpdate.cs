@@ -56,6 +56,7 @@ namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.CurseButton.SetCoolDown(role.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+            role.CurseButton.graphic.SetCooldownNormalizedUvs();
 
             role.CurseButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 

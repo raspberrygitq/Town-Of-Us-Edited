@@ -43,6 +43,8 @@ namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
             if (PlayerControl.LocalPlayer.moveable) Utils.SetTarget(ref role.ClosestPlayer, role.BlackmailButton, float.NaN, notBlackmailed);
             else role.BlackmailButton.SetTarget(null);
 
+            role.BlackmailButton.graphic.SetCooldownNormalizedUvs();
+
             role.BlackmailButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())

@@ -57,6 +57,8 @@ namespace TownOfUsEdited.WerewolfRoles.SorcererMod
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
                     && role.UsedRevive != true);
 
+            reviveButton.graphic.SetCooldownNormalizedUvs();
+
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;
             var truePosition = PlayerControl.LocalPlayer.GetTruePosition();

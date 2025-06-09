@@ -48,7 +48,7 @@ namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
                            (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                            PlayerControl.LocalPlayer.CanMove;
                 var allocs = Physics2D.OverlapCircleAll(truePosition, maxDistance,
-                    LayerMask.GetMask(new[] {"Players", "Ghost"}));
+                    LayerMask.GetMask(new[] { "Players", "Ghost" }));
                 var killButton = role.DragDropButton;
                 DeadBody closestBody = null;
                 var closestDistance = float.MaxValue;
@@ -102,6 +102,8 @@ namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
                 role.DragDropButton.graphic.color = Palette.EnabledColor;
                 role.DragDropButton.graphic.material.SetFloat("_Desat", 0f);
             }
+
+            role.DragDropButton.graphic.SetCooldownNormalizedUvs();
         }
     }
 }

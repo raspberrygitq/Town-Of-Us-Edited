@@ -70,6 +70,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
             role.StoreText.SetOutlineColor(Palette.ImpostorRed);
 
             role.StoreButton.SetCoolDown(role.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+            role.StoreButton.graphic.SetCooldownNormalizedUvs();
 
             var renderer = role.StoreButton.graphic;
             if (role.ButtonUsable)

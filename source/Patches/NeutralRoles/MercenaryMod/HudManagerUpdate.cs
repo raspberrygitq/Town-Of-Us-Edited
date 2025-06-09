@@ -84,6 +84,7 @@ namespace TownOfUsEdited.NeutralRoles.MercenaryMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             __instance.KillButton.SetCoolDown(0f, 1f);
             role.GuardButton.SetCoolDown(role.GuardTimer(), CustomGameOptions.MercenaryCD);
+            role.GuardButton.graphic.SetCooldownNormalizedUvs();
 
             var notGuarded = PlayerControl.AllPlayerControls.ToArray().Where(
                 player => !role.Guarded.Contains(player.PlayerId)).ToList();

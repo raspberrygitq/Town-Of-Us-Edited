@@ -48,6 +48,7 @@ namespace TownOfUsEdited.CovenRoles.CovenLeaderMod
             role.RecruitButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             role.RecruitButton.SetCoolDown(role.KillCooldown, CustomGameOptions.CovenKCD);
+            role.RecruitButton.graphic.SetCooldownNormalizedUvs();
 
             // Set the closest player for the Kill Button's targeting
             var notcoven = PlayerControl.AllPlayerControls

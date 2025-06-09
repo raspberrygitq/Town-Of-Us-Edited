@@ -39,6 +39,7 @@ namespace TownOfUsEdited.Modifiers.DisperserMod
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
             role.DisperseButton.SetCoolDown(role.StartTimer(), 10f);
+            role.DisperseButton.graphic.SetCooldownNormalizedUvs();
             var renderer = role.DisperseButton.graphic;
 
 

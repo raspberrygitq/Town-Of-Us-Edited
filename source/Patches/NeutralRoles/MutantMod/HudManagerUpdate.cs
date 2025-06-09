@@ -99,6 +99,8 @@ namespace TownOfUsEdited.NeutralRoles.MutantMod
                 role.TransformButton.SetCoolDown(role.TransformTimer(), CustomGameOptions.TransformCD);
             }
 
+            role.TransformButton.graphic.SetCooldownNormalizedUvs();
+
             var renderer = role.TransformButton.graphic;
             var label = role.TransformText;
             renderer.color = Palette.EnabledColor;

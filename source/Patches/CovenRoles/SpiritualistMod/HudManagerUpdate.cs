@@ -53,6 +53,7 @@ namespace TownOfUsEdited.CovenRoles.SpiritualistMod
 
             // Set KillButton's cooldown
             role.ControlButton.SetCoolDown(role.KillCooldown, CustomGameOptions.CovenKCD);
+            role.ControlButton.graphic.SetCooldownNormalizedUvs();
 
             // Set the closest player for the Kill Button's targeting
             var notcoven = PlayerControl.AllPlayerControls

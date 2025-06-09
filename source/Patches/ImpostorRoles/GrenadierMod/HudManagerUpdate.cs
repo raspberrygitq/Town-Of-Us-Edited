@@ -66,6 +66,7 @@ namespace TownOfUsEdited.ImpostorRoles.GrenadierMod
             }
 
             role.FlashButton.SetCoolDown(role.FlashTimer(), CustomGameOptions.GrenadeCd);
+            role.FlashButton.graphic.SetCooldownNormalizedUvs();
 
             var system = ShipStatus.Instance.Systems[SystemTypes.Sabotage].Cast<SabotageSystemType>();
             var sabActive = system.AnyActive;

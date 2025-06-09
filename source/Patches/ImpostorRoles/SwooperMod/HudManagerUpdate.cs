@@ -40,6 +40,8 @@ namespace TownOfUsEdited.ImpostorRoles.SwooperMod
             role.SwoopText.text = "Swoop";
             role.SwoopText.SetOutlineColor(Palette.ImpostorRed);
 
+            role.SwoopButton.graphic.SetCooldownNormalizedUvs();
+
             if (role.IsSwooped)
             {
                 role.SwoopButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.SwoopDuration);

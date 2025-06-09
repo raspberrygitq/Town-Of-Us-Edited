@@ -59,6 +59,7 @@ namespace TownOfUsEdited.ImpostorRoles.JanitorMod
 
             KillButtonTarget.SetTarget(killButton, closestBody, role);
             role.CleanButton.SetCoolDown(role.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+            role.CleanButton.graphic.SetCooldownNormalizedUvs();
         }
     }
 }

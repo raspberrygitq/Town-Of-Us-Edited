@@ -73,6 +73,7 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
             
             // The Cooldown code is ran only once else, it will double the kill button speed up (because Time.deltaTime would be ran twice).
             role.BiteButton.SetCoolDown(role.Cooldown, CustomGameOptions.BiteCd);
+            role.BiteButton.graphic.SetCooldownNormalizedUvs();
 
             if (role.ClosestPlayer != null)
             {

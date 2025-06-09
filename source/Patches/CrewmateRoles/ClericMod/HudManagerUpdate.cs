@@ -40,6 +40,7 @@ namespace TownOfUsEdited.CrewmateRoles.ClericMod
 
             __instance.KillButton.SetCoolDown(role.BarrierTimer(), CustomGameOptions.BarrierCD);
             role.CleanseButton.SetCoolDown(role.Cooldown, CustomGameOptions.BarrierCD);
+            role.CleanseButton.graphic.SetCooldownNormalizedUvs();
 
             Utils.SetTarget(ref role.ClosestPlayer, role.CleanseButton, float.NaN);
             if (role.Barriered == null) __instance.KillButton.SetTarget(role.ClosestPlayer);

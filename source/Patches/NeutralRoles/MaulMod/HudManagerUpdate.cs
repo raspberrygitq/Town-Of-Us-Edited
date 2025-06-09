@@ -51,6 +51,8 @@ namespace TownOfUsEdited.NeutralRoles.MaulMod
             role.RampageText.text = "Rampage";
             role.RampageText.SetOutlineColor(Colors.Werewolf);
 
+            role.RampageButton.graphic.SetCooldownNormalizedUvs();
+
             if (role.Rampaged)
             {
                 role.RampageButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.RampageDuration);

@@ -58,6 +58,7 @@ Join the [Discord](https://discord.gg/Huen5AqR2t) if you need help or want to fi
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
+|  16.0.5 | v1.1.2 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.1.2/Toue.v1.1.2.Steam.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.1.2/Toue.v1.1.2.Epic.zip) |
 |  16.0.5 | v1.1.1 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.1.1/Toue.v1.1.1.Steam.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.1.1/Toue.v1.1.1.Epic.zip) |
 |  16.0.5 | v1.1.0 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.1.0/Toue.v1.1.0.zip) | No Download Available |
 | 2024.11.26 | v1.0.4 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.4/Toue.v1.0.4.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.4/Toue.v1.0.4.zip) |

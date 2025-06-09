@@ -49,6 +49,7 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
             else Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors) && !x.IsCursed()).ToList());
 
             role.SpellButton.SetCoolDown(role.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
+            role.SpellButton.graphic.SetCooldownNormalizedUvs();
 
             var labelrender = role.SpellText;
             if (role.ClosestPlayer != null)

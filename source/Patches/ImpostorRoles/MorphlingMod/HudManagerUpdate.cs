@@ -49,6 +49,7 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
             role.MorphText.SetOutlineColor(Palette.ImpostorRed);
 
             role.MorphButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
+            role.MorphButton.graphic.SetCooldownNormalizedUvs();
             if (role.MorphButton.graphic.sprite == SampleSprite)
             {
                 role.MorphText.text = "Sample";

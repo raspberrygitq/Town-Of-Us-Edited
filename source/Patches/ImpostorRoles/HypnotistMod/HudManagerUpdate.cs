@@ -60,6 +60,7 @@ namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
             role.HypnotiseButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             role.HypnotiseButton.SetCoolDown(role.HypnotiseTimer(), CustomGameOptions.HypnotiseCd);
+            role.HypnotiseButton.graphic.SetCooldownNormalizedUvs();
             var killButton = role.HypnotiseButton;
             if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !role.HypnotisedPlayers.Contains(x.PlayerId)).ToList());
             else if (PlayerControl.LocalPlayer.IsLover() && CustomGameOptions.ImpLoverKillTeammate) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !role.HypnotisedPlayers.Contains(x.PlayerId)).ToList());

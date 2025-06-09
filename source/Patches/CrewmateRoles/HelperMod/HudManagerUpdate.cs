@@ -27,6 +27,7 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
 
             // Set KillButton's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
+            __instance.KillButton.buttonLabelText.gameObject.SetActive(false);
 
             // Set KillButton's cooldown
             var alives = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();

@@ -51,6 +51,7 @@ namespace TownOfUsEdited.ImpostorRoles.BountyHunterMod
             role.TimerText.color = Palette.EnabledColor;
             role.TimerText.material.SetFloat("_Desat", 0f);
             role.TimerButton.SetCoolDown(role.TargetTimer(), CustomGameOptions.TargetDuration);
+            role.TimerButton.graphic.SetCooldownNormalizedUvs();
 
             if ((role.TargetTimer() <= 0f || role.BountyTarget == null || role.BountyTarget.Data.IsDead || role.BountyTarget.Data.Disconnected) && !PlayerControl.LocalPlayer.Data.IsDead)
             {

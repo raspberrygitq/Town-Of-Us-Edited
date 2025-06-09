@@ -34,6 +34,7 @@ namespace TownOfUsEdited.Modifiers.SatelliteMod
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
             role.DetectButton.SetCoolDown(role.StartTimer(), 10f);
+            role.DetectButton.graphic.SetCooldownNormalizedUvs();
             var renderer = role.DetectButton.graphic;
 
             if (__instance.UseButton != null)

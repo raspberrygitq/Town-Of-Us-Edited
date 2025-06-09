@@ -70,6 +70,8 @@ namespace TownOfUsEdited.CovenRoles.PotionMasterMod
             }
             else role.PotionButton.SetCoolDown(role.PotionTimer(), CustomGameOptions.PotionCD);
 
+            role.PotionButton.graphic.SetCooldownNormalizedUvs();
+
             role.PotionButton.graphic.color = Palette.EnabledColor;
             role.PotionButton.graphic.material.SetFloat("_Desat", 0f);
             var labelrender = role.PotionText;

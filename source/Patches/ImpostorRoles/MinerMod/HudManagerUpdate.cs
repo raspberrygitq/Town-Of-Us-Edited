@@ -33,6 +33,7 @@ namespace TownOfUsEdited.ImpostorRoles.MinerMod
             role.MineButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             role.MineButton.SetCoolDown(role.MineTimer(), CustomGameOptions.MineCd);
+            role.MineButton.graphic.SetCooldownNormalizedUvs();
             var hits = Physics2D.OverlapBoxAll(PlayerControl.LocalPlayer.transform.position, role.VentSize, 0);
             hits = hits.ToArray().Where(c =>
                     (c.name.Contains("Vent") || !c.isTrigger) && c.gameObject.layer != 8 && c.gameObject.layer != 5)

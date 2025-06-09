@@ -96,8 +96,7 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
             role.ReviveButton.graphic.color = Palette.DisabledClear;
             role.ReviveButton.graphic.material.SetFloat("_Desat", 1f);
 
-            return;
-            
+            role.ReviveButton.SetCoolDown(0f, 1f);
         }
     }
 

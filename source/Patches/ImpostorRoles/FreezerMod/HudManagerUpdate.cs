@@ -54,6 +54,7 @@ namespace TownOfUsEdited.ImpostorRoles.FreezerMod
             if (role.Freezing) role.FreezeButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.BlindDuration);
             else role.FreezeButton.SetCoolDown(role.FreezeTimer(), CustomGameOptions.BlindCD);
             Utils.SetTarget(ref role.ClosestPlayer, role.FreezeButton, float.NaN, notimps);
+            role.FreezeButton.graphic.SetCooldownNormalizedUvs();
 
             var labelrender = role.FreezeText;
             if (role.ClosestPlayer != null || role.Freezing)

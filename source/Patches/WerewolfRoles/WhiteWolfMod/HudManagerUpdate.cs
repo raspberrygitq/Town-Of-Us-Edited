@@ -47,7 +47,7 @@ namespace TownOfUsEdited.WerewolfRoles.WhiteWolfMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
                     && role.Rampaged);
-                
+
             Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN);
             __instance.KillButton.SetCoolDown(role.KillTimer(), CustomGameOptions.WerewolfKillCD);
 
@@ -66,13 +66,13 @@ namespace TownOfUsEdited.WerewolfRoles.WhiteWolfMod
                 var renderer = role.RampageButton.graphic;
                 if (role.Rampaged == true || !role.RampageButton.isCoolingDown)
                 {
-                renderer.color = Palette.EnabledColor;
-                renderer.material.SetFloat("_Desat", 0f);
+                    renderer.color = Palette.EnabledColor;
+                    renderer.material.SetFloat("_Desat", 0f);
                 }
                 else
                 {
-                renderer.color = Palette.DisabledClear;
-                renderer.material.SetFloat("_Desat", 1f);
+                    renderer.color = Palette.DisabledClear;
+                    renderer.material.SetFloat("_Desat", 1f);
                 }
             }
             if (role.Rampaged == true && MeetingHud.Instance)
@@ -81,6 +81,7 @@ namespace TownOfUsEdited.WerewolfRoles.WhiteWolfMod
                 Utils.Rpc(CustomRPC.UnTransform, PlayerControl.LocalPlayer.PlayerId);
                 role.Rampaged = false;
             }
+            role.RampageButton.graphic.SetCooldownNormalizedUvs();
         }
     }
 }

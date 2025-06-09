@@ -462,6 +462,8 @@ namespace TownOfUsEdited.Roles
                 __gInstance.HackButton.SetCoolDown(__gInstance.HackTimer(),
                     CustomGameOptions.HackCooldown);
 
+                __gInstance.HackButton.graphic.SetCooldownNormalizedUvs();
+
                 __gInstance.HackText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
@@ -593,6 +595,7 @@ namespace TownOfUsEdited.Roles
                     __gInstance.MimicButton.SetCoolDown(__gInstance.MimicTimer(),
                         CustomGameOptions.MimicCooldown);
                 }
+                __gInstance.MimicButton.graphic.SetCooldownNormalizedUvs();
             }
 
             public static void MimicButtonPress(Glitch __gInstance)
