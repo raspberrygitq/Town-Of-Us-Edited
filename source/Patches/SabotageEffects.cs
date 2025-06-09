@@ -58,8 +58,10 @@ namespace TownOfUsEdited
         {
             var camera = Camera.main.gameObject.GetComponent<FollowerCamera>();
             ReactorSystemType reactor = null;
+            ReactorSystemType seismic = null;
             HeliSabotageSystem heli = null;
             bool hasReactor = true;
+            bool hasSeismic = true;
             bool hasHeli = true;
             try 
             {
@@ -68,6 +70,14 @@ namespace TownOfUsEdited
             catch
             {
                 hasReactor = false;
+            }
+            try 
+            {
+                seismic = ShipStatus.Instance.Systems[SystemTypes.Laboratory].Cast<ReactorSystemType>();
+            }
+            catch
+            {
+                hasSeismic = false;
             }
             try
             {
@@ -79,7 +89,7 @@ namespace TownOfUsEdited
             }
             for (float t = 0f; t < duration; t += Time.deltaTime)
             {
-                if ((hasReactor && reactor != null && !reactor.IsActive) || (hasHeli && heli != null && !heli.IsActive) || (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay))
+                if ((hasReactor && reactor != null && !reactor.IsActive) || (hasSeismic && seismic != null && !seismic.IsActive) || (hasHeli && heli != null && !heli.IsActive) || (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay))
                 {
                     camera.Offset = Vector2.zero;
                     yield break;

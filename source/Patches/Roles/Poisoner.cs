@@ -40,22 +40,12 @@ namespace TownOfUsEdited.Roles
             if (TimeRemaining <= 0)
             {
                 PoisonKill();
-                Utils.Rpc(CustomRPC.PoisonKill, PlayerControl.LocalPlayer.PlayerId);
             }
         }
         public void PoisonKill()
         {
             Enabled = false;
             var target = PoisonedPlayer;
-            if (!PoisonedPlayer.Is(RoleEnum.Pestilence) && !PoisonedPlayer.IsOnAlert() && !Player.IsJailed())
-            {
-                Utils.MurderPlayer(Player, PoisonedPlayer, false);
-                var targetRole = Role.GetRole(PoisonedPlayer);
-                targetRole.DeathReason = DeathReasons.Poisoned;
-                Utils.Rpc(CustomRPC.SetDeathReason, PoisonedPlayer.PlayerId, (byte)DeathReasons.Poisoned);
-                if (!PoisonedPlayer.Data.IsDead) SoundManager.Instance.PlaySound(PlayerControl.LocalPlayer.KillSfx, false, 0.5f);
-            }
-            PoisonedPlayer = null;
             if (target.Is(ModifierEnum.Diseased))
             {
                 Cooldown = CustomGameOptions.PoisonCD * CustomGameOptions.DiseasedMultiplier;
@@ -79,6 +69,21 @@ namespace TownOfUsEdited.Roles
                 Cooldown = num;
             }
             else Cooldown = CustomGameOptions.PoisonCD;
+
+            // Kill Check
+            if (!PoisonedPlayer.Is(RoleEnum.Pestilence) && !PoisonedPlayer.IsOnAlert() && !Player.IsJailed())
+            {
+                Utils.Rpc(CustomRPC.PoisonKill, PlayerControl.LocalPlayer.PlayerId, true); // Successed Kill
+                Utils.MurderPlayer(Player, PoisonedPlayer, false);
+                var targetRole = Role.GetRole(PoisonedPlayer);
+                targetRole.DeathReason = DeathReasons.Poisoned;
+                Utils.Rpc(CustomRPC.SetDeathReason, PoisonedPlayer.PlayerId, (byte)DeathReasons.Poisoned);
+                SoundManager.Instance.PlaySound(PlayerControl.LocalPlayer.KillSfx, false, 0.5f);
+                PoisonedPlayer = null;
+                return;
+            }
+            Utils.Rpc(CustomRPC.PoisonKill, PlayerControl.LocalPlayer.PlayerId, false); // Failed Kill
+            PoisonedPlayer = null;
         }
         public float PoisonTimer()
         {

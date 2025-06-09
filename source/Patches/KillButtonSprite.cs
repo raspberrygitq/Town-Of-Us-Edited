@@ -425,6 +425,7 @@ namespace TownOfUsEdited
             static bool Prefix(AbilityButton __instance)
             {
                 if (__instance != HudManager.Instance.AbilityButton) return true;
+                if (!PlayerControl.LocalPlayer.Data.IsDead) return false;
                 if (DestroyableSingleton<HudManager>.Instance.Chat.IsOpenOrOpening)
                 {
                     return false;

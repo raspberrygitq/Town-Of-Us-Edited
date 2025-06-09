@@ -4,6 +4,7 @@ using System.Linq;
 using HarmonyLib;
 using Reactor.Utilities;
 using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
@@ -205,7 +206,18 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                         }
                         pos.Remove(list);
                     }
-                    PlayerControl.LocalPlayer.MyPhysics.body.velocity = playerVector2 * PlayerControl.LocalPlayer.MyPhysics.TrueSpeed;
+                    var modifiers = Modifier.GetModifiers(PlayerControl.LocalPlayer);
+                    var speedFactor = 1.0f;
+                    if (modifiers != null && modifiers.Any())
+                    {
+                        var modifier = modifiers.FirstOrDefault(x => x is IVisualAlteration);
+                        if (modifier is IVisualAlteration alteration)
+                        {
+                            alteration.TryGetModifiedAppearance(out VisualAppearance appearance);
+                            speedFactor = appearance.SpeedFactor;
+                        }
+                    }
+                    PlayerControl.LocalPlayer.MyPhysics.body.velocity = playerVector2 * PlayerControl.LocalPlayer.MyPhysics.TrueSpeed * speedFactor;
                 }
                 else
                 {
@@ -284,7 +296,7 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                     playerVector.Normalize();
                     var position2 = PlayerControl.LocalPlayer.transform.position;
 
-                    var vel2 = playerVector * PlayerControl.LocalPlayer.MyPhysics.TrueSpeed;
+                    var vel2 = playerVector;
                     Positions.Add((vel2, Time.time, usingSpecialAnimation, position2, 0, null));
                     return;
                 }

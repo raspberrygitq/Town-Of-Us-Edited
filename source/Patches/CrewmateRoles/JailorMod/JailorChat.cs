@@ -23,8 +23,8 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.JailorMod
             if (JailorChatButton && PlayerControl.LocalPlayer.Data.IsDead)
             {
                 if (JailorChatButton.IsOpenOrOpening) ControllerManager.Instance.CloseOverlayMenu(JailorChatButton.name);
-                    Object.Destroy(JailorChatButton.gameObject);
-                    Object.Destroy(Background.gameObject);
+                Object.Destroy(JailorChatButton.gameObject);
+                Object.Destroy(Background.gameObject);
             }
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Jailor) && !PlayerControl.LocalPlayer.IsJailed())

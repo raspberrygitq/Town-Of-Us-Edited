@@ -4,6 +4,7 @@ using UnityEngine;
 using TownOfUsEdited.Extensions;
 using System.Linq;
 using TMPro;
+using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
 {
@@ -199,7 +200,18 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
 
                 if (role.ManipulatedPlayer != null && role.UsingManipulation && !role.ManipulatedPlayer.Data.Disconnected)
                 {
-                    var vel = manipVector * role.ManipulatedPlayer.MyPhysics.TrueSpeed;
+                    var modifiers = Modifier.GetModifiers(role.ManipulatedPlayer);
+                    var speedFactor = 1.0f;
+                    if (modifiers != null && modifiers.Any())
+                    {
+                        var modifier = modifiers.FirstOrDefault(x => x is IVisualAlteration);
+                        if (modifier is IVisualAlteration alteration)
+                        {
+                            alteration.TryGetModifiedAppearance(out VisualAppearance appearance);
+                            speedFactor = appearance.SpeedFactor;
+                        }
+                    }
+                    var vel = manipVector * role.ManipulatedPlayer.MyPhysics.TrueSpeed * speedFactor;
                     role.ManipulatedPlayer.MyPhysics.body.velocity = vel;
                     Utils.Rpc(CustomRPC.SyncManipMovement, role.ManipulatedPlayer.PlayerId, vel.x, vel.y);
                 }

@@ -2056,7 +2056,13 @@ namespace TownOfUsEdited
                             case CustomRPC.PoisonKill:
                                 var poisoner1 = Utils.PlayerById(reader.ReadByte());
                                 var poisonerRole1 = Role.GetRole<Poisoner>(poisoner1);
-                                poisonerRole1.PoisonKill();
+                                var success = reader.ReadBoolean();
+                                var poisonedPlayer2 = poisonerRole1.PoisonedPlayer;
+                                poisonerRole1.PoisonedPlayer = null;
+                                if (success)
+                                {
+                                    Utils.MurderPlayer(poisonerRole1.Player, poisonedPlayer2, false);
+                                }
                                 break;
                             case CustomRPC.SetTarget:
                                 var exe = Utils.PlayerById(reader.ReadByte());

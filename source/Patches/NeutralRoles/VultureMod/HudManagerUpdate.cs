@@ -41,6 +41,28 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
             var closestDistance = float.MaxValue;
             var allBodies = Object.FindObjectsOfType<DeadBody>();
 
+            if (role.BodiesText == null)
+            {
+                role.BodiesText = Object.Instantiate(killButton.cooldownTimerText, killButton.transform);
+                role.BodiesText.gameObject.SetActive(false);
+                role.BodiesText.transform.localPosition = new Vector3(
+                    role.BodiesText.transform.localPosition.x + 0.26f,
+                    role.BodiesText.transform.localPosition.y + 0.29f,
+                    role.BodiesText.transform.localPosition.z);
+                role.BodiesText.transform.localScale = role.BodiesText.transform.localScale * 0.65f;
+                role.BodiesText.alignment = TMPro.TextAlignmentOptions.Right;
+                role.BodiesText.fontStyle = TMPro.FontStyles.Bold;
+            }
+            if (role.BodiesText != null)
+            {
+                role.BodiesText.text = $"{role.BodiesEaten}/{CustomGameOptions.VultureBodies}";
+            }
+
+            role.BodiesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
             foreach (var body in allBodies.Where(x => Vector2.Distance(x.TruePosition, truePosition) <= maxDistance))
             {
                 var distance = Vector2.Distance(truePosition, body.TruePosition);

@@ -22,6 +22,7 @@ namespace TownOfUsEdited.Roles
         }
 
         public Dictionary<byte, ArrowBehaviour> BodyArrows = new Dictionary<byte, ArrowBehaviour>();
+        public TextMeshPro BodiesText;
         public DeadBody CurrentTarget;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
