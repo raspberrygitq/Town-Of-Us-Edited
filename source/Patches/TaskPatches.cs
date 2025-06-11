@@ -80,7 +80,6 @@ namespace TownOfUsEdited
                            || (playerControl.Is(Faction.Impostors) && !playerControl.Is(RoleEnum.Spirit))
                            || playerControl.Is(Faction.Coven)
                            || playerControl.Is(RoleEnum.Spectator)
-                           || playerControl.Is(Faction.NeutralBenign)
                            || playerControl.Is(RoleEnum.SoulCollector);
 
                 // If the console is not a sabotage repair console

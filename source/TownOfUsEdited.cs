@@ -1,23 +1,25 @@
 using System;
+using System.IO;
 using System.Reflection;
+using AmongUs.GameOptions;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
-using Reactor;
-using Reactor.Utilities.Extensions;
-using Reactor.Networking.Attributes;
-using TownOfUsEdited.CustomOption;
-using TownOfUsEdited.Patches;
-using TownOfUsEdited.RainbowMod;
-using TownOfUsEdited.Extensions;
 using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using UnityEngine;
-using System.IO;
+using Reactor;
+using Reactor.Networking.Attributes;
+using Reactor.Utilities.Extensions;
 using TownOfUsEdited.CrewmateRoles.DetectiveMod;
+using TownOfUsEdited.CustomOption;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.RainbowMod;
+using UnityEngine;
+using System.Linq;
 
 namespace TownOfUsEdited
 {
@@ -30,9 +32,12 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "1.1.2";
+        public const string VersionString = "1.0.0";
         public static System.Version Version = System.Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
+
+        public const int MaxPlayers = 35;
+        public const int MaxImpostors = 35 / 2;
 
         public static AssetLoader bundledAssets;
 
@@ -175,6 +180,7 @@ namespace TownOfUsEdited
         public static ConfigEntry<bool> DeadSeeGhosts { get; set; }
         public static ConfigEntry<bool> DisableLobbyMusic { get; set; }
         public static ConfigEntry<bool> HideDevStatus { get; set; }
+        public static ConfigEntry<bool> UnlockCosmetics { get; set; }
         public static string RuntimeLocation;
         public override void Load()
         {
@@ -329,6 +335,12 @@ namespace TownOfUsEdited
             DisableLobbyMusic = Config.Bind("Settings", "Disable Lobby Music", false, "Whether you want to disable the lobby Music in-game (can be changed in-game with settings)");
 
             HideDevStatus = Config.Bind("Settings", "Hide Special Status", false, "Toggle this to hide your special status when launching if you have one. You will still have access to your special perks.");
+
+            UnlockCosmetics = Config.Bind("Cosmetics", "UnlockAll", true, "Unlock all cosmetics");
+
+            NormalGameOptionsV09.RecommendedImpostors = NormalGameOptionsV09.MaxImpostors = Enumerable.Repeat(35, 35).ToArray();
+            NormalGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 35).ToArray();
+            HideNSeekGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 35).ToArray();
 
             _harmony.PatchAll();
             SubmergedCompatibility.Initialize();
