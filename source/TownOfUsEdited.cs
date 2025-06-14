@@ -32,7 +32,7 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "1.0.0";
+        public const string VersionString = "1.0.1";
         public static System.Version Version = System.Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
@@ -169,6 +169,8 @@ namespace TownOfUsEdited
         public static Sprite ZoomPlusActiveButton;
         public static Sprite ZoomMinusActiveButton;
         public static Sprite NextButton;
+        public static Sprite AnimationButton;
+        public static Sprite AnimationButtonActive;
         public static Sprite heh;
 
         public static Vector3 ButtonPosition { get; private set; } = new Vector3(2.6f, 0.7f, -9f);
@@ -322,6 +324,8 @@ namespace TownOfUsEdited
             ZoomPlusActiveButton = CreateSprite("TownOfUsEdited.Resources.PlusActive.png");
             ZoomMinusActiveButton = CreateSprite("TownOfUsEdited.Resources.MinusActive.png");
             NextButton = CreateSprite("TownOfUsEdited.Resources.NextButton.png");
+            AnimationButton = CreateSprite("TownOfUsEdited.Resources.AnimationButton.png");
+            AnimationButtonActive = CreateSprite("TownOfUsEdited.Resources.AnimationButtonActive.png");
 
             PalettePatch.Load();
             ClassInjector.RegisterTypeInIl2Cpp<RainbowBehaviour>();
