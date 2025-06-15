@@ -2330,13 +2330,16 @@ Custom hats have been added, made by some very talented artists. These are mostl
 ## In Game Features!
 Features such as vanilla improvements, custom chat for special faction, role descriptions...
 ## Controller Support!
-Currently experimental, the mod attempts to make the mod fully compatible. The following binds are present: 
+Currently experimental, the mod attempts to make the mod fully compatible. The following binds are present:
 <br>
 button used for killing - killing as well as all crew abilities and neutral benign abilities <br>
 button used for vanilla role abilities - all impostor abilities like blackmail, ignite, & examine <br>
 LB & RB - either of these will trigger button barry or disperse modifiers <br>
 RT - used for the glitch's hack ability <br>
-LT - used for the glitch's mimic ability
+LT - used for the glitch's mimic ability <br>
+## Custom Emotes and Animations!
+The mod includes a little menu allowing you to express your emotions in game through emotes.\
+There are also a few animations for some roles like morphling and swooper!
 
 ## And much more!
 
