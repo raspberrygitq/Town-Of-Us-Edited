@@ -100,14 +100,17 @@ namespace TownOfUsEdited.Roles
                     if (CustomGameOptions.PotionMasterOn > 0) ColorMapping.Add("Potion Master", Colors.Coven);
                 }
                 if (CustomGameOptions.VigilanteGuessLovers && CustomGameOptions.LoversOn > 0) ColorMapping.Add("Lover", Colors.Lovers);
-                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.BloodlustOn > 0) ColorMapping.Add("Bloodlust", Colors.Impostor);
-                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.DisperserOn > 0) ColorMapping.Add("Disperser", Colors.Impostor);
-                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.LuckyOn > 0) ColorMapping.Add("Lucky", Colors.Impostor);
-                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.DoubleShotOn > 0) ColorMapping.Add("Double Shot", Colors.Impostor);
-                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.UnderdogOn > 0) ColorMapping.Add("Underdog", Colors.Impostor);
-                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.SaboteurOn > 0) ColorMapping.Add("Saboteur", Colors.Impostor);
-                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.TaskerOn > 0) ColorMapping.Add("Tasker", Colors.Impostor);
 
+                if (CustomGameOptions.VigilanteGuessImpModifiers)
+                {
+                    if (CustomGameOptions.BloodlustOn > 0) ColorMapping.Add("Bloodlust", Colors.Impostor);
+                    if (CustomGameOptions.DisperserOn > 0) ColorMapping.Add("Disperser", Colors.Impostor);
+                    if (CustomGameOptions.LuckyOn > 0) ColorMapping.Add("Lucky", Colors.Impostor);
+                    if (CustomGameOptions.DoubleShotOn > 0) ColorMapping.Add("Double Shot", Colors.Impostor);
+                    if (CustomGameOptions.UnderdogOn > 0) ColorMapping.Add("Underdog", Colors.Impostor);
+                    if (CustomGameOptions.SaboteurOn > 0) ColorMapping.Add("Saboteur", Colors.Impostor);
+                    if (CustomGameOptions.TaskerOn > 0) ColorMapping.Add("Tasker", Colors.Impostor);
+                }
             }
 
             SortedColorMapping = ColorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);

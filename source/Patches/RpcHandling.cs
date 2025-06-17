@@ -3611,7 +3611,7 @@ namespace TownOfUsEdited
                     if (Check(CustomGameOptions.LuckyOn))
                         ImpostorModifiers.Add((typeof(Lucky), CustomGameOptions.LuckyOn));
 
-                    if (CustomGameOptions.TaskerOn > 0)
+                    if (Check(CustomGameOptions.TaskerOn))
                         ImpostorModifiers.Add((typeof(Tasker), CustomGameOptions.TaskerOn));
                     #endregion
                     #region Assassin Ability

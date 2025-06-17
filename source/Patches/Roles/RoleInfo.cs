@@ -978,6 +978,7 @@ namespace TownOfUsEdited.Roles
             {
                 return "The <color=#4c4c4c>Black Wolf</color> is a Werewolf role which can Convert a Villager to regular Werewolf once in the game.";
             }
+            // modifiers
             else if (role == "Aftermath")
             {
                 return "<color#A6FFA6FF>Aftermath</color> is a Crewmate Modifier which forces the killer to use its special ability if the killer does have one when being killed.";
@@ -1013,6 +1014,10 @@ namespace TownOfUsEdited.Roles
             else if (role == "ButtonBarry")
             {
                 return "<color#E600FFFF>Button Barry</color> is a Global Modifier which allows you to call a meeting from anywhere once.";
+            }
+            else if (role == "Drunk")
+            {
+                return "<color#758000FF>Drunk</color> is a Global Modifier which you have reversed control.";
             }
             else if (role == "Flash")
             {
@@ -1089,6 +1094,10 @@ namespace TownOfUsEdited.Roles
             else if (role == "Saboteur")
             {
                 return "<color=#FF0000>Saboteur</color> is an Impostor Modifier which reduces the Sabotage cooldown of the Impostor.";
+            }
+            else if (role == "Tasker")
+            {
+                return "<color=#FF0000>Tasker</color> is an Impostor Modifier which you can do tasks.";
             }
             else if (role == "Underdog")
             {
