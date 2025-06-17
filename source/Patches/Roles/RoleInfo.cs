@@ -981,59 +981,59 @@ namespace TownOfUsEdited.Roles
             // modifiers
             else if (role == "Aftermath")
             {
-                return "<color#A6FFA6FF>Aftermath</color> is a Crewmate Modifier which forces the killer to use its special ability if the killer does have one when being killed.";
+                return "<color=#A6FFA6FF>Aftermath</color> is a Crewmate Modifier which forces the killer to use its special ability if the killer does have one when being killed.";
             }
             else if (role == "Bait")
             {
-                return "<color#00B3B3FF>Bait</color> is a Crewmate Modifier which forces the killer to self report when being killed.";
+                return "<color=#00B3B3FF>Bait</color> is a Crewmate Modifier which forces the killer to self report when being killed.";
             }
             else if (role == "Diseased")
             {
-                return "<color#808080FF>Diseased</color> is a Crewmate Modifier which multiplies the kill cooldown of the killer when being killed.";
+                return "<color=#808080FF>Diseased</color> is a Crewmate Modifier which multiplies the kill cooldown of the killer when being killed.";
             }
             else if (role == "Frosty")
             {
-                return "<color#99FFFFFF>Frosty</color> is a Crewmate Modifier which makes the killer temporarily slow when being killed.";
+                return "<color=#99FFFFFF>Frosty</color> is a Crewmate Modifier which makes the killer temporarily slow when being killed.";
             }
             else if (role == "Multitasker")
             {
-                return "<color#FF804DFF>Multitasker</color> is a Crewmate Modifier which makes you see through the task pop up when doing a task.";
+                return "<color=#FF804DFF>Multitasker</color> is a Crewmate Modifier which makes you see through the task pop up when doing a task.";
             }
             else if (role == "Torch")
             {
-                return "<color#FFFF99FF>Torch</color> is a Crewmate Modifier which gives you Impostor vision.";
+                return "<color=#FFFF99FF>Torch</color> is a Crewmate Modifier which gives you Impostor vision.";
             }
             else if (role == "Taskmaster")
             {
-                return "<color#669966FF>Taskmaster</color> is a Crewmate Modifier which completes a random task after each meeting.";
+                return "<color=#669966FF>Taskmaster</color> is a Crewmate Modifier which completes a random task after each meeting.";
             }
             else if (role == "Vengeful")
             {
-                return "<color#8d0000>Vengeful</color> is a Crewmate Modifier which allows you to kill someone once after completing all of your tasks.";
+                return "<color=#8d0000>Vengeful</color> is a Crewmate Modifier which allows you to kill someone once after completing all of your tasks.";
             }
             else if (role == "ButtonBarry")
             {
-                return "<color#E600FFFF>Button Barry</color> is a Global Modifier which allows you to call a meeting from anywhere once.";
+                return "<color=#E600FFFF>Button Barry</color> is a Global Modifier which allows you to call a meeting from anywhere once.";
             }
             else if (role == "Drunk")
             {
-                return "<color#758000FF>Drunk</color> is a Global Modifier which you have reversed control.";
+                return "<color=#758000FF>Drunk</color> is a Global Modifier which you have reversed control.";
             }
             else if (role == "Flash")
             {
-                return "<color#FF8080FF>Flash</color> is a Global Modifier which makes you faster than everyone else.";
+                return "<color=#FF8080FF>Flash</color> is a Global Modifier which makes you faster than everyone else.";
             }
             else if (role == "Satellite")
             {
-                return "<color#0099CCFF>Satellite</color> is a Global Modifier which allows you to locate the position of all the dead bodies once.";
+                return "<color=#0099CCFF>Satellite</color> is a Global Modifier which allows you to locate the position of all the dead bodies once.";
             }
             else if (role == "Giant")
             {
-                return "<color#FFB34DFF>Giant</color> is a Global Modifier which makes you bigger and maybe slower than other players.";
+                return "<color=#FFB34DFF>Giant</color> is a Global Modifier which makes you bigger and maybe slower than other players.";
             }
             else if (role == "Mini")
             {
-                return "<color#CCFFE6FF>Mini</color> is a Global Modifier which makes you much shorter than other players.";
+                return "<color=#CCFFE6FF>Mini</color> is a Global Modifier which makes you much shorter than other players.";
             }
             else if (role == "Lovers")
             {
@@ -1065,7 +1065,7 @@ namespace TownOfUsEdited.Roles
             }
             else if (role == "Superstar")
             {
-                return "The <color=#ffca00>Superstar</color> is a Global Modifier which will alert everyone when dying and show an arrow pointing to its dead bodies.";
+                return "<color=#ffca00>Superstar</color> is a Global Modifier which will alert everyone when dying and show an arrow pointing to its dead bodies.";
             }
             else if (role == "Motionless")
             {
