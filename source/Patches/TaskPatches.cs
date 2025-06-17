@@ -77,7 +77,7 @@ namespace TownOfUsEdited
                            || playerControl.Is(RoleEnum.Terrorist)
                            || playerControl.Is(RoleEnum.Player)
                            || playerControl.Is(RoleEnum.Vulture)
-                           || (playerControl.Is(Faction.Impostors) && !playerControl.Is(RoleEnum.Spirit))
+                           || (playerControl.Is(Faction.Impostors) && !playerControl.Is(RoleEnum.Spirit) && !playerControl.Is(ModifierEnum.Tasker))
                            || playerControl.Is(Faction.Coven)
                            || playerControl.Is(RoleEnum.Spectator)
                            || playerControl.Is(RoleEnum.SoulCollector);

@@ -106,7 +106,8 @@ namespace TownOfUsEdited.Roles
                 if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.DoubleShotOn > 0) ColorMapping.Add("Double Shot", Colors.Impostor);
                 if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.UnderdogOn > 0) ColorMapping.Add("Underdog", Colors.Impostor);
                 if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.SaboteurOn > 0) ColorMapping.Add("Saboteur", Colors.Impostor);
-                
+                if (CustomGameOptions.VigilanteGuessImpModifiers && CustomGameOptions.TaskerOn > 0) ColorMapping.Add("Tasker", Colors.Impostor);
+
             }
 
             SortedColorMapping = ColorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);

@@ -157,7 +157,9 @@ namespace TownOfUsEdited
         Saboteur,
         Taskmaster,
         Satellite,
-        Superstar
+        Superstar,
+        Tasker,
+        Drunk,
     }
 
     public enum AbilityEnum

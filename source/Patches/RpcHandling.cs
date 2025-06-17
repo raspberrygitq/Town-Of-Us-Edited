@@ -3588,6 +3588,9 @@ namespace TownOfUsEdited
 
                     if (Check(CustomGameOptions.SuperstarOn))
                         GlobalModifiers.Add((typeof(Superstar), CustomGameOptions.SuperstarOn));
+
+                    if (Check(CustomGameOptions.DrunkOn))
+                        GlobalModifiers.Add((typeof(Drunk), CustomGameOptions.DrunkOn));
                     #endregion
                     #region Impostor Modifiers
                     if (Check(CustomGameOptions.DisperserOn))
@@ -3607,6 +3610,9 @@ namespace TownOfUsEdited
 
                     if (Check(CustomGameOptions.LuckyOn))
                         ImpostorModifiers.Add((typeof(Lucky), CustomGameOptions.LuckyOn));
+
+                    if (CustomGameOptions.TaskerOn > 0)
+                        ImpostorModifiers.Add((typeof(Tasker), CustomGameOptions.TaskerOn));
                     #endregion
                     #region Assassin Ability
                     AssassinAbility.Add((typeof(Assassin), CustomRPC.SetAssassin, 100));

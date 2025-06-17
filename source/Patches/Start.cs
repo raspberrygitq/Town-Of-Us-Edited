@@ -1,13 +1,14 @@
 using System;
 using HarmonyLib;
 using Hazel;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
 using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using TownOfUsEdited.Extensions;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Patches
 {
@@ -126,6 +127,12 @@ namespace TownOfUsEdited.Patches
             {
                 var seer = Role.GetRole<Seer>(PlayerControl.LocalPlayer);
                 seer.Cooldown = CustomGameOptions.InitialCooldowns;
+            }
+
+            if (PlayerControl.LocalPlayer.Is(ModifierEnum.Drunk))
+            {
+                var drunk = Modifier.GetModifier<Drunk>(PlayerControl.LocalPlayer);
+                drunk.RoundsLeft = CustomGameOptions.DrunkDuration;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Oracle))

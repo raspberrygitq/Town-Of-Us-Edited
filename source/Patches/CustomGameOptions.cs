@@ -190,9 +190,12 @@ namespace TownOfUsEdited
         public static int BloodlustOn => (int)Generate.BloodlustOn.Get();
         public static int SaboteurOn => (int)Generate.SaboteurOn.Get();
         public static int MultitaskerOn => (int)Generate.MultitaskerOn.Get();
+        public static int DrunkOn => (int)Generate.DrunkOn.Get();
+        public static int DrunkDuration => (int)Generate.DrunkDuration.Get();
         public static int DoubleShotOn => (int)Generate.DoubleShotOn.Get();
         public static int UnderdogOn => (int)Generate.UnderdogOn.Get();
         public static int LuckyOn => (int)Generate.LuckyOn.Get();
+        public static int TaskerOn => (int)Generate.TaskerOn.Get();
         public static int FrostyOn => (int)Generate.FrostyOn.Get();
         public static RoleOptions Slot1 => (RoleOptions)Generate.Slot1.Get();
         public static RoleOptions Slot2 => (RoleOptions)Generate.Slot2.Get();

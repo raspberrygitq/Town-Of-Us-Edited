@@ -287,6 +287,15 @@ namespace TownOfUsEdited.Patches {
                 {
                     playerRole += " (<color=#" + Patches.Colors.Motionless.ToHtmlStringRGBA() + ">Motionless</color>)";
                 }
+                if (playerControl.Is(ModifierEnum.Tasker))
+                {
+                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Tasker</color>)";
+                }
+                if (playerControl.Is(ModifierEnum.Drunk))
+                {
+                    playerRole += " (<color=#" + Patches.Colors.Drunk.ToHtmlStringRGBA() + ">Drunk</color>)";
+                }
+
                 if (!playerControl.Data.IsDead)
                 {
                     playerRole += " | (Alive)";
