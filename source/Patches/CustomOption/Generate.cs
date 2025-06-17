@@ -785,6 +785,9 @@ namespace TownOfUsEdited.CustomOption
         public static CustomStringOption ShowBarriered;
         public static CustomToggleOption ClericGetsAttackNotification;
 
+        public static CustomHeaderOption Mystic;
+        public static CustomNumberOption MysticArrowDuration;
+
         public static CustomHeaderOption Giant;
         public static CustomNumberOption GiantSlow;
 
@@ -1487,6 +1490,11 @@ namespace TownOfUsEdited.CustomOption
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Watched Player Knows They Are Being Watched");
             LookoutUseVitals =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Lookout Can Use Vitals", false);
+
+            Mystic =
+                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#4D99E6FF>Mystic</color>");
+            MysticArrowDuration =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Dead Body Arrow Duration", 0.1f, 0f, 1f, 0.05f, CooldownFormat);
 
             Seer =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#FFCC80FF>Seer</color>");

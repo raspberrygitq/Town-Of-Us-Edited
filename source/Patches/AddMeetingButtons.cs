@@ -129,6 +129,13 @@ namespace TownOfUsEdited.Patches
                             aurialRole.SenseArrows.Clear();
                         }
 
+                        if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic))
+                        {
+                            var mysticRole = Role.GetRole<Mystic>(PlayerControl.LocalPlayer);
+                            mysticRole.BodyArrows.Values.DestroyAll();
+                            mysticRole.BodyArrows.Clear();
+                        }
+
                         if (PlayerControl.LocalPlayer.Is(RoleEnum.Cleric))
                         {
                             var clericRole = Role.GetRole<Cleric>(PlayerControl.LocalPlayer);

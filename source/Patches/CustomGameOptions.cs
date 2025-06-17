@@ -452,6 +452,7 @@ namespace TownOfUsEdited
         public static bool GATargetKnows => Generate.GATargetKnows.Get();
         public static bool GAKnowsTargetRole => Generate.GAKnowsTargetRole.Get();
         public static int EvilTargetPercent => (int)Generate.EvilTargetPercent.Get();
+        public static float MysticArrowDuration => Generate.MysticArrowDuration.Get();
         public static float BlackmailCd => Generate.BlackmailCooldown.Get();
         public static bool BlackmailInvisible => Generate.BlackmailInvisible.Get();
         public static bool BlackmailedVote => Generate.BlackmailedVote.Get();
