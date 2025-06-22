@@ -11,7 +11,7 @@ namespace TownOfUsEdited.Patches
         {
             if (activity == null) return;
 
-            var details = $"Town of Us Edited v{TownOfUsEdited.VersionString}";
+            var details = $"Town of Us Edited v{TownOfUsEdited.CompilationString}";
             if (TownOfUsEdited.VersionTag != "<color=#00F0FF></color>") details += " Dev 15";
             activity.Details = details;
         }

@@ -130,7 +130,7 @@ namespace TownOfUsEdited
                 __instance.KillButton.graphic.sprite = Transport;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Informant))
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Informant) || PlayerControl.LocalPlayer.Is(RoleEnum.Spy))
             {
                 __instance.KillButton.buttonLabelText.text = "Admin";
                 flag = true;

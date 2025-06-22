@@ -81,7 +81,6 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption TrollOn;
 
         public static CustomHeaderOption NeutralKillingRoles;
-
         public static CustomNumberOption SerialKillerOn;
         public static CustomNumberOption DoppelgangerOn;
         public static CustomNumberOption InfectiousOn;
@@ -387,6 +386,7 @@ namespace TownOfUsEdited.CustomOption
 
         public static CustomHeaderOption Spy;
         public static CustomStringOption WhoSeesDead;
+        public static CustomToggleOption SpyHasPortableAdmin;
 
         public static CustomHeaderOption Swapper;
         public static CustomToggleOption SwapperButton;
@@ -1532,6 +1532,8 @@ namespace TownOfUsEdited.CustomOption
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#CCA3CCFF>Spy</color>");
             WhoSeesDead = new CustomStringOption(num++, MultiMenu.crewmate, "Who Sees Dead Bodies On Admin",
                 new[] { "Nobody", "Spy", "Everyone But Spy", "Everyone" });
+            SpyHasPortableAdmin =
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Spy Has Portable Admin", false);
 
             Tracker =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#009900FF>Tracker</color>");

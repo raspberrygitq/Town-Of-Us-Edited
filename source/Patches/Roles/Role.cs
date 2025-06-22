@@ -30,6 +30,7 @@ namespace TownOfUsEdited.Roles
         public static bool CrewmateWins;
         public static bool SeeRoles { get; set; } = false;
 
+        public string PlayerNotes { get; set; }
         public List<KillButton> ExtraButtons = new List<KillButton>();
         public List<TextMeshPro> ButtonLabels = new List<TextMeshPro>();
         public RoleEnum formerRole = RoleEnum.None;

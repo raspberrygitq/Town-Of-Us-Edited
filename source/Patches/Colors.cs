@@ -59,6 +59,8 @@ namespace TownOfUsEdited.Patches
         public readonly static Color Cleric = new Color(0f, 1f, 0.7f, 1f);
 
         // Neutral Colors
+        public readonly static Color Neutral = new Color(0.5f, 0.5f, 0.5f, 1f);
+
         public readonly static Color Jester = new Color(1f, 0.75f, 0.8f, 1f);
         public readonly static Color Executioner = new Color(0.55f, 0.25f, 0.02f, 1f);
         public readonly static Color Glitch = Color.green;

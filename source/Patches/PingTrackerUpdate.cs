@@ -16,7 +16,7 @@ namespace TownOfUsEdited
             position.AdjustPosition();
 
             __instance.text.text =
-                "<size=2><color=#00FF00FF><color=#EE9D01>TownOfUs</color><b><color=#AA00FF>Edited</color></b> v" + TownOfUsEdited.VersionString + "</color>" + TownOfUsEdited.VersionTag + "\n" +
+                "<size=2><color=#EE9D01>Town Of Us</color><b><color=#AA00FF> Edited</color></b> <color=#00FF00FF>v" + TownOfUsEdited.VersionString + TownOfUsEdited.VersionTag + "</color>, <color=#FFD000FF>Modified by</color> <color=#FF0000>gitq</color> <color=#00FF00FF>v" + TownOfUsEdited.CompilationString + "</color>" + "\n" +
                 $"Ping: {AmongUsClient.Instance.Ping}ms\n" +
                 (!MeetingHud.Instance
                     ? "<color=#00FF00FF>Modded By: <color=#FF0000>le killer</color> </color>\n" +
@@ -26,11 +26,11 @@ namespace TownOfUsEdited
                     "</size>";
             if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started && CustomGameOptions.GameMode == GameMode.Werewolf)
             {
-                if (!MeetingHud.Instance) 
+                if (!MeetingHud.Instance)
                 {
                     __instance.text.text += $"\n<size=5><color=#922058>          Night {DayNightMechanic.NightCount}</color></size>";
                 }
-                else if (MeetingHud.Instance) 
+                else if (MeetingHud.Instance)
                 {
                     __instance.text.text += $"\n<size=5><color=#ffff00>          Day {DayNightMechanic.DayCount}</color></size>";
                 }

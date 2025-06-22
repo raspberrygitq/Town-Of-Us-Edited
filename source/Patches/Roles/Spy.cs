@@ -13,5 +13,18 @@ namespace TownOfUsEdited.Roles
             Alignment = Alignment.CrewmateInvestigative;
             AddToRoleHistory(RoleType);
         }
+        KillButton _adminButton;
+
+        public KillButton AdminButton
+        {
+            get => _adminButton;
+            set
+            {
+                _adminButton = value;
+                ExtraButtons.Clear();
+                ExtraButtons.Add(value);
+            }
+        }
+
     }
 }
