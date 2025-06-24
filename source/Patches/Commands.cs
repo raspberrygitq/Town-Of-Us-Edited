@@ -211,6 +211,7 @@ namespace TownOfUsEdited.Patches
                 if (chatText.ToLower().StartsWith("/secret") && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId) // Real secret fr fr
                 {
                     Application.OpenURL("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
+                    return false;
                 }
 
                 if (chatText.ToLower().StartsWith("/msg "))
@@ -508,29 +509,49 @@ namespace TownOfUsEdited.Patches
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
+
                 if (chatText.ToLower().StartsWith("/note") || chatText.ToLower().StartsWith("/ note"))
                 {
-                    string note = chatText.Substring(5).Trim();
-                    var sourcePlayerRole = Role.GetRole(sourcePlayer);
-                    sourcePlayerRole.PlayerNotes += "\n" + note;
-                    HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, $"<b>New Note:</b>\n{note}");
-                    return false;
+                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        string note = chatText.Substring(5).Trim();
+                        var sourcePlayerRole = Role.GetRole(sourcePlayer);
+                        sourcePlayerRole.PlayerNotes += "\n" + note;
+                        HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, $"<b>New Note:</b>\n{note}");
+                        return false;
+                    }
+                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
+
                 if (chatText.ToLower().StartsWith("/seenote") || chatText.ToLower().StartsWith("/ seenote"))
                 {
-                    var sourcePlayerRole = Role.GetRole(sourcePlayer);
-                    HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, $"<b>Notes:</b>\n {sourcePlayerRole.PlayerNotes}");
-                    return false;
+                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        var sourcePlayerRole = Role.GetRole(sourcePlayer);
+                        HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, $"<b>Notes:</b>\n {sourcePlayerRole.PlayerNotes}");
+                        return false;
+                    }
+                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
+
                 if (chatText.ToLower().StartsWith("/roles") || chatText.ToLower().StartsWith("/ roles"))
                 {
-                    AddRoleListMessage();
-                    return false;
+                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        AddRoleListMessage();
+                        return false;
+                    }
+                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
-                if (chatText.ToLower().StartsWith("/modi") || chatText.ToLower().StartsWith("/ modi "))
+
+                if (chatText.ToLower().StartsWith("/modi") || chatText.ToLower().StartsWith("/ modi"))
                 {
-                    AddModifierListMessage();
-                    return false;
+                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        AddModifierListMessage();
+                        return false;
+                    }
+                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
                 return true;
             }
