@@ -58,15 +58,9 @@ Join the [Discord](https://discord.gg/Huen5AqR2t) if you need help or want to fi
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
-|  16.0.5 | v1.1.2 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.1.2/Toue.v1.1.2.Steam.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.1.2/Toue.v1.1.2.Epic.zip) |
-|  16.0.5 | v1.1.1 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.1.1/Toue.v1.1.1.Steam.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.1.1/Toue.v1.1.1.Epic.zip) |
-|  16.0.5 | v1.1.0 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.1.0/Toue.v1.1.0.zip) | No Download Available |
-| 2024.11.26 | v1.0.4 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.4/Toue.v1.0.4.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.4/Toue.v1.0.4.zip) |
-| 2024.11.26 | v1.0.3 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.3/Toue.v1.0.3.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.3/Toue.v1.0.3.zip) |
-| 2024.11.26 | v1.0.2 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.2/Toue.v1.0.2.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.2/Toue.v1.0.2.zip) |
-| 2024.11.26 | v1.0.1 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.1/Toue.v1.0.1.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.1/Toue.v1.0.1.zip) |
-| 2024.11.26 | v1.0.0 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.0/Toue.v1.0.0.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v1.0.0/Toue.v1.0.0.zip) |
-| 2024.11.26 | v0.0.1 | [Download for Steam](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v0.0.1/Toue.v0.0.1.zip) | [Download for Epic Games](https://github.com/lekillerdesgames/Town-Of-Us-Edited/releases/download/v0.0.1/Toue.v0.0.1.zip) |
+|  16.0.5 | v1.1.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.1.0/ToUE-Steam.v1.1.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.1.0/ToUE-Epic.v1.1.0.zip) |
+
+
 
 -----------------------
 # Installation
