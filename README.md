@@ -1,8 +1,6 @@
-## *Note: This repository is an unofficial version of Town Of Us Reactivated meant to add more features to the mod.*
+## *Note: This repository is an unofficial version of Town Of Us Reactivated & Town Of Us Edited meant to add more features to the mod.*
 
 ![LOGO](./Images/TOUE-logo.png)
-
-Join the [Discord](https://discord.gg/Huen5AqR2t) if you need help or want to find people to play with.
 
 | **Impostor Roles**             | **Crewmate Roles**                | **Neutral Roles**                 | **Coven Roles**                 | **Modifiers**                 |
 |:------------------------------:|:---------------------------------:|:---------------------------------:|:-------------------------------:|:-----------------------------:|
@@ -13,31 +11,31 @@ Join the [Discord](https://discord.gg/Huen5AqR2t) if you need help or want to fi
 | [Conjurer](#conjurer)          | [Bodyguard](#bodyguard)           | [Doppelganger](#doppelganger)     | [Ritualist](#ritualist)         | [Diseased](#diseased)         |
 | [Converter](#converter)        | [Captain](#captain)               | [Executioner](#executioner)       | [Spiritualist](#spiritualist)   | [Disperser](#disperser)       |
 | [Escapist](#escapist)          | [Chameleon](#chameleon)           | [Guardian Angel](#guardian-angel) | [Voodoo Master](#voodoo-master) | [Double Shot](#double-shot)   |
-| [Freezer](#freezer)            | [Cleric](#cleric)                 | [Infectious](#infectious)         |                                 | [Flash](#flash)               |
-| [Grenadier](#grenadier)        | [Crusader](#crusader)             | [Jester](#jester)                 |                                 | [Frosty](#frosty)             |
-| [Hypnotist](#hypnotist)        | [Deputy](#deputy)                 | [Juggernaut](#juggernaut)         |                                 | [Giant](#giant)               |
-| [Janitor](#janitor)            | [Detective](#detective)           | [Maul](#maul)                     |                                 | [Lovers](#lovers)             |
-| [Mafioso](#mafioso)            | [Doctor](#doctor)                 | [Mercenary](#mercenary)           |                                 | [Lucky](#lucky)               |
-| [Manipulator](#manipulator)    | [Engineer](#engineer)             | [Mutant](#mutant)                 |                                 | [Madmate](#madmate)           |
-| [Miner](#miner)                | [Fighter](#fighter)               | [Phantom](#phantom)               |                                 | [Mini](#mini)                 |
-| [Morphling](#morphling)        | [Guardian](#guardian)             | [Plaguebearer](#plaguebearer)     |                                 | [Motionless](#motionless)     |
-| [Poisoner](#poisoner)          | [Haunter](#haunter)               | [Serial Killer](#serial-killer)   |                                 | [Multitasker](#multitasker)   |
-| [Reviver](#reviver)            | [Helper](#helper)                 | [Shifter](#shifter)               |                                 | [Radar](#radar)               |
-| [Shooter](#shooter)            | [Hunter](#hunter)                 | [Soul Collector](#soul-collector) |                                 | [Saboteur](#saboteur)         |
-| [Spirit](#spirit)              | [Imitator](#imitator)             | [Survivor](#survivor)             |                                 | [Satellite](#satellite)       |
-| [Swooper](#swooper)            | [Informant](#informant)           | [The Glitch](#the-glitch)         |                                 | [Scientist](#scientist)       |
-| [Traitor](#traitor)            | [Investigator](#investigator)     | [Troll](#troll)                   |                                 | [Shy](#shy)                   |
-| [Undertaker](#undertaker)      | [Jailor](#jailor)                 | [Vampire](#vampire)               |                                 | [Sixth Sense](#sixth-sense)   |
-| [Venerer](#venerer)            | [Knight](#knight)                 | [Vulture](#vulture)               |                                 | [Sleuth](#sleuth)             |
-| [Warlock](#warlock)            | [Lookout](#lookout)               |                                   |                                 | [Spotter](#spotter)           |
-| [Witch](#witch)                | [Medic](#medic)                   |                                   |                                 | [Superstar](#superstar)       |
-|                                | [Medium](#medium)                 |                                   |                                 | [Taskmaster](#taskmaster)     |
-|                                | [Mystic](#mystic)                 |                                   |                                 | [Tiebreaker](#tiebreaker)     |
-|                                | [Oracle](#oracle)                 |                                   |                                 | [Torch](#torch)               |
-|                                | [Paranoïac](#paranoïac)           |                                   |                                 | [Underdog](#underdog)         |
-|                                | [Plumber](#plumber)               |                                   |                                 | [Vengeful](#vengeful)         |
-|                                | [Politician](#politician)         |                                   |                                 |                               |
-|                                | [Prosecutor](#prosecutor)         |                                   |                                 |                               |
+| [Freezer](#freezer)            | [Cleric](#cleric)                 | [Infectious](#infectious)         |                                 | [Drunk](#drunk)               |
+| [Grenadier](#grenadier)        | [Crusader](#crusader)             | [Jester](#jester)                 |                                 | [Flash](#flash)               |
+| [Hypnotist](#hypnotist)        | [Deputy](#deputy)                 | [Juggernaut](#juggernaut)         |                                 | [Frosty](#frosty)             |
+| [Janitor](#janitor)            | [Detective](#detective)           | [Maul](#maul)                     |                                 | [Giant](#giant)               |
+| [Mafioso](#mafioso)            | [Doctor](#doctor)                 | [Mercenary](#mercenary)           |                                 | [Lovers](#lovers)             |
+| [Manipulator](#manipulator)    | [Engineer](#engineer)             | [Mutant](#mutant)                 |                                 | [Lucky](#lucky)               |
+| [Miner](#miner)                | [Fighter](#fighter)               | [Phantom](#phantom)               |                                 | [Madmate](#madmate)           |
+| [Morphling](#morphling)        | [Guardian](#guardian)             | [Plaguebearer](#plaguebearer)     |                                 | [Mini](#mini)                 |
+| [Poisoner](#poisoner)          | [Haunter](#haunter)               | [Serial Killer](#serial-killer)   |                                 | [Motionless](#motionless)     |
+| [Reviver](#reviver)            | [Helper](#helper)                 | [Shifter](#shifter)               |                                 | [Multitasker](#multitasker)   |
+| [Shooter](#shooter)            | [Hunter](#hunter)                 | [Soul Collector](#soul-collector) |                                 | [Rader](#radar)               |
+| [Spirit](#spirit)              | [Imitator](#imitator)             | [Survivor](#survivor)             |                                 | [Saboteur](#saboteur)         |
+| [Swooper](#swooper)            | [Informant](#informant)           | [The Glitch](#the-glitch)         |                                 | [Satellite](#satellite)       |
+| [Traitor](#traitor)            | [Investigator](#investigator)     | [Troll](#troll)                   |                                 | [Scientist](#scientist)       |
+| [Undertaker](#undertaker)      | [Jailor](#jailor)                 | [Vampire](#vampire)               |                                 | [Shy](#shy)                   |
+| [Venerer](#venerer)            | [Knight](#knight)                 | [Vulture](#vulture)               |                                 | [Sixth Sense](#sixth-sense)   |
+| [Warlock](#warlock)            | [Lookout](#lookout)               |                                   |                                 | [Sleuth](#sleuth)             |
+| [Witch](#witch)                | [Medic](#medic)                   |                                   |                                 | [Spotter](#spotter)           |
+|                                | [Medium](#medium)                 |                                   |                                 | [Superstar](#superstar)       |
+|                                | [Mystic](#mystic)                 |                                   |                                 | [Tasker](#tasker)             |
+|                                | [Oracle](#oracle)                 |                                   |                                 | [Taskmaster](#taskmaster)     |
+|                                | [Paranoïac](#paranoïac)           |                                   |                                 | [Tiebreaker](#tiebreaker)     |
+|                                | [Plumber](#plumber)               |                                   |                                 | [Torch](#torch)               |
+|                                | [Politician](#politician)         |                                   |                                 | [Underdog](#underdog)         |
+|                                | [Prosecutor](#prosecutor)         |                                   |                                 | [Vengeful](#vengeful)         |
 |                                | [Seer](#seer)                     |                                   |                                 |                               |
 |                                | [Sheriff](#sheriff)               |                                   |                                 |                               |
 |                                | [Snitch](#snitch)                 |                                   |                                 |                               |
@@ -58,6 +56,7 @@ Join the [Discord](https://discord.gg/Huen5AqR2t) if you need help or want to fi
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
+|  16.0.5 | v1.1.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.1.1/ToUE-Steam.v1.1.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.1.1/ToUE-Epic.v1.1.1.zip) |
 |  16.0.5 | v1.1.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.1.0/ToUE-Steam.v1.1.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.1.0/ToUE-Epic.v1.1.0.zip) |
 
 
@@ -175,18 +174,22 @@ Here are all the in-game commands implemented in Town Of Us Edited:
 | Name | Description |
 |----------|:-------------:|
 | /help | Displays the help menu containing all the commands infos |
-| /r [modifier / role name] | Displays the description of any role / modifier in the game |
+| /r [modifier/role name] | Displays the description of any role/modifier in the game |
 | /infoup | Displays informations about the /up command |
 | /up [role name] | Choose the role you want for the next game if allowed by the host |
 | /allup | See all currently chosen roles by the players using /up |
-| /id | See all the player's ids (used for /ban and /kick) |
 | /death | Displays your death reason in-game |
 | /shrug | Adds "`¯\_(ツ)_/¯`" to your message |
+| /roles | List active roles |
+| /modifiers | List active modifiers |
+| /note [new note] | Creates a new note |
+| /seenote | Shows saved notes |
 
 ## Host Only
 | Name | Description |
 |----------|:-------------:|
 | /msg | Displays a message to everyone (dead or alive) marked as a Host message |
+| /id | See all the player's ids (used for /ban and /kick) |
 | /kick [player id] | Kicks the provided player |
 | /ban [player id] | Bans the provided player |
 | Shift + G + ENTER | Forces the game to end (in case of a critical issue) |
@@ -355,6 +358,7 @@ The Mystic will see who is dead through a pop up on their screen.
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Mystic | The percentage probability of the Mystic appearing | Percentage | 0% |
+| Arrow Duration | The duration of the arrows pointing to the bodies | Time | 0.1s |
 
 -----------------------
 ## Seer
@@ -400,6 +404,7 @@ On Admin Table, the Spy can see the colors of every person on the map.
 |----------|:-------------:|:------:|:------:|
 | Spy | The percentage probability of the Spy appearing | Percentage | 0% |
 | Who Sees Dead Bodies On Admin | Which players see dead bodies on the admin map | Nobody / Spy / Everyone But Spy / Everyone | Nobody |
+| Spy Has Portable Admin | Function portable Admin | Toggle | False |
 
 -----------------------
 ## Tracker
@@ -1859,6 +1864,17 @@ They have the same amount of meetings as a regular player.
 | Button Barry | The percentage probability of Button Barry appearing | Percentage | 0% |
 
 -----------------------
+## Drunk
+### **Applied to: All**
+The Drunk's controls are inverted.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:------------:|:------:|:------:|
+| Drunk | The percentage probability of Drunk appearing | Percentage | 0% |
+| Drunk Stays | Rounds being drunk | Rounds | 3 |
+
+-----------------------
 ## Flash
 ### **Applied to: All**
 The Flash travels at a faster speed in comparison to a normal player.
@@ -2067,6 +2083,16 @@ Note that it resets every round.
 |----------|:-------------:|:------:|:------:|
 | Saboteur | The percentage probability of the Saboteur appearing | Percentage | 0% |
 | Reduced Sabotage Bonus | The amount of time removed from the Saboteur's sabotage cooldowns | Time | 10s |
+
+-----------------------
+## Tasker
+### **Applied to: Impostors**
+Tasker is an Impostor who can use tasks.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Tasker | The percentage probability of Tasker appearing | Percentage | 0% |
 
 -----------------------
 ## Underdog
