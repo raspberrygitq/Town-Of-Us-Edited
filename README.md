@@ -163,8 +163,6 @@ If there any problems with the script please check the [faq](https://github.com/
 
 ![Install](https://github.com/whichtwix/whichtwix/blob/main/steam.png)
 <br/>
-## Issues
-If you have issues installing Town of Us Edited, you can join the [Discord](https://discord.gg/Huen5AqR2t) to receive help.
 
 -----------------------
 # Commands
