@@ -91,7 +91,7 @@ namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
                         {
                             var playerState = __instance.playerStates.FirstOrDefault(x => x.TargetPlayerId == role.Blackmailed.PlayerId);
                             if (__instance.state == MeetingHud.VoteStates.NotVoted && !playerState.DidVote &&
-                                CustomGameOptions.BlackmailedVote)
+                                PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList().Count > CustomGameOptions.LatestNonVote)
                             {
                                 playerState.SetVote(252);
                                 if (CustomGameOptions.BlackmailInvisible) playerState.Flag.enabled = false;
@@ -108,28 +108,6 @@ namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
                                     (__instance as MonoBehaviour).StartCoroutine(Effects.SwayX(playerState.transform));
                                 }
                             }
-                        }
-                    }
-                }
-            }
-        }
-
-        [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Update))]
-        public class CantVote
-        {
-            public static void Postfix(MeetingHud __instance)
-            {
-                var bmers = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(RoleEnum.Blackmailer)).ToList();
-                foreach (var bm in bmers)
-                {
-                    var role = Role.GetRole<Blackmailer>(bm);
-                    if (role.Blackmailed != null && role.Blackmailed == PlayerControl.LocalPlayer && !PlayerControl.LocalPlayer.Data.IsDead
-                    && CustomGameOptions.BlackmailedVote)
-                    {
-                        __instance.SkipVoteButton.gameObject.SetActive(false);
-                        foreach (var votearea in __instance.playerStates)
-                        {
-                            votearea.Buttons.SetActive(false);
                         }
                     }
                 }

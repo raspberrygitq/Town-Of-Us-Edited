@@ -1892,6 +1892,11 @@ namespace TownOfUsEdited
                 target.gameObject.layer = LayerMask.NameToLayer("Ghost");
                 target.Visible = false;
 
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic) && !PlayerControl.LocalPlayer.Data.IsDead)
+                {
+                    Coroutines.Start(FlashCoroutine(Patches.Colors.Mystic));
+                }
+
                 if (PlayerControl.LocalPlayer == target) killer.CurrentOutfitType = (PlayerOutfitType)currentOutfitType;
 
                 if (target.Is(ModifierEnum.Frosty))

@@ -610,7 +610,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomHeaderOption Blackmailer;
         public static CustomNumberOption BlackmailCooldown;
         public static CustomToggleOption BlackmailInvisible;
-        public static CustomToggleOption BlackmailedVote;
+        public static CustomNumberOption LatestNonVote;
 
         public static CustomHeaderOption Converter;
         public static CustomNumberOption ConvertCooldown;
@@ -2138,8 +2138,7 @@ namespace TownOfUsEdited.CustomOption
                 new CustomNumberOption(num++, MultiMenu.imposter, "Initial Blackmail Cooldown", 10f, 1f, 15f, 1f, CooldownFormat);
             BlackmailInvisible =
                 new CustomToggleOption(num++, MultiMenu.imposter, "Only Target Sees Blackmail", false);
-            BlackmailedVote =
-                new CustomToggleOption(num++, MultiMenu.imposter, "Blackmailed Player Can't Vote");
+            LatestNonVote = new CustomNumberOption(num++, MultiMenu.imposter, "Maximum People Alive Where Blackmailed Can Vote", 5, 1, 15, 1);
 
             Converter = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Converter</color>");
             ConvertCooldown =
