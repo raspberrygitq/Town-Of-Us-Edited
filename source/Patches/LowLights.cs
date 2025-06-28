@@ -68,11 +68,12 @@ namespace TownOfUsEdited
             }
 
             if (player.IsImpostor() || player._object.Is(RoleEnum.Glitch) ||
-                player._object.Is(RoleEnum.Juggernaut) || player._object.Is(RoleEnum.Pestilence) || player._object.Is(RoleEnum.SerialKiller) ||
+                player._object.Is(RoleEnum.Juggernaut) || player._object.Is(RoleEnum.Pestilence) ||
                 (player._object.Is(RoleEnum.Jester) && CustomGameOptions.JesterImpVision) ||
                 (player._object.Is(RoleEnum.Vulture) && CustomGameOptions.VultureImpVision) ||
                 player._object.Is(RoleEnum.Arsonist) || player._object.Is(RoleEnum.SoulCollector) ||
                 (player._object.Is(RoleEnum.Vampire) && CustomGameOptions.VampImpVision) ||
+                (player._object.Is(RoleEnum.SerialKiller) && CustomGameOptions.SkImpVision) ||
                 (player._object.Is(Faction.Madmates) && CustomGameOptions.MadmateHasImpoVision)||
                 player._object.Is(RoleEnum.WhiteWolf) || player._object.Is(RoleEnum.Player) ||
                 player._object.Is(RoleEnum.Terrorist) || player._object.Is(Faction.Coven) ||

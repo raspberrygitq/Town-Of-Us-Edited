@@ -53,12 +53,13 @@ namespace FlashlightPatch
 
             bool hasFlashlight = !PlayerControl.LocalPlayer.Data.IsDead && CustomGameOptions.FlashlightMode;
             __instance.SetFlashlightInputMethod();
-            if (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) || PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) ||
+            if (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) ||
             PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) ||
             (PlayerControl.LocalPlayer.Is(RoleEnum.Jester) && CustomGameOptions.JesterImpVision) ||
             (PlayerControl.LocalPlayer.Is(RoleEnum.Vulture) && CustomGameOptions.VultureImpVision) ||
             PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist) || PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector) ||
             (PlayerControl.LocalPlayer.Is(RoleEnum.Vampire) && CustomGameOptions.VampImpVision) ||
+            (PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) && CustomGameOptions.SkImpVision) ||
             (PlayerControl.LocalPlayer.Is(Faction.Madmates) && CustomGameOptions.MadmateHasImpoVision) ||
             PlayerControl.LocalPlayer.Is(RoleEnum.WhiteWolf) || PlayerControl.LocalPlayer.Is(RoleEnum.Player) ||
             PlayerControl.LocalPlayer.Is(RoleEnum.Terrorist) || PlayerControl.LocalPlayer.Is(RoleEnum.Infectious) ||

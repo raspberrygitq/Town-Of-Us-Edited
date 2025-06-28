@@ -218,6 +218,7 @@ namespace TownOfUsEdited
         public static bool SKConvertImp => Generate.SKConvertImp.Get();
         public static bool SKConvertNK => Generate.SKConvertNK.Get();
         public static bool SKConvertCoven => Generate.SKConvertCoven.Get();
+        public static bool SkImpVision => Generate.SkImpVision.Get();
         public static bool SerialKillerVent => Generate.SerialKillerVent.Get();
         public static float MutantKCD => Generate.MutantKCD.Get();
         public static float TransformCD => Generate.TransformCD.Get();

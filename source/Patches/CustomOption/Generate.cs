@@ -433,6 +433,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption SKConvertImp;
         public static CustomToggleOption SKConvertNK;
         public static CustomToggleOption SKConvertCoven;
+        public static CustomToggleOption SkImpVision;
         public static CustomToggleOption NewSKCanGuess;
         public static CustomToggleOption SKChat;
 
@@ -1972,6 +1973,8 @@ namespace TownOfUsEdited.CustomOption
                 new CustomToggleOption(num++, MultiMenu.neutral, "Serial Killer Can Convert Coven Roles", false);
             NewSKCanGuess =
                 new CustomToggleOption(num++, MultiMenu.neutral, "New Serial Killer Can Guess", false);
+            SkImpVision =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Serial Killer Has Impostor Vision", false);
             SerialKillerVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Serial Killer Can Vent", false);
             SKChat =
