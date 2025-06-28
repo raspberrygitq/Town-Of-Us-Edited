@@ -1,6 +1,3 @@
-using System.Linq;
-using TownOfUsEdited.Extensions;
-
 namespace TownOfUsEdited.Roles
 {
     public class Prosecutor : Role

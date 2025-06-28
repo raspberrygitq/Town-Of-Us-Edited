@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using AmongUs.Data.Player;
 using HarmonyLib;
 using TownOfUsEdited.Roles;
 

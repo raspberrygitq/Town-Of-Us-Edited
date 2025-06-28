@@ -1,5 +1,4 @@
 using HarmonyLib;
-using Reactor.Utilities;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;

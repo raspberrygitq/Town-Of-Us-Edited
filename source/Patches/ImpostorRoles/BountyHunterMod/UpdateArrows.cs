@@ -1,6 +1,5 @@
 using HarmonyLib;
 using TownOfUsEdited.Roles;
-using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.BountyHunterMod
 {

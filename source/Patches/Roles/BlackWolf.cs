@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-using AmongUs.GameOptions;
 using TownOfUsEdited.Patches;
-using TownOfUsEdited.Patches.ImpostorRoles;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles

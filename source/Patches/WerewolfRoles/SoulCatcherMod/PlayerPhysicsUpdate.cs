@@ -1,6 +1,5 @@
 using HarmonyLib;
 using UnityEngine;
-using System;
 using TownOfUsEdited.Extensions;
 
 namespace TownOfUsEdited.WerewolfRoles.SoulCatcherMod

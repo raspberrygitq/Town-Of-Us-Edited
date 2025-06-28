@@ -1,6 +1,5 @@
 using System.Linq;
 using HarmonyLib;
-using TMPro;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;

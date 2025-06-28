@@ -32,7 +32,7 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "1.2.0";
+        public const string VersionString = "1.2.1";
         public static System.Version Version = System.Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
@@ -182,7 +182,7 @@ namespace TownOfUsEdited
         public static ConfigEntry<bool> DeadSeeGhosts { get; set; }
         public static ConfigEntry<bool> DisableLobbyMusic { get; set; }
         public static ConfigEntry<bool> HideDevStatus { get; set; }
-        public static ConfigEntry<bool> UnlockCosmetics { get; set; }
+
         public static string RuntimeLocation;
         public override void Load()
         {
@@ -339,8 +339,6 @@ namespace TownOfUsEdited
             DisableLobbyMusic = Config.Bind("Settings", "Disable Lobby Music", false, "Whether you want to disable the lobby Music in-game (can be changed in-game with settings)");
 
             HideDevStatus = Config.Bind("Settings", "Hide Special Status", false, "Toggle this to hide your special status when launching if you have one. You will still have access to your special perks.");
-
-            UnlockCosmetics = Config.Bind("Cosmetics", "UnlockAll", true, "Unlock all cosmetics");
 
             NormalGameOptionsV09.RecommendedImpostors = NormalGameOptionsV09.MaxImpostors = Enumerable.Repeat(35, 35).ToArray();
             NormalGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 35).ToArray();

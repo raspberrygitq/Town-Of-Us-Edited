@@ -1,6 +1,5 @@
 using HarmonyLib;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Extensions;
 using UnityEngine;
 
 namespace TownOfUsEdited.WerewolfRoles.GuardMod

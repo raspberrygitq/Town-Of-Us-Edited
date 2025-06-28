@@ -1,7 +1,5 @@
-﻿using AmongUs.GameOptions;
-using HarmonyLib;
+﻿using HarmonyLib;
 using System.Linq;
-using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.CrewmateRoles.SheriffMod

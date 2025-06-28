@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 namespace TownOfUsEdited.Roles
 {
     public class Warden : Role

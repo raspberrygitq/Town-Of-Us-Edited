@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using HarmonyLib;
-using Reactor.Utilities;
+﻿using HarmonyLib;
 using TownOfUsEdited.Roles;
-using UnityEngine;
 
 namespace TownOfUsEdited.Patches.CovenRoles.PotionMasterMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
-    public class PerformKillPotionMaster
+    public class PerformKill
     {
         public static bool Prefix(KillButton __instance)
         {
@@ -36,31 +33,13 @@ namespace TownOfUsEdited.Patches.CovenRoles.PotionMasterMod
                 else
                 {
                     role.UsePotion();
-                    if (role.Potion != "Invisibility")
-                    {
-                        role.TimeRemaining = CustomGameOptions.PotionDuration;
-                        role.Enabled = true;
-                        Utils.Rpc(CustomRPC.UsePotion, PlayerControl.LocalPlayer.PlayerId, role.Potion);
-                    }
-                    else
-                    {
-                        Coroutines.Start(Swoop(role));
-                        Utils.Rpc(CustomRPC.UsePotion, PlayerControl.LocalPlayer.PlayerId, role.Potion);
-                    }
+                    role.TimeRemaining = CustomGameOptions.PotionDuration;
+                    role.Enabled = true;
+                    Utils.Rpc(CustomRPC.UsePotion, PlayerControl.LocalPlayer.PlayerId, role.Potion);
                 }
             }
 
             return false;
-        }
-
-        public static IEnumerator Swoop(PotionMaster role)
-        {
-            Utils.Swoop(role.Player, true);
-            role.PotionCooldown = 2f;
-            yield return new WaitForSeconds(2);
-            role.Swoop();
-            role.TimeRemaining = CustomGameOptions.ChamSwoopDuration;
-            role.Enabled = true;
         }
     }
 }

@@ -1,9 +1,5 @@
 using System;
-using Il2CppSystem.Collections.Generic;
-using AmongUs.GameOptions;
 using HarmonyLib;
-using InnerNet;
-using System.Linq;
 
 namespace TownOfUsEdited.Patches
 {

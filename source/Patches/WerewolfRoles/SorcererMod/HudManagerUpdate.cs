@@ -1,6 +1,5 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 

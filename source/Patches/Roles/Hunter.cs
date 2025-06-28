@@ -1,9 +1,6 @@
 ﻿using Reactor.Utilities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using TownOfUsEdited.Extensions;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles

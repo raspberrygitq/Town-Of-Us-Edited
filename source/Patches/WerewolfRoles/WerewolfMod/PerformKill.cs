@@ -1,6 +1,5 @@
 using HarmonyLib;
 using TownOfUsEdited.Roles;
-using System;
 
 namespace TownOfUsEdited.Patches.WerewolfRoles.WerewolfMod
 {

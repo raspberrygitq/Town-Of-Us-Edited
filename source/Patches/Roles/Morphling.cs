@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using TMPro;
 using TownOfUsEdited.Extensions;
@@ -51,6 +50,7 @@ namespace TownOfUsEdited.Roles
         {
             Enabled = true;
             TimeRemaining -= Time.deltaTime;
+            Utils.Morph(Player, MorphedPlayer);
             if (Player.Data.IsDead)
             {
                 TimeRemaining = 0f;

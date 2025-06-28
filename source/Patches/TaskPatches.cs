@@ -27,6 +27,7 @@ namespace TownOfUsEdited
                             playerInfo._object.Is(RoleEnum.Maul) || playerInfo._object.Is(RoleEnum.Doomsayer) ||
                             playerInfo._object.Is(RoleEnum.Vampire) || playerInfo._object.Is(RoleEnum.SerialKiller) ||
                             playerInfo._object.Is(RoleEnum.Phantom) || playerInfo._object.Is(RoleEnum.Haunter) ||
+                            playerInfo._object.Is(RoleEnum.Guardian) || playerInfo._object.Is(RoleEnum.Helper) ||
                             playerInfo._object.Is(RoleEnum.Mutant) || playerInfo._object.Is(RoleEnum.Shifter) ||
                             playerInfo._object.Is(RoleEnum.Troll) || playerInfo._object.Is(Faction.Madmates) ||
                             playerInfo._object.Is(RoleEnum.WhiteWolf) || playerInfo._object.Is(RoleEnum.Attacker) ||

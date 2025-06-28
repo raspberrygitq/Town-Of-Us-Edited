@@ -1,10 +1,7 @@
-﻿using System;
-using HarmonyLib;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
+﻿using HarmonyLib;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using AmongUs.GameOptions;
-using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited.CrewmateRoles.SheriffMod
 {

@@ -62,11 +62,6 @@ using AllowExtraVotes = TownOfUsEdited.CrewmateRoles.ProsecutorMod.AllowExtraVot
 using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
 using TownOfUsEdited.WerewolfRoles.TalkativeWolfMod.ChatPatch;
 using System.Collections;
-using Sentry.Unity.NativeUtils;
-using TownOfUsEdited.ImpostorRoles.MorphlingMod;
-using TownOfUsEdited.CrewmateRoles.ChameleonMod;
-using TownOfUsEdited.Patches.CovenRoles.PotionMasterMod;
-using TownOfUsEdited.ImpostorRoles.SwooperMod;
 
 namespace TownOfUsEdited
 {
@@ -1984,7 +1979,7 @@ namespace TownOfUsEdited
                                 glitchRole.MimicTarget = mimicPlayer;
                                 glitchRole.IsUsingMimic = true;
                                 glitchRole.Enabled = true;
-                                Utils.Morph(glitchPlayer, mimicPlayer, playAnim:true);
+                                Utils.Morph(glitchPlayer, mimicPlayer);
                                 break;
                             case CustomRPC.RpcResetAnim:
                                 var animPlayer = Utils.PlayerById(reader.ReadByte());
@@ -2050,8 +2045,8 @@ namespace TownOfUsEdited
                                 var morphling = Utils.PlayerById(reader.ReadByte());
                                 var morphTarget = Utils.PlayerById(reader.ReadByte());
                                 var morphRole = Role.GetRole<Morphling>(morphling);
+                                morphRole.TimeRemaining = CustomGameOptions.MorphlingDuration;
                                 morphRole.MorphedPlayer = morphTarget;
-                                Coroutines.Start(PerformKillMorphling.Morph(morphRole));
                                 break;
                             case CustomRPC.UnMorph:
                                 var morphling1 = Utils.PlayerById(reader.ReadByte());
@@ -2192,12 +2187,14 @@ namespace TownOfUsEdited
                             case CustomRPC.Swoop:
                                 var swooper = Utils.PlayerById(reader.ReadByte());
                                 var swooperRole = Role.GetRole<Swooper>(swooper);
-                                Coroutines.Start(PerformKillSwooper.Swoop(swooperRole));
+                                swooperRole.TimeRemaining = CustomGameOptions.SwoopDuration;
+                                swooperRole.Swoop();
                                 break;
                             case CustomRPC.ChameleonSwoop:
                                 var chameleon = Utils.PlayerById(reader.ReadByte());
                                 var chameleonRole = Role.GetRole<Chameleon>(chameleon);
-                                Coroutines.Start(PerformKillChameleon.Swoop(chameleonRole));
+                                chameleonRole.TimeRemaining = CustomGameOptions.ChamSwoopDuration;
+                                chameleonRole.Swoop();
                                 break;
                             case CustomRPC.UnSwoop:
                                 var swooper1 = Utils.PlayerById(reader.ReadByte());
@@ -2763,9 +2760,8 @@ namespace TownOfUsEdited
                                 var pmRole = Role.GetRole<PotionMaster>(pm);
                                 var potion = reader.ReadString();
                                 pmRole.Potion = potion;
+                                pmRole.TimeRemaining = CustomGameOptions.PotionDuration;
                                 pmRole.UsePotion();
-                                if (potion != "Invisibility") pmRole.TimeRemaining = CustomGameOptions.PotionDuration;
-                                else Coroutines.Start(PerformKillPotionMaster.Swoop(pmRole));
                                 break;
                             case CustomRPC.Execution:
                                 var executed = Utils.PlayerById(reader.ReadByte());

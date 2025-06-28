@@ -40,87 +40,35 @@ namespace TownOfUsEdited
         internal static bool ShowDeadBodies = false;
         private static NetworkedPlayerInfo voteTarget = null;
 
-        public static void Morph(PlayerControl player, PlayerControl MorphedPlayer, bool resetAnim = false, bool playAnim = false)
+        public static void Morph(PlayerControl player, PlayerControl MorphedPlayer, bool resetAnim = false)
         {
             if (PlayerControl.LocalPlayer.IsHypnotised()) return;
             if (CamouflageUnCamouflage.IsCamoed) return;
-
             if (player.GetCustomOutfitType() != CustomPlayerOutfitType.Morph)
-            {
-                Coroutines.Start(MorphAnimation(player, MorphedPlayer, playAnim));
-            }
+                player.SetOutfit(CustomPlayerOutfitType.Morph, MorphedPlayer.Data.DefaultOutfit);
         }
 
-        public static IEnumerator MorphAnimation(PlayerControl player, PlayerControl MorphedPlayer, bool playAnim)
-        {
-            Color startingColor = Palette.PlayerColors[player.Data.DefaultOutfit.ColorId];
-            Color endingColor = Palette.PlayerColors[MorphedPlayer.Data.DefaultOutfit.ColorId];
-            Color startingShadowColor = Palette.ShadowColors[player.Data.DefaultOutfit.ColorId];
-            Color endingShadowColor = Palette.ShadowColors[MorphedPlayer.Data.DefaultOutfit.ColorId];
-            float duration = 2f;
-            for (float t = 0f; t < duration; t += Time.deltaTime)
-            {
-                if (player.Data.IsDead)
-                {
-                    Unmorph(player);
-                    yield break;
-                }
-                if (!playAnim) continue;
-                player.cosmetics.SetBodyCosmeticsVisible(false);
-                Color color = Color.Lerp(startingColor, endingColor, t / duration);
-                Color shadowColor = Color.Lerp(startingShadowColor, endingShadowColor, t / duration);
-                player.myRend().material.SetColor(PlayerMaterial.BackColor, shadowColor);
-                player.myRend().material.SetColor(PlayerMaterial.BodyColor, color);
-                player.myRend().material.SetColor(PlayerMaterial.VisorColor, Palette.VisorColor);
-                yield return null;
-            }
-            player.myRend().material.SetColor(PlayerMaterial.BackColor, startingShadowColor);
-            player.myRend().material.SetColor(PlayerMaterial.BodyColor, startingColor);
-            player.myRend().material.SetColor(PlayerMaterial.VisorColor, Palette.VisorColor);
-            player.cosmetics.SetBodyCosmeticsVisible(true);
-            player.SetOutfit(CustomPlayerOutfitType.Morph, MorphedPlayer.Data.DefaultOutfit);
-        }
-
-        public static void Swoop(PlayerControl player, bool playAnim = false)
+        public static void Swoop(PlayerControl player)
         {
             if (PlayerControl.LocalPlayer.IsHypnotised()) return;
-            Coroutines.Start(SwoopAnimation(player, playAnim));
-        }
+            var color = Color.clear;
+            if (player == PlayerControl.LocalPlayer || PlayerControl.LocalPlayer.Data.IsDead || (PlayerControl.LocalPlayer.Data.IsImpostor() && player.Data.IsImpostor())) color.a = 0.1f;
 
-        public static IEnumerator SwoopAnimation(PlayerControl player, bool playAnim)
-        {
-            Color startingColor = Palette.PlayerColors[player.Data.DefaultOutfit.ColorId];
-            Color endingColor = Color.clear;
-            float duration = 2f;
-            for (float t = 0f; t < duration; t += Time.deltaTime)
+            if (player.GetCustomOutfitType() != CustomPlayerOutfitType.Swooper)
             {
-                if (player.Data.IsDead)
+                player.SetOutfit(CustomPlayerOutfitType.Swooper, new NetworkedPlayerInfo.PlayerOutfit()
                 {
-                    Unmorph(player);
-                    yield break;
-                }
-                if (!playAnim) continue;
-                player.cosmetics.SetBodyCosmeticsVisible(false);
-                if (player == PlayerControl.LocalPlayer || PlayerControl.LocalPlayer.Data.IsDead || (PlayerControl.LocalPlayer.Data.IsImpostor() && player.Data.IsImpostor())) endingColor.a = 0.1f;
-                Color color = Color.Lerp(startingColor, endingColor, t / duration);
+                    ColorId = player.CurrentOutfit.ColorId,
+                    HatId = "",
+                    SkinId = "",
+                    VisorId = "",
+                    PlayerName = " ",
+                    PetId = ""
+                });
                 player.myRend().color = color;
-                yield return null;
+                player.nameText().color = Color.clear;
+                player.cosmetics.colorBlindText.color = Color.clear;
             }
-            var finalColor = Color.clear;
-            if (player == PlayerControl.LocalPlayer || PlayerControl.LocalPlayer.Data.IsDead || (PlayerControl.LocalPlayer.Data.IsImpostor() && player.Data.IsImpostor())) finalColor.a = 0.1f;
-            player.SetOutfit(CustomPlayerOutfitType.Swooper, new NetworkedPlayerInfo.PlayerOutfit()
-            {
-                ColorId = player.CurrentOutfit.ColorId,
-                HatId = "",
-                SkinId = "",
-                VisorId = "",
-                PlayerName = " ",
-                PetId = ""
-            });
-            player.myRend().color = finalColor;
-            player.nameText().color = Color.clear;
-            player.cosmetics.colorBlindText.color = Color.clear;
-            player.cosmetics.SetBodyCosmeticsVisible(true);
         }
 
         public static void Unmorph(PlayerControl player)
@@ -628,7 +576,7 @@ namespace TownOfUsEdited
                 player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Bodyguard) ||
                 player.Is(RoleEnum.Avenger) || player.Is(RoleEnum.Fighter) || player.Is(RoleEnum.Crusader) ||
                 player.Is(RoleEnum.VampireHunter) || player.Is(RoleEnum.Knight) || player.Is(ModifierEnum.Vengeful) ||
-                player.Is(RoleEnum.TimeLord)) return true;
+                player.Is(RoleEnum.Imitator) || player.Is(RoleEnum.TimeLord)) return true;
             else if (player.Is(RoleEnum.Hunter))
             {
                 var hunter = Role.GetRole<Hunter>(player);
@@ -638,7 +586,7 @@ namespace TownOfUsEdited
             else if (player.Is(RoleEnum.Imitator))
             {
                 if (PlayerControl.AllPlayerControls.ToArray().Count(x => x.Data.IsDead && !x.Data.Disconnected &&
-                x.IsCrewKiller()) > 0) return true;
+                (x.Is(RoleEnum.Hunter) || x.Is(RoleEnum.Sheriff) || x.Is(RoleEnum.Veteran))) > 0) return true;
             }
             else if (player.Is(RoleEnum.Jailor))
             {
@@ -1597,9 +1545,6 @@ namespace TownOfUsEdited
                 killer.isKilling = true;
                 target.isKilling = true;
 
-                Animations.StopAllAnimations(killer);
-                Animations.StopAllAnimations(target);
-
                 if (ShowShield.DiedFirst == "") ShowShield.DiedFirst = target.GetDefaultOutfit().PlayerName;
 
                 if (target.GetAppearance().SizeFactor == new Vector3(0.4f, 0.4f, 1f))
@@ -1892,11 +1837,6 @@ namespace TownOfUsEdited
                 target.gameObject.layer = LayerMask.NameToLayer("Ghost");
                 target.Visible = false;
 
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic) && !PlayerControl.LocalPlayer.Data.IsDead)
-                {
-                    Coroutines.Start(FlashCoroutine(Patches.Colors.Mystic));
-                }
-
                 if (PlayerControl.LocalPlayer == target) killer.CurrentOutfitType = (PlayerOutfitType)currentOutfitType;
 
                 if (target.Is(ModifierEnum.Frosty))
@@ -1953,8 +1893,6 @@ namespace TownOfUsEdited
                     RoleManager.Instance.SetRole(target, RoleTypes.CrewmateGhost);
                     if (target == PlayerControl.LocalPlayer) Utils.ShowDeadBodies = true;
                 }
-
-                PlayerControl_Die.Postfix();
 
                 if (!killer.AmOwner) return;
 
@@ -3086,11 +3024,6 @@ namespace TownOfUsEdited
                         }
                     }
                 }
-            }
-            foreach (var modifier in Modifier.GetModifiers(ModifierEnum.Drunk))
-            {
-                var drunk = (Drunk)modifier;
-                drunk.RoundsLeft -= 1;
             }
             #endregion
         }

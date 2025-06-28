@@ -2,7 +2,6 @@
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
-using Reactor.Utilities;
 using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
 
 namespace TownOfUsEdited.CrewmateRoles.JailorMod

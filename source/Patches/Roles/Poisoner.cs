@@ -1,7 +1,6 @@
 using UnityEngine;
 using TownOfUsEdited.Modifiers.UnderdogMod;
 using TownOfUsEdited.Roles.Modifiers;
-using TMPro;
 
 namespace TownOfUsEdited.Roles
 {

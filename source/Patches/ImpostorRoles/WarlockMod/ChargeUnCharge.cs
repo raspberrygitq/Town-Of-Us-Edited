@@ -2,7 +2,6 @@ using HarmonyLib;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Modifiers.UnderdogMod;
 using UnityEngine;
-using TownOfUsEdited.ImpostorRoles.ImpostorMod;
 using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited.ImpostorRoles.WarlockMod

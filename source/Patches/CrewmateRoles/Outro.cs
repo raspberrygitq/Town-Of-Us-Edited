@@ -1,7 +1,6 @@
 using System.Linq;
 using HarmonyLib;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Extensions;
 using UnityEngine;
 
 namespace TownOfUsEdited.Patches.CrewmateRoles

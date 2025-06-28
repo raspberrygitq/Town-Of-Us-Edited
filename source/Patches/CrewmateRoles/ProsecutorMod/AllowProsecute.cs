@@ -18,7 +18,6 @@ using TownOfUsEdited.CrewmateRoles.DeputyMod;
 using System.Linq;
 using System.Collections.Generic;
 using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
-using BepInEx.Unity.IL2CPP.Utils.Collections;
 
 namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
 {

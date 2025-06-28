@@ -2,7 +2,6 @@ using System.Linq;
 using TMPro;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
-using TownOfUsEdited.CrewmateRoles.PlumberMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using TownOfUsEdited.ImpostorRoles.BomberMod;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;

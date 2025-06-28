@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 
 namespace TownOfUsEdited.Roles

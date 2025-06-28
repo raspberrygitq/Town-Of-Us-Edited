@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 

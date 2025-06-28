@@ -1,6 +1,5 @@
 using HarmonyLib;
 using TownOfUsEdited.Roles;
-using System;
 using Reactor.Utilities;
 using Object = UnityEngine.Object;
 

@@ -4,7 +4,6 @@ using TownOfUsEdited.Roles;
 using UnityEngine;
 using AmongUs.GameOptions;
 using TownOfUsEdited.CrewmateRoles.SnitchMod;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using Reactor.Utilities;
 using TownOfUsEdited.Roles.Modifiers;

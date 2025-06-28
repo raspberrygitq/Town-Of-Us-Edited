@@ -1,7 +1,5 @@
 using HarmonyLib;
 using TownOfUsEdited.Roles;
-using System;
-using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.Patches.WerewolfRoles.BlackWolfMod
 {

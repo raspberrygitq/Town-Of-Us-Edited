@@ -1,7 +1,6 @@
 using System.Linq;
 using HarmonyLib;
 using TownOfUsEdited.Roles;
-using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.FighterMod
 {

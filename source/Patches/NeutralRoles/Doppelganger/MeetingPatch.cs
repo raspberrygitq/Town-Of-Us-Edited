@@ -1,7 +1,6 @@
 using AmongUs.Data;
 using Assets.CoreScripts;
 using HarmonyLib;
-using System;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;

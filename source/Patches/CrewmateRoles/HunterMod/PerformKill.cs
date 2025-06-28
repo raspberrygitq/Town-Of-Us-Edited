@@ -1,6 +1,5 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
-using System;
 using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.CrewmateRoles.HunterMod

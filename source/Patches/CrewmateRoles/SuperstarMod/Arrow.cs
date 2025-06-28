@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using System.Linq;

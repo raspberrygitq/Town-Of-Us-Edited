@@ -3,7 +3,6 @@ using System.Linq;
 using AmongUs.GameOptions;
 using Reactor.Utilities.Extensions;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
-using TownOfUsEdited.CrewmateRoles.TimeLordMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;

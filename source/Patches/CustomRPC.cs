@@ -163,6 +163,7 @@ namespace TownOfUsEdited
         BypassKill,
         BypassMultiKill,
         SetMimic,
+        UnMimic,
         RpcResetAnim,
         RecreateTasks,
         SetHacked,

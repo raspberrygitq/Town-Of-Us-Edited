@@ -1,6 +1,4 @@
-using System.Linq;
 using UnityEngine;
-using TownOfUsEdited.Extensions;
 
 namespace TownOfUsEdited.Roles
 {

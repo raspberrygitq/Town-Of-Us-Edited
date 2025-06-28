@@ -13,7 +13,6 @@ using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.Patches;
 using Reactor.Utilities.Extensions;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
-using Assassin2 = TownOfUsEdited.Roles.Assassin;
 using TownOfUsEdited.CovenRoles.RitualistMod;
 using TownOfUsEdited.CrewmateRoles.DeputyMod;
 using System.Collections.Generic;

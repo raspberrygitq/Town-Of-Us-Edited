@@ -1,6 +1,5 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
-using System;
 using UnityEngine;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.CrewmateRoles.MedicMod;

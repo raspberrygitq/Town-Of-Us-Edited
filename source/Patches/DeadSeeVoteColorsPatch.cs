@@ -13,7 +13,11 @@ namespace TownOfUsEdited
             SpriteRenderer spriteRenderer = Object.Instantiate<SpriteRenderer>(__instance.PlayerVotePrefab);
             var player = Utils.PlayerByData(voterPlayer);
 
-            if (GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes && (!CustomGameOptions.DeadSeeRoles || !PlayerControl.LocalPlayer.Data.IsDead)
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Prosecutor))
+            {
+                PlayerMaterial.SetColors(voterPlayer.DefaultOutfit.ColorId, spriteRenderer);
+            }
+            else if (GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes && (!CustomGameOptions.DeadSeeRoles || !PlayerControl.LocalPlayer.Data.IsDead)
             && !PlayerControl.LocalPlayer.Is(ModifierEnum.Spotter))
             {
                 //PlayerControl.SetPlayerMaterialColors(Palette.DisabledGrey, spriteRenderer);

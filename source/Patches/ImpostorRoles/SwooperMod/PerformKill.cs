@@ -1,13 +1,10 @@
-using System.Collections;
 using HarmonyLib;
-using Reactor.Utilities;
 using TownOfUsEdited.Roles;
-using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.SwooperMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
-    public class PerformKillSwooper
+    public class PerformKill
     {
         public static bool Prefix(KillButton __instance)
         {
@@ -25,20 +22,12 @@ namespace TownOfUsEdited.ImpostorRoles.SwooperMod
                 if (!abilityUsed) return false;
 
                 Utils.Rpc(CustomRPC.Swoop, PlayerControl.LocalPlayer.PlayerId);
-                Coroutines.Start(Swoop(role));
+                role.TimeRemaining = CustomGameOptions.SwoopDuration;
+                role.Swoop();
                 return false;
             }
 
             return true;
-        }
-
-        public static IEnumerator Swoop(Swooper role)
-        {
-            Utils.Swoop(role.Player, true);
-            role.Cooldown = 2f;
-            yield return new WaitForSeconds(2);
-            role.Swoop();
-            role.TimeRemaining = CustomGameOptions.SwoopDuration;
         }
     }
 }

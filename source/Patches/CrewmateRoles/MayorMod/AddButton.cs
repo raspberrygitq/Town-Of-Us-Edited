@@ -10,7 +10,6 @@ using Object = UnityEngine.Object;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 using TownOfUsEdited.CrewmateRoles.VigilanteMod;
 using TownOfUsEdited.NeutralRoles.DoomsayerMod;
-using Assassin2 = TownOfUsEdited.Roles.Assassin;
 using TownOfUsEdited.CovenRoles.RitualistMod;
 
 namespace TownOfUsEdited.CrewmateRoles.MayorMod

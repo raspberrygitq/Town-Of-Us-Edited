@@ -11,7 +11,6 @@ using UnityEngine;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.CovenRoles.CovenMod;
 using Reactor.Utilities;
-using TownOfUsEdited.CrewmateRoles.PlumberMod;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 
 namespace TownOfUsEdited.Roles

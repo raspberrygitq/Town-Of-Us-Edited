@@ -6,7 +6,6 @@ using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using System.Linq;
 using TownOfUsEdited.Patches;
-using TownOfUsEdited.CrewmateRoles.PlumberMod;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 
 namespace TownOfUsEdited.NeutralRoles.VampireMod

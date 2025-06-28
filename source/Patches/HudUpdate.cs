@@ -7,7 +7,6 @@ using TownOfUsEdited.Roles;
 using TownOfUsEdited.CrewmateRoles.HaunterMod;
 using TownOfUsEdited.NeutralRoles.PhantomMod;
 using TownOfUsEdited.ImpostorRoles.SpiritMod;
-using System.Linq;
 
 namespace TownOfUsEdited.Patches
 {

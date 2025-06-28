@@ -1,9 +1,5 @@
-using System.Collections;
 using HarmonyLib;
-using Reactor.Utilities;
-using TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod;
 using TownOfUsEdited.Roles;
-using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.ManipulatorMod
 {

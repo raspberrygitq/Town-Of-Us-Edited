@@ -5,7 +5,6 @@ using TownOfUsEdited.Patches;
 using UnityEngine;
 using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
-using System;
 using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
 using Reactor.Utilities;
 

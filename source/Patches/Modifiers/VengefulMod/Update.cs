@@ -1,7 +1,6 @@
 using HarmonyLib;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using TMPro;
 using System.Linq;
 
 namespace TownOfUsEdited.Modifiers.VengefulMod

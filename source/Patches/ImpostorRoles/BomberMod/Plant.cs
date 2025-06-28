@@ -2,7 +2,6 @@
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using TownOfUsEdited.Modifiers.UnderdogMod;
-using TownOfUsEdited.ImpostorRoles.ImpostorMod;
 using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited.ImpostorRoles.BomberMod

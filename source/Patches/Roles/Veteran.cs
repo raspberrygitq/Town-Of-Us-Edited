@@ -1,8 +1,5 @@
-using System;
 using UnityEngine;
 using TMPro;
-using System.Linq;
-using TownOfUsEdited.Extensions;
 
 namespace TownOfUsEdited.Roles
 {
