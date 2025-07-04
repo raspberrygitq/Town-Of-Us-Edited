@@ -191,7 +191,6 @@ namespace TownOfUsEdited
         public static int SaboteurOn => (int)Generate.SaboteurOn.Get();
         public static int MultitaskerOn => (int)Generate.MultitaskerOn.Get();
         public static int DrunkOn => (int)Generate.DrunkOn.Get();
-        public static int DrunkDuration => (int)Generate.DrunkDuration.Get();
         public static int DoubleShotOn => (int)Generate.DoubleShotOn.Get();
         public static int UnderdogOn => (int)Generate.UnderdogOn.Get();
         public static int LuckyOn => (int)Generate.LuckyOn.Get();
@@ -628,5 +627,6 @@ namespace TownOfUsEdited
         public static float BarrierCD => Generate.BarrierCd.Get();
         public static BarrierOptions ShowBarriered => (BarrierOptions)Generate.ShowBarriered.Get();
         public static bool ClericAttackNotification => Generate.ClericGetsAttackNotification.Get();
+        public static int DrunkDuration => (int)Generate.DrunkDuration.Get();
     }
 }
