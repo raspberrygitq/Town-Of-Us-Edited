@@ -193,6 +193,7 @@ Here are all the in-game commands implemented in Town Of Us Edited:
 | /id | See all the player's ids (used for /ban and /kick) |
 | /kick [player id] | Kicks the provided player |
 | /ban [player id] | Bans the provided player |
+| /limit [number] | Increases the player limit from the default 15 to a maximum of 255
 | Shift + G + ENTER | Forces the game to end (in case of a critical issue) |
 
 -----------------------
