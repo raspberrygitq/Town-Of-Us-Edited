@@ -291,9 +291,12 @@ namespace TownOfUsEdited.CustomOption
 
         public static CustomHeaderOption CovenSupportRoles;
         public static CustomNumberOption CovenLeaderOn;
-        public static CustomNumberOption SpiritualistOn;
         public static CustomNumberOption PotionMasterOn;
+        public static CustomNumberOption SpiritualistOn;
         public static CustomNumberOption VoodooMasterOn;
+
+        public static CustomHeaderOption HexMaster;
+        public static CustomToggleOption HexMasterVent;
 
         public static CustomHeaderOption Ritualist;
         public static CustomNumberOption RitualistKills;
@@ -304,12 +307,19 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption RitualistGuessImpostors;
         public static CustomToggleOption RitualistGuessModifiers;
         public static CustomToggleOption RitualistGuessLovers;
+        public static CustomToggleOption RitualistVent;
 
         public static CustomHeaderOption PotionMaster;
         public static CustomNumberOption PotionCD;
         public static CustomNumberOption PotionDuration;
         public static CustomNumberOption PotionSpeed;
         public static CustomNumberOption StrengthKCD;
+
+        public static CustomHeaderOption Spiritualist;
+        public static CustomToggleOption SpiritualistVent;
+
+        public static CustomHeaderOption VoodooMaster;
+        public static CustomToggleOption VoodooMasterVent;
 
         public static CustomHeaderOption Fighter;
         public static CustomNumberOption FighterKCD;
@@ -503,8 +513,8 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption UndertakerVentWithBody;
 
         public static CustomHeaderOption Assassin;
-        public static CustomNumberOption NumberOfImpostorAssassins;
-        public static CustomNumberOption NumberOfNeutralAssassins;
+        public static CustomStringOption NumberOfImpostorAssassins;
+        public static CustomStringOption NumberOfNeutralAssassins;
         public static CustomToggleOption AssassinImpostorRole;
         public static CustomNumberOption AssassinOn;
         public static CustomToggleOption AmneTurnImpAssassin;
@@ -842,7 +852,7 @@ namespace TownOfUsEdited.CustomOption
 
             CrewmateGameSettings =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "Global <color=#00FFFF>Crewmate</color> Settings");
-            CrewmateOn = new CustomNumberOption(num++, MultiMenu.crewmate, "Basic <color=#00FFFF>Crewmate</color> Chance", 0f, 0f, 100f, 10f,
+            CrewmateOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#00FFFF>Crewmate</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
             CrewGhostRoles = new CustomHeaderOption(num++, MultiMenu.crewmate, "Crewmate Ghost Roles");
@@ -1002,7 +1012,7 @@ namespace TownOfUsEdited.CustomOption
 
             ImpostorGameSettings =
                 new CustomHeaderOption(num++, MultiMenu.imposter, "Global <color=#FF0000FF>Impostor</color> Settings");
-            ImpostorOn = new CustomNumberOption(num++, MultiMenu.imposter, "Basic <color=#FF0000FF>Impostor</color> Chance", 0f, 0f, 100f, 10f,
+            ImpostorOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Impostor</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             ImpostorChat =
                 new CustomToggleOption(num++, MultiMenu.imposter, "Impostors Have A Private Chat");
@@ -1392,10 +1402,10 @@ namespace TownOfUsEdited.CustomOption
             SeeTasksWhenDead = new CustomToggleOption(num++, MultiMenu.main, "See Tasks When Dead", true);
 
             Assassin = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin Ability</color>");
-            NumberOfImpostorAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of Impostor Assassins", 1, 0, 4, 1);
-            NumberOfNeutralAssassins = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of Neutral Assassins", 1, 0, 5, 1);
+            NumberOfImpostorAssassins = new CustomStringOption(num++, MultiMenu.imposter, "Impostor Assassins Count", new[] { "None", "1", "All" }, 2);
+            NumberOfNeutralAssassins = new CustomStringOption(num++, MultiMenu.imposter, "Neutral Assassins Count", new[] { "None", "1", "All" }, 2);
             AssassinImpostorRole = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin is an Impostor Role", false);
-            AssassinOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin</color> Spawn Chance", 0f, 0f, 100f, 10f,
+            AssassinOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             AmneTurnImpAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Amnesiac Turned Impostor Gets Ability", false);
             AmneTurnNeutAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Amnesiac Turned Neutral Killing Gets Ability", false);
@@ -1414,7 +1424,7 @@ namespace TownOfUsEdited.CustomOption
             AssassinGuessLovers = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Lovers", false);
 
             Guardian =
-                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#7cb6c2>Guardian</color>");
+                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#67bb43>Guardian</color>");
             GuardCooldown =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Guard Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             GuardDuration =
@@ -2172,7 +2182,7 @@ namespace TownOfUsEdited.CustomOption
             CovenReplaceImps = new CustomToggleOption(num++, MultiMenu.coven, "Coven Replaces Impostors", false);
             CovenKCD =
                 new CustomNumberOption(num++, MultiMenu.coven, "Coven Kill Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            CovenOn = new CustomNumberOption(num++, MultiMenu.coven, "Basic <color=#bf5fff>Coven</color> Chance", 0f, 0f, 100f, 10f,
+            CovenOn = new CustomNumberOption(num++, MultiMenu.coven, "<color=#bf5fff>Coven</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             CovenChat =
                 new CustomToggleOption(num++, MultiMenu.coven, "Coven Members Have A Private Chat");
@@ -2194,6 +2204,10 @@ namespace TownOfUsEdited.CustomOption
                 PercentFormat);
             VoodooMasterOn = new CustomNumberOption(num++, MultiMenu.coven, "<color=#bf5fff>Voodoo Master</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+
+            HexMaster = 
+                new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Hex Master</color>");
+            HexMasterVent = new CustomToggleOption(num++, MultiMenu.coven, "Hex Master Can Vent", false);
             
             Ritualist =
                 new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Ritualist</color>");
@@ -2205,6 +2219,7 @@ namespace TownOfUsEdited.CustomOption
             RitualistGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Guess Neutral Killing Roles", false);
             RitualistGuessModifiers = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Guess Crewmates Modifiers", false);
             RitualistGuessLovers = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Guess Lovers", false);
+            RitualistVent = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Vent", false);
 
             PotionMaster =
                 new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Potion Master</color>");
@@ -2215,6 +2230,14 @@ namespace TownOfUsEdited.CustomOption
             PotionSpeed = new CustomNumberOption(num++, MultiMenu.coven, "Speed Potion Boost", 1.25f, 1.05f, 2.5f, 0.05f, MultiplierFormat);
             StrengthKCD =
                 new CustomNumberOption(num++, MultiMenu.coven, "Strength Potion Kill Cooldown", 10f, 2.5f, 60f, 2.5f, CooldownFormat);
+
+            Spiritualist = 
+                new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Spiritualist</color>");
+            SpiritualistVent = new CustomToggleOption(num++, MultiMenu.coven, "Spiritualist Can Vent", false);
+
+            VoodooMaster =
+                new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Voodoo Master</color>");
+            VoodooMasterVent = new CustomToggleOption(num++, MultiMenu.coven, "Voodoo Master Can Vent", false);
 
             Bait = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#00B3B3FF>Bait</color>");
             BaitMinDelay = new CustomNumberOption(num++, MultiMenu.modifiers, "Minimum Delay for the Bait Report", 0f, 0f, 15f, 0.5f, CooldownFormat);

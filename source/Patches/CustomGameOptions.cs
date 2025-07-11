@@ -10,6 +10,12 @@ using static TownOfUsEdited.CrewmateRoles.MedicMod.StopKill;
 
 namespace TownOfUsEdited
 {
+    public enum NumAssassins
+    {
+        None,
+        One,
+        All
+    }
     public enum DisableSkipButtonMeetings
     {
         No,
@@ -367,8 +373,8 @@ namespace TownOfUsEdited
         public static bool AssassinGuessLovers => Generate.AssassinGuessLovers.Get();
         public static bool AssassinCrewmateGuess => Generate.AssassinCrewmateGuess.Get();
         public static int AssassinKills => (int)Generate.AssassinKills.Get();
-        public static int NumberOfImpostorAssassins => (int)Generate.NumberOfImpostorAssassins.Get();
-        public static int NumberOfNeutralAssassins => (int)Generate.NumberOfNeutralAssassins.Get();
+        public static NumAssassins NumberOfImpostorAssassins => (NumAssassins)Generate.NumberOfImpostorAssassins.Get();
+        public static NumAssassins NumberOfNeutralAssassins => (NumAssassins)Generate.NumberOfNeutralAssassins.Get();
         public static bool AmneTurnImpAssassin => Generate.AmneTurnImpAssassin.Get();
         public static bool AssassinImpostorRole => Generate.AssassinImpostorRole.Get();
         public static bool AmneTurnNeutAssassin => Generate.AmneTurnNeutAssassin.Get();
@@ -515,6 +521,7 @@ namespace TownOfUsEdited
         public static int MaxStore => (int)Generate.MaxStore.Get();
         public static float ObserveCooldown => Generate.ObserveCooldown.Get();
         public static int DoomsayerGuessesToWin => (int)Generate.DoomsayerGuessesToWin.Get();
+        public static bool HexMasterVent => Generate.HexMasterVent.Get();
         public static int RitualistKills => (int)Generate.RitualistKills.Get();
         public static bool RitualistMultiKill => Generate.RitualistMultiKill.Get();
         public static bool RitualistGuessNeutralBenign => Generate.RitualistGuessNeutralBenign.Get();
@@ -523,10 +530,13 @@ namespace TownOfUsEdited
         public static bool RitualistGuessImpostors => Generate.RitualistGuessImpostors.Get();
         public static bool RitualistGuessLovers => Generate.RitualistGuessLovers.Get();
         public static bool RitualistGuessModifiers => Generate.RitualistGuessModifiers.Get();
+        public static bool RitualistVent => Generate.RitualistVent.Get();
         public static float PotionCD => Generate.PotionCD.Get();
         public static float PotionDuration => Generate.PotionDuration.Get();
         public static float PotionSpeed => Generate.PotionSpeed.Get();
         public static float StrengthKCD => Generate.StrengthKCD.Get();
+        public static bool SpiritualistVent => Generate.SpiritualistVent.Get();
+        public static bool VoodooMasterVent => Generate.VoodooMasterVent.Get();
         public static float BiteCd => Generate.BiteCooldown.Get();
         public static bool VampImpVision => Generate.VampImpVision.Get();
         public static bool VampVent => Generate.VampVent.Get();

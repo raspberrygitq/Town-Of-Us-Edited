@@ -325,8 +325,11 @@ namespace TownOfUsEdited
                  || PlayerControl.LocalPlayer.Is(RoleEnum.Mutant) || (PlayerControl.LocalPlayer.Is(RoleEnum.Doctor) && PlayerControl.LocalPlayer.Is(Faction.Madmates))
                  || PlayerControl.LocalPlayer.Is(RoleEnum.Paranoïac) || PlayerControl.LocalPlayer.Is(RoleEnum.Terrorist)
                  || PlayerControl.LocalPlayer.Is(RoleEnum.Vulture) || PlayerControl.LocalPlayer.Is(RoleEnum.CovenLeader)
-                 || PlayerControl.LocalPlayer.Is(RoleEnum.PotionMaster) || PlayerControl.LocalPlayer.Is(RoleEnum.Infectious)
-                 || PlayerControl.LocalPlayer.Is(RoleEnum.Doppelganger) || PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector))
+                 || PlayerControl.LocalPlayer.Is(RoleEnum.Coven) || PlayerControl.LocalPlayer.Is(RoleEnum.Ritualist)
+                 || PlayerControl.LocalPlayer.Is(RoleEnum.Spiritualist) || PlayerControl.LocalPlayer.Is(RoleEnum.VoodooMaster)
+                 || PlayerControl.LocalPlayer.Is(RoleEnum.PotionMaster) || PlayerControl.LocalPlayer.Is(RoleEnum.HexMaster)
+                 || PlayerControl.LocalPlayer.Is(RoleEnum.Infectious) || PlayerControl.LocalPlayer.Is(RoleEnum.Doppelganger)
+                 || PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector))
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
             }

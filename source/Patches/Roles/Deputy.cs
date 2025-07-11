@@ -18,6 +18,7 @@ namespace TownOfUsEdited.Roles
             TaskText = () => "Camp crewmates then shoot their killer";
             Color = Patches.Colors.Deputy;
             RoleType = RoleEnum.Deputy;
+            Alignment = Alignment.CrewmateKilling;
             AddToRoleHistory(RoleType);
         }
     }

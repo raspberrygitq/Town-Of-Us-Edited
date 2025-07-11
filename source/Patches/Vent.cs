@@ -61,15 +61,26 @@ namespace TownOfUsEdited
                 || CustomGameOptions.GameMode == GameMode.Chaos)
                 return false;
 
-            if (player.Is(RoleEnum.Engineer) || player.Is(RoleEnum.CovenLeader) || (player.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(player).UsingPotion &&
-                Role.GetRole<PotionMaster>(player).Potion == "Strength") || player.Is(RoleEnum.WhiteWolf) || player.Is(Faction.Madmates) || player.Is(RoleEnum.Paranoïac) ||
-                (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || (player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||
-                (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent) ||
-                (player.Is(RoleEnum.Vampire) && CustomGameOptions.VampVent) || (player.Is(RoleEnum.SerialKiller) && CustomGameOptions.SerialKillerVent) ||
-                (player.Is(RoleEnum.Player) && !CustomGameOptions.BattleDisableVent) || (player.Is(RoleEnum.Terrorist) && CustomGameOptions.TerroristVent) ||
-                (player.Is(RoleEnum.Vulture) && CustomGameOptions.VultureVent) || (player.Is(RoleEnum.Infectious) && CustomGameOptions.InfectiousVent) ||
-                (player.Is(RoleEnum.Doppelganger) && CustomGameOptions.DoppelVent) || (player.Is(RoleEnum.SoulCollector) && CustomGameOptions.SCVent) ||
-                (player.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoVent))
+            if (player.Is(RoleEnum.Engineer) || player.Is(RoleEnum.Coven) || player.Is(RoleEnum.CovenLeader) || 
+                (player.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(player).UsingPotion && Role.GetRole<PotionMaster>(player).Potion == "Strength") ||
+                player.Is(RoleEnum.WhiteWolf) || player.Is(Faction.Madmates) || player.Is(RoleEnum.Paranoïac) ||
+                (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || 
+                (player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||
+                (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || 
+                (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent) ||
+                (player.Is(RoleEnum.Vampire) && CustomGameOptions.VampVent) || 
+                (player.Is(RoleEnum.SerialKiller) && CustomGameOptions.SerialKillerVent) ||
+                (player.Is(RoleEnum.Player) && !CustomGameOptions.BattleDisableVent) || 
+                (player.Is(RoleEnum.Terrorist) && CustomGameOptions.TerroristVent) ||
+                (player.Is(RoleEnum.Vulture) && CustomGameOptions.VultureVent) || 
+                (player.Is(RoleEnum.Infectious) && CustomGameOptions.InfectiousVent) ||
+                (player.Is(RoleEnum.Doppelganger) && CustomGameOptions.DoppelVent) || 
+                (player.Is(RoleEnum.SoulCollector) && CustomGameOptions.SCVent) ||
+                (player.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoVent) ||
+                (player.Is(RoleEnum.HexMaster) && CustomGameOptions.HexMasterVent) ||
+                (player.Is(RoleEnum.Ritualist) && CustomGameOptions.RitualistVent) ||
+                (player.Is(RoleEnum.Spiritualist) && CustomGameOptions.SpiritualistVent) ||
+                (player.Is(RoleEnum.VoodooMaster) && CustomGameOptions.VoodooMasterVent))
                 return true;
 
             if (player.Is(RoleEnum.Maul) && CustomGameOptions.WerewolfVent)

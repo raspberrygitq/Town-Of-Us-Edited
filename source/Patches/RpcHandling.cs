@@ -1067,20 +1067,19 @@ namespace TownOfUsEdited
             var canHaveAbility2 = PlayerControl.AllPlayerControls.ToArray().Where(player => player.Is(Faction.NeutralKilling)).ToList();
             canHaveAbility2.Shuffle();
 
-            var assassinConfig = new (List<PlayerControl>, int)[]
+            var assassinConfig = new (List<PlayerControl>, NumAssassins)[]
             {
                 (canHaveAbility, CustomGameOptions.NumberOfImpostorAssassins),
                 (canHaveAbility2, CustomGameOptions.NumberOfNeutralAssassins)
             };
-            foreach ((var abilityList, int maxNumber) in assassinConfig)
+            foreach ((var abilityList, NumAssassins maxNumber) in assassinConfig)
             {
-                int assassinNumber = maxNumber;
-                if (CustomGameOptions.AssassinImpostorRole) assassinNumber = 0;
-                while (abilityList.Count > 0 && assassinNumber > 0)
+                if (maxNumber == NumAssassins.None) continue;
+                while (abilityList.Count > 0)
                 {
                     var (type, rpc, _) = AssassinAbility.Ability();
                     Role.Gen<Ability>(type, abilityList.TakeFirst(), rpc);
-                    assassinNumber -= 1;
+                    if (maxNumber == NumAssassins.One) break;
                 }
             }
 

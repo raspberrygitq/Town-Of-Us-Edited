@@ -16,7 +16,7 @@ namespace TownOfUsEdited
             position.AdjustPosition();
 
             __instance.text.text =
-                "<size=2><color=#EE9D01>Town Of Us</color><b><color=#AA00FF> Edited</color></b> <color=#00FF00FF>v" + TownOfUsEdited.VersionString + TownOfUsEdited.VersionTag + "</color>, <color=#FFD000FF>Modified by</color> <color=#FF0000>gitq</color>" + "\n" +
+                "<size=2><color=#EE9D01>Town Of Us</color><b><color=#AA00FF> Edited</color></b> <color=#00FF00FF>v" + TownOfUsEdited.BasicCompilation + TownOfUsEdited.VersionTag + "</color>, <color=#FFD000FF>Modified by</color> <color=#FF0000>gitq</color> <color=#00FF00FF>v" + TownOfUsEdited.VersionString +"\n" +
                 $"Ping: {AmongUsClient.Instance.Ping}ms\n" +
                 (!MeetingHud.Instance
                     ? "<color=#00FF00FF>Modded By: <color=#FF0000>le killer</color> </color>\n" +
