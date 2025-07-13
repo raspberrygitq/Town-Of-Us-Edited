@@ -241,17 +241,25 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                 }
                 else if (rememberNeut)
                 {
-                    if (role == RoleEnum.Arsonist || role == RoleEnum.Glitch || role == RoleEnum.Plaguebearer ||
-                            role == RoleEnum.Pestilence || role == RoleEnum.Maul || role == RoleEnum.Juggernaut
-                             || role == RoleEnum.Vampire || role == RoleEnum.SerialKiller || role == RoleEnum.Mutant ||
-                             role == RoleEnum.Attacker || role == RoleEnum.Terrorist || role == RoleEnum.Infectious
-                             || role == RoleEnum.Doppelganger)
+                    if (role == RoleEnum.Amnesiac || role == RoleEnum.GuardianAngel || role == RoleEnum.Mercenary || role == RoleEnum.Shifter || role == RoleEnum.Survivor)
                     {
-                        if (other.Is(AbilityEnum.Assassin)) Ability.AbilityDictionary.Remove(other.PlayerId);
                         var survivor = new Survivor(other);
                         survivor.RegenTask();
+                    }
+                    else if (role == RoleEnum.Doomsayer || role == RoleEnum.Executioner || role == RoleEnum.Jester || role == RoleEnum.Troll || role == RoleEnum.Vulture)
+                    {
+                        var jester = new Jester(other);
+                        jester.RegenTask();
+                    }
+                    else
+                    {
+                        var mercenary = new Mercenary(other);
+                        mercenary.Bribed.Add(amnesiac.PlayerId);
+                        if (PlayerControl.LocalPlayer == amnesiac) mercenary.Alert = true;
+                        mercenary.RegenTask();
                         if (CustomGameOptions.AmneTurnNeutAssassin
                         && !CustomGameOptions.AssassinImpostorRole) new Assassin(amnesiac);
+                        if (other.Is(AbilityEnum.Assassin)) Ability.AbilityDictionary.Remove(other.PlayerId);
                     }
                 }
                 else
