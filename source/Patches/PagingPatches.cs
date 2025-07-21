@@ -23,4 +23,12 @@ internal static class PagingPatches
         }
     }
 
+    [HarmonyPatch(typeof(ShapeshifterMinigame), nameof(ShapeshifterMinigame.Begin))]
+    public static class ShapeshifterMinigameBeginPatch
+    {
+        public static void Postfix(ShapeshifterMinigame __instance)
+        {
+            __instance.gameObject.AddComponent<ShapeshifterBehaviour>().shapeshifterMinigame = __instance;
+        }
+    }
 }

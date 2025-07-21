@@ -573,10 +573,9 @@ namespace TownOfUsEdited
         {
             if (!CustomGameOptions.CrewKillersContinue) return false;
             if (player.Is(RoleEnum.Mayor) || player.Is(RoleEnum.Politician) || player.Is(RoleEnum.Swapper) ||
-                player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Bodyguard) ||
-                player.Is(RoleEnum.Avenger) || player.Is(RoleEnum.Fighter) || player.Is(RoleEnum.Crusader) ||
+                player.Is(RoleEnum.Sheriff) || player.Is(RoleEnum.Avenger) || player.Is(RoleEnum.Fighter) ||
                 player.Is(RoleEnum.VampireHunter) || player.Is(RoleEnum.Knight) || player.Is(ModifierEnum.Vengeful) ||
-                player.Is(RoleEnum.Imitator) || player.Is(RoleEnum.TimeLord)) return true;
+                player.Is(RoleEnum.Imitator)) return true;
             else if (player.Is(RoleEnum.Hunter))
             {
                 var hunter = Role.GetRole<Hunter>(player);

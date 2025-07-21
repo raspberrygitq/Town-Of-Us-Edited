@@ -84,7 +84,7 @@ namespace TownOfUsEdited.CustomOption
             {
             }
 
-            if (HudManager.InstanceExists && Type != CustomOptionType.Header && Notify)
+            if (HudManager.InstanceExists && Type != CustomOptionType.Header && Notify && TownOfUsEdited.SeeSettingNotifier.Value)
             {
                 HudManager.Instance.Notifier.
                     AddSettingsChangeMessage(StringName, ToString(), HudManager.Instance.Notifier.lastMessageKey != (int)StringName);

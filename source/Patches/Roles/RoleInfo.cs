@@ -765,7 +765,7 @@ namespace TownOfUsEdited.Roles
             }
             else if (role == "Infectious")
             {
-                return "The <color=#bf9000>Infectious</color> is a Neutral role which can kill and Infect players.\nInfecting a player will slowly kill them by adding one stage of the Infection after ach meeting.\nOn stage 1, nothing happens, on stage 2, the player will be slower, on stage 3, the player's vision will be much reduced, and on stage 4, the player will die.\nThe Infection will stop if the Infectious gets ejected.\nThe Infectious will also have a shofter kill cooldown when killing an infected.\nThe Infectious will win when they are the last player standing.";
+                return "The <color=#bf9000>Infectious</color> is a Neutral role which can kill and Infect players.\nInfecting a player will slowly kill them by adding one stage of the Infection after each meeting.\nOn stage 1, nothing happens, on stage 2, the player will be slower, on stage 3, the player's vision will be much reduced, and on stage 4, the player will die.\nThe Infection will stop if the Infectious gets ejected.\nThe Infectious will also have a shofter kill cooldown when killing an infected.\nThe Infectious will win when they are the last player standing.";
             }
             else if (role == "Plaguebearer")
             {

@@ -21,9 +21,21 @@ namespace TownOfUsEdited.CustomOption
             },
             new()
             {
+                Title = "See Setting Changes In Lobby",
+                OnClick = () => { return TownOfUsEdited.SeeSettingNotifier.Value = !TownOfUsEdited.SeeSettingNotifier.Value; },
+                DefaultValue = TownOfUsEdited.SeeSettingNotifier.Value
+            },
+            new()
+            {
                 Title = "Disable Lobby Music",
                 OnClick = () => { return TownOfUsEdited.DisableLobbyMusic.Value = !TownOfUsEdited.DisableLobbyMusic.Value; },
                 DefaultValue = TownOfUsEdited.DisableLobbyMusic.Value
+            },
+            new()
+            {
+                Title = "Force 4 Columns",
+                OnClick = () => { return TownOfUsEdited.Force4Columns.Value = !TownOfUsEdited.Force4Columns.Value; },
+                DefaultValue = TownOfUsEdited.Force4Columns.Value
             }
         };
 

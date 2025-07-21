@@ -6,10 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
-using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
 using TownOfUsEdited.Extensions;
-using TownOfUsEdited.NeutralRoles.ExecutionerMod;
-using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -103,7 +100,8 @@ namespace TownOfUsEdited.Patches
                 {
                     if (sourcePlayer.IsDev() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>List Commands</size></b>\n\n<color=#6DFFFA><b>Everyone:</b></color>\n\n" +
+                        chatText = $"<b><size=3>List Commands</size></b>\n\n" +
+                            $"<color=#6DFFFA><b>Everyone</b></color>\n\n" +
                             $"<color=#6DFFFA>/roles</color> - List active roles\n" +
                             $"<color=#6DFFFA>/modifier</color> - List active modifiers\n" +
                             $"<color=#6DFFFA>/note</color> - Write your own note\n" +
@@ -114,7 +112,7 @@ namespace TownOfUsEdited.Patches
                             $"<color=#6DFFFA>/allup</color> - See all currently chosen roles\n" +
                             $"<color=#6DFFFA>/death</color> - Shows your death reason\n" +
                             $"<color=#6DFFFA>/shrug</color> - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#D91919><b>Host only:</b></color>\n\n" +
+                            $"<color=#D91919><b>Host Only</b></color>\n\n" +
                             $"<color=#D91919>Shift + G + ENTER</color> - Force the game to end\n" +
                             $"<color=#D91919>/msg</color> [message] - Send a message as host\n" +
                             $"<color=#D91919>/id</color> - See players ids\n" +
@@ -125,7 +123,8 @@ namespace TownOfUsEdited.Patches
                     }
                     else if (sourcePlayer.IsTester() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>List Commands</size></b>\n\n<color=#6DFFFA><b>Everyone:</b></color>\n\n" +
+                        chatText = $"<b><size=3>List Commands</size></b>\n\n" +
+                            $"<color=#6DFFFA><b>Everyone</b></color>\n\n" +
                             $"<color=#6DFFFA>/roles</color> - List active roles\n" +
                             $"<color=#6DFFFA>/modifier</color> - List active modifiers\n" +
                             $"<color=#6DFFFA>/note</color> - Write your own note\n" +
@@ -136,7 +135,7 @@ namespace TownOfUsEdited.Patches
                             $"<color=#6DFFFA>/allup</color> - See all currently chosen roles\n" +
                             $"<color=#6DFFFA>/death</color> - Shows your death reason\n" +
                             $"<color=#6DFFFA>/shrug</color> - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#D91919><b>Host only:</b></color>\n\n" +
+                            $"<color=#D91919><b>Host Only</b></color>\n\n" +
                             $"<color=#D91919>Shift + G + ENTER</color> - Force the game to end\n" +
                             $"<color=#D91919>/msg</color> [message] - Send a message as host\n" +
                             $"<color=#D91919>/id</color> - See players ids\n" +
@@ -148,7 +147,8 @@ namespace TownOfUsEdited.Patches
                     }
                     else if (sourcePlayer.IsArtist() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>List Commands</size></b>\n\n<color=#6DFFFA><b>Everyone:</b></color>\n\n" +
+                        chatText = $"<b><size=3>List Commands</size></b>\n\n" +
+                            $"<color=#6DFFFA><b>Everyone</b></color>\n\n" +
                             $"<color=#6DFFFA>/roles</color> - List active roles\n" +
                             $"<color=#6DFFFA>/modifier</color> - List active modifiers\n" +
                             $"<color=#6DFFFA>/note</color> - Write your own note\n" +
@@ -159,7 +159,7 @@ namespace TownOfUsEdited.Patches
                             $"<color=#6DFFFA>/allup</color> - See all currently chosen roles\n" +
                             $"<color=#6DFFFA>/death</color> - Shows your death reason\n" +
                             $"<color=#6DFFFA>/shrug</color> - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#D91919><b>Host only:</b></color>\n\n" +
+                            $"<color=#D91919><b>Host Only</b></color>\n\n" +
                             $"<color=#D91919>Shift + G + ENTER</color> - Force the game to end\n" +
                             $"<color=#D91919>/msg</color> [message] - Send a message as host\n" +
                             $"<color=#D91919>/id</color> - See players ids\n" +
@@ -170,7 +170,8 @@ namespace TownOfUsEdited.Patches
                     }
                     else if (sourcePlayer.IsVip() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>List Commands</size></b>\n\n<color=#6DFFFA><b>Everyone:</b></color>\n\n" +
+                        chatText = $"<b><size=3>List Commands</size></b>\n\n" +
+                            $"<color=#6DFFFA><b>Everyone</b></color>\n\n" +
                             $"<color=#6DFFFA>/roles</color> - List active roles\n" +
                             $"<color=#6DFFFA>/modifier</color> - List active modifiers\n" +
                             $"<color=#6DFFFA>/note</color> - Write your own note\n" +
@@ -181,7 +182,7 @@ namespace TownOfUsEdited.Patches
                             $"<color=#6DFFFA>/allup</color> - See all currently chosen roles\n" +
                             $"<color=#6DFFFA>/death</color> - Shows your death reason\n" +
                             $"<color=#6DFFFA>/shrug</color> - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#D91919><b>Host only:</b></color>\n\n" +
+                            $"<color=#D91919><b>Host Only</b></color>\n\n" +
                             $"<color=#D91919>Shift + G + ENTER</color> - Force the game to end\n" +
                             $"<color=#D91919>/msg</color> [message] - Send a message as host\n" +
                             $"<color=#D91919>/id</color> - See players ids\n" +
@@ -192,7 +193,8 @@ namespace TownOfUsEdited.Patches
                     }
                     else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>List Commands</size></b>\n\n<color=#6DFFFA><b>Everyone:</b></color>\n\n" +
+                        chatText = $"<b><size=3>List Commands</size></b>\n\n" +
+                            $"<color=#6DFFFA><b>Everyone</b></color>\n\n" +
                             $"<color=#6DFFFA>/roles</color> - List active roles\n" +
                             $"<color=#6DFFFA>/modifier</color> - List active modifiers\n" +
                             $"<color=#6DFFFA>/note</color> - Write your own note\n" +
@@ -203,7 +205,7 @@ namespace TownOfUsEdited.Patches
                             $"<color=#6DFFFA>/allup</color> - See all currently chosen roles\n" +
                             $"<color=#6DFFFA>/death</color> - Shows your death reason\n" +
                             $"<color=#6DFFFA>/shrug</color> - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#D91919><b>Host only:</b></color>\n\n" +
+                            $"<color=#D91919><b>Host Only</b></color>\n\n" +
                             $"<color=#D91919>Shift + G + ENTER</color> - Force the game to end\n" +
                             $"<color=#D91919>/msg</color> [message] - Send a message as host\n" +
                             $"<color=#D91919>/id</color> - See players ids\n" +
@@ -626,16 +628,13 @@ namespace TownOfUsEdited.Patches
             {
                 Dictionary<string, Color> ColorMapping = new Dictionary<string, Color>();
 
-                ColorMapping.Add("<b>Crewmate:</b>\n", Palette.CrewmateBlue);
-                // Basic
+                ColorMapping.Add("<b>Crewmate <color=#F2F2F2FF>Basic</color></b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.CrewmateOn > 0) ColorMapping.Add("Crewmate", Palette.CrewmateBlue);
-
-                // Crew Ghost
+                ColorMapping.Add("\n<b>Crewmate <color=#D3D3D3FF>Ghost</color></b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.GuardianOn > 0) ColorMapping.Add("Guardian", Colors.Guardian);
                 if (CustomGameOptions.HaunterOn > 0) ColorMapping.Add("Haunter", Colors.Haunter);
                 if (CustomGameOptions.HelperOn > 0) ColorMapping.Add("Helper", Colors.Helper);
-
-                // Crew Investigative
+                ColorMapping.Add("\n<b>Crewmate <color=#00B3B3FF>Investigative</color></b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.AstralOn > 0) ColorMapping.Add("Astral", Colors.Astral);
                 if (CustomGameOptions.AurialOn > 0) ColorMapping.Add("Aurial", Colors.Aurial);
                 if (CustomGameOptions.CaptainOn > 0) ColorMapping.Add("Captain", Colors.Captain);
@@ -650,26 +649,23 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.SpyOn > 0) ColorMapping.Add("Spy", Colors.Spy);
                 if (CustomGameOptions.TrackerOn > 0) ColorMapping.Add("Tracker", Colors.Tracker);
                 if (CustomGameOptions.TrapperOn > 0) ColorMapping.Add("Trapper", Colors.Trapper);
-
-                // Crew Killing
+                ColorMapping.Add("\n<b>Crewmate <color=#FF0000FF>Killing</color></b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.AvengerOn > 0) ColorMapping.Add("Avenger", Colors.Avenger);
                 if (CustomGameOptions.DeputyOn > 0) ColorMapping.Add("Deputy", Colors.Deputy);
                 if (CustomGameOptions.FighterOn > 0) ColorMapping.Add("Fighter", Colors.Fighter);
-                if (CustomGameOptions.HunterOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Hunter)) ColorMapping.Add("Hunter", Colors.Hunter);
+                if (CustomGameOptions.HunterOn > 0) ColorMapping.Add("Hunter", Colors.Hunter);
                 if (CustomGameOptions.KnightOn > 0) ColorMapping.Add("Knight", Colors.Knight);
-                if (CustomGameOptions.SheriffOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Sheriff)) ColorMapping.Add("Sheriff", Colors.Sheriff);
-                if (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0) ColorMapping.Add("Vampire Hunter", Colors.VampireHunter);
-                if (CustomGameOptions.VeteranOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Veteran)) ColorMapping.Add("Veteran", Colors.Veteran);
-                if (CustomGameOptions.VigilanteOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Vigilante)) ColorMapping.Add("Vigilante", Colors.Vigilante);
-
-                // Crew Power
+                if (CustomGameOptions.SheriffOn > 0) ColorMapping.Add("Sheriff", Colors.Sheriff);
+                if (CustomGameOptions.VampireHunterOn > 0) ColorMapping.Add("Vampire Hunter", Colors.VampireHunter);
+                if (CustomGameOptions.VeteranOn > 0) ColorMapping.Add("Veteran", Colors.Veteran);
+                if (CustomGameOptions.VigilanteOn > 0) ColorMapping.Add("Vigilante", Colors.Vigilante);
+                ColorMapping.Add("\n<b>Crewmate <color=#704FA8FF>Power</color></b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.JailorOn > 0) ColorMapping.Add("Jailor", Colors.Jailor);
                 if (CustomGameOptions.PoliticianOn > 0) ColorMapping.Add("Politician", Colors.Politician);
                 if (CustomGameOptions.ProsecutorOn > 0) ColorMapping.Add("Prosecutor", Colors.Prosecutor);
                 if (CustomGameOptions.SwapperOn > 0) ColorMapping.Add("Swapper", Colors.Swapper);
                 if (CustomGameOptions.TimeLordOn > 0) ColorMapping.Add("Time Lord", Colors.TimeLord);
-
-                // Crew Protective
+                ColorMapping.Add("\n<b>Crewmate <color=#006600FF>Protective</color></b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.AltruistOn > 0) ColorMapping.Add("Altruist", Colors.Altruist);
                 if (CustomGameOptions.BodyguardOn > 0) ColorMapping.Add("Bodyguard", Colors.Bodyguard);
                 if (CustomGameOptions.CrusaderOn > 0) ColorMapping.Add("Crusader", Colors.Crusader);
@@ -678,61 +674,52 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.MedicOn > 0) ColorMapping.Add("Medic", Colors.Medic);
                 if (CustomGameOptions.OracleOn > 0) ColorMapping.Add("Oracle", Colors.Oracle);
                 if (CustomGameOptions.WardenOn > 0) ColorMapping.Add("Warden", Colors.Warden);
-                
-                // Crew Support
+                ColorMapping.Add("\n<b>Crewmate <color=#FFA60AFF>Support</color></b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.EngineerOn > 0) ColorMapping.Add("Engineer", Colors.Engineer);
                 if (CustomGameOptions.ImitatorOn > 0) ColorMapping.Add("Imitator", Colors.Imitator);
                 if (CustomGameOptions.MediumOn > 0) ColorMapping.Add("Medium", Colors.Medium);
                 if (CustomGameOptions.ParanoïacOn > 0) ColorMapping.Add("Paranoïac", Colors.Paranoïac);
                 if (CustomGameOptions.PlumberOn > 0) ColorMapping.Add("Plumber", Colors.Plumber);
                 if (CustomGameOptions.TransporterOn > 0) ColorMapping.Add("Transporter", Colors.Transporter);
-                
-                ColorMapping.Add("\n<b>Neutral:</b>\n", Palette.DisabledGrey);
-                // Neut Benign
-                if (CustomGameOptions.AmnesiacOn > 0 || (CustomGameOptions.ExecutionerOn > 0 && CustomGameOptions.OnTargetDead == OnTargetDead.Amnesiac) || (CustomGameOptions.GuardianAngelOn > 0 && CustomGameOptions.GaOnTargetDeath == BecomeOptions.Amnesiac)) ColorMapping.Add("Amnesiac", Colors.Amnesiac);
+                ColorMapping.Add("\n<b>Neutral <color=#B3FFFFFF>Benign</color></b>\n", Palette.DisabledGrey);
+                if (CustomGameOptions.AmnesiacOn > 0) ColorMapping.Add("Amnesiac", Colors.Amnesiac);
                 if (CustomGameOptions.GuardianAngelOn > 0) ColorMapping.Add("Guardian Angel", Colors.GuardianAngel);
-                if (CustomGameOptions.MercenaryOn > 0 || (CustomGameOptions.ExecutionerOn > 0 && CustomGameOptions.OnTargetDead == OnTargetDead.Mercenary) || (CustomGameOptions.GuardianAngelOn > 0 && CustomGameOptions.GaOnTargetDeath == BecomeOptions.Mercenary)) ColorMapping.Add("Mercenary", Colors.Mercenary);
-                if (CustomGameOptions.SurvivorOn > 0 || (CustomGameOptions.ExecutionerOn > 0 && CustomGameOptions.OnTargetDead == OnTargetDead.Survivor) || (CustomGameOptions.GuardianAngelOn > 0 && CustomGameOptions.GaOnTargetDeath == BecomeOptions.Survivor)) ColorMapping.Add("Survivor", Colors.Survivor);
-                
-                // Neut Evil
+                if (CustomGameOptions.MercenaryOn > 0) ColorMapping.Add("Mercenary", Colors.Mercenary);
+                if (CustomGameOptions.ShifterOn > 0) ColorMapping.Add("Shifter", Colors.Shifter);
+                if (CustomGameOptions.SurvivorOn > 0) ColorMapping.Add("Survivor", Colors.Survivor);
+                ColorMapping.Add("\n<b>Neutral <color=#8C4005FF>Evil</color></b>\n", Palette.DisabledGrey);
                 if (CustomGameOptions.DoomsayerOn > 0) ColorMapping.Add("Doomsayer", Colors.Doomsayer);
                 if (CustomGameOptions.ExecutionerOn > 0) ColorMapping.Add("Executioner", Colors.Executioner);
-                if (CustomGameOptions.JesterOn > 0 || (CustomGameOptions.ExecutionerOn > 0 && CustomGameOptions.OnTargetDead == OnTargetDead.Jester) || (CustomGameOptions.GuardianAngelOn > 0 && CustomGameOptions.GaOnTargetDeath == BecomeOptions.Jester)) ColorMapping.Add("Jester", Colors.Jester);
+                if (CustomGameOptions.JesterOn > 0) ColorMapping.Add("Jester", Colors.Jester);
                 if (CustomGameOptions.PhantomOn > 0) ColorMapping.Add("Phantom", Colors.Phantom);
                 if (CustomGameOptions.TrollOn > 0) ColorMapping.Add("Troll", Colors.Troll);
                 if (CustomGameOptions.VultureOn > 0) ColorMapping.Add("Vulture", Colors.Vulture);
-                
-                // Neut Killing
-                if (CustomGameOptions.ArsonistOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)) ColorMapping.Add("Arsonist", Colors.Arsonist);
-                if (CustomGameOptions.AttackerOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Attacker)) ColorMapping.Add("Attacker", Colors.Attacker);
-                if (CustomGameOptions.DoppelgangerOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Doppelganger)) ColorMapping.Add("Doppelganger", Colors.Doppelganger);
-                if (CustomGameOptions.InfectiousOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Infectious)) ColorMapping.Add("Infectious", Colors.Infectious);
-                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggernautOn > 0) ColorMapping.Add("Juggernaut", Colors.Juggernaut);
-                if (CustomGameOptions.WerewolfOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Maul)) ColorMapping.Add("Maul", Colors.Werewolf);
-                if (CustomGameOptions.MutantOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Mutant)) ColorMapping.Add("Mutant", Colors.Mutant);
-                if (CustomGameOptions.PlaguebearerOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer)) ColorMapping.Add("Plaguebearer", Colors.Plaguebearer);
-                if (CustomGameOptions.SerialKillerOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller)) ColorMapping.Add("Serial Killer", Colors.SerialKiller);
-                if (CustomGameOptions.SoulCollectorOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector)) ColorMapping.Add("Soul Collector", Colors.SoulCollector);
-                if (CustomGameOptions.GlitchOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Glitch)) ColorMapping.Add("The Glitch", Colors.Glitch);
-                if (CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && !PlayerControl.LocalPlayer.Is(RoleEnum.Vampire)) ColorMapping.Add("Vampire", Colors.Vampire);
-
-                ColorMapping.Add("\n<b>Impostor:</b>\n", Palette.ImpostorRed);
-                // Basic Imp
+                ColorMapping.Add("\n<b>Neutral <color=#FF0000FF>Killing</color></b>\n", Palette.DisabledGrey);
+                if (CustomGameOptions.ArsonistOn > 0) ColorMapping.Add("Arsonist", Colors.Arsonist);
+                if (CustomGameOptions.AttackerOn > 0) ColorMapping.Add("Attacker", Colors.Attacker);
+                if (CustomGameOptions.DoppelgangerOn > 0) ColorMapping.Add("Doppelganger", Colors.Doppelganger);
+                if (CustomGameOptions.InfectiousOn > 0) ColorMapping.Add("Infectious", Colors.Infectious);
+                if (CustomGameOptions.JuggernautOn > 0) ColorMapping.Add("Juggernaut", Colors.Juggernaut);
+                if (CustomGameOptions.WerewolfOn > 0) ColorMapping.Add("Maul", Colors.Werewolf);
+                if (CustomGameOptions.MutantOn > 0) ColorMapping.Add("Mutant", Colors.Mutant);
+                if (CustomGameOptions.PlaguebearerOn > 0) ColorMapping.Add("Plaguebearer", Colors.Plaguebearer);
+                if (CustomGameOptions.SerialKillerOn > 0) ColorMapping.Add("Serial Killer", Colors.SerialKiller);
+                if (CustomGameOptions.SoulCollectorOn > 0) ColorMapping.Add("Soul Collector", Colors.SoulCollector);
+                if (CustomGameOptions.GlitchOn > 0) ColorMapping.Add("The Glitch", Colors.Glitch);
+                if (CustomGameOptions.VampireOn > 0) ColorMapping.Add("Vampire", Colors.Vampire);
+                ColorMapping.Add("\n<b>Impostor Basic</b>\n", Palette.ImpostorRed);
                 if (CustomGameOptions.ImpostorOn > 0) ColorMapping.Add("Impostor", Colors.Impostor);
-
-                // Imp Concealing
+                ColorMapping.Add("\n<b>Impostor Concealing</b>\n", Palette.ImpostorRed);
                 if (CustomGameOptions.EscapistOn > 0) ColorMapping.Add("Escapist", Colors.Impostor);
                 if (CustomGameOptions.GrenadierOn > 0) ColorMapping.Add("Grenadier", Colors.Impostor);
                 if (CustomGameOptions.MorphlingOn > 0) ColorMapping.Add("Morphling", Colors.Impostor);
                 if (CustomGameOptions.SwooperOn > 0) ColorMapping.Add("Swooper", Colors.Impostor);
                 if (CustomGameOptions.VenererOn > 0) ColorMapping.Add("Venerer", Colors.Impostor);
-
-                // Imp Ghost
+                ColorMapping.Add("\n<b>Impostor Ghost</b>\n", Palette.ImpostorRed);
                 if (CustomGameOptions.BlinderOn > 0) ColorMapping.Add("Blinder", Colors.Impostor);
                 if (CustomGameOptions.FreezerOn > 0) ColorMapping.Add("Freezer", Colors.Impostor);
                 if (CustomGameOptions.SpiritOn > 0) ColorMapping.Add("Spirit", Colors.Impostor);
-
-                // Imp Killing
+                ColorMapping.Add("\n<b>Impostor Killing</b>\n", Palette.ImpostorRed);
                 if (CustomGameOptions.AssassinOn > 0 && CustomGameOptions.AssassinImpostorRole) ColorMapping.Add("Assassin", Colors.Impostor);
                 if (CustomGameOptions.BomberOn > 0) ColorMapping.Add("Bomber", Colors.Impostor);
                 if (CustomGameOptions.BountyHunterOn > 0) ColorMapping.Add("Bounty Hunter", Colors.Impostor);
@@ -743,8 +730,7 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.TraitorOn > 0) ColorMapping.Add("Traitor", Colors.Impostor);
                 if (CustomGameOptions.WarlockOn > 0) ColorMapping.Add("Warlock", Colors.Impostor);
                 if (CustomGameOptions.WitchOn > 0) ColorMapping.Add("Witch", Colors.Impostor);
-
-                // Imp Support
+                ColorMapping.Add("\n<b>Impostor Support</b>\n", Palette.ImpostorRed);
                 if (CustomGameOptions.BlackmailerOn > 0) ColorMapping.Add("Blackmailer", Colors.Impostor);
                 if (CustomGameOptions.ConverterOn > 0) ColorMapping.Add("Converter", Colors.Impostor);
                 if (CustomGameOptions.ConverterOn > 0 || CustomGameOptions.MadmateOn > 0 || CustomGameOptions.FighterOn > 0) ColorMapping.Add("Madmate", Colors.Impostor);
@@ -754,16 +740,12 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.MinerOn > 0) ColorMapping.Add("Miner", Colors.Impostor);
                 if (CustomGameOptions.ReviverOn > 0) ColorMapping.Add("Reviver", Colors.Impostor);
                 if (CustomGameOptions.UndertakerOn > 0) ColorMapping.Add("Undertaker", Colors.Impostor);
-
-                ColorMapping.Add("\n<b>Coven:</b>\n", Colors.Coven);
-                // Basic Coven
+                ColorMapping.Add("\n<b>Coven Basic</b>\n", Colors.Coven);
                 if (CustomGameOptions.CovenOn > 0) ColorMapping.Add("Coven", Colors.Coven);
-
-                // Coven Killing
+                ColorMapping.Add("\n<b>Coven Killing</b>\n", Colors.Coven);
                 if (CustomGameOptions.HexMasterOn > 0) ColorMapping.Add("Hex Master", Colors.Coven);
                 if (CustomGameOptions.RitualistOn > 0) ColorMapping.Add("Ritualist", Colors.Coven);
-
-                // Coven Support
+                ColorMapping.Add("\n<b>Coven Support</b>\n", Colors.Coven);
                 if (CustomGameOptions.CovenLeaderOn > 0) ColorMapping.Add("Coven Leader", Colors.Coven);
                 if (CustomGameOptions.PotionMasterOn > 0) ColorMapping.Add("Potion Master", Colors.Coven);
                 if (CustomGameOptions.SpiritualistOn > 0) ColorMapping.Add("Spiritualist", Colors.Coven);
@@ -781,7 +763,7 @@ namespace TownOfUsEdited.Patches
             {
                 Dictionary<string, Color> ColorMapping = new Dictionary<string, Color>();
 
-                ColorMapping.Add("<b>Crewmate Modifiers:</b>\n", Palette.CrewmateBlue);
+                ColorMapping.Add("<b>Crewmate Modifiers</b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.AftermathOn > 0) ColorMapping.Add("Aftermath", Colors.Aftermath);
                 if (CustomGameOptions.BaitOn > 0) ColorMapping.Add("Bait", Colors.Bait);
                 if (CustomGameOptions.DiseasedOn > 0) ColorMapping.Add("Diseased", Colors.Diseased);
@@ -792,7 +774,7 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.TorchOn > 0) ColorMapping.Add("Torch", Colors.Torch);
                 if (CustomGameOptions.VengefulOn > 0) ColorMapping.Add("Vengeful", Colors.Vengeful);
 
-                ColorMapping.Add("\n<b>Global Modifiers:</b>\n", Palette.DisabledGrey);
+                ColorMapping.Add("\n<b>Global Modifiers</b>\n", Palette.DisabledGrey);
                 if (CustomGameOptions.ButtonBarryOn > 0) ColorMapping.Add("Button Barry", Colors.ButtonBarry);
                 if (CustomGameOptions.DrunkOn > 0) ColorMapping.Add("Drunk", Colors.Drunk);
                 if (CustomGameOptions.FlashOn > 0) ColorMapping.Add("Flash", Colors.Flash);
@@ -810,7 +792,7 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.SuperstarOn > 0) ColorMapping.Add("Superstar", Colors.Superstar);
                 if (CustomGameOptions.TiebreakerOn > 0) ColorMapping.Add("Tiebreaker", Colors.Tiebreaker);
 
-                ColorMapping.Add("\n<b>Impostor Modifiers:</b>\n", Palette.ImpostorRed);
+                ColorMapping.Add("\n<b>Impostor Modifiers</b>\n", Palette.ImpostorRed);
                 if (CustomGameOptions.BloodlustOn > 0) ColorMapping.Add("Bloodlust", Colors.Impostor);
                 if (CustomGameOptions.DisperserOn > 0) ColorMapping.Add("Disperser", Colors.Impostor);
                 if (CustomGameOptions.DoubleShotOn > 0) ColorMapping.Add("Double Shot", Colors.Impostor);

@@ -19,8 +19,7 @@ public class VitalsHudBehaviour : MonoBehaviour
 
     public void Start()
     {
-
-        if (Targets.Count() < 16)
+        if (Targets.Count() < 16 && !TownOfUsEdited.Force4Columns.Value)
         {
             // dont change layout if players count is below 16
             return;

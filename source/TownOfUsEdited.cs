@@ -32,13 +32,13 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "1.3.1";
+        public const string VersionString = "1.4.0";
         public const string BasicCompilation = "1.1.4";
         public static System.Version Version = System.Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
-        public const int MaxPlayers = 35;
-        public const int MaxImpostors = 35 / 2;
+        public const int MaxPlayers = 36;
+        public const int MaxImpostors = 36 / 2;
 
         public static AssetLoader bundledAssets;
 
@@ -181,7 +181,9 @@ namespace TownOfUsEdited
 
         private Harmony _harmony;
         public static ConfigEntry<bool> DeadSeeGhosts { get; set; }
+        public static ConfigEntry<bool> SeeSettingNotifier { get; set; }
         public static ConfigEntry<bool> DisableLobbyMusic { get; set; }
+        public static ConfigEntry<bool> Force4Columns { get; set; }
         public static ConfigEntry<bool> HideDevStatus { get; set; }
 
         public static string RuntimeLocation;
@@ -336,14 +338,14 @@ namespace TownOfUsEdited
             // RegisterInIl2CppAttribute.Register();
 
             DeadSeeGhosts = Config.Bind("Settings", "Dead See Other Ghosts", true, "Whether you see other dead players' ghosts while your dead");
-
+            SeeSettingNotifier = Config.Bind("Settings", "See Setting Notifier", true, "Whether you see setting changes in lobby at bottom left");
             DisableLobbyMusic = Config.Bind("Settings", "Disable Lobby Music", false, "Whether you want to disable the lobby Music in-game (can be changed in-game with settings)");
-
+            Force4Columns = Config.Bind("Settings", "Force 4 Columns", false, "Always display 4 columns in meeting, vitals, etc.");
             HideDevStatus = Config.Bind("Settings", "Hide Special Status", false, "Toggle this to hide your special status when launching if you have one. You will still have access to your special perks.");
 
-            NormalGameOptionsV09.RecommendedImpostors = NormalGameOptionsV09.MaxImpostors = Enumerable.Repeat(35, 35).ToArray();
-            NormalGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 35).ToArray();
-            HideNSeekGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 35).ToArray();
+            NormalGameOptionsV09.RecommendedImpostors = NormalGameOptionsV09.MaxImpostors = Enumerable.Repeat(36, 36).ToArray();
+            NormalGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 36).ToArray();
+            HideNSeekGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 36).ToArray();
 
             _harmony.PatchAll();
             SubmergedCompatibility.Initialize();
