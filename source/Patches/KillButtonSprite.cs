@@ -47,8 +47,7 @@ namespace TownOfUsEdited
         private static Sprite Trap => TownOfUsEdited.TrapSprite;
         private static Sprite Inspect => TownOfUsEdited.InspectSprite;
         private static Sprite Track => TownOfUsEdited.TrackSprite;
-        public static Sprite ChameleonSwoop => TownOfUsEdited.ChameleonSwoop;
-
+        private static Sprite ChameleonSwoop => TownOfUsEdited.ChameleonSwoop;
         private static Sprite Observe => TownOfUsEdited.ObserveSprite;
         private static Sprite Stake => TownOfUsEdited.StakeSprite;
         private static Sprite Confess => TownOfUsEdited.ConfessSprite;
@@ -200,7 +199,7 @@ namespace TownOfUsEdited
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Chameleon))
             {
-                __instance.KillButton.graphic.sprite = TownOfUsEdited.ChameleonSwoop;
+                __instance.KillButton.graphic.sprite = ChameleonSwoop;
                 __instance.KillButton.buttonLabelText.text = "Swoop";
                 flag = true;
             }

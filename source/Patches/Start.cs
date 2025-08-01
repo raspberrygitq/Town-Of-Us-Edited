@@ -330,6 +330,12 @@ namespace TownOfUsEdited.Patches
                 undertaker.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Noclip))
+            {
+                var noclip = Role.GetRole<Noclip>(PlayerControl.LocalPlayer);
+                noclip.Cooldown = CustomGameOptions.InitialCooldowns;
+            }
+
             if (PlayerControl.LocalPlayer.Is(Faction.Coven))
             {
                 Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.InitialCooldowns;

@@ -817,6 +817,12 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 venererRole.Cooldown = CustomGameOptions.AbilityCd;
             }
 
+            else if (role == RoleEnum.Noclip)
+            {
+                var noclipRole = Role.GetRole<Noclip>(shifter);
+                noclipRole.Cooldown = CustomGameOptions.NoclipCooldown;
+            }
+
             else if (role == RoleEnum.Blackmailer)
             {
                 var blackmailerRole = Role.GetRole<Blackmailer>(shifter);

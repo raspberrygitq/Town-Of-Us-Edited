@@ -1,6 +1,7 @@
 ## *Note: This repository is an unofficial version of Town Of Us Reactivated & Town Of Us Edited meant to add more features to the mod.*
 
 ![LOGO](./Images/TOUE-logo.png)
+![Roles](./Images/Roles.png)
 
 | **Impostor Roles**             | **Crewmate Roles**                | **Neutral Roles**                 | **Coven Roles**                 | **Modifiers**                 |
 |:------------------------------:|:---------------------------------:|:---------------------------------:|:-------------------------------:|:-----------------------------:|
@@ -19,17 +20,17 @@
 | [Manipulator](#manipulator)    | [Engineer](#engineer)             | [Mutant](#mutant)                 |                                 | [Lucky](#lucky)               |
 | [Miner](#miner)                | [Fighter](#fighter)               | [Phantom](#phantom)               |                                 | [Madmate](#madmate)           |
 | [Morphling](#morphling)        | [Guardian](#guardian)             | [Plaguebearer](#plaguebearer)     |                                 | [Mini](#mini)                 |
-| [Poisoner](#poisoner)          | [Haunter](#haunter)               | [Serial Killer](#serial-killer)   |                                 | [Motionless](#motionless)     |
-| [Reviver](#reviver)            | [Helper](#helper)                 | [Shifter](#shifter)               |                                 | [Multitasker](#multitasker)   |
-| [Shooter](#shooter)            | [Hunter](#hunter)                 | [Soul Collector](#soul-collector) |                                 | [Rader](#radar)               |
-| [Spirit](#spirit)              | [Imitator](#imitator)             | [Survivor](#survivor)             |                                 | [Saboteur](#saboteur)         |
-| [Swooper](#swooper)            | [Informant](#informant)           | [The Glitch](#the-glitch)         |                                 | [Satellite](#satellite)       |
-| [Traitor](#traitor)            | [Investigator](#investigator)     | [Troll](#troll)                   |                                 | [Scientist](#scientist)       |
-| [Undertaker](#undertaker)      | [Jailor](#jailor)                 | [Vampire](#vampire)               |                                 | [Shy](#shy)                   |
-| [Venerer](#venerer)            | [Knight](#knight)                 | [Vulture](#vulture)               |                                 | [Sixth Sense](#sixth-sense)   |
-| [Warlock](#warlock)            | [Lookout](#lookout)               |                                   |                                 | [Sleuth](#sleuth)             |
-| [Witch](#witch)                | [Medic](#medic)                   |                                   |                                 | [Spotter](#spotter)           |
-|                                | [Medium](#medium)                 |                                   |                                 | [Superstar](#superstar)       |
+| [Noclip](#noclip)              | [Haunter](#haunter)               | [Serial Killer](#serial-killer)   |                                 | [Motionless](#motionless)     |
+| [Poisoner](#poisoner)          | [Helper](#helper)                 | [Shifter](#shifter)               |                                 | [Multitasker](#multitasker)   |
+| [Reviver](#reviver)            | [Hunter](#hunter)                 | [Soul Collector](#soul-collector) |                                 | [Rader](#radar)               |
+| [Shooter](#shooter)            | [Imitator](#imitator)             | [Survivor](#survivor)             |                                 | [Saboteur](#saboteur)         |
+| [Spirit](#spirit)              | [Informant](#informant)           | [The Glitch](#the-glitch)         |                                 | [Satellite](#satellite)       |
+| [Swooper](#swooper)            | [Investigator](#investigator)     | [Troll](#troll)                   |                                 | [Scientist](#scientist)       |
+| [Traitor](#traitor)            | [Jailor](#jailor)                 | [Vampire](#vampire)               |                                 | [Shy](#shy)                   |
+| [Undertaker](#undertaker)      | [Knight](#knight)                 | [Vulture](#vulture)               |                                 | [Sixth Sense](#sixth-sense)   |
+| [Venerer](#venerer)            | [Lookout](#lookout)               |                                   |                                 | [Sleuth](#sleuth)             |
+| [Warlock](#warlock)            | [Medic](#medic)                   |                                   |                                 | [Spotter](#spotter)           |
+| [Witch](#witch)                | [Medium](#medium)                 |                                   |                                 | [Superstar](#superstar)       |
 |                                | [Mystic](#mystic)                 |                                   |                                 | [Tasker](#tasker)             |
 |                                | [Oracle](#oracle)                 |                                   |                                 | [Taskmaster](#taskmaster)     |
 |                                | [Paranoïac](#paranoïac)           |                                   |                                 | [Tiebreaker](#tiebreaker)     |
@@ -56,7 +57,8 @@
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
-|  16.0.5 - 16.1.0 | v1.4.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.4.0/ToUE-Steam.v1.4.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.4.0/ToUE-Epic.v1.4.0.zip) |
+|  16.0.5 - 16.1.0 | v1.5.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.5.0/ToUE-Steam.v1.5.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.5.0/ToUE-Epic.v1.5.0.zip) |
+|  16.0.5 - 16.1.0 | v1.4.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.5.0/ToUE-Steam.v1.4.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.4.0/ToUE-Epic.v1.4.0.zip) |
 |  16.0.5 - 16.1.0 | v1.3.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.3.1/ToUE-Steam.v1.3.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.3.1/ToUE-Epic.v1.3.1.zip) |
 |  16.0.5 - 16.1.0 | v1.3.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.3.0/ToUE-Steam.v1.3.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.3.0/ToUE-Epic.v1.3.0.zip) |
 |  16.0.5 - 16.1.0 | v1.2.2 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.2.2/ToUE-Steam.v1.2.2.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.2.2/ToUE-Epic.v1.2.2.zip) |
@@ -1384,6 +1386,20 @@ They can then Morph into that person at any time for a limited amount of time.
 | Morph Cooldown | The cooldown of the Morphling's Morph button | Time | 25s |
 | Morph Duration | How long the Morph lasts for | Time | 10s |
 | Morphling can Vent | Whether the Morphling can Vent | Toggle | False |
+
+## Noclip
+### **Team:Impostors**
+
+The Noclip is an Impostor that can pass through walls.
+
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Noclip | The percentage probability of the Noclip appearing | Percentage | 0% |
+| Noclip Cooldown | The cooldown of the Noclip button | Time | 25s |
+| Noclip Duration | How long the Noclip lasts for | Time | 10s |
+| Noclip can Vent | Whether the Noclip can Vent | Toggle | False |
+
 
 -----------------------
 ## Swooper

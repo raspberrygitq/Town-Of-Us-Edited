@@ -168,133 +168,41 @@ namespace TownOfUsEdited.Patches {
                     else if (role.Value == RoleEnum.Plumber) { playerRole += "<color=#" + Patches.Colors.Plumber.ToHtmlStringRGBA() + ">Plumber</color> > "; }
                     else if (role.Value == RoleEnum.Mercenary) { playerRole += "<color=#" + Patches.Colors.Mercenary.ToHtmlStringRGBA() + ">Mercenary</color> > "; }
                     else if (role.Value == RoleEnum.Cleric) { playerRole += "<color=#" + Patches.Colors.Cleric.ToHtmlStringRGBA() + ">Cleric</color> > "; }
+                    else if (role.Value == RoleEnum.Noclip) { playerRole += "<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Noclip</color> > "; }
                 }
                 if (!playerRole.IsNullOrWhiteSpace()) playerRole = playerRole.Remove(playerRole.Length - 3);
                 
-                if (playerControl.Is(Faction.Madmates))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Madmate</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Giant))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Giant.ToHtmlStringRGBA() + ">Giant</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Mini))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Mini.ToHtmlStringRGBA() + ">Mini</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.ButtonBarry))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.ButtonBarry.ToHtmlStringRGBA() + ">Button Barry</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Aftermath))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Aftermath.ToHtmlStringRGBA() + ">Aftermath</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Scientist))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Scientist.ToHtmlStringRGBA() + ">Scientist</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Bait))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Bait.ToHtmlStringRGBA() + ">Bait</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Superstar))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Superstar.ToHtmlStringRGBA() + ">Superstar</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Diseased))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Diseased.ToHtmlStringRGBA() + ">Diseased</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Flash))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Flash.ToHtmlStringRGBA() + ">Flash</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Tiebreaker))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Tiebreaker.ToHtmlStringRGBA() + ">Tiebreaker</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Taskmaster))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Taskmaster.ToHtmlStringRGBA() + ">Taskmaster</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Torch))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Torch.ToHtmlStringRGBA() + ">Torch</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Satellite))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Satellite.ToHtmlStringRGBA() + ">Satellite</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Lover))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Lovers.ToHtmlStringRGBA() + ">Lover</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Sleuth))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Sleuth.ToHtmlStringRGBA() + ">Sleuth</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Radar))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Radar.ToHtmlStringRGBA() + ">Radar</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Disperser))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Disperser</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Bloodlust))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Bloodlust</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Saboteur))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Saboteur</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Multitasker))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Multitasker.ToHtmlStringRGBA() + ">Multitasker</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.DoubleShot))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Double Shot</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Underdog))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Underdog</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Lucky))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Lucky</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Frosty))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Frosty.ToHtmlStringRGBA() + ">Frosty</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.SixthSense))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.SixthSense.ToHtmlStringRGBA() + ">Sixth Sense</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Shy))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Shy.ToHtmlStringRGBA() + ">Shy</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Spotter))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Spotter.ToHtmlStringRGBA() + ">Spotter</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Motionless))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Motionless.ToHtmlStringRGBA() + ">Motionless</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Tasker))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Tasker</color>)";
-                }
-                if (playerControl.Is(ModifierEnum.Drunk))
-                {
-                    playerRole += " (<color=#" + Patches.Colors.Drunk.ToHtmlStringRGBA() + ">Drunk</color>)";
-                }
+                if (playerControl.Is(Faction.Madmates)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Madmate</color>)";
+                if (playerControl.Is(ModifierEnum.Giant)) playerRole += " (<color=#" + Patches.Colors.Giant.ToHtmlStringRGBA() + ">Giant</color>)";
+                if (playerControl.Is(ModifierEnum.Mini)) playerRole += " (<color=#" + Patches.Colors.Mini.ToHtmlStringRGBA() + ">Mini</color>)";
+                if (playerControl.Is(ModifierEnum.ButtonBarry)) playerRole += " (<color=#" + Patches.Colors.ButtonBarry.ToHtmlStringRGBA() + ">Button Barry</color>)";
+                if (playerControl.Is(ModifierEnum.Aftermath)) playerRole += " (<color=#" + Patches.Colors.Aftermath.ToHtmlStringRGBA() + ">Aftermath</color>)";
+                if (playerControl.Is(ModifierEnum.Scientist)) playerRole += " (<color=#" + Patches.Colors.Scientist.ToHtmlStringRGBA() + ">Scientist</color>)";
+                if (playerControl.Is(ModifierEnum.Bait)) playerRole += " (<color=#" + Patches.Colors.Bait.ToHtmlStringRGBA() + ">Bait</color>)";
+                if (playerControl.Is(ModifierEnum.Superstar)) playerRole += " (<color=#" + Patches.Colors.Superstar.ToHtmlStringRGBA() + ">Superstar</color>)";
+                if (playerControl.Is(ModifierEnum.Diseased)) playerRole += " (<color=#" + Patches.Colors.Diseased.ToHtmlStringRGBA() + ">Diseased</color>)";
+                if (playerControl.Is(ModifierEnum.Flash)) playerRole += " (<color=#" + Patches.Colors.Flash.ToHtmlStringRGBA() + ">Flash</color>)";
+                if (playerControl.Is(ModifierEnum.Tiebreaker)) playerRole += " (<color=#" + Patches.Colors.Tiebreaker.ToHtmlStringRGBA() + ">Tiebreaker</color>)";
+                if (playerControl.Is(ModifierEnum.Taskmaster)) playerRole += " (<color=#" + Patches.Colors.Taskmaster.ToHtmlStringRGBA() + ">Taskmaster</color>)";
+                if (playerControl.Is(ModifierEnum.Torch)) playerRole += " (<color=#" + Patches.Colors.Torch.ToHtmlStringRGBA() + ">Torch</color>)";
+                if (playerControl.Is(ModifierEnum.Satellite)) playerRole += " (<color=#" + Patches.Colors.Satellite.ToHtmlStringRGBA() + ">Satellite</color>)";
+                if (playerControl.Is(ModifierEnum.Lover)) playerRole += " (<color=#" + Patches.Colors.Lovers.ToHtmlStringRGBA() + ">Lover</color>)";
+                if (playerControl.Is(ModifierEnum.Sleuth)) playerRole += " (<color=#" + Patches.Colors.Sleuth.ToHtmlStringRGBA() + ">Sleuth</color>)";
+                if (playerControl.Is(ModifierEnum.Radar)) playerRole += " (<color=#" + Patches.Colors.Radar.ToHtmlStringRGBA() + ">Radar</color>)";
+                if (playerControl.Is(ModifierEnum.Disperser)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Disperser</color>)";
+                if (playerControl.Is(ModifierEnum.Bloodlust)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Bloodlust</color>)";
+                if (playerControl.Is(ModifierEnum.Saboteur)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Saboteur</color>)";
+                if (playerControl.Is(ModifierEnum.Multitasker)) playerRole += " (<color=#" + Patches.Colors.Multitasker.ToHtmlStringRGBA() + ">Multitasker</color>)";
+                if (playerControl.Is(ModifierEnum.DoubleShot)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Double Shot</color>)";
+                if (playerControl.Is(ModifierEnum.Underdog)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Underdog</color>)";
+                if (playerControl.Is(ModifierEnum.Lucky)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Lucky</color>)";
+                if (playerControl.Is(ModifierEnum.Frosty)) playerRole += " (<color=#" + Patches.Colors.Frosty.ToHtmlStringRGBA() + ">Frosty</color>)";
+                if (playerControl.Is(ModifierEnum.SixthSense)) playerRole += " (<color=#" + Patches.Colors.SixthSense.ToHtmlStringRGBA() + ">Sixth Sense</color>)";
+                if (playerControl.Is(ModifierEnum.Shy)) playerRole += " (<color=#" + Patches.Colors.Shy.ToHtmlStringRGBA() + ">Shy</color>)";
+                if (playerControl.Is(ModifierEnum.Spotter)) playerRole += " (<color=#" + Patches.Colors.Spotter.ToHtmlStringRGBA() + ">Spotter</color>)";
+                if (playerControl.Is(ModifierEnum.Motionless)) playerRole += " (<color=#" + Patches.Colors.Motionless.ToHtmlStringRGBA() + ">Motionless</color>)";
+                if (playerControl.Is(ModifierEnum.Tasker)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Tasker</color>)";
+                if (playerControl.Is(ModifierEnum.Drunk)) playerRole += " (<color=#" + Patches.Colors.Drunk.ToHtmlStringRGBA() + ">Drunk</color>)";
 
                 if (!playerControl.Data.IsDead)
                 {
@@ -508,9 +416,9 @@ namespace TownOfUsEdited.Patches {
             TMPro.TMP_Text roleSummaryTextMesh = roleSummary.GetComponent<TMPro.TMP_Text>();
             roleSummaryTextMesh.alignment = TMPro.TextAlignmentOptions.TopLeft;
             roleSummaryTextMesh.color = Color.white;
-            roleSummaryTextMesh.fontSizeMin = 1.5f;
-            roleSummaryTextMesh.fontSizeMax = 1.5f;
-            roleSummaryTextMesh.fontSize = 1.5f;
+            roleSummaryTextMesh.fontSizeMin = 1f;
+            roleSummaryTextMesh.fontSizeMax = 1f;
+            roleSummaryTextMesh.fontSize = 1f;
              
             var roleSummaryTextMeshRectTransform = roleSummaryTextMesh.GetComponent<RectTransform>();
             roleSummaryTextMeshRectTransform.anchoredPosition = new Vector2(position.x + 3.5f, position.y - 0.1f);

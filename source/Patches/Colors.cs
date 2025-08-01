@@ -112,7 +112,7 @@ namespace TownOfUsEdited.Patches
         public readonly static Color Multitasker = new Color(1f, 0.5f, 0.3f, 1f);
         public readonly static Color Scientist = new Color32(84, 65, 179, 255);
         public readonly static Color Frosty = new Color(0.6f, 1f, 1f, 1f);
-        public readonly static Color SixthSense = new Color(0.85f, 1f, 0.55f, 1f);
+        public readonly static Color SixthSense = new Color(0.93f, 1f, 0.78f, 1f);
         public readonly static Color Shy = new Color(1f, 0.7f, 0.8f, 1f);
         public readonly static Color Vengeful = new Color32(141, 0, 0, 255);
         public readonly static Color Spotter = new Color32(198, 136, 242, 255);

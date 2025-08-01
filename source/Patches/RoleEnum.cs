@@ -101,6 +101,7 @@ namespace TownOfUsEdited
         Blinder,
         Freezer,
         Hypnotist,
+        Noclip,
 
         Coven,
         Ritualist,

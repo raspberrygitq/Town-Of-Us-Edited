@@ -291,7 +291,7 @@ namespace TownOfUsEdited.Patches
                     if (pbRole.InfectedPlayers.Contains(id) && pbRole.Player != Utils.PlayerById(id)) pbRole.InfectedPlayers.Remove(id);
                 }
             }
-            if (effects.Contains(EffectType.Infect2))
+            if (effects.Contains(EffectType.Infection))
             {
                 foreach (var infect in Role.GetRoles(RoleEnum.Infectious))
                 {

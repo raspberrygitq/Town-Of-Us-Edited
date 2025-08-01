@@ -2961,6 +2961,11 @@ namespace TownOfUsEdited
                 undertaker.DragDropButton.graphic.sprite = TownOfUsEdited.DragSprite;
                 undertaker.CurrentlyDragging = null;
             }
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Noclip))
+            {
+                var noclip = Role.GetRole<Noclip>(PlayerControl.LocalPlayer);
+                noclip.Cooldown = CustomGameOptions.NoclipCooldown;
+            }
             if (PlayerControl.LocalPlayer.Is(ModifierEnum.Lucky) && !PlayerControl.LocalPlayer.Is(RoleEnum.Poisoner))
             {
                 var num = Random.RandomRange(1f, 60f);

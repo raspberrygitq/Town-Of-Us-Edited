@@ -160,6 +160,7 @@ namespace TownOfUsEdited
         public static int ReviverOn => (int)Generate.ReviverOn.Get();
         public static int HypnotistOn => (int)Generate.HypnotistOn.Get();
         public static int ManipulatorOn => (int)Generate.ManipulatorOn.Get();
+        public static int NoclipOn => (int)Generate.NoclipOn.Get();
         public static int OracleOn => (int)Generate.OracleOn.Get();
         public static int WardenOn => (int)Generate.WardenOn.Get();
         public static int VenererOn => (int)Generate.VenererOn.Get();
@@ -638,5 +639,8 @@ namespace TownOfUsEdited
         public static BarrierOptions ShowBarriered => (BarrierOptions)Generate.ShowBarriered.Get();
         public static bool ClericAttackNotification => Generate.ClericGetsAttackNotification.Get();
         public static int DrunkDuration => (int)Generate.DrunkDuration.Get();
+        public static float NoclipCooldown => (float)Generate.NoclipCooldown.Get();
+        public static float NoclipDuration => (float)Generate.NoclipDuration.Get();
+        public static bool NoclipVent => Generate.NoclipVent.Get();
     }
 }

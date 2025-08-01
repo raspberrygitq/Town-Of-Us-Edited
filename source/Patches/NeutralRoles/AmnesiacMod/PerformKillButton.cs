@@ -608,6 +608,12 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                 venererRole.Cooldown = CustomGameOptions.AbilityCd;
             }
 
+            else if (role == RoleEnum.Noclip)
+            {
+                var noclipRole = Role.GetRole<Noclip>(amnesiac);
+                noclipRole.Cooldown = CustomGameOptions.NoclipCooldown;
+            }
+
             else if (role == RoleEnum.Blackmailer)
             {
                 var blackmailerRole = Role.GetRole<Blackmailer>(amnesiac);

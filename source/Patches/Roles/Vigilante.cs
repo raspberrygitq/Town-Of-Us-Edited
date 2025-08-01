@@ -58,6 +58,7 @@ namespace TownOfUsEdited.Roles
                 if (CustomGameOptions.VenererOn > 0) ColorMapping.Add("Venerer", Colors.Impostor);
                 if (CustomGameOptions.HypnotistOn > 0) ColorMapping.Add("Hypnotist", Colors.Impostor);
                 if (CustomGameOptions.MadmateOn > 0 || CustomGameOptions.ConverterOn > 0 || CustomGameOptions.FighterOn > 0) ColorMapping.Add("Madmate", Colors.Impostor);
+                if (CustomGameOptions.NoclipOn > 0) ColorMapping.Add("Noclip", Colors.Impostor);
 
                 if (CustomGameOptions.VigilanteGuessNeutralBenign)
                 {

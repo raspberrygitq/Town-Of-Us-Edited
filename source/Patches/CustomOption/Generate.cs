@@ -100,6 +100,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomHeaderOption ImpostorConcealingRoles;
         public static CustomNumberOption EscapistOn;
         public static CustomNumberOption MorphlingOn;
+        public static CustomNumberOption NoclipOn;
         public static CustomNumberOption SwooperOn;
         public static CustomNumberOption GrenadierOn;
         public static CustomNumberOption VenererOn;
@@ -511,6 +512,11 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption UndertakerDragSpeed;
         public static CustomToggleOption UndertakerVent;
         public static CustomToggleOption UndertakerVentWithBody;
+
+        public static CustomHeaderOption Noclip;
+        public static CustomNumberOption NoclipCooldown;
+        public static CustomNumberOption NoclipDuration;
+        public static CustomToggleOption NoclipVent;
 
         public static CustomHeaderOption Assassin;
         public static CustomStringOption NumberOfImpostorAssassins;
@@ -1024,6 +1030,8 @@ namespace TownOfUsEdited.CustomOption
                 PercentFormat);
             MorphlingOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Morphling</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            NoclipOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Noclip</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
             SwooperOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Swooper</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             VenererOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Venerer</color>", 0f, 0f, 100f, 10f,
@@ -1118,7 +1126,7 @@ namespace TownOfUsEdited.CustomOption
                 PercentFormat);
             ShyOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FFB3CCFF>Shy</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-            SixthSenseOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#D9FF8CFF>Sixth Sense</color>", 0f, 0f, 100f, 10f,
+            SixthSenseOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#EDFFC8FF>Sixth Sense</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             SleuthOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#803333FF>Sleuth</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -1426,7 +1434,7 @@ namespace TownOfUsEdited.CustomOption
             Guardian =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#67bb43>Guardian</color>");
             GuardCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Guard Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Guardian Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             GuardDuration =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Guard Duration", 10f, 10f, 30f, 2.5f, CooldownFormat);
 
@@ -1442,9 +1450,9 @@ namespace TownOfUsEdited.CustomOption
             Helper =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#7cb6c2>Helper</color>");
             HelperCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Alert Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Helper Alert Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             HelperDuration =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Alert Duration", 10f, 5f, 15f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Helper Alert Duration", 10f, 5f, 15f, 1f, CooldownFormat);
             HelperSpeed = new CustomNumberOption(num++, MultiMenu.crewmate, "Player Speed On Alert", 1.25f, 1.05f, 2.5f, 0.05f, MultiplierFormat);
 
             Astral =
@@ -1475,9 +1483,9 @@ namespace TownOfUsEdited.CustomOption
             Chameleon =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#068c38>Chameleon</color>");
             ChamSwoopCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Swoop Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Chameleon Swoop Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             ChamSwoopDuration =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Swoop Duration", 10f, 5f, 15f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Chameleon Swoop Duration", 10f, 5f, 15f, 1f, CooldownFormat);
 
             Detective =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#4D4DFFFF>Detective</color>");
@@ -1818,7 +1826,7 @@ namespace TownOfUsEdited.CustomOption
                 new CustomStringOption(num++, MultiMenu.neutral, "Show Protected Player",
                     new[] { "Self", "Guardian Angel", "Self+GA" }, 1);
             GaOnTargetDeath = new CustomStringOption(num++, MultiMenu.neutral, "GA Becomes On Target Dead",
-                new[] { "Crew", "Amnesiac", "Mercenary", "Shifter", "Survivor", "Jester" });
+                new[] { "Crew", "Amnesiac", "Mercenary", "Shifter", "Survivor", "Jester" }, 4);
             GATargetKnows =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Target Knows GA Exists", false);
             GAKnowsTargetRole =
@@ -1857,7 +1865,7 @@ namespace TownOfUsEdited.CustomOption
             Executioner =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#8C4005FF>Executioner</color>");
             OnTargetDead = new CustomStringOption(num++, MultiMenu.neutral, "Executioner Becomes On Target Dead",
-                new[] { "Crew", "Amnesiac", "Mercenary", "Shifter", "Survivor", "Jester" });
+                new[] { "Crew", "Amnesiac", "Mercenary", "Shifter", "Survivor", "Jester" }, 5);
             ExecutionerButton =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Executioner Can Button", true);
             ExecutionerTorment =
@@ -2052,6 +2060,14 @@ namespace TownOfUsEdited.CustomOption
                 new CustomNumberOption(num++, MultiMenu.imposter, "Morphling Duration", 10f, 5f, 15f, 1f, CooldownFormat);
             MorphlingVent =
                 new CustomToggleOption(num++, MultiMenu.imposter, "Morphling Can Vent", false);
+
+            Noclip = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Noclip</color>");
+            NoclipCooldown =
+                new CustomNumberOption(num++, MultiMenu.imposter, "Noclip Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            NoclipDuration =
+                new CustomNumberOption(num++, MultiMenu.imposter, "Noclip Duration", 10f, 5f, 20f, 1f, CooldownFormat);
+            NoclipVent =
+                new CustomToggleOption(num++, MultiMenu.imposter, "Noclip Can Vent", false);
 
             Swooper = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Swooper</color>");
             SwoopCooldown =

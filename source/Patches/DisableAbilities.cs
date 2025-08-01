@@ -91,6 +91,11 @@ namespace TownOfUsEdited
                         var ww = Role.GetRole<Werewolf>(PlayerControl.LocalPlayer);
                         if (ww.Rampaged) disableExtra = false;
                     }
+                    else if (PlayerControl.LocalPlayer.Is(RoleEnum.Noclip))
+                    {
+                        var noclip = Role.GetRole<Noclip>(PlayerControl.LocalPlayer);
+                        if (noclip.Noclipped) disableExtra = false;
+                    }
 
                     if (HudManager.Instance.KillButton != null && disableKill)
                     {

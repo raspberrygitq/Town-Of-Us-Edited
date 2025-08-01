@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using System.Reflection;
 using AmongUs.GameOptions;
 using BepInEx;
 using BepInEx.Configuration;
@@ -12,6 +9,10 @@ using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Reactor;
 using Reactor.Networking.Attributes;
 using Reactor.Utilities.Extensions;
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using TownOfUsEdited.CrewmateRoles.DetectiveMod;
 using TownOfUsEdited.CustomOption;
 using TownOfUsEdited.Extensions;
@@ -19,7 +20,8 @@ using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.RainbowMod;
 using UnityEngine;
-using System.Linq;
+using UnityEngine.Analytics;
+using UnityEngine.CrashReportHandler;
 
 namespace TownOfUsEdited
 {
@@ -32,7 +34,7 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "1.4.0";
+        public const string VersionString = "1.5.0";
         public const string BasicCompilation = "1.1.4";
         public static System.Version Version = System.Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
@@ -160,6 +162,7 @@ namespace TownOfUsEdited
         public static Sprite BarrierSprite;
         public static Sprite CleanseSprite;
         public static Sprite DetectSprite;
+        public static Sprite NoclipSprite;
 
         public static Sprite ToUBanner;
         public static Sprite UpdateTOUButton;
@@ -185,6 +188,7 @@ namespace TownOfUsEdited
         public static ConfigEntry<bool> DisableLobbyMusic { get; set; }
         public static ConfigEntry<bool> Force4Columns { get; set; }
         public static ConfigEntry<bool> HideDevStatus { get; set; }
+        public static ConfigEntry<bool> DisableTelemetry { get; set; }
 
         public static string RuntimeLocation;
         public override void Load()
@@ -317,6 +321,7 @@ namespace TownOfUsEdited
             ExecuteSprite = CreateSprite("TownOfUsEdited.Resources.Execute.png");
             ReapSprite = CreateSprite("TownOfUsEdited.Resources.Reap.png");
             SoulSprite = CreateSprite("TownOfUsEdited.Resources.Soul.png");
+            NoclipSprite = CreateSprite("TownOfUsEdited.Resources.Noclip.png");
 
             ToUBanner = CreateSprite("TownOfUsEdited.Resources.TownOfUsEditedBanner.png");
             UpdateTOUButton = CreateSprite("TownOfUsEdited.Resources.UpdateToUButton.png");
@@ -342,12 +347,22 @@ namespace TownOfUsEdited
             DisableLobbyMusic = Config.Bind("Settings", "Disable Lobby Music", false, "Whether you want to disable the lobby Music in-game (can be changed in-game with settings)");
             Force4Columns = Config.Bind("Settings", "Force 4 Columns", false, "Always display 4 columns in meeting, vitals, etc.");
             HideDevStatus = Config.Bind("Settings", "Hide Special Status", false, "Toggle this to hide your special status when launching if you have one. You will still have access to your special perks.");
+            DisableTelemetry = Config.Bind("Other", "Disable Telemetry", true, "Prevent the game from collecting analytics and sending them to Innersloth");
 
             NormalGameOptionsV09.RecommendedImpostors = NormalGameOptionsV09.MaxImpostors = Enumerable.Repeat(36, 36).ToArray();
             NormalGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 36).ToArray();
             HideNSeekGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 36).ToArray();
 
             _harmony.PatchAll();
+
+            if (!DisableTelemetry.Value) return;
+            Analytics.deviceStatsEnabled = false;
+            Analytics.enabled = false;
+            Analytics.initializeOnStartup = false;
+            Analytics.limitUserTracking = true;
+            CrashReportHandler.enableCaptureExceptions = false;
+            PerformanceReporting.enabled = false;
+
             SubmergedCompatibility.Initialize();
             IL2CPPChainloader.Instance.Finished += LevelImpostorCompatibility.Initialize; // LI has a circular dependency on TOU, so we need to wait for LI to finish loading before we can initialize it
 

@@ -77,7 +77,7 @@ namespace TownOfUsEdited.Roles
             foreach (var role in GetRoles(RoleEnum.Infectious))
             {
                 var infect = (Infectious)role;
-                if (infect.Infected.Contains(id)) effects.Add(EffectType.Infect2);
+                if (infect.Infected.Contains(id)) effects.Add(EffectType.Infection);
             }
             foreach (var role in GetRoles(RoleEnum.Blackmailer))
             {

@@ -89,7 +89,7 @@ namespace TownOfUsEdited.Patches
                 || role == "Troll" || role == "Undertaker" || role == "Vampire" || role == "Vigilante"
                 || role == "Villager" || role == "Vulture" || role == "Warden" || role == "Warlock"
                 || role == "Werewolf" || role == "WhiteWolf" || role == "Witch" || role == "Sorcerer"
-                || role == "Veteran" || role == "VoodooMaster" || role == "Lookout";
+                || role == "Veteran" || role == "VoodooMaster" || role == "Lookout" || role == "Noclip";
             }
             public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl sourcePlayer , ref string chatText)
             {
@@ -586,10 +586,7 @@ namespace TownOfUsEdited.Patches
                                     }
                                     return false;
                                 }
-                                catch (System.Exception)
-                                {
-                                    return false;
-                                }
+                                catch { }
                             }
                             else
                             {
@@ -713,6 +710,7 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.EscapistOn > 0) ColorMapping.Add("Escapist", Colors.Impostor);
                 if (CustomGameOptions.GrenadierOn > 0) ColorMapping.Add("Grenadier", Colors.Impostor);
                 if (CustomGameOptions.MorphlingOn > 0) ColorMapping.Add("Morphling", Colors.Impostor);
+                if (CustomGameOptions.NoclipOn > 0) ColorMapping.Add("Noclip", Colors.Impostor);
                 if (CustomGameOptions.SwooperOn > 0) ColorMapping.Add("Swooper", Colors.Impostor);
                 if (CustomGameOptions.VenererOn > 0) ColorMapping.Add("Venerer", Colors.Impostor);
                 ColorMapping.Add("\n<b>Impostor Ghost</b>\n", Palette.ImpostorRed);

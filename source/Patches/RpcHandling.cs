@@ -3493,6 +3493,10 @@ namespace TownOfUsEdited
 
                     if (CustomGameOptions.VenererOn > 0)
                         ImpostorRoles.Add((typeof(Venerer), CustomGameOptions.VenererOn, true));
+
+                    if (CustomGameOptions.NoclipOn > 0)
+                        ImpostorRoles.Add((typeof(Noclip), CustomGameOptions.NoclipOn, true));
+
                     #endregion
                     #region Coven Roles
                     if (CustomGameOptions.CovenOn > 0)
@@ -3811,6 +3815,9 @@ namespace TownOfUsEdited
 
                         if (CustomGameOptions.VenererOn > 0)
                             ImpostorConcealingRoles.Add((typeof(Venerer), CustomGameOptions.VenererOn, false || CustomGameOptions.UniqueRoles));
+
+                        if (CustomGameOptions.NoclipOn > 0)
+                            ImpostorConcealingRoles.Add((typeof(Noclip), CustomGameOptions.NoclipOn, false || CustomGameOptions.UniqueRoles));
 
                         // Coven
                         if (CustomGameOptions.CovenOn > 0)

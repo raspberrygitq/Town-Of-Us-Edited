@@ -9,6 +9,6 @@
         Blind,
         Flash,
         Hypnosis,
-        Infect2
+        Infection
     }
 }

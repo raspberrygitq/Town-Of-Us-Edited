@@ -375,6 +375,7 @@ namespace TownOfUsEdited.Patches
             else if (role == typeof(Escapist)) newRole = new Escapist(PlayerControl.LocalPlayer);
             else if (role == typeof(Grenadier)) newRole = new Grenadier(PlayerControl.LocalPlayer);
             else if (role == typeof(Morphling)) newRole = new Morphling(PlayerControl.LocalPlayer);
+            else if (role == typeof(Noclip)) newRole = new Noclip(PlayerControl.LocalPlayer);
             else if (role == typeof(Swooper)) newRole = new Swooper(PlayerControl.LocalPlayer);
             else if (role == typeof(Venerer)) newRole = new Venerer(PlayerControl.LocalPlayer);
             else if (role == typeof(Bomber)) newRole = new Bomber(PlayerControl.LocalPlayer);
@@ -618,7 +619,7 @@ namespace TownOfUsEdited.Patches
                 if (taskFolder.FolderName == "Impostor Roles")
                 {
                     List<Type> Roles = [ typeof(Impostor), typeof(Blinder), typeof(Freezer), typeof(Spirit), typeof(Assassin), typeof(Escapist), typeof(Grenadier),
-                    typeof(Morphling), typeof(Swooper), typeof(Venerer), typeof(Bomber), typeof(BountyHunter), typeof(Conjurer),
+                    typeof(Morphling), typeof(Noclip), typeof(Swooper), typeof(Venerer), typeof(Bomber), typeof(BountyHunter), typeof(Conjurer),
                     typeof(Manipulator), typeof(Poisoner), typeof(Shooter), typeof(Traitor), typeof(Warlock), typeof(Witch), typeof(Blackmailer),
                     typeof(Converter), typeof(Hypnotist), typeof(Janitor), typeof(Mafioso), typeof(Miner), typeof(Reviver),
                     typeof(Undertaker) ];
@@ -798,6 +799,7 @@ namespace TownOfUsEdited.Patches
                     else if (__instance.Text.text.Contains("Be_Escapist.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
                     else if (__instance.Text.text.Contains("Be_Grenadier.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
                     else if (__instance.Text.text.Contains("Be_Morphling.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Noclip.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
                     else if (__instance.Text.text.Contains("Be_Swooper.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
                     else if (__instance.Text.text.Contains("Be_Venerer.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
                     else if (__instance.Text.text.Contains("Be_Bomber.exe")) __instance.FileImage.color = Patches.Colors.Impostor;

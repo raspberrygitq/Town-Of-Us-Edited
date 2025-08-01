@@ -416,6 +416,10 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Manipulator</color>, you can use your Manipulate button on a player.\nThen, you can control that player, making you able to control their movements and use their identity to kill.\nNote that the Manipulation will stop if the Manipulated gets killed, if you get killed or if a meeting is called.");
                 }
+                if (pc.Is(RoleEnum.Noclip))
+                {
+                    HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Noclip</color>, you can use your Noclip button to walk through walls.");
+                }
                 //Coven Roles info
                 if (pc.Is(RoleEnum.Coven))
                 {
@@ -915,6 +919,10 @@ namespace TownOfUsEdited.Roles
             else if (role == "Madmate")
             {
                 return "<color=#FF0000FF>Madmates</color> are old Crewmates who joined the Impostor team.\nIt could be either voluntarily (like the Fighter), or they were forced to (conversion).\nMadmates will now have Impostor vision, venting perks and may even be able to access the Impostor chat.\nMadmates may get special abilities depending on their old role (ex: Mad Engineer can sabotage instead of fixing sabotages).";
+            }
+            else if (role == "Noclip")
+            {
+                return "The <color=#FF0000FF>Noclip</color> an Impostor role which can walk trought walls.";
             }
             // coven
             else if (role == "Coven")

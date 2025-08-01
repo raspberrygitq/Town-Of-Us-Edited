@@ -175,6 +175,7 @@ namespace TownOfUsEdited
             Generate.FreezeCooldown.Set((float)Generate.FreezeCooldown.Value + change, false);
             Generate.FreezeDuration.Set((float)Generate.FreezeDuration.Value + change, false);
             Generate.BarrierCd.Set((float)Generate.BarrierCd.Value + change, false);
+            Generate.NoclipCooldown.Set((float)Generate.NoclipCooldown.Value + change, false);
             GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown += change;
             if (change % 5 != 0)
             {
