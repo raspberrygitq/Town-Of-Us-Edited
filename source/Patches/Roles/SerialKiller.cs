@@ -297,6 +297,13 @@ namespace TownOfUsEdited.Roles
                     detecRole.ExamineButton.gameObject.SetActive(false);
                 }
 
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic))
+                {
+                    var mysticRole = Role.GetRole<Mystic>(PlayerControl.LocalPlayer);
+                    mysticRole.BodyArrows.Values.DestroyAll();
+                    mysticRole.BodyArrows.Clear();
+                }
+
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Survivor))
                 {
                     var survRole = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);

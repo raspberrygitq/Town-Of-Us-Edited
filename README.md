@@ -57,6 +57,7 @@
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
+|  16.0.5 - 16.1.0 | v1.5.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.5.1/ToUE-Steam.v1.5.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.5.1/ToUE-Epic.v1.5.1.zip) |
 |  16.0.5 - 16.1.0 | v1.5.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.5.0/ToUE-Steam.v1.5.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.5.0/ToUE-Epic.v1.5.0.zip) |
 |  16.0.5 - 16.1.0 | v1.4.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.5.0/ToUE-Steam.v1.4.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.4.0/ToUE-Epic.v1.4.0.zip) |
 |  16.0.5 - 16.1.0 | v1.3.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.3.1/ToUE-Steam.v1.3.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.3.1/ToUE-Epic.v1.3.1.zip) |

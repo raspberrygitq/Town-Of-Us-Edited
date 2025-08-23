@@ -479,6 +479,8 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
             else if (role == RoleEnum.Mystic)
             {
                 var mysticRole = Role.GetRole<Mystic>(amnesiac);
+                mysticRole.BodyArrows.Values.DestroyAll();
+                mysticRole.BodyArrows.Clear();
                 DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
             }
 

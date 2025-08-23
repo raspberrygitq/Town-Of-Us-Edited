@@ -670,6 +670,8 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             else if (role == RoleEnum.Mystic)
             {
                 var mysticRole = Role.GetRole<Mystic>(shifter);
+                mysticRole.BodyArrows.Values.DestroyAll();
+                mysticRole.BodyArrows.Clear();
                 DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
             }
 

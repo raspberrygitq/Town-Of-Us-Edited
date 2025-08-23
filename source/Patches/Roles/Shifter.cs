@@ -9,7 +9,7 @@ namespace TownOfUsEdited.Roles
         {
             Name = "Shifter";
             ImpostorText = () => "Shift your role";
-            TaskText = () => SpawnedAs ? "Exchange your role with another player\nFake Tasks:" : "Your target was killed. Now shift your role!\nFake Tasks:";
+            TaskText = () => SpawnedAs ? "Exchange your role with another player" : "Your target was killed. Now shift your role!";
             Color = Patches.Colors.Shifter;
             RoleType = RoleEnum.Shifter;
             AddToRoleHistory(RoleType);

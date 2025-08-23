@@ -280,6 +280,9 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
 
             else if (roleEnum == RoleEnum.Mystic)
             {
+                var mysticRole = Role.GetRole<Mystic>(oldVamp);
+                mysticRole.BodyArrows.Values.DestroyAll();
+                mysticRole.BodyArrows.Clear();
                 DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
             }
 

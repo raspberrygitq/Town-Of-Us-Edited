@@ -62,6 +62,7 @@ namespace TownOfUsEdited
         TimeLord,
         Informant,
         Deputy,
+        Lookout,
         Helper,
         Guardian,
         Chameleon,
@@ -109,6 +110,7 @@ namespace TownOfUsEdited
         CovenLeader,
         Spiritualist,
         PotionMaster,
+        VoodooMaster,
 
         Crewmate,
         Impostor,
@@ -121,8 +123,6 @@ namespace TownOfUsEdited
         WhiteWolf,
         Guard,
         TalkativeWolf,
-        VoodooMaster,
-        Lookout,
 
         None
     }

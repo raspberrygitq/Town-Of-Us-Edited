@@ -25,8 +25,8 @@ namespace TownOfUsEdited.Roles
                 target == null ? "You don't have a target for some reason... weird..." : $"Protect {target.name} With Your Life!";
             TaskText = () =>
                 target == null
-                    ? "You don't have a target for some reason... weird...\nFake Tasks:"
-                    : $"Protect {target.name}!\nFake Tasks:";
+                    ? "You don't have a target for some reason... weird..."
+                    : $"Protect {target.name}!";
             Color = Patches.Colors.GuardianAngel;
             Cooldown = CustomGameOptions.ProtectCd;
             RoleType = RoleEnum.GuardianAngel;

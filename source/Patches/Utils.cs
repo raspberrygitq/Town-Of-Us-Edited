@@ -1772,6 +1772,11 @@ namespace TownOfUsEdited
                     if (CustomGameOptions.WatchedKnows) Utils.Rpc(CustomRPC.StopWatch, target.PlayerId);
                 }
 
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic) && !PlayerControl.LocalPlayer.Data.IsDead)
+                {
+                    Coroutines.Start(FlashCoroutine(Patches.Colors.Mystic));
+                }
+
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Detective))
                 {
                     var detective = Role.GetRole<Detective>(PlayerControl.LocalPlayer);

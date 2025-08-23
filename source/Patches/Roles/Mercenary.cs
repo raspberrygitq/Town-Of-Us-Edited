@@ -30,7 +30,7 @@ namespace TownOfUsEdited.Roles
         {
             Name = "Mercenary";
             ImpostorText = () => "Bribe The Crewmates";
-            TaskText = () => SpawnedAs ? "Bribe the Crewmates to win\nFake Tasks:" : "Your target was killed. Now bribe the Crewmates to win!\nFake Tasks:";
+            TaskText = () => SpawnedAs ? "Bribe the Crewmates to win" : "Your target was killed. Now bribe the Crewmates to win!";
             Color = Patches.Colors.Mercenary;
             Cooldown = CustomGameOptions.MercenaryCD;
             RoleType = RoleEnum.Mercenary;
