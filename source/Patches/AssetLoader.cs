@@ -52,16 +52,6 @@ namespace TownOfUsEdited.Patches
         private Dictionary<string, string> objectname_to_bundle = new Dictionary<string, string>();
         private Dictionary<string, UnityObject> loadedObjects = new Dictionary<string, UnityObject>();
 
-        public static RuntimeAnimatorController LoadController(AssetBundle bundle, string name)
-        {
-            return bundle.LoadAsset<RuntimeAnimatorController>(name);
-        }
-
-        public static AnimationClip LoadAnimationClip(AssetBundle bundle, string name)
-        {
-            return bundle.LoadAsset<AnimationClip>(name);
-        }
-
         public static TMPro.TMP_SpriteAsset LoadSpriteAsset(AssetBundle bundle, string name)
         {
             return bundle.LoadAsset<TMPro.TMP_SpriteAsset>(name);

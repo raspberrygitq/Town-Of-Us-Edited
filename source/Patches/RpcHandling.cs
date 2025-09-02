@@ -1706,23 +1706,6 @@ namespace TownOfUsEdited
                                 mutant2.IsTransformed = false;
                                 break;
 
-                            case CustomRPC.Animate:
-                                if (Animations.waveController == null) Animations.waveController = AssetLoader.LoadController(AssetLoader.bundles.FirstOrDefault(x => x.Key == "touebundle").Value, "wave_0.controller");
-                                if (Animations.boingController == null) Animations.boingController = AssetLoader.LoadController(AssetLoader.bundles.FirstOrDefault(x => x.Key == "touebundle").Value, "Boing_0.controller");
-                                if (Animations.sleepyController == null) Animations.sleepyController = AssetLoader.LoadController(AssetLoader.bundles.FirstOrDefault(x => x.Key == "touebundle").Value, "sleepy_0.controller");
-                                if (Animations.rollController == null) Animations.rollController = AssetLoader.LoadController(AssetLoader.bundles.FirstOrDefault(x => x.Key == "touebundle").Value, "roll_0.controller");
-                                var animation = reader.ReadString();
-                                var playerToAnimate = Utils.PlayerById(reader.ReadByte());
-                                var hidePlayer = reader.ReadBoolean();
-                                RuntimeAnimatorController Controller = null;
-                                if (animation == "Bean Dance") Controller = Animations.boingController;
-                                else if (animation == "Wave") Controller = Animations.waveController;
-                                else if (animation == "Sleepy") Controller = Animations.sleepyController;
-                                else if (animation == "Roll") Controller = Animations.rollController;
-                                if (PlayerControl.LocalPlayer) Coroutines.Start(Animations.AnimatePlayer(Controller, playerToAnimate, hidePlayer));
-                                else Coroutines.Start(WaitForLocalAnim(Controller, playerToAnimate, hidePlayer));
-                                break;
-
                             case CustomRPC.Rewind:
                                 var TimeLordPlayer = Utils.PlayerById(reader.ReadByte());
                                 var TimeLordRole = Role.GetRole<TimeLord>(TimeLordPlayer);
@@ -3063,14 +3046,6 @@ namespace TownOfUsEdited
             {
                 while (!PlayerControl.LocalPlayer) yield return null;
                 Utils.Rpc(CustomRPC.ReceiveStatusCheck, PlayerControl.LocalPlayer.PlayerId, playerIdRequester, EOSManager.Instance.FriendCode, DevStatus.hidden);
-                yield break;
-            }
-            
-            public static IEnumerator WaitForLocalAnim(RuntimeAnimatorController controller, PlayerControl animatingPlayer, bool hidePlayer)
-            {
-                while (!PlayerControl.LocalPlayer) yield return null;
-                yield return new WaitForSeconds(0.5f);
-                Coroutines.Start(Animations.AnimatePlayer(controller, animatingPlayer, hidePlayer));
                 yield break;
             }
         }

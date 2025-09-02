@@ -196,7 +196,6 @@ namespace TownOfUsEdited
         CheckForStatus,
         ReceiveStatusCheck,
         SyncCustomStatus,
-        Animate,
         
         RemoveAllBodies,
 

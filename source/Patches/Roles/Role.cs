@@ -701,8 +701,8 @@ namespace TownOfUsEdited.Roles
                         if (role.Faction == Faction.NeutralEvil)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
-                            __instance.__4__this.TeamTitle.color = Color.white;
-                            __instance.__4__this.BackgroundBar.material.color = Color.white;
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
                             var sound = GameManagerCreator.Instance.HideAndSeekManagerPrefab.FinalHideAlertSFX;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = Object.Instantiate(sound, HudManager.Instance.transform.parent);
                         }
@@ -710,9 +710,9 @@ namespace TownOfUsEdited.Roles
                         if (role.Faction == Faction.NeutralBenign)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
-                            __instance.__4__this.TeamTitle.color = Color.white;
-                            __instance.__4__this.BackgroundBar.material.color = Color.white;
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Crewmate);
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Shapeshifter);
                         }
 
                         if (role.Faction == Faction.Coven)
@@ -752,9 +752,9 @@ namespace TownOfUsEdited.Roles
                         if (role.Faction == Faction.NeutralKilling && CustomGameOptions.GameMode != GameMode.BattleRoyale)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
-                            __instance.__4__this.TeamTitle.color = Color.white;
-                            __instance.__4__this.BackgroundBar.material.color = Color.white;
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = DestroyableSingleton<HnSImpostorScreamSfx>.Instance.HnSLocalImpostorTransformSfx;
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Phantom);
                         }
 
                         if (role.Player.Is(Faction.Madmates))
@@ -829,8 +829,8 @@ namespace TownOfUsEdited.Roles
                         else if (role.Faction == Faction.NeutralEvil)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
-                            __instance.__4__this.TeamTitle.color = Color.white;
-                            __instance.__4__this.BackgroundBar.material.color = Color.white;
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
                             var sound = GameManagerCreator.Instance.HideAndSeekManagerPrefab.FinalHideAlertSFX;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = Object.Instantiate(sound, HudManager.Instance.transform.parent);
                         }
@@ -853,9 +853,9 @@ namespace TownOfUsEdited.Roles
                         if (role.Faction == Faction.NeutralBenign)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
-                            __instance.__4__this.TeamTitle.color = Color.white;
-                            __instance.__4__this.BackgroundBar.material.color = Color.white;
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Crewmate);
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Shapeshifter);
                         }
 
                         if (role.Faction == Faction.Coven)
@@ -895,9 +895,9 @@ namespace TownOfUsEdited.Roles
                         else if (role.Faction == Faction.NeutralKilling && CustomGameOptions.GameMode != GameMode.BattleRoyale)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
-                            __instance.__4__this.TeamTitle.color = Color.white;
-                            __instance.__4__this.BackgroundBar.material.color = Color.white;
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = DestroyableSingleton<HnSImpostorScreamSfx>.Instance.HnSLocalImpostorTransformSfx;
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Phantom);
                         }
 
                         else if (role.Player.Is(Faction.Madmates))
@@ -1040,8 +1040,8 @@ namespace TownOfUsEdited.Roles
                         if (role.Faction == Faction.NeutralEvil)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
-                            __instance.__4__this.TeamTitle.color = Color.white;
-                            __instance.__4__this.BackgroundBar.material.color = Color.white;
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
                             var sound = GameManagerCreator.Instance.HideAndSeekManagerPrefab.FinalHideAlertSFX;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = Object.Instantiate(sound, HudManager.Instance.transform.parent);
                         }
@@ -1098,17 +1098,17 @@ namespace TownOfUsEdited.Roles
                         if (role.Faction == Faction.NeutralBenign)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
-                            __instance.__4__this.TeamTitle.color = Color.white;
-                            __instance.__4__this.BackgroundBar.material.color = Color.white;
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Crewmate);
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Shapeshifter);
                         }
 
                         if (role.Faction == Faction.NeutralKilling && CustomGameOptions.GameMode != GameMode.BattleRoyale)
                         {
                             __instance.__4__this.TeamTitle.text = "Neutral";
-                            __instance.__4__this.TeamTitle.color = Color.white;
-                            __instance.__4__this.BackgroundBar.material.color = Color.white;
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = DestroyableSingleton<HnSImpostorScreamSfx>.Instance.HnSLocalImpostorTransformSfx;
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Phantom);
                         }
 
                         if (role.Player.Is(Faction.Madmates))
