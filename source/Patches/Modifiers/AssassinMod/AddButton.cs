@@ -25,6 +25,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
         {
             if (voteArea.AmDead) return true;
             var player = Utils.PlayerById(voteArea.TargetPlayerId);
+            if (player.IsJailed()) return true;
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Vampire))
             {
                 if (
@@ -269,6 +270,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!PlayerControl.LocalPlayer.Is(AbilityEnum.Assassin)) return;
             if (PlayerControl.LocalPlayer.Is(Faction.NeutralBenign)) return;
+            if (PlayerControl.LocalPlayer.IsJailed()) return;
 
             var assassinRole = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
             if (assassinRole.RemainingKills <= 0) return;

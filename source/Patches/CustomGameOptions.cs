@@ -244,11 +244,6 @@ namespace TownOfUsEdited
         public static bool NeutralLovers => Generate.NeutralLovers.Get();
         public static bool CovenLovers => Generate.CovenLovers.Get();
         public static float JailCD => Generate.JailCD.Get();
-        public static bool CanJailNB => Generate.CanJailNB.Get();
-        public static bool CanJailNE => Generate.CanJailNE.Get();
-        public static bool CanJailNK => Generate.CanJailNK.Get();
-        public static bool CanJailCoven => Generate.CanJailCoven.Get();
-        public static bool CanJailMad => Generate.CanJailMad.Get();
         public static bool JailorDies => Generate.JailorDies.Get();
         public static float KnightKCD => Generate.KnightKCD.Get();
         public static float FighterKCD => Generate.FighterKCD.Get();

@@ -5,7 +5,7 @@ using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUsEdited.NeutraleRoles.DoppelgangerMod
+namespace TownOfUsEdited.NeutralRoles.DoppelgangerMod
 {
     public class MeetingPatch
     {

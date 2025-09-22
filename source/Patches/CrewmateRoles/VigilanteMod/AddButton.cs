@@ -23,6 +23,7 @@ namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
         {
             if (voteArea.AmDead) return true;
             var player = Utils.PlayerById(voteArea.TargetPlayerId);
+            if (player.IsJailed()) return true;
             if (
                     player == null ||
                     player.Data.IsDead ||
@@ -200,6 +201,7 @@ namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
 
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Vigilante)) return;
+            if (PlayerControl.LocalPlayer.IsJailed()) return;
 
             var retributionistRole = Role.GetRole<Vigilante>(PlayerControl.LocalPlayer);
             if (retributionistRole.RemainingKills <= 0) return;

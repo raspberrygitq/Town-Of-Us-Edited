@@ -386,6 +386,7 @@ namespace TownOfUsEdited.CrewmateRoles.DeputyMod
 
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Deputy)) return;
+            if (PlayerControl.LocalPlayer.IsJailed()) return;
             var deputyrole = Role.GetRole<Deputy>(PlayerControl.LocalPlayer);
             if (deputyrole.Killer == null) return;
             foreach (var voteArea in __instance.playerStates)

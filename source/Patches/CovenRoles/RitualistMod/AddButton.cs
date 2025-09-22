@@ -23,6 +23,7 @@ namespace TownOfUsEdited.CovenRoles.RitualistMod
         {
             if (voteArea.AmDead) return true;
             var player = Utils.PlayerById(voteArea.TargetPlayerId);
+            if (player.IsJailed()) return true;
             if (
                 player == null ||
                 player.Is(Faction.Coven) ||
@@ -202,6 +203,7 @@ namespace TownOfUsEdited.CovenRoles.RitualistMod
 
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Ritualist)) return;
+            if (PlayerControl.LocalPlayer.IsJailed()) return;
 
             var ritualistRole = Role.GetRole<Ritualist>(PlayerControl.LocalPlayer);
             foreach (var voteArea in __instance.playerStates)

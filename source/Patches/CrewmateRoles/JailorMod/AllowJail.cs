@@ -4,6 +4,7 @@ using TownOfUsEdited.Modifiers.AssassinMod;
 using Reactor.Utilities;
 using TownOfUsEdited.Patches;
 using Reactor.Utilities.Extensions;
+using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.JailorMod
 {
@@ -37,15 +38,11 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                             AssassinKill.MurderPlayer(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer);
                             Utils.Rpc(CustomRPC.Execution, PlayerControl.LocalPlayer.PlayerId, PlayerControl.LocalPlayer.PlayerId);
                         }
-                        if ((role.JailedPlayer.Is(Faction.Crewmates) || (role.JailedPlayer.Is(Faction.NeutralBenign) && !CustomGameOptions.CanJailNB)
-                        || (role.JailedPlayer.Is(Faction.NeutralKilling) && !CustomGameOptions.CanJailNK)
-                        || (role.JailedPlayer.Is(Faction.Coven) && !CustomGameOptions.CanJailCoven)
-                        || (role.JailedPlayer.Is(Faction.NeutralEvil) && !CustomGameOptions.CanJailNE)
-                        || (role.JailedPlayer.Is(Faction.Madmates) && !CustomGameOptions.CanJailMad)) && !PlayerControl.LocalPlayer.Is(Faction.Madmates)
-                        && !role.Player.Data.IsDead)
+                        if (role.JailedPlayer.Is(Faction.Crewmates) && !PlayerControl.LocalPlayer.Is(Faction.Madmates) && !role.Player.Data.IsDead)
                         {
                             role.CanJail = false;
                             role.IncorrectKills++;
+                            Coroutines.Start(Utils.FlashCoroutine(Color.red));
                             if (CustomGameOptions.JailorDies && !role.JailedPlayer.Is(RoleEnum.Pestilence))
                             {
                                 AssassinKill.MurderPlayer(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer);
@@ -60,6 +57,7 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                         else if (!role.Player.Data.IsDead)
                         {
                             role.CorrectKills++;
+                            Coroutines.Start(Utils.FlashCoroutine(Color.green));
                         }
                         var jailedPlayerRole = Role.GetRole(role.JailedPlayer);
                         jailedPlayerRole.DeathReason = DeathReasons.Executed;

@@ -292,19 +292,19 @@ namespace TownOfUsEdited.Patches {
                 }
                 if (player.CorrectKills > 0)
                 {
-                    playerRole += " |<color=#" + Color.green.ToHtmlStringRGBA() + $"> Correct Kills: {player.CorrectKills}</color>";
+                    playerRole += " |<color=#" + Color.green.ToHtmlStringRGBA() + $"> Kills: {player.CorrectKills}</color>";
                 }
                 if (player.IncorrectKills > 0)
                 {
-                    playerRole += " |<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + $"> Incorrect Kills: {player.IncorrectKills}</color>";
+                    playerRole += " |<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + $"> Mis-kills: {player.IncorrectKills}</color>";
                 }
                 if (player.CorrectAssassinKills > 0)
                 {
-                    playerRole += " |<color=#" + Color.green.ToHtmlStringRGBA() + $"> Correct Guesses: {player.CorrectAssassinKills}</color>";
+                    playerRole += " |<color=#" + Color.green.ToHtmlStringRGBA() + $"> Guesses: {player.CorrectAssassinKills}</color>";
                 }
                 if (player.IncorrectAssassinKills > 0)
                 {
-                    playerRole += " |<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + $"> Incorrect Guesses: {player.IncorrectAssassinKills}</color>";
+                    playerRole += " |<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + $"> Misguesses: {player.IncorrectAssassinKills}</color>";
                 }
                 var playerName = "";
                 foreach (var winner in EndGameResult.CachedWinners)

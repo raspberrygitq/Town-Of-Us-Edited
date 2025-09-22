@@ -23,7 +23,7 @@ namespace TownOfUsEdited.Roles
             RoleType = RoleEnum.Noclip;
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
-
+            Alignment = Alignment.ImpostorConcealing;
         }
 
         public bool Noclipped => TimeRemaining > 0f;

@@ -22,6 +22,7 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
         {
             if (voteArea.AmDead) return true;
             var player = Utils.PlayerById(voteArea.TargetPlayerId);
+            if (player.IsJailed()) return true;
             if (
                     player == null ||
                     player.Data.IsDead ||
@@ -181,6 +182,7 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
 
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Doomsayer)) return;
+            if (PlayerControl.LocalPlayer.IsJailed()) return;
 
             var doomsayerRole = Role.GetRole<Doomsayer>(PlayerControl.LocalPlayer);
             foreach (var voteArea in __instance.playerStates)
