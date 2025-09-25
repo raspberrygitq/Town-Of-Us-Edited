@@ -34,13 +34,13 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "1.5.3";
+        public const string VersionString = "1.5.4";
         public const string BasicCompilation = "1.1.4";
         public static System.Version Version = System.Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
-        public const int MaxPlayers = 36;
-        public const int MaxImpostors = 36 / 2;
+        public const int MaxPlayers = 35;
+        public const int MaxImpostors = MaxPlayers / 2;
 
         public static AssetLoader bundledAssets;
 
@@ -347,10 +347,6 @@ namespace TownOfUsEdited
             Force4Columns = Config.Bind("Settings", "Force 4 Columns", false, "Always display 4 columns in meeting, vitals, etc.");
             HideDevStatus = Config.Bind("Settings", "Hide Special Status", false, "Toggle this to hide your special status when launching if you have one. You will still have access to your special perks.");
             DisableTelemetry = Config.Bind("Other", "Disable Telemetry", true, "Prevent the game from collecting analytics and sending them to Innersloth");
-
-            NormalGameOptionsV09.RecommendedImpostors = NormalGameOptionsV09.MaxImpostors = Enumerable.Repeat(36, 36).ToArray();
-            NormalGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 36).ToArray();
-            HideNSeekGameOptionsV09.MinPlayers = Enumerable.Repeat(4, 36).ToArray();
 
             _harmony.PatchAll();
 

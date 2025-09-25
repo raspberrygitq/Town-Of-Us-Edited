@@ -1,15 +1,18 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using Il2CppSystem.Reflection;
 using System.Linq;
+using Reactor.Utilities;
 
 namespace TownOfUsEdited.Patches;
 
 internal static class GenericPatches
 {
-    [HarmonyPatch(typeof(NormalGameOptionsV09), nameof(NormalGameOptionsV09.AreInvalid))]
+    [HarmonyPatch(typeof(LegacyGameOptions), nameof(LegacyGameOptions.AreInvalid))]
     public static class InvalidOptionsPatches
     {
-        public static bool Prefix(NormalGameOptionsV09 __instance, [HarmonyArgument(0)] int maxExpectedPlayers)
+        public static bool Prefix(LegacyGameOptions __instance, [HarmonyArgument(0)] int maxExpectedPlayers)
         {
             return __instance.MaxPlayers > maxExpectedPlayers ||
                    __instance.NumImpostors < 1 ||
@@ -34,19 +37,58 @@ internal static class GenericPatches
         }
     }
 
-    [HarmonyPatch(typeof(GameOptionsMenu), nameof(GameOptionsMenu.Initialize))]
-    public static class GameOptionsMenu_Initialize
+    private static void TryAdjustOptionsRecommendations(GameOptionsManager manager)
     {
-        public static void Postfix(GameOptionsMenu __instance)
+        const int MaxPlayers = TownOfUsEdited.MaxPlayers;
+        var type = manager.GetGameOptions();
+        var options = manager.GameHostOptions.Cast<Il2CppSystem.Object>();
+
+        var maxRecommendation = ((Il2CppStructArray<int>)Enumerable.Repeat(MaxPlayers, MaxPlayers + 1).ToArray())
+            .Cast<Il2CppSystem.Object>();
+        var minRecommendation = ((Il2CppStructArray<int>)Enumerable.Repeat(4, MaxPlayers + 1).ToArray())
+            .Cast<Il2CppSystem.Object>();
+        var killRecommendation = ((Il2CppStructArray<int>)Enumerable.Repeat(0, MaxPlayers + 1).ToArray())
+            .Cast<Il2CppSystem.Object>();
+
+
+        const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+        // all these fields are currently static, but we're doing a forward compat
+        // static fields ignore object param so non-null instance is ok
+        type.GetField("RecommendedImpostors", flags)?.SetValue(options, maxRecommendation);
+        type.GetField("MaxImpostors", flags)?.SetValue(options, maxRecommendation);
+        type.GetField("RecommendedKillCooldown", flags)?.SetValue(options, killRecommendation);
+        type.GetField("MinPlayers", flags)?.SetValue(options, minRecommendation);
+    }
+
+    [HarmonyPatch(typeof(GameOptionsManager), nameof(GameOptionsManager.GameHostOptions), MethodType.Setter)]
+    public static class GameOptionsManager_set_GameHostOptions
+    {
+        public static void Postfix(GameOptionsManager __instance)
         {
-            var numberOptions = __instance.GetComponentsInChildren<NumberOption>();
-
-            var impostorsOption = numberOptions.FirstOrDefault(o => o.Title == StringNames.GameNumImpostors);
-            if (impostorsOption != null)
+            try
             {
-                impostorsOption.ValidRange = new FloatRange(1, TownOfUsEdited.MaxImpostors);
+                TryAdjustOptionsRecommendations(__instance);
             }
+            catch (System.Exception e)
+            {
+                Logger<TownOfUsEdited>.Error($"Failed to adjust options recommendations: {e}");
+            }
+        }
+    }
 
+    [HarmonyPatch(typeof(GameOptionsManager), nameof(GameOptionsManager.SwitchGameMode))]
+    public static class GameOptionsManager_SwitchGameMode
+    {
+        public static void Postfix(GameOptionsManager __instance)
+        {
+            try
+            {
+                TryAdjustOptionsRecommendations(__instance);
+            }
+            catch (System.Exception e)
+            {
+                Logger<TownOfUsEdited>.Error($"Failed to adjust options recommendations: {e}");
+            }
         }
     }
 }
