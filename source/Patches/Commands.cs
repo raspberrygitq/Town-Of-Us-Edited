@@ -574,7 +574,7 @@ namespace TownOfUsEdited.Patches
                         string[] args = chatText.Split(' ');
                         if (args.Length > 1 && int.TryParse(args[1], out int newLimit))
                         {
-                            if (newLimit >= 4 && newLimit <= 255) // This mod integrates AleLuduMod, so 35 players is recommended. If you want to use CrowdedMod then the maximum is 255.
+                            if (newLimit >= 4 && newLimit <= 35) // This mod integrates AleLuduMod, so 35 players is recommended. If you want to use CrowdedMod then the maximum is 255.
                             {
                                 try
                                 {
@@ -593,7 +593,7 @@ namespace TownOfUsEdited.Patches
                                 if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                                 {
                                     error = true;
-                                    HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "The limit must be between 4 and 255.");
+                                    HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "The limit must be between 4 and 35.");
                                 }
                                 return false;
                             }
