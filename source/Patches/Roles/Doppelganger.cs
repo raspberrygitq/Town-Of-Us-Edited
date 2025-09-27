@@ -16,7 +16,7 @@ namespace TownOfUsEdited.Roles
         public Doppelganger(PlayerControl owner) : base(owner)
         {
             Name = "Doppelganger";
-            ImpostorText = () => "Who Is Who?";
+            ImpostorText = () => "Steal your targets identity";
             TaskText = () => "Kill everyone and transform into them\nFake Tasks:";
             Color = Patches.Colors.Doppelganger;
             RoleType = RoleEnum.Doppelganger;

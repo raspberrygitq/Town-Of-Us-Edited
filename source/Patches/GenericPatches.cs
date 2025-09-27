@@ -69,10 +69,7 @@ internal static class GenericPatches
             {
                 TryAdjustOptionsRecommendations(__instance);
             }
-            catch (System.Exception e)
-            {
-                Logger<TownOfUsEdited>.Error($"Failed to adjust options recommendations: {e}");
-            }
+            catch { }
         }
     }
 
@@ -85,10 +82,7 @@ internal static class GenericPatches
             {
                 TryAdjustOptionsRecommendations(__instance);
             }
-            catch (System.Exception e)
-            {
-                Logger<TownOfUsEdited>.Error($"Failed to adjust options recommendations: {e}");
-            }
+            catch { }
         }
     }
 
