@@ -521,26 +521,34 @@ namespace TownOfUsEdited.Patches
 
                 if (chatText.ToLower().StartsWith("/note") || chatText.ToLower().StartsWith("/ note"))
                 {
-                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    if ((AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        system = true;
                         string note = chatText.Substring(5).Trim();
                         var sourcePlayerRole = Role.GetRole(sourcePlayer);
-                        sourcePlayerRole.PlayerNotes += "\n" + note;
-                        HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, $"<b>New Note:</b>\n{note}");
-                        return false;
+                        sourcePlayerRole.PlayerNotes += note + "\n";
+                        chatText = $"<b>New Note:</b>\n{note}";
+                        system = true;
+                    }
+                    else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        chatText = "You can only use this command in game!";
+                        error = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
 
                 if (chatText.ToLower().StartsWith("/seenote") || chatText.ToLower().StartsWith("/ seenote"))
                 {
-                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    if ((AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        system = true;
                         var sourcePlayerRole = Role.GetRole(sourcePlayer);
-                        HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, $"<b>Notes:</b>\n {sourcePlayerRole.PlayerNotes}");
-                        return false;
+                        chatText = $"<b>Notes:</b>\n{sourcePlayerRole.PlayerNotes}";
+                        system = true;
+                    }
+                    else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        chatText = "You can only use this command in game!";
+                        error = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
@@ -569,22 +577,21 @@ namespace TownOfUsEdited.Patches
 
                 if (chatText.StartsWith("/limit "))
                 {
-                    if (GameData.Instance.GetHost() == sourcePlayer.Data)
+                    if (GameData.Instance.GetHost() == sourcePlayer.Data && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         string[] args = chatText.Split(' ');
                         if (args.Length > 1 && int.TryParse(args[1], out int newLimit))
                         {
-                            if (newLimit >= 4 && newLimit <= 35) // This mod integrates AleLuduMod, so 35 players is recommended. If you want to use CrowdedMod then the maximum is 255.
+                            if (newLimit >= 4 && newLimit <= 35)
                             {
                                 try
                                 {
                                     GameOptionsManager.Instance.CurrentGameOptions.SetInt(Int32OptionNames.MaxPlayers, newLimit);
                                     if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                                     {
+                                        chatText = $"A player limit has been set for: {newLimit}";
                                         system = true;
-                                        HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, $"A player limit has been set for: {newLimit}");
                                     }
-                                    return false;
                                 }
                                 catch { }
                             }
@@ -592,30 +599,27 @@ namespace TownOfUsEdited.Patches
                             {
                                 if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                                 {
+                                    chatText = "The /limit command has a range of 4 - 35.";
                                     error = true;
-                                    HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "The limit must be between 4 and 35.");
                                 }
-                                return false;
                             }
                         }
                         else
                         {
                             if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                             {
+                                chatText = "Use /limit [number]. Example: /limit 20.";
                                 error = true;
-                                HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "Use /limit [number]. Example: /limit 20");
                             }
-                            return false;
                         }
                     }
                     else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                         {
+                            chatText = "You don't have access to this command!";
                             noaccess = true;
-                            HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "You don't have access to this command!");
                         }
-                        return false;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }

@@ -10,8 +10,7 @@ namespace TownOfUsEdited.Components;
 [RegisterInIl2Cpp]
 public class VitalsHudBehaviour : MonoBehaviour
 {
-    public VitalsHudBehaviour(IntPtr ptr) : base(ptr) {}
-
+    public VitalsHudBehaviour(IntPtr ptr) : base(ptr) { }
     internal VitalsMinigame vitalsMinigame = null!;
 
     [HideFromIl2Cpp]
@@ -19,12 +18,7 @@ public class VitalsHudBehaviour : MonoBehaviour
 
     public void Start()
     {
-        if (Targets.Count() < 16 && !TownOfUsEdited.Force4Columns.Value)
-        {
-            // dont change layout if players count is below 16
-            return;
-        }
-
+        if (Targets.Count() < 16 && !TownOfUsEdited.Force4Columns.Value) return;
         var i = 0;
         foreach (var panel in Targets)
         {
@@ -35,7 +29,7 @@ public class VitalsHudBehaviour : MonoBehaviour
             panelTransform.localScale *= 0.75f;
             panelTransform.localPosition = new Vector3(
                                           vitalsMinigame.XStart + vitalsMinigame.XOffset * (col * 0.75f - 0.25f),
-                                          vitalsMinigame.YStart +  vitalsMinigame.YOffset * row * 0.75f,
+                                          vitalsMinigame.YStart + vitalsMinigame.YOffset * row * 0.75f,
                                           panelTransform.localPosition.z
                                       );
             i++;
