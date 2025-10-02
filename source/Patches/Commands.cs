@@ -577,6 +577,15 @@ namespace TownOfUsEdited.Patches
 
                 if (chatText.StartsWith("/limit "))
                 {
+                    if ((AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                        {
+                            chatText = "You cannot use this command during the game!";
+                            error = true;
+                        }
+                        return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
+                    }
                     if (GameData.Instance.GetHost() == sourcePlayer.Data && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         string[] args = chatText.Split(' ');
@@ -589,7 +598,7 @@ namespace TownOfUsEdited.Patches
                                     GameOptionsManager.Instance.CurrentGameOptions.SetInt(Int32OptionNames.MaxPlayers, newLimit);
                                     if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                                     {
-                                        chatText = $"A player limit has been set for: {newLimit}";
+                                        chatText = $"Player limit has been set for: <color=#D91919FF><b>{newLimit}</b></color>";
                                         system = true;
                                     }
                                 }
@@ -599,7 +608,7 @@ namespace TownOfUsEdited.Patches
                             {
                                 if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                                 {
-                                    chatText = "The /limit command has a range of 4 - 35.";
+                                    chatText = "The /limit command has a range of 4 - 35!";
                                     error = true;
                                 }
                             }

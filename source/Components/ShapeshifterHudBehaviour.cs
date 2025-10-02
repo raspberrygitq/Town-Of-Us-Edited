@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Il2CppInterop.Runtime.Attributes;
+using Reactor.Utilities.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Il2CppInterop.Runtime.Attributes;
-using Reactor.Utilities.Attributes;
 using UnityEngine;
 
 namespace TownOfUsEdited.Components;
@@ -10,7 +10,7 @@ namespace TownOfUsEdited.Components;
 [RegisterInIl2Cpp]
 public class ShapeshifterBehaviour : MonoBehaviour
 {
-    public ShapeshifterBehaviour(IntPtr ptr) : base(ptr) {}
+    public ShapeshifterBehaviour(IntPtr ptr) : base(ptr) { }
     internal ShapeshifterMinigame shapeshifterMinigame = null!;
 
     [HideFromIl2Cpp]
