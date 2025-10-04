@@ -1320,8 +1320,11 @@ namespace TownOfUsEdited
             // Code from Reactor, link: https://github.com/NuclearPowered/Reactor/blob/e27a79249ea706318f3c06f3dc56a5c42d65b1cf/Reactor.Debugger/Window/Tabs/GameTab.cs#L70
             var data = GameData.Instance.AddDummy(playerControl);
             var pc = srcPlayer;
-            AmongUsClient.Instance.Spawn(data);
-            AmongUsClient.Instance.Spawn(playerControl);
+            if (AmongUsClient.Instance.AmHost)
+            {
+                AmongUsClient.Instance.Spawn(data);
+                AmongUsClient.Instance.Spawn(playerControl);
+            }
             playerControl.isDummy = true;
 
             playerControl.transform.position = new Vector2(position.x, position.y + 0.3636f);
@@ -1360,6 +1363,11 @@ namespace TownOfUsEdited
             data.SetTasks(new Il2CppStructArray<byte>(0));
 
             if (requestingPlayer.Is(RoleEnum.Astral)) Role.GetRole<Astral>(requestingPlayer).AstralBody = playerControl;
+
+            if (CommsCamouflaged())
+            {
+                Camouflage(playerControl);
+            }
         }
 
         public static Il2CppSystem.Collections.Generic.List<PlayerControl> GetClosestPlayers(Vector2 truePosition, float radius, bool includeDead)
@@ -1534,7 +1542,8 @@ namespace TownOfUsEdited
                             }
                             astralRole.Player.NetTransform.SnapTo(new Vector2(position.x, position.y + 0.3636f));
                             astralRole.TimeRemaining = 0f;
-                            astralRole.TurnBack(astralRole.Player);
+                            astralRole.Revive(astralRole.Player);
+                            astralRole.ResetCD();
                             MurderPlayer(killer, astral, jumpToBody);
                         }
                     }
@@ -2660,7 +2669,7 @@ namespace TownOfUsEdited
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Detective))
             {
                 var detective = Role.GetRole<Detective>(PlayerControl.LocalPlayer);
-                detective.LastExamined = DateTime.UtcNow;
+                detective.Cooldown = CustomGameOptions.ExamineCd;
                 detective.ClosestPlayer = null;
                 detective.CurrentTarget = null;
                 if (PlayerControl.LocalPlayer.Data.IsDead)

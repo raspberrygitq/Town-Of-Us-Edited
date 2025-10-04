@@ -41,13 +41,12 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                 }
                 if (interact[0] == true)
                 {
-                    role.LastExamined = DateTime.UtcNow;
+                    role.Cooldown = CustomGameOptions.ExamineCd;
                     return false;
                 }
                 else if (interact[1] == true)
                 {
-                    role.LastExamined = DateTime.UtcNow;
-                    role.LastExamined = role.LastExamined.AddSeconds(CustomGameOptions.TempSaveCdReset - CustomGameOptions.ExamineCd);
+                    role.Cooldown = CustomGameOptions.TempSaveCdReset;
                     return false;
                 }
                 else if (interact[3] == true) return false;

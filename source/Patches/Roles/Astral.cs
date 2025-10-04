@@ -31,7 +31,6 @@ namespace TownOfUsEdited.Roles
         }
 
         public bool UsingGhost => TimeRemaining > 0f;
-        public bool died = false;
 
         public float AstralTimer()
         {
@@ -44,14 +43,10 @@ namespace TownOfUsEdited.Roles
             else return Cooldown;
         }
 
-        public void TurnGhost(PlayerControl player)
+        public void DecreaseCD()
         {
             TimeRemaining -= Time.deltaTime;
             Enabled = true;
-            if (!died)
-            {
-                Die(player);
-            }
         }
 
         public void Die(PlayerControl player)
@@ -92,17 +87,11 @@ namespace TownOfUsEdited.Roles
                 HudManager.Instance.Chat.gameObject.SetActive(false);
                 role.RegenTask();
             }
-
-            died = true;
         }
 
-        public void TurnBack(PlayerControl player)
+        public void ResetCD()
         {
             TimeRemaining = 0f;
-            if (died)
-            {
-                Revive(player);
-            }
             Enabled = false;
             Cooldown = CustomGameOptions.GhostCD;
         }
@@ -120,8 +109,7 @@ namespace TownOfUsEdited.Roles
             revived.Add(player);
             RoleManager.Instance.SetRole(player, RoleTypes.Crewmate);
             Murder.KilledPlayers.Remove(
-                    Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == player.PlayerId));
-                    
+            Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == player.PlayerId));
             var usedPosition = new Vector2(position.x, position.y + 0.3636f);
             player.transform.position = new Vector2(usedPosition.x, usedPosition.y);
 
@@ -166,7 +154,8 @@ namespace TownOfUsEdited.Roles
             GameData.Instance.AllPlayers.Remove(role.AstralBody.Data);
             role.AstralBody.gameObject.Destroy();
             role.AstralBody = null;
-            died = false;
+
+            if (Utils.CommsCamouflaged()) Utils.Camouflage(player);
         }
     }
 }

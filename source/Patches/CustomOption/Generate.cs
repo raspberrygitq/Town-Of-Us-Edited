@@ -1434,9 +1434,9 @@ namespace TownOfUsEdited.CustomOption
             Guardian =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#67bb43>Guardian</color>");
             GuardCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Guardian Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Guardian Guard Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             GuardDuration =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Guard Duration", 10f, 10f, 30f, 2.5f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Guardian Guard Duration", 10f, 10f, 30f, 2.5f, CooldownFormat);
 
             Haunter =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#d3d3d3FF>Haunter</color>");
