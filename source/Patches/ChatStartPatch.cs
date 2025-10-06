@@ -10,7 +10,7 @@ namespace TownOfUsEdited.Patches
         public static void Prefix()
         {
             // Welcome message
-            if (PlayerControl.LocalPlayer != null && LobbyBehaviour.Instance && !welcomesent)
+            if (PlayerControl.LocalPlayer != null && LobbyBehaviour.Instance && !welcomesent && TownOfUsEdited.ShowWelcomeMessage.Value)
             {
                 var message = $"Welcome to <color=#EE9D01>Town Of Us</color><b><color=#AA00FF> Edited</color></b> {PlayerControl.LocalPlayer.Data.PlayerName}!\n\nTo view the commands list, type <color=#D91919>/help</color>.\nTo know more about the mod, visit the github.";
                 if (!string.IsNullOrWhiteSpace(message))

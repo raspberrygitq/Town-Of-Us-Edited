@@ -36,6 +36,12 @@ namespace TownOfUsEdited.CustomOption
                 Title = "Force 4 Columns",
                 OnClick = () => { return TownOfUsEdited.Force4Columns.Value = !TownOfUsEdited.Force4Columns.Value; },
                 DefaultValue = TownOfUsEdited.Force4Columns.Value
+            },
+            new()
+            {
+                Title = "Show Welcome Message",
+                OnClick = () => { return TownOfUsEdited.ShowWelcomeMessage.Value = !TownOfUsEdited.ShowWelcomeMessage.Value; },
+                DefaultValue = TownOfUsEdited.ShowWelcomeMessage.Value
             }
         };
 

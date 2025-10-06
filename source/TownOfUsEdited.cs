@@ -1,4 +1,3 @@
-using AmongUs.GameOptions;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Unity.IL2CPP;
@@ -11,7 +10,6 @@ using Reactor.Networking.Attributes;
 using Reactor.Utilities.Extensions;
 using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using TownOfUsEdited.CrewmateRoles.DetectiveMod;
 using TownOfUsEdited.CustomOption;
@@ -34,7 +32,7 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "1.6.0";
+        public const string VersionString = "1.6.1";
         public const string BasicCompilation = "1.1.5";
         public static System.Version Version = System.Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
@@ -186,6 +184,7 @@ namespace TownOfUsEdited
         public static ConfigEntry<bool> SeeSettingNotifier { get; set; }
         public static ConfigEntry<bool> DisableLobbyMusic { get; set; }
         public static ConfigEntry<bool> Force4Columns { get; set; }
+        public static ConfigEntry<bool> ShowWelcomeMessage { get; set; }
         public static ConfigEntry<bool> HideDevStatus { get; set; }
         public static ConfigEntry<bool> DisableTelemetry { get; set; }
 
@@ -344,7 +343,8 @@ namespace TownOfUsEdited
             DeadSeeGhosts = Config.Bind("Settings", "Dead See Other Ghosts", true, "Whether you see other dead players' ghosts while your dead");
             SeeSettingNotifier = Config.Bind("Settings", "See Setting Notifier", true, "Whether you see setting changes in lobby at bottom left");
             DisableLobbyMusic = Config.Bind("Settings", "Disable Lobby Music", false, "Whether you want to disable the lobby Music in-game (can be changed in-game with settings)");
-            Force4Columns = Config.Bind("Settings", "Force 4 Columns", false, "Always display 4 columns in meeting, vitals, etc.");
+            Force4Columns = Config.Bind("Settings", "Force 4 Columns", false, "Always display 4 columns in meeting, vitals & shapeshifter.");
+            ShowWelcomeMessage = Config.Bind("Settings", "Show Welcome Message", true, "Show welcome message after creating a lobby.");
             HideDevStatus = Config.Bind("Settings", "Hide Special Status", false, "Toggle this to hide your special status when launching if you have one. You will still have access to your special perks.");
             DisableTelemetry = Config.Bind("Other", "Disable Telemetry", true, "Prevent the game from collecting analytics and sending them to Innersloth");
 

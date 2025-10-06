@@ -719,7 +719,7 @@ namespace TownOfUsEdited.Roles
                             __instance.__4__this.TeamTitle.text = "Coven";
                             __instance.__4__this.TeamTitle.color = Patches.Colors.Coven;
                             __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Coven;
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Shapeshifter);
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Viper);
                         }
 
                         if (role.Alignment == Alignment.CrewmateKilling && role.Faction != Faction.Madmates)
@@ -739,7 +739,7 @@ namespace TownOfUsEdited.Roles
 
                         if (role.Alignment == Alignment.CrewmateInvestigative && role.Faction != Faction.Madmates)
                         {
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = HudManager.Instance.TaskCompleteSound;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Detective);
                         }
 
                         if (role.Alignment == Alignment.CrewmatePower && role.Faction != Faction.Madmates)
@@ -862,7 +862,7 @@ namespace TownOfUsEdited.Roles
                             __instance.__4__this.TeamTitle.text = "Coven";
                             __instance.__4__this.TeamTitle.color = Patches.Colors.Coven;
                             __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Coven;
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Shapeshifter);
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Viper);
                         }
 
                         if (role.Alignment == Alignment.CrewmateKilling && role.Faction != Faction.Madmates)
@@ -882,7 +882,7 @@ namespace TownOfUsEdited.Roles
 
                         if (role.Alignment == Alignment.CrewmateInvestigative && role.Faction != Faction.Madmates)
                         {
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = HudManager.Instance.TaskCompleteSound;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Detective);
                         }
 
                         if (role.Alignment == Alignment.CrewmatePower && role.Faction != Faction.Madmates)
@@ -1065,7 +1065,7 @@ namespace TownOfUsEdited.Roles
                             __instance.__4__this.TeamTitle.text = "Coven";
                             __instance.__4__this.TeamTitle.color = Patches.Colors.Coven;
                             __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Coven;
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Shapeshifter);
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Viper);
                         }
 
                         if (role.Alignment == Alignment.CrewmateKilling && role.Faction != Faction.Madmates)
@@ -1085,7 +1085,7 @@ namespace TownOfUsEdited.Roles
 
                         if (role.Alignment == Alignment.CrewmateInvestigative && role.Faction != Faction.Madmates)
                         {
-                            PlayerControl.LocalPlayer.Data.Role.IntroSound = HudManager.Instance.TaskCompleteSound;
+                            PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Detective);
                         }
 
                         if (role.Alignment == Alignment.CrewmatePower && role.Faction != Faction.Madmates)
