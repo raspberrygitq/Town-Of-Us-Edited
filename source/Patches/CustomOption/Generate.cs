@@ -332,11 +332,6 @@ namespace TownOfUsEdited.CustomOption
 
         public static CustomHeaderOption Jailor;
         public static CustomNumberOption JailCD;
-        public static CustomToggleOption CanJailNB;
-        public static CustomToggleOption CanJailNE;
-        public static CustomToggleOption CanJailNK;
-        public static CustomToggleOption CanJailMad;
-        public static CustomToggleOption CanJailCoven;
         public static CustomToggleOption JailorDies;
 
         public static CustomHeaderOption Knight;
@@ -1664,16 +1659,6 @@ namespace TownOfUsEdited.CustomOption
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#61a37a>Jailor</color>");
             JailCD =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Jail Cooldown", 25f, 10f, 40f, 2.5f, CooldownFormat);
-            CanJailNB =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Jailor Can Execute Neutral Benign", false);
-            CanJailNE =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Jailor Can Execute Neutral Evil", false);
-            CanJailNK =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Jailor Can Execute Neutral Killing", false);
-            CanJailMad =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Jailor Can Execute Madmate", false);
-            CanJailCoven =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Jailor Can Execute Coven Roles", false);
             JailorDies =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Jailor Dies When Executing An Innocent", false);
 
