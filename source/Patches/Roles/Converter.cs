@@ -1,8 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
 using AmongUs.GameOptions;
 using Reactor.Utilities.Extensions;
+using System.Collections.Generic;
+using System.Linq;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -185,6 +186,12 @@ namespace TownOfUsEdited.Roles
                 Patches.SubmergedCompatibility.ChangeFloor(target.transform.position.y > -7);
             }
             if (target != null) Object.Destroy(target.gameObject);
+
+            if (player.Is(ModifierEnum.Celebrity))
+            {
+                var celeb = Modifier.GetModifier<Celebrity>(player);
+                celeb.JustDied = false;
+            }
 
             if (revived.Any(x => x.AmOwner))
                 try

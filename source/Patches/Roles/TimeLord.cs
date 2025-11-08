@@ -12,7 +12,7 @@ namespace TownOfUsEdited.Roles
             Color = Patches.Colors.TimeLord;
             Cooldown = CustomGameOptions.RewindCooldown;
             RoleType = RoleEnum.TimeLord;
-            Alignment = Alignment.CrewmatePower;
+            Alignment = Alignment.CrewmateSupport;
             AddToRoleHistory(RoleType);
             Scale = 1.4f;
         }

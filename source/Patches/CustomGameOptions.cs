@@ -173,6 +173,7 @@ namespace TownOfUsEdited
         public static int VoodooMasterOn => (int)Generate.VoodooMasterOn.Get();
         public static int PotionMasterOn => (int)Generate.PotionMasterOn.Get();
         public static int TorchOn => (int)Generate.TorchOn.Get();
+        public static int CelebrityOn => (int)Generate.CelebrityOn.Get();
         public static int TaskmasterOn => (int)Generate.TaskmasterOn.Get();
         public static int SatelliteOn => (int)Generate.SatelliteOn.Get();
         public static int VengefulOn => (int)Generate.VengefulOn.Get();
@@ -275,7 +276,6 @@ namespace TownOfUsEdited
         public static bool VultureImpVision => Generate.VultureImpVision.Get();
         public static bool VultureArrow => Generate.VultureArrow.Get();
         public static int VultureBodies => (int)Generate.VultureBodies.Get();
-
         public static bool ShieldBreaks => Generate.ShieldBreaks.Get();
         public static float MedicReportColorDuration => Generate.MedicReportColorDuration.Get();
         public static bool ShowReports => Generate.MedicReportSwitch.Get();
@@ -439,6 +439,9 @@ namespace TownOfUsEdited
         public static float RememberArrowDelay => Generate.RememberArrowDelay.Get();
         public static float VultureArrowDelay => Generate.VultureArrowDelay.Get();
         public static float ShiftCD => Generate.ShiftCD.Get();
+        public static bool CanShiftNeutKilling => Generate.CanShiftNeutKilling.Get();
+        public static bool CanShiftImp => Generate.CanShiftImp.Get();
+        public static bool CanShiftCoven => Generate.CanShiftCoven.Get();
         public static float MediateCooldown => Generate.MediateCooldown.Get();
         public static bool ShowMediatePlayer => Generate.ShowMediatePlayer.Get();
         public static bool ShowMediumToDead => Generate.ShowMediumToDead.Get();
@@ -526,13 +529,10 @@ namespace TownOfUsEdited
         public static bool RitualistGuessImpostors => Generate.RitualistGuessImpostors.Get();
         public static bool RitualistGuessLovers => Generate.RitualistGuessLovers.Get();
         public static bool RitualistGuessModifiers => Generate.RitualistGuessModifiers.Get();
-        public static bool RitualistVent => Generate.RitualistVent.Get();
         public static float PotionCD => Generate.PotionCD.Get();
         public static float PotionDuration => Generate.PotionDuration.Get();
         public static float PotionSpeed => Generate.PotionSpeed.Get();
         public static float StrengthKCD => Generate.StrengthKCD.Get();
-        public static bool SpiritualistVent => Generate.SpiritualistVent.Get();
-        public static bool VoodooMasterVent => Generate.VoodooMasterVent.Get();
         public static float BiteCd => Generate.BiteCooldown.Get();
         public static bool VampImpVision => Generate.VampImpVision.Get();
         public static bool VampVent => Generate.VampVent.Get();

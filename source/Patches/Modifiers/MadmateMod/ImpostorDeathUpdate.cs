@@ -166,6 +166,13 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                     Object.Destroy(trackerRole.UsesText);
                 }
 
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic))
+                {
+                    var mysticRole = Role.GetRole<Mystic>(PlayerControl.LocalPlayer);
+                    mysticRole.BodyArrows.Values.DestroyAll();
+                    mysticRole.BodyArrows.Clear();
+                }
+
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Transporter))
                 {
                     var transporterRole = Role.GetRole<Transporter>(PlayerControl.LocalPlayer);

@@ -7,8 +7,8 @@ namespace TownOfUsEdited.Roles
         public Captain(PlayerControl owner) : base(owner)
         {
             Name = "Captain";
-            ImpostorText = () => "Zoom The Map";
-            TaskText = () => "Zoom out to catch the <color=#FF0000FF>Impostors</color>";
+            ImpostorText = () => "Zoom out to catch the <color=#FF0000FF>Impostors</color>";
+            TaskText = () => "Zoom The Map";
             Color = Patches.Colors.Captain;
             Cooldown = CustomGameOptions.ZoomCooldown;
             RoleType = RoleEnum.Captain;

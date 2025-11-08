@@ -75,10 +75,9 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption DoomsayerOn;
         public static CustomNumberOption ExecutionerOn;
         public static CustomNumberOption JesterOn;
-        public static CustomNumberOption VultureOn;
         public static CustomNumberOption PhantomOn;
-        public static CustomNumberOption SoulCollectorOn;
         public static CustomNumberOption TrollOn;
+        public static CustomNumberOption VultureOn;
 
         public static CustomHeaderOption NeutralKillingRoles;
         public static CustomNumberOption SerialKillerOn;
@@ -90,6 +89,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption AttackerOn;
         public static CustomNumberOption GlitchOn;
         public static CustomNumberOption JuggernautOn;
+        public static CustomNumberOption SoulCollectorOn;
         public static CustomNumberOption VampireOn;
         public static CustomNumberOption WerewolfOn;
 
@@ -134,6 +134,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomHeaderOption CrewmateModifiers;
         public static CustomNumberOption AftermathOn;
         public static CustomNumberOption BaitOn;
+        public static CustomNumberOption CelebrityOn;
         public static CustomNumberOption DiseasedOn;
         public static CustomNumberOption FrostyOn;
         public static CustomNumberOption MultitaskerOn;
@@ -308,19 +309,12 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption RitualistGuessImpostors;
         public static CustomToggleOption RitualistGuessModifiers;
         public static CustomToggleOption RitualistGuessLovers;
-        public static CustomToggleOption RitualistVent;
 
         public static CustomHeaderOption PotionMaster;
         public static CustomNumberOption PotionCD;
         public static CustomNumberOption PotionDuration;
         public static CustomNumberOption PotionSpeed;
         public static CustomNumberOption StrengthKCD;
-
-        public static CustomHeaderOption Spiritualist;
-        public static CustomToggleOption SpiritualistVent;
-
-        public static CustomHeaderOption VoodooMaster;
-        public static CustomToggleOption VoodooMasterVent;
 
         public static CustomHeaderOption Fighter;
         public static CustomNumberOption FighterKCD;
@@ -594,6 +588,9 @@ namespace TownOfUsEdited.CustomOption
 
         public static CustomHeaderOption Shifter;
         public static CustomNumberOption ShiftCD;
+        public static CustomToggleOption CanShiftNeutKilling;
+        public static CustomToggleOption CanShiftImp;
+        public static CustomToggleOption CanShiftCoven;
         public static CustomToggleOption ShiftTurnImpAssassin;
         public static CustomToggleOption ShiftTurnNeutAssassin;
 
@@ -923,8 +920,6 @@ namespace TownOfUsEdited.CustomOption
                 PercentFormat);
             SwapperOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#66E666FF>Swapper</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-            TimeLordOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#0f00b8>Time Lord</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
 
             CrewProtectiveRoles = new CustomHeaderOption(num++, MultiMenu.crewmate, "Crewmate Protective Roles");
             AltruistOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#660000FF>Altruist</color>", 0f, 0f, 100f, 10f,
@@ -954,6 +949,8 @@ namespace TownOfUsEdited.CustomOption
             ParanoïacOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#0a7eae>Paranoïac</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             PlumberOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#CC6600FF>Plumber</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
+            TimeLordOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#0f00b8>Time Lord</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             TransporterOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#00EEFFFF>Transporter</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -1083,6 +1080,8 @@ namespace TownOfUsEdited.CustomOption
                 PercentFormat);
             BaitOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#00B3B3FF>Bait</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            CelebrityOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#FF9999FF>Celebrity</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
             DiseasedOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#808080FF>Diseased</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             FrostyOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#99FFFFFF>Frosty</color>", 0f, 0f, 100f, 10f,
@@ -1178,7 +1177,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 17);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot2 = new CustomStringOption(num++, MultiMenu.main, "Slot 2", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1186,7 +1185,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot3 = new CustomStringOption(num++, MultiMenu.main, "Slot 3", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1194,7 +1193,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot4 = new CustomStringOption(num++, MultiMenu.main, "Slot 4", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1202,7 +1201,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot5 = new CustomStringOption(num++, MultiMenu.main, "Slot 5", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1210,7 +1209,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot6 = new CustomStringOption(num++, MultiMenu.main, "Slot 6", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1218,7 +1217,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot7 = new CustomStringOption(num++, MultiMenu.main, "Slot 7", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1226,7 +1225,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot8 = new CustomStringOption(num++, MultiMenu.main, "Slot 8", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1234,7 +1233,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot9 = new CustomStringOption(num++, MultiMenu.main, "Slot 9", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1242,7 +1241,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot10 = new CustomStringOption(num++, MultiMenu.main, "Slot 10", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1250,7 +1249,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 17);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot11 = new CustomStringOption(num++, MultiMenu.main, "Slot 11", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1258,7 +1257,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot12 = new CustomStringOption(num++, MultiMenu.main, "Slot 12", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1266,7 +1265,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot13 = new CustomStringOption(num++, MultiMenu.main, "Slot 13", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1274,7 +1273,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot14 = new CustomStringOption(num++, MultiMenu.main, "Slot 14", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1282,7 +1281,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
             Slot15 = new CustomStringOption(num++, MultiMenu.main, "Slot 15", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
                 "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
                 "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
@@ -1290,7 +1289,7 @@ namespace TownOfUsEdited.CustomOption
                 "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
-                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 7);
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
 
             BattleRoyaleSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Battle Royale Settings");
@@ -1677,15 +1676,6 @@ namespace TownOfUsEdited.CustomOption
             SwapperButton =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Swapper Can Button", true);
 
-            TimeLord =
-                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#0f00b8>Time Lord</color>");
-            RewindCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Rewind Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            RewindDuration =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Rewind Duration", 5f, 2f, 15f, 1f, CooldownFormat);
-            TimeLordVitals =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Time Lord Can Use Vitals", false);
-
             Altruist = new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#660000FF>Altruist</color>");
             ReviveDuration =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Altruist Revive Duration", 10f, 1f, 15f, 1f, CooldownFormat);
@@ -1784,6 +1774,15 @@ namespace TownOfUsEdited.CustomOption
             MaxBarricades =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Maximum Number Of Barricades", 5, 1, 15, 1);
 
+            TimeLord =
+                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#0f00b8>Time Lord</color>");
+            RewindCooldown =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Rewind Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            RewindDuration =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Rewind Duration", 5f, 2f, 15f, 1f, CooldownFormat);
+            TimeLordVitals =
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Time Lord Can Use Vitals", false);
+
             Transporter =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#00EEFFFF>Transporter</color>");
             TransportCooldown =
@@ -1831,6 +1830,12 @@ namespace TownOfUsEdited.CustomOption
             Shifter = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#AAAAAA>Shifter</color>");
             ShiftCD =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Shift Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            CanShiftNeutKilling =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Can Shift Neutral Killing", false);
+            CanShiftImp =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Can Shift Impostor", false);
+            CanShiftCoven =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Can Shift Coven", false);
 
             Survivor =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#FFE64DFF>Survivor</color>");
@@ -2220,7 +2225,6 @@ namespace TownOfUsEdited.CustomOption
             RitualistGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Guess Neutral Killing Roles", false);
             RitualistGuessModifiers = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Guess Crewmates Modifiers", false);
             RitualistGuessLovers = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Guess Lovers", false);
-            RitualistVent = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Vent", false);
 
             PotionMaster =
                 new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Potion Master</color>");
@@ -2231,14 +2235,6 @@ namespace TownOfUsEdited.CustomOption
             PotionSpeed = new CustomNumberOption(num++, MultiMenu.coven, "Speed Potion Boost", 1.25f, 1.05f, 2.5f, 0.05f, MultiplierFormat);
             StrengthKCD =
                 new CustomNumberOption(num++, MultiMenu.coven, "Strength Potion Kill Cooldown", 10f, 2.5f, 60f, 2.5f, CooldownFormat);
-
-            Spiritualist = 
-                new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Spiritualist</color>");
-            SpiritualistVent = new CustomToggleOption(num++, MultiMenu.coven, "Spiritualist Can Vent", false);
-
-            VoodooMaster =
-                new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Voodoo Master</color>");
-            VoodooMasterVent = new CustomToggleOption(num++, MultiMenu.coven, "Voodoo Master Can Vent", false);
 
             Bait = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#00B3B3FF>Bait</color>");
             BaitMinDelay = new CustomNumberOption(num++, MultiMenu.modifiers, "Minimum Delay for the Bait Report", 0f, 0f, 15f, 0.5f, CooldownFormat);

@@ -21,7 +21,7 @@ namespace TownOfUsEdited.ChooseImpGhostRole
 
         public static void PickGhostRole(PlayerControl exiled)
         {
-            if (CustomGameOptions.GameMode != GameMode.Classic) return;
+            if (CustomGameOptions.GameMode != GameMode.Classic && CustomGameOptions.GameMode != GameMode.RoleList) return;
             if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return;
             if (!AmongUsClient.Instance.AmHost) return;
             var random = new System.Random();

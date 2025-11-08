@@ -20,7 +20,6 @@ namespace TownOfUsEdited.Roles
             RoleType = RoleEnum.Politician;
             AddToRoleHistory(RoleType);
             CanCampaign = true;
-            Alignment = Alignment.CrewmateSupport;
             Cooldown = CustomGameOptions.CampaignCd;
             Alignment = Alignment.CrewmatePower;
         }

@@ -63,6 +63,7 @@ namespace TownOfUsEdited
                 return false;
 
             if (player.Is(RoleEnum.Engineer) || player.Is(RoleEnum.Coven) || player.Is(RoleEnum.CovenLeader) || 
+                player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.Spiritualist) || player.Is(RoleEnum.VoodooMaster) ||
                 (player.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(player).UsingPotion && Role.GetRole<PotionMaster>(player).Potion == "Strength") ||
                 player.Is(RoleEnum.WhiteWolf) || player.Is(Faction.Madmates) || player.Is(RoleEnum.Paranoïac) ||
                 (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || 
@@ -78,10 +79,7 @@ namespace TownOfUsEdited
                 (player.Is(RoleEnum.Doppelganger) && CustomGameOptions.DoppelVent) || 
                 (player.Is(RoleEnum.SoulCollector) && CustomGameOptions.SCVent) ||
                 (player.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoVent) ||
-                (player.Is(RoleEnum.HexMaster) && CustomGameOptions.HexMasterVent) ||
-                (player.Is(RoleEnum.Ritualist) && CustomGameOptions.RitualistVent) ||
-                (player.Is(RoleEnum.Spiritualist) && CustomGameOptions.SpiritualistVent) ||
-                (player.Is(RoleEnum.VoodooMaster) && CustomGameOptions.VoodooMasterVent))
+                (player.Is(RoleEnum.HexMaster) && CustomGameOptions.HexMasterVent))
                 return true;
 
             if (player.Is(RoleEnum.Maul) && CustomGameOptions.WerewolfVent)

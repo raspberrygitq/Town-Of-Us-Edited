@@ -30,8 +30,8 @@ namespace TownOfUsEdited.ImpostorRoles.WarlockMod
                             if (PlayerControl.LocalPlayer == warlock.Player)
                             {
                                 var lowerKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown - CustomGameOptions.UnderdogKillBonus;
-                            var normalKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
-                            var upperKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.UnderdogKillBonus;
+                                var normalKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
+                                var upperKC = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.UnderdogKillBonus;
                                 Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = PerformKill.LastImp() ? lowerKC : (PerformKill.IncreasedKC() ? normalKC : upperKC);
                             }
                         }

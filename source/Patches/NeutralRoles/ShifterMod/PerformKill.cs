@@ -49,8 +49,17 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
             if (interact[4] == true)
             {
-                Coroutines.Start(Shift(role, player));
-                Utils.Rpc(CustomRPC.Shift, PlayerControl.LocalPlayer.PlayerId, playerId);
+                if (player.Is(Faction.Impostors) && !CustomGameOptions.CanShiftImp ||
+                    player.Is(Faction.Coven) && !CustomGameOptions.CanShiftCoven ||
+                    player.Is(Faction.NeutralKilling) && !CustomGameOptions.CanShiftNeutKilling)
+                {
+                    Utils.RpcMurderPlayer(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer);
+                }
+                else
+                {
+                    Coroutines.Start(Shift(role, player));
+                    Utils.Rpc(CustomRPC.Shift, PlayerControl.LocalPlayer.PlayerId, playerId);
+                }
                 role.Cooldown = CustomGameOptions.ShiftCD;
                 return false;
             }

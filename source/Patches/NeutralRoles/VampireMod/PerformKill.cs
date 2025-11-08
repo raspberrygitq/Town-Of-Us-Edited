@@ -280,6 +280,27 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                     UnityEngine.Object.Destroy(mercRole.UsesText);
                     UnityEngine.Object.Destroy(mercRole.GoldText);
                 }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Amnesiac))
+                {
+                    var amne = Role.GetRole<Amnesiac>(PlayerControl.LocalPlayer);
+                    if (amne.BodyArrows.Count != 0)
+                    {
+                        amne.BodyArrows.Values.DestroyAll();
+                        amne.BodyArrows.Clear();
+                    }
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Vulture))
+                {
+                    var vulture = Role.GetRole<Vulture>(PlayerControl.LocalPlayer);
+                    if (vulture.BodyArrows.Count != 0)
+                    {
+                        vulture.BodyArrows.Values.DestroyAll();
+                        vulture.BodyArrows.Clear();
+                    }
+                    UnityEngine.Object.Destroy(vulture.BodiesText);
+                }
             }
 
             if (oldRole.ExtraButtons.Any())

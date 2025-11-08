@@ -17,10 +17,10 @@ namespace TownOfUsEdited.ImpostorRoles.SpiritMod
     }
 
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
-    [HarmonyPriority(Priority.Last)]
     public class SetSpirit
     {
         public static PlayerControl WillBeSpirit;
+        public static Vector2 StartPosition;
 
         public static void ExileControllerPostfix(ExileController __instance)
         {
@@ -30,14 +30,13 @@ namespace TownOfUsEdited.ImpostorRoles.SpiritMod
             if (!WillBeSpirit.Is(RoleEnum.Spirit))
             {
                 var oldRole = Role.GetRole(WillBeSpirit);
-                var killsList = (oldRole.CorrectKills, oldRole.IncorrectKills, oldRole.CorrectAssassinKills, oldRole.IncorrectAssassinKills);
+                var killsList = (oldRole.Kills, oldRole.CorrectAssassinKills, oldRole.IncorrectAssassinKills);
                 Role.RoleDictionary.Remove(WillBeSpirit.PlayerId);
                 if (PlayerControl.LocalPlayer == WillBeSpirit)
                 {
                     var role = new Spirit(PlayerControl.LocalPlayer);
                     role.formerRole = oldRole.RoleType;
-                    role.CorrectKills = killsList.CorrectKills;
-                    role.IncorrectKills = killsList.IncorrectKills;
+                    role.Kills = killsList.Kills;
                     role.CorrectAssassinKills = killsList.CorrectAssassinKills;
                     role.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
                     role.DeathReason = oldRole.DeathReason;
@@ -47,8 +46,7 @@ namespace TownOfUsEdited.ImpostorRoles.SpiritMod
                 {
                     var role = new Spirit(WillBeSpirit);
                     role.formerRole = oldRole.RoleType;
-                    role.CorrectKills = killsList.CorrectKills;
-                    role.IncorrectKills = killsList.IncorrectKills;
+                    role.Kills = killsList.Kills;
                     role.CorrectAssassinKills = killsList.CorrectAssassinKills;
                     role.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
                     role.DeathReason = oldRole.DeathReason;
@@ -57,7 +55,7 @@ namespace TownOfUsEdited.ImpostorRoles.SpiritMod
                 }
 
                 Utils.RemoveTasks(WillBeSpirit);
-                if (PlayerControl.LocalPlayer.Is(RoleEnum.Spirit)) WillBeSpirit.MyPhysics.ResetMoveState();
+                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Haunter) && !PlayerControl.LocalPlayer.Is(RoleEnum.Phantom)) WillBeSpirit.MyPhysics.ResetMoveState();
 
                 WillBeSpirit.gameObject.layer = LayerMask.NameToLayer("Players");
             }

@@ -204,6 +204,8 @@ namespace TownOfUsEdited.Roles
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Investigator)) Footprint.DestroyAll(Role.GetRole<Investigator>(PlayerControl.LocalPlayer));
 
                 HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+                HudManager.Instance.SabotageButton.gameObject.SetActive(false);
+                HudManager.Instance.SabotageButton.buttonLabelText.gameObject.SetActive(false);
 
                 if (PlayerControl.LocalPlayer.Is(Faction.Coven))
                 {
@@ -346,6 +348,27 @@ namespace TownOfUsEdited.Roles
                     mercRole.GuardButton.gameObject.SetActive(false);
                     UnityEngine.Object.Destroy(mercRole.UsesText);
                     UnityEngine.Object.Destroy(mercRole.GoldText);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Amnesiac))
+                {
+                    var amne = Role.GetRole<Amnesiac>(PlayerControl.LocalPlayer);
+                    if (amne.BodyArrows.Count != 0)
+                    {
+                        amne.BodyArrows.Values.DestroyAll();
+                        amne.BodyArrows.Clear();
+                    }
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Vulture))
+                {
+                    var vulture = Role.GetRole<Vulture>(PlayerControl.LocalPlayer);
+                    if (vulture.BodyArrows.Count != 0)
+                    {
+                        vulture.BodyArrows.Values.DestroyAll();
+                        vulture.BodyArrows.Clear();
+                    }
+                    UnityEngine.Object.Destroy(vulture.BodiesText);
                 }
             }
 

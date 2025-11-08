@@ -161,6 +161,7 @@ namespace TownOfUsEdited
         Superstar,
         Tasker,
         Drunk,
+        Celebrity,
     }
 
     public enum AbilityEnum

@@ -3,7 +3,6 @@ using HarmonyLib;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Il2CppSystem.Reflection;
 using System.Linq;
-using Reactor.Utilities;
 
 namespace TownOfUsEdited.Patches;
 

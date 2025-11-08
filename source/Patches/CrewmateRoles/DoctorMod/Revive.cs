@@ -156,6 +156,11 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                     }
                 }
             }
+            if (player.Is(ModifierEnum.Celebrity))
+            {
+                var celeb = Modifier.GetModifier<Celebrity>(player);
+                celeb.JustDied = false;
+            }
 
             if (revived.Any(x => x.AmOwner && !x.Data.IsDead))
                 try

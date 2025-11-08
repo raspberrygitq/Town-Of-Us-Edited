@@ -18,7 +18,7 @@ namespace TownOfUsEdited.CovenRoles.HexMasterMod
                 {
                     var player = Utils.PlayerById(pva.TargetPlayerId);
                     if (!player.Data.IsDead)
-                    pva.NameText.text = "<color=#bf5fff>† </color>" + pva.NameText.text;
+                    pva.NameText.text = "<color=#bf5fff>乂 </color>" + pva.NameText.text;
                 }
             }
         }
@@ -35,7 +35,7 @@ namespace TownOfUsEdited.CovenRoles.HexMasterMod
                     if (hexed.Any(x => x == player.PlayerId) && (PlayerControl.LocalPlayer.Is(Faction.Coven) ||
                     PlayerControl.LocalPlayer.Data.IsDead) && !hexmaster.Player.Data.IsDead && !player.Data.IsDead)
                     {
-                        player.nameText().text = "<color=#bf5fff>† </color>" + player.nameText().text;
+                        player.nameText().text = "<color=#bf5fff>乂 </color>" + player.nameText().text;
                     }
                 } 
             }  

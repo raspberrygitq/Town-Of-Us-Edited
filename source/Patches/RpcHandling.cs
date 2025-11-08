@@ -1164,7 +1164,7 @@ namespace TownOfUsEdited
                 Utils.Rpc(CustomRPC.SetPhantom, byte.MaxValue);
             }
 
-            var exeTargets = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Is(ModifierEnum.Lover) && !x.Is(RoleEnum.Politician) && !x.Is(RoleEnum.Prosecutor) && !x.Is(RoleEnum.Swapper) && !x.Is(RoleEnum.Vigilante) && x != SetTraitor.WillBeTraitor).ToList();
+            var exeTargets = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Is(ModifierEnum.Lover) && !x.Is(RoleEnum.Politician) && !x.Is(RoleEnum.Prosecutor) && !x.Is(RoleEnum.Swapper) && !x.Is(RoleEnum.Vigilante) && !x.Is(RoleEnum.Jailor) && x != SetTraitor.WillBeTraitor).ToList();
             foreach (var role in Role.GetRoles(RoleEnum.Executioner))
             {
                 var exe = (Executioner)role;
@@ -2114,7 +2114,7 @@ namespace TownOfUsEdited
                                         break;
                                 }
                                 break;
-                            case CustomRPC.Confess:
+                             case CustomRPC.Confess:
                                 var oracle = Role.GetRole<Oracle>(Utils.PlayerById(reader.ReadByte()));
                                 oracle.Confessor = Utils.PlayerById(reader.ReadByte());
                                 var faction = reader.ReadInt32();
@@ -2714,6 +2714,10 @@ namespace TownOfUsEdited
                                 foreach (var body in buggedBodies)
                                     body.gameObject.Destroy();
                                 break;
+                            case CustomRPC.CelebDied:
+                                string message = reader.ReadString();
+                                if (!PlayerControl.LocalPlayer.Data.IsDead) HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, message);
+                                break;
                             case CustomRPC.SubmergedFixOxygen:
                                 Patches.SubmergedCompatibility.RepairOxygen();
                                 break;
@@ -3221,7 +3225,7 @@ namespace TownOfUsEdited
 
                 if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return true;
 
-                if (CustomGameOptions.GameMode == GameMode.Classic)
+                if (CustomGameOptions.GameMode == GameMode.Classic || CustomGameOptions.GameMode == GameMode.RoleList)
                 {
                     PhantomOn = Check(CustomGameOptions.PhantomOn);
                     TraitorOn = Check(CustomGameOptions.TraitorOn);
@@ -3423,7 +3427,7 @@ namespace TownOfUsEdited
                     if (CustomGameOptions.WerewolfOn > 0)
                         NeutralKillingRoles.Add((typeof(Maul), CustomGameOptions.WerewolfOn, true));
 
-                    if (CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0)
+                    if (CustomGameOptions.VampireOn > 0)
                         NeutralKillingRoles.Add((typeof(Vampire), CustomGameOptions.VampireOn, true));
 
                     if (CustomGameOptions.JuggernautOn > 0)
@@ -3546,6 +3550,9 @@ namespace TownOfUsEdited
 
                     if (Check(CustomGameOptions.TaskmasterOn) && !SubmergedCompatibility.isSubmerged())
                         CrewmateModifiers.Add((typeof(Taskmaster), CustomGameOptions.TaskmasterOn));
+
+                    if (Check(CustomGameOptions.CelebrityOn))
+                        CrewmateModifiers.Add((typeof(Celebrity), CustomGameOptions.CelebrityOn));
                     #endregion
                     #region Global Modifiers
                     if (Check(CustomGameOptions.TiebreakerOn))
@@ -3707,7 +3714,7 @@ namespace TownOfUsEdited
                             CrewmateSupportRoles.Add((typeof(Transporter), CustomGameOptions.TransporterOn, false || CustomGameOptions.UniqueRoles));
 
                         if (CustomGameOptions.TimeLordOn > 0)
-                            CrewmatePowerRoles.Add((typeof(TimeLord), CustomGameOptions.TimeLordOn, true));
+                            CrewmateSupportRoles.Add((typeof(TimeLord), CustomGameOptions.TimeLordOn, true));
 
                         if (CustomGameOptions.MediumOn > 0)
                             CrewmateInvestigativeRoles.Add((typeof(Medium), CustomGameOptions.MediumOn, false || CustomGameOptions.UniqueRoles));
@@ -3750,6 +3757,9 @@ namespace TownOfUsEdited
 
                         if (CustomGameOptions.AurialOn > 0)
                             CrewmateInvestigativeRoles.Add((typeof(Aurial), CustomGameOptions.AurialOn, false || CustomGameOptions.UniqueRoles));
+
+                        if (CustomGameOptions.VampireOn > 0 && CustomGameOptions.VampireHunterOn > 0)
+                            CrewmateKillingRoles.Add((typeof(VampireHunter), CustomGameOptions.VampireHunterOn, true));
 
                         // Impostors
                         if (CustomGameOptions.ImpostorOn > 0)
@@ -3824,7 +3834,7 @@ namespace TownOfUsEdited
                         if (CustomGameOptions.NoclipOn > 0)
                             ImpostorConcealingRoles.Add((typeof(Noclip), CustomGameOptions.NoclipOn, false || CustomGameOptions.UniqueRoles));
 
-                        // Coven
+                         // Coven
                         if (CustomGameOptions.CovenOn > 0)
                             CovenSupportRoles.Add((typeof(Coven), CustomGameOptions.CovenOn, false || CustomGameOptions.UniqueRoles));
                         if (CustomGameOptions.RitualistOn > 0)

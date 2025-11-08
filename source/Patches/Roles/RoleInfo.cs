@@ -330,7 +330,7 @@ namespace TownOfUsEdited.Roles
                 }
                 if (pc.Is(RoleEnum.Grenadier))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Grenadier</color>, you can use your Flash button to make near Crewmates totally blind.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Grenadier</color>, you can use your Flash button to make near Crewmates totally flash.");
                 }
                 if (pc.Is(RoleEnum.Morphling))
                 {
@@ -536,7 +536,7 @@ namespace TownOfUsEdited.Roles
             }
             else if (role == "Avenger")
             {
-                return "The <color=#216f01>Avenger</color> has an ability usable on a dead bodie.\nWhenever the Avenger uses its Avenge ability, the kill button of the Avenger will activate and target the killer of the dead body.\nThe killer will have its name displayed as black to the Avenger.\nHowever, if someone reports / calls a meeting, the Avenger will no longer see who the killer is.";
+                return "The <color=#216f01>Avenger</color> has an ability usable on a dead body.\nWhenever the Avenger uses its Avenge ability, the kill button of the Avenger will activate and target the killer of the dead body.\nThe killer will have its name displayed as black to the Avenger.\nHowever, if someone reports / calls a meeting, the Avenger will no longer see who the killer is.";
             }
             else if (role == "Chameleon")
             {
@@ -986,132 +986,139 @@ namespace TownOfUsEdited.Roles
             {
                 return "The <color=#4c4c4c>Black Wolf</color> is a Werewolf role which can Convert a Villager to regular Werewolf once in the game.";
             }
-            // modifiers
-            else if (role == "Aftermath")
+            else return "The role you have searched for could not be found.\nMake sure you typed the role correctly. (Do not use spaces and use majs ex: /r SerialKiller)";
+        }
+        public static string GetModifiersInfos(string modifiers)
+        {
+            if (modifiers == "Aftermath")
             {
                 return "<color=#A6FFA6FF>Aftermath</color> is a Crewmate Modifier which forces the killer to use its special ability if the killer does have one when being killed.";
             }
-            else if (role == "Bait")
+            else if (modifiers == "Bait")
             {
                 return "<color=#00B3B3FF>Bait</color> is a Crewmate Modifier which forces the killer to self report when being killed.";
             }
-            else if (role == "Diseased")
+            else if (modifiers == "Celebrity")
+            {
+                return "<color=#FF9999FF>Celebrity</color> is a Crewmate Modifier that will send a message showing where, when, and how you died when the next meeting starts.";
+            }
+            else if (modifiers == "Diseased")
             {
                 return "<color=#808080FF>Diseased</color> is a Crewmate Modifier which multiplies the kill cooldown of the killer when being killed.";
             }
-            else if (role == "Frosty")
+            else if (modifiers == "Frosty")
             {
                 return "<color=#99FFFFFF>Frosty</color> is a Crewmate Modifier which makes the killer temporarily slow when being killed.";
             }
-            else if (role == "Multitasker")
+            else if (modifiers == "Multitasker")
             {
                 return "<color=#FF804DFF>Multitasker</color> is a Crewmate Modifier which makes you see through the task pop up when doing a task.";
             }
-            else if (role == "Torch")
+            else if (modifiers == "Torch")
             {
                 return "<color=#FFFF99FF>Torch</color> is a Crewmate Modifier which gives you Impostor vision.";
             }
-            else if (role == "Taskmaster")
+            else if (modifiers == "Taskmaster")
             {
                 return "<color=#669966FF>Taskmaster</color> is a Crewmate Modifier which completes a random task after each meeting.";
             }
-            else if (role == "Vengeful")
+            else if (modifiers == "Vengeful")
             {
                 return "<color=#8d0000>Vengeful</color> is a Crewmate Modifier which allows you to kill someone once after completing all of your tasks.";
             }
-            else if (role == "ButtonBarry")
+            else if (modifiers == "ButtonBarry")
             {
                 return "<color=#E600FFFF>Button Barry</color> is a Global Modifier which allows you to call a meeting from anywhere once.";
             }
-            else if (role == "Drunk")
+            else if (modifiers == "Drunk")
             {
                 return "<color=#758000FF>Drunk</color> is a Global Modifier which you have reversed control.";
             }
-            else if (role == "Flash")
+            else if (modifiers == "Flash")
             {
                 return "<color=#FF8080FF>Flash</color> is a Global Modifier which makes you faster than everyone else.";
             }
-            else if (role == "Satellite")
+            else if (modifiers == "Satellite")
             {
                 return "<color=#0099CCFF>Satellite</color> is a Global Modifier which allows you to locate the position of all the dead bodies once.";
             }
-            else if (role == "Giant")
+            else if (modifiers == "Giant")
             {
                 return "<color=#FFB34DFF>Giant</color> is a Global Modifier which makes you bigger and maybe slower than other players.";
             }
-            else if (role == "Mini")
+            else if (modifiers == "Mini")
             {
                 return "<color=#CCFFE6FF>Mini</color> is a Global Modifier which makes you much shorter than other players.";
             }
-            else if (role == "Lovers")
+            else if (modifiers == "Lovers")
             {
                 return "<color=#FF66CCFF>Lovers</color> is a Global Modifier which makes two players fall in lover.\nThe Lovers will now both win together, whatever their side is and may also both die if one of them dies.";
             }
-            else if (role == "Radar")
+            else if (modifiers == "Radar")
             {
                 return "<color=#FF0080FF>Radar</color> is a Global Modifier which makes you always have an arrow pointing to the nearest player.";
             }
-            else if (role == "Scientist")
+            else if (modifiers == "Scientist")
             {
                 return "<color=#5441b3>Scientist</color> is a Global Modifier which makes you see the players death reasons.";
             }
-            else if (role == "Shy")
+            else if (modifiers == "Shy")
             {
                 return "<color=#FFB3CCFF>Shy</color> is a Global Modifier which makes you slowly turn invisible when not moving.";
             }
-            else if (role == "SixthSense")
+            else if (modifiers == "SixthSense")
             {
                 return "<color=#D9FF8CFF>Sixth Sense</color> is a Global Modifier which makes you know when anyone interacts with you.";
             }
-            else if (role == "Sleuth")
+            else if (modifiers == "Sleuth")
             {
                 return "<color=#803333FF>Sleuth</color> is a Global Modifier which makes you know the role of dead players you report.";
             }
-            else if (role == "Spotter")
+            else if (modifiers == "Spotter")
             {
                 return "<color=#c688f2>Spotter</color> is a Global Modifier which makes you see the vote colors of each player when anonymous votes are toggled.";
             }
-            else if (role == "Superstar")
+            else if (modifiers == "Superstar")
             {
                 return "<color=#ffca00>Superstar</color> is a Global Modifier which will alert everyone when dying and show an arrow pointing to its dead bodies.";
             }
-            else if (role == "Motionless")
+            else if (modifiers == "Motionless")
             {
                 return "<color=#008591>Motionless</color> is a Global Modifier which makes you not move when a meeting is called.\nThis means that you will respawn where you were before the meeting when the meeting ends.";
             }
-            else if (role == "Tiebreaker")
+            else if (modifiers == "Tiebreaker")
             {
                 return "<color=#99E699FF>Tiebreaker</color> is a Global Modifier which makes your vote count twice whenever there's a tie.";
             }
-            else if (role == "Disperser")
+            else if (modifiers == "Disperser")
             {
                 return "<color=#FF0000>Disperser</color> is an Impostor Modifier which makes you able to Teleport all players to a random vent once in the game.";
             }
-            else if (role == "Bloodlust")
+            else if (modifiers == "Bloodlust")
             {
                 return "<color=#FF0000>Bloodlust</color> is an Impostor Modifier which makes your kill cooldown divided by two after killing two players in the same round.";
             }
-            else if (role == "DoubleShot")
+            else if (modifiers == "DoubleShot")
             {
                 return "<color=#FF0000>Double Shot</color> is an Impostor Modifier which makes you able to guess the role of a player wrong as Assassin once in the game without any consequence.";
             }
-            else if (role == "Lucky")
+            else if (modifiers == "Lucky")
             {
                 return "<color=#FF0000>Lucky</color> is an Impostor Modifier which makes your kill cooldowns completely random.";
             }
-            else if (role == "Saboteur")
+            else if (modifiers == "Saboteur")
             {
                 return "<color=#FF0000>Saboteur</color> is an Impostor Modifier which reduces the Sabotage cooldown of the Impostor.";
             }
-            else if (role == "Tasker")
+            else if (modifiers == "Tasker")
             {
                 return "<color=#FF0000>Tasker</color> is an Impostor Modifier which you can do tasks.";
             }
-            else if (role == "Underdog")
+            else if (modifiers == "Underdog")
             {
                 return "<color=#FF0000>Underdog</color> is an Impostor Modifier which makes your kill cooldowns be long when there's more than 1 Impostor alive, but short when your the only Impostor alive.";
             }
-            else return "The role you have searched for could not be found.\nMake sure you typed the role correctly. (Do not use spaces and use majs ex: /r SerialKiller)";
+            else return "The modifier you have searched for could not be found.\nMake sure you typed the modifier correctly. (Do not use spaces and use majs ex: /m SixthSense)";
         }
     }
 }

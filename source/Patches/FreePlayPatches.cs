@@ -94,6 +94,7 @@ namespace TownOfUsEdited.Patches
                     vulture.BodyArrows.Values.DestroyAll();
                     vulture.BodyArrows.Clear();
                 }
+                UnityEngine.Object.Destroy(vulture.BodiesText);
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.BountyHunter))
@@ -184,6 +185,13 @@ namespace TownOfUsEdited.Patches
                 trackerRole.TrackerArrows.Values.DestroyAll();
                 trackerRole.TrackerArrows.Clear();
                 UnityEngine.Object.Destroy(trackerRole.UsesText);
+            }
+
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic))
+            {
+                var mysticRole = Role.GetRole<Mystic>(PlayerControl.LocalPlayer);
+                mysticRole.BodyArrows.Values.DestroyAll();
+                mysticRole.BodyArrows.Clear();
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Knight))

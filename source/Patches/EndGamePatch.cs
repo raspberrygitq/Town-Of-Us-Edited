@@ -203,6 +203,7 @@ namespace TownOfUsEdited.Patches {
                 if (playerControl.Is(ModifierEnum.Motionless)) playerRole += " (<color=#" + Patches.Colors.Motionless.ToHtmlStringRGBA() + ">Motionless</color>)";
                 if (playerControl.Is(ModifierEnum.Tasker)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Tasker</color>)";
                 if (playerControl.Is(ModifierEnum.Drunk)) playerRole += " (<color=#" + Patches.Colors.Drunk.ToHtmlStringRGBA() + ">Drunk</color>)";
+                if (playerControl.Is(ModifierEnum.Celebrity)) playerRole += " (<color=#" + Patches.Colors.Celebrity.ToHtmlStringRGBA() + ">Celebrity</color>)";
 
                 if (!playerControl.Data.IsDead)
                 {
@@ -376,7 +377,8 @@ namespace TownOfUsEdited.Patches {
     }
 
     [HarmonyPatch(typeof(EndGameManager), nameof(EndGameManager.SetEverythingUp))]
-    public class EndGameManagerSetUpPatch {
+    public class EndGameManagerSetUpPatch
+    {
         public static void Postfix(EndGameManager __instance)
         {
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return;
@@ -394,7 +396,8 @@ namespace TownOfUsEdited.Patches {
 
             var roleSummaryText = new StringBuilder();
             roleSummaryText.AppendLine("End game summary:");
-            foreach(var data in AdditionalTempData.playerRoles) {
+            foreach (var data in AdditionalTempData.playerRoles) 
+            {
                 var role = string.Join(" ", data.Role);
                 roleSummaryText.AppendLine($"{data.PlayerName} - {role}");
             }

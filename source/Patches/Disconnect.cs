@@ -146,6 +146,16 @@ namespace TownOfUsEdited.Patches
                     }
                 }
 
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Deputy) && !PlayerControl.LocalPlayer.Data.IsDead)
+                {
+                    var dep = Role.GetRole<Deputy>(PlayerControl.LocalPlayer);
+                    if (dep.Buttons.Count > 0 && dep.Buttons[voteArea.TargetPlayerId] != null)
+                    {
+                        dep.Buttons[voteArea.TargetPlayerId].SetActive(false);
+                        dep.Buttons[voteArea.TargetPlayerId].GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();
+                    }
+                }
+
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Vigilante) && !PlayerControl.LocalPlayer.Data.IsDead)
                 {
                     var vigi = Role.GetRole<Vigilante>(PlayerControl.LocalPlayer);

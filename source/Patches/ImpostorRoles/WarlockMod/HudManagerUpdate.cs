@@ -46,7 +46,7 @@ namespace TownOfUsEdited.ImpostorRoles.WarlockMod
                     role.Charging = false;
                 }
             }
-            else if (PlayerControl.LocalPlayer.killTimer == 0f)
+            else if (role.KillCooldown <= 0f)
             {
                 if (!role.Charging)
                 {

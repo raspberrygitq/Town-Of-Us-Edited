@@ -9,35 +9,35 @@
 | [Blinder](#blinder)            | [Astral](#astral)                 | [Arsonist](#arsonist)             | [Coven Leader](#coven-leader)   | [Bait](#bait)                 |
 | [Bomber](#bomber)              | [Aurial](#aurial)                 | [Attacker](#attacker)             | [Hex Master](#hex-master)       | [Bloodlust](#bloodlust)       |
 | [Bounty Hunter](bounty-hunter) | [Avenger](#avenger)               | [Doomsayer](#doomsayer)           | [Potion Master](#potion-master) | [Button Barry](#button-barry) |
-| [Conjurer](#conjurer)          | [Bodyguard](#bodyguard)           | [Doppelganger](#doppelganger)     | [Ritualist](#ritualist)         | [Diseased](#diseased)         |
-| [Converter](#converter)        | [Captain](#captain)               | [Executioner](#executioner)       | [Spiritualist](#spiritualist)   | [Disperser](#disperser)       |
-| [Escapist](#escapist)          | [Chameleon](#chameleon)           | [Guardian Angel](#guardian-angel) | [Voodoo Master](#voodoo-master) | [Double Shot](#double-shot)   |
-| [Freezer](#freezer)            | [Cleric](#cleric)                 | [Infectious](#infectious)         |                                 | [Drunk](#drunk)               |
-| [Grenadier](#grenadier)        | [Crusader](#crusader)             | [Jester](#jester)                 |                                 | [Flash](#flash)               |
-| [Hypnotist](#hypnotist)        | [Deputy](#deputy)                 | [Juggernaut](#juggernaut)         |                                 | [Frosty](#frosty)             |
-| [Janitor](#janitor)            | [Detective](#detective)           | [Maul](#maul)                     |                                 | [Giant](#giant)               |
-| [Mafioso](#mafioso)            | [Doctor](#doctor)                 | [Mercenary](#mercenary)           |                                 | [Lovers](#lovers)             |
-| [Manipulator](#manipulator)    | [Engineer](#engineer)             | [Mutant](#mutant)                 |                                 | [Lucky](#lucky)               |
-| [Miner](#miner)                | [Fighter](#fighter)               | [Phantom](#phantom)               |                                 | [Madmate](#madmate)           |
-| [Morphling](#morphling)        | [Guardian](#guardian)             | [Plaguebearer](#plaguebearer)     |                                 | [Mini](#mini)                 |
-| [Noclip](#noclip)              | [Haunter](#haunter)               | [Serial Killer](#serial-killer)   |                                 | [Motionless](#motionless)     |
-| [Poisoner](#poisoner)          | [Helper](#helper)                 | [Shifter](#shifter)               |                                 | [Multitasker](#multitasker)   |
-| [Reviver](#reviver)            | [Hunter](#hunter)                 | [Soul Collector](#soul-collector) |                                 | [Rader](#radar)               |
-| [Shooter](#shooter)            | [Imitator](#imitator)             | [Survivor](#survivor)             |                                 | [Saboteur](#saboteur)         |
-| [Spirit](#spirit)              | [Informant](#informant)           | [The Glitch](#the-glitch)         |                                 | [Satellite](#satellite)       |
-| [Swooper](#swooper)            | [Investigator](#investigator)     | [Troll](#troll)                   |                                 | [Scientist](#scientist)       |
-| [Traitor](#traitor)            | [Jailor](#jailor)                 | [Vampire](#vampire)               |                                 | [Shy](#shy)                   |
-| [Undertaker](#undertaker)      | [Knight](#knight)                 | [Vulture](#vulture)               |                                 | [Sixth Sense](#sixth-sense)   |
-| [Venerer](#venerer)            | [Lookout](#lookout)               |                                   |                                 | [Sleuth](#sleuth)             |
-| [Warlock](#warlock)            | [Medic](#medic)                   |                                   |                                 | [Spotter](#spotter)           |
-| [Witch](#witch)                | [Medium](#medium)                 |                                   |                                 | [Superstar](#superstar)       |
-|                                | [Mystic](#mystic)                 |                                   |                                 | [Tasker](#tasker)             |
-|                                | [Oracle](#oracle)                 |                                   |                                 | [Taskmaster](#taskmaster)     |
-|                                | [Paranoïac](#paranoïac)           |                                   |                                 | [Tiebreaker](#tiebreaker)     |
-|                                | [Plumber](#plumber)               |                                   |                                 | [Torch](#torch)               |
-|                                | [Politician](#politician)         |                                   |                                 | [Underdog](#underdog)         |
-|                                | [Prosecutor](#prosecutor)         |                                   |                                 | [Vengeful](#vengeful)         |
-|                                | [Seer](#seer)                     |                                   |                                 |                               |
+| [Conjurer](#conjurer)          | [Bodyguard](#bodyguard)           | [Doppelganger](#doppelganger)     | [Ritualist](#ritualist)         | [Celebrity](#celebrity)       |
+| [Converter](#converter)        | [Captain](#captain)               | [Executioner](#executioner)       | [Spiritualist](#spiritualist)   | [Diseased](#diseased)         |
+| [Escapist](#escapist)          | [Chameleon](#chameleon)           | [Guardian Angel](#guardian-angel) | [Voodoo Master](#voodoo-master) | [Disperser](#disperser)       |
+| [Freezer](#freezer)            | [Cleric](#cleric)                 | [Infectious](#infectious)         |                                 | [Double Shot](#double-shot)   |
+| [Grenadier](#grenadier)        | [Crusader](#crusader)             | [Jester](#jester)                 |                                 | [Drunk](#drunk)               |
+| [Hypnotist](#hypnotist)        | [Deputy](#deputy)                 | [Juggernaut](#juggernaut)         |                                 | [Flash](#flash)               |
+| [Janitor](#janitor)            | [Detective](#detective)           | [Maul](#maul)                     |                                 | [Frosty](#frosty)             |
+| [Mafioso](#mafioso)            | [Doctor](#doctor)                 | [Mercenary](#mercenary)           |                                 | [Giant](#giant)               |
+| [Manipulator](#manipulator)    | [Engineer](#engineer)             | [Mutant](#mutant)                 |                                 | [Lovers](#lovers)             |
+| [Miner](#miner)                | [Fighter](#fighter)               | [Phantom](#phantom)               |                                 | [Lucky](#lucky)               |
+| [Morphling](#morphling)        | [Guardian](#guardian)             | [Plaguebearer](#plaguebearer)     |                                 | [Madmate](#madmate)           |
+| [Noclip](#noclip)              | [Haunter](#haunter)               | [Serial Killer](#serial-killer)   |                                 | [Mini](#mini)                 |
+| [Poisoner](#poisoner)          | [Helper](#helper)                 | [Shifter](#shifter)               |                                 | [Motionless](#motionless)     |
+| [Reviver](#reviver)            | [Hunter](#hunter)                 | [Soul Collector](#soul-collector) |                                 | [Multitasker](#multitasker)   |
+| [Shooter](#shooter)            | [Imitator](#imitator)             | [Survivor](#survivor)             |                                 | [Radar](#radar)               |
+| [Spirit](#spirit)              | [Informant](#informant)           | [The Glitch](#the-glitch)         |                                 | [Saboteur](#saboteur)         |
+| [Swooper](#swooper)            | [Investigator](#investigator)     | [Troll](#troll)                   |                                 | [Satellite](#satellite)       |
+| [Traitor](#traitor)            | [Jailor](#jailor)                 | [Vampire](#vampire)               |                                 | [Scientist](#scientist)       |
+| [Undertaker](#undertaker)      | [Knight](#knight)                 | [Vulture](#vulture)               |                                 | [Shy](#shy)                   |
+| [Venerer](#venerer)            | [Lookout](#lookout)               |                                   |                                 | [Sixth Sense](#sixth-sense)   |
+| [Warlock](#warlock)            | [Medic](#medic)                   |                                   |                                 | [Sleuth](#sleuth)             |
+| [Witch](#witch)                | [Medium](#medium)                 |                                   |                                 | [Spotter](#spotter)           |
+|                                | [Mystic](#mystic)                 |                                   |                                 | [Superstar](#superstar)       |
+|                                | [Oracle](#oracle)                 |                                   |                                 | [Tasker](#tasker)             |
+|                                | [Paranoïac](#paranoïac)           |                                   |                                 | [Taskmaster](#taskmaster)     |
+|                                | [Plumber](#plumber)               |                                   |                                 | [Tiebreaker](#tiebreaker)     |
+|                                | [Politician](#politician)         |                                   |                                 | [Torch](#torch)               |
+|                                | [Prosecutor](#prosecutor)         |                                   |                                 | [Underdog](#underdog)         |
+|                                | [Seer](#seer)                     |                                   |                                 | [Vengeful](#vengeful)         |
 |                                | [Sheriff](#sheriff)               |                                   |                                 |                               |
 |                                | [Snitch](#snitch)                 |                                   |                                 |                               |
 |                                | [Spy](#spy)                       |                                   |                                 |                               |
@@ -246,7 +246,7 @@ However, if the Haunter is clicked they lose their ability to reveal Impostors a
 |----------|:-------------:|:------:|:------:|
 | Haunter | The percentage probability of the Haunter appearing | Percentage | 0% |
 | When Haunter Can Be Clicked | The amount of tasks remaining when the Haunter Can Be Clicked | Number | 5 |
-| Haunter Alert | The amount of tasks remaining when the Impostors are alreted that the Haunter is nearly finished | Number | 1 |
+| Haunter Alert | The amount of tasks remaining when the Impostors are alerted that the Haunter is nearly finished | Number | 1 |
 | Haunter Reveals Neutral Roles | Whether the Haunter also Reveals Neutral Roles | Toggle | False |
 | Who can Click Haunter | Whether even other Crewmates can click the Haunter | All / Non-Crew / Imps Only | All |
 
@@ -936,8 +936,7 @@ If their target loses, they lose.
 | Protect Duration | How long The Guardian Angel's Protect lasts | Time | 10s |
 | Max Uses | The amount of times the Protect ability can be used | Number | 5 |
 | Show Protected Player | Who should be able to see who is Protected | Self / GA / Self + GA | Self |
-| Guardian Angel becomes on Target Dead | Which role the Guardian Angel becomes when their target dies | Crewmate / Amnesiac / Mercenary / Survivor / Jester | Survivor |
-| Guardian Angel becomes on Target Dead | Which role the Guardian Angel becomes when their target dies | Crewmate / Amnesiac / Shifter / Survivor / Jester | Crewmate |
+| Guardian Angel becomes on Target Dead | Which role the Guardian Angel becomes when their target dies | Crewmate / Amnesiac / Shifter / Survivor / Jester | Survivor |
 | Target Knows GA Exists | Whether the GA's Target knows they have a GA | Toggle | False |
 | GA Knows Targets Role | Whether the GA knows their target's role | Toggle | False |
 | Odds Of Target Being Evil | The chances of the Guardian Angel's target being evil | Percentage | 20% |
@@ -967,13 +966,16 @@ The Shifter is a Neutral role with no win condition.\
 Similar to [Amnesiac](#amnesiac), they have zero tasks and are essentially roleless.\
 However, they can switch their role with another player.\
 The Shifter will get the player's role and the player will become a shifter.\
-Note that shifter can't be guessed.
+Depending on the settings, the Shifter may commit suicide if they attempt to Shift: Neutral Killing/Impostor/Coven
 
 ### Game Options
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Shifter | The percentage probability of the Shifter appearing | Percentage | 0% |
 | Shift Cooldown | The cooldown of the Shifter's Shift button | Time | 25s |
+| Can Shift Neutral Killing | Shifter can shift Neutral Killing | Toggle | false |
+| Can Shift Impostor | Shifter can shift Impostors | Toggle | false |
+| Can Shift Coven | Shifter can shift Coven | Toggle | false |
 
 -----------------------
 ## Survivor
@@ -1015,7 +1017,7 @@ If that player gets voted out, they win the game.
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Executioner | The percentage probability of the Executioner appearing | Percentage | 0% |
-| Executioner becomes on Target Dead | Which role the Executioner becomes when their target dies | Crewmate / Amnesiac / Mercenary / Survivor / Jester | Survivor |
+| Executioner becomes on Target Dead | Which role the Executioner becomes when their target dies | Crewmate / Amnesiac / Mercenary / Survivor / Jester | Jester |
 | Executioner Can Button | Whether the Executioner Can Press the Button | Toggle | True |
 | Executioner Torment On Victory | Whether the Executioner can torment someone when they win | Toggle | True |
 
@@ -1350,6 +1352,8 @@ But if you get clicked, you will become a regular ghost again.
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Spirit | The percentage probability of the Spirit appearing | Percentage | 0% |
+| Tasks Remaining When Spirit Can Be Clicked | The amount of tasks remaining when the Spirit Can Be Clicked | Number | 5 |
+| Tasks Remaining When Alert Is Sent | The amount of tasks remaining when the players are alerted that the Spirit is nearly finished | Number | 1 |
 
 -----------------------
 ## Escapist
@@ -1410,7 +1414,6 @@ The Noclip is an Impostor that can pass through walls.
 | Noclip Cooldown | The cooldown of the Noclip button | Time | 25s |
 | Noclip Duration | How long the Noclip lasts for | Time | 10s |
 | Noclip can Vent | Whether the Noclip can Vent | Toggle | False |
-
 
 -----------------------
 ## Swooper
@@ -1589,7 +1592,7 @@ This prevents the blackmailed person from speaking during the next meeting.
 | Blackmailer | The percentage probability of the Blackmailer appearing | Percentage | 0% |
 | Initial Blackmail Cooldown | The initial cooldown of the Blackmailer's Blackmail button | Time | 10s |
 | Only Target Sees Blackmail | If enabled, only the blackmailed player (and the Blackmailer) will see that the player can't speak. | Toggle | False |
-| Blackmailed Can't Vote | If enabled, the blackmailed player can't vote. | Toggle | False |
+| Maximum People Alive Where Blackmailed Can Vote | The maximum number of players alive to allow the blackmailed player to vote | Number | 5 |
 
 -----------------------
 ## Converter
@@ -1725,6 +1728,7 @@ Note that Hexed players will be displayed to everyone while in the meeting.
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Hex Master | The percentage probability of the Hex Master appearing | Percentage | 0% |
+| Hex Master Can Vent | Whether the Hex Master can Vent | false |
 
 -----------------------
 
@@ -1810,6 +1814,15 @@ Killing the Bait makes the killer auto self-report.
 | Bait | The percentage probability of the Bait appearing | Percentage | 0% |
 | Bait Minimum Delay | The minimum time the killer of the Bait reports the body | Time | 0s |
 | Bait Maximum Delay | The maximum time the killer of the Bait reports the body | Time | 1s |
+
+-----------------------
+## Celebrity
+### **Applied to: Crewmates**
+The Celebrity announces how, when and where they died the meeting after they die.
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Celebrity | The percentage probability of the Celebrity appearing | Percentage | 0% |
 
 -----------------------
 ## Diseased

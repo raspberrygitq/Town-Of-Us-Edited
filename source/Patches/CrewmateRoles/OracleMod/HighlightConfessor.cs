@@ -1,5 +1,6 @@
 using HarmonyLib;
 using TownOfUsEdited.Roles;
+using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.OracleMod
 {
@@ -16,14 +17,14 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
                     if (player.PlayerId != state.TargetPlayerId) continue;
                     if (player == role.Confessor)
                     {
-                        if (role.RevealedFaction == Faction.Crewmates && !role.Player.Is(Faction.Madmates)) state.NameText.text += $"<color=#00FFFFFF> ({accuracy}% Crew)</color>";
-                        else if (role.RevealedFaction == Faction.Impostors && !role.Player.Is(Faction.Madmates)) state.NameText.text += $"<color=#FF0000FF> ({accuracy}% Imp)</color>";
-                        else if (role.RevealedFaction == Faction.Coven) state.NameText.text += $"<color=#bf5fff> ({accuracy}% Coven)</color>";
-                        else if (role.RevealedFaction == Faction.Impostors && role.Player.Is(Faction.Madmates)) state.NameText.text += $"<color=#00FFFFFF> ({accuracy}% Crew)</color>";
-                        else if (role.RevealedFaction == Faction.Crewmates && role.Player.Is(Faction.Madmates)) state.NameText.text += $"<color=#FF0000FF> ({accuracy}% Imp)</color>";
-                        else if (role.RevealedFaction == Faction.Madmates && !role.Player.Is(Faction.Madmates)) state.NameText.text += $"<color=#FF0000FF> ({accuracy}% Mad)</color>";
-                        else if (role.RevealedFaction == Faction.Madmates && role.Player.Is(Faction.Madmates)) state.NameText.text += $"<color=#00FFFFFF> ({accuracy}% Crew)</color>";
-                        else state.NameText.text += $"<color=#808080FF> ({accuracy}% Neut)</color>";
+                        if (role.RevealedFaction == Faction.Crewmates && !role.Player.Is(Faction.Madmates)) state.NameText.text += $"<size=75%>{Palette.CrewmateBlue.ToTextColor()} ({accuracy}% Crew)</color></size>";
+                        else if (role.RevealedFaction == Faction.Impostors && !role.Player.Is(Faction.Madmates)) state.NameText.text += $"<size=75%>{Palette.ImpostorRed.ToTextColor()} ({accuracy}% Imp)</color></size>";
+                        else if (role.RevealedFaction == Faction.Madmates && !role.Player.Is(Faction.Madmates)) state.NameText.text += $"<size=75%>{Palette.ImpostorRed.ToTextColor()} ({accuracy}% Mad)</color></size>";
+                        else if (role.RevealedFaction == Faction.Coven) state.NameText.text += $"<size=75%>{Patches.Colors.Coven.ToTextColor()} ({accuracy}% Coven)</color></size>";
+                        else if (role.RevealedFaction == Faction.Impostors && role.Player.Is(Faction.Madmates)) state.NameText.text += $"<size=75%>{Palette.CrewmateBlue.ToTextColor()} ({accuracy}% Crew)</color></size>";
+                        else if (role.RevealedFaction == Faction.Crewmates && role.Player.Is(Faction.Madmates)) state.NameText.text += $"<size=75%>{Palette.ImpostorRed.ToTextColor()} ({accuracy}% Imp)</color></size>";
+                        else if (role.RevealedFaction == Faction.Madmates && role.Player.Is(Faction.Madmates)) state.NameText.text += $"<size=75%>{Palette.CrewmateBlue.ToTextColor()} ({accuracy}% Crew)</color></size>";
+                        else state.NameText.text += $"<size=75%>{Color.gray.ToTextColor()} ({accuracy}% Neut)</color></size>";
                     }
                 }
             }

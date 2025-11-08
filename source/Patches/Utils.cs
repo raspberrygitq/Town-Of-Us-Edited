@@ -119,7 +119,7 @@ namespace TownOfUsEdited
             var ColorMapping = new Dictionary<string, Color>();
             if (CustomGameOptions.AssassinCrewmateGuess) ColorMapping.Add("Crewmate", Colors.Crewmate);
             if (CustomGameOptions.ChameleonOn > 0) ColorMapping.Add("Chameleon", Colors.Chameleon);
-            if (CustomGameOptions.SheriffOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Sheriff)) ColorMapping.Add("Sheriff", Colors.Sheriff);
+            if (CustomGameOptions.SheriffOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Sheriff)) ColorMapping.Add("Sheriff", Colors.Sheriff);
             if (CustomGameOptions.KnightOn > 0) ColorMapping.Add("Knight", Colors.Knight);
             if (CustomGameOptions.FighterOn > 0) ColorMapping.Add("Fighter", Colors.Fighter);
             if (CustomGameOptions.JailorOn > 0) ColorMapping.Add("Jailor", Colors.Jailor);
@@ -136,9 +136,9 @@ namespace TownOfUsEdited
             if (CustomGameOptions.SpyOn > 0) ColorMapping.Add("Spy", Colors.Spy);
             if (CustomGameOptions.SnitchOn > 0) ColorMapping.Add("Snitch", Colors.Snitch);
             if (CustomGameOptions.AltruistOn > 0) ColorMapping.Add("Altruist", Colors.Altruist);
-            if (CustomGameOptions.VigilanteOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Vigilante)) ColorMapping.Add("Vigilante", Colors.Vigilante);
-            if (CustomGameOptions.VeteranOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Veteran)) ColorMapping.Add("Veteran", Colors.Veteran);
-            if (CustomGameOptions.HunterOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Hunter)) ColorMapping.Add("Hunter", Colors.Hunter);
+            if (CustomGameOptions.VigilanteOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Vigilante)) ColorMapping.Add("Vigilante", Colors.Vigilante);
+            if (CustomGameOptions.VeteranOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Veteran)) ColorMapping.Add("Veteran", Colors.Veteran);
+            if (CustomGameOptions.HunterOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Hunter)) ColorMapping.Add("Hunter", Colors.Hunter);
             if (CustomGameOptions.TrackerOn > 0) ColorMapping.Add("Tracker", Colors.Tracker);
             if (CustomGameOptions.TrapperOn > 0) ColorMapping.Add("Trapper", Colors.Trapper);
             if (CustomGameOptions.TransporterOn > 0) ColorMapping.Add("Transporter", Colors.Transporter);
@@ -148,7 +148,7 @@ namespace TownOfUsEdited
             if (CustomGameOptions.ParanoïacOn > 0) ColorMapping.Add("Paranoïac", Colors.Paranoïac);
             if (CustomGameOptions.DetectiveOn > 0) ColorMapping.Add("Detective", Colors.Detective);
             if (CustomGameOptions.ImitatorOn > 0) ColorMapping.Add("Imitator", Colors.Imitator);
-            if (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0) ColorMapping.Add("Vampire Hunter", Colors.VampireHunter);
+            if (CustomGameOptions.VampireHunterOn > 0) ColorMapping.Add("Vampire Hunter", Colors.VampireHunter);
             if (CustomGameOptions.ProsecutorOn > 0) ColorMapping.Add("Prosecutor", Colors.Prosecutor);
             if (CustomGameOptions.OracleOn > 0) ColorMapping.Add("Oracle", Colors.Oracle);
             if (CustomGameOptions.AurialOn > 0) ColorMapping.Add("Aurial", Colors.Aurial);
@@ -264,7 +264,7 @@ namespace TownOfUsEdited
             var ColorMapping = new Dictionary<string, Color>();
             if (CustomGameOptions.AssassinCrewmateGuess) ColorMapping.Remove("Crewmate");
             if (CustomGameOptions.ChameleonOn > 0) ColorMapping.Remove("Chameleon");
-            if (CustomGameOptions.SheriffOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Sheriff)) ColorMapping.Remove("Sheriff");
+            if (CustomGameOptions.SheriffOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Sheriff)) ColorMapping.Remove("Sheriff");
             if (CustomGameOptions.KnightOn > 0) ColorMapping.Remove("Knight");
             if (CustomGameOptions.FighterOn > 0) ColorMapping.Remove("Fighter");
             if (CustomGameOptions.JailorOn > 0) ColorMapping.Remove("Jailor");
@@ -281,9 +281,9 @@ namespace TownOfUsEdited
             if (CustomGameOptions.SpyOn > 0) ColorMapping.Remove("Spy");
             if (CustomGameOptions.SnitchOn > 0) ColorMapping.Remove("Snitch");
             if (CustomGameOptions.AltruistOn > 0) ColorMapping.Remove("Altruist");
-            if (CustomGameOptions.VigilanteOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Vigilante)) ColorMapping.Remove("Vigilante");
-            if (CustomGameOptions.VeteranOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Veteran)) ColorMapping.Remove("Veteran");
-            if (CustomGameOptions.HunterOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Hunter)) ColorMapping.Remove("Hunter");
+            if (CustomGameOptions.VigilanteOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Vigilante)) ColorMapping.Remove("Vigilante");
+            if (CustomGameOptions.VeteranOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Veteran)) ColorMapping.Remove("Veteran");
+            if (CustomGameOptions.HunterOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Hunter)) ColorMapping.Remove("Hunter");
             if (CustomGameOptions.TrackerOn > 0) ColorMapping.Remove("Tracker");
             if (CustomGameOptions.TrapperOn > 0) ColorMapping.Remove("Trapper");
             if (CustomGameOptions.TransporterOn > 0) ColorMapping.Remove("Transporter");
@@ -293,7 +293,7 @@ namespace TownOfUsEdited
             if (CustomGameOptions.ParanoïacOn > 0) ColorMapping.Remove("Paranoïac");
             if (CustomGameOptions.DetectiveOn > 0) ColorMapping.Remove("Detective");
             if (CustomGameOptions.ImitatorOn > 0) ColorMapping.Remove("Imitator");
-            if (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.GameMode == GameMode.Classic && CustomGameOptions.VampireOn > 0) ColorMapping.Remove("Vampire Hunter");
+            if (CustomGameOptions.VampireHunterOn > 0) ColorMapping.Remove("Vampire Hunter");
             if (CustomGameOptions.ProsecutorOn > 0) ColorMapping.Remove("Prosecutor");
             if (CustomGameOptions.OracleOn > 0) ColorMapping.Remove("Oracle");
             if (CustomGameOptions.AurialOn > 0) ColorMapping.Remove("Aurial");
@@ -1587,6 +1587,12 @@ namespace TownOfUsEdited
                     ga.UnProtect();
                 }
 
+                if (target == PlayerControl.LocalPlayer && target.Is(ModifierEnum.Celebrity))
+                {
+                    var celeb = Modifier.GetModifier<Celebrity>(target);
+                    celeb.GenMessage(killer);
+                }
+
                 // I do both cause desync sometimes
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Deputy))
                 {
@@ -2664,7 +2670,11 @@ namespace TownOfUsEdited
                 var trapper = Role.GetRole<Trapper>(PlayerControl.LocalPlayer);
                 trapper.Cooldown = CustomGameOptions.TrapCooldown;
                 trapper.trappedPlayers.Clear();
-                if (CustomGameOptions.TrapsRemoveOnNewRound) trapper.traps.ClearTraps();
+                if (CustomGameOptions.TrapsRemoveOnNewRound)
+                {
+                    trapper.traps.ClearTraps();
+                    trapper.UsesLeft = CustomGameOptions.MaxTraps;
+                }
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Detective))
             {

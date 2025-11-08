@@ -133,6 +133,13 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
                     Object.Destroy(trackerRole.UsesText);
                 }
 
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic))
+                {
+                    var mysticRole = Role.GetRole<Mystic>(PlayerControl.LocalPlayer);
+                    mysticRole.BodyArrows.Values.DestroyAll();
+                    mysticRole.BodyArrows.Clear();
+                }
+
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Transporter))
                 {
                     var transporterRole = Role.GetRole<Transporter>(PlayerControl.LocalPlayer);
@@ -288,6 +295,7 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
             if (CustomGameOptions.ConjurerOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Conjurer)) role.CanBeRoles.Add(RoleEnum.Conjurer);
             if (CustomGameOptions.BountyHunterOn > 0 && !role.CanBeRoles.Contains(RoleEnum.BountyHunter)) role.CanBeRoles.Add(RoleEnum.BountyHunter);
             if (CustomGameOptions.ReviverOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Reviver)) role.CanBeRoles.Add(RoleEnum.Reviver);
+            if (CustomGameOptions.NoclipOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Noclip)) role.CanBeRoles.Add(RoleEnum.Noclip);
             PlayerControl.LocalPlayer.NetTransform.Halt();
             if (role.CanBeRoles.Count > 0)
             {
@@ -336,6 +344,7 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
             else if (selectedRole == RoleEnum.Conjurer) new Conjurer(traitor);
             else if (selectedRole == RoleEnum.BountyHunter) new BountyHunter(traitor);
             else if (selectedRole == RoleEnum.Reviver) new Reviver(traitor);
+            else if (selectedRole == RoleEnum.Noclip) new Noclip(traitor);
             else new Impostor(traitor);
             var newRole = Role.GetRole(traitor);
             newRole.Kills = killsList.Kills;

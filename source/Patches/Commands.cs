@@ -78,7 +78,7 @@ namespace TownOfUsEdited.Patches
                 || role == "Janitor" || role == "Jester" || role == "Juggernaut" || role == "Knight"
                 || role == "Mafioso" || role == "Manipulator" || role == "Maul"
                 || role == "Mayor" || role == "Medic" || role == "Medium" || role == "Miner"
-                || role == "Morphling" || role == "Mutant" || role == "Mystic" || role == "Oracle"
+                || role == "Morphling" || role == "Mutant" || role == "Mystic" || role == "Noclip" || role == "Oracle"
                 || role == "Paranoïac" || role == "Plaguebearer" || role == "Poisoner" || role == "Politician"
                 || role == "PotionMaster" || role == "Prosecutor" || role == "Reviver" || role == "Ritualist"
                 || role == "Seer" || role == "SerialKiller" || role == "Sheriff" || role == "Shifter"
@@ -89,7 +89,7 @@ namespace TownOfUsEdited.Patches
                 || role == "Troll" || role == "Undertaker" || role == "Vampire" || role == "Vigilante"
                 || role == "Villager" || role == "Vulture" || role == "Warden" || role == "Warlock"
                 || role == "Werewolf" || role == "WhiteWolf" || role == "Witch" || role == "Sorcerer"
-                || role == "Veteran" || role == "VoodooMaster" || role == "Lookout" || role == "Noclip";
+                || role == "Veteran" || role == "VoodooMaster" || role == "Lookout";
             }
             public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl sourcePlayer , ref string chatText)
             {
@@ -100,118 +100,117 @@ namespace TownOfUsEdited.Patches
                 {
                     if (sourcePlayer.IsDev() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>List Commands</size></b>\n\n" +
-                            $"<color=#6DFFFA><b>Everyone</b></color>\n\n" +
-                            $"<color=#6DFFFA>/roles</color> - List active roles\n" +
-                            $"<color=#6DFFFA>/modifier</color> - List active modifiers\n" +
-                            $"<color=#6DFFFA>/note</color> - Write your own note\n" +
-                            $"<color=#6DFFFA>/seenote</color> - Your saved notes\n" +
-                            $"<color=#6DFFFA>/r</color> [modifier / role name] - Displays the description of any role/modifier\n" +
-                            $"<color=#6DFFFA>/infoup</color> - See infos about /up command\n" +
-                            $"<color=#6DFFFA>/up</color> - Choose any role in the game (if enabled)\n" +
-                            $"<color=#6DFFFA>/allup</color> - See all currently chosen roles\n" +
-                            $"<color=#6DFFFA>/death</color> - Shows your death reason\n" +
-                            $"<color=#6DFFFA>/shrug</color> - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#D91919><b>Host Only</b></color>\n\n" +
-                            $"<color=#D91919>Shift + G + ENTER</color> - Force the game to end\n" +
-                            $"<color=#D91919>/msg</color> [message] - Send a message as host\n" +
-                            $"<color=#D91919>/id</color> - See players ids\n" +
-                            $"<color=#D91919>/kick</color> [id] - Kick a player by its id\n" +
-                            $"<color=#D91919>/ban</color> [id] - Ban a player by its id\n" +
-                            $"<color=#D91919>/limit</color> [number] - Set a player limit in the lobby";
+                        chatText = $"<color=#00FF00><b>Everyone</b></color>\n\n" +
+                            $"/roles - List active roles\n" +
+                            $"/modifier - List active modifiers\n" +
+                            $"/note [your note] - Write your own note\n" +
+                            $"/seenote - Your saved notes\n" +
+                            $"/r [role name] - Displays the description of any role\n" +
+                            $"/m [modifier name] - Display the description of any modifier\n" +
+                            $"/infoup - See infos about /up command\n" +
+                            $"/up - Choose any role in the game (if enabled)\n" +
+                            $"/allup - See all currently chosen roles\n" +
+                            $"/death - Shows your death reason\n" +
+                            $"/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
+                            $"<color=#FF1919><b>Host Commands</b></color>\n\n" +
+                            $"Shift + G + ENTER - Force the game to end\n" +
+                            $"/msg [message] - Send a message as host\n" +
+                            $"/id - See players ids\n" +
+                            $"/kick [id] - Kick a player by its id\n" +
+                            $"/ban [id] - Ban a player by its id\n" +
+                            $"/limit [number] - Set a player limit in the lobby";
                         system = true;
                     }
                     else if (sourcePlayer.IsTester() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>List Commands</size></b>\n\n" +
-                            $"<color=#6DFFFA><b>Everyone</b></color>\n\n" +
-                            $"<color=#6DFFFA>/roles</color> - List active roles\n" +
-                            $"<color=#6DFFFA>/modifier</color> - List active modifiers\n" +
-                            $"<color=#6DFFFA>/note</color> - Write your own note\n" +
-                            $"<color=#6DFFFA>/seenote</color> - Your saved notes\n" +
-                            $"<color=#6DFFFA>/r</color> [modifier / role name] - Displays the description of any role/modifier\n" +
-                            $"<color=#6DFFFA>/infoup</color> - See infos about /up command\n" +
-                            $"<color=#6DFFFA>/up</color> - Choose any role in the game (if enabled)\n" +
-                            $"<color=#6DFFFA>/allup</color> - See all currently chosen roles\n" +
-                            $"<color=#6DFFFA>/death</color> - Shows your death reason\n" +
-                            $"<color=#6DFFFA>/shrug</color> - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#D91919><b>Host Only</b></color>\n\n" +
-                            $"<color=#D91919>Shift + G + ENTER</color> - Force the game to end\n" +
-                            $"<color=#D91919>/msg</color> [message] - Send a message as host\n" +
-                            $"<color=#D91919>/id</color> - See players ids\n" +
-                            $"<color=#D91919>/kick</color> [id] - Kick a player by its id\n" +
-                            $"<color=#D91919>/ban</color> [id] - Ban a player by its id\n" +
-                            $"<color=#D91919>/limit</color> [number] - Set a player limit in the lobby";
-
+                        chatText = $"<color=#00FF00><b>Everyone</b></color>\n\n" +
+                            $"/roles - List active roles\n" +
+                            $"/modifier - List active modifiers\n" +
+                            $"/note [your note] - Write your own note\n" +
+                            $"/seenote - Your saved notes\n" +
+                            $"/r [role name] - Displays the description of any role\n" +
+                            $"/m [modifier name] - Display the description of any modifier\n" +
+                            $"/infoup - See infos about /up command\n" +
+                            $"/up - Choose any role in the game (if enabled)\n" +
+                            $"/allup - See all currently chosen roles\n" +
+                            $"/death - Shows your death reason\n" +
+                            $"/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
+                            $"<color=#FF1919><b>Host Commands</b></color>\n\n" +
+                            $"Shift + G + ENTER - Force the game to end\n" +
+                            $"/msg [message] - Send a message as host\n" +
+                            $"/id - See players ids\n" +
+                            $"/kick [id] - Kick a player by its id\n" +
+                            $"/ban [id] - Ban a player by its id\n" +
+                            $"/limit [number] - Set a player limit in the lobby";
                         system = true;
                     }
                     else if (sourcePlayer.IsArtist() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>List Commands</size></b>\n\n" +
-                            $"<color=#6DFFFA><b>Everyone</b></color>\n\n" +
-                            $"<color=#6DFFFA>/roles</color> - List active roles\n" +
-                            $"<color=#6DFFFA>/modifier</color> - List active modifiers\n" +
-                            $"<color=#6DFFFA>/note</color> - Write your own note\n" +
-                            $"<color=#6DFFFA>/seenote</color> - Your saved notes\n" +
-                            $"<color=#6DFFFA>/r</color> [modifier / role name] - Displays the description of any role/modifier\n" +
-                            $"<color=#6DFFFA>/infoup</color> - See infos about /up command\n" +
-                            $"<color=#6DFFFA>/up</color> - Choose any role in the game (if enabled)\n" +
-                            $"<color=#6DFFFA>/allup</color> - See all currently chosen roles\n" +
-                            $"<color=#6DFFFA>/death</color> - Shows your death reason\n" +
-                            $"<color=#6DFFFA>/shrug</color> - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#D91919><b>Host Only</b></color>\n\n" +
-                            $"<color=#D91919>Shift + G + ENTER</color> - Force the game to end\n" +
-                            $"<color=#D91919>/msg</color> [message] - Send a message as host\n" +
-                            $"<color=#D91919>/id</color> - See players ids\n" +
-                            $"<color=#D91919>/kick</color> [id] - Kick a player by its id\n" +
-                            $"<color=#D91919>/ban</color> [id] - Ban a player by its id\n" +
-                            $"<color=#D91919>/limit</color> [number] - Set a player limit in the lobby";
+                        chatText = $"<color=#00FF00><b>Everyone</b></color>\n\n" +
+                            $"/roles - List active roles\n" +
+                            $"/modifier - List active modifiers\n" +
+                            $"/note [your note] - Write your own note\n" +
+                            $"/seenote - Your saved notes\n" +
+                            $"/r [role name] - Displays the description of any role\n" +
+                            $"/m [modifier name] - Display the description of any modifier\n" +
+                            $"/infoup - See infos about /up command\n" +
+                            $"/up - Choose any role in the game (if enabled)\n" +
+                            $"/allup - See all currently chosen roles\n" +
+                            $"/death - Shows your death reason\n" +
+                            $"/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
+                            $"<color=#FF1919><b>Host Commands</b></color>\n\n" +
+                            $"Shift + G + ENTER - Force the game to end\n" +
+                            $"/msg [message] - Send a message as host\n" +
+                            $"/id - See players ids\n" +
+                            $"/kick [id] - Kick a player by its id\n" +
+                            $"/ban [id] - Ban a player by its id\n" +
+                            $"/limit [number] - Set a player limit in the lobby";
                         system = true;
                     }
                     else if (sourcePlayer.IsVip() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>List Commands</size></b>\n\n" +
-                            $"<color=#6DFFFA><b>Everyone</b></color>\n\n" +
-                            $"<color=#6DFFFA>/roles</color> - List active roles\n" +
-                            $"<color=#6DFFFA>/modifier</color> - List active modifiers\n" +
-                            $"<color=#6DFFFA>/note</color> - Write your own note\n" +
-                            $"<color=#6DFFFA>/seenote</color> - Your saved notes\n" +
-                            $"<color=#6DFFFA>/r</color> [modifier / role name] - Displays the description of any role/modifier\n" +
-                            $"<color=#6DFFFA>/infoup</color> - See infos about /up command\n" +
-                            $"<color=#6DFFFA>/up</color> - Choose any role in the game (if enabled)\n" +
-                            $"<color=#6DFFFA>/allup</color> - See all currently chosen roles\n" +
-                            $"<color=#6DFFFA>/death</color> - Shows your death reason\n" +
-                            $"<color=#6DFFFA>/shrug</color> - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#D91919><b>Host Only</b></color>\n\n" +
-                            $"<color=#D91919>Shift + G + ENTER</color> - Force the game to end\n" +
-                            $"<color=#D91919>/msg</color> [message] - Send a message as host\n" +
-                            $"<color=#D91919>/id</color> - See players ids\n" +
-                            $"<color=#D91919>/kick</color> [id] - Kick a player by its id\n" +
-                            $"<color=#D91919>/ban</color> [id] - Ban a player by its id\n" +
-                            $"<color=#D91919>/limit</color> [number] - Set a player limit in the lobby";
+                        chatText = $"<color=#00FF00><b>Everyone</b></color>\n\n" +
+                            $"/roles - List active roles\n" +
+                            $"/modifier - List active modifiers\n" +
+                            $"/note [your note] - Write your own note\n" +
+                            $"/seenote - Your saved notes\n" +
+                            $"/r [role name] - Displays the description of any role\n" +
+                            $"/m [modifier name] - Display the description of any modifier\n" +
+                            $"/infoup - See infos about /up command\n" +
+                            $"/up - Choose any role in the game (if enabled)\n" +
+                            $"/allup - See all currently chosen roles\n" +
+                            $"/death - Shows your death reason\n" +
+                            $"/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
+                            $"<color=#FF1919><b>Host Commands</b></color>\n\n" +
+                            $"Shift + G + ENTER - Force the game to end\n" +
+                            $"/msg [message] - Send a message as host\n" +
+                            $"/id - See players ids\n" +
+                            $"/kick [id] - Kick a player by its id\n" +
+                            $"/ban [id] - Ban a player by its id\n" +
+                            $"/limit [number] - Set a player limit in the lobby";
                         system = true;
                     }
                     else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<b><size=3>List Commands</size></b>\n\n" +
-                            $"<color=#6DFFFA><b>Everyone</b></color>\n\n" +
-                            $"<color=#6DFFFA>/roles</color> - List active roles\n" +
-                            $"<color=#6DFFFA>/modifier</color> - List active modifiers\n" +
-                            $"<color=#6DFFFA>/note</color> - Write your own note\n" +
-                            $"<color=#6DFFFA>/seenote</color> - Your saved notes\n" +
-                            $"<color=#6DFFFA>/r</color> [modifier / role name] - Displays the description of any role/modifier\n" +
-                            $"<color=#6DFFFA>/infoup</color> - See infos about /up command\n" +
-                            $"<color=#6DFFFA>/up</color> - Choose any role in the game (if enabled)\n" +
-                            $"<color=#6DFFFA>/allup</color> - See all currently chosen roles\n" +
-                            $"<color=#6DFFFA>/death</color> - Shows your death reason\n" +
-                            $"<color=#6DFFFA>/shrug</color> - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#D91919><b>Host Only</b></color>\n\n" +
-                            $"<color=#D91919>Shift + G + ENTER</color> - Force the game to end\n" +
-                            $"<color=#D91919>/msg</color> [message] - Send a message as host\n" +
-                            $"<color=#D91919>/id</color> - See players ids\n" +
-                            $"<color=#D91919>/kick</color> [id] - Kick a player by its id\n" +
-                            $"<color=#D91919>/ban</color> [id] - Ban a player by its id\n" +
-                            $"<color=#D91919>/limit</color> [number] - Set a player limit in the lobby";
+                        chatText = $"<color=#00FF00><b>Everyone</b></color>\n\n" +
+                            $"/roles - List active roles\n" +
+                            $"/modifier - List active modifiers\n" +
+                            $"/note [your note] - Write your own note\n" +
+                            $"/seenote - Your saved notes\n" +
+                            $"/r [role name] - Displays the description of any role\n" +
+                            $"/m [modifier name] - Display the description of any modifier\n" +
+                            $"/infoup - See infos about /up command\n" +
+                            $"/up - Choose any role in the game (if enabled)\n" +
+                            $"/allup - See all currently chosen roles\n" +
+                            $"/death - Shows your death reason\n" +
+                            $"/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
+                            $"<color=#FF1919><b>Host Commands</b></color>\n\n" +
+                            $"Shift + G + ENTER - Force the game to end\n" +
+                            $"/msg [message] - Send a message as host\n" +
+                            $"/id - See players ids\n" +
+                            $"/kick [id] - Kick a player by its id\n" +
+                            $"/ban [id] - Ban a player by its id\n" +
+                            $"/limit [number] - Set a player limit in the lobby";
                         system = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
@@ -355,6 +354,16 @@ namespace TownOfUsEdited.Patches
                     if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         chatText = UpdateRoleInfo.GetRoleInfos(chatText[3..]);
+                        system = true;
+                    }
+                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
+                }
+
+                if (chatText.ToLower().StartsWith("/m "))
+                {
+                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        chatText = UpdateRoleInfo.GetModifiersInfos(chatText[3..]);
                         system = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
@@ -519,7 +528,7 @@ namespace TownOfUsEdited.Patches
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
 
-                if (chatText.ToLower().StartsWith("/note") || chatText.ToLower().StartsWith("/ note"))
+                if (chatText.ToLower().StartsWith("/note "))
                 {
                     if ((AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
@@ -537,7 +546,7 @@ namespace TownOfUsEdited.Patches
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
 
-                if (chatText.ToLower().StartsWith("/seenote") || chatText.ToLower().StartsWith("/ seenote"))
+                if (chatText.ToLower().StartsWith("/seenote"))
                 {
                     if ((AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
@@ -553,29 +562,29 @@ namespace TownOfUsEdited.Patches
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
 
-                if (chatText.ToLower().StartsWith("/roles") || chatText.ToLower().StartsWith("/ roles"))
+                if (chatText.ToLower().StartsWith("/roles"))
                 {
                     if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         system = true;
-                        AddRoleListMessage();
+                        ActiveRolesMessage();
                         return false;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
 
-                if (chatText.ToLower().StartsWith("/modi") || chatText.ToLower().StartsWith("/ modi"))
+                if (chatText.ToLower().StartsWith("/modi"))
                 {
                     if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
                         system = true;
-                        AddModifierListMessage();
+                        ActiveModifiersMessage();
                         return false;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
 
-                if (chatText.StartsWith("/limit "))
+                if (chatText.ToLower().StartsWith("/limit "))
                 {
                     if ((AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
@@ -632,9 +641,18 @@ namespace TownOfUsEdited.Patches
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
+                if (chatText.ToLower().StartsWith("/"))
+                {
+                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                    {
+                        chatText = "Invalid Command. Type /help to display a list of available commands.";
+                        error = true;
+                    }
+                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
+                }
                 return true;
             }
-            public static void AddRoleListMessage()
+            public static void ActiveRolesMessage()
             {
                 Dictionary<string, Color> ColorMapping = new Dictionary<string, Color>();
 
@@ -674,7 +692,6 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.PoliticianOn > 0) ColorMapping.Add("Politician", Colors.Politician);
                 if (CustomGameOptions.ProsecutorOn > 0) ColorMapping.Add("Prosecutor", Colors.Prosecutor);
                 if (CustomGameOptions.SwapperOn > 0) ColorMapping.Add("Swapper", Colors.Swapper);
-                if (CustomGameOptions.TimeLordOn > 0) ColorMapping.Add("Time Lord", Colors.TimeLord);
                 ColorMapping.Add("\n<b>Crewmate <color=#006600FF>Protective</color></b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.AltruistOn > 0) ColorMapping.Add("Altruist", Colors.Altruist);
                 if (CustomGameOptions.BodyguardOn > 0) ColorMapping.Add("Bodyguard", Colors.Bodyguard);
@@ -690,6 +707,7 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.MediumOn > 0) ColorMapping.Add("Medium", Colors.Medium);
                 if (CustomGameOptions.ParanoïacOn > 0) ColorMapping.Add("Paranoïac", Colors.Paranoïac);
                 if (CustomGameOptions.PlumberOn > 0) ColorMapping.Add("Plumber", Colors.Plumber);
+                if (CustomGameOptions.TimeLordOn > 0) ColorMapping.Add("Time Lord", Colors.TimeLord);
                 if (CustomGameOptions.TransporterOn > 0) ColorMapping.Add("Transporter", Colors.Transporter);
                 ColorMapping.Add("\n<b>Neutral <color=#B3FFFFFF>Benign</color></b>\n", Palette.DisabledGrey);
                 if (CustomGameOptions.AmnesiacOn > 0) ColorMapping.Add("Amnesiac", Colors.Amnesiac);
@@ -770,13 +788,14 @@ namespace TownOfUsEdited.Patches
 
                 HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, mess);
             }
-            public static void AddModifierListMessage()
+            public static void ActiveModifiersMessage()
             {
                 Dictionary<string, Color> ColorMapping = new Dictionary<string, Color>();
 
                 ColorMapping.Add("<b>Crewmate Modifiers</b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.AftermathOn > 0) ColorMapping.Add("Aftermath", Colors.Aftermath);
                 if (CustomGameOptions.BaitOn > 0) ColorMapping.Add("Bait", Colors.Bait);
+                if (CustomGameOptions.CelebrityOn > 0) ColorMapping.Add("Celebrity", Colors.Celebrity);
                 if (CustomGameOptions.DiseasedOn > 0) ColorMapping.Add("Diseased", Colors.Diseased);
                 if (CustomGameOptions.FrostyOn > 0) ColorMapping.Add("Frosty", Colors.Frosty);
                 if (CustomGameOptions.MadmateOn > 0) ColorMapping.Add("Madmate", Colors.Impostor);
@@ -784,7 +803,6 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.TaskmasterOn > 0) ColorMapping.Add("Taskmaster", Colors.Taskmaster);
                 if (CustomGameOptions.TorchOn > 0) ColorMapping.Add("Torch", Colors.Torch);
                 if (CustomGameOptions.VengefulOn > 0) ColorMapping.Add("Vengeful", Colors.Vengeful);
-
                 ColorMapping.Add("\n<b>Global Modifiers</b>\n", Palette.DisabledGrey);
                 if (CustomGameOptions.ButtonBarryOn > 0) ColorMapping.Add("Button Barry", Colors.ButtonBarry);
                 if (CustomGameOptions.DrunkOn > 0) ColorMapping.Add("Drunk", Colors.Drunk);
@@ -802,7 +820,6 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.SpotterOn > 0) ColorMapping.Add("Spotter", Colors.Spotter);
                 if (CustomGameOptions.SuperstarOn > 0) ColorMapping.Add("Superstar", Colors.Superstar);
                 if (CustomGameOptions.TiebreakerOn > 0) ColorMapping.Add("Tiebreaker", Colors.Tiebreaker);
-
                 ColorMapping.Add("\n<b>Impostor Modifiers</b>\n", Palette.ImpostorRed);
                 if (CustomGameOptions.BloodlustOn > 0) ColorMapping.Add("Bloodlust", Colors.Impostor);
                 if (CustomGameOptions.DisperserOn > 0) ColorMapping.Add("Disperser", Colors.Impostor);
@@ -820,7 +837,6 @@ namespace TownOfUsEdited.Patches
 
                 HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, mess);
             }
-
         }
 
         [HarmonyPatch(typeof(PoolablePlayer), nameof(PoolablePlayer.UpdateFromPlayerOutfit))]

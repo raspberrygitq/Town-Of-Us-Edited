@@ -458,7 +458,7 @@ namespace TownOfUsEdited.Roles
 
             Player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
 
-            return PlayerName + "\n" + Name;
+            return $"{PlayerName}\n<size=75%>{Name}</size>";
         }
 
         public static bool operator ==(Role a, Role b)

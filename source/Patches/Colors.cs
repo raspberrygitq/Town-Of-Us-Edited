@@ -118,6 +118,7 @@ namespace TownOfUsEdited.Patches
         public readonly static Color Spotter = new Color32(198, 136, 242, 255);
         public readonly static Color Motionless = new Color32(0, 133, 145, 255);
         public readonly static Color Mini = new Color(0.8f, 1f, 0.9f, 1f);
+        public readonly static Color Celebrity = new Color(1f, 0.6f, 0.6f, 1f);
         public readonly static Color Taskmaster = new Color(0.4f, 0.6f, 0.4f, 1f);
         public readonly static Color Satellite = new Color(0f, 0.6f, 0.8f, 1f);
         public readonly static Color Superstar = new Color32(255, 202, 0, 255);

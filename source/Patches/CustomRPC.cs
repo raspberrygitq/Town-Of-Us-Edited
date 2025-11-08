@@ -155,6 +155,7 @@ namespace TownOfUsEdited
         Camp,
         StartWatch,
         StopWatch,
+        CelebDied,
 
         ImpostorWin,
         CrewmateWin,

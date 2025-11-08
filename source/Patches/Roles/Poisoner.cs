@@ -1,6 +1,9 @@
-using UnityEngine;
-using TownOfUsEdited.Modifiers.UnderdogMod;
+using TownOfUsEdited.CrewmateRoles.ClericMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using PerformKill = TownOfUsEdited.Modifiers.UnderdogMod.PerformKill;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {
@@ -70,8 +73,9 @@ namespace TownOfUsEdited.Roles
             else Cooldown = CustomGameOptions.PoisonCD;
 
             // Kill Check
-            if (!PoisonedPlayer.Is(RoleEnum.Pestilence) && !PoisonedPlayer.IsOnAlert() && !Player.IsJailed()
-            && !PoisonedPlayer.HasPotionShield() && !PoisonedPlayer.IsProtected() || !PoisonedPlayer.IsBarriered() || !PoisonedPlayer.IsGuarded2())
+            if (PoisonedPlayer != null && !PoisonedPlayer.Is(RoleEnum.Pestilence) && !PoisonedPlayer.IsOnAlert() && !Player.IsJailed() 
+                && !PoisonedPlayer.HasPotionShield() && !PoisonedPlayer.IsProtected() && !PoisonedPlayer.IsBarriered() && !PoisonedPlayer.IsGuarded2() 
+                && !PoisonedPlayer.IsShielded() && PoisonedPlayer != ShowShield.FirstRoundShielded)
             {
                 Utils.Rpc(CustomRPC.PoisonKill, PlayerControl.LocalPlayer.PlayerId, true); // Successed Kill
                 Utils.MurderPlayer(Player, PoisonedPlayer, false);
@@ -81,6 +85,21 @@ namespace TownOfUsEdited.Roles
                 SoundManager.Instance.PlaySound(PlayerControl.LocalPlayer.KillSfx, false, 0.5f);
                 PoisonedPlayer = null;
                 return;
+            }
+            else if (PoisonedPlayer.IsShielded())
+            {
+                foreach (var medic in PoisonedPlayer.GetMedic())
+                {
+                    Utils.Rpc(CustomRPC.AttemptSound, medic.Player.PlayerId, target.PlayerId);
+                    StopKill.BreakShield(medic.Player.PlayerId, PoisonedPlayer.PlayerId, CustomGameOptions.ShieldBreaks);
+                }
+            }
+            else if (PoisonedPlayer.IsBarriered())
+            {
+                foreach (var cleric in PoisonedPlayer.GetCleric())
+                {
+                    StopAttack.NotifyCleric(cleric.Player.PlayerId, false);
+                }
             }
             Utils.Rpc(CustomRPC.PoisonKill, PlayerControl.LocalPlayer.PlayerId, false); // Failed Kill
             PoisonedPlayer = null;
