@@ -17,8 +17,7 @@ namespace TownOfUsEdited
             {
                 PlayerMaterial.SetColors(voterPlayer.DefaultOutfit.ColorId, spriteRenderer);
             }
-            else if (GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes && (!CustomGameOptions.DeadSeeRoles || !PlayerControl.LocalPlayer.Data.IsDead)
-            && !PlayerControl.LocalPlayer.Is(ModifierEnum.Spotter))
+            else if (GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes && (!CustomGameOptions.DeadSeeRoles || !PlayerControl.LocalPlayer.Data.IsDead))
             {
                 //PlayerControl.SetPlayerMaterialColors(Palette.DisabledGrey, spriteRenderer);
                 PlayerMaterial.SetColors(Palette.DisabledGrey, spriteRenderer);

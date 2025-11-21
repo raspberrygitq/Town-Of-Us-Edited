@@ -27,7 +27,7 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
             var allPlayers = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected && x != PlayerControl.LocalPlayer && x != player).ToList();
             if (allPlayers.Count < 2) return "Too few people alive to receive a confessional";
             var evilPlayers = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected &&
-            (x.Is(Faction.Impostors) || (x.Is(Faction.NeutralKilling) && CustomGameOptions.NeutralKillingShowsEvil) ||
+            (x.Is(Faction.Impostors) || x.Is(Faction.Coven) || (x.Is(Faction.NeutralKilling) && CustomGameOptions.NeutralKillingShowsEvil) ||
             (x.Is(Faction.NeutralEvil) && CustomGameOptions.NeutralEvilShowsEvil) || (x.Is(Faction.NeutralBenign) && CustomGameOptions.NeutralBenignShowsEvil))).ToList();
             if (evilPlayers.Count == 0) return $"{player.GetDefaultOutfit().PlayerName} confesses to knowing that there are no more evil players!"; 
             allPlayers.Shuffle();

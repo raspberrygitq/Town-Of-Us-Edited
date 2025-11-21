@@ -12,9 +12,10 @@ namespace TownOfUsEdited
         Guessed,
         Cursed,
         Exploded,
-        Won,
+        Victorious,
         Hexed,
         Infected,
+        Shift,
         Spectator
     }
 }

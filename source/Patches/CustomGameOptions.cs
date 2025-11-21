@@ -190,7 +190,6 @@ namespace TownOfUsEdited
         public static int ScientistOn => (int)Generate.ScientistOn.Get();
         public static int ShyOn => (int)Generate.ShyOn.Get();
         public static int SixthSenseOn => (int)Generate.SixthSenseOn.Get();
-        public static int SpotterOn => (int)Generate.SpotterOn.Get();
         public static int MotionlessOn => (int)Generate.MotionlessOn.Get();
         public static int AftermathOn => (int)Generate.AftermathOn.Get();
         public static int RadarOn => (int)Generate.RadarOn.Get();

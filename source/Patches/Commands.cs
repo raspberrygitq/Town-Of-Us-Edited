@@ -817,7 +817,6 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.ShyOn > 0) ColorMapping.Add("Shy", Colors.Shy);
                 if (CustomGameOptions.SixthSenseOn > 0) ColorMapping.Add("Sixth Sense", Colors.SixthSense);
                 if (CustomGameOptions.SleuthOn > 0) ColorMapping.Add("Sleuth", Colors.Sleuth);
-                if (CustomGameOptions.SpotterOn > 0) ColorMapping.Add("Spotter", Colors.Spotter);
                 if (CustomGameOptions.SuperstarOn > 0) ColorMapping.Add("Superstar", Colors.Superstar);
                 if (CustomGameOptions.TiebreakerOn > 0) ColorMapping.Add("Tiebreaker", Colors.Tiebreaker);
                 ColorMapping.Add("\n<b>Impostor Modifiers</b>\n", Palette.ImpostorRed);

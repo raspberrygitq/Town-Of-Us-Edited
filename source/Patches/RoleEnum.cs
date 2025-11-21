@@ -151,7 +151,6 @@ namespace TownOfUsEdited
         SixthSense,
         Shy,
         Frosty,
-        Spotter,
         Motionless,
         Bloodlust,
         Mini,

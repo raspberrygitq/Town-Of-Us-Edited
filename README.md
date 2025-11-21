@@ -30,14 +30,14 @@
 | [Undertaker](#undertaker)      | [Knight](#knight)                 | [Vulture](#vulture)               |                                 | [Shy](#shy)                   |
 | [Venerer](#venerer)            | [Lookout](#lookout)               |                                   |                                 | [Sixth Sense](#sixth-sense)   |
 | [Warlock](#warlock)            | [Medic](#medic)                   |                                   |                                 | [Sleuth](#sleuth)             |
-| [Witch](#witch)                | [Medium](#medium)                 |                                   |                                 | [Spotter](#spotter)           |
-|                                | [Mystic](#mystic)                 |                                   |                                 | [Superstar](#superstar)       |
-|                                | [Oracle](#oracle)                 |                                   |                                 | [Tasker](#tasker)             |
-|                                | [Paranoïac](#paranoïac)           |                                   |                                 | [Taskmaster](#taskmaster)     |
-|                                | [Plumber](#plumber)               |                                   |                                 | [Tiebreaker](#tiebreaker)     |
-|                                | [Politician](#politician)         |                                   |                                 | [Torch](#torch)               |
-|                                | [Prosecutor](#prosecutor)         |                                   |                                 | [Underdog](#underdog)         |
-|                                | [Seer](#seer)                     |                                   |                                 | [Vengeful](#vengeful)         |
+| [Witch](#witch)                | [Medium](#medium)                 |                                   |                                 | [Superstar](#superstar)       |
+|                                | [Mystic](#mystic)                 |                                   |                                 | [Tasker](#tasker)             |
+|                                | [Oracle](#oracle)                 |                                   |                                 | [Taskmaster](#taskmaster)     |
+|                                | [Paranoïac](#paranoïac)           |                                   |                                 | [Tiebreaker](#tiebreaker)     |
+|                                | [Plumber](#plumber)               |                                   |                                 | [Torch](#torch)               |
+|                                | [Politician](#politician)         |                                   |                                 | [Underdog](#underdog)         |
+|                                | [Prosecutor](#prosecutor)         |                                   |                                 | [Vengeful](#vengeful)         |
+|                                | [Seer](#seer)                     |                                   |                                 |                               |
 |                                | [Sheriff](#sheriff)               |                                   |                                 |                               |
 |                                | [Snitch](#snitch)                 |                                   |                                 |                               |
 |                                | [Spy](#spy)                       |                                   |                                 |                               |
@@ -57,6 +57,7 @@
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
+|  17.1.0 | v1.7.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.1/ToUEG-Steam.v1.7.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.1/ToUEG-Epic.v1.7.1.zip) |
 |  17.0.1 | v1.7.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.0/ToUEG-Steam.v1.7.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.0/ToUEG-Epic.v1.7.0.zip) |
 |  17.0.0 | v1.6.2 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.6.2/ToUEG-Steam.v1.6.2.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.6.2/ToUEG-Epic.v1.6.2.zip) |
 |  17.0.0 | v1.6.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.6.1/ToUEG-Steam.v1.6.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.6.1/ToUEG-Epic.v1.6.1.zip) |
@@ -975,7 +976,7 @@ Depending on the settings, the Shifter may commit suicide if they attempt to Shi
 | Shifter | The percentage probability of the Shifter appearing | Percentage | 0% |
 | Shift Cooldown | The cooldown of the Shifter's Shift button | Time | 25s |
 | Can Shift Neutral Killing | Shifter can shift Neutral Killing | Toggle | false |
-| Can Shift Impostor | Shifter can shift Impostors | Toggle | false |
+| Can Shift Impostor / Madmate | Shifter can shift Impostors / Madmates | Toggle | false |
 | Can Shift Coven | Shifter can shift Coven | Toggle | false |
 
 -----------------------
@@ -2041,17 +2042,6 @@ During meetings the Sleuth can see the roles of all players in which they've rep
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Sleuth | The percentage probability of the Sleuth appearing | Percentage | 0% |
-
------------------------
-## Spotter
-### **Applied to: All**
-The Spotter is able to see the vote color of each player during meetings.\
-Note that the Spotter will only spawn if the Anonymous Votes setting is Toggled.
-
-### Game Options
-| Name | Description | Type | Default |
-|----------|:-------------:|:------:|:------:|
-| Spotter | The percentage probability of the Spotter appearing | Percentage | 0% |
 
 -----------------------
 ## Superstar

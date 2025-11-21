@@ -16,7 +16,8 @@ namespace TownOfUsEdited.ImpostorRoles.NoclipMod
                 var noclip = (Noclip)role;
                 if (noclip.Noclipped)
                     noclip.WallWalk();
-                else if (noclip.Enabled) noclip.UnWallWalk();
+                else if (noclip.Enabled)
+                    noclip.UnWallWalk();
             }
         }
     }

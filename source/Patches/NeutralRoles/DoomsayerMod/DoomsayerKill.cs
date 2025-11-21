@@ -54,8 +54,8 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
                 if (!CustomGameOptions.NeutralEvilWinEndsGame)
                 {
                     MurderPlayer(doom.Player, doomsayer, true, false);
-                    doom.DeathReason = DeathReasons.Won;
-                    Utils.Rpc(CustomRPC.SetDeathReason, doomsayer.PlayerId, (byte)DeathReasons.Won);
+                    doom.DeathReason = DeathReasons.Victorious;
+                    Utils.Rpc(CustomRPC.SetDeathReason, doomsayer.PlayerId, (byte)DeathReasons.Victorious);
                 }
             }
         }

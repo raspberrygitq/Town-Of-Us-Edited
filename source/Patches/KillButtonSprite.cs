@@ -413,6 +413,7 @@ namespace TownOfUsEdited
                 HudManager.Instance.AbilityButton.graphic.sprite = ghost.Ability.Image;
                 HudManager.Instance.AbilityButton.SetInfiniteUses();
                 HudManager.Instance.AbilityButton.buttonLabelText.text = "Haunt";
+                HudManager.Instance.AbilityButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
                 HudManager.Instance.AbilityButton.buttonLabelText.SetOutlineColor(Palette.CrewmateBlue);
                 HudManager.Instance.AbilityButton.gameObject.SetActive(PlayerControl.LocalPlayer.Data.IsDead && !ghostRole && Utils.ShowDeadBodies && !MeetingHud.Instance);
             }

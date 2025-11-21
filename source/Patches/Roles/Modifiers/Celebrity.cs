@@ -22,9 +22,9 @@ namespace TownOfUsEdited.Roles.Modifiers
         {
             JustDied = true;
             DeathTime = DateTime.UtcNow;
-            Room = Room == string.Empty ? "Unknown" : Room;
-            if (Player == killer) Message = $"The Celebrity, {Player.GetDefaultOutfit().PlayerName}, was killed! Location: {Room}, Death: By Suicide, Time: ";
-            else Message = $"The Celebrity, {Player.GetDefaultOutfit().PlayerName}, was killed! Location: {Room}, Death: By {Role.GetRole(killer).RoleType.ToString()}, Time: ";
+            Room = Room == string.Empty ? "Outside/Hallway" : Room;
+            if (Player == killer) Message = $"The Celebrity, {Player.GetDefaultOutfit().PlayerName}, was killed!\nLocation: {Room}\nDeath: By Suicide\nTime: ";
+            else Message = $"The Celebrity, {Player.GetDefaultOutfit().PlayerName}, was killed!\nLocation: {Room}\nDeath: By {Role.GetRole(killer).RoleType.ToString()}\nTime: ";
             if (MeetingHud.Instance) PrintMessage();
         }
 

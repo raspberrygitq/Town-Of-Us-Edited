@@ -2919,8 +2919,11 @@ namespace TownOfUsEdited
                                     case DeathReasons.Exploded:
                                         deadPlayerRole.DeathReason = DeathReasons.Exploded;
                                         break;
-                                    case DeathReasons.Won:
-                                        deadPlayerRole.DeathReason = DeathReasons.Won;
+                                    case DeathReasons.Victorious:
+                                        deadPlayerRole.DeathReason = DeathReasons.Victorious;
+                                        break;
+                                    case DeathReasons.Shift:
+                                        deadPlayerRole.DeathReason = DeathReasons.Shift;
                                         break;
                                 }
                                 break;
@@ -3575,9 +3578,6 @@ namespace TownOfUsEdited
 
                     if (Check(CustomGameOptions.SixthSenseOn))
                         GlobalModifiers.Add((typeof(SixthSense), CustomGameOptions.SixthSenseOn));
-
-                    if (Check(CustomGameOptions.SpotterOn) && GameOptionsManager.Instance.currentNormalGameOptions.AnonymousVotes == true)
-                        GlobalModifiers.Add((typeof(Spotter), CustomGameOptions.SpotterOn));
 
                     if (Check(CustomGameOptions.MotionlessOn))
                         GlobalModifiers.Add((typeof(Motionless), CustomGameOptions.MotionlessOn));

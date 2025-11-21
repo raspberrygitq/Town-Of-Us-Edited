@@ -45,6 +45,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                 {
                     Utils.TurnCrewmateTeam(PlayerControl.LocalPlayer);
                     Utils.Rpc(CustomRPC.TurnCrewmateTeam, PlayerControl.LocalPlayer.PlayerId);
+                    __instance.SabotageButton.Hide();
                     return;
                 }
                 else if (CustomGameOptions.MadmateOnImpoDeath == BecomeMadmateOptions.Impostor)

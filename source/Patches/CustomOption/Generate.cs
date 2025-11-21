@@ -157,7 +157,6 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption ShyOn;
         public static CustomNumberOption SixthSenseOn;
         public static CustomNumberOption SleuthOn;
-        public static CustomNumberOption SpotterOn;
         public static CustomNumberOption SuperstarOn;
         public static CustomNumberOption TiebreakerOn;
 
@@ -1124,8 +1123,6 @@ namespace TownOfUsEdited.CustomOption
                 PercentFormat);
             SleuthOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#803333FF>Sleuth</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-            SpotterOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#c688f2>Spotter</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
             SuperstarOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#ffca00>Superstar</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             TiebreakerOn = new CustomNumberOption(num++, MultiMenu.modifiers, "<color=#99E699FF>Tiebreaker</color>", 0f, 0f, 100f, 10f,
@@ -1149,7 +1146,7 @@ namespace TownOfUsEdited.CustomOption
 
             GameModeSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Game Mode Settings");
-            GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] {"Classic", "Role List", "Battle Royale", "Cultist", "Werewolf", "Chaos" });
+            GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] {"Classic", "Role List", "Battle Royale", "Cultist", "Werewolf", "Chaos" }, 1);
 
             ClassicSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Classic Game Mode Settings");
@@ -1552,7 +1549,7 @@ namespace TownOfUsEdited.CustomOption
             UpdateInterval =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Arrow Update Interval", 5f, 0.5f, 15f, 0.5f, CooldownFormat);
             TrackCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Track Cooldown", 10f, 1f, 15f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Track Cooldown", 25f, 1f, 60f, 1f, CooldownFormat);
             ResetOnNewRound = new CustomToggleOption(num++, MultiMenu.crewmate, "Tracker Arrows Reset After Each Round", false);
             MaxTracks = new CustomNumberOption(num++, MultiMenu.crewmate, "Maximum Number Of Tracks Per Round", 5, 1, 15, 1);
 
@@ -1561,7 +1558,7 @@ namespace TownOfUsEdited.CustomOption
             MinAmountOfTimeInTrap =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Min Amount Of Time In Trap To Register", 1f, 0f, 15f, 0.5f, CooldownFormat);
             TrapCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Trap Cooldown", 10f, 1f, 15f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Trap Cooldown", 25f, 1f, 60f, 1f, CooldownFormat);
             TrapsRemoveOnNewRound =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Traps Removed After Each Round", true);
             MaxTraps =
@@ -1833,7 +1830,7 @@ namespace TownOfUsEdited.CustomOption
             CanShiftNeutKilling =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Can Shift Neutral Killing", false);
             CanShiftImp =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Can Shift Impostor", false);
+                new CustomToggleOption(num++, MultiMenu.neutral, "Can Shift Impostor / Madmate", false);
             CanShiftCoven =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Can Shift Coven", false);
 

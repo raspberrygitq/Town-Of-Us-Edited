@@ -199,7 +199,6 @@ namespace TownOfUsEdited.Patches {
                 if (playerControl.Is(ModifierEnum.Frosty)) playerRole += " (<color=#" + Patches.Colors.Frosty.ToHtmlStringRGBA() + ">Frosty</color>)";
                 if (playerControl.Is(ModifierEnum.SixthSense)) playerRole += " (<color=#" + Patches.Colors.SixthSense.ToHtmlStringRGBA() + ">Sixth Sense</color>)";
                 if (playerControl.Is(ModifierEnum.Shy)) playerRole += " (<color=#" + Patches.Colors.Shy.ToHtmlStringRGBA() + ">Shy</color>)";
-                if (playerControl.Is(ModifierEnum.Spotter)) playerRole += " (<color=#" + Patches.Colors.Spotter.ToHtmlStringRGBA() + ">Spotter</color>)";
                 if (playerControl.Is(ModifierEnum.Motionless)) playerRole += " (<color=#" + Patches.Colors.Motionless.ToHtmlStringRGBA() + ">Motionless</color>)";
                 if (playerControl.Is(ModifierEnum.Tasker)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Tasker</color>)";
                 if (playerControl.Is(ModifierEnum.Drunk)) playerRole += " (<color=#" + Patches.Colors.Drunk.ToHtmlStringRGBA() + ">Drunk</color>)";
@@ -225,6 +224,11 @@ namespace TownOfUsEdited.Patches {
                     else if (role.DeathReason == DeathReasons.Suicided && !hasDeathReason)
                     {
                         playerRole += " | (<color=#FF0000>Suicided</color>)";
+                        hasDeathReason = true;
+                    }
+                    else if (role.DeathReason == DeathReasons.Shift && !hasDeathReason)
+                    {
+                        playerRole += $" | (<color=#AAAAAA>Shift</color>)";
                         hasDeathReason = true;
                     }
                     foreach (var deadPlayer in Murder.KilledPlayers)

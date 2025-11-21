@@ -34,8 +34,8 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
                 if (!CustomGameOptions.NeutralEvilWinEndsGame)
                 {
                     Utils.Interact(role.Player, role.Player, true);
-                    role.DeathReason = DeathReasons.Won;
-                    Utils.Rpc(CustomRPC.SetDeathReason, role.Player.PlayerId, (byte)DeathReasons.Won);
+                    role.DeathReason = DeathReasons.Victorious;
+                    Utils.Rpc(CustomRPC.SetDeathReason, role.Player.PlayerId, (byte)DeathReasons.Victorious);
                 }
             }
         }

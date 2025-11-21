@@ -36,7 +36,7 @@ namespace TownOfUsEdited.NeutraleRoles.ExecutionerMod
                 {
                     KillButtonTarget.DontRevive = role.Player.PlayerId;
                     role.Player.Exiled();
-                    role.DeathReason = DeathReasons.Won;
+                    role.DeathReason = DeathReasons.Victorious;
                 }
         }
 

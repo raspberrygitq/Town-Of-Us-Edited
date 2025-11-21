@@ -77,8 +77,11 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
 
             __instance.SabotageButton.Show();
             var position = __instance.KillButton.transform.localPosition;
-            __instance.SabotageButton.transform.localPosition = new Vector3(position.x,
-            position.y, position.z);
+            __instance.SabotageButton.transform.localPosition = new Vector3(0f, 1f, 0f);
+
+            __instance.ImpostorVentButton.Show();
+            var position2 = __instance.ImpostorVentButton.transform.localPosition;
+            __instance.ImpostorVentButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
         }
     }
 }

@@ -447,18 +447,17 @@ namespace TownOfUsEdited.Roles
             {
                 if ((PlayerControl.LocalPlayer.Data.IsDead && CustomGameOptions.SeeTasksWhenDead) || (MeetingHud.Instance && CustomGameOptions.SeeTasksDuringMeeting) || (!PlayerControl.LocalPlayer.Data.IsDead && !MeetingHud.Instance && CustomGameOptions.SeeTasksDuringRound))
                 {
-                    PlayerName += $" ({TotalTasks - TasksLeft}/{TotalTasks})";
+                    PlayerName += $" <size=75%>({TotalTasks - TasksLeft}/{TotalTasks})</size>";
                 }
             }
 
-            if (player != null && (MeetingHud.Instance.state == MeetingHud.VoteStates.Proceeding ||
-                                   MeetingHud.Instance.state == MeetingHud.VoteStates.Results)) return PlayerName;
+            if (player != null && (MeetingHud.Instance.state == MeetingHud.VoteStates.Proceeding || MeetingHud.Instance.state == MeetingHud.VoteStates.Results)) return $"{Palette.White.ToTextColor()}{PlayerName}</color>";
 
             if (!revealRole) return PlayerName;
 
             Player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
 
-            return $"{PlayerName}\n<size=75%>{Name}</size>";
+            return $"<size=75%>{Name}</size>\n{Palette.White.ToTextColor()}{PlayerName}</color>";
         }
 
         public static bool operator ==(Role a, Role b)
@@ -1258,7 +1257,7 @@ namespace TownOfUsEdited.Roles
                 if (role == null || role.Hidden) return;
                 var task = new GameObject(role.Name + "Task").AddComponent<ImportantTextTask>();
                 task.transform.SetParent(player.transform, false);
-                task.Text = $"{role.ColorString}Role: {role.Name}  (Press F2 for Role infos)\n{role.TaskText()}</color>";
+                task.Text = $"{role.ColorString}Role: {role.Name} (Press F2 for Role infos)\n{role.TaskText()}</color>";
                 player.myTasks.Insert(0, task);
             }
         }

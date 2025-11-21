@@ -49,11 +49,13 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
             if (interact[4] == true)
             {
-                if (player.Is(Faction.Impostors) && !CustomGameOptions.CanShiftImp ||
+                if (player.Is(Faction.Impostors) || player.Is(Faction.Madmates) && !CustomGameOptions.CanShiftImp ||
                     player.Is(Faction.Coven) && !CustomGameOptions.CanShiftCoven ||
                     player.Is(Faction.NeutralKilling) && !CustomGameOptions.CanShiftNeutKilling)
                 {
                     Utils.RpcMurderPlayer(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer);
+                    role.DeathReason = DeathReasons.Shift;
+                    Utils.Rpc(CustomRPC.SetDeathReason, role.Player.PlayerId, (byte)DeathReasons.Shift);
                 }
                 else
                 {

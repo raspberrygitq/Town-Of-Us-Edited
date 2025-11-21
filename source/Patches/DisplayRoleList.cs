@@ -55,6 +55,7 @@ namespace TownOfUsEdited.Patches
         public static void Postfix(HudManager __instance)
         {
             if (AmongUsClient.Instance?.GameState != InnerNet.InnerNetClient.GameStates.Joined) return;
+            if (AmongUsClient.Instance?.NetworkMode == NetworkModes.FreePlay) return;
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return;
             if (CustomGameOptions.GameMode != GameMode.RoleList)
             {

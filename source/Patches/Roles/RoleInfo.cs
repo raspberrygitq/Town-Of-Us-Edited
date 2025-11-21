@@ -1074,10 +1074,6 @@ namespace TownOfUsEdited.Roles
             {
                 return "<color=#803333FF>Sleuth</color> is a Global Modifier which makes you know the role of dead players you report.";
             }
-            else if (modifiers == "Spotter")
-            {
-                return "<color=#c688f2>Spotter</color> is a Global Modifier which makes you see the vote colors of each player when anonymous votes are toggled.";
-            }
             else if (modifiers == "Superstar")
             {
                 return "<color=#ffca00>Superstar</color> is a Global Modifier which will alert everyone when dying and show an arrow pointing to its dead bodies.";

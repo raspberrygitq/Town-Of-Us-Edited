@@ -41,7 +41,7 @@ namespace TownOfUsEdited.NeutralRoles.JesterMod
 
                 if (CustomGameOptions.NeutralEvilWinEndsGame || !CustomGameOptions.JesterHaunt) return;
                 if (PlayerControl.LocalPlayer != player) return;
-                role.DeathReason = DeathReasons.Won;
+                role.DeathReason = DeathReasons.Victorious;
                 Utils.Rpc(CustomRPC.SetDeathReason, player.PlayerId, (byte)DeathReasons.Guessed);
                 role.PauseEndCrit = true;
 

@@ -34,7 +34,7 @@ namespace TownOfUsEdited.NeutralRoles.TrollMod
                     if (CustomGameOptions.NeutralEvilWinEndsGame || !CustomGameOptions.TrollHaunts) return;
                     if (PlayerControl.LocalPlayer != player) return;
                     role.PauseEndCrit = true;
-                    role.DeathReason = DeathReasons.Won;
+                    role.DeathReason = DeathReasons.Victorious;
 
                     byte[] toKill = MeetingHud.Instance.playerStates.Where(x => !Utils.PlayerById(x.TargetPlayerId).Is(RoleEnum.Pestilence) && x.VotedFor == ((Troll)role).TrolledPlayer.PlayerId).Select(x => x.TargetPlayerId).ToArray();
                     var pk = new PlayerMenu((x) => {
