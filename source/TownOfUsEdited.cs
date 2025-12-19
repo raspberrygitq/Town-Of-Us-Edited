@@ -189,8 +189,6 @@ namespace TownOfUsEdited
         {
             RuntimeLocation = Path.GetDirectoryName(Assembly.GetAssembly(typeof(TownOfUsEdited)).Location);
 
-            ReactorCredits.Register<TownOfUsEdited>(ReactorCredits.AlwaysShow);
-
             System.Console.WriteLine("000.000.000.000/000000000000000000");
 
             _harmony = new Harmony("com.lekillerdesgames.townofusedited");
