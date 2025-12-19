@@ -1,6 +1,6 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
 using Reactor.Utilities.Extensions;
+using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.CrewmateRoles.MayorMod
 {

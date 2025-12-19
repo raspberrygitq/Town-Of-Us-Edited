@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -8,8 +8,6 @@ namespace TownOfUsEdited.ImpostorRoles.MinerMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite MineSprite => TownOfUsEdited.MineSprite;
-
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -24,8 +22,12 @@ namespace TownOfUsEdited.ImpostorRoles.MinerMod
                 role.MineButton.gameObject.SetActive(false);
             }
 
-            role.MineButton.graphic.sprite = MineSprite;
+            role.MineButton.graphic.sprite = TownOfUsEdited.MineSprite;
             role.MineButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.MineButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -34,20 +36,27 @@ namespace TownOfUsEdited.ImpostorRoles.MinerMod
 
             role.MineButton.SetCoolDown(role.MineTimer(), CustomGameOptions.MineCd);
             role.MineButton.graphic.SetCooldownNormalizedUvs();
+
+            role.MineButton.buttonLabelText.text = "Mine";
+
             var hits = Physics2D.OverlapBoxAll(PlayerControl.LocalPlayer.transform.position, role.VentSize, 0);
             hits = hits.ToArray().Where(c =>
                     (c.name.Contains("Vent") || !c.isTrigger) && c.gameObject.layer != 8 && c.gameObject.layer != 5)
                 .ToArray();
-            if (hits.Count == 0 && PlayerControl.LocalPlayer.moveable == true)
+            if (hits.Count == 0 && PlayerControl.LocalPlayer.moveable == true && !role.coolingDown)
             {
                 role.MineButton.graphic.color = Palette.EnabledColor;
                 role.MineButton.graphic.material.SetFloat("_Desat", 0f);
+                role.MineButton.buttonLabelText.color = Palette.EnabledColor;
+                role.MineButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 role.CanPlace = true;
             }
             else
             {
                 role.MineButton.graphic.color = Palette.DisabledClear;
                 role.MineButton.graphic.material.SetFloat("_Desat", 1f);
+                role.MineButton.buttonLabelText.color = Palette.DisabledClear;
+                role.MineButton.buttonLabelText.material.SetFloat("_Desat", 1f);
                 role.CanPlace = false;
             }
         }

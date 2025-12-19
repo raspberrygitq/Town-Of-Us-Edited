@@ -1,17 +1,15 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
 using System.Linq;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite Blackmail => TownOfUsEdited.BlackmailSprite;
-
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -28,8 +26,12 @@ namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
 
             if (PlayerControl.LocalPlayer.Data.IsDead) role.BlackmailButton.SetTarget(null);
 
-            role.BlackmailButton.graphic.sprite = Blackmail;
+            role.BlackmailButton.graphic.sprite = TownOfUsEdited.BlackmailSprite;
             role.BlackmailButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.BlackmailButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -43,6 +45,9 @@ namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
             else role.BlackmailButton.SetTarget(null);
 
             role.BlackmailButton.graphic.SetCooldownNormalizedUvs();
+
+            role.BlackmailButton.buttonLabelText.text = "Blackmail";
+            role.BlackmailButton.buttonLabelText.SetOutlineColor(Palette.ImpostorRed);
 
             role.BlackmailButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
@@ -71,6 +76,17 @@ namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
                     else if (imp.nameText().color == Color.clear ||
                         imp.nameText().color == new Color(0.3f, 0.0f, 0.0f)) imp.nameText().color = Patches.Colors.Impostor;
                 }
+            }
+
+            if (role.ClosestPlayer != null && !role.coolingDown)
+            {
+                role.BlackmailButton.buttonLabelText.color = Palette.EnabledColor;
+                role.BlackmailButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                role.BlackmailButton.buttonLabelText.color = Palette.DisabledClear;
+                role.BlackmailButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
     }

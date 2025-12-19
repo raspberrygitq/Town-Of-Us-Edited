@@ -1,6 +1,6 @@
-using System.Linq;
 using AmongUs.GameOptions;
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -34,9 +34,17 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && role.UsedRevive == false && !player.Data.Disconnected
                     && role.CanRevive == true);
-                    
+            role.ReviveButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
+                    && role.UsedRevive == false && !player.Data.Disconnected
+                    && role.CanRevive == true);
+
             role.ReviveButton.graphic.sprite = TownOfUsEdited.Revive2Sprite;
             role.ReviveButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
+
+            role.ReviveButton.buttonLabelText.text = "Ressurect";
 
             if (!role.ReviveButton.isActiveAndEnabled) return;
 
@@ -77,6 +85,8 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
             {
                 role.ReviveButton.graphic.color = Palette.DisabledClear;
                 role.ReviveButton.graphic.material.SetFloat("_Desat", 1f);
+                role.ReviveButton.buttonLabelText.color = Palette.DisabledClear;
+                role.ReviveButton.buttonLabelText.material.SetFloat("_Desat", 1f);
                 return;
             }
             var player2 = Utils.PlayerById(role.CurrentTarget.ParentId);
@@ -90,11 +100,15 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
                 component.material.SetColor("_OutlineColor", Color.red);
                 role.ReviveButton.graphic.color = Palette.EnabledColor;
                 role.ReviveButton.graphic.material.SetFloat("_Desat", 0f);
+                role.ReviveButton.buttonLabelText.color = Palette.EnabledColor;
+                role.ReviveButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 return;
             }
 
             role.ReviveButton.graphic.color = Palette.DisabledClear;
             role.ReviveButton.graphic.material.SetFloat("_Desat", 1f);
+            role.ReviveButton.buttonLabelText.color = Palette.DisabledClear;
+            role.ReviveButton.buttonLabelText.material.SetFloat("_Desat", 1f);
 
             role.ReviveButton.SetCoolDown(0f, 1f);
         }

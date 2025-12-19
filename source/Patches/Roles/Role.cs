@@ -1,18 +1,18 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using Reactor.Utilities;
+using Reactor.Utilities.Extensions;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Reactor.Utilities.Extensions;
 using TMPro;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles.Modifiers;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
-using TownOfUsEdited.Extensions;
-using AmongUs.GameOptions;
-using System.Collections;
-using Reactor.Utilities;
 
 namespace TownOfUsEdited.Roles
 {
@@ -427,7 +427,7 @@ namespace TownOfUsEdited.Roles
                 var troll = (Troll) role;
                 if (Player == troll.TrolledPlayer && (PlayerControl.LocalPlayer.Data.IsDead || PlayerControl.LocalPlayer == role.Player))
                 {
-                    PlayerName += "<color=#8C4005FF> T</color>";
+                    PlayerName += "<color=#c27d5aFF> T</color>";
                 }
             }
 

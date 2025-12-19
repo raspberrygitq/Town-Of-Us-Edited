@@ -1,21 +1,21 @@
-﻿using System.Linq;
+﻿using Reactor.Utilities.Extensions;
+using System.Collections.Generic;
+using System.Linq;
+using TownOfUsEdited.CovenRoles.RitualistMod;
+using TownOfUsEdited.CrewmateRoles.DeputyMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
-using TownOfUsEdited.Modifiers.AssassinMod;
-using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
-using TownOfUsEdited.Extensions;
-using TownOfUsEdited.CrewmateRoles.VigilanteMod;
-using TownOfUsEdited.CrewmateRoles.SwapperMod;
-using TownOfUsEdited.Patches;
-using Reactor.Utilities.Extensions;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
-using TownOfUsEdited.CovenRoles.RitualistMod;
-using TownOfUsEdited.CrewmateRoles.DeputyMod;
-using System.Collections.Generic;
 
 namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
 {

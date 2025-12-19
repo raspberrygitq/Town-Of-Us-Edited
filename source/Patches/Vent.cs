@@ -1,10 +1,10 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using AmongUs.GameOptions;
-using TownOfUsEdited.Patches;
-using System.Linq;
 
 namespace TownOfUsEdited
 {

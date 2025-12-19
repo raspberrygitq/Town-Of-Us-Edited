@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
-using UnityEngine;
-using Object = UnityEngine.Object;
+using System.Collections.Generic;
 using System.Linq;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
-using System.Collections.Generic;
 using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Modifiers.SuperstarMod
 {

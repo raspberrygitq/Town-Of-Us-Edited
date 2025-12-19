@@ -1,5 +1,5 @@
-﻿using System;
-using Reactor.Localization.Utilities;
+﻿using Reactor.Localization.Utilities;
+using System;
 using UnityEngine;
 
 public class RainbowUtils

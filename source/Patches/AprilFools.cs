@@ -1,8 +1,8 @@
-﻿using System;
+﻿using HarmonyLib;
+using Reactor.Utilities.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using HarmonyLib;
-using Reactor.Utilities.Extensions;
 using TMPro;
 using TownOfUsEdited.Extensions;
 using UnityEngine;

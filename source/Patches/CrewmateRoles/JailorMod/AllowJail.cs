@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using TownOfUsEdited.Modifiers.AssassinMod;
 using Reactor.Utilities;
-using TownOfUsEdited.Patches;
 using Reactor.Utilities.Extensions;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.JailorMod

@@ -1,9 +1,9 @@
 using HarmonyLib;
+using System.Collections.Generic;
 using System.Linq;
+using TownOfUsEdited.CrewmateRoles.GuardianMod;
 using TownOfUsEdited.CrewmateRoles.HaunterMod;
 using TownOfUsEdited.CrewmateRoles.HelperMod;
-using System.Collections.Generic;
-using TownOfUsEdited.CrewmateRoles.GuardianMod;
 
 namespace TownOfUsEdited.ChooseCrewGhostRoles
 {

@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using Reactor.Utilities;
-using UnityEngine;
 using TownOfUsEdited.CustomOption;
+using UnityEngine;
 
 namespace TownOfUsEdited.Patches
 {

@@ -1,6 +1,6 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
 using Reactor.Utilities;
+using TownOfUsEdited.Roles;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Patches.NeutralRoles.MutantMod

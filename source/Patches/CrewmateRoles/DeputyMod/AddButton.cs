@@ -1,6 +1,9 @@
-using System;
-using System.Linq;
+using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TownOfUsEdited.CovenRoles.RitualistMod;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.CrewmateRoles.SwapperMod;
@@ -14,11 +17,8 @@ using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
-using Object = UnityEngine.Object;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
-using TownOfUsEdited.CovenRoles.RitualistMod;
-using Reactor.Utilities;
-using System.Collections.Generic;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.CrewmateRoles.DeputyMod
 {

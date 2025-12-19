@@ -1,12 +1,12 @@
-using System;
 using HarmonyLib;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUsEdited.Patches;
-using System.Linq;
-using TownOfUsEdited.Extensions;
-using System.Collections.Generic;
 
 namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
 {

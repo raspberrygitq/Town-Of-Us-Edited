@@ -1,19 +1,19 @@
+using Reactor.Utilities;
 using System;
-using UnityEngine;
-using Object = UnityEngine.Object;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Reactor.Utilities;
-using System.Collections.Generic;
-using TownOfUsEdited.Patches;
-using System.Collections;
+using TownOfUsEdited.CrewmateRoles.ClericMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.TimeLordMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Patches.NeutralRoles;
 using TownOfUsEdited.Roles.Modifiers;
-using TownOfUsEdited.Extensions;
-using TownOfUsEdited.CrewmateRoles.TimeLordMod;
-using TownOfUsEdited.CrewmateRoles.ClericMod;
+using UnityEngine;
 using HudManagerUpdate = TownOfUsEdited.Modifiers.ShyMod.HudManagerUpdate;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Roles
 {

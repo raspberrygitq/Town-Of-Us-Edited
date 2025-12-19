@@ -1,6 +1,6 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod

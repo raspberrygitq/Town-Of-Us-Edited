@@ -1,5 +1,5 @@
-using System.Linq;
 using Il2CppSystem.Collections.Generic;
+using System.Linq;
 
 namespace TownOfUsEdited.Roles
 {

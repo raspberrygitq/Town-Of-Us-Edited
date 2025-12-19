@@ -76,11 +76,22 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
                 }
 
                 role.MorphButton.SetCoolDown(role.MorphTimer(), CustomGameOptions.MorphlingCd);
-                role.MorphButton.graphic.color = Palette.EnabledColor;
-                role.MorphButton.graphic.material.SetFloat("_Desat", 0f);
-                role.MorphText.color = Palette.EnabledColor;
-                role.MorphText.material.SetFloat("_Desat", 0f);
                 role.MorphText.text = "Morph";
+
+                if (!role.coolingDown)
+                {
+                    role.MorphButton.graphic.color = Palette.EnabledColor;
+                    role.MorphButton.graphic.material.SetFloat("_Desat", 0f);
+                    role.MorphText.color = Palette.EnabledColor;
+                    role.MorphText.material.SetFloat("_Desat", 0f);
+                }
+                else
+                {
+                    role.MorphButton.graphic.color = Palette.DisabledClear;
+                    role.MorphButton.graphic.material.SetFloat("_Desat", 1f);
+                    role.MorphText.color = Palette.DisabledClear;
+                    role.MorphText.material.SetFloat("_Desat", 1f);
+                }
             }
         }
     }

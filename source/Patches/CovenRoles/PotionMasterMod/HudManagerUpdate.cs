@@ -72,11 +72,21 @@ namespace TownOfUsEdited.CovenRoles.PotionMasterMod
 
             role.PotionButton.graphic.SetCooldownNormalizedUvs();
 
-            role.PotionButton.graphic.color = Palette.EnabledColor;
-            role.PotionButton.graphic.material.SetFloat("_Desat", 0f);
             var labelrender = role.PotionText;
-            labelrender.color = Palette.EnabledColor;
-            labelrender.material.SetFloat("_Desat", 0f);
+            if (!role.PotioncoolingDown)
+            {
+                role.PotionButton.graphic.color = Palette.EnabledColor;
+                role.PotionButton.graphic.material.SetFloat("_Desat", 0f);
+                labelrender.color = Palette.EnabledColor;
+                labelrender.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                role.PotionButton.graphic.color = Palette.DisabledClear;
+                role.PotionButton.graphic.material.SetFloat("_Desat", 1f);
+                labelrender.color = Palette.DisabledClear;
+                labelrender.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

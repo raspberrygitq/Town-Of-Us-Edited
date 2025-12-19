@@ -1,10 +1,10 @@
 using HarmonyLib;
 using System;
-using UnityEngine;
-using Object = UnityEngine.Object;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Extensions;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.CrewmateRoles.GuardMod
 {

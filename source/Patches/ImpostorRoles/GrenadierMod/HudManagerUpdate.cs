@@ -1,16 +1,14 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.GrenadierMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite FlashSprite => TownOfUsEdited.FlashSprite;
-
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -51,11 +49,16 @@ namespace TownOfUsEdited.ImpostorRoles.GrenadierMod
                 }
             }
 
-            role.FlashButton.graphic.sprite = FlashSprite;
+            role.FlashButton.graphic.sprite = TownOfUsEdited.FlashSprite;
             role.FlashButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.FlashButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
 
             role.FlashButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
@@ -68,6 +71,8 @@ namespace TownOfUsEdited.ImpostorRoles.GrenadierMod
             role.FlashButton.SetCoolDown(role.FlashTimer(), CustomGameOptions.GrenadeCd);
             role.FlashButton.graphic.SetCooldownNormalizedUvs();
 
+            role.FlashButton.buttonLabelText.text = "Flash";
+
             var system = ShipStatus.Instance.Systems[SystemTypes.Sabotage].Cast<SabotageSystemType>();
             var sabActive = system.AnyActive;
 
@@ -75,11 +80,25 @@ namespace TownOfUsEdited.ImpostorRoles.GrenadierMod
             {
                 role.FlashButton.graphic.color = Palette.DisabledClear;
                 role.FlashButton.graphic.material.SetFloat("_Desat", 1f);
+                role.FlashButton.buttonLabelText.color = Palette.DisabledClear;
+                role.FlashButton.buttonLabelText.material.SetFloat("_Desat", 1f);
                 return;
             }
 
-            role.FlashButton.graphic.color = Palette.EnabledColor;
-            role.FlashButton.graphic.material.SetFloat("_Desat", 0f);
+            if (!role.coolingDown) 
+            {
+                role.FlashButton.graphic.color = Palette.EnabledColor;
+                role.FlashButton.graphic.material.SetFloat("_Desat", 0f);
+                role.FlashButton.buttonLabelText.color = Palette.EnabledColor;
+                role.FlashButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                role.FlashButton.graphic.color = Palette.DisabledClear;
+                role.FlashButton.graphic.material.SetFloat("_Desat", 1f);
+                role.FlashButton.buttonLabelText.color = Palette.DisabledClear;
+                role.FlashButton.buttonLabelText.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace TownOfUsEdited.CrewmateRoles.InformantMod
                 role.ButtonLabels.Add(role.VitalsText);
             }
 
-            role.VitalsButton.graphic.sprite = DestroyableSingleton<HudManager>.Instance.UseButton.fastUseSettings[ImageNames.VitalsButton].Image;
+            role.VitalsButton.graphic.sprite = HudManager.Instance.UseButton.fastUseSettings[ImageNames.VitalsButton].Image;
             role.VitalsButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
 
             role.VitalsButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
@@ -51,7 +51,7 @@ namespace TownOfUsEdited.CrewmateRoles.InformantMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            __instance.KillButton.graphic.sprite = DestroyableSingleton<HudManager>.Instance.UseButton.fastUseSettings[ImageNames.AdminMapButton].Image;
+            __instance.KillButton.graphic.sprite = HudManager.Instance.UseButton.fastUseSettings[ImageNames.AdminMapButton].Image;
 
             AdminText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
@@ -63,14 +63,28 @@ namespace TownOfUsEdited.CrewmateRoles.InformantMod
 
             var renderer = __instance.KillButton.graphic;
             var renderer2 = role.VitalsButton.graphic;
-            AdminText.color = Palette.EnabledColor;
-            AdminText.material.SetFloat("_Desat", 0f);
-            role.VitalsText.color = Palette.EnabledColor;
-            role.VitalsText.material.SetFloat("_Desat", 0f);
-            renderer.color = Palette.EnabledColor;
-            renderer.material.SetFloat("_Desat", 0f);
-            renderer2.color = Palette.EnabledColor;
-            renderer2.material.SetFloat("_Desat", 0f);
+            if (!CamouflageUnCamouflage.CommsEnabled)
+            {
+                AdminText.color = Palette.EnabledColor;
+                AdminText.material.SetFloat("_Desat", 0f);
+                role.VitalsText.color = Palette.EnabledColor;
+                role.VitalsText.material.SetFloat("_Desat", 0f);
+                renderer.color = Palette.EnabledColor;
+                renderer.material.SetFloat("_Desat", 0f);
+                renderer2.color = Palette.EnabledColor;
+                renderer2.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                AdminText.color = Palette.DisabledClear;
+                AdminText.material.SetFloat("_Desat", 1f);
+                role.VitalsText.color = Palette.DisabledClear;
+                role.VitalsText.material.SetFloat("_Desat", 1f);
+                renderer.color = Palette.DisabledClear;
+                renderer.material.SetFloat("_Desat", 1f);
+                renderer2.color = Palette.DisabledClear;
+                renderer2.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

@@ -1,35 +1,35 @@
-using System.Linq;
-using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
-using UnityEngine.UI;
-using Object = UnityEngine.Object;
-using System;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
-using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using AmongUs.GameOptions;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
+using HarmonyLib;
+using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
-using TownOfUsEdited.ImpostorRoles.SpiritMod;
-using TownOfUsEdited.ImpostorRoles.FreezerMod;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using TownOfUsEdited.ChooseCrewGhostRoles;
 using TownOfUsEdited.ChooseImpGhostRole;
+using TownOfUsEdited.CovenRoles.CovenMod;
+using TownOfUsEdited.CrewmateRoles.AltruistMod;
 using TownOfUsEdited.CrewmateRoles.GuardianMod;
 using TownOfUsEdited.CrewmateRoles.HelperMod;
-using TownOfUsEdited.ChooseCrewGhostRoles;
-using TownOfUsEdited.ImpostorRoles.BlinderMod;
-using TownOfUsEdited.CrewmateRoles.AltruistMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.CrewmateRoles.TimeLordMod;
-using TownOfUsEdited.ImpostorRoles.ConverterMod;
-using System.Collections;
-using Reactor.Utilities;
-using System.Collections.Generic;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using TownOfUsEdited.Extensions;
-using TMPro;
-using TownOfUsEdited.CovenRoles.CovenMod;
+using TownOfUsEdited.ImpostorRoles.BlinderMod;
+using TownOfUsEdited.ImpostorRoles.ConverterMod;
+using TownOfUsEdited.ImpostorRoles.FreezerMod;
+using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
-using Assassin2 = TownOfUsEdited.Roles.Modifiers.Assassin;
+using UnityEngine;
+using UnityEngine.UI;
 using Assassin = TownOfUsEdited.Roles.Assassin;
+using Assassin2 = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Patches
 {
@@ -128,7 +128,7 @@ namespace TownOfUsEdited.Patches
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Plumber))
             {
                 var plumberRole = Role.GetRole<Plumber>(PlayerControl.LocalPlayer);
-                foreach (GameObject barricade in plumberRole.Barricades)
+                foreach (GameObject barricade in plumberRole.Block)
                 {
                     UnityEngine.Object.Destroy(barricade);
                 }
@@ -296,9 +296,9 @@ namespace TownOfUsEdited.Patches
                 }
             }
 
-            DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
-            DestroyableSingleton<HudManager>.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
-            DestroyableSingleton<HudManager>.Instance.SabotageButton.gameObject.SetActive(false);
+            HudManager.Instance.KillButton.gameObject.SetActive(false);
+            HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+            HudManager.Instance.SabotageButton.gameObject.SetActive(false);
 
             if (Role.RoleDictionary.ContainsKey(PlayerControl.LocalPlayer.PlayerId)) Role.RoleDictionary.Remove(PlayerControl.LocalPlayer.PlayerId);
 

@@ -1,13 +1,12 @@
-﻿using System;
+﻿using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
-using AmongUs.GameOptions;
+using Reactor.Utilities;
 using TownOfUsEdited.CrewmateRoles.SnitchMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
-using Reactor.Utilities;
-using TownOfUsEdited.Roles.Modifiers;
 using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
 {
@@ -328,7 +327,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
             else if (roleEnum == RoleEnum.Survivor)
             {
                 var survRole = Role.GetRole<Survivor>(oldVamp);
-                survRole.LastVested = DateTime.UtcNow;
+                survRole.Cooldown = CustomGameOptions.VestCd;
                 survRole.UsesLeft = CustomGameOptions.MaxVests;
             }
 

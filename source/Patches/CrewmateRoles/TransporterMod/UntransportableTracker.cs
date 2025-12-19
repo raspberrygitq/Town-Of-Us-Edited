@@ -1,6 +1,6 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
 using System;
+using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.CrewmateRoles.TransporterMod
 {

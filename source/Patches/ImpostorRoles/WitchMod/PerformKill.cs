@@ -1,8 +1,8 @@
 using HarmonyLib;
+using TownOfUsEdited.Modifiers.UnderdogMod;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using TownOfUsEdited.Modifiers.UnderdogMod;
 
 namespace TownOfUsEdited.ImpostorRoles.WitchMod
 {

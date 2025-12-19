@@ -1,21 +1,21 @@
-﻿using System.Linq;
-using TownOfUsEdited.Roles;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using Reactor.Utilities.Extensions;
+using System.Collections.Generic;
+using System.Linq;
+using TownOfUsEdited.CrewmateRoles.DeputyMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.CrewmateRoles.SwapperMod;
 using TownOfUsEdited.CrewmateRoles.VigilanteMod;
-using TownOfUsEdited.NeutralRoles.DoomsayerMod;
-using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
-using TownOfUsEdited.Roles.Modifiers;
 using TownOfUsEdited.Extensions;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using TownOfUsEdited.Patches;
-using Reactor.Utilities.Extensions;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
 using TownOfUsEdited.Modifiers.AssassinMod;
-using TownOfUsEdited.CrewmateRoles.DeputyMod;
-using System.Collections.Generic;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
+using UnityEngine.UI;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 
 namespace TownOfUsEdited.CovenRoles.RitualistMod
 {

@@ -1,7 +1,7 @@
-using System.Linq;
 using HarmonyLib;
-using TownOfUsEdited.Roles;
 using Reactor.Utilities;
+using System.Linq;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.SpiritMod

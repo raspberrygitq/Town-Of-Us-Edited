@@ -1,8 +1,8 @@
 using HarmonyLib;
+using System;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUsEdited.Extensions;
-using System;
 
 namespace TownOfUsEdited.CrewmateRoles.TrackerMod
 {

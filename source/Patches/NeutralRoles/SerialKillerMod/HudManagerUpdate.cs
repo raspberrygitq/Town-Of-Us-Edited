@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -42,9 +42,18 @@ namespace TownOfUsEdited.NeutralRoles.SerialKillerMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && sk.Converted == false && CustomGameOptions.SerialKillerCanConvert
                     && !player.Data.Disconnected);
-                    
+            sk.skconvertButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
+                    && sk.Converted == false && CustomGameOptions.SerialKillerCanConvert
+                    && !player.Data.Disconnected);
+
             sk.skconvertButton.graphic.sprite = TownOfUsEdited.SKConvertSprite;
             sk.skconvertButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
+
+            sk.skconvertButton.buttonLabelText.text = "Convert";
+            sk.skconvertButton.buttonLabelText.SetOutlineColor(Patches.Colors.SerialKiller);
 
             // Set KillButton's cooldown
             __instance.KillButton.SetCoolDown(sk.KillTimer(), CustomGameOptions.SerialKillerKCD);

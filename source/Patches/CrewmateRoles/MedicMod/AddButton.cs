@@ -1,11 +1,11 @@
-﻿using System;
+﻿using HarmonyLib;
+using System;
 using System.Linq;
-using HarmonyLib;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
-using TownOfUsEdited.Extensions;
 
 namespace TownOfUsEdited.CrewmateRoles.MedicMod
 {

@@ -1,6 +1,6 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
 using TownOfUsEdited;
-using AmongUs.GameOptions;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 

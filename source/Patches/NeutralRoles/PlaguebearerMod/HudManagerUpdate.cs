@@ -1,9 +1,9 @@
-using System.Linq;
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
+using System.Linq;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.NeutralRoles.PlaguebearerMod
 {
@@ -19,6 +19,7 @@ namespace TownOfUsEdited.NeutralRoles.PlaguebearerMod
             var isDead = PlayerControl.LocalPlayer.Data.IsDead;
             var infectButton = __instance.KillButton;
             var role = Role.GetRole<Plaguebearer>(PlayerControl.LocalPlayer);
+            var infectText = __instance.KillButton.buttonLabelText;
 
             if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())
             {
@@ -38,6 +39,10 @@ namespace TownOfUsEdited.NeutralRoles.PlaguebearerMod
             }
 
             infectButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            infectText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));

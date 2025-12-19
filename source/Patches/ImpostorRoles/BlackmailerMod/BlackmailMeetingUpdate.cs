@@ -1,11 +1,11 @@
+using AmongUs.QuickChat;
 using HarmonyLib;
+using Reactor.Utilities;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using System.Linq;
-using System.Collections;
-using Reactor.Utilities;
-using AmongUs.QuickChat;
-using System.Collections.Generic;
 
 namespace TownOfUsEdited.ImpostorRoles.BlackmailerMod
 {

@@ -1,9 +1,9 @@
 using TownOfUsEdited.CrewmateRoles.ClericMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
-using PerformKill = TownOfUsEdited.Modifiers.UnderdogMod.PerformKill;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
+using PerformKill = TownOfUsEdited.Modifiers.UnderdogMod.PerformKill;
 
 namespace TownOfUsEdited.Roles
 {

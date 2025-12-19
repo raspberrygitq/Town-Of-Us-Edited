@@ -1,5 +1,5 @@
-﻿using TownOfUsEdited.Components;
-using HarmonyLib;
+﻿using HarmonyLib;
+using TownOfUsEdited.Components;
 
 namespace TownOfUsEdited.Patches;
 

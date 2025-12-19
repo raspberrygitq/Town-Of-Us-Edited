@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using Reactor.Utilities;
+﻿using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
+using System;
+using System.Linq;
 using TMPro;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;

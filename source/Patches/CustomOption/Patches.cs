@@ -1,15 +1,15 @@
-using System.Linq;
-using System;
 using AmongUs.GameOptions;
 using HarmonyLib;
-using Reactor.Utilities.Extensions;
-using UnityEngine;
-using System.Collections.Generic;
-using TMPro;
-using System.IO;
 using Il2CppSystem.Text;
 using Reactor.Utilities;
+using Reactor.Utilities.Extensions;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using TMPro;
+using UnityEngine;
 
 namespace TownOfUsEdited.CustomOption
 {

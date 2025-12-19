@@ -1,9 +1,9 @@
 using HarmonyLib;
+using System.Linq;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using System.Linq;
-using TownOfUsEdited.Roles;
-using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited.Modifiers.VengefulMod
 {

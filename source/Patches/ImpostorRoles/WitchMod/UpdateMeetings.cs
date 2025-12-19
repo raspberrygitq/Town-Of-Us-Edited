@@ -1,21 +1,21 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using System.Linq;
-using Object = UnityEngine.Object;
-using TownOfUsEdited.Patches;
+using Reactor.Utilities.Extensions;
 using System;
-using UnityEngine;
-using UnityEngine.UI;
+using System.Linq;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.CrewmateRoles.SwapperMod;
 using TownOfUsEdited.CrewmateRoles.VigilanteMod;
-using TownOfUsEdited.NeutralRoles.DoomsayerMod;
-using TownOfUsEdited.Roles.Modifiers;
 using TownOfUsEdited.Extensions;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using Reactor.Utilities.Extensions;
 using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
+using UnityEngine.UI;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.ImpostorRoles.WitchMod
 {

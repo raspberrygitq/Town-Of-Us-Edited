@@ -1,5 +1,5 @@
-using TMPro;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -12,7 +12,8 @@ namespace TownOfUsEdited.Roles
         public Vent Vent;
         public List<byte> FutureBlocks = new List<byte>();
         public List<byte> VentsBlocked = new List<byte>();
-        public List<GameObject> Barricades = new List<GameObject>();
+        public List<GameObject> Block = new List<GameObject>();
+        public TextMeshPro FlushText;
         public KillButton FlushButton
         {
             get => _flushButton;

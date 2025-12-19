@@ -25,6 +25,5 @@ namespace TownOfUsEdited.Roles
                 ExtraButtons.Add(value);
             }
         }
-
     }
 }

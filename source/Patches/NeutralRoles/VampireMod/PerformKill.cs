@@ -1,12 +1,12 @@
-﻿using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
-using AmongUs.GameOptions;
+﻿using AmongUs.GameOptions;
+using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
-using System.Linq;
-using TownOfUsEdited.Patches;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
+using UnityEngine;
 
 namespace TownOfUsEdited.NeutralRoles.VampireMod
 {
@@ -146,7 +146,7 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
             if (newVamp.Is(RoleEnum.Plumber))
             {
                 var plumberRole = Role.GetRole<Plumber>(newVamp);
-                foreach (GameObject barricade in plumberRole.Barricades)
+                foreach (GameObject barricade in plumberRole.Block)
                 {
                     UnityEngine.Object.Destroy(barricade);
                 }

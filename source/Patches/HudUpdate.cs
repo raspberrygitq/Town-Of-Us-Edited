@@ -1,12 +1,12 @@
-using HarmonyLib;
-using UnityEngine;
-using System;
-using Object = UnityEngine.Object;
 using AmongUs.GameOptions;
-using TownOfUsEdited.Roles;
+using HarmonyLib;
+using System;
 using TownOfUsEdited.CrewmateRoles.HaunterMod;
-using TownOfUsEdited.NeutralRoles.PhantomMod;
 using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.NeutralRoles.PhantomMod;
+using TownOfUsEdited.Roles;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Patches
 {

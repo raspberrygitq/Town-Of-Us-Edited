@@ -15,7 +15,7 @@ namespace TownOfUsEdited.Roles
         public Guardian(PlayerControl player) : base(player)
         {
             Name = "Guardian";
-            ImpostorText = () => "Aw no role description?";
+            ImpostorText = () => "";
             TaskText = () => "Save <color=#00FFFF>Crewmates</color> from Murder Attempts!";
             Color = Patches.Colors.Guardian;
             RoleType = RoleEnum.Guardian;

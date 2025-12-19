@@ -1,10 +1,10 @@
-using UnityEngine;
 using System;
-using TownOfUsEdited.ImpostorRoles.BomberMod;
+using TownOfUsEdited.CrewmateRoles.ClericMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.ImpostorRoles.BomberMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles.Modifiers;
-using TownOfUsEdited.CrewmateRoles.ClericMod;
+using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {

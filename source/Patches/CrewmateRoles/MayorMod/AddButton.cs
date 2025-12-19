@@ -1,16 +1,16 @@
+using Reactor.Utilities.Extensions;
 using System;
 using System.Linq;
-using Reactor.Utilities.Extensions;
+using TownOfUsEdited.CovenRoles.RitualistMod;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
 using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
-using Object = UnityEngine.Object;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
-using TownOfUsEdited.CrewmateRoles.VigilanteMod;
-using TownOfUsEdited.NeutralRoles.DoomsayerMod;
-using TownOfUsEdited.CovenRoles.RitualistMod;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.CrewmateRoles.MayorMod
 {

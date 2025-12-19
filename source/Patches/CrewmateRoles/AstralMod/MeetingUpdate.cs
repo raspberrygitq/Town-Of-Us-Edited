@@ -1,7 +1,7 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using System.Linq;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using System.Linq;
+using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.ImpostorRoles.AstralMod
 {

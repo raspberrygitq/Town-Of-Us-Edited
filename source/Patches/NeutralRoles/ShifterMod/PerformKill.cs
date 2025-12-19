@@ -1,26 +1,24 @@
 using HarmonyLib;
-using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
-using TownOfUsEdited.CrewmateRoles.SnitchMod;
-using TownOfUsEdited.CrewmateRoles.TrapperMod;
-using TownOfUsEdited.Roles;
-using UnityEngine;
-using System;
-using TownOfUsEdited.Extensions;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using TownOfUsEdited.Roles.Modifiers;
-using TownOfUsEdited.ImpostorRoles.BomberMod;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 using Reactor.Utilities;
 using System.Collections;
 using System.Linq;
 using TownOfUsEdited.CovenRoles.CovenMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
+using TownOfUsEdited.CrewmateRoles.SnitchMod;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.ImpostorRoles.BomberMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 
 namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static bool Prefix(KillButton __instance)
         {
             if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
@@ -50,8 +48,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             if (interact[4] == true)
             {
                 if (player.Is(Faction.Impostors) || player.Is(Faction.Madmates) && !CustomGameOptions.CanShiftImp ||
-                    player.Is(Faction.Coven) && !CustomGameOptions.CanShiftCoven ||
-                    player.Is(Faction.NeutralKilling) && !CustomGameOptions.CanShiftNeutKilling)
+                    player.Is(Faction.Coven) && !CustomGameOptions.CanShiftCoven)
                 {
                     Utils.RpcMurderPlayer(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer);
                     role.DeathReason = DeathReasons.Shift;
@@ -433,7 +430,8 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                         player.nameText().color = Patches.Colors.Impostor;
                     }
                 }
-                if (other.Is(ModifierEnum.Disperser) || other.Is(ModifierEnum.DoubleShot) || other.Is(ModifierEnum.Underdog) || other.Is(ModifierEnum.Lucky) || other.Is(ModifierEnum.Bloodlust))
+                if (other.Is(ModifierEnum.Disperser) || other.Is(ModifierEnum.DoubleShot) || other.Is(ModifierEnum.Underdog) ||
+                    other.Is(ModifierEnum.Lucky) || other.Is(ModifierEnum.Bloodlust) || other.Is(ModifierEnum.Tasker))
                 {
                     Modifier.ModifierDictionary.Remove(other.PlayerId);
                 }
@@ -457,7 +455,8 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                         player.nameText().color = Patches.Colors.Impostor;
                     }
                 }
-                if (other.Is(ModifierEnum.Disperser) || other.Is(ModifierEnum.DoubleShot) || other.Is(ModifierEnum.Underdog) || other.Is(ModifierEnum.Lucky) || other.Is(ModifierEnum.Bloodlust))
+                if (other.Is(ModifierEnum.Disperser) || other.Is(ModifierEnum.DoubleShot) || other.Is(ModifierEnum.Underdog) || 
+                    other.Is(ModifierEnum.Lucky) || other.Is(ModifierEnum.Bloodlust) || other.Is(ModifierEnum.Tasker))
                 {
                     Modifier.ModifierDictionary.Remove(other.PlayerId);
                 }
@@ -741,7 +740,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             else if (role == RoleEnum.Survivor)
             {
                 var survRole = Role.GetRole<Survivor>(shifter);
-                survRole.LastVested = DateTime.UtcNow;
+                survRole.Cooldown = CustomGameOptions.VestCd;
                 survRole.UsesLeft = CustomGameOptions.MaxVests;
             }
 
@@ -906,7 +905,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 var plagueRole = Role.GetRole<Plaguebearer>(shifter);
                 plagueRole.InfectedPlayers.RemoveRange(0, plagueRole.InfectedPlayers.Count);
                 plagueRole.InfectedPlayers.Add(shifter.PlayerId);
-                plagueRole.LastInfected = DateTime.UtcNow;
+                plagueRole.Cooldown = CustomGameOptions.InfectCd;
             }
 
             else if (role == RoleEnum.Terrorist)
@@ -1004,7 +1003,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                         var arrow = gameObj.AddComponent<ArrowBehaviour>();
                         gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                         var renderer = gameObj.AddComponent<SpriteRenderer>();
-                        renderer.sprite = Sprite;
+                        renderer.sprite = TownOfUsEdited.Arrow;
                         arrow.image = renderer;
                         gameObj.layer = 5;
                         snitchRole.SnitchArrows.Add(shifter.PlayerId, arrow);
@@ -1015,7 +1014,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                         var arrow = gameObj.AddComponent<ArrowBehaviour>();
                         gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                         var renderer = gameObj.AddComponent<SpriteRenderer>();
-                        renderer.sprite = Sprite;
+                        renderer.sprite = TownOfUsEdited.Arrow;
                         arrow.image = renderer;
                         gameObj.layer = 5;
                         snitchRole.ImpArrows.Add(arrow);

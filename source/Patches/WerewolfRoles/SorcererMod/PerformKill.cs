@@ -1,7 +1,7 @@
-using HarmonyLib;
-using TownOfUsEdited.Roles;
-using Reactor.Utilities;
 using AmongUs.GameOptions;
+using HarmonyLib;
+using Reactor.Utilities;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
 namespace TownOfUsEdited.WerewolfRoles.SorcererMod

@@ -1,10 +1,10 @@
-using System;
 using HarmonyLib;
-using UnityEngine;
-using Object = UnityEngine.Object;
+using System;
+using TownOfUsEdited.CrewmateRoles.AltruistMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.CrewmateRoles.AltruistMod;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.NeutraleRoles.ExecutionerMod
 {

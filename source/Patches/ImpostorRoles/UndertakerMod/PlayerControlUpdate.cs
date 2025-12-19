@@ -1,7 +1,7 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
 {
@@ -34,10 +34,15 @@ namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.DragDropButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.DragDropButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
-
+            role.DragDropButton.buttonLabelText.text = role.DragDropButton.graphic.sprite == TownOfUsEdited.DropSprite ? "Drop" : "Drag";
+            
             if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DragSprite)
             {
                 var data = PlayerControl.LocalPlayer.Data;
@@ -101,6 +106,8 @@ namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
                 role.DragDropButton.SetCoolDown(0f, 1f);
                 role.DragDropButton.graphic.color = Palette.EnabledColor;
                 role.DragDropButton.graphic.material.SetFloat("_Desat", 0f);
+                role.DragDropButton.buttonLabelText.color = Palette.EnabledColor;
+                role.DragDropButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
 
             role.DragDropButton.graphic.SetCooldownNormalizedUvs();

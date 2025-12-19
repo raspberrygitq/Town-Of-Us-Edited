@@ -1,12 +1,12 @@
+using Il2CppInterop.Runtime.InteropTypes;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using System;
-using TownOfUsEdited.Patches;
-using System.Linq.Expressions;
-using Il2CppInterop.Runtime.InteropTypes;
-using System.Linq;
 
 namespace TownOfUsEdited.Extensions
 {

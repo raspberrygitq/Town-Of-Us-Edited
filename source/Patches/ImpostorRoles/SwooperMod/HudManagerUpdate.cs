@@ -50,11 +50,20 @@ namespace TownOfUsEdited.ImpostorRoles.SwooperMod
 
             role.SwoopButton.SetCoolDown(role.SwoopTimer(), CustomGameOptions.SwoopCd);
 
-
-            role.SwoopButton.graphic.color = Palette.EnabledColor;
-            role.SwoopButton.graphic.material.SetFloat("_Desat", 0f);
-            role.SwoopText.color = Palette.EnabledColor;
-            role.SwoopText.material.SetFloat("_Desat", 0f);
+            if (!role.coolingDown)
+            {
+                role.SwoopButton.graphic.color = Palette.EnabledColor;
+                role.SwoopButton.graphic.material.SetFloat("_Desat", 0f);
+                role.SwoopText.color = Palette.EnabledColor;
+                role.SwoopText.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                role.SwoopButton.graphic.color = Palette.DisabledClear;
+                role.SwoopButton.graphic.material.SetFloat("_Desat", 1f);
+                role.SwoopText.color = Palette.DisabledClear;
+                role.SwoopText.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

@@ -1,17 +1,17 @@
-using System.Linq;
+using AmongUs.GameOptions;
 using Il2CppSystem.Collections.Generic;
-using TownOfUsEdited.Extensions;
+using Reactor.Utilities;
+using System.Linq;
+using TownOfUsEdited.CovenRoles.CovenMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using AmongUs.GameOptions;
-using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.ImpostorRoles.BomberMod;
-using UnityEngine;
-using TownOfUsEdited.Patches;
-using TownOfUsEdited.CovenRoles.CovenMod;
-using Reactor.Utilities;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {
@@ -193,7 +193,7 @@ namespace TownOfUsEdited.Roles
             if (newsk.Is(RoleEnum.Plumber))
             {
                 var plumberRole = Role.GetRole<Plumber>(newsk);
-                foreach (GameObject barricade in plumberRole.Barricades)
+                foreach (GameObject barricade in plumberRole.Block)
                 {
                     UnityEngine.Object.Destroy(barricade);
                 }

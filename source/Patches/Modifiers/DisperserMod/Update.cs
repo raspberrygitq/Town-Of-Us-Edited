@@ -1,15 +1,13 @@
 using HarmonyLib;
+using TMPro;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using TMPro;
 
 namespace TownOfUsEdited.Modifiers.DisperserMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class Update
     {
-        public static Sprite DisperseButton => TownOfUsEdited.DisperseSprite;
-
         public static void Postfix(HudManager __instance)
         {
             UpdateButtonButton(__instance);
@@ -29,17 +27,24 @@ namespace TownOfUsEdited.Modifiers.DisperserMod
                 role.DisperseButton = Object.Instantiate(__instance.KillButton, __instance.transform.parent);
                 role.DisperseButton.GetComponentsInChildren<TextMeshPro>()[0].text = "";
                 role.DisperseButton.graphic.enabled = true;
-                role.DisperseButton.graphic.sprite = DisperseButton;
+                role.DisperseButton.graphic.sprite = TownOfUsEdited.DisperseSprite;
             }
 
-            role.DisperseButton.graphic.sprite = DisperseButton;
+            role.DisperseButton.graphic.sprite = TownOfUsEdited.DisperseSprite;
 
             role.DisperseButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+            role.DisperseButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
             role.DisperseButton.SetCoolDown(role.StartTimer(), 10f);
             role.DisperseButton.graphic.SetCooldownNormalizedUvs();
+
+            role.DisperseButton.buttonLabelText.text = "Disperse";
+            role.DisperseButton.buttonLabelText.SetOutlineColor(Palette.ImpostorRed);
+
             var renderer = role.DisperseButton.graphic;
 
 
@@ -72,11 +77,15 @@ namespace TownOfUsEdited.Modifiers.DisperserMod
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
+                role.DisperseButton.buttonLabelText.color = Palette.EnabledColor;
+                role.DisperseButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 return;
             }
 
             renderer.color = Palette.DisabledClear;
             renderer.material.SetFloat("_Desat", 1f);
+            role.DisperseButton.buttonLabelText.color = Palette.EnabledColor;
+            role.DisperseButton.buttonLabelText.material.SetFloat("_Desat", 0f);
         }
     }
 }

@@ -1,10 +1,10 @@
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using TownOfUsEdited.CrewmateRoles.ClericMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Patches;
 using UnityEngine;
-using TMPro;
-using TownOfUsEdited.CrewmateRoles.ClericMod;
 
 namespace TownOfUsEdited.Roles
 {

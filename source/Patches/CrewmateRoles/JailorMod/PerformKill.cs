@@ -1,8 +1,8 @@
-﻿using HarmonyLib;
+﻿using AmongUs.GameOptions;
+using HarmonyLib;
+using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using AmongUs.GameOptions;
-using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
 
 namespace TownOfUsEdited.CrewmateRoles.JailorMod
 {

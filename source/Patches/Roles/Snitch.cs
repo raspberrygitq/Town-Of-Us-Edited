@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using TownOfUsEdited.Extensions;
-using UnityEngine;
 using System.Linq;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.Extensions;
+using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {

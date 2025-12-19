@@ -22,6 +22,7 @@ namespace TownOfUsEdited.CrewmateRoles.TrapperMod
             var trapButton = __instance.KillButton;
 
             var role = Role.GetRole<Trapper>(PlayerControl.LocalPlayer);
+            var trapText = __instance.KillButton.buttonLabelText;
 
             if (role.UsesText == null && role.UsesLeft > 0)
             {
@@ -48,6 +49,10 @@ namespace TownOfUsEdited.CrewmateRoles.TrapperMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            trapText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             if (role.ButtonUsable) trapButton.SetCoolDown(role.TrapTimer(), CustomGameOptions.TrapCooldown);
             else trapButton.SetCoolDown(0f, CustomGameOptions.TrapCooldown);
 
@@ -56,11 +61,15 @@ namespace TownOfUsEdited.CrewmateRoles.TrapperMod
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
+                trapText.color = Palette.EnabledColor;
+                trapText.material.SetFloat("_Desat", 0f);
                 return;
             }
 
             renderer.color = Palette.DisabledClear;
             renderer.material.SetFloat("_Desat", 1f);
+            trapText.color = Palette.DisabledClear;
+            trapText.material.SetFloat("_Desat", 1f);
         }
     }
 }

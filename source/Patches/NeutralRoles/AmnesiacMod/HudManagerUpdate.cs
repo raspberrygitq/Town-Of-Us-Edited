@@ -1,10 +1,10 @@
-﻿using HarmonyLib;
+﻿using AmongUs.GameOptions;
+using HarmonyLib;
+using System.Linq;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using System.Linq;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
-using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
 {

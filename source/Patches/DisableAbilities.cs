@@ -1,10 +1,10 @@
 using HarmonyLib;
+using InnerNet;
 using Reactor.Utilities;
 using System;
-using TownOfUsEdited.Roles;
 using System.Collections;
-using InnerNet;
 using System.Collections.Generic;
+using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited
 {

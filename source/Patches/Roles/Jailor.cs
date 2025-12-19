@@ -8,8 +8,8 @@ namespace TownOfUsEdited.Roles
         public Jailor(PlayerControl owner) : base(owner)
         {
             Name = "Jailor";
-            ImpostorText = () => "Execute order 66";
-            TaskText = () => "Jail and execute the <color=#FF0000FF>Impostors</color>";
+            ImpostorText = () => "Jail and execute the <color=#FF1919FF>Impostors</color>";
+            TaskText = () => $"Execute evildoers but not {Palette.CrewmateBlue.ToTextColor()}Crewmates</color>";
             Color = Patches.Colors.Jailor;
             Cooldown = CustomGameOptions.JailCD;
             RoleType = RoleEnum.Jailor;

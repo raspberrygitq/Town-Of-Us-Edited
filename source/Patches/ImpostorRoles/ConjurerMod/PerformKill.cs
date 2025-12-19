@@ -1,10 +1,10 @@
-using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
 using AmongUs.GameOptions;
+using HarmonyLib;
 using System.Linq;
 using TownOfUsEdited.Modifiers.UnderdogMod;
+using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
 {

@@ -1,7 +1,7 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
 {

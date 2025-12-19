@@ -1,9 +1,9 @@
-using System;
 using HarmonyLib;
+using System;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited.CrewmateRoles.HelperMod
 {

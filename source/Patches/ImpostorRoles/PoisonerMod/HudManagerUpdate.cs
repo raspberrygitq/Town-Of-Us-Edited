@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
-using TownOfUsEdited.Roles;
 using System.Linq;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
@@ -69,23 +69,20 @@ namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
             }
 
             try
+            {
+                if (role.Poisoned)
                 {
-                    if (role.Poisoned)
-                    {
-                        PoisonText.text = "Poisoned";
-                        role.Poison();
-                        PoisonButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.PoisonDuration);
-                    }
-                    else
-                    {
-                        PoisonText.text = "Poison";
-                        PoisonButton.SetCoolDown(role.PoisonTimer(), CustomGameOptions.PoisonCD);
-                    }
+                    PoisonText.text = "Poisoned";
+                    role.Poison();
+                    PoisonButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.PoisonDuration);
                 }
-                catch
+                else
                 {
-
+                    PoisonText.text = "Poison";
+                    PoisonButton.SetCoolDown(role.PoisonTimer(), CustomGameOptions.PoisonCD);
                 }
+            }
+            catch { }
         }
     }
 }

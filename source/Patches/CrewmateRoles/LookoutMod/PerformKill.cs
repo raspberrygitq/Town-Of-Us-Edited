@@ -1,10 +1,10 @@
-using System.Collections.Generic;
 using HarmonyLib;
 using Reactor.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TownOfUsEdited.Patches.NeutralRoles;
 using TownOfUsEdited.Roles;
-using System;
-using System.Linq;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.CrewmateRoles.LookoutMod

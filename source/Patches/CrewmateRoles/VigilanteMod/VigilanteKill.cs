@@ -1,20 +1,20 @@
-﻿using System.Linq;
+﻿using Reactor.Utilities.Extensions;
+using System.Collections.Generic;
+using System.Linq;
+using TownOfUsEdited.CovenRoles.RitualistMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
-using TownOfUsEdited.Modifiers.AssassinMod;
-using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
-using TownOfUsEdited.Extensions;
-using TownOfUsEdited.NeutralRoles.DoomsayerMod;
-using TownOfUsEdited.CrewmateRoles.SwapperMod;
-using TownOfUsEdited.Patches;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
-using TownOfUsEdited.CovenRoles.RitualistMod;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using System.Collections.Generic;
-using Reactor.Utilities.Extensions;
 
 namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
 {

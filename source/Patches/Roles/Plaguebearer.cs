@@ -1,7 +1,6 @@
-using System;
+using Reactor.Utilities;
 using System.Collections.Generic;
 using System.Linq;
-using Reactor.Utilities;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -11,7 +10,8 @@ namespace TownOfUsEdited.Roles
     {
         public PlayerControl ClosestPlayer;
         public List<byte> InfectedPlayers = new List<byte>();
-        public DateTime LastInfected;
+        public bool coolingDown => Cooldown > 0f;
+        public float Cooldown;
         public bool PlaguebearerWins { get; set; }
 
         public int InfectedAlive => InfectedPlayers.Count(x => Utils.PlayerById(x) != null && Utils.PlayerById(x).Data != null && !Utils.PlayerById(x).Data.IsDead && !Utils.PlayerById(x).Data.Disconnected);
@@ -27,6 +27,7 @@ namespace TownOfUsEdited.Roles
             AddToRoleHistory(RoleType);
             Faction = Faction.NeutralKilling;
             InfectedPlayers.Add(player.PlayerId);
+            Cooldown = CustomGameOptions.InfectCd;
         }
 
         internal override void NeutralWin(LogicGameFlowNormal __instance)
@@ -64,12 +65,13 @@ namespace TownOfUsEdited.Roles
 
         public float InfectTimer()
         {
-            var utcNow = DateTime.UtcNow;
-            var timeSpan = utcNow - LastInfected;
-            var num = CustomGameOptions.InfectCd * 1000f;
-            var flag2 = num - (float)timeSpan.TotalMilliseconds < 0f;
-            if (flag2) return 0;
-            return (num - (float)timeSpan.TotalMilliseconds) / 1000f;
+            if (!coolingDown) return 0f;
+            else if (!PlayerControl.LocalPlayer.inVent)
+            {
+                Cooldown -= Time.deltaTime;
+                return Cooldown;
+            }
+            else return Cooldown;
         }
 
         public void RpcSpreadInfection(PlayerControl source, PlayerControl target)

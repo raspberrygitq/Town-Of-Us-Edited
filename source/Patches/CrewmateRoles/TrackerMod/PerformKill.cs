@@ -1,8 +1,8 @@
-﻿using HarmonyLib;
+﻿using AmongUs.GameOptions;
+using HarmonyLib;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUsEdited.Extensions;
-using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.CrewmateRoles.TrackerMod
 {

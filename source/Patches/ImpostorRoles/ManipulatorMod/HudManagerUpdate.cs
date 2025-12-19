@@ -1,10 +1,10 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
-using TownOfUsEdited.Extensions;
 using System.Linq;
 using TMPro;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
 {

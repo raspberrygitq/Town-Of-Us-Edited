@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;

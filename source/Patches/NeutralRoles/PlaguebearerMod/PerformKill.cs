@@ -1,7 +1,6 @@
-using System;
+using AmongUs.GameOptions;
 using HarmonyLib;
 using TownOfUsEdited.Roles;
-using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.NeutralRoles.PlaguebearerMod
 {
@@ -15,7 +14,7 @@ namespace TownOfUsEdited.NeutralRoles.PlaguebearerMod
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             var role = Role.GetRole<Plaguebearer>(PlayerControl.LocalPlayer);
-            if (role.InfectTimer() != 0) return false;
+            if (role.Cooldown > 0) return false;
 
             if (role.ClosestPlayer == null) return false;
             if (role.InfectedPlayers.Contains(role.ClosestPlayer.PlayerId)) return false;
@@ -26,13 +25,12 @@ namespace TownOfUsEdited.NeutralRoles.PlaguebearerMod
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
             if (interact[0] == true)
             {
-                role.LastInfected = DateTime.UtcNow;
+                role.Cooldown = CustomGameOptions.InfectCd;
                 return false;
             }
             else if (interact[1] == true)
             {
-                role.LastInfected = DateTime.UtcNow;
-                role.LastInfected.AddSeconds(CustomGameOptions.TempSaveCdReset - CustomGameOptions.InfectCd);
+                role.Cooldown = CustomGameOptions.TempSaveCdReset;
                 return false;
             }
             else if (interact[3] == true) return false;

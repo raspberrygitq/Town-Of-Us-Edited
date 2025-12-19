@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
@@ -29,6 +29,9 @@ namespace TownOfUsEdited.CrewmateRoles.PlumberMod
                 role.FlushButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.FlushButton.graphic.enabled = true;
                 role.FlushButton.gameObject.SetActive(false);
+                role.FlushText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.FlushButton.transform);
+                role.FlushText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.FlushText);
             }
 
             if (role.UsesText == null && role.UsesLeft > 0)
@@ -52,7 +55,15 @@ namespace TownOfUsEdited.CrewmateRoles.PlumberMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.FlushText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             blockButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            blockButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -69,6 +80,9 @@ namespace TownOfUsEdited.CrewmateRoles.PlumberMod
                 role.FlushButton.SetCoolDown(role.FlushTimer(), CustomGameOptions.FlushCd);
                 role.FlushButton.graphic.SetCooldownNormalizedUvs();
             }
+
+            role.FlushText.text = "Flush";
+            role.FlushText.SetOutlineColor(Colors.Plumber);
 
             blockButton.SetTarget(null);
             blockButton.SetCoolDown(role.Cooldown, CustomGameOptions.FlushCd);
@@ -128,16 +142,24 @@ namespace TownOfUsEdited.CrewmateRoles.PlumberMod
 
             role.Vent = closestVent;
 
-            if (role.Vent != null && blockButton.enabled && PlayerControl.LocalPlayer.moveable)
+            if (role.Vent != null && blockButton.isActiveAndEnabled && PlayerControl.LocalPlayer.moveable)
             {
                 flushRenderer.color = Palette.EnabledColor;
                 flushRenderer.material.SetFloat("_Desat", 0f);
+                role.FlushText.color = Palette.EnabledColor;
+                role.FlushText.material.SetFloat("_Desat", 0f);
+                blockButton.buttonLabelText.color = Palette.EnabledColor;
+                blockButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 if (role.ButtonUsable && !role.FutureBlocks.Contains((byte)role.Vent.Id))
                 {
                     renderer.color = Palette.EnabledColor;
                     renderer.material.SetFloat("_Desat", 0f);
                     role.UsesText.color = Palette.EnabledColor;
                     role.UsesText.material.SetFloat("_Desat", 0f);
+                    role.FlushText.color = Palette.EnabledColor;
+                    role.FlushText.material.SetFloat("_Desat", 0f);
+                    blockButton.buttonLabelText.color = Palette.EnabledColor;
+                    blockButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 }
                 else
                 {
@@ -145,6 +167,10 @@ namespace TownOfUsEdited.CrewmateRoles.PlumberMod
                     renderer.material.SetFloat("_Desat", 1f);
                     role.UsesText.color = Palette.DisabledClear;
                     role.UsesText.material.SetFloat("_Desat", 1f);
+                    role.FlushText.color = Palette.DisabledClear;
+                    role.FlushText.material.SetFloat("_Desat", 1f);
+                    blockButton.buttonLabelText.color = Palette.DisabledClear;
+                    blockButton.buttonLabelText.material.SetFloat("_Desat", 1f);
                 }
             }
             else
@@ -155,6 +181,10 @@ namespace TownOfUsEdited.CrewmateRoles.PlumberMod
                 renderer.material.SetFloat("_Desat", 1f);
                 role.UsesText.color = Palette.DisabledClear;
                 role.UsesText.material.SetFloat("_Desat", 1f);
+                role.FlushText.color = Palette.DisabledClear;
+                role.FlushText.material.SetFloat("_Desat", 1f);
+                blockButton.buttonLabelText.color = Palette.DisabledClear;
+                blockButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
     }

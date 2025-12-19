@@ -9,8 +9,6 @@ namespace TownOfUsEdited.NeutralRoles.MaulMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
     {
-        public static Sprite RampageSprite => TownOfUsEdited.RampageSprite;
-        
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -35,7 +33,7 @@ namespace TownOfUsEdited.NeutralRoles.MaulMod
                 role.ButtonLabels.Add(role.RampageText);
             }
 
-            role.RampageButton.graphic.sprite = RampageSprite;
+            role.RampageButton.graphic.sprite = TownOfUsEdited.RampageSprite;
             role.RampageButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
 
             role.RampageButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
@@ -67,10 +65,20 @@ namespace TownOfUsEdited.NeutralRoles.MaulMod
             else
             {
                 role.RampageButton.SetCoolDown(role.RampageTimer(), CustomGameOptions.RampageCd);
-                role.RampageButton.graphic.color = Palette.EnabledColor;
-                role.RampageButton.graphic.material.SetFloat("_Desat", 0f);
-                role.RampageText.color = Palette.EnabledColor;
-                role.RampageText.material.SetFloat("_Desat", 0f);
+                if (!role.RampagecoolingDown)
+                {
+                    role.RampageButton.graphic.color = Palette.EnabledColor;
+                    role.RampageButton.graphic.material.SetFloat("_Desat", 0f);
+                    role.RampageText.color = Palette.EnabledColor;
+                    role.RampageText.material.SetFloat("_Desat", 0f);
+                }
+                else
+                {
+                    role.RampageButton.graphic.color = Palette.DisabledClear;
+                    role.RampageButton.graphic.material.SetFloat("_Desat", 1f);
+                    role.RampageText.color = Palette.DisabledClear;
+                    role.RampageText.material.SetFloat("_Desat", 1f);
+                }
 
                 return;
             }

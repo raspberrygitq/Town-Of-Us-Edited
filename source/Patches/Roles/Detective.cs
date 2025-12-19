@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using TMPro;
 using TownOfUsEdited.CrewmateRoles.DetectiveMod;
 using UnityEngine;
 
@@ -15,6 +15,7 @@ namespace TownOfUsEdited.Roles
         public List<GameObject> CrimeScenes = new List<GameObject>();
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
+        public TextMeshPro ExamineText;
 
         public Detective(PlayerControl player) : base(player)
         {

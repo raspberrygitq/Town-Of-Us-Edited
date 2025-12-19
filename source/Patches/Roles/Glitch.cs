@@ -1,18 +1,18 @@
 ﻿using InnerNet;
+using Reactor.Utilities;
+using Reactor.Utilities.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Reactor.Utilities;
-using Reactor.Utilities.Extensions;
+using TMPro;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Patches.NeutralRoles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using TownOfUsEdited.Patches;
 using static TownOfUsEdited.DisableAbilities;
-using TownOfUsEdited.Patches.NeutralRoles;
-using TMPro;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Roles
 {
@@ -49,6 +49,7 @@ namespace TownOfUsEdited.Roles
         public PlayerControl KillTarget { get; set; }
         public PlayerControl HackTarget { get; set; }
         public TextMeshPro HackText;
+        public TextMeshPro MimicText;
         public bool IsUsingMimic { get; set; }
         public bool Enabled;
         public float Cooldown;
@@ -546,6 +547,9 @@ namespace TownOfUsEdited.Roles
                     __gInstance.MimicButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                     __gInstance.MimicButton.gameObject.SetActive(true);
                     __gInstance.MimicButton.graphic.enabled = true;
+                    __gInstance.MimicText = Object.Instantiate(__instance.KillButton.buttonLabelText, __gInstance.MimicButton.transform);
+                    __gInstance.MimicText.gameObject.SetActive(false);
+                    __gInstance.ButtonLabels.Add(__gInstance.MimicText);
                 }
 
                 __gInstance.MimicButton.graphic.sprite = MimicSprite;
@@ -554,6 +558,11 @@ namespace TownOfUsEdited.Roles
                     && !MeetingHud.Instance && !__gInstance.Player.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+                __gInstance.MimicText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
                 if (__instance.UseButton != null)
                 {
                     __gInstance.MimicButton.transform.position = new Vector3(
@@ -573,12 +582,24 @@ namespace TownOfUsEdited.Roles
                 {
                     __gInstance.MimicButton.graphic.material.SetFloat("_Desat", 0f);
                     __gInstance.MimicButton.graphic.color = Palette.EnabledColor;
+                    __gInstance.MimicText.material.SetFloat("_Desat", 0f);
+                    __gInstance.MimicText.color = Palette.EnabledColor;
+                }
+                else if (__gInstance.MimiccoolingDown)
+                {
+                    __gInstance.MimicButton.isCoolingDown = true;
+                    __gInstance.MimicButton.graphic.material.SetFloat("_Desat", 1f);
+                    __gInstance.MimicButton.graphic.color = Palette.DisabledClear;
+                    __gInstance.MimicText.material.SetFloat("_Desat", 1f);
+                    __gInstance.MimicText.color = Palette.DisabledClear;
                 }
                 else if (__gInstance.Player.moveable)
                 {
                     __gInstance.MimicButton.isCoolingDown = false;
                     __gInstance.MimicButton.graphic.material.SetFloat("_Desat", 0f);
                     __gInstance.MimicButton.graphic.color = Palette.EnabledColor;
+                    __gInstance.MimicText.material.SetFloat("_Desat", 0f);
+                    __gInstance.MimicText.color = Palette.EnabledColor;
                     if (Rewired.ReInput.players.GetPlayer(0).GetButtonDown("ToU bb/disperse/mimic") || ConsoleJoystick.player.GetButtonDown(24)) // controller LT
                     {
                         __gInstance.MimicButton.DoClick();
@@ -589,14 +610,18 @@ namespace TownOfUsEdited.Roles
                     __gInstance.MimicButton.isCoolingDown = true;
                     __gInstance.MimicButton.graphic.material.SetFloat("_Desat", 1f);
                     __gInstance.MimicButton.graphic.color = Palette.DisabledClear;
+                    __gInstance.MimicText.material.SetFloat("_Desat", 1f);
+                    __gInstance.MimicText.color = Palette.DisabledClear;
                 }
 
                 if (!__gInstance.IsUsingMimic)
                 {
-                    __gInstance.MimicButton.SetCoolDown(__gInstance.MimicTimer(),
-                        CustomGameOptions.MimicCooldown);
+                    __gInstance.MimicButton.SetCoolDown(__gInstance.MimicTimer(), CustomGameOptions.MimicCooldown);
                 }
                 __gInstance.MimicButton.graphic.SetCooldownNormalizedUvs();
+
+                __gInstance.MimicText.SetOutlineColor(Colors.Glitch);
+                __gInstance.MimicText.text = "Mimic";
             }
 
             public static void MimicButtonPress(Glitch __gInstance)

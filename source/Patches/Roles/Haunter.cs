@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
 using TownOfUsEdited.Extensions;
+using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {

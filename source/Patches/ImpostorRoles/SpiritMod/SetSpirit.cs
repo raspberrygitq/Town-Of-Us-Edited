@@ -1,11 +1,11 @@
-using System;
 using HarmonyLib;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUsEdited.Patches;
-using System.Collections.Generic;
-using System.Linq;
 using Random = UnityEngine.Random;
 
 namespace TownOfUsEdited.ImpostorRoles.SpiritMod

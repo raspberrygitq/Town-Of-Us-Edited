@@ -1,12 +1,12 @@
-using System;
 using HarmonyLib;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
-using TownOfUsEdited.Patches;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace TownOfUsEdited.CrewmateRoles.HaunterMod
 {

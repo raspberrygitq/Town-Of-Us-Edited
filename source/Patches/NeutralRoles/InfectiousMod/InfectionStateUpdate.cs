@@ -1,6 +1,6 @@
-using System;
 using HarmonyLib;
 using Reactor.Utilities.Extensions;
+using System;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Patches;

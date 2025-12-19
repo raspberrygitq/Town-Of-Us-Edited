@@ -1,7 +1,7 @@
-using TownOfUsEdited.Roles;
-using UnityEngine;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
+using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.InvestigatorMod
 {

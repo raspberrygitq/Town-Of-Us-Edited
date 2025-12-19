@@ -25,6 +25,7 @@ namespace TownOfUsEdited.Roles
         public bool Alert = false;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
+        public TextMeshPro GuardText;
 
         public Mercenary(PlayerControl player) : base(player)
         {

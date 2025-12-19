@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Reactor.Utilities;
+using System.Collections.Generic;
 using System.Linq;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Patches;
 using UnityEngine;
-using TownOfUsEdited.Extensions;
-using Reactor.Utilities;
 
 namespace TownOfUsEdited.Roles.Modifiers
 {

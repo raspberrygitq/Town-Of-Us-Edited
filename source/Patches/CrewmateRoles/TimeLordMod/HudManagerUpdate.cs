@@ -1,8 +1,8 @@
+using HarmonyLib;
+using Reactor.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using HarmonyLib;
-using Reactor.Utilities;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
@@ -50,7 +50,7 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                 }
 
                 var renderer = rewindButton.graphic;
-                if (rewindButton.enabled)
+                if (rewindButton.enabled && !role.UsingRewind && !role.coolingDown)
                 {
                     rewindText.color = Palette.EnabledColor;
                     rewindText.material.SetFloat("_Desat", 0f);
@@ -58,11 +58,13 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                     renderer.material.SetFloat("_Desat", 0f);
                     return;
                 }
-
-                rewindText.color = Palette.DisabledClear;
-                rewindText.material.SetFloat("_Desat", 1f);
-                renderer.color = Palette.DisabledClear;
-                renderer.material.SetFloat("_Desat", 1f);
+                else
+                {
+                    rewindText.color = Palette.DisabledClear;
+                    rewindText.material.SetFloat("_Desat", 1f);
+                    renderer.color = Palette.DisabledClear;
+                    renderer.material.SetFloat("_Desat", 1f);
+                }
             }
 
             public static bool Waiting = false;

@@ -22,6 +22,9 @@ namespace TownOfUsEdited.CrewmateRoles.ClericMod
                 role.CleanseButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.CleanseButton.graphic.enabled = true;
                 role.CleanseButton.gameObject.SetActive(false);
+                role.CleanseText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.CleanseButton.transform);
+                role.CleanseText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.CleanseText);
             }
 
             role.CleanseButton.graphic.sprite = CleanseSprite;
@@ -33,7 +36,15 @@ namespace TownOfUsEdited.CrewmateRoles.ClericMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             role.CleanseButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.CleanseText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -42,7 +53,27 @@ namespace TownOfUsEdited.CrewmateRoles.ClericMod
             role.CleanseButton.SetCoolDown(role.Cooldown, CustomGameOptions.BarrierCD);
             role.CleanseButton.graphic.SetCooldownNormalizedUvs();
 
+            role.CleanseText.text = "Cleanse";
+            role.CleanseText.SetOutlineColor(Patches.Colors.Cleric);
+
             Utils.SetTarget(ref role.ClosestPlayer, role.CleanseButton, float.NaN);
+            var cleanseRenderer = role.CleanseButton.graphic;
+            var label = role.CleanseText;
+            if (role.ClosestPlayer != null && role.CleanseButton.isActiveAndEnabled && PlayerControl.LocalPlayer.moveable)
+            {
+                cleanseRenderer.color = Palette.EnabledColor;
+                cleanseRenderer.material.SetFloat("_Desat", 0f);
+                label.color = Palette.EnabledColor;
+                label.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                cleanseRenderer.color = Palette.DisabledClear;
+                cleanseRenderer.material.SetFloat("_Desat", 1f);
+                label.color = Palette.DisabledClear;
+                label.material.SetFloat("_Desat", 1f);
+            }
+
             if (role.Barriered == null) __instance.KillButton.SetTarget(role.ClosestPlayer);
             else
             {
@@ -50,6 +81,7 @@ namespace TownOfUsEdited.CrewmateRoles.ClericMod
                 var renderer = __instance.KillButton.graphic;
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
+                role.CleanseText.material.SetFloat("_Desat", 0f);
             }
 
             return;

@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
@@ -103,10 +103,20 @@ namespace TownOfUsEdited.NeutralRoles.MutantMod
 
             var renderer = role.TransformButton.graphic;
             var label = role.TransformText;
-            renderer.color = Palette.EnabledColor;
-            renderer.material.SetFloat("_Desat", 0f);
-            label.color = Palette.EnabledColor;
-            label.material.SetFloat("_Desat", 0f);
+            if (!role.TransformcoolingDown)
+            {
+                renderer.color = Palette.EnabledColor;
+                renderer.material.SetFloat("_Desat", 0f);
+                label.color = Palette.EnabledColor;
+                label.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                renderer.color = Palette.DisabledClear;
+                renderer.material.SetFloat("_Desat", 1f);
+                label.color = Palette.DisabledClear;
+                label.material.SetFloat("_Desat", 1f);
+            }
 
             if (role.IsTransformed == true && MeetingHud.Instance)
             {

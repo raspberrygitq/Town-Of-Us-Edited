@@ -1,8 +1,8 @@
+using Hazel;
+using Reactor.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Hazel;
-using Reactor.Utilities;
 using UnityEngine;
 
 namespace TownOfUsEdited.CustomOption

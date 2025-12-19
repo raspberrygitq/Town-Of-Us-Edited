@@ -1,5 +1,5 @@
-using TownOfUsEdited.Roles;
 using HarmonyLib;
+using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.CrewmateRoles.SpyMod 
 {

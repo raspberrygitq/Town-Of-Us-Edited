@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using System.Linq;
 using UnityEngine;
 
 namespace TownOfUsEdited
@@ -15,6 +15,8 @@ namespace TownOfUsEdited
 
         public static readonly Vector3 TempColdNewPos = new Vector3(25.4f, -6.4f, 1f);
         public static readonly Vector3 TempColdNewPosDV = new Vector3(7.772f, -17.103f, -0.017f);
+
+        public static readonly Vector3 ToiletVentNewPos = new(34.063f, -10.226f, 2f);
 
         public const float DvdScreenNewScale = 0.75f;
 
@@ -35,6 +37,7 @@ namespace TownOfUsEdited
         public static Vent ScienceBuildingVent;
         public static Vent StorageVent;
         public static Vent LightCageVent;
+        public static Vent BathroomVent;
 
         public static GameObject Comms;
         public static GameObject DropShip;
@@ -101,6 +104,7 @@ namespace TownOfUsEdited
                 if (!CustomGameOptions.ColdTempDeathValley && CustomGameOptions.VitalsLab) MoveTempCold();
                 if (CustomGameOptions.ColdTempDeathValley) MoveTempColdDV();
                 if (CustomGameOptions.WifiChartCourseSwap) SwitchNavWifi();
+                if (CustomGameOptions.MoveToiletVent) MoveToiletVent();
             }
 
             if (CustomGameOptions.VentImprovements) AdjustVents();
@@ -130,6 +134,11 @@ namespace TownOfUsEdited
             if (StorageVent == null)
             {
                 StorageVent = ventsList.Find(vent => vent.gameObject.name == "StorageVent");
+            }
+
+            if (BathroomVent == null)
+            {
+                BathroomVent = ventsList.Find(vent => vent.gameObject.name == "BathroomVent")!;
             }
 
             if (LightCageVent == null)
@@ -265,6 +274,15 @@ namespace TownOfUsEdited
                 navTransform.position = NavNewPos;
 
                 NavConsole.checkWalls = true;
+            }
+        }
+
+        public static void MoveToiletVent()
+        {
+            if (IsVentsFetched && BathroomVent.transform.position != ToiletVentNewPos)
+            {
+                var vitalsTransform = BathroomVent.gameObject.transform;
+                vitalsTransform.position = ToiletVentNewPos;
             }
         }
 

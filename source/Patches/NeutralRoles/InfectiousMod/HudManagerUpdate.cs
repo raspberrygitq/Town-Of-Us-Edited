@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using HarmonyLib;
+﻿using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
@@ -40,6 +40,13 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.InfectButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            role.InfectButton.buttonLabelText.text = "Infection";
+            role.InfectButton.buttonLabelText.SetOutlineColor(Patches.Colors.Infectious);
 
             foreach (var player in PlayerControl.AllPlayerControls)
             {

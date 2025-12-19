@@ -18,6 +18,19 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && !CustomGameOptions.DoomsayerCantObserve);
+            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && !CustomGameOptions.DoomsayerCantObserve);
+
+            if (role.ClosestPlayer != null)
+            {
+                __instance.KillButton.buttonLabelText.color = Palette.EnabledColor;
+                __instance.KillButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+            }
+
+            __instance.KillButton.buttonLabelText.color = Palette.DisabledClear;
+            __instance.KillButton.buttonLabelText.material.SetFloat("_Desat", 0f);
 
             __instance.KillButton.SetCoolDown(role.ObserveTimer(), CustomGameOptions.ObserveCooldown);
             Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton);

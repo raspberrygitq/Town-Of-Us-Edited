@@ -41,9 +41,12 @@ namespace TownOfUsEdited.CrewmateRoles.ParanoïacMod
             }
 
             PanicButton.graphic.sprite = TownOfUsEdited.ButtonSprite;
-            PanicButton.buttonLabelText.gameObject.SetActive(false);
 
             PanicButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            PanicButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -52,13 +55,18 @@ namespace TownOfUsEdited.CrewmateRoles.ParanoïacMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
+            PanicButton.buttonLabelText.text = "Panic";
+            PanicButton.buttonLabelText.SetOutlineColor(Patches.Colors.Paranoïac);
+
             var renderer = PanicButton.graphic;
-            if (role.ButtonUsable)
+            if (role.ButtonUsable && PlayerControl.LocalPlayer.moveable && !PlayerControl.LocalPlayer.inVent)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
                 role.UsesText.color = Palette.EnabledColor;
                 role.UsesText.material.SetFloat("_Desat", 0f);
+                PanicButton.buttonLabelText.color = Palette.EnabledColor;
+                PanicButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
@@ -66,6 +74,8 @@ namespace TownOfUsEdited.CrewmateRoles.ParanoïacMod
                 renderer.material.SetFloat("_Desat", 1f);
                 role.UsesText.color = Palette.DisabledClear;
                 role.UsesText.material.SetFloat("_Desat", 1f);
+                PanicButton.buttonLabelText.color = Palette.DisabledClear;
+                PanicButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
     }

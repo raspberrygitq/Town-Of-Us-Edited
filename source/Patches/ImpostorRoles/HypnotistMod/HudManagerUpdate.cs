@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
 using System.Linq;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
 {
@@ -52,6 +52,10 @@ namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead && !role.HysteriaActive
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.HypnotiseButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead && !role.HysteriaActive
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             var notHypnotised = PlayerControl.AllPlayerControls.ToArray().Where(
                 player => !role.HypnotisedPlayers.Contains(player.PlayerId)
@@ -61,13 +65,28 @@ namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
 
             role.HypnotiseButton.SetCoolDown(role.HypnotiseTimer(), CustomGameOptions.HypnotiseCd);
             role.HypnotiseButton.graphic.SetCooldownNormalizedUvs();
+
+            role.HypnotiseButton.buttonLabelText.text = "Hypnotize";
+
             var killButton = role.HypnotiseButton;
+
             if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !role.HypnotisedPlayers.Contains(x.PlayerId)).ToList());
             else if (PlayerControl.LocalPlayer.IsLover() && CustomGameOptions.ImpLoverKillTeammate) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !role.HypnotisedPlayers.Contains(x.PlayerId)).ToList());
             else if (PlayerControl.LocalPlayer.IsLover() && !CustomGameOptions.MadmateKillEachOther) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Impostors) && !x.Is(Faction.Madmates) && !role.HypnotisedPlayers.Contains(x.PlayerId)).ToList());
             else if (PlayerControl.LocalPlayer.IsLover()) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Impostors) && !role.HypnotisedPlayers.Contains(x.PlayerId)).ToList());
             else if (!CustomGameOptions.MadmateKillEachOther) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Impostors) && !x.Is(Faction.Madmates) && !role.HypnotisedPlayers.Contains(x.PlayerId)).ToList());
             else Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors) && !role.HypnotisedPlayers.Contains(x.PlayerId)).ToList());
+
+            if (role.ClosestPlayer != null)
+            {
+                role.HypnotiseButton.buttonLabelText.color = Palette.EnabledColor;
+                role.HypnotiseButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                role.HypnotiseButton.buttonLabelText.color = Palette.DisabledClear;
+                role.HypnotiseButton.buttonLabelText.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

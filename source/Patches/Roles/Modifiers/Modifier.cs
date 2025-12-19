@@ -1,7 +1,7 @@
+using Reactor.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Reactor.Utilities.Extensions;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 

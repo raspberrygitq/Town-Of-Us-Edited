@@ -1,8 +1,8 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
 using Reactor.Utilities;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.CrewmateRoles.AltruistMod
 {

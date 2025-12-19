@@ -1,5 +1,5 @@
-using System;
 using Reactor.Utilities.Extensions;
+using System;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;

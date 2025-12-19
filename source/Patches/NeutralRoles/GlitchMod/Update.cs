@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using HarmonyLib;
+﻿using HarmonyLib;
 using InnerNet;
+using System.Linq;
 using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.NeutralRoles.GlitchMod

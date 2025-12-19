@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using TownOfUsEdited.Roles;
 using System;
 using System.Linq;
 using TownOfUsEdited.CrewmateRoles.OracleMod;
+using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
 {

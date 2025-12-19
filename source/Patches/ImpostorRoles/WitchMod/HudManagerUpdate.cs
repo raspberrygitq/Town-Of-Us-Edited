@@ -1,7 +1,7 @@
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using System.Linq;
 
 namespace TownOfUsEdited.ImpostorRoles.WitchMod
 {

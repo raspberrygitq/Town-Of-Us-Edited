@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
-using TownOfUsEdited.Extensions;
 using System.Linq;
 using TMPro;
+using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using UnityEngine;
 
 namespace TownOfUsEdited.Patches.CrewmateRoles.LookoutMod
 {
@@ -23,6 +23,7 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.LookoutMod
 
                 var role = Role.GetRole<Lookout>(PlayerControl.LocalPlayer);
                 var WatchButton = __instance.KillButton;
+                var watchText = __instance.KillButton.buttonLabelText;
 
                 // Check if the game state allows the KillButton to be active
                 bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
@@ -31,12 +32,15 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.LookoutMod
                 AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
 
                 WatchButton.gameObject.SetActive(isKillButtonActive);
+                watchText.gameObject.SetActive(isKillButtonActive);
 
                 var renderer = WatchButton.graphic;
                 if (!WatchButton.isCoolingDown || role.IsWatching)
                 {
                     renderer.color = Palette.EnabledColor;
                     renderer.material.SetFloat("_Desat", 0f);
+                    watchText.color = Palette.EnabledColor;
+                    watchText.material.SetFloat("_Desat", 0f);
                 }
 
                 if (role.ClosestPlayer != null)

@@ -133,7 +133,7 @@ namespace TownOfUsEdited.Roles
             if (newcoven.Is(RoleEnum.Plumber))
             {
                 var plumberRole = Role.GetRole<Plumber>(newcoven);
-                foreach (GameObject barricade in plumberRole.Barricades)
+                foreach (GameObject barricade in plumberRole.Block)
                 {
                     UnityEngine.Object.Destroy(barricade);
                 }

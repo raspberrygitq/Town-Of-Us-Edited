@@ -1,4 +1,3 @@
-using System;
 using HarmonyLib;
 using Hazel;
 using TownOfUsEdited.Extensions;
@@ -426,15 +425,13 @@ namespace TownOfUsEdited.Patches
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer))
             {
                 var plaguebearer = Role.GetRole<Plaguebearer>(PlayerControl.LocalPlayer);
-                plaguebearer.LastInfected = DateTime.UtcNow;
-                plaguebearer.LastInfected = plaguebearer.LastInfected.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.InfectCd);
+                plaguebearer.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Survivor))
             {
                 var surv = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);
-                surv.LastVested = DateTime.UtcNow;
-                surv.LastVested = surv.LastVested.AddSeconds(CustomGameOptions.InitialCooldowns - CustomGameOptions.VestCd);
+                surv.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))

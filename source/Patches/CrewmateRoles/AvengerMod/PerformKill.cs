@@ -1,9 +1,9 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
-using UnityEngine;
-using TownOfUsEdited.Roles;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
 using System.Linq;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Roles;
+using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.AvengerMod
 {

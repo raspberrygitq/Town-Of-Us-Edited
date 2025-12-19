@@ -100,7 +100,7 @@ namespace TownOfUsEdited.Patches
                 {
                     if (sourcePlayer.IsDev() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<color=#00FF00><b>Everyone</b></color>\n\n" +
+                        chatText = $"<size=75%>" + $"{Color.green.ToTextColor()}<b>Everyone</b></color>\n\n" +
                             $"/roles - List active roles\n" +
                             $"/modifier - List active modifiers\n" +
                             $"/note [your note] - Write your own note\n" +
@@ -112,18 +112,19 @@ namespace TownOfUsEdited.Patches
                             $"/allup - See all currently chosen roles\n" +
                             $"/death - Shows your death reason\n" +
                             $"/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#FF1919><b>Host Commands</b></color>\n\n" +
+                            $"{Palette.ImpostorRed.ToTextColor()}<b>Host Commands</b></color>\n\n" +
                             $"Shift + G + ENTER - Force the game to end\n" +
                             $"/msg [message] - Send a message as host\n" +
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby";
+                            $"/limit [number] - Set a player limit in the lobby" + 
+                            $"</size>";
                         system = true;
                     }
                     else if (sourcePlayer.IsTester() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<color=#00FF00><b>Everyone</b></color>\n\n" +
+                        chatText = $"<size=75%>" + $"{Color.green.ToTextColor()}<b>Everyone</b></color>\n\n" +
                             $"/roles - List active roles\n" +
                             $"/modifier - List active modifiers\n" +
                             $"/note [your note] - Write your own note\n" +
@@ -135,18 +136,19 @@ namespace TownOfUsEdited.Patches
                             $"/allup - See all currently chosen roles\n" +
                             $"/death - Shows your death reason\n" +
                             $"/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#FF1919><b>Host Commands</b></color>\n\n" +
+                            $"{Palette.ImpostorRed.ToTextColor()}<b>Host Commands</b></color>\n\n" +
                             $"Shift + G + ENTER - Force the game to end\n" +
                             $"/msg [message] - Send a message as host\n" +
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby";
+                            $"/limit [number] - Set a player limit in the lobby" +
+                            $"</size>";
                         system = true;
                     }
                     else if (sourcePlayer.IsArtist() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<color=#00FF00><b>Everyone</b></color>\n\n" +
+                        chatText = $"<size=75%>" + $"{Color.green.ToTextColor()}<b>Everyone</b></color>\n\n" +
                             $"/roles - List active roles\n" +
                             $"/modifier - List active modifiers\n" +
                             $"/note [your note] - Write your own note\n" +
@@ -158,18 +160,19 @@ namespace TownOfUsEdited.Patches
                             $"/allup - See all currently chosen roles\n" +
                             $"/death - Shows your death reason\n" +
                             $"/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#FF1919><b>Host Commands</b></color>\n\n" +
+                            $"{Palette.ImpostorRed.ToTextColor()}<b>Host Commands</b></color>\n\n" +
                             $"Shift + G + ENTER - Force the game to end\n" +
                             $"/msg [message] - Send a message as host\n" +
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby";
+                            $"/limit [number] - Set a player limit in the lobby" +
+                            $"</size>";
                         system = true;
                     }
                     else if (sourcePlayer.IsVip() && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<color=#00FF00><b>Everyone</b></color>\n\n" +
+                        chatText = $"<size=75%>" + $"{Color.green.ToTextColor()}<b>Everyone</b></color>\n\n" +
                             $"/roles - List active roles\n" +
                             $"/modifier - List active modifiers\n" +
                             $"/note [your note] - Write your own note\n" +
@@ -181,18 +184,19 @@ namespace TownOfUsEdited.Patches
                             $"/allup - See all currently chosen roles\n" +
                             $"/death - Shows your death reason\n" +
                             $"/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#FF1919><b>Host Commands</b></color>\n\n" +
+                            $"{Palette.ImpostorRed.ToTextColor()}<b>Host Commands</b></color>\n\n" +
                             $"Shift + G + ENTER - Force the game to end\n" +
                             $"/msg [message] - Send a message as host\n" +
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby";
+                            $"/limit [number] - Set a player limit in the lobby" +
+                            $"</size>";
                         system = true;
                     }
                     else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = $"<color=#00FF00><b>Everyone</b></color>\n\n" +
+                        chatText = $"<size=75%>" + $"{Color.green.ToTextColor()}<b>Everyone</b></color>\n\n" +
                             $"/roles - List active roles\n" +
                             $"/modifier - List active modifiers\n" +
                             $"/note [your note] - Write your own note\n" +
@@ -204,13 +208,14 @@ namespace TownOfUsEdited.Patches
                             $"/allup - See all currently chosen roles\n" +
                             $"/death - Shows your death reason\n" +
                             $"/shrug - Adds \"{@"¯\_(ツ)_/¯"}\" to your message\n\n" +
-                            $"<color=#FF1919><b>Host Commands</b></color>\n\n" +
+                            $"{Palette.ImpostorRed.ToTextColor()}<b>Host Commands</b></color>\n\n" +
                             $"Shift + G + ENTER - Force the game to end\n" +
                             $"/msg [message] - Send a message as host\n" +
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby";
+                            $"/limit [number] - Set a player limit in the lobby" +
+                            $"</size>";
                         system = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;

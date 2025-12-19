@@ -1,13 +1,13 @@
-using HarmonyLib;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Text;
-using System.Linq;
-using Reactor.Utilities.Extensions;
-using TownOfUsEdited.Roles;
 using AmongUs.GameOptions;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
+using HarmonyLib;
 using Reactor.Utilities;
+using Reactor.Utilities.Extensions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Roles;
+using UnityEngine;
 
 namespace TownOfUsEdited.Patches {
 

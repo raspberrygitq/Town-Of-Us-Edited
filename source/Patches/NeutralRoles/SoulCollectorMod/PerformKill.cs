@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using TownOfUsEdited.Roles;
-using System.Collections;
-using UnityEngine;
 using Reactor.Utilities.Extensions;
+using System.Collections;
+using TownOfUsEdited.Roles;
+using UnityEngine;
 
 namespace TownOfUsEdited.NeutralRoles.SoulCollectorMod
 {

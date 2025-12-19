@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using HarmonyLib;
+﻿using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -51,9 +51,18 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && vamps.Count < CustomGameOptions.MaxVampiresPerGame
                     && alivevamps.Count == 1);
-                    
+            role.BiteButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
+                    && vamps.Count < CustomGameOptions.MaxVampiresPerGame
+                    && alivevamps.Count == 1);
+
             role.BiteButton.graphic.sprite = TownOfUsEdited.BiteSprite;
             role.BiteButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
+
+            role.BiteButton.buttonLabelText.text = "Bite";
+            role.BiteButton.buttonLabelText.SetOutlineColor(Patches.Colors.Vampire);
 
             var notvamps = PlayerControl.AllPlayerControls
                 .ToArray()
@@ -79,11 +88,15 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
             {
                 role.BiteButton.graphic.color = Palette.EnabledColor;
                 role.BiteButton.graphic.material.SetFloat("_Desat", 0f);
+                role.BiteButton.buttonLabelText.color = Palette.EnabledColor;
+                role.BiteButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 role.BiteButton.graphic.color = Palette.DisabledClear;
                 role.BiteButton.graphic.material.SetFloat("_Desat", 1f);
+                role.BiteButton.buttonLabelText.color = Palette.DisabledClear;
+                role.BiteButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
     }

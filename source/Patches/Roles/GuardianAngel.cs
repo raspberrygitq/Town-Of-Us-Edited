@@ -1,6 +1,6 @@
-using UnityEngine;
 using TMPro;
 using TownOfUsEdited.Patches;
+using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using TownOfUsEdited.CrewmateRoles.ClericMod;
 using TownOfUsEdited.Patches;
 using UnityEngine;
@@ -26,6 +27,7 @@ namespace TownOfUsEdited.Roles
         public float TimeRemaining;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
+        public TextMeshPro CleanseText;
         public KillButton CleanseButton
         {
             get => _cleanseButton;

@@ -1,7 +1,7 @@
 ﻿﻿using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using System.Linq;
 
 namespace TownOfUsEdited.CrewmateRoles.OracleMod
 {
@@ -26,6 +26,9 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
                 role.BlessButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.BlessButton.graphic.enabled = true;
                 role.BlessButton.gameObject.SetActive(false);
+                role.BlessText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.BlessButton.transform);
+                role.BlessText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.BlessText);
             }
 
             if (PlayerControl.LocalPlayer.Data.IsDead) role.BlessButton.SetTarget(null);
@@ -42,13 +45,24 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.BlessText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             role.BlessButton.SetCoolDown(role.BlessTimer(), CustomGameOptions.BlessCD);
             if (PlayerControl.LocalPlayer.moveable) Utils.SetTarget(ref role.ClosestBlessedPlayer, role.BlessButton, float.NaN, notBlessed);
             else role.BlessButton.SetTarget(null);
 
             role.BlessButton.graphic.SetCooldownNormalizedUvs();
 
+            role.BlessText.text = "Bless";
+            role.BlessText.SetOutlineColor(Patches.Colors.Oracle);
+
             confessButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            confessButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -60,6 +74,26 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
                 .ToList();
 
             Utils.SetTarget(ref role.ClosestPlayer, confessButton, float.NaN, notConfessing);
+
+            var renderer = role.BlessButton.graphic;
+            if (role.ClosestPlayer != null)
+            {
+                renderer.color = Palette.EnabledColor;
+                renderer.material.SetFloat("_Desat", 0f);
+                confessButton.buttonLabelText.color = Palette.EnabledColor;
+                confessButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+                role.BlessText.color = Palette.EnabledColor;
+                role.BlessText.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                renderer.color = Palette.DisabledClear;
+                renderer.material.SetFloat("_Desat", 1f);
+                confessButton.buttonLabelText.color = Palette.DisabledClear;
+                confessButton.buttonLabelText.material.SetFloat("_Desat", 1f);
+                role.BlessText.color = Palette.DisabledClear;
+                role.BlessText.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

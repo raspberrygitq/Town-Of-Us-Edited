@@ -1,16 +1,16 @@
 using HarmonyLib;
-using UnityEngine;
+using Reactor.Utilities;
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Text.Json;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Twitch;
-using Reactor.Utilities;
+using UnityEngine;
 
 namespace TownOfUsEdited
 {

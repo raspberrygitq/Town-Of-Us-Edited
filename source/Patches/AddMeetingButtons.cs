@@ -1,23 +1,23 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
-using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
-using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using System.Collections.Generic;
+using TownOfUsEdited.CovenRoles.RitualistMod;
+using TownOfUsEdited.CrewmateRoles.ClericMod;
 using TownOfUsEdited.CrewmateRoles.DeputyMod;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.MayorMod;
 using TownOfUsEdited.CrewmateRoles.PoliticianMod;
 using TownOfUsEdited.CrewmateRoles.ProsecutorMod;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
 using TownOfUsEdited.ImpostorRoles.HypnotistMod;
 using TownOfUsEdited.Modifiers.AssassinMod;
 using TownOfUsEdited.NeutralRoles.DoomsayerMod;
-using AddButton = TownOfUsEdited.CrewmateRoles.SwapperMod.AddButton;
-using TownOfUsEdited.CovenRoles.RitualistMod;
-using TownOfUsEdited.CrewmateRoles.ClericMod;
-using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
+using TownOfUsEdited.Roles;
+using UnityEngine;
 using static TownOfUsEdited.CrewmateRoles.JailorMod.AddJail;
+using AddButton = TownOfUsEdited.CrewmateRoles.SwapperMod.AddButton;
 
 namespace TownOfUsEdited.Patches
 {

@@ -1,14 +1,14 @@
-using HarmonyLib;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using Object = UnityEngine.Object;
-using TownOfUsEdited.NeutralRoles.PhantomMod;
-using TownOfUsEdited.CrewmateRoles.HaunterMod;
-using TownOfUsEdited.Roles;
-using TownOfUsEdited.ImpostorRoles.SpiritMod;
-using TownOfUsEdited.Roles.Modifiers;
 using AmongUs.GameOptions;
+using HarmonyLib;
+using System;
+using System.Collections.Generic;
+using TownOfUsEdited.CrewmateRoles.HaunterMod;
+using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.NeutralRoles.PhantomMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Patches
 {

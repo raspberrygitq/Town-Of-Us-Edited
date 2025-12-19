@@ -21,6 +21,7 @@ namespace TownOfUsEdited.NeutralRoles.SurvivorMod
             var vestButton = __instance.KillButton;
 
             var role = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);
+            var VestText = __instance.KillButton.buttonLabelText;
 
             if (role.UsesText == null && role.UsesLeft > 0)
             {
@@ -47,6 +48,10 @@ namespace TownOfUsEdited.NeutralRoles.SurvivorMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            VestText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
             if (role.Vesting) vestButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.VestDuration);
             else if (role.ButtonUsable) vestButton.SetCoolDown(role.VestTimer(), CustomGameOptions.VestCd);
             else vestButton.SetCoolDown(0f, CustomGameOptions.VestCd);
@@ -58,6 +63,8 @@ namespace TownOfUsEdited.NeutralRoles.SurvivorMod
                 renderer.material.SetFloat("_Desat", 0f);
                 role.UsesText.color = Palette.EnabledColor;
                 role.UsesText.material.SetFloat("_Desat", 0f);
+                VestText.color = Palette.EnabledColor;
+                VestText.material.SetFloat("_Desat", 0f);
             }
             else
             {
@@ -65,6 +72,8 @@ namespace TownOfUsEdited.NeutralRoles.SurvivorMod
                 renderer.material.SetFloat("_Desat", 1f);
                 role.UsesText.color = Palette.DisabledClear;
                 role.UsesText.material.SetFloat("_Desat", 1f);
+                VestText.color = Palette.DisabledClear;
+                VestText.material.SetFloat("_Desat", 0f);
             }
         }
     }

@@ -1,36 +1,36 @@
-﻿using HarmonyLib;
+﻿using AmongUs.GameOptions;
+using HarmonyLib;
 using Hazel;
+using Il2CppInterop.Runtime.InteropTypes;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using Reactor.Networking;
+using Reactor.Networking.Extensions;
+using Reactor.Utilities;
+using Reactor.Utilities.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Reactor.Utilities;
-using Reactor.Utilities.Extensions;
+using TownOfUsEdited.CrewmateRoles.ClericMod;
+using TownOfUsEdited.CrewmateRoles.DetectiveMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.TimeLordMod;
+using TownOfUsEdited.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.ImpostorRoles.BomberMod;
+using TownOfUsEdited.ImpostorRoles.TraitorMod;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Patches;
+using TownOfUsEdited.Patches.NeutralRoles;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
-using Il2CppInterop.Runtime.InteropTypes;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
+using static TownOfUsEdited.Roles.Glitch;
 using Object = UnityEngine.Object;
 using PerformKill = TownOfUsEdited.Modifiers.UnderdogMod.PerformKill;
 using Random = UnityEngine.Random;
-using AmongUs.GameOptions;
-using TownOfUsEdited.CrewmateRoles.TrapperMod;
-using TownOfUsEdited.ImpostorRoles.BomberMod;
-using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using Reactor.Networking;
-using Reactor.Networking.Extensions;
-using static TownOfUsEdited.Roles.Glitch;
-using TownOfUsEdited.Patches.NeutralRoles;
-using TownOfUsEdited.CrewmateRoles.DetectiveMod;
-using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
-using TownOfUsEdited.CrewmateRoles.TimeLordMod;
-using TownOfUsEdited.ImpostorRoles.TraitorMod;
-using TownOfUsEdited.CrewmateRoles.ClericMod;
 
 namespace TownOfUsEdited
 {
@@ -2517,7 +2517,7 @@ namespace TownOfUsEdited
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Politician))
             {
                 var politician = Role.GetRole<Politician>(PlayerControl.LocalPlayer);
-                politician.Cooldown = CustomGameOptions.InitialCooldowns;
+                politician.Cooldown = CustomGameOptions.CampaignCd;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Jailor))
             {
@@ -2704,7 +2704,7 @@ namespace TownOfUsEdited
                 foreach (var ventId in plumber.FutureBlocks)
                 {
                     plumber.VentsBlocked.Add(ventId);
-                    GameObject barricade = new GameObject("Barricade");
+                    GameObject block = new GameObject("Block");
                     Vent trueVent = null;
                     foreach (var vent in ShipStatus.Instance.AllVents)
                     {
@@ -2714,10 +2714,10 @@ namespace TownOfUsEdited
                     if (GameOptionsManager.Instance.currentNormalGameOptions.MapId == 5) pos.y -= 0.1f;
                     else if (GameOptionsManager.Instance.currentNormalGameOptions.MapId != 2) pos.y -= 0.04f;
                     pos.z -= 0.00001f;
-                    barricade.transform.localPosition = pos;
-                    SpriteRenderer render = barricade.AddComponent<SpriteRenderer>();
-                    render.sprite = TownOfUsEdited.BarricadeSprite;
-                    plumber.Barricades.Add(barricade);
+                    block.transform.localPosition = pos;
+                    SpriteRenderer render = block.AddComponent<SpriteRenderer>();
+                    render.sprite = TownOfUsEdited.BlockSprite;
+                    plumber.Block.Add(block);
                 }
                 plumber.FutureBlocks.Clear();
             }
@@ -2726,7 +2726,7 @@ namespace TownOfUsEdited
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Survivor))
             {
                 var surv = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);
-                surv.LastVested = DateTime.UtcNow;
+                surv.Cooldown = CustomGameOptions.VestCd;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Vulture))
             {
@@ -2796,7 +2796,7 @@ namespace TownOfUsEdited
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer))
             {
                 var plaguebearer = Role.GetRole<Plaguebearer>(PlayerControl.LocalPlayer);
-                plaguebearer.LastInfected = DateTime.UtcNow;
+                plaguebearer.Cooldown = CustomGameOptions.InfectCd;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Terrorist))
             {

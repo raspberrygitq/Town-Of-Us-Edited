@@ -213,6 +213,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption VitalsLab;
         public static CustomToggleOption ColdTempDeathValley;
         public static CustomToggleOption WifiChartCourseSwap;
+        public static CustomToggleOption MoveToiletVent;
         public static CustomToggleOption AirshipPolusDoors;
 
         public static CustomHeaderOption GameModeSettings;
@@ -385,7 +386,7 @@ namespace TownOfUsEdited.CustomOption
 
         public static CustomHeaderOption Spy;
         public static CustomStringOption WhoSeesDead;
-        public static CustomToggleOption SpyHasPortableAdmin;
+        public static CustomToggleOption DisablePortableAdmin;
 
         public static CustomHeaderOption Swapper;
         public static CustomToggleOption SwapperButton;
@@ -587,7 +588,6 @@ namespace TownOfUsEdited.CustomOption
 
         public static CustomHeaderOption Shifter;
         public static CustomNumberOption ShiftCD;
-        public static CustomToggleOption CanShiftNeutKilling;
         public static CustomToggleOption CanShiftImp;
         public static CustomToggleOption CanShiftCoven;
         public static CustomToggleOption ShiftTurnImpAssassin;
@@ -911,7 +911,7 @@ namespace TownOfUsEdited.CustomOption
                 PercentFormat);
 
             CrewPowerRoles = new CustomHeaderOption(num++, MultiMenu.crewmate, "Crewmate Power Roles");
-            JailorOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#61a37a>Jailor</color>", 0f, 0f, 100f, 10f,
+            JailorOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#A6A6A6FF>Jailor</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             PoliticianOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#660099FF>Politician</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
@@ -1360,6 +1360,8 @@ namespace TownOfUsEdited.CustomOption
             ColdTempDeathValley = new CustomToggleOption(num++, MultiMenu.main, "Cold Temp Moved To Death Valley", false);
             WifiChartCourseSwap =
                 new CustomToggleOption(num++, MultiMenu.main, "Reboot Wifi And Chart Course Swapped", false);
+            MoveToiletVent =
+                new CustomToggleOption(num++, MultiMenu.main, "Move Toilet Vent", false);
             AirshipPolusDoors = new CustomToggleOption(num++, MultiMenu.main, "Airship Doors Are Polus Doors", false);
 
             CustomGameSettings =
@@ -1467,7 +1469,7 @@ namespace TownOfUsEdited.CustomOption
             ZoomCooldown =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Zoom Ability Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             ZoomDuration =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Zoom Ability Duration", 5f, 2f, 10f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Zoom Ability Duration", 5f, 2f, 15f, 1f, CooldownFormat);
             ZoomRange =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Zoom Ability Range", 8f, 3.5f, 10f, 0.5f, MultiplierFormat);
 
@@ -1541,8 +1543,8 @@ namespace TownOfUsEdited.CustomOption
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#CCA3CCFF>Spy</color>");
             WhoSeesDead = new CustomStringOption(num++, MultiMenu.crewmate, "Who Sees Dead Bodies On Admin",
                 new[] { "Nobody", "Spy", "Everyone But Spy", "Everyone" });
-            SpyHasPortableAdmin =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Spy Has Portable Admin", false);
+            DisablePortableAdmin =
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Disable Portable Admin", false);
 
             Tracker =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#009900FF>Tracker</color>");
@@ -1652,7 +1654,7 @@ namespace TownOfUsEdited.CustomOption
             VigilanteGuessImpModifiers = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Impostor Modifiers", false);
 
             Jailor =
-                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#61a37a>Jailor</color>");
+                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#A6A6A6FF>Jailor</color>");
             JailCD =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Jail Cooldown", 25f, 10f, 40f, 2.5f, CooldownFormat);
             JailorDies =
@@ -1772,7 +1774,7 @@ namespace TownOfUsEdited.CustomOption
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Maximum Number Of Barricades", 5, 1, 15, 1);
 
             TimeLord =
-                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#0f00b8>Time Lord</color>");
+                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#0000FF>Time Lord</color>");
             RewindCooldown =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Rewind Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             RewindDuration =
@@ -1827,8 +1829,6 @@ namespace TownOfUsEdited.CustomOption
             Shifter = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#AAAAAA>Shifter</color>");
             ShiftCD =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Shift Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            CanShiftNeutKilling =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Can Shift Neutral Killing", false);
             CanShiftImp =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Can Shift Impostor / Madmate", false);
             CanShiftCoven =
@@ -2252,7 +2252,7 @@ namespace TownOfUsEdited.CustomOption
             MadmateHasImpoVision = new CustomToggleOption(num++, MultiMenu.modifiers, "Madmates Have Impostor Vision", false);
             MadmateCanChat = new CustomToggleOption(num++, MultiMenu.modifiers, "Madmates Can Use Impostor Chat");
             MadmateOnImpoDeath = new CustomStringOption(num++, MultiMenu.modifiers, "What Happens On Impostors Death",
-                new[] { "Madmates Die", "Madmates Get Their Old Faction Back", "One Madmate Becomes Impostor" });
+                new[] { "Madmates Die", "Madmates Get Their Old Faction Back", "One Madmate Becomes Traitor" });
 
             Flash = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#FF8080FF>Flash</color>");
             FlashSpeed = new CustomNumberOption(num++, MultiMenu.modifiers, "Flash Speed", 1.25f, 1.05f, 2.5f, 0.05f, MultiplierFormat);

@@ -1,16 +1,16 @@
 using HarmonyLib;
-using Object = UnityEngine.Object;
 using Reactor.Utilities.Extensions;
-using UnityEngine;
 using TownOfUsEdited.Patches;
+using TownOfUsEdited.Patches.CovenRoles;
+using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
+using TownOfUsEdited.Patches.ImpostorRoles;
+using TownOfUsEdited.Patches.Modifiers.LoversMod;
+using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
+using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
-using TownOfUsEdited.Patches.ImpostorRoles;
-using TownOfUsEdited.Patches.CovenRoles;
-using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
-using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
-using TownOfUsEdited.Patches.Modifiers.LoversMod;
-using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited
 {

@@ -1,11 +1,11 @@
-using System.Linq;
-using Reactor.Utilities.Extensions;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
-using TownOfUsEdited.Roles;
-using UnityEngine;
-using TownOfUsEdited.Roles.Modifiers;
 using AmongUs.GameOptions;
+using Reactor.Utilities.Extensions;
+using System.Linq;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 {

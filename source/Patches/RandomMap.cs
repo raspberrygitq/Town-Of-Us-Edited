@@ -1,9 +1,9 @@
-using HarmonyLib;
-using System;
-using TownOfUsEdited.Patches;
-using TownOfUsEdited.CustomOption;
 using AmongUs.GameOptions;
 using BepInEx.Unity.IL2CPP;
+using HarmonyLib;
+using System;
+using TownOfUsEdited.CustomOption;
+using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited
 {

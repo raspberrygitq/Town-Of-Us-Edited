@@ -1,23 +1,23 @@
-using System.Collections;
 using HarmonyLib;
 using Reactor.Utilities;
+using Reactor.Utilities.Extensions;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TownOfUsEdited.CovenRoles.RitualistMod;
 using TownOfUsEdited.CrewmateRoles.AltruistMod;
+using TownOfUsEdited.CrewmateRoles.DeputyMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
 using TownOfUsEdited.Modifiers.AssassinMod;
 using TownOfUsEdited.NeutralRoles.DoomsayerMod;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 using UnityEngine.UI;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using TownOfUsEdited.CrewmateRoles.VigilanteMod;
-using Reactor.Utilities.Extensions;
-using TownOfUsEdited.CrewmateRoles.DeputyMod;
-using System.Linq;
-using System.Collections.Generic;
-using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 
 namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
 {

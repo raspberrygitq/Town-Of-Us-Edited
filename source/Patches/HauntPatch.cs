@@ -1,8 +1,8 @@
+using AmongUs.GameOptions;
+using HarmonyLib;
+using TMPro;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
-using HarmonyLib;
-using AmongUs.GameOptions;
-using TMPro;
 
 namespace TownOfUsEdited
 {

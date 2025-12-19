@@ -1,67 +1,67 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using AmongUs.GameOptions;
 using HarmonyLib;
 using Hazel;
+using Reactor.Networking.Extensions;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
-using Reactor.Networking.Extensions;
-using TownOfUsEdited.CrewmateRoles.TimeLordMod;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
-using TownOfUsEdited.CrewmateRoles.SwapperMod;
-using TownOfUsEdited.CrewmateRoles.VigilanteMod;
-using TownOfUsEdited.NeutralRoles.DoomsayerMod;
-using TownOfUsEdited.ImpostorRoles.ConverterMod;
-using TownOfUsEdited.CustomOption;
-using TownOfUsEdited.Modifiers.AssassinMod;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
-using TownOfUsEdited.NeutralRoles.ExecutionerMod;
-using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
-using TownOfUsEdited.ImpostorRoles.MinerMod;
-using TownOfUsEdited.CrewmateRoles.HaunterMod;
-using TownOfUsEdited.CrewmateRoles.HelperMod;
-using TownOfUsEdited.NeutralRoles.PhantomMod;
-using TownOfUsEdited.ImpostorRoles.TraitorMod;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using TownOfUsEdited.ImpostorRoles.WitchMod;
-using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
-using UnityEngine;
-using Object = UnityEngine.Object;
-using PerformKillButton = TownOfUsEdited.NeutralRoles.AmnesiacMod.PerformKillButton;
-using PerformKill = TownOfUsEdited.Patches.NeutralRoles.ShifterMod.PerformKill;
-using PerformStake = TownOfUsEdited.CrewmateRoles.VampireHunterMod.PerformKill;
-using Random = UnityEngine.Random;
-using TownOfUsEdited.Patches;
-using AmongUs.GameOptions;
-using TownOfUsEdited.NeutralRoles.VampireMod;
-using TownOfUsEdited.CrewmateRoles.MayorMod;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-using TownOfUsEdited.Patches.NeutralRoles;
-using TownOfUsEdited.CrewmateRoles.GuardianMod;
-using TownOfUsEdited.Patches.Modifiers.MadmateMod;
-using TownOfUsEdited.ImpostorRoles.SpiritMod;
-using TownOfUsEdited.ImpostorRoles.BlinderMod;
-using TownOfUsEdited.ImpostorRoles.FreezerMod;
-using TownOfUsEdited.CovenRoles.RitualistMod;
 using TownOfUsEdited.ChooseCrewGhostRoles;
 using TownOfUsEdited.ChooseImpGhostRole;
-using TownOfUsEdited.CrewmateRoles.DoctorMod;
-using KillButtonTarget = TownOfUsEdited.CrewmateRoles.AltruistMod.KillButtonTarget;
+using TownOfUsEdited.CovenRoles.RitualistMod;
+using TownOfUsEdited.CrewmateRoles.ClericMod;
 using TownOfUsEdited.CrewmateRoles.DeputyMod;
-using TownOfUsEdited.Patches.ImpostorRoles;
-using TownOfUsEdited.Patches.CovenRoles;
-using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
-using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
-using TownOfUsEdited.Patches.Modifiers.LoversMod;
+using TownOfUsEdited.CrewmateRoles.DoctorMod;
+using TownOfUsEdited.CrewmateRoles.GuardianMod;
+using TownOfUsEdited.CrewmateRoles.HaunterMod;
+using TownOfUsEdited.CrewmateRoles.HelperMod;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.JailorMod;
+using TownOfUsEdited.CrewmateRoles.MayorMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.CrewmateRoles.SwapperMod;
+using TownOfUsEdited.CrewmateRoles.TimeLordMod;
+using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.CustomOption;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
-using TownOfUsEdited.CrewmateRoles.ClericMod;
-using TownOfUsEdited.CrewmateRoles.JailorMod;
-using AllowExtraVotes = TownOfUsEdited.CrewmateRoles.ProsecutorMod.AllowExtraVotes;
+using TownOfUsEdited.ImpostorRoles.BlinderMod;
+using TownOfUsEdited.ImpostorRoles.ConverterMod;
+using TownOfUsEdited.ImpostorRoles.FreezerMod;
+using TownOfUsEdited.ImpostorRoles.MinerMod;
+using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.ImpostorRoles.TraitorMod;
+using TownOfUsEdited.ImpostorRoles.WitchMod;
+using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
+using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
+using TownOfUsEdited.NeutralRoles.PhantomMod;
+using TownOfUsEdited.NeutralRoles.VampireMod;
+using TownOfUsEdited.Patches;
+using TownOfUsEdited.Patches.CovenRoles;
 using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
+using TownOfUsEdited.Patches.ImpostorRoles;
+using TownOfUsEdited.Patches.Modifiers.LoversMod;
+using TownOfUsEdited.Patches.Modifiers.MadmateMod;
+using TownOfUsEdited.Patches.NeutralRoles;
+using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
+using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using TownOfUsEdited.WerewolfRoles.TalkativeWolfMod.ChatPatch;
-using System.Collections;
+using UnityEngine;
+using AllowExtraVotes = TownOfUsEdited.CrewmateRoles.ProsecutorMod.AllowExtraVotes;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using KillButtonTarget = TownOfUsEdited.CrewmateRoles.AltruistMod.KillButtonTarget;
+using Object = UnityEngine.Object;
+using PerformKill = TownOfUsEdited.Patches.NeutralRoles.ShifterMod.PerformKill;
+using PerformKillButton = TownOfUsEdited.NeutralRoles.AmnesiacMod.PerformKillButton;
+using PerformStake = TownOfUsEdited.CrewmateRoles.VampireHunterMod.PerformKill;
+using Random = UnityEngine.Random;
 
 namespace TownOfUsEdited
 {
@@ -1648,7 +1648,8 @@ namespace TownOfUsEdited
                                 {
                                     Coroutines.Start(UpdateJailButton.Jail(jailedPlayer));
                                     JailorChat.UpdateJailorChat();
-                                    HudManager.Instance.ShowPopUp("You have been jailed, you can't use any special ability and can't guess next meeting unless the Jailor releases you.");
+                                    HudManager.Instance.ShowPopUp("You are jailed, cannot use special abilities or guess until the Jailor releases you.\nClick in the upper right corner below the map to chat with the Jailor and prove that you are a Crewmate.");
+                                    HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "You are jailed, click under the chat map to write to the Jailor.");
                                 }
                                 break;
 
@@ -2646,15 +2647,16 @@ namespace TownOfUsEdited
                             case CustomRPC.TurnImpostor:
                                 var impostor = Utils.PlayerById(reader.ReadByte());
                                 var oldRole2 = Role.GetRole(impostor);
-                                var killsList2 = (oldRole2.CorrectKills, oldRole2.IncorrectKills, oldRole2.CorrectAssassinKills, oldRole2.IncorrectAssassinKills);
+                                var killsList2 = (oldRole2.Kills, oldRole2.CorrectKills, oldRole2.IncorrectKills, oldRole2.CorrectAssassinKills, oldRole2.IncorrectAssassinKills);
                                 Role.RoleDictionary.Remove(impostor.PlayerId);
-                                var impostorRole = new Impostor(impostor);
+                                var impostorRole = new Traitor(impostor);
                                 if (StartImitate.ImitatingPlayers.Contains(impostor.PlayerId))
                                 {
                                     impostorRole.formerRole = RoleEnum.Imitator;
                                     StartImitate.ImitatingPlayers.Remove(impostor.PlayerId);
                                 }
                                 else impostorRole.formerRole = oldRole2.RoleType;
+                                impostorRole.Kills = killsList2.Kills;
                                 impostorRole.CorrectKills = killsList2.CorrectKills;
                                 impostorRole.IncorrectKills = killsList2.IncorrectKills;
                                 impostorRole.CorrectAssassinKills = killsList2.CorrectAssassinKills;
@@ -3758,7 +3760,7 @@ namespace TownOfUsEdited
                         if (CustomGameOptions.AurialOn > 0)
                             CrewmateInvestigativeRoles.Add((typeof(Aurial), CustomGameOptions.AurialOn, false || CustomGameOptions.UniqueRoles));
 
-                        if (CustomGameOptions.VampireOn > 0 && CustomGameOptions.VampireHunterOn > 0)
+                        if (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.VampireOn > 0)
                             CrewmateKillingRoles.Add((typeof(VampireHunter), CustomGameOptions.VampireHunterOn, true));
 
                         // Impostors

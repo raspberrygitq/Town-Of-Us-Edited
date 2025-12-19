@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Collections;
-using Object = UnityEngine.Object;
-using UnityEngine;
 using Reactor.Utilities;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Roles.Modifiers
 {

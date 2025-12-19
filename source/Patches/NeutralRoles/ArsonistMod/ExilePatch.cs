@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
-using System.Linq;
-using UnityEngine;
 using System;
+using System.Linq;
 using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles;
+using UnityEngine;
 
 namespace TownOfUsEdited.NeutralRoles.ArsonistMod
 {

@@ -1,10 +1,10 @@
-using HarmonyLib;
-using TownOfUsEdited.Extensions;
 using AmongUs.GameOptions;
+using HarmonyLib;
+using TownOfUsEdited.CrewmateRoles.SheriffMod;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Modifiers.UnderdogMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUsEdited.CrewmateRoles.SheriffMod;
 
 namespace TownOfUsEdited
 {

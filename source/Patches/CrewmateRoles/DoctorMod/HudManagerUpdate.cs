@@ -1,7 +1,7 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 {
@@ -23,7 +23,6 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Doctor)) return;
 
             var role = Role.GetRole<Doctor>(PlayerControl.LocalPlayer);
-            var ReviveText = __instance.KillButton.buttonLabelText;
 
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;
@@ -80,7 +79,7 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && CustomGameOptions.GameMode != GameMode.Chaos);
-            ReviveText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            reviveButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -106,8 +105,6 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                         var renderer = reviveButton.graphic;
                         renderer.color = Palette.DisabledClear;
                         renderer.material.SetFloat("_Desat", 1f);
-                        ReviveText.color = Palette.DisabledClear;
-                        ReviveText.material.SetFloat("_Desat", 1f);
                         role.UsesText.color = Palette.DisabledClear;
                         role.UsesText.material.SetFloat("_Desat", 1f);
                     }
@@ -129,8 +126,6 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                 var renderer = reviveButton.graphic;
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
-                ReviveText.color = Palette.DisabledClear;
-                ReviveText.material.SetFloat("_Desat", 1f);
                 role.UsesText.color = Palette.DisabledClear;
                 role.UsesText.material.SetFloat("_Desat", 1f);
             }
@@ -163,7 +158,16 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && CustomGameOptions.OnlyMedRevive && CustomGameOptions.GameMode != GameMode.Chaos);
+            role.DragDropButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
+                    && CustomGameOptions.OnlyMedRevive && CustomGameOptions.GameMode != GameMode.Chaos);
 
+            role.DragDropButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
+
+            role.DragDropButton.buttonLabelText.text = role.DragDropButton.graphic.sprite == TownOfUsEdited.DropSprite ? "Drop" : "Drag";
+            role.DragDropButton.buttonLabelText.SetOutlineColor(Patches.Colors.Doctor);
 
             if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DragSprite)
             {
@@ -227,11 +231,10 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                 KillButtonTarget.SetTarget(dragButton, closestBody, role);
             }
             role.DragDropButton.SetCoolDown(0f, 1f);
-            if (role.CurrentlyDragging != null)
-            {
             role.DragDropButton.graphic.color = Palette.EnabledColor;
             role.DragDropButton.graphic.material.SetFloat("_Desat", 0f);
-            }
+            role.DragDropButton.buttonLabelText.color = Palette.EnabledColor;
+            role.DragDropButton.buttonLabelText.material.SetFloat("_Desat", 0f);
         }
     }
 }

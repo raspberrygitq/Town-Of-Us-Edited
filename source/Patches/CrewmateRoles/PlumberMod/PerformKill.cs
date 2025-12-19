@@ -1,8 +1,8 @@
+using HarmonyLib;
+using Reactor.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using HarmonyLib;
-using Reactor.Utilities;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -11,7 +11,6 @@ namespace TownOfUsEdited.CrewmateRoles.PlumberMod
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite Arrow => TownOfUsEdited.Arrow;
         public static bool Prefix(KillButton __instance)
         {
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Plumber);
@@ -65,7 +64,7 @@ namespace TownOfUsEdited.CrewmateRoles.PlumberMod
                     var arrow = gameObj.AddComponent<ArrowBehaviour>();
                     gameObj.transform.parent = player.gameObject.transform;
                     var renderer = gameObj.AddComponent<SpriteRenderer>();
-                    renderer.sprite = Arrow;
+                    renderer.sprite = TownOfUsEdited.Arrow;
                     arrow.image = renderer;
                     gameObj.layer = 5;
                     arrows.Add(player.PlayerId, arrow);

@@ -1,12 +1,12 @@
 using HarmonyLib;
 using Reactor.Utilities;
+using System;
 using System.Linq;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Patches.NeutralRoles;
 using TownOfUsEdited.Roles;
-using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited.NeutralRoles.TrollMod
 {

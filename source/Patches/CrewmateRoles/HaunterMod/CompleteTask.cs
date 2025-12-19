@@ -1,9 +1,9 @@
-using System.Linq;
 using HarmonyLib;
-using TownOfUsEdited.Roles;
 using Reactor.Utilities;
-using UnityEngine;
+using System.Linq;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Roles;
+using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.HaunterMod
 {

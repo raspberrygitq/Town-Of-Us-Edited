@@ -1,6 +1,6 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
 using System.Linq;
+using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.CrewmateRoles.LookoutMod
 {

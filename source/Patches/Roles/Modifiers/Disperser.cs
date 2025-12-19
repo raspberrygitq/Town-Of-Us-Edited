@@ -1,16 +1,16 @@
 using Hazel;
-using System.Linq;
-using UnityEngine;
-using System.Collections.Generic;
+using Reactor.Networking.Extensions;
 using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
-using Object = UnityEngine.Object;
-using Reactor.Networking.Extensions;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using TownOfUsEdited.CrewmateRoles.TimeLordMod;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Modifiers.ShyMod;
 using TownOfUsEdited.Patches;
-using TownOfUsEdited.Extensions;
-using TownOfUsEdited.CrewmateRoles.TimeLordMod;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Roles.Modifiers
 {

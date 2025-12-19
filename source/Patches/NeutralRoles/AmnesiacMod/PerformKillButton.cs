@@ -1,19 +1,18 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
+using System.Linq;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
+using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.CrewmateRoles.SnitchMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
-using TownOfUsEdited.Roles;
-using UnityEngine;
-using System;
 using TownOfUsEdited.Extensions;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using AmongUs.GameOptions;
-using TownOfUsEdited.Roles.Modifiers;
 using TownOfUsEdited.ImpostorRoles.BomberMod;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 using TownOfUsEdited.Patches;
-using TownOfUsEdited.CrewmateRoles.MedicMod;
-using System.Linq;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
+using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 
 namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
 {
@@ -541,7 +540,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
             else if (role == RoleEnum.Survivor)
             {
                 var survRole = Role.GetRole<Survivor>(amnesiac);
-                survRole.LastVested = DateTime.UtcNow;
+                survRole.Cooldown = CustomGameOptions.VestCd;
                 survRole.UsesLeft = CustomGameOptions.MaxVests;
             }
 
@@ -686,7 +685,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                 var plagueRole = Role.GetRole<Plaguebearer>(amnesiac);
                 plagueRole.InfectedPlayers.RemoveRange(0, plagueRole.InfectedPlayers.Count);
                 plagueRole.InfectedPlayers.Add(amnesiac.PlayerId);
-                plagueRole.LastInfected = DateTime.UtcNow;
+                plagueRole.Cooldown = CustomGameOptions.InfectCd;
             }
 
             else if (role == RoleEnum.Terrorist)

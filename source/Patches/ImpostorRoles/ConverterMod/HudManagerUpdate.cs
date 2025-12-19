@@ -32,7 +32,12 @@ namespace TownOfUsEdited.ImpostorRoles.ConverterMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && converter.AbilityUsed == false && !player.Data.Disconnected);
-                    
+            converter.ConvertButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
+                    && converter.AbilityUsed == false && !player.Data.Disconnected);
+
             converter.ConvertButton.graphic.sprite = TownOfUsEdited.Revive2Sprite;
             converter.ConvertButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
@@ -69,6 +74,8 @@ namespace TownOfUsEdited.ImpostorRoles.ConverterMod
             converter.ConvertButton.SetCoolDown(converter.ConvertTimer(), CustomGameOptions.ConvertCD);
             converter.ConvertButton.graphic.SetCooldownNormalizedUvs();
 
+            converter.ConvertButton.buttonLabelText.text = "Convert";
+
             if (converter.CurrentTarget && converter.CurrentTarget != closestBody)
             {
                 foreach (var body in converter.CurrentTarget.bodyRenderers) body.material.SetFloat("_Outline", 0f);
@@ -80,6 +87,8 @@ namespace TownOfUsEdited.ImpostorRoles.ConverterMod
             {
                 converter.ConvertButton.graphic.color = Palette.DisabledClear;
                 converter.ConvertButton.graphic.material.SetFloat("_Desat", 1f);
+                converter.ConvertButton.buttonLabelText.color = Palette.DisabledClear;
+                converter.ConvertButton.buttonLabelText.material.SetFloat("_Desat", 1f);
                 return;
             }
             var player2 = Utils.PlayerById(converter.CurrentTarget.ParentId);
@@ -99,6 +108,8 @@ namespace TownOfUsEdited.ImpostorRoles.ConverterMod
                         component.material.SetColor("_OutlineColor", Color.red);
                         converter.ConvertButton.graphic.color = Palette.EnabledColor;
                         converter.ConvertButton.graphic.material.SetFloat("_Desat", 0f);
+                        converter.ConvertButton.buttonLabelText.color = Palette.EnabledColor;
+                        converter.ConvertButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                         return;
                     }
                 }
@@ -106,6 +117,8 @@ namespace TownOfUsEdited.ImpostorRoles.ConverterMod
 
             converter.ConvertButton.graphic.color = Palette.DisabledClear;
             converter.ConvertButton.graphic.material.SetFloat("_Desat", 1f);
+            converter.ConvertButton.buttonLabelText.color = Palette.DisabledClear;
+            converter.ConvertButton.buttonLabelText.material.SetFloat("_Desat", 1f);
 
             return;
             

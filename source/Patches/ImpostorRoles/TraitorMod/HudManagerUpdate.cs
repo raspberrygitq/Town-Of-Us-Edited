@@ -36,7 +36,7 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.ChangeText.text = "Change Role";
+            role.ChangeText.text = "Select";
             role.ChangeText.SetOutlineColor(Palette.ImpostorRed);
             role.ChangeRoleButton.SetCoolDown(0f, 1f);
 

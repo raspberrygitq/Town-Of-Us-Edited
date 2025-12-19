@@ -1,13 +1,13 @@
+using Hazel;
 using Reactor.Utilities;
 using System.Collections;
+using System.Linq;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.ImpostorRoles.BomberMod;
-using UnityEngine;
 using TownOfUsEdited.Modifiers.UnderdogMod;
-using Object = UnityEngine.Object;
-using Hazel;
-using System.Linq;
 using TownOfUsEdited.Patches;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Roles.Modifiers
 {

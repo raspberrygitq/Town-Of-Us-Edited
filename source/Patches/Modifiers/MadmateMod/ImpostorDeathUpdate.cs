@@ -1,6 +1,6 @@
-using System.Linq;
 using HarmonyLib;
 using Reactor.Utilities;
+using System.Linq;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.SnitchMod;
@@ -58,14 +58,15 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                         var pc = toChooseFromMad[rand];
 
                         var oldRole = Role.GetRole(pc);
-                        var killsList = (oldRole.CorrectKills, oldRole.IncorrectKills, oldRole.CorrectAssassinKills, oldRole.IncorrectAssassinKills);
+                        var killsList = (oldRole.Kills, oldRole.CorrectKills, oldRole.IncorrectKills, oldRole.CorrectAssassinKills, oldRole.IncorrectAssassinKills);
                         Role.RoleDictionary.Remove(pc.PlayerId);
-                        var role = new Impostor(pc);
+                        var role = new Traitor(pc);
+                        role.Kills = killsList.Kills;
                         role.CorrectKills = killsList.CorrectKills;
                         role.IncorrectKills = killsList.IncorrectKills;
                         role.CorrectAssassinKills = killsList.CorrectAssassinKills;
                         role.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
-                        role.TaskText = () => "You have become the new Impostor, kill the remaining crew!";
+                        role.TaskText = () => "You have become the new Traitor, kill the remaining crew!";
                         role.RegenTask();
 
                         TurnImp(pc);
@@ -98,7 +99,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
             if (player.Is(RoleEnum.Plumber))
             {
                 var plumberRole = Role.GetRole<Plumber>(player);
-                foreach (GameObject barricade in plumberRole.Barricades)
+                foreach (GameObject barricade in plumberRole.Block)
                 {
                     UnityEngine.Object.Destroy(barricade);
                 }
@@ -218,9 +219,10 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                 if (StartImitate.ImitatingPlayers.Contains(PlayerControl.LocalPlayer.PlayerId)) StartImitate.ImitatingPlayers.Remove(PlayerControl.LocalPlayer.PlayerId);
 
                 var oldRole = Role.GetRole(PlayerControl.LocalPlayer);
-                var killsList = (oldRole.CorrectKills, oldRole.IncorrectKills, oldRole.CorrectAssassinKills, oldRole.IncorrectAssassinKills);
+                var killsList = (oldRole.Kills, oldRole.CorrectKills, oldRole.IncorrectKills, oldRole.CorrectAssassinKills, oldRole.IncorrectAssassinKills);
                 Role.RoleDictionary.Remove(PlayerControl.LocalPlayer.PlayerId);
-                var role = new Impostor(PlayerControl.LocalPlayer);
+                var role = new Traitor(PlayerControl.LocalPlayer);
+                role.Kills = killsList.Kills;
                 role.CorrectKills = killsList.CorrectKills;
                 role.IncorrectKills = killsList.IncorrectKills;
                 role.CorrectAssassinKills = killsList.CorrectAssassinKills;
@@ -242,7 +244,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
             if (PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
                 DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(true);
-                Coroutines.Start(Utils.FlashCoroutine(Color.red, 3f));
+                Coroutines.Start(Utils.FlashCoroutine(Color.red));
             }
 
             foreach (var snitch in Role.GetRoles(RoleEnum.Snitch))

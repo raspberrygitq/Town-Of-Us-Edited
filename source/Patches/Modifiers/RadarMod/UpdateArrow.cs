@@ -1,9 +1,9 @@
-using System.Linq;
 using HarmonyLib;
-using TownOfUsEdited.Roles.Modifiers;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 using TownOfUsEdited.Patches;
+using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.Modifiers.RadarMod
 {

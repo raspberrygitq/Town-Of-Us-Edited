@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Linq;
 using HarmonyLib;
 using InnerNet;
-using TownOfUsEdited.Patches;
+using System.Collections;
+using System.Linq;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -25,7 +24,7 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                         {
                             lockImg[0] = new GameObject();
                             var lockImgR = lockImg[0].AddComponent<SpriteRenderer>();
-                            lockImgR.sprite = LockSprite;
+                            lockImgR.sprite = TownOfUsEdited.LockSprite;
                         }
                         lockImg[0].layer = 5;
                         lockImg[0].transform.position = new Vector3(HudManager.Instance.KillButton.transform.position.x, HudManager.Instance.KillButton.transform.position.y, -50f);
@@ -38,7 +37,7 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                         {
                             lockImg[1] = new GameObject();
                             var lockImgR = lockImg[1].AddComponent<SpriteRenderer>();
-                            lockImgR.sprite = LockSprite;
+                            lockImgR.sprite = TownOfUsEdited.LockSprite;
                         }
 
                         lockImg[1].transform.position = new Vector3(
@@ -61,7 +60,7 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                 yield return null;
             }
         }
-        public static Sprite LockSprite = TownOfUsEdited.LockSprite;
+
         [HarmonyPatch(nameof(HudManager.Update))]
         public static void Postfix(HudManager __instance)
         {
@@ -72,6 +71,7 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             var jailButton = __instance.KillButton;
 
             var role = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
+            var jailText = __instance.KillButton.buttonLabelText;
 
             if (role.ReleaseButton == null)
             {
@@ -97,9 +97,14 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.ReleaseText.text = "Release";
-            role.ReleaseText.SetOutlineColor(Colors.Jailor);
+            role.ReleaseText.SetOutlineColor(Patches.Colors.Jailor);
 
             jailButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            jailText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -123,6 +128,21 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             {
                 jailButton.SetTarget(null);
                 role.ClosestPlayer = null;
+            }
+
+            if (role.JailedPlayer == null && role.ClosestPlayer != null && !jailButton.isCoolingDown)
+            {
+                jailButton.graphic.color = Palette.EnabledColor;
+                jailButton.graphic.material.SetFloat("_Desat", 0f);
+                jailText.color = Palette.EnabledColor;
+                jailText.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                jailButton.graphic.color = Palette.DisabledClear;
+                jailButton.graphic.material.SetFloat("_Desat", 1f);
+                jailText.color = Palette.DisabledClear;
+                jailText.material.SetFloat("_Desat", 1f);
             }
 
             if (role.JailedPlayer != null)

@@ -1,9 +1,9 @@
 using HarmonyLib;
-using TownOfUsEdited.CrewmateRoles.AltruistMod;
-using TownOfUsEdited.Roles.Modifiers;
-using TownOfUsEdited.Roles;
 using System;
+using TownOfUsEdited.CrewmateRoles.AltruistMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited.Modifiers.LoversMod
 {

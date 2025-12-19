@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Reactor.Utilities;
+using System.Collections.Generic;
 using System.Linq;
-using Reactor.Utilities;
+using TMPro;
 using TownOfUsEdited.CrewmateRoles.ClericMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Extensions;
@@ -18,6 +19,7 @@ namespace TownOfUsEdited.Roles
         public PlayerControl ClosestPlayerIgnite;
         public List<byte> DousedPlayers = new List<byte>();
         public bool LastKiller = false;
+        public TextMeshPro IgniteText;
 
         public int DousedAlive => DousedPlayers.Count(x => Utils.PlayerById(x) != null && Utils.PlayerById(x).Data != null && !Utils.PlayerById(x).Data.IsDead && !Utils.PlayerById(x).Data.Disconnected);
 

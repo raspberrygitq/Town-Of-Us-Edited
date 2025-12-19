@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using HarmonyLib;
+﻿using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.CrewmateRoles.SeerMod
@@ -22,6 +22,7 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Seer)) return;
             if (CustomGameOptions.GameMode == GameMode.Werewolf) return;
             var investigateButton = __instance.KillButton;
+            var revealText = __instance.KillButton.buttonLabelText;
 
             var role = Role.GetRole<Seer>(PlayerControl.LocalPlayer);
 
@@ -29,6 +30,10 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            revealText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
             investigateButton.SetCoolDown(role.SeerTimer(), CustomGameOptions.SeerCd);
 
             var notInvestigated = PlayerControl.AllPlayerControls
@@ -39,16 +44,19 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
             Utils.SetTarget(ref role.ClosestPlayer, investigateButton, float.NaN, notInvestigated);
 
             var renderer = investigateButton.graphic;
-
             if (role.ClosestPlayer != null)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
+                revealText.color = Palette.EnabledColor;
+                revealText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
+                revealText.color = Palette.DisabledClear;
+                revealText.material.SetFloat("_Desat", 0f);
             }
         }
 

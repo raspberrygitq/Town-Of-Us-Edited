@@ -1,6 +1,6 @@
+using HarmonyLib;
 using System;
 using System.Linq;
-using HarmonyLib;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 
 namespace TownOfUsEdited.CrewmateRoles.DetectiveMod

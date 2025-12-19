@@ -1,8 +1,8 @@
-using UnityEngine;
-using System.Collections;
-using Reactor.Utilities;
 using HarmonyLib;
 using Il2CppSystem;
+using Reactor.Utilities;
+using System.Collections;
+using UnityEngine;
 
 namespace TownOfUsEdited.Patches
 {

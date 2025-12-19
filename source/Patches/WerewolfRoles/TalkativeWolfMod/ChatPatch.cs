@@ -1,6 +1,6 @@
+using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
-using HarmonyLib;
 using TownOfUsEdited.Modifiers.AssassinMod;
 using TownOfUsEdited.Roles;
 

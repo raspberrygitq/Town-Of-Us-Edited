@@ -1,9 +1,9 @@
 using HarmonyLib;
+using System;
+using System.Linq;
+using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using System.Linq;
-using System;
-using TownOfUsEdited.Extensions;
 
 namespace TownOfUsEdited.CrewmateRoles.MediumMod
 {
@@ -20,9 +20,14 @@ namespace TownOfUsEdited.CrewmateRoles.MediumMod
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Medium))
             {
                 var mediateButton = __instance.KillButton;
+                var mediateText = __instance.KillButton.buttonLabelText;
 
                 var role = Role.GetRole<Medium>(PlayerControl.LocalPlayer);
                 mediateButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+                mediateText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -55,11 +60,15 @@ namespace TownOfUsEdited.CrewmateRoles.MediumMod
                 {
                     renderer.color = Palette.EnabledColor;
                     renderer.material.SetFloat("_Desat", 0f);
+                    mediateText.color = Palette.EnabledColor;
+                    mediateText.material.SetFloat("_Desat", 0f);
                 }
                 else
                 {
                     renderer.color = Palette.DisabledClear;
                     renderer.material.SetFloat("_Desat", 1f);
+                    mediateText.color = Palette.DisabledClear;
+                    mediateText.material.SetFloat("_Desat", 1f);
                 }
             }
             if (CustomGameOptions.ShowMediumToDead)

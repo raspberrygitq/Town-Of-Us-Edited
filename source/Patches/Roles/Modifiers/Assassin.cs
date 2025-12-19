@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using TownOfUsEdited.Patches;
-using UnityEngine;
+using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
 using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
-using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
+using TownOfUsEdited.Patches;
+using UnityEngine;
+using static TownOfUsEdited.Roles.Modifiers.Madmate;
 
 namespace TownOfUsEdited.Roles.Modifiers
 {
@@ -120,7 +121,7 @@ namespace TownOfUsEdited.Roles.Modifiers
                 if (CustomGameOptions.UndertakerOn > 0) ColorMapping.Add("Undertaker", Colors.Impostor);
                 if (CustomGameOptions.EscapistOn > 0) ColorMapping.Add("Escapist", Colors.Impostor);
                 if (CustomGameOptions.GrenadierOn > 0) ColorMapping.Add("Grenadier", Colors.Impostor);
-                if (CustomGameOptions.TraitorOn > 0) ColorMapping.Add("Traitor", Colors.Impostor);
+                if (CustomGameOptions.TraitorOn > 0 || (CustomGameOptions.MadmateOn > 0 && CustomGameOptions.MadmateOnImpoDeath == BecomeMadmateOptions.Impostor)) ColorMapping.Add("Traitor", Colors.Impostor);
                 if (CustomGameOptions.PoisonerOn > 0) ColorMapping.Add("Poisoner", Colors.Impostor);
                 if (CustomGameOptions.ShooterOn > 0) ColorMapping.Add("Shooter", Colors.Impostor);
                 if (CustomGameOptions.BlackmailerOn > 0) ColorMapping.Add("Blackmailer", Colors.Impostor);

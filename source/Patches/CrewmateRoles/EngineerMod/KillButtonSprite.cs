@@ -17,6 +17,7 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
             if (PlayerControl.LocalPlayer.Is(Faction.Madmates)) return;
 
             var role = Role.GetRole<Engineer>(PlayerControl.LocalPlayer);
+            var fixText = __instance.KillButton.buttonLabelText;
 
             if (role.UsesText == null && role.UsesLeft > 0)
             {
@@ -44,21 +45,29 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            fixText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!ShipStatus.Instance) return;
             var system = ShipStatus.Instance.Systems[SystemTypes.Sabotage].Cast<SabotageSystemType>();
             if (system == null) return;
             var sabActive = system.AnyActive;
             var renderer = __instance.KillButton.graphic;
-            if (sabActive & role.ButtonUsable & __instance.KillButton.enabled)
+            if (sabActive && role.ButtonUsable && __instance.KillButton.enabled && !PlayerControl.LocalPlayer.inVent)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
+                fixText.color = Palette.EnabledColor;
+                fixText.material.SetFloat("_Desat", 0f);
                 return;
             }
 
             renderer.color = Palette.DisabledClear;
             renderer.material.SetFloat("_Desat", 1f);
+            fixText.color = Palette.DisabledClear;
+            fixText.material.SetFloat("_Desat", 1f);
         }
     }
     [HarmonyPatch(typeof(HudManager))]

@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using UnityEngine;
-using TownOfUsEdited.Extensions;
+﻿using Reactor.Utilities;
 using System.Collections.Generic;
-using Reactor.Utilities;
+using System.Linq;
+using TownOfUsEdited.Extensions;
+using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {

@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using AmongUs.GameOptions;
 using HarmonyLib;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.SpyMod

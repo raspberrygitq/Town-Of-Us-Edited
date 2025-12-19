@@ -73,7 +73,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
             role.StoreButton.graphic.SetCooldownNormalizedUvs();
 
             var renderer = role.StoreButton.graphic;
-            if (role.ButtonUsable)
+            if (isKillButtonActive && role.ButtonUsable && role.KillCooldown <= 0f)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);

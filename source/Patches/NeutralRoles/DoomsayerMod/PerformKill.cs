@@ -1,6 +1,6 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
 using TownOfUsEdited.Roles;
-using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
 {
@@ -28,7 +28,7 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
             }
             if (interact[0] == true)
             {
-                role.Cooldown = CustomGameOptions.MineCd;
+                role.Cooldown = CustomGameOptions.ObserveCooldown;
                 return false;
             }
             else if (interact[1] == true)

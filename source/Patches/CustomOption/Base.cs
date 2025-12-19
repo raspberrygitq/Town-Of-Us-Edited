@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Reactor.Localization.Utilities;
 using Reactor.Utilities;
+using System;
+using System.Collections.Generic;
 
 namespace TownOfUsEdited.CustomOption
 {

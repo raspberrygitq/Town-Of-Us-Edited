@@ -1,9 +1,9 @@
 using HarmonyLib;
 using System;
-using UnityEngine;
-using Object = UnityEngine.Object;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.CrewmateRoles.SeerMod
 {

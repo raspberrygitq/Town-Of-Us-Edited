@@ -1,14 +1,14 @@
-﻿using System;
-using Reactor.Utilities;
+﻿using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
+using System;
+using System.Linq;
 using TMPro;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
-using TownOfUsEdited.Patches;
-using System.Linq;
 
 namespace TownOfUsEdited.CovenRoles.RitualistMod
 {

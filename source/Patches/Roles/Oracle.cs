@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -17,6 +18,7 @@ namespace TownOfUsEdited.Roles
 
         public PlayerControl ClosestBlessedPlayer;
         public PlayerControl Confessor;
+        public TextMeshPro BlessText;
 
         public Oracle(PlayerControl player) : base(player)
         {

@@ -1,12 +1,12 @@
-using TownOfUsEdited.CustomOption;
-using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.CrewmateRoles.HaunterMod;
 using TownOfUsEdited.CrewmateRoles.MediumMod;
 using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
+using TownOfUsEdited.CustomOption;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
-using static TownOfUsEdited.Roles.Modifiers.Madmate;
 using TownOfUsEdited.Patches;
 using static TownOfUsEdited.CrewmateRoles.MedicMod.StopKill;
+using static TownOfUsEdited.Roles.Modifiers.Madmate;
 
 namespace TownOfUsEdited
 {
@@ -438,7 +438,6 @@ namespace TownOfUsEdited
         public static float RememberArrowDelay => Generate.RememberArrowDelay.Get();
         public static float VultureArrowDelay => Generate.VultureArrowDelay.Get();
         public static float ShiftCD => Generate.ShiftCD.Get();
-        public static bool CanShiftNeutKilling => Generate.CanShiftNeutKilling.Get();
         public static bool CanShiftImp => Generate.CanShiftImp.Get();
         public static bool CanShiftCoven => Generate.CanShiftCoven.Get();
         public static float MediateCooldown => Generate.MediateCooldown.Get();
@@ -564,11 +563,12 @@ namespace TownOfUsEdited
         public static float AuraOuterRadius => (float)Generate.AuraOuterRadius.Get();
         public static float SenseDuration => (float)Generate.SenseDuration.Get();
         public static AdminDeadPlayers WhoSeesDead => (AdminDeadPlayers)Generate.WhoSeesDead.Get();
-        public static bool SpyHasPortableAdmin => Generate.SpyHasPortableAdmin.Get();
+        public static bool DisablePortableAdmin => Generate.DisablePortableAdmin.Get();
         public static bool VentImprovements => Generate.VentImprovements.Get();
         public static bool VitalsLab => Generate.VitalsLab.Get();
         public static bool ColdTempDeathValley => Generate.ColdTempDeathValley.Get();
         public static bool WifiChartCourseSwap => Generate.WifiChartCourseSwap.Get();
+        public static bool MoveToiletVent => Generate.MoveToiletVent.Get();
         public static bool AirshipPolusDoors => Generate.AirshipPolusDoors.Get();
         public static bool RandomMapEnabled => Generate.RandomMapEnabled.Get();
         public static float RandomMapSkeld => Generate.RandomMapSkeld.Get();

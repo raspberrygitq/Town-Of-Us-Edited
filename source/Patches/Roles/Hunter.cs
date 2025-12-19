@@ -35,6 +35,7 @@ namespace TownOfUsEdited.Roles
         public int UsesLeft { get; set; }
         public TextMeshPro UsesText { get; set; }
         public bool UsedRetribution { get; set; } = false;
+        public TextMeshPro StalkText;
         public KillButton StalkButton
         {
             get => _stalkButton;

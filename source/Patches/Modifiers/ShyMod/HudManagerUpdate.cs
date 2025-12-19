@@ -1,7 +1,7 @@
-using System;
-using System.Linq;
 using AmongUs.Data;
 using HarmonyLib;
+using System;
+using System.Linq;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles.Modifiers;
 

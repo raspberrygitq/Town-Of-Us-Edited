@@ -19,7 +19,7 @@ namespace TownOfUsEdited.NeutralRoles.SurvivorMod
             {
                 if (__instance.isCoolingDown) return false;
                 if (!__instance.isActiveAndEnabled) return false;
-                if (role.VestTimer() != 0) return false;
+                if (role.Cooldown > 0) return false;
                 var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
                 if (!abilityUsed) return false;
                 role.TimeRemaining = CustomGameOptions.VestDuration;

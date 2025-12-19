@@ -25,6 +25,9 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                 role.ExamineButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.ExamineButton.graphic.enabled = true;
                 role.ExamineButton.gameObject.SetActive(false);
+                role.ExamineText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.ExamineButton.transform);
+                role.ExamineText.gameObject.SetActive(false);
+                role.ButtonLabels.Add(role.ExamineText);
             }
 
             role.ExamineButton.graphic.sprite = ExamineSprite;
@@ -36,14 +39,27 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
 
             role.ExamineButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.ExamineText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.ExamineButton.SetCoolDown(role.ExamineTimer(), CustomGameOptions.ExamineCd);
             role.ExamineButton.graphic.SetCooldownNormalizedUvs();
+
+            role.ExamineText.text = "Examine";
+            role.ExamineText.SetOutlineColor(Patches.Colors.Detective);
+
 
             if (role.InvestigatedPlayers.Count > 0)
             {
@@ -54,11 +70,19 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                 {
                     renderer.color = Palette.EnabledColor;
                     renderer.material.SetFloat("_Desat", 0f);
+                    role.ExamineText.color = Palette.EnabledColor;
+                    role.ExamineText.material.SetFloat("_Desat", 0f);
+                    __instance.KillButton.buttonLabelText.color = Palette.EnabledColor;
+                    __instance.KillButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 }
                 else
                 {
                     renderer.color = Palette.DisabledClear;
                     renderer.material.SetFloat("_Desat", 1f);
+                    role.ExamineText.color = Palette.DisabledClear;
+                    role.ExamineText.material.SetFloat("_Desat", 1f);
+                    __instance.KillButton.buttonLabelText.color = Palette.DisabledClear;
+                    __instance.KillButton.buttonLabelText.material.SetFloat("_Desat", 1f);
                 }
             }
 

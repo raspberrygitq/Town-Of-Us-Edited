@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.CrewmateRoles.GuardianMod
@@ -28,10 +28,7 @@ namespace TownOfUsEdited.CrewmateRoles.GuardianMod
 
             // Set KillButton's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
-            protectText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            protectText.gameObject.SetActive(isKillButtonActive);
 
             // Set KillButton's cooldown
             var alives = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
@@ -40,19 +37,19 @@ namespace TownOfUsEdited.CrewmateRoles.GuardianMod
             if (!role.Guarding) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, alives);
 
             var labelrender = protectText;
-            if (role.ClosestPlayer != null || role.Guarding)
+            if (role.ClosestPlayer != null && !role.Guarding && !role.coolingDown)
             {
                 __instance.KillButton.graphic.color = Palette.EnabledColor;
                 __instance.KillButton.graphic.material.SetFloat("_Desat", 0f);
-                labelrender.color = Palette.EnabledColor;
-                labelrender.material.SetFloat("_Desat", 0f);
+                protectText.color = Palette.EnabledColor;
+                protectText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 __instance.KillButton.graphic.color = Palette.DisabledClear;
                 __instance.KillButton.graphic.material.SetFloat("_Desat", 1f);
-                labelrender.color = Palette.DisabledClear;
-                labelrender.material.SetFloat("_Desat", 1f);
+                protectText.color = Palette.DisabledClear;
+                protectText.material.SetFloat("_Desat", 1f);
             }
         }
     }

@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using TownOfUsEdited.Roles;
-using UnityEngine;
 using TownOfUsEdited.Modifiers.UnderdogMod;
+using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.BomberMod
 {

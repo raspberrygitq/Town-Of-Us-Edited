@@ -35,10 +35,20 @@ namespace TownOfUsEdited.CrewmateRoles.ChameleonMod
 
             var renderer = swoopButton.graphic;
             var label = swoopText;
-            renderer.color = Palette.EnabledColor;
-            renderer.material.SetFloat("_Desat", 0f);
-            label.color = Palette.EnabledColor;
-            label.material.SetFloat("_Desat", 0f);
+            if (!role.IsSwooped && !role.coolingDown)
+            {
+                renderer.color = Palette.EnabledColor;
+                renderer.material.SetFloat("_Desat", 0f);
+                label.color = Palette.EnabledColor;
+                label.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                renderer.color = Palette.DisabledClear;
+                renderer.material.SetFloat("_Desat", 1f);
+                label.color = Palette.DisabledClear;
+                label.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

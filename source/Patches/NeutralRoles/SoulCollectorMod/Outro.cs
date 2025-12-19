@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
@@ -11,6 +11,14 @@ namespace TownOfUsEdited.NeutralRoles.SoulCollectorMod
     {
         public static void Postfix(EndGameManager __instance)
         {
+            if (CustomGameOptions.NeutralEvilWinEndsGame)
+            {
+                if (Role.GetRoles(RoleEnum.Jester).Any(x => ((Jester)x).VotedOut)) return;
+                if (Role.GetRoles(RoleEnum.Troll).Any(x => ((Troll)x).TrolledVotedOut)) return;
+                if (Role.GetRoles(RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut)) return;
+                if (Role.GetRoles(RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing)) return;
+                if (Role.GetRoles(RoleEnum.Vulture).Any(x => ((Vulture)x).VultureWins)) return;
+            }
             var role = Role.AllRoles.FirstOrDefault(x =>
                 x.RoleType == RoleEnum.SoulCollector && ((SoulCollector) x).SCWins);
             if (role == null) return;

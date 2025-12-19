@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using TownOfUsEdited.Extensions;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using TownOfUsEdited.Extensions;
 
 namespace TownOfUsEdited.Roles
 {

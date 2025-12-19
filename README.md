@@ -57,6 +57,7 @@
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
+|  17.1.0 | v2.0.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.0.0/ToUEG-Steam.v2.0.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.0.0/ToUEG-Epic.v2.0.0.zip) |
 |  17.1.0 | v1.7.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.1/ToUEG-Steam.v1.7.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.1/ToUEG-Epic.v1.7.1.zip) |
 |  17.0.1 | v1.7.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.0/ToUEG-Steam.v1.7.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.0/ToUEG-Epic.v1.7.0.zip) |
 |  17.0.0 | v1.6.2 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.6.2/ToUEG-Steam.v1.6.2.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.6.2/ToUEG-Epic.v1.6.2.zip) |
@@ -613,11 +614,6 @@ Note that everyone know who the Jailed player is during the meeting.
 |----------|:-------------:|:------:|:------:|
 | Jailor | The percentage probability of the Jailor appearing | Percentage | 0% |
 | Jail Cooldown | The cooldown on the Jailor's jail button | Time | 25s |
-| Jailor Can Execute Neutral Benign | Whether the Jailor can execute Neutral Benign Roles | Toggle | False |
-| Jailor Can Execute Neutral Evil | Whether the Jailor can execute Neutral Evil Roles | Toggle | False |
-| Jailor Can Execute Neutral Killing | Whether the Jailor can execute Neutral Killing Roles | Toggle | False |
-| Jailor Can Execute Neutral Madmate | Whether the Jailor can execute Madmates | Toggle | False |
-| Jailor Can Execute Coven | Whether the Jailor can execute Coven Roles | Toggle | False |
 | Jailor Dies When Executing Innocent | Whether the Jailor will die if they execute an Innocent | Toggle | False |
 
 -----------------------
@@ -975,7 +971,6 @@ Depending on the settings, the Shifter may commit suicide if they attempt to Shi
 |----------|:-------------:|:------:|:------:|
 | Shifter | The percentage probability of the Shifter appearing | Percentage | 0% |
 | Shift Cooldown | The cooldown of the Shifter's Shift button | Time | 25s |
-| Can Shift Neutral Killing | Shifter can shift Neutral Killing | Toggle | false |
 | Can Shift Impostor / Madmate | Shifter can shift Impostors / Madmates | Toggle | false |
 | Can Shift Coven | Shifter can shift Coven | Toggle | false |
 

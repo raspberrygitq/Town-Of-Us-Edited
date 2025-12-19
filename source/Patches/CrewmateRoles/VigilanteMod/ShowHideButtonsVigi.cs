@@ -2,8 +2,8 @@
 ﻿using HarmonyLib;
 using System.Linq;
 using TownOfUsEdited.Roles;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
 {

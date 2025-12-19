@@ -1,12 +1,10 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {
     public class Noclip : Role
     {
         private KillButton _noclipButton;
-        public TextMeshPro NoclipText;
         public bool Enabled;
         public Vector3 NoclipSafePoint = new();
         public float Cooldown;

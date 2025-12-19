@@ -1,15 +1,14 @@
-using System;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 namespace TownOfUsEdited.Roles
 {
     public class Survivor : Role
     {
         public bool Enabled;
-        public DateTime LastVested;
         public float TimeRemaining;
-
+        public float Cooldown;
+        public bool coolingDown => Cooldown > 0f;
         public int UsesLeft;
         public TextMeshPro UsesText;
 
@@ -23,10 +22,10 @@ namespace TownOfUsEdited.Roles
             ImpostorText = () => "Do Whatever It Takes To Live";
             TaskText = () => SpawnedAs ? "Stay alive to win" : "Your target was killed. Now you just need to live!";
             Color = Patches.Colors.Survivor;
-            LastVested = DateTime.UtcNow;
             RoleType = RoleEnum.Survivor;
             Faction = Faction.NeutralBenign;
             AddToRoleHistory(RoleType);
+            Cooldown = CustomGameOptions.VestCd;
 
             UsesLeft = CustomGameOptions.MaxVests;
         }
@@ -35,12 +34,13 @@ namespace TownOfUsEdited.Roles
 
         public float VestTimer()
         {
-            var utcNow = DateTime.UtcNow;
-            var timeSpan = utcNow - LastVested;
-            var num = CustomGameOptions.VestCd * 1000f;
-            var flag2 = num - (float) timeSpan.TotalMilliseconds < 0f;
-            if (flag2) return 0;
-            return (num - (float) timeSpan.TotalMilliseconds) / 1000f;
+            if (!coolingDown) return 0f;
+            else if (!PlayerControl.LocalPlayer.inVent)
+            {
+                Cooldown -= Time.deltaTime;
+                return Cooldown;
+            }
+            else return Cooldown;
         }
 
         public void Vest()
@@ -53,7 +53,7 @@ namespace TownOfUsEdited.Roles
         public void UnVest()
         {
             Enabled = false;
-            LastVested = DateTime.UtcNow;
+            Cooldown = CustomGameOptions.VestCd;
         }
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__38 __instance)

@@ -1,10 +1,10 @@
+using BepInEx.Logging;
+using Reactor.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using BepInEx.Logging;
-using Reactor.Utilities;
 using System.Linq;
+using System.Reflection;
 using UnityEngine.AddressableAssets;
 
 namespace TownOfUsEdited.Patches.CustomHats

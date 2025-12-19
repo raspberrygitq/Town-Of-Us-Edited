@@ -1,7 +1,7 @@
+using AmongUs.GameOptions;
 using HarmonyLib;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using AmongUs.GameOptions;
 
 namespace TownOfUsEdited.ImpostorRoles.JanitorMod
 {
@@ -24,6 +24,10 @@ namespace TownOfUsEdited.ImpostorRoles.JanitorMod
             }
 
             role.CleanButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.CleanButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -60,6 +64,19 @@ namespace TownOfUsEdited.ImpostorRoles.JanitorMod
             KillButtonTarget.SetTarget(killButton, closestBody, role);
             role.CleanButton.SetCoolDown(role.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
             role.CleanButton.graphic.SetCooldownNormalizedUvs();
+
+            role.CleanButton.buttonLabelText.text = "Clean";
+
+            if (role.CurrentTarget != null)
+            {
+                role.CleanButton.buttonLabelText.color = Palette.EnabledColor;
+                role.CleanButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                role.CleanButton.buttonLabelText.color = Palette.DisabledClear;
+                role.CleanButton.buttonLabelText.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

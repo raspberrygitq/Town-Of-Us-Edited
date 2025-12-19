@@ -1,14 +1,14 @@
+using HarmonyLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using Reactor.Utilities;
 using System;
 using System.Collections.Generic;
-using HarmonyLib;
-using Reactor.Utilities;
+using System.Linq;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using System.Linq;
 
 namespace TownOfUsEdited.CrewmateRoles.MayorMod
 {

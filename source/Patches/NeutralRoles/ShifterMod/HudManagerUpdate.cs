@@ -27,7 +27,12 @@ namespace TownOfUsEdited.NeutraleRoles.ShifterMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && PlayerControl.LocalPlayer.Is(RoleEnum.Shifter));
-            HudManager.Instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
+                    && PlayerControl.LocalPlayer.Is(RoleEnum.Shifter));
+
             shiftButton.SetCoolDown(role.ShiftTimer(), CustomGameOptions.ShiftCD);
             Utils.SetTarget(ref role.ClosestPlayer, shiftButton, float.NaN);
         }

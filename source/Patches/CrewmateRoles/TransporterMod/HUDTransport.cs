@@ -18,6 +18,7 @@ namespace TownOfUsEdited.CrewmateRoles.TransporterMod
             var transportButton = __instance.KillButton;
 
             var role = Role.GetRole<Transporter>(PlayerControl.LocalPlayer);
+            var transportText = __instance.KillButton.buttonLabelText;
 
             if (role.UsesText == null && role.UsesLeft > 0)
             {
@@ -44,6 +45,10 @@ namespace TownOfUsEdited.CrewmateRoles.TransporterMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            transportText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             if (data.IsDead) return;
 
             if (role.ButtonUsable) transportButton.SetCoolDown(role.TransportTimer(), CustomGameOptions.TransportCooldown);
@@ -56,13 +61,19 @@ namespace TownOfUsEdited.CrewmateRoles.TransporterMod
                 renderer.material.SetFloat("_Desat", 0f);
                 role.UsesText.color = Palette.EnabledColor;
                 role.UsesText.material.SetFloat("_Desat", 0f);
+                transportText.color = Palette.EnabledColor;
+                transportText.material.SetFloat("_Desat", 0f);
                 return;
             }
-
-            renderer.color = Palette.DisabledClear;
-            renderer.material.SetFloat("_Desat", 1f);
-            role.UsesText.color = Palette.DisabledClear;
-            role.UsesText.material.SetFloat("_Desat", 1f);
+            else
+            {
+                renderer.color = Palette.DisabledClear;
+                renderer.material.SetFloat("_Desat", 1f);
+                role.UsesText.color = Palette.DisabledClear;
+                role.UsesText.material.SetFloat("_Desat", 1f);
+                transportText.color = Palette.DisabledClear;
+                transportText.material.SetFloat("_Desat", 0f);
+            }
         }
     }
 }

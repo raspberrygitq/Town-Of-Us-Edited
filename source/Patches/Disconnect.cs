@@ -1,21 +1,21 @@
 using HarmonyLib;
+using Reactor.Utilities.Extensions;
+using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using TownOfUsEdited.ImpostorRoles.TraitorMod;
-using TownOfUsEdited.Roles;
-using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
+using TownOfUsEdited.CovenRoles.RitualistMod;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.SwapperMod;
 using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
+using TownOfUsEdited.ImpostorRoles.TraitorMod;
 using TownOfUsEdited.Modifiers.AssassinMod;
 using TownOfUsEdited.NeutralRoles.DoomsayerMod;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
+using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
+using UnityEngine;
 using UnityEngine.UI;
-using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
-using TownOfUsEdited.CovenRoles.RitualistMod;
-using System.Collections.Generic;
-using Reactor.Utilities.Extensions;
 
 namespace TownOfUsEdited.Patches
 {

@@ -1,14 +1,14 @@
+using AmongUs.GameOptions;
+using Reactor.Utilities.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Reactor.Utilities.Extensions;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using AmongUs.GameOptions;
-using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited.WerewolfRoles.SorcererMod
 {

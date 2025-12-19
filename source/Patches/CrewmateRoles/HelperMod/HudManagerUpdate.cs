@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using System.Linq;
 using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.CrewmateRoles.HelperMod
@@ -18,6 +18,7 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
 
             // Get the Fighter role instance
             var role = Role.GetRole<Helper>(PlayerControl.LocalPlayer);
+            var alertText = __instance.KillButton.buttonLabelText;
 
             // Check if the game state allows the KillButton to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
@@ -27,7 +28,7 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
 
             // Set KillButton's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
-            __instance.KillButton.buttonLabelText.gameObject.SetActive(false);
+            alertText.gameObject.SetActive(isKillButtonActive);
 
             // Set KillButton's cooldown
             var alives = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
@@ -35,15 +36,19 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
             else __instance.KillButton.SetCoolDown(role.AlertTimer(), CustomGameOptions.HelperCD);
             if (!role.OnAlert) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, alives);
 
-            if (role.ClosestPlayer != null || role.OnAlert)
+            if (role.ClosestPlayer != null && !role.OnAlert && !role.coolingDown)
             {
                 __instance.KillButton.graphic.color = Palette.EnabledColor;
                 __instance.KillButton.graphic.material.SetFloat("_Desat", 0f);
+                alertText.color = Palette.EnabledColor;
+                alertText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 __instance.KillButton.graphic.color = Palette.DisabledClear;
                 __instance.KillButton.graphic.material.SetFloat("_Desat", 1f);
+                alertText.color = Palette.DisabledClear;
+                alertText.material.SetFloat("_Desat", 1f);
             }
         }
     }

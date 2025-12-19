@@ -1,13 +1,13 @@
-using System.Linq;
+using AmongUs.GameOptions;
 using HarmonyLib;
-using Object = UnityEngine.Object;
 using Reactor.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
-using AmongUs.GameOptions;
 using UnityEngine;
-using System.Collections.Generic;
+using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
 {

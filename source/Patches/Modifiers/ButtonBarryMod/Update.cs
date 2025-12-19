@@ -1,15 +1,13 @@
 using HarmonyLib;
+using TMPro;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using TMPro;
 
 namespace TownOfUsEdited.Modifiers.ButtonBarryMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class Update
     {
-        public static Sprite Button => TownOfUsEdited.ButtonSprite;
-
         public static void Postfix(HudManager __instance)
         {
             UpdateButtonButton(__instance);
@@ -29,17 +27,24 @@ namespace TownOfUsEdited.Modifiers.ButtonBarryMod
                 role.ButtonButton = Object.Instantiate(__instance.KillButton, __instance.transform.parent);
                 role.ButtonButton.GetComponentsInChildren<TextMeshPro>()[0].text = "";
                 role.ButtonButton.graphic.enabled = true;
-                role.ButtonButton.graphic.sprite = Button;
+                role.ButtonButton.graphic.sprite = TownOfUsEdited.ButtonSprite;
             }
 
-            role.ButtonButton.graphic.sprite = Button;
+            role.ButtonButton.graphic.sprite = TownOfUsEdited.ButtonSprite;
 
             role.ButtonButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
+            role.ButtonButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started);
 
             role.ButtonButton.SetCoolDown(role.StartTimer(), 10f);
             role.ButtonButton.graphic.SetCooldownNormalizedUvs();
+
+            role.ButtonButton.buttonLabelText.text = "Button";
+            role.ButtonButton.buttonLabelText.SetOutlineColor(Patches.Colors.ButtonBarry);
+
             var renderer = role.ButtonButton.graphic;
 
             if (__instance.UseButton != null)
@@ -61,11 +66,15 @@ namespace TownOfUsEdited.Modifiers.ButtonBarryMod
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
+                role.ButtonButton.buttonLabelText.color = Palette.EnabledColor;
+                role.ButtonButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 return;
             }
 
             renderer.color = Palette.DisabledClear;
             renderer.material.SetFloat("_Desat", 1f);
+            role.ButtonButton.buttonLabelText.color = Palette.DisabledClear;
+            role.ButtonButton.buttonLabelText.material.SetFloat("_Desat", 1f);
         }
     }
 }

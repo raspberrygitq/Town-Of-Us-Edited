@@ -1,16 +1,16 @@
 using HarmonyLib;
-using TownOfUsEdited.Roles;
+using Reactor.Utilities;
 using System.Linq;
+using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.SnitchMod;
 using TownOfUsEdited.Extensions;
-using UnityEngine;
-using Reactor.Utilities;
+using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Patches;
-using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.Roles;
+using UnityEngine;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 using Assassin2 = TownOfUsEdited.Roles.Assassin;
-using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 
 namespace TownOfUsEdited.ImpostorRoles.TraitorMod
 {
@@ -60,7 +60,7 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
             if (WillBeTraitor.Is(RoleEnum.Plumber))
             {
                 var plumberRole = Role.GetRole<Plumber>(WillBeTraitor);
-                foreach (GameObject barricade in plumberRole.Barricades)
+                foreach (GameObject barricade in plumberRole.Block)
                 {
                     UnityEngine.Object.Destroy(barricade);
                 }

@@ -1,16 +1,16 @@
+using AmongUs.GameOptions;
+using Reactor.Utilities.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Reactor.Utilities.Extensions;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
+using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using TownOfUsEdited.Roles.Modifiers;
-using AmongUs.GameOptions;
-using TownOfUsEdited.Patches;
 
 namespace TownOfUsEdited.CrewmateRoles.AltruistMod
 {
