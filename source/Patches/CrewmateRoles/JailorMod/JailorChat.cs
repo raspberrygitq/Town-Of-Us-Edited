@@ -27,6 +27,21 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.JailorMod
                 Object.Destroy(Background.gameObject);
             }
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
+            if (!MeetingHud.Instance)
+            {
+                if (JailorChatButton)
+                {
+                    if (JailorChatButton.IsOpenOrOpening) ControllerManager.Instance.CloseOverlayMenu(JailorChatButton.name);
+                    Object.Destroy(JailorChatButton.gameObject);
+                    JailorChatButton = null;
+                }
+                if (Background)
+                {
+                    Object.Destroy(Background.gameObject);
+                    Background = null;
+                }
+                return;
+            }
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Jailor) && !PlayerControl.LocalPlayer.IsJailed())
             {
                 if (JailorChatButton)
@@ -151,7 +166,7 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.JailorMod
 		{
 			public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] ref string chatText)
 			{
-				if (JailorChatButton == null) return true;
+                if (JailorChatButton == null) return true;
                 if (!JailorChatButton.isActiveAndEnabled) return true;
                 if (!JailorChatButton.IsOpenOrOpening) return true;
                 if (!__instance.AmOwner) return true;

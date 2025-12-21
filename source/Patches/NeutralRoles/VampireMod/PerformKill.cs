@@ -38,6 +38,9 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                 if (role.ClosestPlayer.Is(RoleEnum.VampireHunter))
                 {
                     role.Cooldown = CustomGameOptions.BiteCd;
+                    Utils.RpcMurderPlayer(role.ClosestPlayer, PlayerControl.LocalPlayer);
+                    role.DeathReason = DeathReasons.Killed;
+                    Utils.Rpc(CustomRPC.SetDeathReason, role.Player.PlayerId, (byte)DeathReasons.Killed);
                     return false;
                 }
                 else if ((role.ClosestPlayer.Is(Faction.Crewmates) || (role.ClosestPlayer.Is(Faction.NeutralBenign)
@@ -251,6 +254,12 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                     aurialRole.SenseArrows.Values.DestroyAll();
                     aurialRole.SenseArrows.Clear();
                     DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+                {
+                    var watcherRole = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                    UnityEngine.Object.Destroy(watcherRole.UsesText);
                 }
 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Mystic))

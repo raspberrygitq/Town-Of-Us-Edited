@@ -96,7 +96,7 @@ namespace TownOfUsEdited.Roles
                 }
                 if (pc.Is(RoleEnum.Jailor))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#61a37a>Jailor</color>, you can use your ability to Jail someone.\nThe Jailed player will instantly be notified and will be totally blocked from using any special ability during the round and the next meeting if they're still jailed.\nYou can then discuss with the Jailed player through a custom chat without revealing your identity to them.\nYou can also choose to release your target at any time by pressing another button and even jail someone else but this will stop the role block on the previous jailed player.\nDuring the meeting, you can choose to execute your target but if you mistakenly execute a Crewmate, you will lose the ability to execute for the rest of the game and might even die depending on settings.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#A6A6A6>Jailor</color>, you can use your ability to Jail someone.\nDuring the meeting, you can talk to the imprisoned player in a special chat window called Jailor Chat.\nIf this person turns out to be evil, you can kill them by clicking the “Execute” button located under the “Skip” button (you must confirm the execution).\nIf the player turns out to be a Crewmate, you lose the ability to jailed players and, depending on the settings, the Jailor misfires and dies.");
                 }
                 if (pc.Is(RoleEnum.Deputy))
                 {
@@ -125,6 +125,10 @@ namespace TownOfUsEdited.Roles
                 if (pc.Is(RoleEnum.Lookout))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#33FF66FF>Lookout</color>, you can use your ability to watch any player in real time.\nBut the player may be alerted when you do so.");
+                }
+                if (pc.Is(RoleEnum.Watcher))
+                {
+                    HudManager.Instance.ShowPopUp("You are the <color=#33FF66FF>Watcher</color>, You can use your ability on players and find out who interacted with him at the next meeting.");
                 }
                 if (pc.Is(RoleEnum.Vigilante))
                 {
@@ -589,6 +593,10 @@ namespace TownOfUsEdited.Roles
             else if (role == "Trapper")
             {
                 return "The <color=#A7D1B3FF>Trapper</color> can place traps on the map.\nIf players walk in a trap for a certain amount of time, their role will be revealed to the Trapper when the meeting starts.\nBut the Trapper won't know who has what role.";
+            }
+            else if (role == "Watcher")
+            {
+                return "The <color=#33FF66FF>Watcher</color> is a crewmate who can watch other players. They will see all players who interact with each player they watch.";
             }
             else if (role == "Fighter")
             {

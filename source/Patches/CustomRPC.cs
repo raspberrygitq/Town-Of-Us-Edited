@@ -169,7 +169,6 @@ namespace TownOfUsEdited
         RecreateTasks,
         SetHacked,
         SetJail,
-        ReleaseJail,
         SetCrusade,
         SyncManipMovement,
         SetVoodooPlayer,

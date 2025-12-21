@@ -39,7 +39,7 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
             else if (player.Is(RoleEnum.Investigator) || player.Is(RoleEnum.Swooper) || player.Is(RoleEnum.Tracker)
                 || player.Is(RoleEnum.VampireHunter) || player.Is(RoleEnum.Venerer) || player.Is(RoleEnum.Maul)
                 || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Mutant) || player.Is(RoleEnum.BountyHunter) 
-                || player.Is(RoleEnum.Noclip))
+                || player.Is(RoleEnum.Noclip) || player.Is(RoleEnum.Watcher))
                 return $"You observe that {player.GetDefaultOutfit().PlayerName} is well trained in hunting down prey";
             else if (player.Is(RoleEnum.Arsonist) || player.Is(RoleEnum.Miner) || player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Hypnotist)
                   || player.Is(RoleEnum.Prosecutor) || player.Is(RoleEnum.Seer) || player.Is(RoleEnum.Transporter) || player.Is(RoleEnum.SerialKiller)
@@ -85,12 +85,12 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
             else if (player.Is(RoleEnum.Investigator) || player.Is(RoleEnum.Swooper) || player.Is(RoleEnum.Tracker)
                 || player.Is(RoleEnum.VampireHunter) || player.Is(RoleEnum.Venerer) || player.Is(RoleEnum.Maul)
                 || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Mutant) || player.Is(RoleEnum.BountyHunter)
-                || player.Is(RoleEnum.Noclip))
-                return "(Bounty Hunter, Hunter, Investigator, Mutant, Noclip, Swooper, Tracker, Vampire Hunter, Venerer or Maul)";
+                || player.Is(RoleEnum.Noclip) || player.Is(RoleEnum.Watcher))
+                return "(Bounty Hunter, Hunter, Investigator, Maul, Mutant, Noclip, Swooper, Tracker, Vampire Hunter, Venerer or Watcher)";
             else if (player.Is(RoleEnum.Arsonist) || player.Is(RoleEnum.Miner) || player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Hypnotist)
                   || player.Is(RoleEnum.Prosecutor) || player.Is(RoleEnum.Seer) || player.Is(RoleEnum.Transporter) || player.Is(RoleEnum.SerialKiller)
                   || player.Is(RoleEnum.Converter) || player.Is(RoleEnum.Crusader) || player.Is(RoleEnum.Attacker) | player.Is(RoleEnum.Infectious))
-                return "(Arsonist, Attacker, Converter, Crusader, Hypnotist, Infectious, Miner, Plaguebearer, Prosecutor, Seer, Transporter, Serial Killer or Shifter)";
+                return "(Arsonist, Attacker, Converter, Crusader, Hypnotist, Infectious, Miner, Plaguebearer, Prosecutor, Seer, Serial Killer, Shifter or Transporter)";
             else if (player.Is(RoleEnum.Engineer) || player.Is(RoleEnum.Escapist) || player.Is(RoleEnum.Shifter) || player.Is(RoleEnum.Grenadier)
                 || player.Is(RoleEnum.GuardianAngel) || player.Is(RoleEnum.Medic) || player.Is(RoleEnum.Survivor) || player.Is(RoleEnum.Paranoïac)
                 || player.Is(RoleEnum.Bodyguard) || player.Is(RoleEnum.Spiritualist) || player.Is(RoleEnum.Warden) || player.Is(RoleEnum.Cleric))

@@ -48,6 +48,7 @@ namespace TownOfUsEdited.Patches
                 if (!imi.Is(Faction.Impostors) && !imi.Is(Faction.Madmates) && !imi.Is(RoleEnum.Vampire))
                 {
                     List<RoleEnum> trappedPlayers = null;
+                    Dictionary<byte, List<RoleEnum>> seenPlayers = null;
                     PlayerControl confessingPlayer = null;
                     bool isMadmate = false;
 
@@ -69,6 +70,13 @@ namespace TownOfUsEdited.Patches
                             trackerRole.TrackerArrows.Values.DestroyAll();
                             trackerRole.TrackerArrows.Clear();
                             Object.Destroy(trackerRole.UsesText);
+                        }
+
+                        if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+                        {
+                            var watchRole = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                            Object.Destroy(watchRole.UsesText);
+                            seenPlayers = watchRole.Watching;
                         }
 
                         if (PlayerControl.LocalPlayer.Is(RoleEnum.VampireHunter))

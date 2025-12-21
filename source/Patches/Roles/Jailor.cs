@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -24,18 +23,7 @@ namespace TownOfUsEdited.Roles
         public bool CanJail = true;
         public PlayerControl ClosestPlayer;
         public PlayerControl JailedPlayer;
-        public KillButton _releaseButton;
-        public TextMeshPro ReleaseText;
-        public KillButton ReleaseButton
-        {
-            get => _releaseButton;
-            set
-            {
-                _releaseButton = value;
-                ExtraButtons.Clear();
-                ExtraButtons.Add(value);
-            }
-        }
+
         public float JailTimer()
         {
             if (!coolingDown) return 0f;

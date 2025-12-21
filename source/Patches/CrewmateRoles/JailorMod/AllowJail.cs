@@ -51,7 +51,6 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                         }
                         else if (PlayerControl.LocalPlayer.Is(Faction.Madmates) && !role.Player.Data.IsDead)
                         {
-                            role.CanJail = false;
                             role.Kills++;
                         }
                         else if (!role.Player.Data.IsDead)

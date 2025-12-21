@@ -207,6 +207,12 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                     aurialRole.SenseArrows.Clear();
                 }
 
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+                {
+                    var watcherRole = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                    Object.Destroy(watcherRole.UsesText);
+                }
+
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
                 {
                     var mercRole = Role.GetRole<Mercenary>(PlayerControl.LocalPlayer);

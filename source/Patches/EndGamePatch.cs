@@ -169,6 +169,7 @@ namespace TownOfUsEdited.Patches {
                     else if (role.Value == RoleEnum.Mercenary) { playerRole += "<color=#" + Patches.Colors.Mercenary.ToHtmlStringRGBA() + ">Mercenary</color> > "; }
                     else if (role.Value == RoleEnum.Cleric) { playerRole += "<color=#" + Patches.Colors.Cleric.ToHtmlStringRGBA() + ">Cleric</color> > "; }
                     else if (role.Value == RoleEnum.Noclip) { playerRole += "<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Noclip</color> > "; }
+                    else if (role.Value == RoleEnum.Watcher) { playerRole += "<color=#" + Patches.Colors.Lookout.ToHtmlStringRGBA() + ">Watcher</color> > "; }
                 }
                 if (!playerRole.IsNullOrWhiteSpace()) playerRole = playerRole.Remove(playerRole.Length - 3);
                 

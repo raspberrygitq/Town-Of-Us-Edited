@@ -217,6 +217,12 @@ namespace TownOfUsEdited.Patches
                 trapper.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+            {
+                var watcher = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                watcher.Cooldown = CustomGameOptions.InitialCooldowns;
+            }
+
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Veteran))
             {
                 var veteran = Role.GetRole<Veteran>(PlayerControl.LocalPlayer);

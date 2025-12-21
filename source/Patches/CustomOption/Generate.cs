@@ -28,6 +28,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption TrackerOn;
         public static CustomNumberOption TrapperOn;
         public static CustomNumberOption InformantOn;
+        public static CustomNumberOption WatcherOn;
 
         public static CustomHeaderOption CrewProtectiveRoles;
         public static CustomNumberOption AltruistOn;
@@ -797,6 +798,11 @@ namespace TownOfUsEdited.CustomOption
         public static CustomHeaderOption Mystic;
         public static CustomNumberOption MysticArrowDuration;
 
+        public static CustomHeaderOption Watcher;
+        public static CustomNumberOption WatcherCooldown;
+        public static CustomToggleOption LoResetOnNewRound;
+        public static CustomNumberOption MaxWatches;
+
         public static CustomHeaderOption Giant;
         public static CustomNumberOption GiantSlow;
 
@@ -888,6 +894,8 @@ namespace TownOfUsEdited.CustomOption
             TrackerOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#009900FF>Tracker</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             TrapperOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#A7D1B3FF>Trapper</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
+            WatcherOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#33FF66FF>Watcher</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
             CrewKillingRoles = new CustomHeaderOption(num++, MultiMenu.crewmate, "Crewmate Killing Roles");
@@ -1551,7 +1559,7 @@ namespace TownOfUsEdited.CustomOption
             UpdateInterval =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Arrow Update Interval", 5f, 0.5f, 15f, 0.5f, CooldownFormat);
             TrackCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Track Cooldown", 25f, 1f, 60f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Track Cooldown", 25f, 10f, 60f, 1f, CooldownFormat);
             ResetOnNewRound = new CustomToggleOption(num++, MultiMenu.crewmate, "Tracker Arrows Reset After Each Round", false);
             MaxTracks = new CustomNumberOption(num++, MultiMenu.crewmate, "Maximum Number Of Tracks Per Round", 5, 1, 15, 1);
 
@@ -1560,7 +1568,7 @@ namespace TownOfUsEdited.CustomOption
             MinAmountOfTimeInTrap =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Min Amount Of Time In Trap To Register", 1f, 0f, 15f, 0.5f, CooldownFormat);
             TrapCooldown =
-                new CustomNumberOption(num++, MultiMenu.crewmate, "Trap Cooldown", 25f, 1f, 60f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Trap Cooldown", 25f, 10f, 60f, 1f, CooldownFormat);
             TrapsRemoveOnNewRound =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Traps Removed After Each Round", true);
             MaxTraps =
@@ -1569,6 +1577,13 @@ namespace TownOfUsEdited.CustomOption
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Trap Size", 0.25f, 0.05f, 1f, 0.05f, MultiplierFormat);
             MinAmountOfPlayersInTrap =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Minimum Number Of Roles Required To Trigger Trap", 3, 1, 5, 1);
+
+            Watcher =
+                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#33FF66FF>Watcher</color>");
+            WatcherCooldown =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Watch Cooldown", 25f, 10f, 60f, 1f, CooldownFormat);
+            LoResetOnNewRound = new CustomToggleOption(num++, MultiMenu.crewmate, "Watcher Watches Reset After Each Round", true);
+            MaxWatches = new CustomNumberOption(num++, MultiMenu.crewmate, "Maximum Number Of Players That Can Be Watched", 5, 1, 15, 1);
 
             Fighter =
                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#9358e6>Fighter</color>");
@@ -1888,7 +1903,7 @@ namespace TownOfUsEdited.CustomOption
             VultureVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Vulture Can Vent", true);
             VultureImpVision =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Vulture Has Impostor Vision", true);
+                new CustomToggleOption(num++, MultiMenu.neutral, "Vulture Has Impostor Vision", false);
             VultureArrow =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Vulture Has Arrows Poiting To Dead Bodies", true);
             VultureArrowDelay =

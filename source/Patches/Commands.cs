@@ -682,6 +682,7 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.SpyOn > 0) ColorMapping.Add("Spy", Colors.Spy);
                 if (CustomGameOptions.TrackerOn > 0) ColorMapping.Add("Tracker", Colors.Tracker);
                 if (CustomGameOptions.TrapperOn > 0) ColorMapping.Add("Trapper", Colors.Trapper);
+                if (CustomGameOptions.WatcherOn > 0) ColorMapping.Add("Watcher", Colors.Lookout);
                 ColorMapping.Add("\n<b>Crewmate <color=#FF0000FF>Killing</color></b>\n", Palette.CrewmateBlue);
                 if (CustomGameOptions.AvengerOn > 0) ColorMapping.Add("Avenger", Colors.Avenger);
                 if (CustomGameOptions.DeputyOn > 0) ColorMapping.Add("Deputy", Colors.Deputy);

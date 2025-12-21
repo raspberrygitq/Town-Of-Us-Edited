@@ -11,6 +11,15 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
 
         public static IEnumerator EatCoroutine(DeadBody body, Vulture role)
         {
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+            {
+                var watcher = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                if (watcher.Watching.ContainsKey(body.ParentId))
+                {
+                    if (!watcher.Watching[body.ParentId].Contains(RoleEnum.Vulture)) watcher.Watching[body.ParentId].Add(RoleEnum.Vulture);
+                }
+            }
+
             KillButtonTarget.SetTarget(DestroyableSingleton<HudManager>.Instance.KillButton, null, role);
             SpriteRenderer renderer = null;
             foreach (var body2 in body.bodyRenderers) renderer = body2;

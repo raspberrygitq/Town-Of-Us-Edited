@@ -76,12 +76,10 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
             Utils.SetTarget(ref role.ClosestPlayer, confessButton, float.NaN, notConfessing);
 
             var renderer = role.BlessButton.graphic;
-            if (role.ClosestPlayer != null)
+            if (role.ClosestBlessedPlayer != null)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
-                confessButton.buttonLabelText.color = Palette.EnabledColor;
-                confessButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 role.BlessText.color = Palette.EnabledColor;
                 role.BlessText.material.SetFloat("_Desat", 0f);
             }
@@ -89,10 +87,24 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
-                confessButton.buttonLabelText.color = Palette.DisabledClear;
-                confessButton.buttonLabelText.material.SetFloat("_Desat", 1f);
                 role.BlessText.color = Palette.DisabledClear;
                 role.BlessText.material.SetFloat("_Desat", 1f);
+            }
+
+            var renderer2 = confessButton.graphic;
+            if (role.ClosestPlayer != null)
+            {
+                confessButton.graphic.color = Palette.EnabledColor;
+                confessButton.graphic.material.SetFloat("_Desat", 0f);
+                confessButton.buttonLabelText.color = Palette.EnabledColor;
+                confessButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                confessButton.graphic.color = Palette.DisabledClear;
+                confessButton.graphic.material.SetFloat("_Desat", 1f);
+                confessButton.buttonLabelText.color = Palette.DisabledClear;
+                confessButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
     }

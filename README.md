@@ -50,13 +50,14 @@
 |                                | [Veteran](#veteran)               |                                   |                                 |                               |
 |                                | [Vigilante](#vigilante)           |                                   |                                 |                               |
 |                                | [Warden](#warden)                 |                                   |                                 |                               |
+|                                | [Watcher](#watcher)               |                                   |                                 |                               |
 |                                |                                   |                                   |                                 |                               |
-
 
 -----------------------
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
+|  17.1.0 | v2.1.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.1.0/ToUEG-Steam.v2.1.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.1.0/ToUEG-Epic.v2.1.0.zip) |
 |  17.1.0 | v2.0.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.0.0/ToUEG-Steam.v2.0.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.0.0/ToUEG-Epic.v2.0.0.zip) |
 |  17.1.0 | v1.7.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.1/ToUEG-Steam.v1.7.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.1/ToUEG-Epic.v1.7.1.zip) |
 |  17.0.1 | v1.7.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.0/ToUEG-Steam.v1.7.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.0/ToUEG-Epic.v1.7.0.zip) |
@@ -462,6 +463,19 @@ However, this is done so in a random order, not stating who entered the trap, no
 | Minimum Number of Roles required to Trigger Trap | The number of players that must enter the trap for it to be triggered | Number | 3 |
 
 -----------------------
+## Watcher
+### **Team: Crewmates**
+
+The Watcher is a Crewmate that can watch other players during rounds.\
+During meetings they will see all roles who interact with each watched player.
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Watcher | The percentage probability of the Watcher appearing | Percentage | 0% |
+| Watch Cooldown | The cooldown on the Watcher's Watch button | Time | 10s |
+| Watcher Watches Reset After Each Round | Whether Watcher Watches are removed after each meeting | Toggle | True |
+| Maximum Number Of Players That Can Be Watched | The number of people they can watch | Number | 5 |
+-----------------------
 ## Avenger
 ### **Team: Crewmates**
 The Avenger can Avenge a dead player.\
@@ -564,7 +578,7 @@ The Vampire Hunter may also self kill while trying to stake a non Vampire withou
 | Maximum Failed Stakes | The Maximum number of failed stakes that the Vampire Hunter can perform | Number | 5 |
 | Can Stake Round One | Whether the Vampire Hunter can Stake during the first round | Toggle | False |
 | Self Kills On Failure To Kill A Vamp With All Stakes | Whether the Vampire Hunter dies if they fail to kill any Vampire | Toggle | False |
-| What Vampire Hunter Becomes On All Vampires Death | What role should the Vampire Hunter get after the death of every Vampire | Crewmate / Sheriff / Veteran / Vigilante | Crewmate |
+| What Vampire Hunter Becomes On All Vampires Death | What role should the Vampire Hunter get after the death of every Vampire | Crewmate / Sheriff / Veteran / Vigilante / Hunter | Crewmate |
 
 -----------------------
 ## Veteran
@@ -602,10 +616,7 @@ During meetings, the Vigilante can choose to kill someone by guessing their role
 -----------------------
 ## Jailor
 ### **Team: Crewmates**
-The Jailor, can jail another player.\
-The Jailed player will instantly be notified and will be totally blocked from using any special ability during the round and the next meeting if they're still jailed.\
-The Jailor can then discuss with the Jailed player through a custom chat without revealing its identity to them.\
-They can also choose to release their target at any time by pressing another button and even jail someone else but this will stop the role block on the previous jailed player.\
+The Jailor, can jail another player. An introduction to Jail will be shown at the meeting. The person who has been jailed should write in the chat below the map with the Jailor.\
 During the meeting, the Jailor can choose to execute their target but if they mistakenly execute a Crewmate, they will lose the ability to execute for the rest of the game and might even die depending on settings.\
 Note that everyone know who the Jailed player is during the meeting.
 
@@ -1856,7 +1867,7 @@ Note that after becoming a Madmate, the player will be able to vent, whatever th
 | Madmates & Impostors Can Kill Each Other | Whether Madmates and Impostors will be able to Kill each other | Toggle | True |
 | Madmates have Impostor Vision | Whether Madmates will have Impostor Vision | Toggle | False |
 | Madmates Can Use Impostor Chat | Whether Madmates can see and send messages through the Impostor private chat | Toggle | True |
-| What Happens On Impostor Death | What will happen to Madmates whenever all Impostors die | Madmates Die / Madmates Get Their Old Faction Back / One Madmate Becomes Impostor | Madmates Die |
+| What Happens On Impostor Death | What will happen to Madmates whenever all Impostors die | Madmates Die / Madmates Get Their Old Faction Back / One Madmate Becomes Traitor | Madmates Die |
 
 -----------------------
 ## Multitasker

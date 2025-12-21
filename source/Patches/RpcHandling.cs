@@ -19,7 +19,6 @@ using TownOfUsEdited.CrewmateRoles.GuardianMod;
 using TownOfUsEdited.CrewmateRoles.HaunterMod;
 using TownOfUsEdited.CrewmateRoles.HelperMod;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
-using TownOfUsEdited.CrewmateRoles.JailorMod;
 using TownOfUsEdited.CrewmateRoles.MayorMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.CrewmateRoles.SwapperMod;
@@ -1644,25 +1643,6 @@ namespace TownOfUsEdited
                                 var jailedPlayer = Utils.PlayerById(reader.ReadByte());
                                 var jailorRole1 = Role.GetRole<Jailor>(jailorPlayer);
                                 jailorRole1.JailedPlayer = jailedPlayer;
-                                if (PlayerControl.LocalPlayer == jailedPlayer)
-                                {
-                                    Coroutines.Start(UpdateJailButton.Jail(jailedPlayer));
-                                    JailorChat.UpdateJailorChat();
-                                    HudManager.Instance.ShowPopUp("You are jailed, cannot use special abilities or guess until the Jailor releases you.\nClick in the upper right corner below the map to chat with the Jailor and prove that you are a Crewmate.");
-                                    HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, "You are jailed, click under the chat map to write to the Jailor.");
-                                }
-                                break;
-
-                            case CustomRPC.ReleaseJail:
-                                var jailorPlayer2 = Utils.PlayerById(reader.ReadByte());
-                                var jailorRole3 = Role.GetRole<Jailor>(jailorPlayer2);
-                                var jailedPlayer2 = jailorRole3.JailedPlayer;
-                                if (PlayerControl.LocalPlayer == jailedPlayer2)
-                                {
-                                    JailorChat.UpdateJailorChat();
-                                    HudManager.Instance.ShowPopUp("The Jailor has decided to release you... for now...");
-                                }
-                                jailorRole3.JailedPlayer = null;
                                 break;
 
                             case CustomRPC.SpiritKill:
@@ -1706,24 +1686,7 @@ namespace TownOfUsEdited
                                 SeekerPlayer.MyPhysics.SetBodyType(PlayerBodyTypes.Normal);
                                 mutant2.IsTransformed = false;
                                 break;
-/*
-                            case CustomRPC.Animate:
-                                if (Animations.waveController == null) Animations.waveController = AssetLoader.LoadController(AssetLoader.bundles.FirstOrDefault(x => x.Key == "touebundle").Value, "wave_0.controller");
-                                if (Animations.boingController == null) Animations.boingController = AssetLoader.LoadController(AssetLoader.bundles.FirstOrDefault(x => x.Key == "touebundle").Value, "Boing_0.controller");
-                                if (Animations.sleepyController == null) Animations.sleepyController = AssetLoader.LoadController(AssetLoader.bundles.FirstOrDefault(x => x.Key == "touebundle").Value, "sleepy_0.controller");
-                                if (Animations.rollController == null) Animations.rollController = AssetLoader.LoadController(AssetLoader.bundles.FirstOrDefault(x => x.Key == "touebundle").Value, "roll_0.controller");
-                                var animation = reader.ReadString();
-                                var playerToAnimate = Utils.PlayerById(reader.ReadByte());
-                                var hidePlayer = reader.ReadBoolean();
-                                RuntimeAnimatorController Controller = null;
-                                if (animation == "Bean Dance") Controller = Animations.boingController;
-                                else if (animation == "Wave") Controller = Animations.waveController;
-                                else if (animation == "Sleepy") Controller = Animations.sleepyController;
-                                else if (animation == "Roll") Controller = Animations.rollController;
-                                if (PlayerControl.LocalPlayer) Coroutines.Start(Animations.AnimatePlayer(Controller, playerToAnimate, hidePlayer));
-                                else Coroutines.Start(WaitForLocalAnim(Controller, playerToAnimate, hidePlayer));
-                                break;
-*/
+
                             case CustomRPC.Rewind:
                                 var TimeLordPlayer = Utils.PlayerById(reader.ReadByte());
                                 var TimeLordRole = Role.GetRole<TimeLord>(TimeLordPlayer);
@@ -2508,8 +2471,29 @@ namespace TownOfUsEdited
                                 readByte = reader.ReadByte();
                                 var dienerBodies = Object.FindObjectsOfType<DeadBody>();
                                 foreach (var body in dienerBodies)
+                                {
                                     if (body.ParentId == readByte)
+                                    {
                                         dienerRole.CurrentlyDragging = body;
+
+                                        if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+                                        {
+                                            var watcher = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                                            if (watcher.Watching.ContainsKey(body.ParentId))
+                                            {
+                                                if (!watcher.Watching[body.ParentId].Contains(RoleEnum.Undertaker)) watcher.Watching[body.ParentId].Add(RoleEnum.Undertaker);
+                                            }
+                                        }
+                                        else if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+                                        {
+                                            var watcher = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                                            if (watcher.Watching.ContainsKey(body.ParentId))
+                                            {
+                                                if (!watcher.Watching[body.ParentId].Contains(RoleEnum.Doctor)) watcher.Watching[body.ParentId].Add(RoleEnum.Doctor);
+                                            }
+                                        }
+                                    }
+                                }
 
                                 break;
                             case CustomRPC.Drop:
@@ -2873,6 +2857,15 @@ namespace TownOfUsEdited
                                     var aurial = Role.GetRole<Aurial>(PlayerControl.LocalPlayer);
                                     Coroutines.Start(aurial.Sense(abilityUser));
                                 }
+                                else if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher) && abilitytarget != null)
+                                {
+                                    var watcher = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                                    if (watcher.Watching.ContainsKey(abilitytargetId))
+                                    {
+                                        RoleEnum playerRole2 = Role.GetRole(Utils.PlayerById(abilityUser.PlayerId)).RoleType;
+                                        if (!watcher.Watching[abilitytargetId].Contains(playerRole2)) watcher.Watching[abilitytargetId].Add(playerRole2);
+                                    }
+                                }
                                 else if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary) && abilitytarget != null)
                                 {
                                     var merc = Role.GetRole<Mercenary>(PlayerControl.LocalPlayer);
@@ -3072,15 +3065,6 @@ namespace TownOfUsEdited
                 Utils.Rpc(CustomRPC.ReceiveStatusCheck, PlayerControl.LocalPlayer.PlayerId, playerIdRequester, EOSManager.Instance.FriendCode, DevStatus.hidden);
                 yield break;
             }
-/*
-            public static IEnumerator WaitForLocalAnim(RuntimeAnimatorController controller, PlayerControl animatingPlayer, bool hidePlayer)
-            {
-                while (!PlayerControl.LocalPlayer) yield return null;
-                yield return new WaitForSeconds(0.5f);
-                Coroutines.Start(Animations.AnimatePlayer(controller, animatingPlayer, hidePlayer));
-                yield break;
-            }
-*/
         }
 
         [HarmonyPatch(typeof(RoleManager), nameof(RoleManager.SelectRoles))]
@@ -3370,6 +3354,10 @@ namespace TownOfUsEdited
 
                     if (CustomGameOptions.ClericOn > 0)
                         CrewmateRoles.Add((typeof(Cleric), CustomGameOptions.ClericOn, false || CustomGameOptions.UniqueRoles));
+
+                    if (CustomGameOptions.WatcherOn > 0)
+                        CrewmateRoles.Add((typeof(Watcher), CustomGameOptions.WatcherOn, false || CustomGameOptions.UniqueRoles));
+
                     #endregion
                     #region Neutral Roles
                     if (CustomGameOptions.JesterOn > 0)
@@ -3762,6 +3750,9 @@ namespace TownOfUsEdited
 
                         if (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.VampireOn > 0)
                             CrewmateKillingRoles.Add((typeof(VampireHunter), CustomGameOptions.VampireHunterOn, true));
+
+                        if (CustomGameOptions.WatcherOn > 0)
+                            CrewmateInvestigativeRoles.Add((typeof(Watcher), CustomGameOptions.WatcherOn, false || CustomGameOptions.UniqueRoles));
 
                         // Impostors
                         if (CustomGameOptions.ImpostorOn > 0)

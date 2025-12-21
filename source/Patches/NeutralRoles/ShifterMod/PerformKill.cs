@@ -78,6 +78,15 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
 
         public static IEnumerator Shift(Shifter shiftRole, PlayerControl other)
         {
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+            {
+                var watcher = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                if (watcher.Watching.ContainsKey(other.PlayerId))
+                {
+                    if (!watcher.Watching[other.PlayerId].Contains(RoleEnum.Shifter)) watcher.Watching[other.PlayerId].Add(RoleEnum.Shifter);
+                }
+            }
+
             var role = Utils.GetRole(other);
             var shifter = shiftRole.Player;
 
@@ -142,6 +151,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 case RoleEnum.Politician:
                 case RoleEnum.Plumber:
                 case RoleEnum.Cleric:
+                case RoleEnum.Watcher:
 
                     shiftImp = false;
                     shiftNeut = false;
@@ -714,6 +724,14 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 var oracleRole = Role.GetRole<Oracle>(shifter);
                 oracleRole.Blessed = null;
                 oracleRole.Cooldown = CustomGameOptions.ConfessCd;
+            }
+
+            else if (role == RoleEnum.Watcher)
+            {
+                var watcherRole = Role.GetRole<Watcher>(shifter);
+                watcherRole.UsesLeft = CustomGameOptions.MaxWatches;
+                watcherRole.Watching.Clear();
+                watcherRole.Cooldown = CustomGameOptions.WatcherCooldown;
             }
 
             else if (role == RoleEnum.Aurial)

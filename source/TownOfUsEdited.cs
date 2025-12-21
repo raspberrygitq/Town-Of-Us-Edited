@@ -7,7 +7,6 @@ using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Reactor;
 using Reactor.Networking.Attributes;
-using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using System;
 using System.IO;
@@ -33,7 +32,7 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "2.0.0";
+        public const string VersionString = "2.1.0";
         public const string BasicCompilation = "1.1.5";
         public static System.Version Version = System.Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
@@ -45,7 +44,6 @@ namespace TownOfUsEdited
 
         public static Sprite JanitorClean;
         public static Sprite SwitchRole;
-        public static Sprite ReleaseSprite;
         public static Sprite PlaceHolder;
         public static Sprite SabotageCoven;
         public static Sprite Potion;
@@ -140,7 +138,6 @@ namespace TownOfUsEdited
         public static Sprite HypnotiseSprite;
         public static Sprite HysteriaSprite;
         public static Sprite InJailSprite;
-        public static Sprite ExecuteSprite;
         public static Sprite ReapSprite;
         public static Sprite SoulSprite;
         public static Sprite Voodoo;
@@ -159,6 +156,7 @@ namespace TownOfUsEdited
         public static Sprite DetectSprite;
         public static Sprite NoclipSprite;
         public static Sprite AdminSprite;
+        public static Sprite JailCellSprite;
 
         public static Sprite ToUBanner;
         public static Sprite UpdateTOUButton;
@@ -200,7 +198,6 @@ namespace TownOfUsEdited
             PlaceHolder = CreateSprite("TownOfUsEdited.Resources.Placeholder.png");
             SwitchRole = CreateSprite("TownOfUsEdited.Resources.SwitchRole.png");
             heh = CreateSprite("TownOfUsEdited.Resources.heh.png");
-            ReleaseSprite = CreateSprite("TownOfUsEdited.Resources.Release.png");
             WatchSprite = CreateSprite("TownOfUsEdited.Resources.Watch.png");
             BlessSprite = CreateSprite("TownOfUsEdited.Resources.Bless.png");
             FlushSprite = CreateSprite("TownOfUsEdited.Resources.Flush.png");
@@ -308,11 +305,11 @@ namespace TownOfUsEdited
             HypnotiseSprite = CreateSprite("TownOfUsEdited.Resources.Hypnotise.png");
             HysteriaSprite = CreateSprite("TownOfUsEdited.Resources.Hysteria.png");
             InJailSprite = CreateSprite("TownOfUsEdited.Resources.InJail.png");
-            ExecuteSprite = CreateSprite("TownOfUsEdited.Resources.Execute.png");
             ReapSprite = CreateSprite("TownOfUsEdited.Resources.Reap.png");
             SoulSprite = CreateSprite("TownOfUsEdited.Resources.Soul.png");
             NoclipSprite = CreateSprite("TownOfUsEdited.Resources.Noclip.png");
             AdminSprite = CreateSprite("TownOfUsEdited.Resources.Admin.png");
+            JailCellSprite = CreateSprite("TownOfUsEdited.Resources.JailCell.png");
 
             ToUBanner = CreateSprite("TownOfUsEdited.Resources.TownOfUsEditedBanner.png");
             UpdateTOUButton = CreateSprite("TownOfUsEdited.Resources.UpdateToUButton.png");
@@ -323,8 +320,6 @@ namespace TownOfUsEdited
             ZoomPlusActiveButton = CreateSprite("TownOfUsEdited.Resources.PlusActive.png");
             ZoomMinusActiveButton = CreateSprite("TownOfUsEdited.Resources.MinusActive.png");
             NextButton = CreateSprite("TownOfUsEdited.Resources.NextButton.png");
-//          AnimationButton = CreateSprite("TownOfUsEdited.Resources.AnimationButton.png");
-//          AnimationButtonActive = CreateSprite("TownOfUsEdited.Resources.AnimationButtonActive.png");
 
             PalettePatch.Load();
             ClassInjector.RegisterTypeInIl2Cpp<RainbowBehaviour>();

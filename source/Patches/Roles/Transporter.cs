@@ -61,6 +61,18 @@ namespace TownOfUsEdited.Roles
 
         public static IEnumerator TransportPlayers(byte player1, byte player2, bool die)
         {
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+            {
+                var watcher = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                if (watcher.Watching.ContainsKey(player1))
+                {
+                    if (!watcher.Watching[player1].Contains(RoleEnum.Transporter)) watcher.Watching[player1].Add(RoleEnum.Transporter);
+                }
+                if (watcher.Watching.ContainsKey(player2))
+                {
+                    if (!watcher.Watching[player2].Contains(RoleEnum.Transporter)) watcher.Watching[player2].Add(RoleEnum.Transporter);
+                }
+            }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
             {
                 var merc = Role.GetRole<Mercenary>(PlayerControl.LocalPlayer);

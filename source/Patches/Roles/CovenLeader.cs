@@ -248,6 +248,12 @@ namespace TownOfUsEdited.Roles
                     aurialRole.SenseArrows.Clear();
                 }
 
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+                {
+                    var watcherRole = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                    UnityEngine.Object.Destroy(watcherRole.UsesText);
+                }
+
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Survivor))
                 {
                     var survRole = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);

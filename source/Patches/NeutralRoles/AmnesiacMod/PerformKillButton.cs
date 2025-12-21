@@ -67,6 +67,15 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
 
         public static void Remember(Amnesiac amneRole, PlayerControl other)
         {
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+            {
+                var watcher = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                if (watcher.Watching.ContainsKey(other.PlayerId))
+                {
+                    if (!watcher.Watching[other.PlayerId].Contains(RoleEnum.Amnesiac)) watcher.Watching[other.PlayerId].Add(RoleEnum.Amnesiac);
+                }
+            }
+
             var role = Utils.GetRole(other);
             var roleInstance = Role.GetRole(other);
             var amnesiac = amneRole.Player;
@@ -139,6 +148,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                 case RoleEnum.Politician:
                 case RoleEnum.Plumber:
                 case RoleEnum.Cleric:
+                case RoleEnum.Watcher:
 
                     rememberImp = false;
                     rememberNeut = false;
@@ -403,6 +413,14 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
             {
                 var lookoutRole = Role.GetRole<Lookout>(amnesiac);
                 lookoutRole.Cooldown = CustomGameOptions.WatchCD;
+            }
+
+            else if (role == RoleEnum.Watcher)
+            {
+                var watcherRole = Role.GetRole<Watcher>(amnesiac);
+                watcherRole.UsesLeft = CustomGameOptions.MaxWatches;
+                watcherRole.Watching.Clear();
+                watcherRole.Cooldown = CustomGameOptions.WatcherCooldown;
             }
 
             else if (role == RoleEnum.Hunter)

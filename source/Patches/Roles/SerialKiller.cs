@@ -254,6 +254,12 @@ namespace TownOfUsEdited.Roles
                     UnityEngine.Object.Destroy(engineerRole.UsesText);
                 }
 
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+                {
+                    var watcherRole = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                    UnityEngine.Object.Destroy(watcherRole.UsesText);
+                }
+
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Knight))
                 {
                     var knightRole = Role.GetRole<Knight>(PlayerControl.LocalPlayer);

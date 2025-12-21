@@ -119,6 +119,12 @@ namespace TownOfUsEdited
                         engi.UsesText.color = Palette.DisabledClear;
                         engi.UsesText.material.SetFloat("_Desat", 1f);
                     }
+                    else if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+                    {
+                        var watcher = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                        watcher.UsesText.color = Palette.DisabledClear;
+                        watcher.UsesText.material.SetFloat("_Desat", 1f);
+                    }
                     else if (PlayerControl.LocalPlayer.Is(RoleEnum.Avenger))
                     {
                         var avenger = Role.GetRole<Avenger>(PlayerControl.LocalPlayer);

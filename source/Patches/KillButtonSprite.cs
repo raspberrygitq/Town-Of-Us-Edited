@@ -254,7 +254,7 @@ namespace TownOfUsEdited
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.CampSprite;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Lookout))
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Lookout) || PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
             {
                 __instance.KillButton.buttonLabelText.text = "Watch";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.WatchSprite;

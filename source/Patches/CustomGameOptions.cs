@@ -97,6 +97,7 @@ namespace TownOfUsEdited
         public static int MedicOn => (int)Generate.MedicOn.Get();
         public static int AstralOn => (int)Generate.AstralOn.Get();
         public static int LookoutOn => (int)Generate.LookoutOn.Get();
+        public static int WatcherOn => (int)Generate.WatcherOn.Get();
         public static int SeerOn => (int)Generate.SeerOn.Get();
         public static int GlitchOn => (int)Generate.GlitchOn.Get();
         public static int JuggernautOn => (int)Generate.JuggernautOn.Get();
@@ -636,5 +637,8 @@ namespace TownOfUsEdited
         public static float NoclipCooldown => (float)Generate.NoclipCooldown.Get();
         public static float NoclipDuration => (float)Generate.NoclipDuration.Get();
         public static bool NoclipVent => Generate.NoclipVent.Get();
+        public static float WatcherCooldown => (float)Generate.WatcherCooldown.Get();
+        public static bool LoResetOnNewRound => Generate.LoResetOnNewRound.Get();
+        public static int MaxWatches => (int)Generate.MaxWatches.Get();
     }
 }

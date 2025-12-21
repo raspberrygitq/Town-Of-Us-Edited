@@ -95,6 +95,7 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
             if (imitatorRole == RoleEnum.Aurial) new Aurial(imi);
             if (imitatorRole == RoleEnum.Crewmate) new Crewmate(imi);
             else if (imitatorRole == RoleEnum.Lookout) new Lookout(imi);
+            else if (imitatorRole == RoleEnum.Watcher) new Watcher(imi);
             else if (imitatorRole == RoleEnum.Crusader) new Crusader(imi);
             else if (imitatorRole == RoleEnum.Paranoïac) new Paranoïac(imi);
             else if (imitatorRole == RoleEnum.Chameleon) new Chameleon(imi);

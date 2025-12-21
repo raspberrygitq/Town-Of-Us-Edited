@@ -152,6 +152,8 @@ namespace TownOfUsEdited
             if (CustomGameOptions.ProsecutorOn > 0) ColorMapping.Add("Prosecutor", Colors.Prosecutor);
             if (CustomGameOptions.OracleOn > 0) ColorMapping.Add("Oracle", Colors.Oracle);
             if (CustomGameOptions.AurialOn > 0) ColorMapping.Add("Aurial", Colors.Aurial);
+            if (CustomGameOptions.WatcherOn > 0) ColorMapping.Add("Watcher", Colors.Lookout);
+
             vigiRole.SortedColorMapping = ColorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
             }
             else if (Madmate.Is(RoleEnum.Crewmate))
@@ -234,7 +236,11 @@ namespace TownOfUsEdited
             {
                 madmate.TaskText = () => "Crusade an Impostor to make them invincible!";
             }
-            var taskText= $"{madmate.TaskText()}"; // Using a var, else Stack Overflow lol
+            else if (Madmate.Is(RoleEnum.Watcher))
+            {
+                madmate.TaskText = () => "Watch other Impostors";
+            }
+            var taskText = $"{madmate.TaskText()}"; // Using a var, else Stack Overflow lol
             madmate.TaskText = () => $"{taskText}\nFake Tasks:";
             if (SpawnedAs == false)
             {
@@ -297,6 +303,7 @@ namespace TownOfUsEdited
             if (CustomGameOptions.ProsecutorOn > 0) ColorMapping.Remove("Prosecutor");
             if (CustomGameOptions.OracleOn > 0) ColorMapping.Remove("Oracle");
             if (CustomGameOptions.AurialOn > 0) ColorMapping.Remove("Aurial");
+            if (CustomGameOptions.WatcherOn > 0) ColorMapping.Remove("Watcher");
             vigiRole.SortedColorMapping = ColorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
             }
             else if (Crewmate.Is(RoleEnum.Crewmate))
@@ -350,7 +357,7 @@ namespace TownOfUsEdited
             }
             else if (Crewmate.Is(RoleEnum.Jailor))
             {
-                crewmate.TaskText = () => "Execute the <color=#FF0000FF>Impostors</color>";
+                crewmate.TaskText = () => $"Execute evildoers but not {Palette.CrewmateBlue.ToTextColor()}Crewmates</color>";
             }
             else if (Crewmate.Is(RoleEnum.Mayor))
             {
@@ -399,6 +406,10 @@ namespace TownOfUsEdited
             else if (Crewmate.Is(RoleEnum.Crusader))
             {
                 crewmate.TaskText = () => "Trick the <color=#FF0000FF>Impostors</color>";
+            }
+            else if (Crewmate.Is(RoleEnum.Watcher))
+            {
+                crewmate.TaskText = () => "Watch other Crewmates";
             }
             crewmate.RegenTask();
         }
@@ -1304,7 +1315,6 @@ namespace TownOfUsEdited
                 Coroutines.Start(AbilityCoroutine.Hack(player));
                 return false;
             }
-            else if (player.IsJailed()) return false;
             var targetId = byte.MaxValue;
             if (target != null) targetId = target.PlayerId;
             Rpc(CustomRPC.AbilityTrigger, player.PlayerId, targetId);
@@ -1422,7 +1432,6 @@ namespace TownOfUsEdited
         )
         {
             if (!button.isActiveAndEnabled) return;
-            if (PlayerControl.LocalPlayer.IsJailed()) return;
 
             button.SetTarget(
                 SetClosestPlayer(ref closestPlayer, maxDistance, targets)
@@ -1438,7 +1447,6 @@ namespace TownOfUsEdited
         )
         {
             if (!button.isActiveAndEnabled) return;
-            if (PlayerControl.LocalPlayer.IsJailed()) return;
 
             button.SetTarget(
                 SetClosestPlayerTarget(ref closestPlayer, srcPlayer, maxDistance, targets)
@@ -2589,6 +2597,29 @@ namespace TownOfUsEdited
                 {
                     tracker.TrackerArrows.Values.DestroyAll();
                     tracker.TrackerArrows.Clear();
+                }
+            }
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+            {
+                var watcher = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                watcher.Cooldown = CustomGameOptions.WatcherCooldown;
+                if (CustomGameOptions.LoResetOnNewRound)
+                {
+                    watcher.UsesLeft = CustomGameOptions.MaxWatches;
+                    watcher.Watching.Clear();
+                }
+                else
+                {
+                    List<byte> toRemove = new List<byte>();
+                    foreach (var (key, value) in watcher.Watching)
+                    {
+                        value.Clear();
+                        if (PlayerById(key).Data.IsDead || PlayerById(key).Data.Disconnected) toRemove.Add(key);
+                    }
+                    foreach (var key in toRemove)
+                    {
+                        watcher.Watching.Remove(key);
+                    }
                 }
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.VampireHunter))

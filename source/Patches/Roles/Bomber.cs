@@ -72,11 +72,11 @@ namespace TownOfUsEdited.Roles
             while (playersToDie.Count > CustomGameOptions.MaxKillsInDetonation) playersToDie.Remove(playersToDie[playersToDie.Count - 1]);
             foreach (var player in playersToDie)
             {
-                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsProtected() && !player.IsBarriered() && player != ShowShield.FirstRoundShielded && !PlayerControl.LocalPlayer.IsJailed())
+                if (!player.Is(RoleEnum.Pestilence) && !player.IsShielded() && !player.IsProtected() && !player.IsBarriered() && player != ShowShield.FirstRoundShielded)
                 {
                     Utils.RpcMultiMurderPlayer(Player, player);
                 }
-                else if (player.IsShielded() && !PlayerControl.LocalPlayer.IsJailed())
+                else if (player.IsShielded())
                 {
                     foreach (var medic in player.GetMedic())
                     {

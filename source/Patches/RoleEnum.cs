@@ -75,6 +75,7 @@ namespace TownOfUsEdited
         Plumber,
         Mercenary,
         Cleric,
+        Watcher,
 
         Miner,
         Poisoner,

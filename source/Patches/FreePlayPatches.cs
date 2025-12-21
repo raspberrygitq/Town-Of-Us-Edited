@@ -179,6 +179,12 @@ namespace TownOfUsEdited.Patches
                 UnityEngine.Object.Destroy(paranoRole.UsesText);
             }
 
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
+            {
+                var watcherRole = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
+                UnityEngine.Object.Destroy(watcherRole.UsesText);
+            }
+
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Tracker))
             {
                 var trackerRole = Role.GetRole<Tracker>(PlayerControl.LocalPlayer);
@@ -322,6 +328,7 @@ namespace TownOfUsEdited.Patches
             else if (role == typeof(Spy)) newRole = new Spy(PlayerControl.LocalPlayer);
             else if (role == typeof(Tracker)) newRole = new Tracker(PlayerControl.LocalPlayer);
             else if (role == typeof(Trapper)) newRole = new Trapper(PlayerControl.LocalPlayer);
+            else if (role == typeof(Watcher)) newRole = new Watcher(PlayerControl.LocalPlayer);
             else if (role == typeof(Avenger)) newRole = new Avenger(PlayerControl.LocalPlayer);
             else if (role == typeof(Deputy)) newRole = new Deputy(PlayerControl.LocalPlayer);
             else if (role == typeof(Fighter)) newRole = new Fighter(PlayerControl.LocalPlayer);
@@ -581,7 +588,7 @@ namespace TownOfUsEdited.Patches
                     List<Type> Roles = [ typeof(Crewmate), typeof(Guardian), typeof(Haunter), typeof(Helper),
                     typeof(Astral), typeof(Aurial), typeof(Captain), typeof(Chameleon), typeof(Detective), typeof(Informant), typeof(Investigator),
                     typeof(Lookout), typeof(Mystic), typeof(Seer), typeof(Snitch), typeof(Spy), typeof(Tracker),
-                    typeof(Trapper), typeof(Avenger), typeof(Deputy), typeof(Fighter), typeof(Hunter),
+                    typeof(Trapper), typeof(Watcher), typeof(Avenger), typeof(Deputy), typeof(Fighter), typeof(Hunter),
                     typeof(Knight), typeof(Sheriff), typeof(VampireHunter), typeof(Veteran), typeof(Vigilante),
                     typeof(Jailor), typeof(Mayor), typeof(Politician), typeof(Prosecutor), typeof(Swapper), typeof(TimeLord),
                     typeof(Altruist), typeof(Bodyguard), typeof(Cleric), typeof(Crusader), typeof(Doctor), typeof(Medic),
@@ -727,6 +734,7 @@ namespace TownOfUsEdited.Patches
                     else if (__instance.Text.text.Contains("Be_Spy.exe")) __instance.FileImage.color = Patches.Colors.Spy;
                     else if (__instance.Text.text.Contains("Be_Tracker.exe")) __instance.FileImage.color = Patches.Colors.Tracker;
                     else if (__instance.Text.text.Contains("Be_Trapper.exe")) __instance.FileImage.color = Patches.Colors.Trapper;
+                    else if (__instance.Text.text.Contains("Be_Watcher.exe")) __instance.FileImage.color = Patches.Colors.Lookout;
                     else if (__instance.Text.text.Contains("Be_Avenger.exe")) __instance.FileImage.color = Patches.Colors.Avenger;
                     else if (__instance.Text.text.Contains("Be_Deputy.exe")) __instance.FileImage.color = Patches.Colors.Deputy;
                     else if (__instance.Text.text.Contains("Be_Fighter.exe")) __instance.FileImage.color = Patches.Colors.Fighter;

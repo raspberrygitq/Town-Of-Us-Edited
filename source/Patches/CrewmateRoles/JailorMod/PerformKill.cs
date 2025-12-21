@@ -1,6 +1,5 @@
 ﻿using AmongUs.GameOptions;
 using HarmonyLib;
-using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -14,15 +13,6 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Jailor);
             if (!flag) return true;
             var role = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
-            if (__instance == role.ReleaseButton)
-            {
-                if (!PlayerControl.LocalPlayer.CanMove || role.JailedPlayer == null) return false;
-                var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-                if (!abilityUsed) return false;
-                role.JailedPlayer = null;
-                Utils.Rpc(CustomRPC.ReleaseJail, PlayerControl.LocalPlayer.PlayerId);
-                JailorChat.UpdateJailorChat();
-            }
             if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (role.Cooldown > 0) return false;
@@ -39,7 +29,6 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                 role.JailedPlayer = role.ClosestPlayer;
                 role.Cooldown = CustomGameOptions.JailCD;
                 Utils.Rpc(CustomRPC.SetJail, PlayerControl.LocalPlayer.PlayerId, role.ClosestPlayer.PlayerId);
-                JailorChat.UpdateJailorChat();
             }
             if (interact[0] == true)
             {
