@@ -179,7 +179,7 @@ namespace TownOfUsEdited.Patches
 
                         try
                         {
-                            DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                            HudManager.Instance.KillButton.gameObject.SetActive(false);
                         }
                         catch { }
                     }

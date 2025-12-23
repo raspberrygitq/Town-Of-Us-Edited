@@ -13,7 +13,7 @@ namespace TownOfUsEdited.CrewmateRoles.AstralMod
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             var role = Role.GetRole<Astral>(PlayerControl.LocalPlayer);
-            var ghostButton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var ghostButton = HudManager.Instance.KillButton;
             if (__instance == ghostButton)
             {
                 if (__instance.isCoolingDown) return false;

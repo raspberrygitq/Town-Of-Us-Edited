@@ -26,9 +26,6 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
                 role.BlessButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.BlessButton.graphic.enabled = true;
                 role.BlessButton.gameObject.SetActive(false);
-                role.BlessText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.BlessButton.transform);
-                role.BlessText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.BlessText);
             }
 
             if (PlayerControl.LocalPlayer.Data.IsDead) role.BlessButton.SetTarget(null);
@@ -45,7 +42,7 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            role.BlessText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.BlessButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -55,8 +52,8 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
 
             role.BlessButton.graphic.SetCooldownNormalizedUvs();
 
-            role.BlessText.text = "Bless";
-            role.BlessText.SetOutlineColor(Patches.Colors.Oracle);
+            role.BlessButton.buttonLabelText.text = "Bless";
+            role.BlessButton.buttonLabelText.SetOutlineColor(Patches.Colors.Oracle);
 
             confessButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
@@ -66,6 +63,10 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            confessButton.buttonLabelText.text = "Confess";
+            confessButton.buttonLabelText.SetOutlineColor(Patches.Colors.Oracle);
+
             confessButton.SetCoolDown(role.ConfessTimer(), CustomGameOptions.ConfessCd);
 
             var notConfessing = PlayerControl.AllPlayerControls
@@ -76,23 +77,23 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
             Utils.SetTarget(ref role.ClosestPlayer, confessButton, float.NaN, notConfessing);
 
             var renderer = role.BlessButton.graphic;
-            if (role.ClosestBlessedPlayer != null)
+            if (role.ClosestBlessedPlayer != null && !role.blessCoolingDown)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
-                role.BlessText.color = Palette.EnabledColor;
-                role.BlessText.material.SetFloat("_Desat", 0f);
+                role.BlessButton.buttonLabelText.color = Palette.EnabledColor;
+                role.BlessButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
-                role.BlessText.color = Palette.DisabledClear;
-                role.BlessText.material.SetFloat("_Desat", 1f);
+                role.BlessButton.buttonLabelText.color = Palette.DisabledClear;
+                role.BlessButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
 
             var renderer2 = confessButton.graphic;
-            if (role.ClosestPlayer != null)
+            if (role.ClosestPlayer != null && !role.coolingDown)
             {
                 confessButton.graphic.color = Palette.EnabledColor;
                 confessButton.graphic.material.SetFloat("_Desat", 0f);

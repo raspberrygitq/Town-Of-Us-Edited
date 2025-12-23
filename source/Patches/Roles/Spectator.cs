@@ -20,7 +20,7 @@ namespace TownOfUsEdited.Roles
 
         public void StartSpectate(PlayerControl player)
         {
-            var hudManager = DestroyableSingleton<HudManager>.Instance;
+            var hudManager = HudManager.Instance;
             var amOwner = player.AmOwner;
             player.gameObject.layer = LayerMask.NameToLayer("Ghost");
             player.Visible = false;

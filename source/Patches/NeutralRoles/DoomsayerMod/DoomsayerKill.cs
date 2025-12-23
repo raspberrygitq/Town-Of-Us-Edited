@@ -67,7 +67,7 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
             bool showKillAnim = true
         )
         {
-            var hudManager = DestroyableSingleton<HudManager>.Instance;
+            var hudManager = HudManager.Instance;
             if (showKillAnim)
             {
                 SoundManager.Instance.PlaySound(player.KillSfx, false, 0.8f);

@@ -14,7 +14,7 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             var role = Role.GetRole<Infectious>(PlayerControl.LocalPlayer);
             if (role.Player.inVent) return false;
-            var killbutton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var killbutton = HudManager.Instance.KillButton;
 
             if (__instance == role.InfectButton)
             {

@@ -1,6 +1,5 @@
 using HarmonyLib;
 using System.Linq;
-using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -64,9 +63,6 @@ namespace TownOfUsEdited.NeutralRoles.MutantMod
                 role.TransformButton.graphic.enabled = true;
                 role.TransformButton.graphic.sprite = TownOfUsEdited.TransformSprite;
                 role.TransformButton.gameObject.SetActive(false);
-                role.TransformText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.TransformButton.transform);
-                role.TransformText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.TransformText);
             }
             if (role.TransformButton.graphic.sprite != TownOfUsEdited.TransformSprite &&
                 role.TransformButton.graphic.sprite != TownOfUsEdited.UnTransformSprite)
@@ -86,13 +82,13 @@ namespace TownOfUsEdited.NeutralRoles.MutantMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.TransformText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.TransformButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.TransformText.text = "Transform";
-            role.TransformText.SetOutlineColor(Colors.Mutant);
+            role.TransformButton.buttonLabelText.text = role.IsTransformed ? "Untransform" : "Transform";
+            role.TransformButton.buttonLabelText.SetOutlineColor(Patches.Colors.Mutant);
 
             if (role.IsTransformed != true)
             {
@@ -102,7 +98,7 @@ namespace TownOfUsEdited.NeutralRoles.MutantMod
             role.TransformButton.graphic.SetCooldownNormalizedUvs();
 
             var renderer = role.TransformButton.graphic;
-            var label = role.TransformText;
+            var label = role.TransformButton.buttonLabelText;
             if (!role.TransformcoolingDown)
             {
                 renderer.color = Palette.EnabledColor;

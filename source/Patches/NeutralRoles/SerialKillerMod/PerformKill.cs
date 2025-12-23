@@ -18,7 +18,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod
                 return false;
 
             var sk = Role.GetRole<SerialKiller>(PlayerControl.LocalPlayer);
-            var killbutton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var killbutton = HudManager.Instance.KillButton;
             
             if (sk.ClosestPlayer == null)
                 return false;

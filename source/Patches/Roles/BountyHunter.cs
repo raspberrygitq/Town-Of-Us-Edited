@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Roles
@@ -12,7 +11,6 @@ namespace TownOfUsEdited.Roles
         public KillButton _timerButton;
         public PlayerControl BountyTarget;
         public DateTime TargetSwitch;
-        public TextMeshPro TimerText;
         public BountyHunter(PlayerControl player) : base(player)
         {
             Name = "Bounty Hunter";

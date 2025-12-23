@@ -12,7 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.GuardianMod
             if (!flag) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             var role = Role.GetRole<Guardian>(PlayerControl.LocalPlayer);
-            var alertButton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var alertButton = HudManager.Instance.KillButton;
             if (__instance == alertButton)
             {
                 if (__instance.isCoolingDown) return false;

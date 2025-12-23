@@ -13,7 +13,7 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Jailor);
             if (!flag) return true;
             var role = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
-            if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
+            if (__instance != HudManager.Instance.KillButton) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (role.Cooldown > 0) return false;
             if (!__instance.enabled) return false;

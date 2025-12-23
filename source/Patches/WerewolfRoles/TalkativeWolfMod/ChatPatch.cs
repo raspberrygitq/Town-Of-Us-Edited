@@ -27,7 +27,7 @@ namespace TownOfUsEdited.WerewolfRoles.TalkativeWolfMod.ChatPatch
                     foreach (var player in impos)
                     {
                         var playerResults = $"Today's word is {Word}, if the Talkative Wolf doesn't say it before the day ends, he will die!";
-                        if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(player, playerResults);
+                        if (!string.IsNullOrWhiteSpace(playerResults) && player == PlayerControl.LocalPlayer) HudManager.Instance.Chat.AddChat(player, playerResults);
                     }
                     Utils.Rpc(CustomRPC.SetTalkativeWord, Word);
                 }

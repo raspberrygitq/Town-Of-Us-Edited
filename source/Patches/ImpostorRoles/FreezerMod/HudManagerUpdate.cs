@@ -26,9 +26,6 @@ namespace TownOfUsEdited.ImpostorRoles.FreezerMod
                 role.FreezeButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.FreezeButton.graphic.enabled = true;
                 role.FreezeButton.gameObject.SetActive(false);
-                role.FreezeText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.FreezeButton.transform);
-                role.FreezeText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.FreezeText);
             }
 
             role.FreezeButton.graphic.sprite = TownOfUsEdited.Freeze;
@@ -37,13 +34,13 @@ namespace TownOfUsEdited.ImpostorRoles.FreezerMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.FreezeText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.FreezeButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.FreezeText.text = "Freeze";
-            role.FreezeText.SetOutlineColor(Palette.ImpostorRed);
+            role.FreezeButton.buttonLabelText.text = "Freeze";
+            role.FreezeButton.buttonLabelText.SetOutlineColor(Palette.ImpostorRed);
 
             var position = __instance.KillButton.transform.localPosition;
             role.FreezeButton.transform.localPosition = new Vector3(position.x,
@@ -56,7 +53,7 @@ namespace TownOfUsEdited.ImpostorRoles.FreezerMod
             Utils.SetTarget(ref role.ClosestPlayer, role.FreezeButton, float.NaN, notimps);
             role.FreezeButton.graphic.SetCooldownNormalizedUvs();
 
-            var labelrender = role.FreezeText;
+            var labelrender = role.FreezeButton.buttonLabelText;
             if (role.ClosestPlayer != null || role.Freezing)
             {
                 role.FreezeButton.graphic.color = Palette.EnabledColor;

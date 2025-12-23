@@ -7,8 +7,6 @@ namespace TownOfUsEdited.CrewmateRoles.ClericMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
     {
-        public static Sprite CleanseSprite => TownOfUsEdited.CleanseSprite;
-        
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -27,7 +25,7 @@ namespace TownOfUsEdited.CrewmateRoles.ClericMod
                 role.ButtonLabels.Add(role.CleanseText);
             }
 
-            role.CleanseButton.graphic.sprite = CleanseSprite;
+            role.CleanseButton.graphic.sprite = TownOfUsEdited.CleanseSprite;
             role.CleanseButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
 
             if (PlayerControl.LocalPlayer.Data.IsDead) role.CleanseButton.SetTarget(null);
@@ -49,12 +47,15 @@ namespace TownOfUsEdited.CrewmateRoles.ClericMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            __instance.KillButton.SetCoolDown(role.BarrierTimer(), CustomGameOptions.BarrierCD);
-            role.CleanseButton.SetCoolDown(role.Cooldown, CustomGameOptions.BarrierCD);
-            role.CleanseButton.graphic.SetCooldownNormalizedUvs();
+            __instance.KillButton.buttonLabelText.text = "Barrier";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Cleric);
 
             role.CleanseText.text = "Cleanse";
             role.CleanseText.SetOutlineColor(Patches.Colors.Cleric);
+
+            __instance.KillButton.SetCoolDown(role.BarrierTimer(), CustomGameOptions.BarrierCD);
+            role.CleanseButton.SetCoolDown(role.Cooldown, CustomGameOptions.BarrierCD);
+            role.CleanseButton.graphic.SetCooldownNormalizedUvs();
 
             Utils.SetTarget(ref role.ClosestPlayer, role.CleanseButton, float.NaN);
             var cleanseRenderer = role.CleanseButton.graphic;

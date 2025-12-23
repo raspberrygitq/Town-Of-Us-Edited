@@ -1,5 +1,4 @@
 using System.Linq;
-using TMPro;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
@@ -11,7 +10,6 @@ namespace TownOfUsEdited.Roles
     {
         public KillButton _morphButton;
         public PlayerControl ClosestPlayer;
-        public TextMeshPro MorphText;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
         public PlayerControl MorphedPlayer;

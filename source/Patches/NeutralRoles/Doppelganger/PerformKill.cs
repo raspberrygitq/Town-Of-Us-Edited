@@ -18,7 +18,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.DoppelgangerMod
                 return false;
 
             var role = Role.GetRole<Doppelganger>(PlayerControl.LocalPlayer);
-            var killbutton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var killbutton = HudManager.Instance.KillButton;
             
             if (role.ClosestPlayer == null)
                 return false;

@@ -54,7 +54,7 @@ namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
             Utils.Rpc(CustomRPC.GAToSurv, PlayerControl.LocalPlayer.PlayerId);
 
             Object.Destroy(role.UsesText);
-            DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+            HudManager.Instance.KillButton.gameObject.SetActive(false);
 
             GAToSurv(PlayerControl.LocalPlayer);
         }

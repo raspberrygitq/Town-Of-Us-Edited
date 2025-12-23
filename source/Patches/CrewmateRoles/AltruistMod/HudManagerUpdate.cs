@@ -17,7 +17,6 @@ namespace TownOfUsEdited.CrewmateRoles.AltruistMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Altruist)) return;
 
             var role = Role.GetRole<Altruist>(PlayerControl.LocalPlayer);
-            var reviveText = __instance.KillButton.buttonLabelText;
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;
             var truePosition = PlayerControl.LocalPlayer.GetTruePosition();
@@ -51,21 +50,24 @@ namespace TownOfUsEdited.CrewmateRoles.AltruistMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            reviveText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            killButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             __instance.KillButton.SetCoolDown(0f, 1f);
 
+            killButton.buttonLabelText.text = "Revive";
+            killButton.buttonLabelText.SetOutlineColor(Patches.Colors.Altruist);
+
             if (role.CurrentTarget != null)
             {
-                reviveText.color = Palette.EnabledColor;
-                reviveText.material.SetFloat("_Desat", 0f);
+                killButton.buttonLabelText.color = Palette.EnabledColor;
+                killButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
-                reviveText.color = Palette.DisabledClear;
-                reviveText.material.SetFloat("_Desat", 1f);
+                killButton.buttonLabelText.color = Palette.DisabledClear;
+                killButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
 
             foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())

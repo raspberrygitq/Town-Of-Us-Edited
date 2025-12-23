@@ -10,7 +10,6 @@ namespace TownOfUsEdited.CrewmateRoles.HunterMod
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate
     {
-        public static Sprite StalkSprite => TownOfUsEdited.StalkSprite;
         [HarmonyPatch(nameof(HudManager.Update))]
         public static void Postfix(HudManager __instance)
         {
@@ -45,12 +44,9 @@ namespace TownOfUsEdited.CrewmateRoles.HunterMod
                 role.StalkButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.StalkButton.graphic.enabled = true;
                 role.StalkButton.gameObject.SetActive(false);
-                role.StalkText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.StalkButton.transform);
-                role.StalkText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.StalkText);
             }
 
-            role.StalkButton.graphic.sprite = StalkSprite;
+            role.StalkButton.graphic.sprite = TownOfUsEdited.StalkSprite;
             role.StalkButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
 
             if (role.UsesText == null && role.UsesLeft > 0)
@@ -74,7 +70,7 @@ namespace TownOfUsEdited.CrewmateRoles.HunterMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            role.StalkText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.StalkButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -89,8 +85,8 @@ namespace TownOfUsEdited.CrewmateRoles.HunterMod
             
             role.StalkButton.graphic.SetCooldownNormalizedUvs();
 
-            role.StalkText.text = "Stalk";
-            role.StalkText.SetOutlineColor(Patches.Colors.Hunter);
+            role.StalkButton.buttonLabelText.text = role.Stalking ? "Stalking" : "Stalk";
+            role.StalkButton.buttonLabelText.SetOutlineColor(Patches.Colors.Hunter);
 
             var renderer = role.StalkButton.graphic;
             if (role.Stalking || role.UsesLeft == 0 || !PlayerControl.LocalPlayer.moveable) role.StalkButton.SetTarget(null);
@@ -107,8 +103,8 @@ namespace TownOfUsEdited.CrewmateRoles.HunterMod
                 renderer.material.SetFloat("_Desat", 0f);
                 role.UsesText.color = Palette.EnabledColor;
                 role.UsesText.material.SetFloat("_Desat", 0f);
-                role.StalkText.color = Palette.EnabledColor;
-                role.StalkText.material.SetFloat("_Desat", 0f);
+                role.StalkButton.buttonLabelText.color = Palette.EnabledColor;
+                role.StalkButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
@@ -116,8 +112,8 @@ namespace TownOfUsEdited.CrewmateRoles.HunterMod
                 renderer.material.SetFloat("_Desat", 1f);
                 role.UsesText.color = Palette.DisabledClear;
                 role.UsesText.material.SetFloat("_Desat", 1f);
-                role.StalkText.color = Palette.DisabledClear;
-                role.StalkText.material.SetFloat("_Desat", 1f);
+                role.StalkButton.buttonLabelText.color = Palette.DisabledClear;
+                role.StalkButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
 
             __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)

@@ -18,7 +18,7 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
         public static List<byte> Revived = new List<byte>();
         public static bool Prefix(KillButton __instance)
         {
-            if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
+            if (__instance != HudManager.Instance.KillButton) return true;
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.TimeLord);
             if (!flag) return true;
             var role = Role.GetRole<TimeLord>(PlayerControl.LocalPlayer);

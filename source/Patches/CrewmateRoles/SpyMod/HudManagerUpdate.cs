@@ -15,33 +15,37 @@ namespace TownOfUsEdited.CrewmateRoles.SpyMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Spy)) return;
 
             var role = Role.GetRole<Spy>(PlayerControl.LocalPlayer);
-            var AdminText = __instance.KillButton.buttonLabelText;
 
             __instance.KillButton.SetCoolDown(0f, 10f);
             __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay && !CustomGameOptions.DisablePortableAdmin));
-            __instance.KillButton.graphic.sprite = TownOfUsEdited.AdminSprite;
-
-            AdminText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay && !CustomGameOptions.DisablePortableAdmin));
+
+            __instance.KillButton.buttonLabelText.text = "Admin";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Spy);
+
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
 
             var renderer = __instance.KillButton.graphic;
-            AdminText.color = Palette.EnabledColor;
-            AdminText.material.SetFloat("_Desat", 0f);
+            var AdminText = __instance.KillButton.buttonLabelText;
             if (!CamouflageUnCamouflage.CommsEnabled)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
+                AdminText.color = Palette.EnabledColor;
+                AdminText.material.SetFloat("_Desat", 0f);
             } 
             else 
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
+                AdminText.color = Palette.DisabledClear;
+                AdminText.material.SetFloat("_Desat", 1f);
             }
         }
     }

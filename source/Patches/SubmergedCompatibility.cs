@@ -261,12 +261,12 @@ namespace TownOfUsEdited.Patches
 
         public static IEnumerator waitStart(Action next)
         {
-            while (DestroyableSingleton<HudManager>.Instance.UICamera.transform.Find("SpawnInMinigame(Clone)") == null)
+            while (HudManager.Instance.UICamera.transform.Find("SpawnInMinigame(Clone)") == null)
             {
                 yield return null;
             }
             yield return new WaitForSeconds(0.5f);
-            while (DestroyableSingleton<HudManager>.Instance.UICamera.transform.Find("SpawnInMinigame(Clone)") != null)
+            while (HudManager.Instance.UICamera.transform.Find("SpawnInMinigame(Clone)") != null)
             {
                 yield return null;
             }
@@ -279,7 +279,7 @@ namespace TownOfUsEdited.Patches
                 yield return null;
             }
             yield return new WaitForSeconds(0.5f);
-            while (DestroyableSingleton<HudManager>.Instance.PlayerCam.transform.Find("SpawnInMinigame(Clone)") != null)
+            while (HudManager.Instance.PlayerCam.transform.Find("SpawnInMinigame(Clone)") != null)
             {
                 yield return null;
             }       

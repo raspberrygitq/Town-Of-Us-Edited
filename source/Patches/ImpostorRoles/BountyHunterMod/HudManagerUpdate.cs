@@ -24,9 +24,6 @@ namespace TownOfUsEdited.ImpostorRoles.BountyHunterMod
                 role.TimerButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.TimerButton.graphic.enabled = true;
                 role.TimerButton.gameObject.SetActive(false);
-                role.TimerText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.TimerButton.transform);
-                role.TimerText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.TimerText);
             }
 
             role.TimerButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
@@ -37,19 +34,19 @@ namespace TownOfUsEdited.ImpostorRoles.BountyHunterMod
 
             role.TimerButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
-            role.TimerText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.TimerButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.TimerText.text = "Timer";
-            role.TimerText.SetOutlineColor(Palette.ImpostorRed);
+            role.TimerButton.buttonLabelText.text = "Timer";
+            role.TimerButton.buttonLabelText.SetOutlineColor(Palette.ImpostorRed);
 
             var renderer = role.TimerButton.graphic;
             renderer.color = Palette.EnabledColor;
             renderer.material.SetFloat("_Desat", 0f);
-            role.TimerText.color = Palette.EnabledColor;
-            role.TimerText.material.SetFloat("_Desat", 0f);
+            role.TimerButton.buttonLabelText.color = Palette.EnabledColor;
+            role.TimerButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             role.TimerButton.SetCoolDown(role.TargetTimer(), CustomGameOptions.TargetDuration);
             role.TimerButton.graphic.SetCooldownNormalizedUvs();
 

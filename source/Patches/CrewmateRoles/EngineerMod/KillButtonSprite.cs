@@ -17,7 +17,6 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
             if (PlayerControl.LocalPlayer.Is(Faction.Madmates)) return;
 
             var role = Role.GetRole<Engineer>(PlayerControl.LocalPlayer);
-            var fixText = __instance.KillButton.buttonLabelText;
 
             if (role.UsesText == null && role.UsesLeft > 0)
             {
@@ -41,14 +40,18 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             role.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            fixText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            __instance.KillButton.buttonLabelText.text = "Fix";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Engineer);
+
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (!ShipStatus.Instance) return;
             var system = ShipStatus.Instance.Systems[SystemTypes.Sabotage].Cast<SabotageSystemType>();
@@ -59,15 +62,15 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
-                fixText.color = Palette.EnabledColor;
-                fixText.material.SetFloat("_Desat", 0f);
+                __instance.KillButton.buttonLabelText.color = Palette.EnabledColor;
+                __instance.KillButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 return;
             }
 
             renderer.color = Palette.DisabledClear;
             renderer.material.SetFloat("_Desat", 1f);
-            fixText.color = Palette.DisabledClear;
-            fixText.material.SetFloat("_Desat", 1f);
+            __instance.KillButton.buttonLabelText.color = Palette.DisabledClear;
+            __instance.KillButton.buttonLabelText.material.SetFloat("_Desat", 1f);
         }
     }
     [HarmonyPatch(typeof(HudManager))]

@@ -27,8 +27,7 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                 if (PlayerControl.LocalPlayer == null) return;
                 if (PlayerControl.LocalPlayer.Data == null) return;
                 if (!PlayerControl.LocalPlayer.Is(RoleEnum.TimeLord)) return;
-                var rewindButton = DestroyableSingleton<HudManager>.Instance.KillButton;
-                var rewindText = __instance.KillButton.buttonLabelText;
+                var rewindButton = HudManager.Instance.KillButton;
 
                 var role = Role.GetRole<TimeLord>(PlayerControl.LocalPlayer);
 
@@ -36,10 +35,14 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                         AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-                rewindText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                rewindButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+                rewindButton.buttonLabelText.text = "Rewind";
+                rewindButton.buttonLabelText.SetOutlineColor(Patches.Colors.TimeLord);
+
                 if (role.UsingRewind)
                 {
                     rewindButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.RewindDuration);
@@ -50,6 +53,7 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                 }
 
                 var renderer = rewindButton.graphic;
+                var rewindText = rewindButton.buttonLabelText;
                 if (rewindButton.enabled && !role.UsingRewind && !role.coolingDown)
                 {
                     rewindText.color = Palette.EnabledColor;

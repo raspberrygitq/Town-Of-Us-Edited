@@ -193,13 +193,13 @@ namespace TownOfUsEdited.Patches.Modifiers.LoversMod
                 {
                     return false;
                 }
-                if (DestroyableSingleton<HudManager>.Instance)
+                if (HudManager.Instance)
                 {
                     LoversChatButton.AddChat(__instance, chatText, true);
                 }
                 if (chatText.IndexOf("who", StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    DestroyableSingleton<UnityTelemetry>.Instance.SendWho();
+                    UnityTelemetry.Instance.SendWho();
                 }
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, chatText, "LoversChat");
                 return false;
@@ -244,13 +244,13 @@ namespace TownOfUsEdited.Patches.Modifiers.LoversMod
                 {
                     return false;
                 }
-                if (DestroyableSingleton<HudManager>.Instance)
+                if (HudManager.Instance)
                 {
                     LoversChatButton.AddChat(__instance, text, false);
                 }
                 if (data.ToChatText().IndexOf("who", StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    DestroyableSingleton<UnityTelemetry>.Instance.SendWho();
+                    UnityTelemetry.Instance.SendWho();
                 }
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, text, "LoversChat");
                 return false;

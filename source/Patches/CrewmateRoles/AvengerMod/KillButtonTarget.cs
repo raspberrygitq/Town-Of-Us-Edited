@@ -25,15 +25,15 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
                 component.material.SetColor("_OutlineColor", Color.red);
                 __instance.graphic.color = Palette.EnabledColor;
                 __instance.graphic.material.SetFloat("_Desat", 0f);
-                role.AvengeText.color = Palette.EnabledColor;
-                role.AvengeText.material.SetFloat("_Desat", 0f);
+                role.AvengeButton.buttonLabelText.color = Palette.EnabledColor;
+                role.AvengeButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 return;
             }
 
             __instance.graphic.color = Palette.DisabledClear;
             __instance.graphic.material.SetFloat("_Desat", 1f);
-            role.AvengeText.color = Palette.DisabledClear;
-            role.AvengeText.material.SetFloat("_Desat", 1f);
+            role.AvengeButton.buttonLabelText.color = Palette.DisabledClear;
+            role.AvengeButton.buttonLabelText.material.SetFloat("_Desat", 1f);
         }
     }
 }

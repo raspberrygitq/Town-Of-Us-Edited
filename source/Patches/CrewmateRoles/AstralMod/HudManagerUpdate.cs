@@ -19,17 +19,20 @@ namespace TownOfUsEdited.CrewmateRoles.AstralMod
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Astral)) return;
             var ghostButton = __instance.KillButton;
-            var dissociateText = __instance.KillButton.buttonLabelText;
             var role = Role.GetRole<Astral>(PlayerControl.LocalPlayer);
 
             ghostButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            dissociateText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            ghostButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            ghostButton.buttonLabelText.text = "Dissociate";
+            ghostButton.buttonLabelText.SetOutlineColor(Patches.Colors.Astral);
+
             if (role.UsingGhost) ghostButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.GhostDuration);
             else ghostButton.SetCoolDown(role.AstralTimer(), CustomGameOptions.GhostCD);
 
@@ -43,15 +46,15 @@ namespace TownOfUsEdited.CrewmateRoles.AstralMod
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
-                dissociateText.color = Palette.EnabledColor;
-                dissociateText.material.SetFloat("_Desat", 0f);
+                ghostButton.buttonLabelText.color = Palette.EnabledColor;
+                ghostButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
-                dissociateText.color = Palette.DisabledClear;
-                dissociateText.material.SetFloat("_Desat", 1f);
+                ghostButton.buttonLabelText.color = Palette.DisabledClear;
+                ghostButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
 

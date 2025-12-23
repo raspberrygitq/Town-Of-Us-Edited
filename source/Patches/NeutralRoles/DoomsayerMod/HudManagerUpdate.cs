@@ -21,7 +21,10 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
             __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && !CustomGameOptions.DoomsayerCantObserve);
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            __instance.KillButton.buttonLabelText.text = "Observe";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Doomsayer);
 
             if (role.ClosestPlayer != null)
             {

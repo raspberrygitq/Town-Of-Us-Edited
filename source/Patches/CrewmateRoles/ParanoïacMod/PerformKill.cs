@@ -14,7 +14,7 @@ namespace TownOfUsEdited.CrewmateRoles.ParanoïacMod
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             var role = Role.GetRole<Paranoïac>(PlayerControl.LocalPlayer);
             if (!role.ButtonUsable) return false;
-            var PanicButton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var PanicButton = HudManager.Instance.KillButton;
             if (__instance == PanicButton)
             {
                 if (!__instance.isActiveAndEnabled) return false;
@@ -30,7 +30,7 @@ namespace TownOfUsEdited.CrewmateRoles.ParanoïacMod
                     AmongUsClient.Instance.DisconnectHandlers.AddUnique(
                     MeetingRoomManager.Instance.Cast<IDisconnectHandler>());
                     if (GameManager.Instance.CheckTaskCompletion()) return false;
-                    DestroyableSingleton<HudManager>.Instance.OpenMeetingRoom(PlayerControl.LocalPlayer);
+                    HudManager.Instance.OpenMeetingRoom(PlayerControl.LocalPlayer);
                     PlayerControl.LocalPlayer.RpcStartMeeting(null);
                 }
                 return false;

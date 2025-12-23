@@ -30,7 +30,7 @@ namespace TownOfUsEdited.NeutralRoles.MaulMod
 
             if (role.Cooldown > 0) return false;
             if (!role.Rampaged) return false;
-            if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
+            if (__instance != HudManager.Instance.KillButton) return true;
             if (!__instance.isActiveAndEnabled || __instance.isCoolingDown) return false;
             if (role.ClosestPlayer == null) return false;
             var distBetweenPlayers = Utils.GetDistBetweenPlayers(PlayerControl.LocalPlayer, role.ClosestPlayer);

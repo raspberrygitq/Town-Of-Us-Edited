@@ -58,7 +58,7 @@ namespace TownOfUsEdited.ImpostorRoles.BomberMod
                         else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay;
                     }
                     else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay;
-                    DestroyableSingleton<HudManager>.Instance.KillButton.SetTarget(null);
+                    HudManager.Instance.KillButton.SetTarget(null);
                     role.Bomb = BombExtentions.CreateBomb(pos);
                     return false;
                 }

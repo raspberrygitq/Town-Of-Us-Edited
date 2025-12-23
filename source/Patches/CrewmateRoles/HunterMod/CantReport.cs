@@ -36,7 +36,7 @@ namespace TownOfUsEdited.CrewmateRoles.HunterMod
                     }
                 }
 
-            DestroyableSingleton<HudManager>.Instance.ReportButton.SetActive(flag2);
+            HudManager.Instance.ReportButton.SetActive(flag2);
         }
     }
 

@@ -307,7 +307,7 @@ namespace TownOfUsEdited.Patches
 			                sourcePlayer.RpcSetPet(DataManager.Player.Customization.Pet);
 			                sourcePlayer.RpcSetHat(DataManager.Player.Customization.Hat);
 			                sourcePlayer.RpcSetSkin(DataManager.Player.Customization.Skin);
-			                if (DestroyableSingleton<HatManager>.Instance.GetHatById(DataManager.Player.Customization.Hat).BlocksVisors)
+			                if (HatManager.Instance.GetHatById(DataManager.Player.Customization.Hat).BlocksVisors)
 			                {
 				                DataManager.Player.Customization.Visor = "visor_EmptyVisor";
 			                }

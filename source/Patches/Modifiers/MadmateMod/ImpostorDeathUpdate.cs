@@ -249,7 +249,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
 
             if (PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(true);
+                HudManager.Instance.KillButton.gameObject.SetActive(true);
                 Coroutines.Start(Utils.FlashCoroutine(Color.red));
             }
 

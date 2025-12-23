@@ -17,7 +17,6 @@ namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
             var role = Role.GetRole<Poisoner>(PlayerControl.LocalPlayer);
-            var PoisonText = __instance.KillButton.buttonLabelText;
             var PoisonButton = __instance.KillButton;
 
             __instance.KillButton.transform.localPosition = new Vector3(0f, 1f, 0f);
@@ -26,8 +25,8 @@ namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-                
-            PoisonText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+
+            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -47,7 +46,7 @@ namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
             else if (!CustomGameOptions.MadmateKillEachOther || CustomGameOptions.GameMode == GameMode.Cultist) Utils.SetTarget(ref role.ClosestPlayer, PoisonButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Impostors) && !x.Is(Faction.Madmates)).ToList());
             else Utils.SetTarget(ref role.ClosestPlayer, PoisonButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors)).ToList());
 
-            var labelrender = PoisonText;
+            var labelrender = __instance.KillButton.buttonLabelText;
             if (role.ClosestPlayer != null)
             {
                 role.ClosestPlayer.myRend().material.SetColor("_OutlineColor", Palette.Purple);
@@ -72,13 +71,13 @@ namespace TownOfUsEdited.ImpostorRoles.PoisonerMod
             {
                 if (role.Poisoned)
                 {
-                    PoisonText.text = "Poisoned";
+                    __instance.KillButton.buttonLabelText.text = "Poisoned";
                     role.Poison();
                     PoisonButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.PoisonDuration);
                 }
                 else
                 {
-                    PoisonText.text = "Poison";
+                    __instance.KillButton.buttonLabelText.text = "Poison";
                     PoisonButton.SetCoolDown(role.PoisonTimer(), CustomGameOptions.PoisonCD);
                 }
             }

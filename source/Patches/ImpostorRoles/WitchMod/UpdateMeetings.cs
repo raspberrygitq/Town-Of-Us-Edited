@@ -81,7 +81,7 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
 
         public static void MurderPlayer(PlayerControl player, PlayerControl witch, bool checkLover)
         {
-            var hudManager = DestroyableSingleton<HudManager>.Instance;
+            var hudManager = HudManager.Instance;
             var amOwner = player.AmOwner;
             if (amOwner)
             {

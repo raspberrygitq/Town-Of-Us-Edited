@@ -25,9 +25,6 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                 role.ExamineButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.ExamineButton.graphic.enabled = true;
                 role.ExamineButton.gameObject.SetActive(false);
-                role.ExamineText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.ExamineButton.transform);
-                role.ExamineText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.ExamineText);
             }
 
             role.ExamineButton.graphic.sprite = ExamineSprite;
@@ -44,12 +41,14 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
+            __instance.KillButton.buttonLabelText.text = "Inspect";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Detective);
 
             role.ExamineButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            role.ExamineText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.ExamineButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -57,8 +56,8 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
             role.ExamineButton.SetCoolDown(role.ExamineTimer(), CustomGameOptions.ExamineCd);
             role.ExamineButton.graphic.SetCooldownNormalizedUvs();
 
-            role.ExamineText.text = "Examine";
-            role.ExamineText.SetOutlineColor(Patches.Colors.Detective);
+            role.ExamineButton.buttonLabelText.text = "Examine";
+            role.ExamineButton.buttonLabelText.SetOutlineColor(Patches.Colors.Detective);
 
 
             if (role.InvestigatedPlayers.Count > 0)
@@ -66,23 +65,19 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                 Utils.SetTarget(ref role.ClosestPlayer, role.ExamineButton, float.NaN);
 
                 var renderer = role.ExamineButton.graphic;
-                if (role.ClosestPlayer != null && role.InvestigatingScene != null)
+                if (role.ClosestPlayer != null && role.InvestigatingScene != null && !role.coolingDown)
                 {
                     renderer.color = Palette.EnabledColor;
                     renderer.material.SetFloat("_Desat", 0f);
-                    role.ExamineText.color = Palette.EnabledColor;
-                    role.ExamineText.material.SetFloat("_Desat", 0f);
-                    __instance.KillButton.buttonLabelText.color = Palette.EnabledColor;
-                    __instance.KillButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+                    role.ExamineButton.buttonLabelText.color = Palette.EnabledColor;
+                    role.ExamineButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 }
                 else
                 {
                     renderer.color = Palette.DisabledClear;
                     renderer.material.SetFloat("_Desat", 1f);
-                    role.ExamineText.color = Palette.DisabledClear;
-                    role.ExamineText.material.SetFloat("_Desat", 1f);
-                    __instance.KillButton.buttonLabelText.color = Palette.DisabledClear;
-                    __instance.KillButton.buttonLabelText.material.SetFloat("_Desat", 1f);
+                    role.ExamineButton.buttonLabelText.color = Palette.DisabledClear;
+                    role.ExamineButton.buttonLabelText.material.SetFloat("_Desat", 1f);
                 }
             }
 
@@ -117,6 +112,18 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
 
             KillButtonTarget.SetTarget(killButton, closestScene, role);
             killButton.SetCoolDown(0f, 1f);
+
+            var InspectText = __instance.KillButton.buttonLabelText;
+            if (closestScene != null && killButton.enabled)
+            {
+                InspectText.color = Palette.EnabledColor;
+                InspectText.material.SetFloat("_Desat", 0f);
+            }
+            else
+            {
+                InspectText.color = Palette.DisabledClear;
+                InspectText.material.SetFloat("_Desat", 1f);
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ namespace TownOfUsEdited.Roles
         public KillButton _storeButton;
         public int UsesLeft;
         public TextMeshPro UsesText;
-        public TextMeshPro StoreText;
         public PlayerControl ClosestPlayer;
         public bool ButtonUsable => UsesLeft != CustomGameOptions.MaxStore;
         public bool Killing = false;

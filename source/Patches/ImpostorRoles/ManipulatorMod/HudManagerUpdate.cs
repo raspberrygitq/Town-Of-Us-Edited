@@ -11,7 +11,6 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite ManipulateSprite => TownOfUsEdited.ManipulateSprite;
         public static void Postfix(HudManager __instance)
         {
             var player = PlayerControl.LocalPlayer;
@@ -27,10 +26,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
                 role.ManipulateButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.ManipulateButton.graphic.enabled = true;
                 role.ManipulateButton.gameObject.SetActive(false);
-                role.ManipulateButton.graphic.sprite = ManipulateSprite;
-                role.ManipulateText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.ManipulateButton.transform);
-                role.ManipulateText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.ManipulateText);
+                role.ManipulateButton.graphic.sprite = TownOfUsEdited.ManipulateSprite;
             }
 
             // Check if the game state allows the KillButton to be active
@@ -39,25 +35,25 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
             isKillButtonActive = isKillButtonActive && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
             AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
 
-            role.ManipulateButton.graphic.sprite = ManipulateSprite;
+            role.ManipulateButton.graphic.sprite = TownOfUsEdited.ManipulateSprite;
 
             role.ManipulateButton.gameObject.SetActive(isKillButtonActive);
             role.ManipulateButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
-            role.ManipulateText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.ManipulateButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.ManipulateText.SetOutlineColor(Palette.ImpostorRed);
+            role.ManipulateButton.buttonLabelText.SetOutlineColor(Palette.ImpostorRed);
 
             var notimp = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors)).ToList();
 
             var renderer = role.ManipulateButton.graphic;
-            var labelrender = role.ManipulateText;
+            var labelrender = role.ManipulateButton.buttonLabelText;
             if (role.ManipulatedPlayer == null)
             {
-                role.ManipulateText.text = "Manipulate";
+                role.ManipulateButton.buttonLabelText.text = "Manipulate";
                 var killButton = role.ManipulateButton;
                 if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => (!x.isDummy || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && !x.IsManipulated()).ToList());
                 else if (PlayerControl.LocalPlayer.IsLover() && CustomGameOptions.ImpLoverKillTeammate) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && (!x.isDummy || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && !x.IsManipulated()).ToList());
@@ -79,7 +75,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
             }
             else if (!role.ManipulateButton.isCoolingDown || role.UsingManipulation)
             {
-                role.ManipulateText.text = "Control";
+                role.ManipulateButton.buttonLabelText.text = "Control";
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
                 labelrender.color = Palette.EnabledColor;
@@ -87,7 +83,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
             }
             else
             {
-                role.ManipulateText.text = "Control";
+                role.ManipulateButton.buttonLabelText.text = "Control";
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
                 labelrender.color = Palette.DisabledClear;
@@ -186,7 +182,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
                     {
                         Minigame.Instance.Close();
                     }
-                    else if (DestroyableSingleton<HudManager>.InstanceExists && MapBehaviour.Instance && MapBehaviour.Instance.IsOpen)
+                    else if (HudManager.InstanceExists && MapBehaviour.Instance && MapBehaviour.Instance.IsOpen)
                     {
                         MapBehaviour.Instance.Close();
                     }

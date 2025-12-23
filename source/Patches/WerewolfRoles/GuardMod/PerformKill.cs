@@ -21,7 +21,7 @@ namespace TownOfUsEdited.WerewolfRoles.GuardMod
 
             var role = Role.GetRole<Guard>(PlayerControl.LocalPlayer);
 
-            var ProtectButton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var ProtectButton = HudManager.Instance.KillButton;
                 
             if (__instance == ProtectButton)
             {

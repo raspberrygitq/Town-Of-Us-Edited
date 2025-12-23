@@ -24,9 +24,6 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
                 role.StoreButton.graphic.enabled = true;
                 role.StoreButton.gameObject.SetActive(false);
                 role.StoreButton.graphic.sprite = StoreSprite;
-                role.StoreText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.StoreButton.transform);
-                role.StoreText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.StoreText);
             }
 
             if (role.UsesText == null)
@@ -61,13 +58,13 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && !player.Data.Disconnected);
 
-             role.StoreText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+             role.StoreButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.StoreText.text = "Store";
-            role.StoreText.SetOutlineColor(Palette.ImpostorRed);
+            role.StoreButton.buttonLabelText.text = "Store";
+            role.StoreButton.buttonLabelText.SetOutlineColor(Palette.ImpostorRed);
 
             role.StoreButton.SetCoolDown(role.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
             role.StoreButton.graphic.SetCooldownNormalizedUvs();
@@ -77,15 +74,15 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
-                role.StoreText.color = Palette.EnabledColor;
-                role.StoreText.material.SetFloat("_Desat", 0f);
+                role.StoreButton.buttonLabelText.color = Palette.EnabledColor;
+                role.StoreButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
-                role.StoreText.color = Palette.DisabledClear;
-                role.StoreText.material.SetFloat("_Desat", 1f);
+                role.StoreButton.buttonLabelText.color = Palette.DisabledClear;
+                role.StoreButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
 
             role.UsesText.color = Palette.EnabledColor;

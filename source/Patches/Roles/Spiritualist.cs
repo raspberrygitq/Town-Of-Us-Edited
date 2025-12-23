@@ -1,5 +1,4 @@
 using System.Linq;
-using TMPro;
 
 namespace TownOfUsEdited.Roles
 {
@@ -19,7 +18,6 @@ namespace TownOfUsEdited.Roles
         public KillButton _controlButton;
         public PlayerControl ClosestPlayer;
         public PlayerControl ControlledPlayer;
-        public TextMeshPro ControlText;
         public void Control(PlayerControl target)
         {
             var interact = Utils.Interact(PlayerControl.LocalPlayer, target);

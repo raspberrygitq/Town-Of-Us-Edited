@@ -18,7 +18,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.TrollMod
                 return false;
 
             var troll = Role.GetRole<Troll>(PlayerControl.LocalPlayer);
-            var killbutton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var killbutton = HudManager.Instance.KillButton;
             
             if (troll.ClosestPlayer == null)
                 return false;

@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -8,7 +7,6 @@ namespace TownOfUsEdited.Roles
         public KillButton _curseButton;
         public PlayerControl CursedPlayer;
         public PlayerControl ClosestPlayer;
-        public TextMeshPro LabelText;
         public Sprite Kill;
 
         public Conjurer(PlayerControl player) : base(player)
@@ -21,7 +19,7 @@ namespace TownOfUsEdited.Roles
             AddToRoleHistory(RoleType);
             Faction = Faction.Impostors;
             Alignment = Alignment.ImpostorKilling;
-            Kill = DestroyableSingleton<HudManager>.Instance.KillButton.graphic.sprite;
+            Kill = HudManager.Instance.KillButton.graphic.sprite;
         }
 
         public KillButton CurseButton

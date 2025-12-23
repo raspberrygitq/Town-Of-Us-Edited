@@ -25,9 +25,6 @@ namespace TownOfUsEdited.CovenRoles.VoodooMasterMod
                 role.VoodooButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.VoodooButton.graphic.enabled = true;
                 role.VoodooButton.gameObject.SetActive(false);
-                role.VoodooText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.VoodooButton.transform);
-                role.VoodooText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.VoodooText);
             }
 
             role.VoodooButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
@@ -35,15 +32,15 @@ namespace TownOfUsEdited.CovenRoles.VoodooMasterMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.VoodooText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.VoodooButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.VoodooButton.graphic.sprite = TownOfUsEdited.Voodoo;
             role.VoodooButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
-            role.VoodooText.text = "Voodoo";
-            role.VoodooText.SetOutlineColor(Colors.Coven);
+            role.VoodooButton.buttonLabelText.text = "Voodoo";
+            role.VoodooButton.buttonLabelText.SetOutlineColor(Colors.Coven);
 
             foreach (var player2 in PlayerControl.AllPlayerControls)
             {
@@ -59,7 +56,7 @@ namespace TownOfUsEdited.CovenRoles.VoodooMasterMod
             else if (PlayerControl.LocalPlayer.IsLover()) Utils.SetTarget(ref role.ClosestPlayer, role.VoodooButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Coven) && !x.IsVoodoo()).ToList());
             else Utils.SetTarget(ref role.ClosestPlayer, role.VoodooButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Coven) && !x.IsVoodoo()).ToList());
 
-            var labelrender = role.VoodooText;
+            var labelrender = role.VoodooButton.buttonLabelText;
             if (role.ClosestPlayer != null)
             {
                 labelrender.color = Palette.EnabledColor;

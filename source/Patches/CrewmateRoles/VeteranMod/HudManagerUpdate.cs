@@ -22,7 +22,6 @@ namespace TownOfUsEdited.CrewmateRoles.VeteranMod
             var alertButton = __instance.KillButton;
 
             var role = Role.GetRole<Veteran>(PlayerControl.LocalPlayer);
-            var alertText = __instance.KillButton.buttonLabelText;
 
             if (role.UsesText == null && role.UsesLeft > 0)
             {
@@ -45,14 +44,18 @@ namespace TownOfUsEdited.CrewmateRoles.VeteranMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            alertButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             role.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            alertText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            alertButton.buttonLabelText.text = "Alert";
+            alertButton.buttonLabelText.SetOutlineColor(Patches.Colors.Veteran);
+
             if (role.OnAlert) alertButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.AlertDuration);
             else if (role.ButtonUsable) alertButton.SetCoolDown(role.AlertTimer(), CustomGameOptions.AlertCd);
             else alertButton.SetCoolDown(0f, CustomGameOptions.AlertCd);
@@ -64,8 +67,8 @@ namespace TownOfUsEdited.CrewmateRoles.VeteranMod
                 renderer.material.SetFloat("_Desat", 0f);
                 role.UsesText.color = Palette.EnabledColor;
                 role.UsesText.material.SetFloat("_Desat", 0f);
-                alertText.color = Palette.EnabledColor;
-                alertText.material.SetFloat("_Desat", 0f);
+                alertButton.buttonLabelText.color = Palette.EnabledColor;
+                alertButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
@@ -73,8 +76,8 @@ namespace TownOfUsEdited.CrewmateRoles.VeteranMod
                 renderer.material.SetFloat("_Desat", 1f);
                 role.UsesText.color = Palette.DisabledClear;
                 role.UsesText.material.SetFloat("_Desat", 1f);
-                alertText.color = Palette.DisabledClear;
-                alertText.material.SetFloat("_Desat", 1f);
+                alertButton.buttonLabelText.color = Palette.DisabledClear;
+                alertButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
     }

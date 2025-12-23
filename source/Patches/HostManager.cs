@@ -125,7 +125,7 @@ namespace TownOfUsEdited.Patches
 		        {
                     GameStartManager.Instance.StartButtonGlyph.spriteRenderer.color = Palette.EnabledColor;
                     GameStartManager.Instance.StartButton.SetButtonEnableState(true);
-                    GameStartManager.Instance.StartButton.ChangeButtonText(DestroyableSingleton<TranslationController>.Instance.GetString(StringNames.StartLabel, string.Empty));
+                    GameStartManager.Instance.StartButton.ChangeButtonText(TranslationController.Instance.GetString(StringNames.StartLabel, string.Empty));
                 }
             }
         }

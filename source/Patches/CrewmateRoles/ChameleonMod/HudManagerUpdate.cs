@@ -18,7 +18,6 @@ namespace TownOfUsEdited.CrewmateRoles.ChameleonMod
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Chameleon)) return;
             var swoopButton = __instance.KillButton;
-            var swoopText = __instance.KillButton.buttonLabelText;
 
             var role = Role.GetRole<Chameleon>(PlayerControl.LocalPlayer);
 
@@ -26,15 +25,19 @@ namespace TownOfUsEdited.CrewmateRoles.ChameleonMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            swoopText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            swoopButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            swoopButton.buttonLabelText.text = "Swoop";
+            swoopButton.buttonLabelText.SetOutlineColor(Patches.Colors.Chameleon);
+
             if (role.IsSwooped) swoopButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.ChamSwoopDuration);
             else swoopButton.SetCoolDown(role.SwoopTimer(), CustomGameOptions.ChamSwoopCooldown);
 
             var renderer = swoopButton.graphic;
-            var label = swoopText;
+            var label = swoopButton.buttonLabelText;
             if (!role.IsSwooped && !role.coolingDown)
             {
                 renderer.color = Palette.EnabledColor;

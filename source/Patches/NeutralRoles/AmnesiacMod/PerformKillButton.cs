@@ -19,10 +19,9 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton
     {
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static bool Prefix(KillButton __instance)
         {
-            if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
+            if (__instance != HudManager.Instance.KillButton) return true;
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Amnesiac);
             if (!flag) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
@@ -304,7 +303,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                 if (other.AmOwner)
                     foreach (var player in PlayerControl.AllPlayerControls)
                         player.nameText().color = Color.white;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Sheriff)
@@ -356,7 +355,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
             {
                 var mayorRole = Role.GetRole<Mayor>(amnesiac);
                 mayorRole.Revealed = false;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Politician)
@@ -385,14 +384,14 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
             {
                 var prosRole = Role.GetRole<Prosecutor>(amnesiac);
                 prosRole.Prosecuted = false;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Vigilante)
             {
                 var vigiRole = Role.GetRole<Vigilante>(amnesiac);
                 vigiRole.RemainingKills = CustomGameOptions.VigilanteKills;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Veteran)
@@ -498,7 +497,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                 var mysticRole = Role.GetRole<Mystic>(amnesiac);
                 mysticRole.BodyArrows.Values.DestroyAll();
                 mysticRole.BodyArrows.Clear();
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Transporter)
@@ -545,7 +544,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                 var aurialRole = Role.GetRole<Aurial>(amnesiac);
                 aurialRole.SenseArrows.Values.DestroyAll();
                 aurialRole.SenseArrows.Clear();
-                if (PlayerControl.LocalPlayer == aurialRole.Player) DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                if (PlayerControl.LocalPlayer == aurialRole.Player) HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Arsonist)
@@ -768,7 +767,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
 
             else if (!(amnesiac.Is(RoleEnum.Altruist) || amnesiac.Is(RoleEnum.Amnesiac) || amnesiac.Is(Faction.Impostors)))
             {
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             var killsList = (newRole.Kills, newRole.CorrectKills, newRole.IncorrectKills, newRole.CorrectAssassinKills, newRole.IncorrectAssassinKills);
@@ -792,7 +791,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                     var poisonerRole = Role.GetRole<Poisoner>(amnesiac);
                     poisonerRole.Cooldown = CustomGameOptions.PoisonCD;
                     poisonerRole.PoisonedPlayer = null;
-                    DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                    HudManager.Instance.KillButton.gameObject.SetActive(false);
                 }
             }
 
@@ -807,7 +806,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                         var arrow = gameObj.AddComponent<ArrowBehaviour>();
                         gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                         var renderer = gameObj.AddComponent<SpriteRenderer>();
-                        renderer.sprite = Sprite;
+                        renderer.sprite = TownOfUsEdited.Arrow;
                         arrow.image = renderer;
                         gameObj.layer = 5;
                         snitchRole.SnitchArrows.Add(amnesiac.PlayerId, arrow);
@@ -818,7 +817,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                         var arrow = gameObj.AddComponent<ArrowBehaviour>();
                         gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                         var renderer = gameObj.AddComponent<SpriteRenderer>();
-                        renderer.sprite = Sprite;
+                        renderer.sprite = TownOfUsEdited.Arrow;
                         arrow.image = renderer;
                         gameObj.layer = 5;
                         snitchRole.ImpArrows.Add(arrow);

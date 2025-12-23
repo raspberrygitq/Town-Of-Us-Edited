@@ -22,7 +22,6 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Seer)) return;
             if (CustomGameOptions.GameMode == GameMode.Werewolf) return;
             var investigateButton = __instance.KillButton;
-            var revealText = __instance.KillButton.buttonLabelText;
 
             var role = Role.GetRole<Seer>(PlayerControl.LocalPlayer);
 
@@ -30,10 +29,14 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            revealText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            investigateButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
+
+            investigateButton.buttonLabelText.text = "Reveal";
+            investigateButton.buttonLabelText.SetOutlineColor(Patches.Colors.Seer);
+
             investigateButton.SetCoolDown(role.SeerTimer(), CustomGameOptions.SeerCd);
 
             var notInvestigated = PlayerControl.AllPlayerControls
@@ -44,6 +47,7 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
             Utils.SetTarget(ref role.ClosestPlayer, investigateButton, float.NaN, notInvestigated);
 
             var renderer = investigateButton.graphic;
+            var revealText = investigateButton.buttonLabelText;
             if (role.ClosestPlayer != null)
             {
                 renderer.color = Palette.EnabledColor;

@@ -21,7 +21,6 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Vulture)) return;
 
             var role = Role.GetRole<Vulture>(PlayerControl.LocalPlayer);
-            var EatText = __instance.KillButton.buttonLabelText;
 
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;
@@ -30,11 +29,6 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
             var flag = (GameOptionsManager.Instance.currentNormalGameOptions.GhostsDoTasks || !data.IsDead) &&
                        (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                        PlayerControl.LocalPlayer.CanMove;
-
-            EatText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             var killButton = __instance.KillButton;
             DeadBody closestBody = null;
@@ -119,6 +113,14 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            __instance.KillButton.buttonLabelText.text = "Eat";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Vulture);
+
             __instance.KillButton.SetCoolDown(role.EatTimer(), CustomGameOptions.VultureCD);
             KillButtonTarget.SetTarget(killButton, closestBody, role);
         }

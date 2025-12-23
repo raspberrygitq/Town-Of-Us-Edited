@@ -64,7 +64,7 @@ namespace TownOfUsEdited
 
             public static void Die(PlayerControl player, PlayerControl infectious)
             {
-                var hudManager = DestroyableSingleton<HudManager>.Instance;
+                var hudManager = HudManager.Instance;
                 var amOwner = player.AmOwner;
                 player.gameObject.layer = LayerMask.NameToLayer("Ghost");
                 player.Visible = false;

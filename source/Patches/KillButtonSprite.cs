@@ -35,170 +35,143 @@ namespace TownOfUsEdited
                 flag = true;
                 if (CustomGameOptions.GameMode != GameMode.Werewolf)
                 {
-                    __instance.KillButton.buttonLabelText.text = "Reveal";
                     __instance.KillButton.graphic.sprite = TownOfUsEdited.SeerSprite;
                 }
                 else __instance.KillButton.graphic.sprite = TownOfUsEdited.RevealRoleSprite;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Medic))
             {
-                __instance.KillButton.buttonLabelText.text = "Shield";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.MedicSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist))
             {
-                __instance.KillButton.buttonLabelText.text = "Douse";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.DouseSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Altruist))
             {
-                __instance.KillButton.buttonLabelText.text = "Revive";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.ReviveSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Veteran) || PlayerControl.LocalPlayer.Is(RoleEnum.Helper))
             {
-                __instance.KillButton.buttonLabelText.text = "Alert";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.AlertSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Astral))
             {
-                __instance.KillButton.buttonLabelText.text = "Dissociate";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.Dissociate;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.TimeLord))
             {
-                __instance.KillButton.buttonLabelText.text = "Rewind";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.Rewind;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Amnesiac))
             {
-                __instance.KillButton.buttonLabelText.text = "Remember";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.RememberSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Tracker))
             {
-                __instance.KillButton.buttonLabelText.text = "Track";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.TrackSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Transporter))
             {
-                __instance.KillButton.buttonLabelText.text = "Transport";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.TransportSprite;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Informant) || PlayerControl.LocalPlayer.Is(RoleEnum.Spy))
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Spy))
             {
-                __instance.KillButton.buttonLabelText.text = "Admin";
+                __instance.KillButton.graphic.sprite = TownOfUsEdited.AdminSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Medium))
             {
-                __instance.KillButton.buttonLabelText.text = "Mediate";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.MediateSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Survivor))
             {
-                __instance.KillButton.buttonLabelText.text = "Safeguard";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.VestSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel) || PlayerControl.LocalPlayer.Is(RoleEnum.Guardian))
             {
-                __instance.KillButton.buttonLabelText.text = "Protect";
                 var ga = RoleManager.Instance.GetRole(AmongUs.GameOptions.RoleTypes.GuardianAngel).Cast<GuardianAngelRole>();
                 __instance.KillButton.graphic.sprite = ga.Ability.Image;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer))
             {
-                __instance.KillButton.buttonLabelText.text = "Infect";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.InfectSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Engineer))
             {
-                __instance.KillButton.buttonLabelText.text = "Fix";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.EngineerFix;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Trapper))
             {
-                __instance.KillButton.buttonLabelText.text = "Trap";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.TrapSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Captain))
             {
-                __instance.KillButton.buttonLabelText.text = "Zoom";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.CapZoomButton;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Jailor))
             {
-                __instance.KillButton.buttonLabelText.text = "Jail";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.JailSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Politician))
             {
-                __instance.KillButton.buttonLabelText.text = "Campaign";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.CampaignSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Warden))
             {
-                __instance.KillButton.buttonLabelText.text = "Fortify";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.FortifySprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Doctor))
             {
-                __instance.KillButton.buttonLabelText.text = "Revive";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.DocReviveButton;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Detective))
             {
-                __instance.KillButton.buttonLabelText.text = "Inspect";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.InspectSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Chameleon))
             {
-                __instance.KillButton.buttonLabelText.text = "Swoop";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.ChameleonSwoop;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Doomsayer))
             {
-                __instance.KillButton.buttonLabelText.text = "Observe";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.ObserveSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.VampireHunter))
             {
-                __instance.KillButton.buttonLabelText.text = "Stake";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.StakeSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Oracle))
             {
-                __instance.KillButton.buttonLabelText.text = "Confess";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.ConfessSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Shifter))
             {
-                __instance.KillButton.buttonLabelText.text = "Shift";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.ShiftButton;
                 flag = true;
             }
@@ -214,49 +187,41 @@ namespace TownOfUsEdited
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Vulture))
             {
-                __instance.KillButton.buttonLabelText.text = "Eat";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.Eat;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.HexMaster))
             {
-                __instance.KillButton.buttonLabelText.text = "Hex";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.Hex;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector))
             {
-                __instance.KillButton.buttonLabelText.text = "Reap";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.ReapSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Plumber))
             {
-                __instance.KillButton.buttonLabelText.text = "Barricade";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.BarricadeSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
             {
-                __instance.KillButton.buttonLabelText.text = "Bribe";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.BribeSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Cleric))
             {
-                __instance.KillButton.buttonLabelText.text = "Barrier";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.BarrierSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Deputy))
             {
-                __instance.KillButton.buttonLabelText.text = "Camp";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.CampSprite;
                 flag = true;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Lookout) || PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))
             {
-                __instance.KillButton.buttonLabelText.text = "Watch";
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.WatchSprite;
                 flag = true;
             }
@@ -394,7 +359,7 @@ namespace TownOfUsEdited
             {
                 if (__instance != HudManager.Instance.AbilityButton) return true;
                 if (!PlayerControl.LocalPlayer.Data.IsDead) return false;
-                if (DestroyableSingleton<HudManager>.Instance.Chat.IsOpenOrOpening)
+                if (HudManager.Instance.Chat.IsOpenOrOpening)
                 {
                     return false;
                 }
@@ -408,10 +373,10 @@ namespace TownOfUsEdited
                 }
                 var ghost = RoleManager.Instance.GetRole(AmongUs.GameOptions.RoleTypes.CrewmateGhost).Cast<CrewmateGhostRole>();
                 Minigame minigame = Object.Instantiate<Minigame>(ghost.HauntMenu);
-                minigame.transform.SetParent(DestroyableSingleton<HudManager>.Instance.AbilityButton.transform, false);
+                minigame.transform.SetParent(HudManager.Instance.AbilityButton.transform, false);
                 minigame.transform.SetLocalZ(-5f);
                 minigame.Begin(null);
-                DestroyableSingleton<HudManager>.Instance.AbilityButton.SetDisabled();
+                HudManager.Instance.AbilityButton.SetDisabled();
                 return false;
             }
         }

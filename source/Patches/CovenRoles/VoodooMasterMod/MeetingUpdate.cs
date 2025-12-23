@@ -66,7 +66,7 @@ namespace TownOfUsEdited.CovenRoles.VoodooMasterModMod
                 {
                     
                     var message = "A <color=#bf5fff>Voodoo Master</color> cast a spell on you, you can not vote and will be forced to vote for whoever the Voodoo Master votes.";
-                    DestroyableSingleton<HudManager>.Instance.Chat.AddChat(PlayerControl.LocalPlayer, message, false);
+                    HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, message, false);
                 }
             }
         }

@@ -40,7 +40,7 @@ namespace TownOfUsEdited.Patches
 		    __instance.taskOverlay.Show();
             __instance.ColorControl.baseColor = role.Color;
 		    __instance.ColorControl.SetColor(role.Color);
-			DestroyableSingleton<HudManager>.Instance.SetHudActive(false);
+			HudManager.Instance.SetHudActive(false);
             return false;
         }
     }
@@ -74,7 +74,7 @@ namespace TownOfUsEdited.Patches
 		    __instance.ColorControl.baseColor = role.Color;
 		    __instance.ColorControl.SetColor(role.Color);
 		    __instance.taskOverlay.Show();
-		    DestroyableSingleton<HudManager>.Instance.SetHudActive(false);
+		    HudManager.Instance.SetHudActive(false);
 		    ConsoleJoystick.SetMode_Sabotage();
             return false;
         }

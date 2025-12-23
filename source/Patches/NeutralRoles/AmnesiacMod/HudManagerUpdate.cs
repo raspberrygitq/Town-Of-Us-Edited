@@ -50,6 +50,9 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
+            __instance.KillButton.buttonLabelText.text = "Remember";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Amnesiac);
+
             if (CustomGameOptions.RememberArrows && !PlayerControl.LocalPlayer.Data.IsDead)
             {
                 var validBodies = Object.FindObjectsOfType<DeadBody>().Where(x =>

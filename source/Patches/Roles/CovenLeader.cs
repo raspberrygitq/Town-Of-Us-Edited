@@ -1,5 +1,4 @@
 using System.Linq;
-using TMPro;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
@@ -26,7 +25,6 @@ namespace TownOfUsEdited.Roles
         public KillButton _recruitButton;
         public PlayerControl ClosestPlayer;
         public bool Converted = false;
-        public TextMeshPro RecruitText;
         public void Recruit(PlayerControl target)
         {
             // Check if the Hex Master can hex

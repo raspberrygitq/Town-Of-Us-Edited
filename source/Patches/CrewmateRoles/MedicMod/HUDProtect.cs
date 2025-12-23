@@ -20,17 +20,20 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Medic)) return;
 
             var protectButton = __instance.KillButton;
-            var shieldText = __instance.KillButton.buttonLabelText;
             var role = Role.GetRole<Medic>(PlayerControl.LocalPlayer);
 
             protectButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            shieldText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            protectButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            protectButton.buttonLabelText.text = "Shield";
+            protectButton.buttonLabelText.SetOutlineColor(Patches.Colors.Medic);
+
             protectButton.SetCoolDown(role.StartTimer(), 10f);
 
             if (role.ShieldedPlayer != null) return;

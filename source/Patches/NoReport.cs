@@ -43,7 +43,7 @@ namespace TownOfUsEdited.Patches
                 if (!__instance.CanMove) return;
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation)
                 {
-                    DestroyableSingleton<HudManager>.Instance.ReportButton.SetActive(false);
+                    HudManager.Instance.ReportButton.SetActive(false);
                     return;
                 }
                 if (CustomGameOptions.GameMode != GameMode.BattleRoyale &&
@@ -68,7 +68,7 @@ namespace TownOfUsEdited.Patches
                         }
                     }
 
-                DestroyableSingleton<HudManager>.Instance.ReportButton.SetActive(flag2);
+                HudManager.Instance.ReportButton.SetActive(flag2);
             }
         }
 

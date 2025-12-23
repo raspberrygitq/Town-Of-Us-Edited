@@ -23,17 +23,14 @@ namespace TownOfUsEdited.CovenRoles.PotionMasterMod
                 role.PotionButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.PotionButton.graphic.enabled = true;
                 role.PotionButton.gameObject.SetActive(false);
-                role.PotionText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.PotionButton.transform);
-                role.PotionText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.PotionText);
             }
 
-            role.PotionText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.PotionButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.PotionText.SetOutlineColor(Colors.Coven);
+            role.PotionButton.buttonLabelText.SetOutlineColor(Colors.Coven);
 
             if (role.Potion == "null")
             {
@@ -54,12 +51,12 @@ namespace TownOfUsEdited.CovenRoles.PotionMasterMod
             if (role.Potion == "null")
             {
                 role.PotionButton.graphic.sprite = TownOfUsEdited.Potion;
-                role.PotionText.text = "Potion";
+                role.PotionButton.buttonLabelText.text = "Potion";
             }
             else
             {
                 role.PotionButton.graphic.sprite = TownOfUsEdited.Drink;
-                role.PotionText.text = "Drink";
+                role.PotionButton.buttonLabelText.text = "Drink";
             }
             role.PotionButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
@@ -72,7 +69,7 @@ namespace TownOfUsEdited.CovenRoles.PotionMasterMod
 
             role.PotionButton.graphic.SetCooldownNormalizedUvs();
 
-            var labelrender = role.PotionText;
+            var labelrender = role.PotionButton.buttonLabelText;
             if (!role.PotioncoolingDown)
             {
                 role.PotionButton.graphic.color = Palette.EnabledColor;

@@ -13,7 +13,7 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.CaptainMod
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             var role = Role.GetRole<Captain>(PlayerControl.LocalPlayer);
-            var ZoomButton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var ZoomButton = HudManager.Instance.KillButton;
             if (__instance == ZoomButton)
             {
                 if (__instance.isCoolingDown) return false;

@@ -23,7 +23,6 @@ namespace TownOfUsEdited.CrewmateRoles.TrackerMod
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;
             var trackButton = __instance.KillButton;
-            var trackText = __instance.KillButton.buttonLabelText;
 
             var role = Role.GetRole<Tracker>(PlayerControl.LocalPlayer);
 
@@ -47,14 +46,18 @@ namespace TownOfUsEdited.CrewmateRoles.TrackerMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            trackButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             role.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            trackText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            trackButton.buttonLabelText.text = "Track";
+            trackButton.buttonLabelText.SetOutlineColor(Patches.Colors.Tracker);
+
             if (role.ButtonUsable) trackButton.SetCoolDown(role.TrackerTimer(), CustomGameOptions.TrackCd);
             else trackButton.SetCoolDown(0f, CustomGameOptions.TrackCd);
             if (role.UsesLeft == 0) return;
@@ -67,7 +70,7 @@ namespace TownOfUsEdited.CrewmateRoles.TrackerMod
             Utils.SetTarget(ref role.ClosestPlayer, trackButton, float.NaN, notTracked);
 
             var renderer = trackButton.graphic;
-            var label = trackText;
+            var label = trackButton.buttonLabelText;
             if (role.ClosestPlayer != null && role.ButtonUsable)
             {
                 renderer.color = Palette.EnabledColor;

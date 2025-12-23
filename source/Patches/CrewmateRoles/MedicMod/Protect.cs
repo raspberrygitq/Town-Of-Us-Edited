@@ -8,7 +8,7 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
     {
         public static bool Prefix(KillButton __instance)
         {
-            if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
+            if (__instance != HudManager.Instance.KillButton) return true;
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Medic);
             if (!flag) return true;
             var role = Role.GetRole<Medic>(PlayerControl.LocalPlayer);

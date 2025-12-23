@@ -23,7 +23,6 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.LookoutMod
 
                 var role = Role.GetRole<Lookout>(PlayerControl.LocalPlayer);
                 var WatchButton = __instance.KillButton;
-                var watchText = __instance.KillButton.buttonLabelText;
 
                 // Check if the game state allows the KillButton to be active
                 bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
@@ -32,15 +31,18 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.LookoutMod
                 AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
 
                 WatchButton.gameObject.SetActive(isKillButtonActive);
-                watchText.gameObject.SetActive(isKillButtonActive);
+                WatchButton.buttonLabelText.gameObject.SetActive(isKillButtonActive);
+
+                WatchButton.buttonLabelText.text = "Watch";
+                WatchButton.buttonLabelText.SetOutlineColor(Colors.Lookout);
 
                 var renderer = WatchButton.graphic;
                 if (!WatchButton.isCoolingDown || role.IsWatching)
                 {
                     renderer.color = Palette.EnabledColor;
                     renderer.material.SetFloat("_Desat", 0f);
-                    watchText.color = Palette.EnabledColor;
-                    watchText.material.SetFloat("_Desat", 0f);
+                    WatchButton.buttonLabelText.color = Palette.EnabledColor;
+                    WatchButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 }
 
                 if (role.ClosestPlayer != null)

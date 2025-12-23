@@ -1658,7 +1658,7 @@ namespace TownOfUsEdited
                                 foreach (var impPlayer in impos)
                                 {
                                     var playerResults = $"Today's word is {word}, if the Talkative Wolf doesn't say it before the day ends, he will die!";
-                                    if (!string.IsNullOrWhiteSpace(playerResults) && impPlayer == PlayerControl.LocalPlayer) DestroyableSingleton<HudManager>.Instance.Chat.AddChat(impPlayer, playerResults);
+                                    if (!string.IsNullOrWhiteSpace(playerResults) && impPlayer == PlayerControl.LocalPlayer) HudManager.Instance.Chat.AddChat(impPlayer, playerResults);
                                 }
                                 break;
 
@@ -2444,7 +2444,7 @@ namespace TownOfUsEdited
                                         .Cast<IDisconnectHandler>());
                                     if (GameManager.Instance.CheckTaskCompletion()) return;
 
-                                    DestroyableSingleton<HudManager>.Instance.OpenMeetingRoom(buttonBarry);
+                                    HudManager.Instance.OpenMeetingRoom(buttonBarry);
                                     buttonBarry.RpcStartMeeting(null);
                                 }
                                 break;

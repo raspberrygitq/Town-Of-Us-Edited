@@ -181,6 +181,7 @@ namespace TownOfUsEdited.Patches
             {
                 var hunter = Role.GetRole<Hunter>(PlayerControl.LocalPlayer);
                 hunter.Cooldown = CustomGameOptions.InitialCooldowns;
+                hunter.StalkCooldown = CustomGameOptions.InitialCooldowns;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.VampireHunter))

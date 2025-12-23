@@ -85,6 +85,9 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             reviveButton.graphic.sprite = TownOfUsEdited.DocReviveButton;
 
+            reviveButton.buttonLabelText.text = "Revive";
+            reviveButton.buttonLabelText.SetOutlineColor(Patches.Colors.Doctor);
+
             if (role.ButtonUsable || CustomGameOptions.GameMode == GameMode.Chaos)
             {
                 reviveButton.SetCoolDown(role.ReviveTimer(), CustomGameOptions.DocReviveCooldown);

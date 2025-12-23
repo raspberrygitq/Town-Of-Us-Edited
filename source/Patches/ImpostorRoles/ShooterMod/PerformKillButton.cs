@@ -14,7 +14,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             var role = Role.GetRole<Shooter>(PlayerControl.LocalPlayer);
 
-            var killButton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var killButton = HudManager.Instance.KillButton;
   
             if (__instance == role.StoreButton) 
             {

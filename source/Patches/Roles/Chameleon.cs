@@ -19,6 +19,7 @@ namespace TownOfUsEdited.Roles
             Cooldown = CustomGameOptions.ChamSwoopCooldown;
             RoleType = RoleEnum.Chameleon;
             Faction = Faction.Crewmates;
+            Alignment = Alignment.CrewmateInvestigative;
             AddToRoleHistory(RoleType);
         }
 

@@ -15,10 +15,10 @@ namespace TownOfUsEdited.CrewmateRoles.InformantMod
             var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
             if (!abilityUsed) return false;
             var role = Role.GetRole<Informant>(PlayerControl.LocalPlayer);
-            if (__instance == DestroyableSingleton<HudManager>.Instance.KillButton)
+            if (__instance == HudManager.Instance.KillButton)
             {
                 if (!__instance.isActiveAndEnabled) return false;
-                DestroyableSingleton<HudManager>.Instance.ToggleMapVisible(new MapOptions
+                HudManager.Instance.ToggleMapVisible(new MapOptions
                 {
                     Mode = MapOptions.Modes.CountOverlay
                 });

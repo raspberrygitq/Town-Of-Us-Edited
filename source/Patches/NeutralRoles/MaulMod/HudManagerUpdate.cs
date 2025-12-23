@@ -28,9 +28,6 @@ namespace TownOfUsEdited.NeutralRoles.MaulMod
                 role.RampageButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.RampageButton.graphic.enabled = true;
                 role.RampageButton.gameObject.SetActive(false);
-                role.RampageText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.RampageButton.transform);
-                role.RampageText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.RampageText);
             }
 
             role.RampageButton.graphic.sprite = TownOfUsEdited.RampageSprite;
@@ -41,13 +38,13 @@ namespace TownOfUsEdited.NeutralRoles.MaulMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.RampageText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.RampageButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.RampageText.text = "Rampage";
-            role.RampageText.SetOutlineColor(Colors.Werewolf);
+            role.RampageButton.buttonLabelText.text = "Rampage";
+            role.RampageButton.buttonLabelText.SetOutlineColor(Colors.Werewolf);
 
             role.RampageButton.graphic.SetCooldownNormalizedUvs();
 
@@ -69,15 +66,15 @@ namespace TownOfUsEdited.NeutralRoles.MaulMod
                 {
                     role.RampageButton.graphic.color = Palette.EnabledColor;
                     role.RampageButton.graphic.material.SetFloat("_Desat", 0f);
-                    role.RampageText.color = Palette.EnabledColor;
-                    role.RampageText.material.SetFloat("_Desat", 0f);
+                    role.RampageButton.buttonLabelText.color = Palette.EnabledColor;
+                    role.RampageButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 }
                 else
                 {
                     role.RampageButton.graphic.color = Palette.DisabledClear;
                     role.RampageButton.graphic.material.SetFloat("_Desat", 1f);
-                    role.RampageText.color = Palette.DisabledClear;
-                    role.RampageText.material.SetFloat("_Desat", 1f);
+                    role.RampageButton.buttonLabelText.color = Palette.DisabledClear;
+                    role.RampageButton.buttonLabelText.material.SetFloat("_Desat", 1f);
                 }
 
                 return;

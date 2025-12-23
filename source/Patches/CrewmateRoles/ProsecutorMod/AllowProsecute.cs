@@ -82,9 +82,9 @@ namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
                     if (prosecutor.ProsecuteThisMeeting)
                     {
                         ConsoleJoystick.SetMode_Task();
-                        yield return DestroyableSingleton<HudManager>.Instance.CoFadeFullScreen(Color.clear, Color.black, 1f, false);
+                        yield return HudManager.Instance.CoFadeFullScreen(Color.clear, Color.black, 1f, false);
                         ExileController exileController = Object.Instantiate<ExileController>(ShipStatus.Instance.ExileCutscenePrefab);
-                        exileController.transform.SetParent(DestroyableSingleton<HudManager>.Instance.transform, false);
+                        exileController.transform.SetParent(HudManager.Instance.transform, false);
                         exileController.transform.localPosition = new Vector3(0f, 0f, -60f);
                         MeetingHud.Instance.gameObject.SetActive(false);
                         exileController.BeginForGameplay(VotedPlayer.Data, false);
@@ -151,7 +151,7 @@ namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
 
             public static void UpdateProsecuted(PlayerControl player)
             {
-                var hudManager = DestroyableSingleton<HudManager>.Instance;
+                var hudManager = HudManager.Instance;
                 var amOwner = player.AmOwner;
                 if (amOwner)
                 {
@@ -386,7 +386,7 @@ namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
                     var prosecutor = (Prosecutor)role;
                     if (prosecutor.ProsecuteThisMeeting)
                     {
-                        DestroyableSingleton<HudManager>.Instance.StartCoroutine(DestroyableSingleton<HudManager>.Instance.CoFadeFullScreen(Color.black, Color.clear, 0.2f, false));
+                        HudManager.Instance.StartCoroutine(HudManager.Instance.CoFadeFullScreen(Color.black, Color.clear, 0.2f, false));
                         return false;
                     }
                 }

@@ -32,6 +32,9 @@ namespace TownOfUsEdited.CrewmateRoles.MediumMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
+                mediateText.text = "Mediate";
+                mediateText.SetOutlineColor(Patches.Colors.Medium);
+
                 foreach (var player in PlayerControl.AllPlayerControls)
                 {
                     if (role.MediatedPlayers.Keys.Contains(player.PlayerId))

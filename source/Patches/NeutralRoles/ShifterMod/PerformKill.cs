@@ -21,7 +21,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
     {
         public static bool Prefix(KillButton __instance)
         {
-            if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
+            if (__instance != HudManager.Instance.KillButton) return true;
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Shifter);
             if (!flag) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
@@ -432,7 +432,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 var newshifterRole = Role.GetRole<Shifter>(other);
                 Role.GetRole(shifter).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
                 newshifterRole.Cooldown = CustomGameOptions.ShiftCD;
-                DestroyableSingleton<HudManager>.Instance.SabotageButton.Hide();
+                HudManager.Instance.SabotageButton.Hide();
                 foreach (var player in PlayerControl.AllPlayerControls)
                 {
                     if (player.Data.IsImpostor() && PlayerControl.LocalPlayer.Data.IsImpostor())
@@ -484,7 +484,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                         var poisonerRole = Role.GetRole<Poisoner>(shifter);
                         poisonerRole.Cooldown = CustomGameOptions.PoisonCD;
                         poisonerRole.PoisonedPlayer = null;
-                        DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                        HudManager.Instance.KillButton.gameObject.SetActive(false);
                     }
                 }
             }
@@ -499,7 +499,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 if (other.AmOwner)
                     foreach (var player in PlayerControl.AllPlayerControls)
                         player.nameText().color = Color.white;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Sheriff)
@@ -566,7 +566,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 var mayorRole = Role.GetRole<Mayor>(shifter);
                 mayorRole.Revealed = false;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Politician)
@@ -580,7 +580,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 var prosRole = Role.GetRole<Prosecutor>(shifter);
                 prosRole.Prosecuted = false;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Deputy)
@@ -595,7 +595,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 var vigiRole = Role.GetRole<Vigilante>(shifter);
                 vigiRole.RemainingKills = CustomGameOptions.VigilanteKills;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Veteran)
@@ -692,7 +692,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 var mysticRole = Role.GetRole<Mystic>(shifter);
                 mysticRole.BodyArrows.Values.DestroyAll();
                 mysticRole.BodyArrows.Clear();
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Transporter)
@@ -739,7 +739,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 var aurialRole = Role.GetRole<Aurial>(shifter);
                 aurialRole.SenseArrows.Values.DestroyAll();
                 aurialRole.SenseArrows.Clear();
-                if (PlayerControl.LocalPlayer == aurialRole.Player) DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                if (PlayerControl.LocalPlayer == aurialRole.Player) HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.Arsonist)
@@ -991,7 +991,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
 
             else if (!(shifter.Is(RoleEnum.Altruist) || shifter.Is(RoleEnum.Amnesiac) || shifter.Is(RoleEnum.Shifter) || shifter.Is(Faction.Impostors)))
             {
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             var killsList = (newRole.Kills, newRole.CorrectKills, newRole.IncorrectKills, newRole.CorrectAssassinKills, newRole.IncorrectAssassinKills);

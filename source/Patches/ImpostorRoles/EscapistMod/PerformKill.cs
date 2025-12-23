@@ -27,7 +27,7 @@ namespace TownOfUsEdited.ImpostorRoles.EscapistMod
                     if (!abilityUsed) return false;
                     role.EscapePoint = PlayerControl.LocalPlayer.transform.position;
                     role.EscapeButton.graphic.sprite = EscapeSprite;
-                    DestroyableSingleton<HudManager>.Instance.KillButton.SetTarget(null);
+                    HudManager.Instance.KillButton.SetTarget(null);
                     if (role.Cooldown < 5f)
                         role.Cooldown = 5f;
                 }

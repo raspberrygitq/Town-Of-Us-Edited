@@ -20,7 +20,6 @@ namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel)) return;
             var protectButton = __instance.KillButton;
-            var protectText = __instance.KillButton.buttonLabelText;
 
             var role = Role.GetRole<GuardianAngel>(PlayerControl.LocalPlayer);
 
@@ -46,16 +45,20 @@ namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && role.target != null);
+            protectButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
+                    && role.target != null);
             role.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && role.target != null);
-            protectText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
-                    && role.target != null);
+
+            protectButton.buttonLabelText.text = "Protect";
+            protectButton.buttonLabelText.SetOutlineColor(Patches.Colors.GuardianAngel);
+
             if (role.Protecting) protectButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.ProtectDuration);
             else if (role.ButtonUsable) protectButton.SetCoolDown(role.ProtectTimer(), CustomGameOptions.ProtectCd);
             else protectButton.SetCoolDown(0f, CustomGameOptions.ProtectCd);
@@ -67,8 +70,8 @@ namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
                 renderer.material.SetFloat("_Desat", 0f);
                 role.UsesText.color = Palette.EnabledColor;
                 role.UsesText.material.SetFloat("_Desat", 0f);
-                protectText.color = Palette.EnabledColor;
-                protectText.material.SetFloat("_Desat", 0f);
+                protectButton.buttonLabelText.color = Palette.EnabledColor;
+                protectButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
@@ -76,8 +79,8 @@ namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
                 renderer.material.SetFloat("_Desat", 1f);
                 role.UsesText.color = Palette.DisabledClear;
                 role.UsesText.material.SetFloat("_Desat", 1f);
-                protectText.color = Palette.DisabledClear;
-                protectText.material.SetFloat("_Desat", 1f);
+                protectButton.buttonLabelText.color = Palette.DisabledClear;
+                protectButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
     }

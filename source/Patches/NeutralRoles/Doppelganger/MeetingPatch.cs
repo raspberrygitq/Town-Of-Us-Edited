@@ -238,8 +238,8 @@ namespace TownOfUsEdited.NeutralRoles.DoppelgangerMod
                         bool flag = target == null;
                         var targetPlayer = Utils.PlayerByData(target);
                         if (target != null && targetPlayer == role.TransformedPlayer) target = role.OldTransformed.Data;
-		                DestroyableSingleton<UnityTelemetry>.Instance.WriteMeetingStarted(flag);
-		                DestroyableSingleton<DebugAnalytics>.Instance.Analytics.MeetingStarted(role.TransformedPlayer.Data, target != null);
+		                UnityTelemetry.Instance.WriteMeetingStarted(flag);
+		                DebugAnalytics.Instance.Analytics.MeetingStarted(role.TransformedPlayer.Data, target != null);
 		                ShipStatus.Instance.StartMeeting(role.TransformedPlayer, target);
                         doppelStartedMeeting = true;
 		                if (__instance.AmOwner)

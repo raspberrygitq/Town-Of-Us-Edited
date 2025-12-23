@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -21,7 +20,6 @@ namespace TownOfUsEdited.Roles
         }
 
         public KillButton _potionButton;
-        public TextMeshPro PotionText;
         public float PotionCooldown;
         public bool PotioncoolingDown => PotionCooldown > 0f;
         public float TimeRemaining;

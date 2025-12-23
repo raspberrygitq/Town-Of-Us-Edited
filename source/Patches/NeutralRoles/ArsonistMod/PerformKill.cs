@@ -50,7 +50,7 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
                 else return false;
             }
 
-            if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
+            if (__instance != HudManager.Instance.KillButton) return true;
             if (role.DousedAlive == CustomGameOptions.MaxDoused) return false;
             if (role.ClosestPlayerDouse == null) return false;
             if (role.Cooldown > 0f) return false;

@@ -233,7 +233,7 @@ namespace TownOfUsEdited.Roles.Modifiers
                     Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
                 }
                 else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay;
-                DestroyableSingleton<HudManager>.Instance.KillButton.SetTarget(null);
+                HudManager.Instance.KillButton.SetTarget(null);
                 bomber.Bomb = BombExtentions.CreateBomb(pos);
             }
         }

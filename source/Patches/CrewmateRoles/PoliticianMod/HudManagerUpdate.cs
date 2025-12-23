@@ -19,7 +19,6 @@ namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
             var isDead = PlayerControl.LocalPlayer.Data.IsDead;
             var campaignButton = __instance.KillButton;
             var role = Role.GetRole<Politician>(PlayerControl.LocalPlayer);
-            var campaignText = __instance.KillButton.buttonLabelText;
 
             if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())
             {
@@ -40,14 +39,17 @@ namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            campaignText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            campaignButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
             campaignButton.SetCoolDown(role.CampaignTimer(), CustomGameOptions.CampaignCd);
 
-            campaignText.color = Palette.EnabledColor;
-            campaignText.material.SetFloat("_Desat", 0f);
+            campaignButton.buttonLabelText.text = "Campaign";
+            campaignButton.buttonLabelText.SetOutlineColor(Patches.Colors.Politician);
+
+            campaignButton.buttonLabelText.color = Palette.EnabledColor;
+            campaignButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             if (!role.CanCampaign) return;
 
             var notCampaigned = PlayerControl.AllPlayerControls.ToArray().Where(

@@ -14,7 +14,7 @@ namespace TownOfUsEdited.Patches {
             // Clear upped Players list
             RpcHandling.Upped.Clear();
             // Fix Grenadier blind in lobby
-            ((Renderer)DestroyableSingleton<HudManager>.Instance.FullScreen).gameObject.active = false;
+            ((Renderer)HudManager.Instance.FullScreen).gameObject.active = false;
             // Auto Start code
             if (AmongUsClient.Instance.AmHost && CustomGameOptions.AutoStart)
             {

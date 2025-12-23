@@ -8,7 +8,7 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
     {
         public static bool Prefix(KillButton __instance)
         {
-            if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
+            if (__instance != HudManager.Instance.KillButton) return true;
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Engineer);
             if (!flag) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
@@ -160,12 +160,12 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
         public static bool Prefix(SabotageButton __instance)
         {
             if (!PlayerControl.LocalPlayer.Is(Faction.Madmates) && !PlayerControl.LocalPlayer.Is(Faction.Impostors)) return true;
-            if (__instance != DestroyableSingleton<HudManager>.Instance.SabotageButton) return true;
+            if (__instance != HudManager.Instance.SabotageButton) return true;
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) || PlayerControl.LocalPlayer.Is(Faction.Impostors);
             if (!flag) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (MeetingHud.Instance) return false;
-            DestroyableSingleton<HudManager>.Instance.ToggleMapVisible(new MapOptions
+            HudManager.Instance.ToggleMapVisible(new MapOptions
             {
                 Mode = MapOptions.Modes.Sabotage
             });

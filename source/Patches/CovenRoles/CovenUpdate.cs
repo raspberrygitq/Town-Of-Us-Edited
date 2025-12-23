@@ -172,7 +172,7 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
             if (!PlayerControl.LocalPlayer.Is(Faction.Coven)) return true;
 
             var role = Role.GetRole(PlayerControl.LocalPlayer);
-            var killbutton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var killbutton = HudManager.Instance.KillButton;
 
             if (PlayerControl.LocalPlayer.inVent) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
@@ -213,7 +213,7 @@ namespace TownOfUsEdited.CovenRoles.CovenMod
             if (__instance != CovenUpdate.SabotageButton) return true;
             if (MeetingHud.Instance) return false;
             if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return false;
-            DestroyableSingleton<HudManager>.Instance.ToggleMapVisible(new MapOptions
+            HudManager.Instance.ToggleMapVisible(new MapOptions
             {
                 Mode = MapOptions.Modes.Sabotage
             });

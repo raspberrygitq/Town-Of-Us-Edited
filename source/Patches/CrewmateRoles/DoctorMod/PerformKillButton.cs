@@ -14,7 +14,7 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             if (!flag) return true;
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
-            var ReviveButton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var ReviveButton = HudManager.Instance.KillButton;
             var role = Role.GetRole<Doctor>(PlayerControl.LocalPlayer);
             if (__instance == ReviveButton)
             {

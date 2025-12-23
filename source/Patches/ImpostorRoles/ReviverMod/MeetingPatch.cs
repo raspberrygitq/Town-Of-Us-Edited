@@ -245,8 +245,8 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
                     if (__instance == reviver.Player)
                     {
                         bool flag = target == null;
-		                DestroyableSingleton<UnityTelemetry>.Instance.WriteMeetingStarted(flag);
-		                DestroyableSingleton<DebugAnalytics>.Instance.Analytics.MeetingStarted(role.RevivedPlayer.Data, target != null);
+		                UnityTelemetry.Instance.WriteMeetingStarted(flag);
+		                DebugAnalytics.Instance.Analytics.MeetingStarted(role.RevivedPlayer.Data, target != null);
 		                ShipStatus.Instance.StartMeeting(role.RevivedPlayer, target);
                         StartedMeeting = true;
 		                if (__instance.AmOwner)

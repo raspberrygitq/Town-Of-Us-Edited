@@ -18,7 +18,6 @@ namespace TownOfUsEdited.CrewmateRoles.GuardianMod
 
             // Get the Guardian role instance
             var role = Role.GetRole<Guardian>(PlayerControl.LocalPlayer);
-            var protectText = __instance.KillButton.buttonLabelText;
 
             // Check if the game state allows the KillButton to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
@@ -28,7 +27,10 @@ namespace TownOfUsEdited.CrewmateRoles.GuardianMod
 
             // Set KillButton's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
-            protectText.gameObject.SetActive(isKillButtonActive);
+            __instance.KillButton.buttonLabelText.gameObject.SetActive(isKillButtonActive);
+
+            __instance.KillButton.buttonLabelText.text = "Protect";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Guardian);
 
             // Set KillButton's cooldown
             var alives = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
@@ -36,20 +38,20 @@ namespace TownOfUsEdited.CrewmateRoles.GuardianMod
             else __instance.KillButton.SetCoolDown(role.GuardTimer(), CustomGameOptions.GuardCD);
             if (!role.Guarding) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, alives);
 
-            var labelrender = protectText;
+            var labelrender = __instance.KillButton.buttonLabelText;
             if (role.ClosestPlayer != null && !role.Guarding && !role.coolingDown)
             {
                 __instance.KillButton.graphic.color = Palette.EnabledColor;
                 __instance.KillButton.graphic.material.SetFloat("_Desat", 0f);
-                protectText.color = Palette.EnabledColor;
-                protectText.material.SetFloat("_Desat", 0f);
+                labelrender.color = Palette.EnabledColor;
+                labelrender.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 __instance.KillButton.graphic.color = Palette.DisabledClear;
                 __instance.KillButton.graphic.material.SetFloat("_Desat", 1f);
-                protectText.color = Palette.DisabledClear;
-                protectText.material.SetFloat("_Desat", 1f);
+                labelrender.color = Palette.DisabledClear;
+                labelrender.material.SetFloat("_Desat", 1f);
             }
         }
     }

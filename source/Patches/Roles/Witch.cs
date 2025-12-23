@@ -1,13 +1,10 @@
 using System.Collections.Generic;
-using TMPro;
 
 namespace TownOfUsEdited.Roles
 {
     public class Witch : Role
     {
         public KillButton _spellButton;
-        public TextMeshPro SpellText;
-
         public Witch(PlayerControl player) : base(player)
         {
             Name = "Witch";

@@ -17,7 +17,6 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)) return;
             var role = Role.GetRole<Arsonist>(PlayerControl.LocalPlayer);
-            var douseText = __instance.KillButton.buttonLabelText;
 
             if (!PlayerControl.LocalPlayer.IsHypnotised() && !Utils.CommsCamouflaged())
             {
@@ -48,9 +47,6 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
                 role.IgniteButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.IgniteButton.graphic.enabled = true;
                 role.IgniteButton.gameObject.SetActive(false);
-                role.IgniteText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.IgniteButton.transform);
-                role.IgniteText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.IgniteText);
             }
 
             role.IgniteButton.graphic.sprite = TownOfUsEdited.IgniteSprite;
@@ -62,15 +58,19 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            douseText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
+
+            __instance.KillButton.buttonLabelText.text = "Douse";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Arsonist);
+
             role.IgniteButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            role.IgniteText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.IgniteButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -82,9 +82,10 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
             }
             role.IgniteButton.graphic.SetCooldownNormalizedUvs();
 
-            role.IgniteText.text = "Ignite";
-            role.IgniteText.SetOutlineColor(Patches.Colors.Arsonist);
+            role.IgniteButton.buttonLabelText.text = "Ignite";
+            role.IgniteButton.buttonLabelText.SetOutlineColor(Patches.Colors.Arsonist);
 
+            var douseText = __instance.KillButton.buttonLabelText;
             if (role.ClosestPlayerDouse != null)
             {
                 douseText.color = Palette.EnabledColor;
@@ -96,15 +97,16 @@ namespace TownOfUsEdited.NeutralRoles.ArsonistMod
                 douseText.material.SetFloat("_Desat", 1f);
             }
 
+            var IgniteText = role.IgniteButton.buttonLabelText;
             if (role.ClosestPlayerIgnite != null && role.DousedAlive > 0)
             {
-                role.IgniteText.color = Palette.EnabledColor;
-                role.IgniteText.material.SetFloat("_Desat", 0f);
+                IgniteText.color = Palette.EnabledColor;
+                IgniteText.material.SetFloat("_Desat", 0f);
             }
             else
             {
-                role.IgniteText.color = Palette.DisabledClear;
-                role.IgniteText.material.SetFloat("_Desat", 1f);
+                IgniteText.color = Palette.DisabledClear;
+                IgniteText.material.SetFloat("_Desat", 1f);
             }
 
             var notDoused = PlayerControl.AllPlayerControls.ToArray().Where(

@@ -20,7 +20,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.MutantMod
                 return false;
 
             var role = Role.GetRole<Mutant>(PlayerControl.LocalPlayer);
-            var killbutton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var killbutton = HudManager.Instance.KillButton;
                 
             if (__instance == role.TransformButton)
             {

@@ -171,13 +171,13 @@ namespace TownOfUsEdited.Patches.CovenRoles
                 {
                     return false;
                 }
-                if (DestroyableSingleton<HudManager>.Instance)
+                if (HudManager.Instance)
                 {
                     CovenChatButton.AddChat(__instance, chatText, true);
                 }
                 if (chatText.IndexOf("who", StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    DestroyableSingleton<UnityTelemetry>.Instance.SendWho();
+                    UnityTelemetry.Instance.SendWho();
                 }
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, chatText, "CovenChat");
                 return false;
@@ -222,13 +222,13 @@ namespace TownOfUsEdited.Patches.CovenRoles
                 {
                     return false;
                 }
-                if (DestroyableSingleton<HudManager>.Instance)
+                if (HudManager.Instance)
                 {
                     CovenChatButton.AddChat(__instance, text, false);
                 }
                 if (data.ToChatText().IndexOf("who", StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    DestroyableSingleton<UnityTelemetry>.Instance.SendWho();
+                    UnityTelemetry.Instance.SendWho();
                 }
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, text, "CovenChat");
                 return false;

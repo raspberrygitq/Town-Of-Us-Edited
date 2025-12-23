@@ -22,7 +22,7 @@ namespace TownOfUsEdited.WerewolfRoles.SorcererMod
 
             var role = Role.GetRole<Sorcerer>(PlayerControl.LocalPlayer);
 
-            var PoisonButton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var PoisonButton = HudManager.Instance.KillButton;
                 
             if (__instance == PoisonButton)
             {

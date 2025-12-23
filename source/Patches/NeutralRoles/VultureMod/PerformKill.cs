@@ -18,7 +18,7 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             var role = Role.GetRole<Vulture>(PlayerControl.LocalPlayer);
 
-            if (__instance == DestroyableSingleton<HudManager>.Instance.KillButton)
+            if (__instance == HudManager.Instance.KillButton)
             {
                 var flag2 = __instance.isCoolingDown;
                 if (flag2) return false;

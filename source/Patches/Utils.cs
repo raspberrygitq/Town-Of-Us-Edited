@@ -1841,8 +1841,8 @@ namespace TownOfUsEdited
                     {
                     }
 
-                    DestroyableSingleton<HudManager>.Instance.KillOverlay.ShowKillAnimation(killer.Data, data);
-                    DestroyableSingleton<HudManager>.Instance.ShadowQuad.gameObject.SetActive(false);
+                    HudManager.Instance.KillOverlay.ShowKillAnimation(killer.Data, data);
+                    HudManager.Instance.ShadowQuad.gameObject.SetActive(false);
                     target.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
                     target.RpcSetScanner(false);
 
@@ -2226,7 +2226,7 @@ namespace TownOfUsEdited
                     color.a = alpha;
                     if (HudManager.InstanceExists && HudManager.Instance.FullScreen)
                     {
-                        var fullscreen = DestroyableSingleton<HudManager>.Instance.FullScreen;
+                        var fullscreen = HudManager.Instance.FullScreen;
                         fullscreen.enabled = true;
                         fullscreen.gameObject.active = true;
                         fullscreen.color = color;
@@ -2237,7 +2237,7 @@ namespace TownOfUsEdited
                 {
                     if (HudManager.InstanceExists && HudManager.Instance.FullScreen)
                     {
-                        var fullscreen = DestroyableSingleton<HudManager>.Instance.FullScreen;
+                        var fullscreen = HudManager.Instance.FullScreen;
                         if (fullscreen.color.Equals(color))
                         {
                             fullscreen.color = new Color(1f, 0f, 0f, 0.37254903f);
@@ -2587,6 +2587,7 @@ namespace TownOfUsEdited
             {
                 var hunter = Role.GetRole<Hunter>(PlayerControl.LocalPlayer);
                 hunter.Cooldown = CustomGameOptions.HunterKillCd;
+                hunter.StalkCooldown = CustomGameOptions.HunterStalkCd;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Tracker))
             {

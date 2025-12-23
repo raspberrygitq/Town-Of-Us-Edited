@@ -18,7 +18,6 @@ namespace TownOfUsEdited.CrewmateRoles.WatcherMod
             var data = PlayerControl.LocalPlayer.Data;
             var isDead = data.IsDead;
             var watchButton = __instance.KillButton;
-            var watchText = __instance.KillButton.buttonLabelText;
 
             var role = Role.GetRole<Watcher>(PlayerControl.LocalPlayer);
 
@@ -42,7 +41,7 @@ namespace TownOfUsEdited.CrewmateRoles.WatcherMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            watchText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            watchButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -50,6 +49,10 @@ namespace TownOfUsEdited.CrewmateRoles.WatcherMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            watchButton.buttonLabelText.text = "Watch";
+            watchButton.buttonLabelText.SetOutlineColor(Patches.Colors.Lookout);
+
             if (role.ButtonUsable) watchButton.SetCoolDown(role.WatchTimer(), CustomGameOptions.WatcherCooldown);
             else watchButton.SetCoolDown(0f, CustomGameOptions.WatcherCooldown);
             if (role.UsesLeft == 0) return;
@@ -68,8 +71,8 @@ namespace TownOfUsEdited.CrewmateRoles.WatcherMod
                 renderer.material.SetFloat("_Desat", 0f);
                 role.UsesText.color = Palette.EnabledColor;
                 role.UsesText.material.SetFloat("_Desat", 0f);
-                watchText.color = Palette.EnabledColor;
-                watchText.material.SetFloat("_Desat", 0f);
+                watchButton.buttonLabelText.color = Palette.EnabledColor;
+                watchButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
@@ -77,8 +80,8 @@ namespace TownOfUsEdited.CrewmateRoles.WatcherMod
                 renderer.material.SetFloat("_Desat", 1f);
                 role.UsesText.color = Palette.DisabledClear;
                 role.UsesText.material.SetFloat("_Desat", 1f);
-                watchText.color = Palette.DisabledClear;
-                watchText.material.SetFloat("_Desat", 1f);
+                watchButton.buttonLabelText.color = Palette.DisabledClear;
+                watchButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
     }

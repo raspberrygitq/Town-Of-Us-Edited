@@ -20,6 +20,7 @@ namespace TownOfUsEdited.ImpostorRoles.NoclipMod
                 role.NoclipButton.graphic.enabled = true;
                 role.NoclipButton.gameObject.SetActive(false);
             }
+
             role.NoclipButton.graphic.sprite = TownOfUsEdited.NoclipSprite;
             role.NoclipButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead

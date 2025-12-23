@@ -14,7 +14,7 @@ namespace TownOfUsEdited
         [HarmonyPriority(Priority.First)]
         public static bool Prefix(KillButton __instance)
         {
-            if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
+            if (__instance != HudManager.Instance.KillButton) return true;
             if (!PlayerControl.LocalPlayer.Data.IsImpostor()) return true;
             if (PlayerControl.LocalPlayer.Data.IsDead) return false;
             if (!__instance.isActiveAndEnabled || PlayerControl.LocalPlayer.coolingDown()) return false;

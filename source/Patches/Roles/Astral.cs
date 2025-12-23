@@ -55,7 +55,7 @@ namespace TownOfUsEdited.Roles
             var role = Role.GetRole<Astral>(player);
             new Astral(role.AstralBody);
 
-            var hudManager = DestroyableSingleton<HudManager>.Instance;
+            var hudManager = HudManager.Instance;
             var amOwner = player.AmOwner;
             RoleManager.Instance.SetRole(player, RoleTypes.CrewmateGhost);
             if (amOwner)

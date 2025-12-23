@@ -1,5 +1,4 @@
 using HarmonyLib;
-using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -22,7 +21,6 @@ namespace TownOfUsEdited.CrewmateRoles.InformantMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Informant)) return;
 
             var role = Role.GetRole<Informant>(PlayerControl.LocalPlayer);
-            var AdminText = __instance.KillButton.buttonLabelText;
 
             if (role.VitalsButton == null)
             {
@@ -37,53 +35,57 @@ namespace TownOfUsEdited.CrewmateRoles.InformantMod
             role.VitalsButton.graphic.sprite = HudManager.Instance.UseButton.fastUseSettings[ImageNames.VitalsButton].Image;
             role.VitalsButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
 
+            role.VitalsButton.SetCoolDown(0f, 10f);
             role.VitalsButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-
             role.VitalsText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
+            role.VitalsText.text = "Vitals";
+            role.VitalsText.SetOutlineColor(Patches.Colors.Informant);
+
+            __instance.KillButton.SetCoolDown(0f, 10f);
             __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             __instance.KillButton.graphic.sprite = HudManager.Instance.UseButton.fastUseSettings[ImageNames.AdminMapButton].Image;
 
-            AdminText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-
-            role.VitalsText.text = "Vitals";
-            role.VitalsText.SetOutlineColor(Colors.Informant);
+            __instance.KillButton.buttonLabelText.text = "Admin";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Informant);
 
             var renderer = __instance.KillButton.graphic;
             var renderer2 = role.VitalsButton.graphic;
+            var AdminText = __instance.KillButton.buttonLabelText;
             if (!CamouflageUnCamouflage.CommsEnabled)
             {
-                AdminText.color = Palette.EnabledColor;
-                AdminText.material.SetFloat("_Desat", 0f);
                 role.VitalsText.color = Palette.EnabledColor;
                 role.VitalsText.material.SetFloat("_Desat", 0f);
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
                 renderer2.color = Palette.EnabledColor;
                 renderer2.material.SetFloat("_Desat", 0f);
+                AdminText.color = Palette.EnabledColor;
+                AdminText.material.SetFloat("_Desat", 0f);
             }
             else
             {
-                AdminText.color = Palette.DisabledClear;
-                AdminText.material.SetFloat("_Desat", 1f);
                 role.VitalsText.color = Palette.DisabledClear;
                 role.VitalsText.material.SetFloat("_Desat", 1f);
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
                 renderer2.color = Palette.DisabledClear;
                 renderer2.material.SetFloat("_Desat", 1f);
+                AdminText.color = Palette.DisabledClear;
+                AdminText.material.SetFloat("_Desat", 1f);
             }
         }
     }

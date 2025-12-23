@@ -1,5 +1,4 @@
 using System.Linq;
-using TMPro;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -21,7 +20,6 @@ namespace TownOfUsEdited.Roles
         public KillButton _voodooButton;
         public PlayerControl VoodooPlayer;
         public PlayerControl ClosestPlayer;
-        public TextMeshPro VoodooText;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
         public bool Voted;

@@ -24,6 +24,9 @@ namespace TownOfUsEdited.NeutralRoles.SoulCollectorMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
+            __instance.KillButton.buttonLabelText.text = "Reap";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.SoulCollector);
+
             __instance.KillButton.SetCoolDown(role.ReapTimer(), CustomGameOptions.ReapCd);
 
             if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton);

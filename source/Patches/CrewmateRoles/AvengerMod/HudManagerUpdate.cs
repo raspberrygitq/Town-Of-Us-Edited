@@ -39,9 +39,6 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
                 role.AvengeButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.AvengeButton.graphic.enabled = true;
                 role.AvengeButton.gameObject.SetActive(false);
-                role.AvengeText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.AvengeButton.transform);
-                role.AvengeText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.AvengeText);
             }
 
             role.AvengeButton.graphic.sprite = TownOfUsEdited.Avenge;
@@ -53,14 +50,14 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && !role.Avenging);
 
-            role.AvengeText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.AvengeButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && !role.Avenging);
 
-            role.AvengeText.text = "Avenge";
-            role.AvengeText.SetOutlineColor(Colors.Avenger);
+            role.AvengeButton.buttonLabelText.text = "Avenge";
+            role.AvengeButton.buttonLabelText.SetOutlineColor(Colors.Avenger);
 
             var killButton = __instance.KillButton;
 

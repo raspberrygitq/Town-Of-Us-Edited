@@ -177,13 +177,13 @@ namespace TownOfUsEdited.Patches.ImpostorRoles
                 {
                     return false;
                 }
-                if (DestroyableSingleton<HudManager>.Instance)
+                if (HudManager.Instance)
                 {
                     ImpostorChatButton.AddChat(__instance, chatText, true);
                 }
                 if (chatText.IndexOf("who", StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    DestroyableSingleton<UnityTelemetry>.Instance.SendWho();
+                    UnityTelemetry.Instance.SendWho();
                 }
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, chatText, "ImpChat");
                 return false;
@@ -228,13 +228,13 @@ namespace TownOfUsEdited.Patches.ImpostorRoles
                 {
                     return false;
                 }
-                if (DestroyableSingleton<HudManager>.Instance)
+                if (HudManager.Instance)
                 {
                     ImpostorChatButton.AddChat(__instance, text, false);
                 }
                 if (data.ToChatText().IndexOf("who", StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    DestroyableSingleton<UnityTelemetry>.Instance.SendWho();
+                    UnityTelemetry.Instance.SendWho();
                 }
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, text, "ImpChat");
                 return false;

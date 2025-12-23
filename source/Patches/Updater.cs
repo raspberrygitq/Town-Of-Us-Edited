@@ -17,8 +17,6 @@ namespace TownOfUsEdited
     [HarmonyPatch(typeof(MainMenuManager), nameof(MainMenuManager.Start))]
     public class ModUpdaterButton
     {
-        private static Sprite TOUUpdateSprite => TownOfUsEdited.UpdateTOUButton;
-        private static Sprite SubmergedUpdateSprite => TownOfUsEdited.UpdateSubmergedButton;
         private static void Prefix(MainMenuManager __instance)
         {
             //Check if there's a ToU update
@@ -35,7 +33,7 @@ namespace TownOfUsEdited
                     string info =
                         $"ALERT\nTown of Us Edited {TownOfUsEdited.VersionString} requires {RequiredVersions.Values.Last()}\nyou have {Application.version}\nPlease {action} your among us version"
                         + "\nvisit Github or Discord for any help";
-                    TwitchManager man = DestroyableSingleton<TwitchManager>.Instance;
+                    TwitchManager man = TwitchManager.Instance;
                     ModUpdater.InfoPopup = UnityEngine.Object.Instantiate(man.TwitchPopup);
                     ModUpdater.InfoPopup.TextAreaTMP.fontSize *= 0.68f;
                     ModUpdater.InfoPopup.TextAreaTMP.enableAutoSizing = true;
@@ -73,8 +71,8 @@ namespace TownOfUsEdited
                 SpriteRenderer ButtonSprite = Button.transform.GetChild(1).GetComponent<SpriteRenderer>();
                 passiveButton.OnClick = new UnityEngine.UI.Button.ButtonClickedEvent();
 
-                ButtonSprite.sprite = _pos == 0 ? TOUUpdateSprite : SubmergedUpdateSprite;
-                Button.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _pos == 0 ? TOUUpdateSprite : SubmergedUpdateSprite;
+                ButtonSprite.sprite = _pos == 0 ? TownOfUsEdited.UpdateTOUButton : TownOfUsEdited.UpdateSubmergedButton;
+                Button.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _pos == 0 ? TownOfUsEdited.UpdateTOUButton : TownOfUsEdited.UpdateSubmergedButton;
 
                 Button.transform.SetParent(GameObject.Find("RightPanel").transform);
                 var pos = Button.GetComponent<AspectPosition>();
@@ -97,7 +95,7 @@ namespace TownOfUsEdited
                 })));
 
                 //Set popup stuff
-                TwitchManager man = DestroyableSingleton<TwitchManager>.Instance;
+                TwitchManager man = TwitchManager.Instance;
                 ModUpdater.InfoPopup = UnityEngine.Object.Instantiate(man.TwitchPopup);
                 ModUpdater.InfoPopup.TextAreaTMP.fontSize *= 0.7f;
                 ModUpdater.InfoPopup.TextAreaTMP.enableAutoSizing = false;

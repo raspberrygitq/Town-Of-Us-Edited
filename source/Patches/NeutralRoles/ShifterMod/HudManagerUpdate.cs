@@ -27,11 +27,14 @@ namespace TownOfUsEdited.NeutraleRoles.ShifterMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && PlayerControl.LocalPlayer.Is(RoleEnum.Shifter));
-            __instance.KillButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            shiftButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && PlayerControl.LocalPlayer.Is(RoleEnum.Shifter));
+
+            shiftButton.buttonLabelText.text = "Shift";
+            shiftButton.buttonLabelText.SetOutlineColor(Patches.Colors.Shifter);
 
             shiftButton.SetCoolDown(role.ShiftTimer(), CustomGameOptions.ShiftCD);
             Utils.SetTarget(ref role.ClosestPlayer, shiftButton, float.NaN);

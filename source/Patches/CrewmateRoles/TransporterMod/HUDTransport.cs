@@ -18,7 +18,6 @@ namespace TownOfUsEdited.CrewmateRoles.TransporterMod
             var transportButton = __instance.KillButton;
 
             var role = Role.GetRole<Transporter>(PlayerControl.LocalPlayer);
-            var transportText = __instance.KillButton.buttonLabelText;
 
             if (role.UsesText == null && role.UsesLeft > 0)
             {
@@ -41,20 +40,25 @@ namespace TownOfUsEdited.CrewmateRoles.TransporterMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            transportButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             role.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            transportText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            transportButton.buttonLabelText.text = "Transport";
+            transportButton.buttonLabelText.SetOutlineColor(Patches.Colors.Transporter);
+
             if (data.IsDead) return;
 
             if (role.ButtonUsable) transportButton.SetCoolDown(role.TransportTimer(), CustomGameOptions.TransportCooldown);
             else transportButton.SetCoolDown(0f, CustomGameOptions.TransportCooldown);
 
             var renderer = transportButton.graphic;
+            var transportText = transportButton.buttonLabelText;
             if (!transportButton.isCoolingDown && role.ButtonUsable && PlayerControl.LocalPlayer.moveable)
             {
                 renderer.color = Palette.EnabledColor;

@@ -25,15 +25,12 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
                 role.MorphButton.graphic.enabled = true;
                 role.MorphButton.graphic.sprite = SampleSprite;
                 role.MorphButton.gameObject.SetActive(false);
-                role.MorphText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.MorphButton.transform);
-                role.MorphText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.MorphText);
             }
 
             if (role.MorphButton.graphic.sprite != SampleSprite && role.MorphButton.graphic.sprite != MorphSprite)
             {
                 role.MorphButton.graphic.sprite = SampleSprite;
-                role.MorphText.text = "Sample";
+                role.MorphButton.buttonLabelText.text = "Sample";
             }
 
             role.MorphButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
@@ -41,21 +38,21 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.MorphText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.MorphButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.MorphText.SetOutlineColor(Palette.ImpostorRed);
+            role.MorphButton.buttonLabelText.SetOutlineColor(Palette.ImpostorRed);
 
             role.MorphButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
             role.MorphButton.graphic.SetCooldownNormalizedUvs();
             if (role.MorphButton.graphic.sprite == SampleSprite)
             {
-                role.MorphText.text = "Sample";
+                role.MorphButton.buttonLabelText.text = "Sample";
                 role.MorphButton.SetCoolDown(0f, 1f);
                 Utils.SetTarget(ref role.ClosestPlayer, role.MorphButton);
-                var labelrender = role.MorphText;
+                var labelrender = role.MorphButton.buttonLabelText;
                 if (role.ClosestPlayer != null)
                 {
                     labelrender.color = Palette.EnabledColor;
@@ -76,21 +73,21 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
                 }
 
                 role.MorphButton.SetCoolDown(role.MorphTimer(), CustomGameOptions.MorphlingCd);
-                role.MorphText.text = "Morph";
+                role.MorphButton.buttonLabelText.text = "Morph";
 
                 if (!role.coolingDown)
                 {
                     role.MorphButton.graphic.color = Palette.EnabledColor;
                     role.MorphButton.graphic.material.SetFloat("_Desat", 0f);
-                    role.MorphText.color = Palette.EnabledColor;
-                    role.MorphText.material.SetFloat("_Desat", 0f);
+                    role.MorphButton.buttonLabelText.color = Palette.EnabledColor;
+                    role.MorphButton.buttonLabelText.material.SetFloat("_Desat", 0f);
                 }
                 else
                 {
                     role.MorphButton.graphic.color = Palette.DisabledClear;
                     role.MorphButton.graphic.material.SetFloat("_Desat", 1f);
-                    role.MorphText.color = Palette.DisabledClear;
-                    role.MorphText.material.SetFloat("_Desat", 1f);
+                    role.MorphButton.buttonLabelText.color = Palette.DisabledClear;
+                    role.MorphButton.buttonLabelText.material.SetFloat("_Desat", 1f);
                 }
             }
         }

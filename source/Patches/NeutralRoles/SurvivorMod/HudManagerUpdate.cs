@@ -21,7 +21,6 @@ namespace TownOfUsEdited.NeutralRoles.SurvivorMod
             var vestButton = __instance.KillButton;
 
             var role = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);
-            var VestText = __instance.KillButton.buttonLabelText;
 
             if (role.UsesText == null && role.UsesLeft > 0)
             {
@@ -48,15 +47,20 @@ namespace TownOfUsEdited.NeutralRoles.SurvivorMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            VestText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            vestButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay);
+
+            vestButton.buttonLabelText.text = "Safeguard";
+            vestButton.buttonLabelText.SetOutlineColor(Patches.Colors.Survivor);
+
             if (role.Vesting) vestButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.VestDuration);
             else if (role.ButtonUsable) vestButton.SetCoolDown(role.VestTimer(), CustomGameOptions.VestCd);
             else vestButton.SetCoolDown(0f, CustomGameOptions.VestCd);
 
             var renderer = vestButton.graphic;
+            var VestText = vestButton.buttonLabelText;
             if (role.Vesting || (!vestButton.isCoolingDown && role.ButtonUsable))
             {
                 renderer.color = Palette.EnabledColor;

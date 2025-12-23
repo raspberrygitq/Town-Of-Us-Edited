@@ -26,9 +26,6 @@ namespace TownOfUsEdited.ImpostorRoles.BlinderMod
                 role.BlindButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.BlindButton.graphic.enabled = true;
                 role.BlindButton.gameObject.SetActive(false);
-                role.BlindText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.BlindButton.transform);
-                role.BlindText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.BlindText);
             }
 
             role.BlindButton.graphic.sprite = TownOfUsEdited.Blind;
@@ -37,13 +34,13 @@ namespace TownOfUsEdited.ImpostorRoles.BlinderMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.BlindText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.BlindButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.BlindText.text = "Blind";
-            role.BlindText.SetOutlineColor(Palette.ImpostorRed);
+            role.BlindButton.buttonLabelText.text = "Blind";
+            role.BlindButton.buttonLabelText.SetOutlineColor(Palette.ImpostorRed);
 
             var position = __instance.KillButton.transform.localPosition;
             role.BlindButton.transform.localPosition = new Vector3(position.x,
@@ -56,7 +53,7 @@ namespace TownOfUsEdited.ImpostorRoles.BlinderMod
             Utils.SetTarget(ref role.ClosestPlayer, role.BlindButton, float.NaN, notimps);
             role.BlindButton.graphic.SetCooldownNormalizedUvs();
             
-            var labelrender = role.BlindText;
+            var labelrender = role.BlindButton.buttonLabelText;
             if (role.ClosestPlayer != null || role.Blinding)
             {
                 role.BlindButton.graphic.color = Palette.EnabledColor;

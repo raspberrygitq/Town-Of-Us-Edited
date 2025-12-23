@@ -31,7 +31,7 @@ namespace TownOfUsEdited.Modifiers.VengefulMod
             {
                 role.KillButton = Object.Instantiate(__instance.KillButton, __instance.transform.parent);
                 role.KillButton.graphic.enabled = true;
-                role.KillButton.graphic.sprite = DestroyableSingleton<HudManager>.Instance.KillButton.graphic.sprite;
+                role.KillButton.graphic.sprite = HudManager.Instance.KillButton.graphic.sprite;
                 role.KillText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.KillButton.transform);
                 role.KillText.gameObject.SetActive(false);
                 playerRole.ButtonLabels.Add(role.KillText);

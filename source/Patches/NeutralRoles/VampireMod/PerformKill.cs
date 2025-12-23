@@ -253,7 +253,7 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                     var aurialRole = Role.GetRole<Aurial>(PlayerControl.LocalPlayer);
                     aurialRole.SenseArrows.Values.DestroyAll();
                     aurialRole.SenseArrows.Clear();
-                    DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                    HudManager.Instance.KillButton.gameObject.SetActive(false);
                 }
 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Watcher))

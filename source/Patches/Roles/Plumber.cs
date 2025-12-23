@@ -13,7 +13,6 @@ namespace TownOfUsEdited.Roles
         public List<byte> FutureBlocks = new List<byte>();
         public List<byte> VentsBlocked = new List<byte>();
         public List<GameObject> Block = new List<GameObject>();
-        public TextMeshPro FlushText;
         public KillButton FlushButton
         {
             get => _flushButton;

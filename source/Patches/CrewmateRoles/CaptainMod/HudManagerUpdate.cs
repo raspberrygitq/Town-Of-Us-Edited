@@ -19,17 +19,20 @@ namespace TownOfUsEdited.CrewmateRoles.CaptainMod
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Captain)) return;
             var ZoomButton = __instance.KillButton;
-            var ZoomText = __instance.KillButton.buttonLabelText;
             var role = Role.GetRole<Captain>(PlayerControl.LocalPlayer);
 
             ZoomButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            ZoomText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            ZoomButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            ZoomButton.buttonLabelText.text = "Zoom";
+            ZoomButton.buttonLabelText.SetOutlineColor(Patches.Colors.Captain);
+
             if (role.Zooming) ZoomButton.SetCoolDown(role.TimeRemainingZoom, CustomGameOptions.ZoomDuration);
             else
             {
@@ -46,15 +49,15 @@ namespace TownOfUsEdited.CrewmateRoles.CaptainMod
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
-                ZoomText.color = Palette.EnabledColor;
-                ZoomText.material.SetFloat("_Desat", 0f);
+                ZoomButton.buttonLabelText.color = Palette.EnabledColor;
+                ZoomButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
-                ZoomText.color = Palette.DisabledClear;
-                ZoomText.material.SetFloat("_Desat", 1f);
+                ZoomButton.buttonLabelText.color = Palette.DisabledClear;
+                ZoomButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
     }

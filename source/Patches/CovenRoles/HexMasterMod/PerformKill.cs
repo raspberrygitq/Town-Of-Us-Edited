@@ -15,7 +15,7 @@ namespace TownOfUsEdited.Patches.CovenRoles.HexMasterMod
                 return false;
 
             var role = Role.GetRole<HexMaster>(PlayerControl.LocalPlayer);
-            var killbutton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var killbutton = HudManager.Instance.KillButton;
             
             if (PlayerControl.LocalPlayer.Data.IsDead)
                 return false;

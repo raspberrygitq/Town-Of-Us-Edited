@@ -25,6 +25,10 @@ namespace TownOfUsEdited.CrewmateRoles.DeputyMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            campButton.buttonLabelText.text = "Camp";
+            campButton.buttonLabelText.SetOutlineColor(Patches.Colors.Deputy);
+
             campButton.SetCoolDown(0f, 1f);
 
             if (role.Camping == null && role.CampedThisRound == false) Utils.SetTarget(ref role.ClosestPlayer, campButton, float.NaN);

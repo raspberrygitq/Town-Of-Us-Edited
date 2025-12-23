@@ -1,6 +1,5 @@
 ﻿using Reactor.Utilities;
 using System.Linq;
-using TMPro;
 using TownOfUsEdited.Extensions;
 using UnityEngine;
 
@@ -9,7 +8,6 @@ namespace TownOfUsEdited.Roles
     public class Maul : Role
     {
         private KillButton _rampageButton;
-        public TextMeshPro RampageText;
         public bool Enabled;
         public bool WerewolfWins;
         public PlayerControl ClosestPlayer;

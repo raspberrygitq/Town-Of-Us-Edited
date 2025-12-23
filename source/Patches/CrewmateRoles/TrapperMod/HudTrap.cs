@@ -22,7 +22,6 @@ namespace TownOfUsEdited.CrewmateRoles.TrapperMod
             var trapButton = __instance.KillButton;
 
             var role = Role.GetRole<Trapper>(PlayerControl.LocalPlayer);
-            var trapText = __instance.KillButton.buttonLabelText;
 
             if (role.UsesText == null && role.UsesLeft > 0)
             {
@@ -45,18 +44,23 @@ namespace TownOfUsEdited.CrewmateRoles.TrapperMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            trapButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
             role.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            trapText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            trapButton.buttonLabelText.text = "Trap";
+            trapButton.buttonLabelText.SetOutlineColor(Patches.Colors.Trapper);
+
             if (role.ButtonUsable) trapButton.SetCoolDown(role.TrapTimer(), CustomGameOptions.TrapCooldown);
             else trapButton.SetCoolDown(0f, CustomGameOptions.TrapCooldown);
 
             var renderer = trapButton.graphic;
+            var trapText = trapButton.buttonLabelText;
             if (!trapButton.isCoolingDown && trapButton.gameObject.active && role.ButtonUsable)
             {
                 renderer.color = Palette.EnabledColor;

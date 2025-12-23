@@ -44,8 +44,6 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
             if (obj.name?.Contains("ExileCutscene") == true) ExileControllerPostfix(ExileControllerPatch.lastExiled);
         }
 
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
-
         public static void Imitate(Imitator imitator)
         {
             bool isMadmate = false;
@@ -115,7 +113,7 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
                     var arrow = gameObj.AddComponent<ArrowBehaviour>();
                     gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                     var renderer = gameObj.AddComponent<SpriteRenderer>();
-                    renderer.sprite = Sprite;
+                    renderer.sprite = TownOfUsEdited.Arrow;
                     arrow.image = renderer;
                     gameObj.layer = 5;
                     snitch.ImpArrows.Add(arrow);
@@ -131,7 +129,7 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
                             var arrow = gameObj.AddComponent<ArrowBehaviour>();
                             gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                             var renderer = gameObj.AddComponent<SpriteRenderer>();
-                            renderer.sprite = Sprite;
+                            renderer.sprite = TownOfUsEdited.Arrow;
                             arrow.image = renderer;
                             gameObj.layer = 5;
                             snitch.SnitchArrows.Add(imp.PlayerId, arrow);

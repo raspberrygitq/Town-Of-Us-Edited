@@ -18,7 +18,6 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
 
             // Get the Fighter role instance
             var role = Role.GetRole<Helper>(PlayerControl.LocalPlayer);
-            var alertText = __instance.KillButton.buttonLabelText;
 
             // Check if the game state allows the KillButton to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
@@ -28,7 +27,10 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
 
             // Set KillButton's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
-            alertText.gameObject.SetActive(isKillButtonActive);
+            __instance.KillButton.buttonLabelText.gameObject.SetActive(isKillButtonActive);
+
+            __instance.KillButton.buttonLabelText.text = "Alert";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Helper);
 
             // Set KillButton's cooldown
             var alives = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList();
@@ -36,6 +38,7 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
             else __instance.KillButton.SetCoolDown(role.AlertTimer(), CustomGameOptions.HelperCD);
             if (!role.OnAlert) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, alives);
 
+            var alertText = __instance.KillButton.buttonLabelText;
             if (role.ClosestPlayer != null && !role.OnAlert && !role.coolingDown)
             {
                 __instance.KillButton.graphic.color = Palette.EnabledColor;

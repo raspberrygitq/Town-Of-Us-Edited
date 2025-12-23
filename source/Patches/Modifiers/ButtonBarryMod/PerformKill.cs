@@ -30,7 +30,7 @@ namespace TownOfUsEdited.Modifiers.ButtonBarryMod
                 AmongUsClient.Instance.DisconnectHandlers.AddUnique(
                     MeetingRoomManager.Instance.Cast<IDisconnectHandler>());
                 if (GameManager.Instance.CheckTaskCompletion()) return false;
-                DestroyableSingleton<HudManager>.Instance.OpenMeetingRoom(PlayerControl.LocalPlayer);
+                HudManager.Instance.OpenMeetingRoom(PlayerControl.LocalPlayer);
                 PlayerControl.LocalPlayer.RpcStartMeeting(null);
             }
 

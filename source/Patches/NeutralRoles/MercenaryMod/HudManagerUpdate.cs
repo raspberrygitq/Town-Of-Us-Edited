@@ -8,7 +8,6 @@ namespace TownOfUsEdited.NeutralRoles.MercenaryMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite GuardSprite => TownOfUsEdited.GuardSprite;
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -24,9 +23,6 @@ namespace TownOfUsEdited.NeutralRoles.MercenaryMod
                 role.GuardButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.GuardButton.graphic.enabled = true;
                 role.GuardButton.gameObject.SetActive(false);
-                role.GuardText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.GuardButton.transform);
-                role.GuardText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.GuardText);
             }
 
             if (role.UsesText == null && role.UsesLeft > 0)
@@ -66,7 +62,7 @@ namespace TownOfUsEdited.NeutralRoles.MercenaryMod
                 else role.GoldText.text = "<color=#FFFFFFFF>" + role.GoldText.text + "</color>";
             }
 
-            role.GuardButton.graphic.sprite = GuardSprite;
+            role.GuardButton.graphic.sprite = TownOfUsEdited.GuardSprite;
             role.GuardButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
             
             __instance.KillButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
@@ -81,7 +77,7 @@ namespace TownOfUsEdited.NeutralRoles.MercenaryMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-            role.GuardText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.GuardButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
@@ -97,8 +93,11 @@ namespace TownOfUsEdited.NeutralRoles.MercenaryMod
             role.GuardButton.SetCoolDown(role.GuardTimer(), CustomGameOptions.MercenaryCD);
             role.GuardButton.graphic.SetCooldownNormalizedUvs();
 
-            role.GuardText.text = "Guard";
-            role.GuardText.SetOutlineColor(Patches.Colors.Mercenary);
+            role.GuardButton.buttonLabelText.text = "Guard";
+            role.GuardButton.buttonLabelText.SetOutlineColor(Patches.Colors.Mercenary);
+
+            __instance.KillButton.buttonLabelText.text = "Gold";
+            __instance.KillButton.buttonLabelText.SetOutlineColor(Patches.Colors.Mercenary);
 
             var notGuarded = PlayerControl.AllPlayerControls.ToArray().Where(
                 player => !role.Guarded.Contains(player.PlayerId)).ToList();
@@ -116,13 +115,16 @@ namespace TownOfUsEdited.NeutralRoles.MercenaryMod
 
             var renderer = role.GuardButton.graphic;
             var renderer2 = __instance.KillButton.graphic;
-
+            var BribeText = __instance.KillButton.buttonLabelText;
+            var GuardText = role.GuardButton.buttonLabelText;
             if (role.ClosestBribePlayer != null && PlayerControl.LocalPlayer.moveable)
             {
                 renderer2.color = Palette.EnabledColor;
                 renderer2.material.SetFloat("_Desat", 0f);
                 role.GoldText.color = Palette.EnabledColor;
                 role.GoldText.material.SetFloat("_Desat", 0f);
+                BribeText.color = Palette.EnabledColor;
+                BribeText.material.SetFloat("_Desat", 0f);
             }
             else
             {
@@ -130,6 +132,8 @@ namespace TownOfUsEdited.NeutralRoles.MercenaryMod
                 renderer2.material.SetFloat("_Desat", 1f);
                 role.GoldText.color = Palette.DisabledClear;
                 role.GoldText.material.SetFloat("_Desat", 1f);
+                BribeText.color = Palette.DisabledClear;
+                BribeText.material.SetFloat("_Desat", 1f);
             }
 
             if (role.ClosestGuardPlayer != null && role.ButtonUsable)
@@ -138,8 +142,8 @@ namespace TownOfUsEdited.NeutralRoles.MercenaryMod
                 renderer.material.SetFloat("_Desat", 0f);
                 role.UsesText.color = Palette.EnabledColor;
                 role.UsesText.material.SetFloat("_Desat", 0f);
-                role.GuardText.color = Palette.EnabledColor;
-                role.GuardText.material.SetFloat("_Desat", 0f);
+                GuardText.color = Palette.EnabledColor;
+                GuardText.material.SetFloat("_Desat", 0f);
             }
             else
             {
@@ -147,8 +151,8 @@ namespace TownOfUsEdited.NeutralRoles.MercenaryMod
                 renderer.material.SetFloat("_Desat", 1f);
                 role.UsesText.color = Palette.DisabledClear;
                 role.UsesText.material.SetFloat("_Desat", 1f);
-                role.GuardText.color = Palette.DisabledClear;
-                role.GuardText.material.SetFloat("_Desat", 1f);
+                GuardText.color = Palette.DisabledClear;
+                GuardText.material.SetFloat("_Desat", 1f);
             }
         }
     }

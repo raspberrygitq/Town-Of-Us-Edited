@@ -55,7 +55,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
             bool checkLover = true
         )
         {
-            var hudManager = DestroyableSingleton<HudManager>.Instance;
+            var hudManager = HudManager.Instance;
             if (checkLover)
             {
                 SoundManager.Instance.PlaySound(player.KillSfx, false, 0.8f);

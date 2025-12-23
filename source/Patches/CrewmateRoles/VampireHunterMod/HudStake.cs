@@ -49,6 +49,10 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            stakeButton.buttonLabelText.text = "Stake";
+            stakeButton.buttonLabelText.SetOutlineColor(Patches.Colors.VampireHunter);
+
             if (role.ButtonUsable) stakeButton.SetCoolDown(role.StakeTimer(), CustomGameOptions.StakeCd);
             else stakeButton.SetCoolDown(0f, CustomGameOptions.StakeCd);
             if (role.UsesLeft == 0) return;
@@ -60,10 +64,13 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
             else Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton);
 
             var renderer = stakeButton.graphic;
+            var stakeText = stakeButton.buttonLabelText;
             if (role.ClosestPlayer != null && role.ButtonUsable)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
+                stakeText.color = Palette.EnabledColor;
+                stakeText.material.SetFloat("_Desat", 0f);
                 role.UsesText.color = Palette.EnabledColor;
                 role.UsesText.material.SetFloat("_Desat", 0f);
             }
@@ -71,6 +78,8 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
+                stakeText.color = Palette.DisabledClear;
+                stakeText.material.SetFloat("_Desat", 1f);
                 role.UsesText.color = Palette.DisabledClear;
                 role.UsesText.material.SetFloat("_Desat", 1f);
             }

@@ -86,7 +86,7 @@ namespace TownOfUsEdited.ImpostorRoles.VenererMod
             }
 
             var cooldownTimer = role.AbilityTimer();
-            if (role.Kills > 0 && PlayerControl.LocalPlayer.moveable && cooldownTimer == 0f)
+            if (role.Kills > 0 && PlayerControl.LocalPlayer.moveable && cooldownTimer == 0f && !role.coolingDown)
             {
                 role.AbilityButton.SetCoolDown(cooldownTimer, CustomGameOptions.AbilityCd);
                 role.AbilityButton.graphic.color = Palette.EnabledColor;

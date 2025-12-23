@@ -14,9 +14,7 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
             if (PlayerControl.LocalPlayer.Data.IsDead) return;
             if (StartImitate.ImitatingPlayers.Count == 0) return;
             if (!StartImitate.ImitatingPlayers.Contains(PlayerControl.LocalPlayer.PlayerId)) return;
-            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff) && !PlayerControl.LocalPlayer.Is(RoleEnum.Hunter)
-            && !PlayerControl.LocalPlayer.Is(RoleEnum.Knight) && !PlayerControl.LocalPlayer.Is(RoleEnum.Fighter)) __instance.KillButton.OverrideText("");
-            return;
+            if (!PlayerControl.LocalPlayer.Is(Faction.Crewmates)) return;
         }
     }
 }

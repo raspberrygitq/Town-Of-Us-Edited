@@ -15,7 +15,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
     {
         public static bool Prefix(KillButton __instance)
         {
-            if (__instance != DestroyableSingleton<HudManager>.Instance.KillButton) return true;
+            if (__instance != HudManager.Instance.KillButton) return true;
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.VampireHunter)) return true;
             var role = Role.GetRole<VampireHunter>(PlayerControl.LocalPlayer);
             if (!PlayerControl.LocalPlayer.CanMove || role.ClosestPlayer == null) return false;
@@ -100,7 +100,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
                 snitchRole.SnitchArrows.Values.DestroyAll();
                 snitchRole.SnitchArrows.Clear();
                 CompleteTask.Postfix(oldVamp);
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (roleEnum == RoleEnum.Sheriff)
@@ -144,14 +144,14 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
             {
                 var mayorRole = Role.GetRole<Mayor>(oldVamp);
                 mayorRole.Revealed = false;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (roleEnum == RoleEnum.Prosecutor)
             {
                 var prosRole = Role.GetRole<Prosecutor>(oldVamp);
                 prosRole.Prosecuted = false;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (roleEnum == RoleEnum.Politician)
@@ -185,7 +185,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
             {
                 var vigiRole = Role.GetRole<Vigilante>(oldVamp);
                 vigiRole.RemainingKills = CustomGameOptions.VigilanteKills;
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (roleEnum == RoleEnum.Veteran)
@@ -282,7 +282,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
                 var mysticRole = Role.GetRole<Mystic>(oldVamp);
                 mysticRole.BodyArrows.Values.DestroyAll();
                 mysticRole.BodyArrows.Clear();
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (roleEnum == RoleEnum.Transporter)
@@ -321,7 +321,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
                 var aurialRole = Role.GetRole<Aurial>(oldVamp);
                 aurialRole.SenseArrows.Values.DestroyAll();
                 aurialRole.SenseArrows.Clear();
-                if (PlayerControl.LocalPlayer == aurialRole.Player) DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                if (PlayerControl.LocalPlayer == aurialRole.Player) HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (roleEnum == RoleEnum.Survivor)
@@ -366,7 +366,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
 
             else if (!(oldVamp.Is(RoleEnum.Altruist) || oldVamp.Is(RoleEnum.Amnesiac)))
             {
-                DestroyableSingleton<HudManager>.Instance.KillButton.gameObject.SetActive(false);
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             var otherRole = Role.GetRole(oldVamp);

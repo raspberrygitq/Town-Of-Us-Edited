@@ -21,9 +21,6 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
                 role.SpellButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.SpellButton.graphic.enabled = true;
                 role.SpellButton.gameObject.SetActive(false);
-                role.SpellText = Object.Instantiate(__instance.KillButton.buttonLabelText, role.SpellButton.transform);
-                role.SpellText.gameObject.SetActive(false);
-                role.ButtonLabels.Add(role.SpellText);
             }
 
             role.SpellButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
@@ -33,12 +30,12 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
             role.SpellButton.graphic.sprite = TownOfUsEdited.Spell;
             role.SpellButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
-            role.SpellText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            role.SpellButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
-            role.SpellText.text = "Spell";
+            role.SpellButton.buttonLabelText.text = "Spell";
 
             var killButton = role.SpellButton;
             if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, killButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsCursed()).ToList());
@@ -51,7 +48,7 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
             role.SpellButton.SetCoolDown(role.KillCooldown, GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
             role.SpellButton.graphic.SetCooldownNormalizedUvs();
 
-            var labelrender = role.SpellText;
+            var labelrender = role.SpellButton.buttonLabelText;
             if (role.ClosestPlayer != null)
             {
                 labelrender.color = Palette.EnabledColor;

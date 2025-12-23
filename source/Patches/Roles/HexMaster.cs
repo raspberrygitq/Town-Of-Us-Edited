@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using TownOfUsEdited.CrewmateRoles.ClericMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Patches;
@@ -27,7 +26,6 @@ namespace TownOfUsEdited.Roles
         public PlayerControl ClosestPlayer;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
-        public TextMeshPro BombText;
         public void Hex(PlayerControl target)
         {
             // Check if the Hex Master can hex

@@ -17,17 +17,18 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             var jailButton = __instance.KillButton;
 
             var role = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
-            var jailText = __instance.KillButton.buttonLabelText;
 
             jailButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
-
-            jailText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+            jailButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+
+            jailButton.buttonLabelText.text = "Jail";
+            jailButton.buttonLabelText.SetOutlineColor(Patches.Colors.Jailor);
 
             if (role.CanJail)
             {
@@ -60,15 +61,15 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             {
                 jailButton.graphic.color = Palette.EnabledColor;
                 jailButton.graphic.material.SetFloat("_Desat", 0f);
-                jailText.color = Palette.EnabledColor;
-                jailText.material.SetFloat("_Desat", 0f);
+                jailButton.buttonLabelText.color = Palette.EnabledColor;
+                jailButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 jailButton.graphic.color = Palette.DisabledClear;
                 jailButton.graphic.material.SetFloat("_Desat", 1f);
-                jailText.color = Palette.DisabledClear;
-                jailText.material.SetFloat("_Desat", 1f);
+                jailButton.buttonLabelText.color = Palette.DisabledClear;
+                jailButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
         }
     }

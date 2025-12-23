@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -8,7 +7,6 @@ namespace TownOfUsEdited.Roles
         public KillButton _blindButton;
         public PlayerControl ClosestPlayer;
         public PlayerControl BlindedPlayer;
-        public TextMeshPro BlindText;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
         public bool Enabled;

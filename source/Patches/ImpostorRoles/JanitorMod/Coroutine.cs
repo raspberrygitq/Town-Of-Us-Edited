@@ -22,7 +22,7 @@ namespace TownOfUsEdited.ImpostorRoles.JanitorMod
                 }
             }
 
-            KillButtonTarget.SetTarget(DestroyableSingleton<HudManager>.Instance.KillButton, null, role);
+            KillButtonTarget.SetTarget(HudManager.Instance.KillButton, null, role);
             if (PlayerControl.LocalPlayer == role.Player)
             {
                 if (PlayerControl.LocalPlayer.Is(ModifierEnum.Underdog))

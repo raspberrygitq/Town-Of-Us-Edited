@@ -18,7 +18,7 @@ namespace TownOfUsEdited.Patches.BattleRoyale.PlayerMod
                 return false;
 
             var player = Role.GetRole<Player>(PlayerControl.LocalPlayer);
-            var killbutton = DestroyableSingleton<HudManager>.Instance.KillButton;
+            var killbutton = HudManager.Instance.KillButton;
             
             if (player.ClosestPlayer == null)
                 return false;

@@ -664,7 +664,7 @@ namespace TownOfUsEdited.CustomOption
 
             public static void Postfix(NumberOption __instance)
             {
-                if (__instance.TitleText.text == DestroyableSingleton<TranslationController>.Instance.GetString(StringNames.GameNumImpostors, string.Empty))
+                if (__instance.TitleText.text == TranslationController.Instance.GetString(StringNames.GameNumImpostors, string.Empty))
                 {
                     __instance.ValidRange.min = 0;
                     __instance.ValidRange.max = 5;
@@ -692,7 +692,7 @@ namespace TownOfUsEdited.CustomOption
         {
             public static void Postfix(NumberOption __instance)
             {
-                if (__instance.TitleText.text == DestroyableSingleton<TranslationController>.Instance.GetString(StringNames.GameNumImpostors, string.Empty))
+                if (__instance.TitleText.text == TranslationController.Instance.GetString(StringNames.GameNumImpostors, string.Empty))
                 {
                     __instance.ValidRange.min = 0;
                     __instance.ValidRange.max = 5;
