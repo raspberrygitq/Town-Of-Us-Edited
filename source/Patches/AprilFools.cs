@@ -116,8 +116,8 @@ namespace TownOfUsEdited.Patches
 
                 aprilfoolstoggle.gameObject.transform.SetParent(GameObject.Find("RightPanel").transform);
                 var pos = aprilfoolstoggle.gameObject.AddComponent<AspectPosition>();
-                pos.Alignment = AspectPosition.EdgeAlignments.LeftBottom;
-                pos.DistanceFromEdge = new Vector3(2.1f, 2f, 8f);
+                pos.Alignment = AspectPosition.EdgeAlignments.RightTop;
+                pos.DistanceFromEdge = new Vector3(2.9f, 0.58f, 5f);
 
                 passive.OnClick.AddListener((Action)(() =>
                 {

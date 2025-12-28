@@ -613,11 +613,6 @@ namespace TownOfUsEdited
                 var pros = Role.GetRole<Prosecutor>(player);
                 if (!pros.Prosecuted) return true;
             }
-            else if (player.Is(RoleEnum.Sorcerer))
-            {
-                var sorcerer = Role.GetRole<Sorcerer>(player);
-                if (!sorcerer.UsedPoison) return true;
-            }
             else if (player.Is(RoleEnum.Veteran))
             {
                 var vet = Role.GetRole<Veteran>(player);
@@ -856,8 +851,8 @@ namespace TownOfUsEdited
         {
             return Role.GetRoles(RoleEnum.Spiritualist).Any(role =>
             {
-                var spirit = (Spiritualist)role;
-                return spirit != null && spirit.ControlledPlayer != null && player.PlayerId == spirit.ControlledPlayer.PlayerId && !spirit.Player.Data.IsDead;
+                var spiritualist = (Spiritualist)role;
+                return spiritualist != null && spiritualist.ControlledPlayer != null && player.PlayerId == spiritualist.ControlledPlayer.PlayerId && !spiritualist.Player.Data.IsDead;
             });
         }
 
@@ -871,15 +866,6 @@ namespace TownOfUsEdited
         }
 
         public static bool IsGuarded(this PlayerControl player)
-        {
-            return Role.GetRoles(RoleEnum.Guard).Any(role =>
-            {
-                var guard = (Guard)role;
-                return guard != null && guard.ProtectedPlayer != null && player.PlayerId == guard.ProtectedPlayer.PlayerId && !guard.Player.Data.IsDead;
-            });
-        }
-
-        public static bool IsGuarded2(this PlayerControl player)
         {
             return Role.GetRoles(RoleEnum.Guardian).Any(role =>
             {
@@ -992,7 +978,7 @@ namespace TownOfUsEdited
                     if (CustomGameOptions.ShieldBreaks) fullCooldownReset = true;
                     else zeroSecReset = true;
                 }
-                else if (player.IsProtected() || player.IsBarriered() || target.IsGuarded2() || target.HasPotionShield())
+                else if (player.IsProtected() || player.IsBarriered() || target.IsGuarded() || target.HasPotionShield())
                 {
                     gaReset = true;
                     if (player.IsBarriered())
@@ -1019,7 +1005,7 @@ namespace TownOfUsEdited
                     if (CustomGameOptions.ShieldBreaks) fullCooldownReset = true;
                     else zeroSecReset = true;
                 }
-                else if (player.IsProtected() || player.IsBarriered() || target.IsGuarded2() || target.HasPotionShield())
+                else if (player.IsProtected() || player.IsBarriered() || target.IsGuarded() || target.HasPotionShield())
                 {
                     gaReset = true;
                     if (player.IsBarriered())
@@ -1045,7 +1031,7 @@ namespace TownOfUsEdited
                         else zeroSecReset = true;
                         Coroutines.Start(FlashCoroutine(new Color(0f, 0.5f, 0f, 1f)));
                     }
-                    else if (target.IsProtected() || target.IsBarriered() || target.IsGuarded2() || target.HasPotionShield())
+                    else if (target.IsProtected() || target.IsBarriered() || target.IsGuarded() || target.HasPotionShield())
                     {
                         gaReset = true;
                         if (target.IsBarriered())
@@ -1125,9 +1111,9 @@ namespace TownOfUsEdited
                             var vh = Role.GetRole<VampireHunter>(player);
                             vh.Cooldown = CustomGameOptions.StakeCd;
                         }
-                        else if (player.Is(RoleEnum.Maul))
+                        else if (player.Is(RoleEnum.Werewolf))
                         {
-                            var ww = Role.GetRole<Maul>(player);
+                            var ww = Role.GetRole<Werewolf>(player);
                             ww.Cooldown = CustomGameOptions.RampageKillCd;
                         }
                         else if (player.Is(RoleEnum.SoulCollector))
@@ -1160,7 +1146,7 @@ namespace TownOfUsEdited
                 else zeroSecReset = true;
                 Coroutines.Start(Utils.FlashCoroutine(new Color(0f, 0.5f, 0f, 1f)));
             }
-            else if ((target.IsVesting() || target.IsProtected() || target.IsBarriered() || target.IsGuarded2() || target.HasPotionShield()) && toKill)
+            else if ((target.IsVesting() || target.IsProtected() || target.IsBarriered() || target.IsGuarded() || target.HasPotionShield()) && toKill)
             {
                 gaReset = true;
                 if (target.IsBarriered())
@@ -1240,9 +1226,9 @@ namespace TownOfUsEdited
                     var vh = Role.GetRole<VampireHunter>(player);
                     vh.Cooldown = CustomGameOptions.StakeCd;
                 }
-                else if (player.Is(RoleEnum.Maul))
+                else if (player.Is(RoleEnum.Werewolf))
                 {
-                    var ww = Role.GetRole<Maul>(player);
+                    var ww = Role.GetRole<Werewolf>(player);
                     ww.Cooldown = CustomGameOptions.RampageKillCd;
                 }
                 else if (player.Is(RoleEnum.SoulCollector))
@@ -1956,13 +1942,6 @@ namespace TownOfUsEdited
                     return;
                 }
 
-                if (killer.Data.IsImpostor() && CustomGameOptions.GameMode == GameMode.Werewolf &&
-                killer == PlayerControl.LocalPlayer)
-                {
-                    Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.WerewolfKillCD;
-                    return;
-                }
-
                 if (killer == PlayerControl.LocalPlayer && killer.Is(RoleEnum.BountyHunter))
                 {
                     var bh = Role.GetRole<BountyHunter>(killer);
@@ -2003,9 +1982,9 @@ namespace TownOfUsEdited
                     return;
                 }
 
-                if (target.Is(ModifierEnum.Diseased) && killer.Is(RoleEnum.Maul))
+                if (target.Is(ModifierEnum.Diseased) && killer.Is(RoleEnum.Werewolf))
                 {
-                    var werewolf = Role.GetRole<Maul>(killer);
+                    var werewolf = Role.GetRole<Werewolf>(killer);
                     werewolf.Cooldown = CustomGameOptions.RampageKillCd * CustomGameOptions.DiseasedMultiplier;
                     return;
                 }
@@ -2791,12 +2770,6 @@ namespace TownOfUsEdited
                 var vamp = Role.GetRole<Vampire>(PlayerControl.LocalPlayer);
                 vamp.Cooldown = CustomGameOptions.BiteCd;
             }
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.WhiteWolf))
-            {
-                var whitewolf = Role.GetRole<WhiteWolf>(PlayerControl.LocalPlayer);
-                whitewolf.Cooldown = CustomGameOptions.WerewolfKillCD;
-                whitewolf.RampageCooldown = CustomGameOptions.RampageCD;
-            }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel))
             {
                 var ga = Role.GetRole<GuardianAngel>(PlayerControl.LocalPlayer);
@@ -2819,9 +2792,9 @@ namespace TownOfUsEdited
                 var juggernaut = Role.GetRole<Juggernaut>(PlayerControl.LocalPlayer);
                 juggernaut.Cooldown = CustomGameOptions.JuggKCd - CustomGameOptions.ReducedKCdPerKill * juggernaut.JuggKills;
             }
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Maul))
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf))
             {
-                var werewolf = Role.GetRole<Maul>(PlayerControl.LocalPlayer);
+                var werewolf = Role.GetRole<Werewolf>(PlayerControl.LocalPlayer);
                 werewolf.RampageCooldown = CustomGameOptions.RampageCd;
                 werewolf.Cooldown = CustomGameOptions.RampageKillCd;
             }
@@ -2870,31 +2843,10 @@ namespace TownOfUsEdited
             }
             #endregion
             #region ImposterRoles
-            if (PlayerControl.LocalPlayer.Data.IsImpostor() && CustomGameOptions.GameMode == GameMode.Werewolf)
-            {
-                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.WerewolfKillCD;
-            }
-            if (PlayerControl.LocalPlayer.Data.IsImpostor() && CustomGameOptions.GameMode != GameMode.Werewolf && CustomGameOptions.GameMode != GameMode.Chaos
+            if (PlayerControl.LocalPlayer.Data.IsImpostor() && CustomGameOptions.GameMode != GameMode.Chaos
             && !PlayerControl.LocalPlayer.Is(RoleEnum.Mafioso))
             {
                 Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
-            }
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.TalkativeWolf))
-            {
-                var tw = Role.GetRole<TalkativeWolf>(PlayerControl.LocalPlayer);
-                tw.RampageCooldown = CustomGameOptions.RampageCD;
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.BlackWolf))
-            {
-                var bw = Role.GetRole<BlackWolf>(PlayerControl.LocalPlayer);
-                bw.RampageCooldown = CustomGameOptions.RampageCD;
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf))
-            {
-                var ww = Role.GetRole<Werewolf>(PlayerControl.LocalPlayer);
-                ww.RampageCooldown = CustomGameOptions.RampageCD;
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator))
             {

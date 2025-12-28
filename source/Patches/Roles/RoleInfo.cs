@@ -34,7 +34,7 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#216f01>Avenger</color>, you can avenge a dead body if you find one, resulting in being able to kill his killer.");
                 }
-                if (pc.Is(RoleEnum.Chameleon) && CustomGameOptions.GameMode != GameMode.Werewolf)
+                if (pc.Is(RoleEnum.Chameleon))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#068c38>Chameleon</color>, use your ability to turn invisible and watch other players.");
                 }
@@ -66,7 +66,7 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#BF00BFFF>Oracle</color>, you can force a player to confess to you giving you an information on one of two players.\nThe confessed player will also reveal their alignment to everyone if you die.\nFinally, you can also use your bless ability on someone, making them immune to being voted out the next meeting.");
                 }
-                if (pc.Is(RoleEnum.Seer) && CustomGameOptions.GameMode != GameMode.Werewolf)
+                if (pc.Is(RoleEnum.Seer))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#FFCC80FF>Seer</color>, you can check if someone is evil or not.\nUse this ability on suspicious players!");
                 }
@@ -106,7 +106,7 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#ffd082>Knight</color>, you can kill anyone but only once.\nUse this ability with responsibility.");
                 }
-                if (pc.Is(RoleEnum.Sheriff) && CustomGameOptions.GameMode != GameMode.Werewolf)
+                if (pc.Is(RoleEnum.Sheriff))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#FFFF00FF>Sheriff</color>, you can kill the <color=#FF0000FF>Impostors</color> but if you try to kill a <color=#00FFFF>Crewmate</color>, you will die instead.");
                 }
@@ -162,7 +162,7 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#255bc9>Bodyguard</color>, if a near player tries to kill someone else, you will kill them and die too.\nNote that this only applies to players that use the regular kill method.");
                 }
-                if (pc.Is(RoleEnum.Paranoïac) && CustomGameOptions.GameMode != GameMode.Werewolf)
+                if (pc.Is(RoleEnum.Paranoïac))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#0a7eae>Paranoïac</color>, you can call a Meeting at anytime and hide in vents if you feel scared.");
                 }
@@ -182,7 +182,7 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#9900FFFF>Warden</color>, you can use your button on someone to fortify them, they will be immune to interactions and if someone does interact with them, you and your target will get notified.\nNote that this doesn't protect from kills.");
                 }
-                if (pc.Is(RoleEnum.Mayor) && CustomGameOptions.GameMode != GameMode.Werewolf)
+                if (pc.Is(RoleEnum.Mayor))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#704FA8FF>Mayor</color>, now that you have been revealed to other players, everyone know who you are and you have two extra votes when voting.\nTo balance this, your vision is reduced.");
                 }
@@ -190,7 +190,7 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#A680FFFF>Medium</color>, you can see the ghosts of recent dead players by pressing the Mediate button.\nGhosts might lead you to their killer but be careful because some might try to trick you!");
                 }
-                if (pc.Is(RoleEnum.Prosecutor) && CustomGameOptions.GameMode != GameMode.Werewolf)
+                if (pc.Is(RoleEnum.Prosecutor))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#B38000FF>Prosecutor</color>, you can choose to control the vote and vote someone out once.\nHowever, you may also die by executing a Crewmate.\nYou can not prosecute on the 10 last seconds of a meeting.");
                 }
@@ -303,9 +303,9 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#262626FF>Vampire</color>, you can bite someone to convert them to your side, if the convert is unsuccessful, your cooldown will be reset.\nYou can also perform regular kills.");
                 }
-                if (pc.Is(RoleEnum.Maul))
+                if (pc.Is(RoleEnum.Werewolf))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#A86629FF>Maul</color>, use your Rampage ability to kill with a shorter kill cooldown and to get an Impostor vision.\nYou may also gain the ability to vent while rampaging, depending on settings.");
+                    HudManager.Instance.ShowPopUp("You are the <color=#A86629FF>Werewolf</color>, use your Rampage ability to kill with a shorter kill cooldown and to get an Impostor vision.\nYou may also gain the ability to vent while rampaging, depending on settings.");
                 }
                 if (pc.Is(RoleEnum.Juggernaut))
                 {
@@ -316,9 +316,9 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Impostor</color>, kill everyone and sabotage without being caught!");
                 }
-                if (pc.Is(RoleEnum.Spirit))
+                if (pc.Is(RoleEnum.Wraith))
                 {
-                    HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Spirit</color>, if you manage to complete all your tasks before getting clicked, you will kill a random non impostor!");
+                    HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Wraith</color>, if you manage to complete all your tasks before getting clicked, you will kill a random non impostor!");
                 }
                 if (pc.Is(RoleEnum.Freezer))
                 {
@@ -452,63 +452,6 @@ namespace TownOfUsEdited.Roles
                 if (pc.Is(RoleEnum.PotionMaster))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#bf5fff>Potion Master</color>, you use your ability to get a random potion effect.\nUsing it will give you one of the following potions:\nSpeed: Make your speed higher\nStrength: You are able to vent and have a shorter kill cooldown\nShield: You are temporarily immune to direct kills\nInvisibility: You are invisible to other players");
-                }
-                //Werewolf Roles info
-                if (pc.Is(RoleEnum.Werewolf))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#A86629FF>Werewolf</color>, kill all <color=#adf34b>Villagers</color> before they find your true identity.\nDuring the night, you can go on Rampage, making you able to kill.");
-                }
-                if (pc.Is(RoleEnum.Villager))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#adf34b>Villager</color>, you must exile the <color=#A86629FF>Werewolves</color> before they kill you.");
-                }
-                if (pc.Is(RoleEnum.Sorcerer))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#9210ff>Sorcerer</color>, during the night, you can Poison a player resulting in their death on the next Day.\nYou can also Revive a player.");
-                }
-                if (pc.Is(RoleEnum.Seer) && CustomGameOptions.GameMode == GameMode.Werewolf)
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#FFCC80FF>Seer</color>, every night, you can reveal the role of a player.");
-                }
-                if (pc.Is(RoleEnum.Prosecutor) && CustomGameOptions.GameMode == GameMode.Werewolf)
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#B38000FF>Prosecutor</color>, you can choose to control the vote and vote someone out once.\nBe careful because if you exile a <color=#adf34b>Villager</color>, you will die.\nYou can not prosecute on the 10 last seconds of a meeting.");
-                }
-                if (pc.Is(RoleEnum.SoulCatcher))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#7b7781>Soul Catcher</color>, during the night, you will be able to see the Deads.\nBe careful, some might try to trick you!\nNote that you won't know who the Deads are.");
-                }
-                if (pc.Is(RoleEnum.WhiteWolf))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#ffffff>White Wolf</color>, you work the same way as a normal Werewolf, however you are not in the Werewolf team.\nYou must kill all <color=#A86629FF>Werewolves</color> and <color=#adf34b>Villagers</color> to win!");
-                }
-                if (pc.Is(RoleEnum.Guard))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#0095ff>Guard</color>, every night, you can Protect someone making them immune to <color=#A86629FF>Werewolves</color> attacks.\nProtection will be reset the next day.");
-                }
-                if (pc.Is(RoleEnum.Chameleon) && CustomGameOptions.GameMode == GameMode.Werewolf)
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#068c38>Chameleon</color>, during the night, you can turn invisible to watch other players without them knowing.");
-                }
-                if (pc.Is(RoleEnum.Mayor) && CustomGameOptions.GameMode == GameMode.Werewolf)
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#704FA8FF>Mayor</color>, during the day, you can choose to reveal which will safe you and gain you two extra votes.\nTo balance this, your vision will be reduced.");
-                }
-                if (pc.Is(RoleEnum.TalkativeWolf))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#ffa750>Talkative Wolf</color>, during the day, you will have to say a random word.\nIf you didn't say it before the day ends, you will die!");
-                }
-                if (pc.Is(RoleEnum.Sheriff) && CustomGameOptions.GameMode == GameMode.Werewolf)
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#FFFF00FF>Sheriff</color>, during the night, you can kill <color=#A86629FF>Werewolves</color> but if you try to kill <color=#adf34b>Villagers</color>, you will die!");
-                }
-                if (pc.Is(RoleEnum.BlackWolf))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#4c4c4c>Black Wolf</color>, during the night, you can Convert a <color=#adf34b>Villager</color> to a <color=#A86629FF>Werewolf</color>!");
-                }
-                if (pc.Is(RoleEnum.Paranoïac) && CustomGameOptions.GameMode == GameMode.Werewolf)
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#0a7eae>Paranoïac</color>, during the night, if you feel stressed, you can start the next day quicker and skip the current night once.\nYou can also hide in vents.");
                 }
                 //Battle Royale Role
                 if (pc.Is(RoleEnum.Player))
@@ -820,9 +763,9 @@ namespace TownOfUsEdited.Roles
                 return "The <color=#8c004c>Juggernaut</color> is a Neutral role which can kill and will have its cooldown decreased by each kill.\nThe Juggernaut wins by being the last player standing.";
             }
             // impostors
-            else if (role == "Spirit")
+            else if (role == "Wraith")
             {
-                return "The <color=#FF0000FF>Spirit</color> is an Impostor role obtainable after death.\nAs the Spirit, you will kill a random non-Impostor living player after completing all of your assigned tasks before getting clicked.";
+                return "The <color=#FF0000FF>Wraith</color> is an Impostor role obtainable after death.\nAs the Wraith, you will kill a random non-Impostor living player after completing all of your assigned tasks before getting clicked.";
             }
             else if (role == "Freezer")
             {
@@ -960,39 +903,6 @@ namespace TownOfUsEdited.Roles
             else if (role == "PotionMaster")
             {
                 return "The <color=#bf5fff>Potion Master</color> is a Coven role which can get a random potion and drink it.\nThe Shield potion will grant the Potion Master a temporary shield, the invisibility potion will make the Potion Master invisible, the Strength potion will make it have a short kill cooldown and able to vent and the Speed potion will grant the Potion Master a temporary speed boost.";
-            }
-            // werewolf
-            else if (role == "Werewolf")
-            {
-                return "The <color=#A86629FF>Werewolf</color> is the default Werewolf role.\nIt can only kill while being Transformed as a Werewolf but has a short kill cooldown.\nThe goal of Werewolves is to kill all living Villagers.";
-            }
-            else if (role == "Villager")
-            {
-                return "The <color=#adf34b>Villager</color> is the default Villager role.\nIt has no special ability.";
-            }
-            else if (role == "Sorcerer")
-            {
-                return "The <color=#9210ff>Sorcerer</color> is a Villager role which can use its first potion to Poison a player, killing them next meeting.\nThe Sorcerer also has a revive potion that, when used on a dead body, will revive it.";
-            }
-            else if (role == "SoulCatcher")
-            {
-                return "The <color=#7b7781>Soul Catcher</color> is a Villager role which can see the ghosts of dead player.\nHowever, the Soul Catcher doesn't know who is who.";
-            }
-            else if (role == "WhiteWolf")
-            {
-                return "The <color=#ffffff>White Wolf</color> is a Neutral role which works the same way as the basic <color=#A86629FF>Werewolf</color> role.\nBut the White Wolf wins alone by killing Villagers and Werewolves.";
-            }
-            else if (role == "Guard")
-            {
-                return "The <color=#0095ff>Guard</color> is a Villager role which can protect someone during the Night by giving this player a shield.";
-            }
-            else if (role == "TalkativeWolf")
-            {
-                return "The <color=#ffa750>Talkative Wolf</color> is a Werewolf role which has to say one specific role each day.\nIf the Talkative Wolf fails to say his word and the Day ends, it will self kill.";
-            }
-            else if (role == "BlackWolf")
-            {
-                return "The <color=#4c4c4c>Black Wolf</color> is a Werewolf role which can Convert a Villager to regular Werewolf once in the game.";
             }
             else return "The role you have searched for could not be found.\nMake sure you typed the role correctly. (Do not use spaces and use majs ex: /r SerialKiller)";
         }

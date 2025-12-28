@@ -65,7 +65,7 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                 Utils.SetTarget(ref role.ClosestPlayer, role.ExamineButton, float.NaN);
 
                 var renderer = role.ExamineButton.graphic;
-                if (role.ClosestPlayer != null && role.InvestigatingScene != null && !role.coolingDown)
+                if (role.ClosestPlayer != null && role.InvestigatingScene != null)
                 {
                     renderer.color = Palette.EnabledColor;
                     renderer.material.SetFloat("_Desat", 0f);

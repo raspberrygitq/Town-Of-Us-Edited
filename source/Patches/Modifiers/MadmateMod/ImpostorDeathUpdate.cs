@@ -25,7 +25,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
             var aliveimps = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
             if (aliveimps.Count <= 0)
             {
-                if ((CustomGameOptions.MadmateOnImpoDeath == BecomeMadmateOptions.Die || CustomGameOptions.GameMode == GameMode.Cultist) && !PlayerControl.LocalPlayer.Data.IsDead
+                if ((CustomGameOptions.MadmateOnImpoDeath == BecomeMadmateOptions.Die) && !PlayerControl.LocalPlayer.Data.IsDead
                 && !PlayerControl.LocalPlayer.Data.Disconnected && PlayerControl.LocalPlayer.Is(Faction.Madmates))
                 {
                     if (!MeetingHud.Instance)
@@ -40,7 +40,6 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                         return;
                     }
                 }
-                if (CustomGameOptions.GameMode == GameMode.Cultist) return;
                 else if (CustomGameOptions.MadmateOnImpoDeath == BecomeMadmateOptions.OriginalFaction && PlayerControl.LocalPlayer.Is(Faction.Madmates))
                 {
                     Utils.TurnCrewmateTeam(PlayerControl.LocalPlayer);
@@ -233,7 +232,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                 role.IncorrectKills = killsList.IncorrectKills;
                 role.CorrectAssassinKills = killsList.CorrectAssassinKills;
                 role.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
-                role.TaskText = () => "You have become the new Impostor, kill the remaining crew!";
+                role.TaskText = () => "You have become the new Traitor, kill the remaining crew!";
                 role.RegenTask();
             }
 

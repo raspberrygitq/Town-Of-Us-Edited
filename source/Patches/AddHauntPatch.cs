@@ -3,7 +3,7 @@ using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using TownOfUsEdited.CrewmateRoles.HaunterMod;
-using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.ImpostorRoles.WraithMod;
 using TownOfUsEdited.NeutralRoles.PhantomMod;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
@@ -43,7 +43,7 @@ namespace TownOfUsEdited.Patches
                 try
                 {
                     if (SetPhantom.WillBePhantom != player && SetHaunter.WillBeHaunter != player &&
-                    SetSpirit.WillBeSpirit != player && !player.Data.Disconnected) player.Exiled();
+                    SetWraith.WillBeWraith != player && !player.Data.Disconnected) player.Exiled();
                     if (AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     {
                         RoleManager.Instance.SetRole(player, RoleTypes.CrewmateGhost);

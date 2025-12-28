@@ -39,7 +39,7 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
             if (!role.OnAlert) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, alives);
 
             var alertText = __instance.KillButton.buttonLabelText;
-            if (role.ClosestPlayer != null && !role.OnAlert && !role.coolingDown)
+            if (role.ClosestPlayer != null && !role.OnAlert)
             {
                 __instance.KillButton.graphic.color = Palette.EnabledColor;
                 __instance.KillButton.graphic.material.SetFloat("_Desat", 0f);

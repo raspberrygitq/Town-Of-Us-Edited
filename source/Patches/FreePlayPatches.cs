@@ -22,7 +22,7 @@ using TownOfUsEdited.Extensions;
 using TownOfUsEdited.ImpostorRoles.BlinderMod;
 using TownOfUsEdited.ImpostorRoles.ConverterMod;
 using TownOfUsEdited.ImpostorRoles.FreezerMod;
-using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.ImpostorRoles.WraithMod;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
@@ -57,7 +57,7 @@ namespace TownOfUsEdited.Patches
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Haunter) || PlayerControl.LocalPlayer.Is(RoleEnum.Phantom)
-            || PlayerControl.LocalPlayer.Is(RoleEnum.Spirit) || PlayerControl.LocalPlayer.Is(RoleEnum.Doppelganger) || PlayerControl.LocalPlayer.Is(RoleEnum.Morphling) ||
+            || PlayerControl.LocalPlayer.Is(RoleEnum.Wraith) || PlayerControl.LocalPlayer.Is(RoleEnum.Doppelganger) || PlayerControl.LocalPlayer.Is(RoleEnum.Morphling) ||
             PlayerControl.LocalPlayer.Is(RoleEnum.Chameleon) || PlayerControl.LocalPlayer.Is(RoleEnum.Swooper) ||
             PlayerControl.LocalPlayer.Is(RoleEnum.Glitch) || PlayerControl.LocalPlayer.Is(RoleEnum.Reviver))
             {
@@ -374,7 +374,6 @@ namespace TownOfUsEdited.Patches
             else if (role == typeof(Terrorist)) newRole = new Terrorist(PlayerControl.LocalPlayer);
             else if (role == typeof(Doppelganger)) newRole = new Doppelganger(PlayerControl.LocalPlayer);
             else if (role == typeof(Infectious)) newRole = new Infectious(PlayerControl.LocalPlayer);
-            else if (role == typeof(Maul)) newRole = new Maul(PlayerControl.LocalPlayer);
             else if (role == typeof(Mutant)) newRole = new Mutant(PlayerControl.LocalPlayer);
             else if (role == typeof(Juggernaut)) newRole = new Juggernaut(PlayerControl.LocalPlayer);
             else if (role == typeof(Plaguebearer)) newRole = new Plaguebearer(PlayerControl.LocalPlayer);
@@ -382,10 +381,11 @@ namespace TownOfUsEdited.Patches
             else if (role == typeof(SerialKiller)) newRole = new SerialKiller(PlayerControl.LocalPlayer);
             else if (role == typeof(Glitch)) newRole = new Glitch(PlayerControl.LocalPlayer);
             else if (role == typeof(Vampire)) newRole = new Vampire(PlayerControl.LocalPlayer);
+            else if (role == typeof(Werewolf)) newRole = new Werewolf(PlayerControl.LocalPlayer);
             else if (role == typeof(Impostor)) newRole = new Impostor(PlayerControl.LocalPlayer);
             else if (role == typeof(Blinder)) newRole = new Blinder(PlayerControl.LocalPlayer);
             else if (role == typeof(Freezer)) newRole = new Freezer(PlayerControl.LocalPlayer);
-            else if (role == typeof(Spirit)) newRole = new Spirit(PlayerControl.LocalPlayer);
+            else if (role == typeof(Wraith)) newRole = new Wraith(PlayerControl.LocalPlayer);
             else if (role == typeof(Assassin)) newRole = new Assassin(PlayerControl.LocalPlayer);
             else if (role == typeof(Escapist)) newRole = new Escapist(PlayerControl.LocalPlayer);
             else if (role == typeof(Grenadier)) newRole = new Grenadier(PlayerControl.LocalPlayer);
@@ -420,7 +420,7 @@ namespace TownOfUsEdited.Patches
             else newRole = new Crewmate(PlayerControl.LocalPlayer);
 
             var flag = role == typeof(Guardian) || role == typeof(Haunter) || role == typeof(Helper) ||
-            role == typeof(Spirit) || role == typeof(Blinder) || role == typeof(Freezer) || role == typeof(Phantom);
+            role == typeof(Wraith) || role == typeof(Blinder) || role == typeof(Freezer) || role == typeof(Phantom);
 
             if (PlayerControl.LocalPlayer.Data.IsDead && !flag)
             {
@@ -476,10 +476,10 @@ namespace TownOfUsEdited.Patches
                 var phantomRole = Role.GetRole<Phantom>(PlayerControl.LocalPlayer);
                 phantomRole.Fade();
             }
-            else if (role == typeof(Spirit))
+            else if (role == typeof(Wraith))
             {
-                var spiritRole = Role.GetRole<Spirit>(PlayerControl.LocalPlayer);
-                spiritRole.Fade();
+                var wraithRole = Role.GetRole<Wraith>(PlayerControl.LocalPlayer);
+                wraithRole.Fade();
             }
             else if (role == typeof(Assassin))
             {
@@ -614,7 +614,7 @@ namespace TownOfUsEdited.Patches
                 }
                 if (taskFolder.FolderName == "Impostor Roles")
                 {
-                    List<Type> Roles = [ typeof(Impostor), typeof(Blinder), typeof(Freezer), typeof(Spirit), typeof(Assassin), typeof(Escapist), typeof(Grenadier),
+                    List<Type> Roles = [ typeof(Impostor), typeof(Blinder), typeof(Freezer), typeof(Wraith), typeof(Assassin), typeof(Escapist), typeof(Grenadier),
                     typeof(Morphling), typeof(Noclip), typeof(Swooper), typeof(Venerer), typeof(Bomber), typeof(BountyHunter), typeof(Conjurer),
                     typeof(Manipulator), typeof(Poisoner), typeof(Shooter), typeof(Traitor), typeof(Warlock), typeof(Witch), typeof(Blackmailer),
                     typeof(Converter), typeof(Hypnotist), typeof(Janitor), typeof(Mafioso), typeof(Miner), typeof(Reviver),
@@ -641,9 +641,9 @@ namespace TownOfUsEdited.Patches
                 {
                     List<Type> Roles = [ typeof(Amnesiac), typeof(GuardianAngel), typeof(Mercenary), typeof(Shifter), typeof(Survivor), typeof(Doomsayer),
                     typeof(Executioner), typeof(Jester), typeof(Phantom), typeof(Troll), typeof(Vulture),
-                    typeof(Arsonist), typeof(Attacker), typeof(Terrorist), typeof(Doppelganger), typeof(Infectious), typeof(Maul),
+                    typeof(Arsonist), typeof(Attacker), typeof(Terrorist), typeof(Doppelganger), typeof(Infectious),
                     typeof(Mutant), typeof(Juggernaut), typeof(Plaguebearer), typeof(Pestilence), typeof(SerialKiller), typeof(SoulCollector), typeof(Glitch),
-                    typeof(Vampire) ];
+                    typeof(Vampire), typeof(Werewolf) ];
                     while (Roles.Count > 0)
                     {
                         Type role = Roles[0];
@@ -715,114 +715,114 @@ namespace TownOfUsEdited.Patches
             {
                 if (__instance.Text.text != null)
                 {
-                    if (__instance.Text.text.Contains("Be_Crewmate.exe")) __instance.FileImage.color = Patches.Colors.Crewmate;
-                    else if (__instance.Text.text.Contains("Be_Aurial.exe")) __instance.FileImage.color = Patches.Colors.Aurial;
-                    else if (__instance.Text.text.Contains("Be_Guardian.exe")) __instance.FileImage.color = Patches.Colors.Guardian;
-                    else if (__instance.Text.text.Contains("Be_Haunter.exe")) __instance.FileImage.color = Patches.Colors.Haunter;
-                    else if (__instance.Text.text.Contains("Be_Helper.exe")) __instance.FileImage.color = Patches.Colors.Helper;
-                    else if (__instance.Text.text.Contains("Be_Astral.exe")) __instance.FileImage.color = Patches.Colors.Astral;
-                    else if (__instance.Text.text.Contains("Be_Captain.exe")) __instance.FileImage.color = Patches.Colors.Captain;
-                    else if (__instance.Text.text.Contains("Be_Chameleon.exe")) __instance.FileImage.color = Patches.Colors.Chameleon;
-                    else if (__instance.Text.text.Contains("Be_Detective.exe")) __instance.FileImage.color = Patches.Colors.Detective;
-                    else if (__instance.Text.text.Contains("Be_Informant.exe")) __instance.FileImage.color = Patches.Colors.Informant;
-                    else if (__instance.Text.text.Contains("Be_Investigator.exe")) __instance.FileImage.color = Patches.Colors.Investigator;
-                    else if (__instance.Text.text.Contains("Be_Lookout.exe")) __instance.FileImage.color = Patches.Colors.Lookout;
-                    else if (__instance.Text.text.Contains("Be_Mystic.exe")) __instance.FileImage.color = Patches.Colors.Mystic;
-                    else if (__instance.Text.text.Contains("Be_Oracle.exe")) __instance.FileImage.color = Patches.Colors.Oracle;
-                    else if (__instance.Text.text.Contains("Be_Seer.exe")) __instance.FileImage.color = Patches.Colors.Seer;
-                    else if (__instance.Text.text.Contains("Be_Snitch.exe")) __instance.FileImage.color = Patches.Colors.Snitch;
-                    else if (__instance.Text.text.Contains("Be_Spy.exe")) __instance.FileImage.color = Patches.Colors.Spy;
-                    else if (__instance.Text.text.Contains("Be_Tracker.exe")) __instance.FileImage.color = Patches.Colors.Tracker;
-                    else if (__instance.Text.text.Contains("Be_Trapper.exe")) __instance.FileImage.color = Patches.Colors.Trapper;
-                    else if (__instance.Text.text.Contains("Be_Watcher.exe")) __instance.FileImage.color = Patches.Colors.Lookout;
-                    else if (__instance.Text.text.Contains("Be_Avenger.exe")) __instance.FileImage.color = Patches.Colors.Avenger;
-                    else if (__instance.Text.text.Contains("Be_Deputy.exe")) __instance.FileImage.color = Patches.Colors.Deputy;
-                    else if (__instance.Text.text.Contains("Be_Fighter.exe")) __instance.FileImage.color = Patches.Colors.Fighter;
-                    else if (__instance.Text.text.Contains("Be_Hunter.exe")) __instance.FileImage.color = Patches.Colors.Hunter;
-                    else if (__instance.Text.text.Contains("Be_Jailor.exe")) __instance.FileImage.color = Patches.Colors.Jailor;
-                    else if (__instance.Text.text.Contains("Be_Knight.exe")) __instance.FileImage.color = Patches.Colors.Knight;
-                    else if (__instance.Text.text.Contains("Be_Sheriff.exe")) __instance.FileImage.color = Patches.Colors.Sheriff;
-                    else if (__instance.Text.text.Contains("Be_VampireHunter.exe")) __instance.FileImage.color = Patches.Colors.VampireHunter;
-                    else if (__instance.Text.text.Contains("Be_Veteran.exe")) __instance.FileImage.color = Patches.Colors.Veteran;
-                    else if (__instance.Text.text.Contains("Be_Vigilante.exe")) __instance.FileImage.color = Patches.Colors.Vigilante;
-                    else if (__instance.Text.text.Contains("Be_Altruist.exe")) __instance.FileImage.color = Patches.Colors.Altruist;
-                    else if (__instance.Text.text.Contains("Be_Bodyguard.exe")) __instance.FileImage.color = Patches.Colors.Bodyguard;
-                    else if (__instance.Text.text.Contains("Be_Crusader.exe")) __instance.FileImage.color = Patches.Colors.Crusader;
-                    else if (__instance.Text.text.Contains("Be_Cleric.exe")) __instance.FileImage.color = Patches.Colors.Cleric;
-                    else if (__instance.Text.text.Contains("Be_Doctor.exe")) __instance.FileImage.color = Patches.Colors.Doctor;
-                    else if (__instance.Text.text.Contains("Be_Medic.exe")) __instance.FileImage.color = Patches.Colors.Medic;
-                    else if (__instance.Text.text.Contains("Be_Engineer.exe")) __instance.FileImage.color = Patches.Colors.Engineer;
-                    else if (__instance.Text.text.Contains("Be_Plumber.exe")) __instance.FileImage.color = Patches.Colors.Plumber;
-                    else if (__instance.Text.text.Contains("Be_Imitator.exe")) __instance.FileImage.color = Patches.Colors.Imitator;
-                    else if (__instance.Text.text.Contains("Be_Medium.exe")) __instance.FileImage.color = Patches.Colors.Medium;
-                    else if (__instance.Text.text.Contains("Be_Paranoïac.exe")) __instance.FileImage.color = Patches.Colors.Paranoïac;
-                    else if (__instance.Text.text.Contains("Be_Politician.exe")) __instance.FileImage.color = Patches.Colors.Politician;
-                    else if (__instance.Text.text.Contains("Be_Mayor.exe")) __instance.FileImage.color = Patches.Colors.Mayor;
-                    else if (__instance.Text.text.Contains("Be_Prosecutor.exe")) __instance.FileImage.color = Patches.Colors.Prosecutor;
-                    else if (__instance.Text.text.Contains("Be_TimeLord.exe")) __instance.FileImage.color = Patches.Colors.TimeLord;
-                    else if (__instance.Text.text.Contains("Be_Swapper.exe")) __instance.FileImage.color = Patches.Colors.Swapper;
-                    else if (__instance.Text.text.Contains("Be_Transporter.exe")) __instance.FileImage.color = Patches.Colors.Transporter;
-                    else if (__instance.Text.text.Contains("Be_Warden.exe")) __instance.FileImage.color = Patches.Colors.Warden;
-                    else if (__instance.Text.text.Contains("Be_Amnesiac.exe")) __instance.FileImage.color = Patches.Colors.Amnesiac;
-                    else if (__instance.Text.text.Contains("Be_GuardianAngel.exe")) __instance.FileImage.color = Patches.Colors.GuardianAngel;
-                    else if (__instance.Text.text.Contains("Be_Mercenary.exe")) __instance.FileImage.color = Patches.Colors.Mercenary;
-                    else if (__instance.Text.text.Contains("Be_Shifter.exe")) __instance.FileImage.color = Patches.Colors.Shifter;
-                    else if (__instance.Text.text.Contains("Be_Survivor.exe")) __instance.FileImage.color = Patches.Colors.Survivor;
-                    else if (__instance.Text.text.Contains("Be_Doomsayer.exe")) __instance.FileImage.color = Patches.Colors.Doomsayer;
-                    else if (__instance.Text.text.Contains("Be_Executioner.exe")) __instance.FileImage.color = Patches.Colors.Executioner;
-                    else if (__instance.Text.text.Contains("Be_Jester.exe")) __instance.FileImage.color = Patches.Colors.Jester;
-                    else if (__instance.Text.text.Contains("Be_Phantom.exe")) __instance.FileImage.color = Patches.Colors.Phantom;
-                    else if (__instance.Text.text.Contains("Be_SoulCollector.exe")) __instance.FileImage.color = Patches.Colors.SoulCollector;
-                    else if (__instance.Text.text.Contains("Be_Troll.exe")) __instance.FileImage.color = Patches.Colors.Troll;
-                    else if (__instance.Text.text.Contains("Be_Vulture.exe")) __instance.FileImage.color = Patches.Colors.Vulture;
-                    else if (__instance.Text.text.Contains("Be_Arsonist.exe")) __instance.FileImage.color = Patches.Colors.Arsonist;
-                    else if (__instance.Text.text.Contains("Be_Attacker.exe")) __instance.FileImage.color = Patches.Colors.Attacker;
-                    else if (__instance.Text.text.Contains("Be_Terrorist.exe")) __instance.FileImage.color = Patches.Colors.Terrorist;
-                    else if (__instance.Text.text.Contains("Be_Doppelganger.exe")) __instance.FileImage.color = Patches.Colors.Doppelganger;
-                    else if (__instance.Text.text.Contains("Be_Infectious.exe")) __instance.FileImage.color = Patches.Colors.Infectious;
-                    else if (__instance.Text.text.Contains("Be_Maul.exe")) __instance.FileImage.color = Patches.Colors.Werewolf;
-                    else if (__instance.Text.text.Contains("Be_Mutant.exe")) __instance.FileImage.color = Patches.Colors.Mutant;
-                    else if (__instance.Text.text.Contains("Be_Juggernaut.exe")) __instance.FileImage.color = Patches.Colors.Juggernaut;
-                    else if (__instance.Text.text.Contains("Be_Plaguebearer.exe")) __instance.FileImage.color = Patches.Colors.Plaguebearer;
-                    else if (__instance.Text.text.Contains("Be_Pestilence.exe")) __instance.FileImage.color = Patches.Colors.Pestilence;
-                    else if (__instance.Text.text.Contains("Be_SerialKiller.exe")) __instance.FileImage.color = Patches.Colors.SerialKiller;
-                    else if (__instance.Text.text.Contains("Be_Glitch.exe")) __instance.FileImage.color = Patches.Colors.Glitch;
-                    else if (__instance.Text.text.Contains("Be_Vampire.exe")) __instance.FileImage.color = Patches.Colors.Vampire;
-                    else if (__instance.Text.text.Contains("Be_Impostor.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Blinder.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Freezer.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Spirit.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Assassin.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Escapist.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Grenadier.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Morphling.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Noclip.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Swooper.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Venerer.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Bomber.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_BountyHunter.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Conjurer.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Manipulator.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Poisoner.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Shooter.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Traitor.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Warlock.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Witch.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Blackmailer.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Converter.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Hypnotist.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Janitor.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Mafioso.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Miner.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Reviver.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Undertaker.exe")) __instance.FileImage.color = Patches.Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Coven.exe")) __instance.FileImage.color = Patches.Colors.Coven;
-                    else if (__instance.Text.text.Contains("Be_CovenLeader.exe")) __instance.FileImage.color = Patches.Colors.Coven;
-                    else if (__instance.Text.text.Contains("Be_HexMaster.exe")) __instance.FileImage.color = Patches.Colors.Coven;
-                    else if (__instance.Text.text.Contains("Be_PotionMaster.exe")) __instance.FileImage.color = Patches.Colors.Coven;
-                    else if (__instance.Text.text.Contains("Be_Ritualist.exe")) __instance.FileImage.color = Patches.Colors.Coven;
-                    else if (__instance.Text.text.Contains("Be_Spiritualist.exe")) __instance.FileImage.color = Patches.Colors.Coven;
-                    else if (__instance.Text.text.Contains("Be_VoodooMaster.exe")) __instance.FileImage.color = Patches.Colors.Coven;
+                    if (__instance.Text.text.Contains("Be_Crewmate.exe")) __instance.FileImage.color = Colors.Crewmate;
+                    else if (__instance.Text.text.Contains("Be_Aurial.exe")) __instance.FileImage.color = Colors.Aurial;
+                    else if (__instance.Text.text.Contains("Be_Guardian.exe")) __instance.FileImage.color = Colors.Guardian;
+                    else if (__instance.Text.text.Contains("Be_Haunter.exe")) __instance.FileImage.color = Colors.Haunter;
+                    else if (__instance.Text.text.Contains("Be_Helper.exe")) __instance.FileImage.color = Colors.Helper;
+                    else if (__instance.Text.text.Contains("Be_Astral.exe")) __instance.FileImage.color = Colors.Astral;
+                    else if (__instance.Text.text.Contains("Be_Captain.exe")) __instance.FileImage.color = Colors.Captain;
+                    else if (__instance.Text.text.Contains("Be_Chameleon.exe")) __instance.FileImage.color = Colors.Chameleon;
+                    else if (__instance.Text.text.Contains("Be_Detective.exe")) __instance.FileImage.color = Colors.Detective;
+                    else if (__instance.Text.text.Contains("Be_Informant.exe")) __instance.FileImage.color = Colors.Informant;
+                    else if (__instance.Text.text.Contains("Be_Investigator.exe")) __instance.FileImage.color = Colors.Investigator;
+                    else if (__instance.Text.text.Contains("Be_Lookout.exe")) __instance.FileImage.color = Colors.Lookout;
+                    else if (__instance.Text.text.Contains("Be_Mystic.exe")) __instance.FileImage.color = Colors.Mystic;
+                    else if (__instance.Text.text.Contains("Be_Oracle.exe")) __instance.FileImage.color = Colors.Oracle;
+                    else if (__instance.Text.text.Contains("Be_Seer.exe")) __instance.FileImage.color = Colors.Seer;
+                    else if (__instance.Text.text.Contains("Be_Snitch.exe")) __instance.FileImage.color = Colors.Snitch;
+                    else if (__instance.Text.text.Contains("Be_Spy.exe")) __instance.FileImage.color = Colors.Spy;
+                    else if (__instance.Text.text.Contains("Be_Tracker.exe")) __instance.FileImage.color = Colors.Tracker;
+                    else if (__instance.Text.text.Contains("Be_Trapper.exe")) __instance.FileImage.color = Colors.Trapper;
+                    else if (__instance.Text.text.Contains("Be_Watcher.exe")) __instance.FileImage.color = Colors.Lookout;
+                    else if (__instance.Text.text.Contains("Be_Avenger.exe")) __instance.FileImage.color = Colors.Avenger;
+                    else if (__instance.Text.text.Contains("Be_Deputy.exe")) __instance.FileImage.color = Colors.Deputy;
+                    else if (__instance.Text.text.Contains("Be_Fighter.exe")) __instance.FileImage.color = Colors.Fighter;
+                    else if (__instance.Text.text.Contains("Be_Hunter.exe")) __instance.FileImage.color = Colors.Hunter;
+                    else if (__instance.Text.text.Contains("Be_Jailor.exe")) __instance.FileImage.color = Colors.Jailor;
+                    else if (__instance.Text.text.Contains("Be_Knight.exe")) __instance.FileImage.color = Colors.Knight;
+                    else if (__instance.Text.text.Contains("Be_Sheriff.exe")) __instance.FileImage.color = Colors.Sheriff;
+                    else if (__instance.Text.text.Contains("Be_VampireHunter.exe")) __instance.FileImage.color = Colors.VampireHunter;
+                    else if (__instance.Text.text.Contains("Be_Veteran.exe")) __instance.FileImage.color = Colors.Veteran;
+                    else if (__instance.Text.text.Contains("Be_Vigilante.exe")) __instance.FileImage.color = Colors.Vigilante;
+                    else if (__instance.Text.text.Contains("Be_Altruist.exe")) __instance.FileImage.color = Colors.Altruist;
+                    else if (__instance.Text.text.Contains("Be_Bodyguard.exe")) __instance.FileImage.color = Colors.Bodyguard;
+                    else if (__instance.Text.text.Contains("Be_Crusader.exe")) __instance.FileImage.color = Colors.Crusader;
+                    else if (__instance.Text.text.Contains("Be_Cleric.exe")) __instance.FileImage.color = Colors.Cleric;
+                    else if (__instance.Text.text.Contains("Be_Doctor.exe")) __instance.FileImage.color = Colors.Doctor;
+                    else if (__instance.Text.text.Contains("Be_Medic.exe")) __instance.FileImage.color = Colors.Medic;
+                    else if (__instance.Text.text.Contains("Be_Engineer.exe")) __instance.FileImage.color = Colors.Engineer;
+                    else if (__instance.Text.text.Contains("Be_Plumber.exe")) __instance.FileImage.color = Colors.Plumber;
+                    else if (__instance.Text.text.Contains("Be_Imitator.exe")) __instance.FileImage.color = Colors.Imitator;
+                    else if (__instance.Text.text.Contains("Be_Medium.exe")) __instance.FileImage.color = Colors.Medium;
+                    else if (__instance.Text.text.Contains("Be_Paranoïac.exe")) __instance.FileImage.color = Colors.Paranoïac;
+                    else if (__instance.Text.text.Contains("Be_Politician.exe")) __instance.FileImage.color = Colors.Politician;
+                    else if (__instance.Text.text.Contains("Be_Mayor.exe")) __instance.FileImage.color = Colors.Mayor;
+                    else if (__instance.Text.text.Contains("Be_Prosecutor.exe")) __instance.FileImage.color = Colors.Prosecutor;
+                    else if (__instance.Text.text.Contains("Be_TimeLord.exe")) __instance.FileImage.color = Colors.TimeLord;
+                    else if (__instance.Text.text.Contains("Be_Swapper.exe")) __instance.FileImage.color = Colors.Swapper;
+                    else if (__instance.Text.text.Contains("Be_Transporter.exe")) __instance.FileImage.color = Colors.Transporter;
+                    else if (__instance.Text.text.Contains("Be_Warden.exe")) __instance.FileImage.color = Colors.Warden;
+                    else if (__instance.Text.text.Contains("Be_Amnesiac.exe")) __instance.FileImage.color = Colors.Amnesiac;
+                    else if (__instance.Text.text.Contains("Be_GuardianAngel.exe")) __instance.FileImage.color = Colors.GuardianAngel;
+                    else if (__instance.Text.text.Contains("Be_Mercenary.exe")) __instance.FileImage.color = Colors.Mercenary;
+                    else if (__instance.Text.text.Contains("Be_Shifter.exe")) __instance.FileImage.color = Colors.Shifter;
+                    else if (__instance.Text.text.Contains("Be_Survivor.exe")) __instance.FileImage.color = Colors.Survivor;
+                    else if (__instance.Text.text.Contains("Be_Doomsayer.exe")) __instance.FileImage.color = Colors.Doomsayer;
+                    else if (__instance.Text.text.Contains("Be_Executioner.exe")) __instance.FileImage.color = Colors.Executioner;
+                    else if (__instance.Text.text.Contains("Be_Jester.exe")) __instance.FileImage.color = Colors.Jester;
+                    else if (__instance.Text.text.Contains("Be_Phantom.exe")) __instance.FileImage.color = Colors.Phantom;
+                    else if (__instance.Text.text.Contains("Be_SoulCollector.exe")) __instance.FileImage.color = Colors.SoulCollector;
+                    else if (__instance.Text.text.Contains("Be_Troll.exe")) __instance.FileImage.color = Colors.Troll;
+                    else if (__instance.Text.text.Contains("Be_Vulture.exe")) __instance.FileImage.color = Colors.Vulture;
+                    else if (__instance.Text.text.Contains("Be_Arsonist.exe")) __instance.FileImage.color = Colors.Arsonist;
+                    else if (__instance.Text.text.Contains("Be_Attacker.exe")) __instance.FileImage.color = Colors.Attacker;
+                    else if (__instance.Text.text.Contains("Be_Terrorist.exe")) __instance.FileImage.color = Colors.Terrorist;
+                    else if (__instance.Text.text.Contains("Be_Doppelganger.exe")) __instance.FileImage.color = Colors.Doppelganger;
+                    else if (__instance.Text.text.Contains("Be_Infectious.exe")) __instance.FileImage.color = Colors.Infectious;
+                    else if (__instance.Text.text.Contains("Be_Mutant.exe")) __instance.FileImage.color = Colors.Mutant;
+                    else if (__instance.Text.text.Contains("Be_Juggernaut.exe")) __instance.FileImage.color = Colors.Juggernaut;
+                    else if (__instance.Text.text.Contains("Be_Plaguebearer.exe")) __instance.FileImage.color = Colors.Plaguebearer;
+                    else if (__instance.Text.text.Contains("Be_Pestilence.exe")) __instance.FileImage.color = Colors.Pestilence;
+                    else if (__instance.Text.text.Contains("Be_SerialKiller.exe")) __instance.FileImage.color = Colors.SerialKiller;
+                    else if (__instance.Text.text.Contains("Be_Glitch.exe")) __instance.FileImage.color = Colors.Glitch;
+                    else if (__instance.Text.text.Contains("Be_Vampire.exe")) __instance.FileImage.color = Colors.Vampire;
+                    else if (__instance.Text.text.Contains("Be_Werewolf.exe")) __instance.FileImage.color = Colors.Werewolf;
+                    else if (__instance.Text.text.Contains("Be_Impostor.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Blinder.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Freezer.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Wraith.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Assassin.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Escapist.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Grenadier.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Morphling.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Noclip.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Swooper.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Venerer.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Bomber.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_BountyHunter.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Conjurer.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Manipulator.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Poisoner.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Shooter.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Traitor.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Warlock.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Witch.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Blackmailer.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Converter.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Hypnotist.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Janitor.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Mafioso.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Miner.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Reviver.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Undertaker.exe")) __instance.FileImage.color = Colors.Impostor;
+                    else if (__instance.Text.text.Contains("Be_Coven.exe")) __instance.FileImage.color = Colors.Coven;
+                    else if (__instance.Text.text.Contains("Be_CovenLeader.exe")) __instance.FileImage.color = Colors.Coven;
+                    else if (__instance.Text.text.Contains("Be_HexMaster.exe")) __instance.FileImage.color = Colors.Coven;
+                    else if (__instance.Text.text.Contains("Be_PotionMaster.exe")) __instance.FileImage.color = Colors.Coven;
+                    else if (__instance.Text.text.Contains("Be_Ritualist.exe")) __instance.FileImage.color = Colors.Coven;
+                    else if (__instance.Text.text.Contains("Be_Spiritualist.exe")) __instance.FileImage.color = Colors.Coven;
+                    else if (__instance.Text.text.Contains("Be_VoodooMaster.exe")) __instance.FileImage.color = Colors.Coven;
                 }
 
                 __instance.RolloverHandler.OutColor = __instance.FileImage.color;
@@ -992,7 +992,7 @@ namespace TownOfUsEdited.Patches
                 }
                 ApplyRoleChange(typeof(Crewmate), true);
                 Utils.ShowDeadBodies = false;
-                SetSpirit.WillBeSpirit = null;
+                SetWraith.WillBeWraith = null;
                 SetFreezer.WillBeFreezer = null;
                 SetBlinder.WillBeBlinder = null;
                 SetGuardian.WillBeGuardian = null;

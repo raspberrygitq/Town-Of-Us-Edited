@@ -30,7 +30,7 @@ namespace TownOfUsEdited
         {
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return false;
 
-            if (PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList().Count <= 2 && !player.Is(RoleEnum.Haunter) && !player.Is(RoleEnum.Phantom) && !player.Is(RoleEnum.Spirit)
+            if (PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList().Count <= 2 && !player.Is(RoleEnum.Haunter) && !player.Is(RoleEnum.Phantom) && !player.Is(RoleEnum.Wraith)
             && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
             {
                 if (player.inVent)
@@ -65,7 +65,7 @@ namespace TownOfUsEdited
             if (player.Is(RoleEnum.Engineer) || player.Is(RoleEnum.Coven) || player.Is(RoleEnum.CovenLeader) || 
                 player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.Spiritualist) || player.Is(RoleEnum.VoodooMaster) ||
                 (player.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(player).UsingPotion && Role.GetRole<PotionMaster>(player).Potion == "Strength") ||
-                player.Is(RoleEnum.WhiteWolf) || player.Is(Faction.Madmates) || player.Is(RoleEnum.Paranoïac) ||
+                player.Is(Faction.Madmates) || player.Is(RoleEnum.Paranoïac) ||
                 (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || 
                 (player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||
                 (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || 
@@ -82,9 +82,9 @@ namespace TownOfUsEdited
                 (player.Is(RoleEnum.HexMaster) && CustomGameOptions.HexMasterVent))
                 return true;
 
-            if (player.Is(RoleEnum.Maul) && CustomGameOptions.WerewolfVent)
+            if (player.Is(RoleEnum.Werewolf) && CustomGameOptions.WerewolfVent)
             {
-                var role = Role.GetRole<Maul>(PlayerControl.LocalPlayer);
+                var role = Role.GetRole<Werewolf>(PlayerControl.LocalPlayer);
                 if (role.Rampaged) return true;
             }
 
@@ -129,7 +129,7 @@ namespace TownOfUsEdited
                 var plumber = (Plumber)role;
                 if (plumber.VentsBlocked.Contains((byte)__instance.Id) && (!PlayerControl.LocalPlayer.Is(RoleEnum.Haunter) || Role.GetRole<Haunter>(PlayerControl.LocalPlayer).Caught)
                 && (!PlayerControl.LocalPlayer.Is(RoleEnum.Phantom) || Role.GetRole<Phantom>(PlayerControl.LocalPlayer).Caught)
-                && (!PlayerControl.LocalPlayer.Is(RoleEnum.Spirit) || Role.GetRole<Spirit>(PlayerControl.LocalPlayer).Caught))
+                && (!PlayerControl.LocalPlayer.Is(RoleEnum.Wraith) || Role.GetRole<Wraith>(PlayerControl.LocalPlayer).Caught))
                 {
                     couldUse = false;
                 }

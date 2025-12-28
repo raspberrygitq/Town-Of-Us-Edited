@@ -12,11 +12,7 @@ namespace TownOfUsEdited.Roles
         {
             Name = "Seer";
             ImpostorText = () => "Reveal The Alliance Of Other Players";
-            if (CustomGameOptions.GameMode != GameMode.Werewolf)
-            {
             TaskText = () => "Reveal alliances of other players to find the <color=#FF0000>Impostors</color>";
-            }
-            else TaskText = () => "Reveal the role of other players to find the <color=#A86629FF>Werewolves</color>";
             Color = Patches.Colors.Seer;
             Cooldown = CustomGameOptions.SeerCd;
             RoleType = RoleEnum.Seer;

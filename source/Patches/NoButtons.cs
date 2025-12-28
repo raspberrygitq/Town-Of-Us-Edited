@@ -14,8 +14,7 @@ namespace TownOfUsEdited.Patches
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Executioner)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
             if (!CustomGameOptions.SwapperButton)
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Swapper)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
-            if (CustomGameOptions.GameMode == GameMode.Werewolf || CustomGameOptions.GameMode == GameMode.BattleRoyale ||
-            CustomGameOptions.GameMode == GameMode.Chaos) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
+            if (CustomGameOptions.GameMode == GameMode.BattleRoyale || CustomGameOptions.GameMode == GameMode.Chaos) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
         }
     }
 
@@ -31,8 +30,7 @@ namespace TownOfUsEdited.Patches
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Executioner)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
             if (!CustomGameOptions.SwapperButton)
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Swapper)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
-            if (CustomGameOptions.GameMode == GameMode.Werewolf || CustomGameOptions.GameMode == GameMode.BattleRoyale ||
-            CustomGameOptions.GameMode == GameMode.Chaos) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
+            if (CustomGameOptions.GameMode == GameMode.BattleRoyale || CustomGameOptions.GameMode == GameMode.Chaos) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
         }
     }
 }

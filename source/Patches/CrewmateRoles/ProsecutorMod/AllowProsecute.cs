@@ -104,7 +104,7 @@ namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
                         UpdateProsecuted(VotedPlayer);
                         MeetingHud.Instance.gameObject.SetActive(true);
                         prosecutor.Prosecuted = true;
-                        if ((VotedPlayer.Is(Faction.Crewmates) && CustomGameOptions.ProsDiesOnIncorrectPros && !role.Player.Is(Faction.Madmates)) || (CustomGameOptions.GameMode == GameMode.Werewolf && VotedPlayer.Is(Faction.Crewmates)))
+                        if (VotedPlayer.Is(Faction.Crewmates) && CustomGameOptions.ProsDiesOnIncorrectPros && !role.Player.Is(Faction.Madmates))
                         {
                             KillButtonTarget.DontRevive = prosecutor.Player.PlayerId;
                             prosecutor.Player.Exiled();

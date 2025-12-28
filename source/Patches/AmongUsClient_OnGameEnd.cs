@@ -386,26 +386,15 @@ namespace TownOfUsEdited
                         EndGameResult.CachedWinners.Add(pestilenceData);
                     }
                 }
-                else if (type == RoleEnum.Maul)
+                else if (type == RoleEnum.Werewolf)
                 {
-                    var werewolf = (Maul)role;
+                    var werewolf = (Werewolf)role;
                     if (werewolf.WerewolfWins)
                     {
                         EndGameResult.CachedWinners = new List<CachedPlayerData>();
                         var werewolfData = new CachedPlayerData(werewolf.Player.Data);
                         if (PlayerControl.LocalPlayer != werewolf.Player) werewolfData.IsYou = false;
                         EndGameResult.CachedWinners.Add(werewolfData);
-                    }
-                }
-                else if (type == RoleEnum.WhiteWolf)
-                {
-                    var whitewolf = (WhiteWolf)role;
-                    if (whitewolf.WhiteWolfWins)
-                    {
-                        EndGameResult.CachedWinners = new List<CachedPlayerData>();
-                        var whitewolfData = new CachedPlayerData(whitewolf.Player.Data);
-                        if (PlayerControl.LocalPlayer != whitewolf.Player) whitewolfData.IsYou = false;
-                        EndGameResult.CachedWinners.Add(whitewolfData);
                     }
                 }
             }

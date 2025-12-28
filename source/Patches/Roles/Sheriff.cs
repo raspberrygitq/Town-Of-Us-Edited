@@ -8,14 +8,7 @@ namespace TownOfUsEdited.Roles
         {
             Name = "Sheriff";
             ImpostorText = () => "Shoot The <color=#FF0000FF>Impostor</color>";
-            if (CustomGameOptions.GameMode != GameMode.Werewolf)
-            {
             TaskText = () => "Shoot the <color=#FF0000>Impostors</color> but don't kill <color=#00FFFF>Crewmates</color>";
-            }
-            else
-            {
-                TaskText = () => "Kill <color=#A86629FF>Werewolves</color> but don't kill <color=#adf34b>Villagers</color>";
-            }
             Color = Patches.Colors.Sheriff;
             Cooldown = CustomGameOptions.SheriffKillCd;
             RoleType = RoleEnum.Sheriff;

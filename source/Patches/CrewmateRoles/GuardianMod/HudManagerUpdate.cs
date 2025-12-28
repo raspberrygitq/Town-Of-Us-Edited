@@ -39,7 +39,7 @@ namespace TownOfUsEdited.CrewmateRoles.GuardianMod
             if (!role.Guarding) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, alives);
 
             var labelrender = __instance.KillButton.buttonLabelText;
-            if (role.ClosestPlayer != null && !role.Guarding && !role.coolingDown)
+            if (role.ClosestPlayer != null && !role.Guarding)
             {
                 __instance.KillButton.graphic.color = Palette.EnabledColor;
                 __instance.KillButton.graphic.material.SetFloat("_Desat", 0f);

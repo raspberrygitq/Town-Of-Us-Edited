@@ -17,7 +17,7 @@ namespace TownOfUsEdited
             __state = false;
 
             var playerControl = playerInfo.Object;
-            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(playerControl).Caught) && playerInfo.IsDead)
+            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(playerControl).Caught) && playerInfo.IsDead)
             {
                 playerInfo.IsDead = false;
                 __state = true;
@@ -55,7 +55,7 @@ namespace TownOfUsEdited
             __state = false;
 
             var playerControl = playerInfo.Object;
-            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(playerControl).Caught) && playerInfo.IsDead)
+            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(playerControl).Caught) && playerInfo.IsDead)
             {
                 playerInfo.IsDead = false;
                 __state = true;
@@ -103,7 +103,7 @@ namespace TownOfUsEdited
         {
             __state = false;
             var playerControl = playerInfo.Object;
-            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(playerControl).Caught) && playerInfo.IsDead)
+            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(playerControl).Caught) && playerInfo.IsDead)
             {
                 playerInfo.IsDead = false;
                 __state = true;
@@ -141,7 +141,7 @@ namespace TownOfUsEdited
         {
             __state = false;
             var playerControl = playerInfo.Object;
-            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(playerControl).Caught) && playerInfo.IsDead)
+            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(playerControl).Caught) && playerInfo.IsDead)
             {
                 playerInfo.IsDead = false;
                 __state = true;
@@ -173,7 +173,7 @@ namespace TownOfUsEdited
         public static bool Prefix(MovingPlatformBehaviour __instance, [HarmonyArgument(0)] PlayerControl player)
         {
             if (player.Data.Disconnected) return true;
-            if ((player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(player).Caught) || (player.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(player).Caught) || (player.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(player).Caught))
+            if ((player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(player).Caught) || (player.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(player).Caught) || (player.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(player).Caught))
             {
                 __instance.IsDirty = true;
 		        __instance.StartCoroutine(__instance.UsePlatform(player));
@@ -195,7 +195,7 @@ namespace TownOfUsEdited
             __state = false;
 
             var playerControl = playerInfo.Object;
-            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(playerControl).Caught) && playerInfo.IsDead)
+            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(playerControl).Caught) && playerInfo.IsDead)
             {
                 playerInfo.IsDead = false;
                 __state = true;
@@ -241,7 +241,7 @@ namespace TownOfUsEdited
             __state = false;
 
             var playerControl = playerInfo.Object;
-            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(playerControl).Caught) && playerInfo.IsDead)
+            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(playerControl).Caught) && playerInfo.IsDead)
             {
                 playerInfo.IsDead = false;
                 __state = true;
@@ -280,7 +280,7 @@ namespace TownOfUsEdited
         {
             if (target != null && !MeetingHud.Instance && target.Data != null && !target.inMovingPlat)
             {
-                if ((target.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(target).Caught) || (target.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(target).Caught) || (target.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(target).Caught))
+                if ((target.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(target).Caught) || (target.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(target).Caught) || (target.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(target).Caught))
                 {
                     PlayerControl.LocalPlayer.RpcUseZipline(target, ziplineBehaviour, fromTop);
                     return false;
@@ -297,7 +297,7 @@ namespace TownOfUsEdited
         public static bool Prefix(ZiplineBehaviour __instance, [HarmonyArgument(0)] PlayerControl player, [HarmonyArgument(1)] bool fromTop)
         {
             if (player.Data.Disconnected) return true;
-            if ((player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(player).Caught) || (player.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(player).Caught) || (player.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(player).Caught))
+            if ((player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(player).Caught) || (player.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(player).Caught) || (player.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(player).Caught))
             {
                 Transform start;
                 Transform end;
@@ -334,7 +334,7 @@ namespace TownOfUsEdited
             __state = false;
 
             var playerControl = playerInfo.Object;
-            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(playerControl).Caught) && playerInfo.IsDead)
+            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(playerControl).Caught) && playerInfo.IsDead)
             {
                 playerInfo.IsDead = false;
                 __state = true;
@@ -379,7 +379,7 @@ namespace TownOfUsEdited
         public static bool Prefix(PlayerControl __instance)
         {
             var playerControl = __instance;
-            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(playerControl).Caught)) return false;
+            if ((playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(playerControl).Caught) || (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(playerControl).Caught) || (playerControl.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(playerControl).Caught)) return false;
             return true;
         }
     }

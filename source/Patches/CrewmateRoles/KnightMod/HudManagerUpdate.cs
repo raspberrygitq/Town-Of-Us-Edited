@@ -56,8 +56,8 @@ namespace TownOfUsEdited.CrewmateRoles.KnightMod
             {
                 __instance.KillButton.SetCoolDown(knight.KillTimer(), CustomGameOptions.KnightKCD);
                 if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref knight.ClosestPlayer, __instance.KillButton);
-                else if (knight.Player.IsLover() && knight.Player.Is(Faction.Madmates) && (!CustomGameOptions.MadmateKillEachOther || CustomGameOptions.GameMode == GameMode.Cultist)) Utils.SetTarget(ref knight.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Impostors)).ToList());
-                else if (knight.Player.Is(Faction.Madmates) && (!CustomGameOptions.MadmateKillEachOther || CustomGameOptions.GameMode == GameMode.Cultist)) Utils.SetTarget(ref knight.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors)).ToList());
+                else if (knight.Player.IsLover() && knight.Player.Is(Faction.Madmates) && !CustomGameOptions.MadmateKillEachOther) Utils.SetTarget(ref knight.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Impostors)).ToList());
+                else if (knight.Player.Is(Faction.Madmates) && !CustomGameOptions.MadmateKillEachOther) Utils.SetTarget(ref knight.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors)).ToList());
                 else if (knight.Player.IsLover()) Utils.SetTarget(ref knight.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover()).ToList());
                 else Utils.SetTarget(ref knight.ClosestPlayer, __instance.KillButton);
             }

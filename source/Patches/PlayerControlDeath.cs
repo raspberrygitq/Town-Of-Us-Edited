@@ -56,7 +56,7 @@ namespace TownOfUsEdited.Patches
                     while (SpawnInMinigame.Instance || ExileController.Instance) yield return null;
                     foreach (var player in PlayerControl.AllPlayerControls)
                     {
-                        bool isGhostRole = player.Is(RoleEnum.Guardian) || player.Is(RoleEnum.Spirit) || player.Is(RoleEnum.Haunter)
+                        bool isGhostRole = player.Is(RoleEnum.Guardian) || player.Is(RoleEnum.Wraith) || player.Is(RoleEnum.Haunter)
                         || player.Is(RoleEnum.Helper) || player.Is(RoleEnum.Blinder) || player.Is(RoleEnum.Freezer) || player.Is(RoleEnum.Phantom);
                         if (player.Data.IsDead && !isGhostRole) RevivePlayer(player);
                     }

@@ -176,7 +176,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 case RoleEnum.Plaguebearer:
                 case RoleEnum.Attacker:
                 case RoleEnum.Terrorist:
-                case RoleEnum.Maul:
+                case RoleEnum.Werewolf:
                 case RoleEnum.Doomsayer:
                 case RoleEnum.Vulture:
                 case RoleEnum.Vampire:
@@ -378,7 +378,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                     newshifter.RegenTask();
                     newshifterRole.Cooldown = CustomGameOptions.ShiftCD;
                     if (role == RoleEnum.Arsonist || role == RoleEnum.Glitch || role == RoleEnum.Plaguebearer ||
-                            role == RoleEnum.Pestilence || role == RoleEnum.Maul || role == RoleEnum.Juggernaut
+                            role == RoleEnum.Pestilence || role == RoleEnum.Werewolf || role == RoleEnum.Juggernaut
                              || role == RoleEnum.Vampire || role == RoleEnum.SerialKiller || role == RoleEnum.Mutant
                              || role == RoleEnum.Attacker || role == RoleEnum.Terrorist || role == RoleEnum.Infectious
                              || role == RoleEnum.Doppelganger)
@@ -395,7 +395,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                     newshifter.RegenTask();
                     newshifterRole.Cooldown = CustomGameOptions.ShiftCD;
                     if (role == RoleEnum.Arsonist || role == RoleEnum.Glitch || role == RoleEnum.Plaguebearer ||
-                            role == RoleEnum.Pestilence || role == RoleEnum.Maul || role == RoleEnum.Juggernaut
+                            role == RoleEnum.Pestilence || role == RoleEnum.Werewolf || role == RoleEnum.Juggernaut
                              || role == RoleEnum.Vampire || role == RoleEnum.SerialKiller || role == RoleEnum.Mutant
                              || role == RoleEnum.Attacker || role == RoleEnum.Terrorist || role == RoleEnum.Infectious
                              || role == RoleEnum.Doppelganger)
@@ -896,9 +896,9 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 hmRole.Cooldown = CustomGameOptions.CovenKCD;
             }
 
-            else if (role == RoleEnum.Maul)
+            else if (role == RoleEnum.Werewolf)
             {
-                var wwRole = Role.GetRole<Maul>(shifter);
+                var wwRole = Role.GetRole<Werewolf>(shifter);
                 wwRole.RampageCooldown = CustomGameOptions.RampageCd;
                 wwRole.Cooldown = CustomGameOptions.RampageKillCd;
             }

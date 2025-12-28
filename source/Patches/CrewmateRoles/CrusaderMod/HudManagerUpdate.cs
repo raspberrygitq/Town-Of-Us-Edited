@@ -23,6 +23,8 @@ namespace TownOfUsEdited.CrewmateRoles.CrusaderMod
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
+            crusadeButton.graphic.sprite = TownOfUsEdited.CrusadeSprite;
+
             crusadeButton.SetCoolDown(role.CrusadeTimer(), CustomGameOptions.CrusadeCD);
 
             crusadeButton.buttonLabelText.text = "Crusade";

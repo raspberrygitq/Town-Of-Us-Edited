@@ -45,9 +45,9 @@ namespace TownOfUsEdited.Patches
                     if (!Role.GetRole<Phantom>(PlayerControl.LocalPlayer).Caught) __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(false);
                     else  __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(true);
                 }
-                if (PlayerControl.LocalPlayer.Data.IsDead && PlayerControl.LocalPlayer.Is(RoleEnum.Spirit))
+                if (PlayerControl.LocalPlayer.Data.IsDead && PlayerControl.LocalPlayer.Is(RoleEnum.Wraith))
                 {
-                    if (!Role.GetRole<Spirit>(PlayerControl.LocalPlayer).Caught) __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(false);
+                    if (!Role.GetRole<Wraith>(PlayerControl.LocalPlayer).Caught) __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(false);
                     else  __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(true);
                 }
             }
@@ -334,9 +334,9 @@ namespace TownOfUsEdited.Patches
                     PlayerControl.LocalPlayer.MyPhysics.RpcEnterVent(startingVent.Id);
                 }
             }
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Spirit))
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Wraith))
             {
-                if (!Role.GetRole<Spirit>(PlayerControl.LocalPlayer).Caught)
+                if (!Role.GetRole<Wraith>(PlayerControl.LocalPlayer).Caught)
                 {
                     var startingVent =
                         ShipStatus.Instance.AllVents[UnityEngine.Random.RandomRangeInt(0, ShipStatus.Instance.AllVents.Count)];
@@ -388,9 +388,9 @@ namespace TownOfUsEdited.Patches
                         __instance.myPlayer.gameObject.layer = 8;
                     }
                 }
-                if (player.Is(RoleEnum.Spirit))
+                if (player.Is(RoleEnum.Wraith))
                 {
-                    if (!Role.GetRole<Spirit>(player).Caught)
+                    if (!Role.GetRole<Wraith>(player).Caught)
                     {
                         if (player.AmOwner) MoveDeadPlayerElevator(player);
                         else player.Collider.enabled = false;
@@ -484,7 +484,7 @@ namespace TownOfUsEdited.Patches
             var playerControl = playerInfo.Object;
             bool isGhostRole = (playerControl.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(PlayerControl.LocalPlayer).Caught) ||
             (playerControl.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(PlayerControl.LocalPlayer).Caught) ||
-            (playerControl.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(PlayerControl.LocalPlayer).Caught);
+            (playerControl.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(PlayerControl.LocalPlayer).Caught);
 
             if (isGhostRole && playerInfo.IsDead)
                 return;

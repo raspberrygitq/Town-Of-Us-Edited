@@ -109,7 +109,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomHeaderOption ImpostorGhostRoles;
         public static CustomNumberOption BlinderOn;
         public static CustomNumberOption FreezerOn;
-        public static CustomNumberOption SpiritOn;
+        public static CustomNumberOption WraithOn;
 
         public static CustomHeaderOption ImpostorKillingRoles;
         public static CustomNumberOption PoisonerOn;
@@ -209,12 +209,22 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption CrewmateFlashlightVision;
         public static CustomNumberOption ImpostorFlashlightVision;
 
-        public static CustomHeaderOption BetterMapSettings;
+        public static CustomHeaderOption BetterSkeldSettings;
+        public static CustomToggleOption BSVentImprovements;
+
+        public static CustomHeaderOption BetterPolusSettings;
         public static CustomToggleOption VentImprovements;
         public static CustomToggleOption VitalsLab;
         public static CustomToggleOption ColdTempDeathValley;
         public static CustomToggleOption WifiChartCourseSwap;
         public static CustomToggleOption MoveToiletVent;
+
+        public static CustomHeaderOption BetterAirshipSettings;
+        public static CustomStringOption BAMoveAdmin;
+        public static CustomStringOption BAMoveElectrical;
+        public static CustomToggleOption BAMoveVitals;
+        public static CustomToggleOption BAMoveFuel;
+        public static CustomToggleOption BAMoveDivert;
         public static CustomToggleOption AirshipPolusDoors;
 
         public static CustomHeaderOption GameModeSettings;
@@ -250,24 +260,6 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption BattleRoyaleKillCD;
         public static CustomNumberOption BattleRoyaleStartingCD;
         public static CustomToggleOption BattleDisableVent;
-
-        public static CustomHeaderOption WerewolfSettings;
-        public static CustomNumberOption RampageCD;
-        public static CustomNumberOption WerewolfKillCD;
-        public static CustomNumberOption BasicWerewolfOn;
-        public static CustomNumberOption VillagerOn;
-        public static CustomNumberOption SorcererOn;
-        public static CustomNumberOption WerewolfSeerOn;
-        public static CustomNumberOption WerewolfProsecutorOn;
-        public static CustomNumberOption WerewolfMayorOn;
-        public static CustomNumberOption WerewolfChameleonOn;
-        public static CustomNumberOption SoulCatcherOn;
-        public static CustomNumberOption GuardOn;
-        public static CustomNumberOption BlackWolfOn;
-        public static CustomNumberOption TalkativeWolfOn;
-        public static CustomNumberOption WhiteWolfOn;
-        public static CustomNumberOption WerewolfSheriffOn;
-        public static CustomNumberOption WerewolfParanoïacOn;
 
         public static CustomHeaderOption SabotageEffects;
         public static CustomToggleOption ReactorScreenShake;
@@ -632,7 +624,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption PestKillCooldown;
         public static CustomToggleOption PestVent;
 
-        public static CustomHeaderOption Maul;
+        public static CustomHeaderOption Werewolf;
         public static CustomNumberOption RampageCooldown;
         public static CustomNumberOption RampageDuration;
         public static CustomNumberOption RampageKillCooldown;
@@ -762,9 +754,9 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption FreezeCooldown;
         public static CustomNumberOption FreezeDuration;
 
-        public static CustomHeaderOption Spirit;
-        public static CustomNumberOption SpiritTasksRemainingClicked;
-        public static CustomNumberOption SpiritTasksRemainingAlert;
+        public static CustomHeaderOption Wraith;
+        public static CustomNumberOption WraithTasksRemainingClicked;
+        public static CustomNumberOption WraithTasksRemainingAlert;
 
         public static CustomHeaderOption Aurial;
         public static CustomNumberOption AuraInnerRadius;
@@ -957,11 +949,10 @@ namespace TownOfUsEdited.CustomOption
                 PercentFormat);
             PlumberOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#CC6600FF>Plumber</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-            TimeLordOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#0f00b8>Time Lord</color>", 0f, 0f, 100f, 10f,
+            TimeLordOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#0000FFFF>Time Lord</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             TransporterOn = new CustomNumberOption(num++, MultiMenu.crewmate, "<color=#00EEFFFF>Transporter</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-
 
             NeutralBenignRoles = new CustomHeaderOption(num++, MultiMenu.neutral, "Neutral Benign Roles");
             AmnesiacOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#80B2FFFF>Amnesiac</color>", 0f, 0f, 100f, 10f,
@@ -1000,8 +991,6 @@ namespace TownOfUsEdited.CustomOption
                 PercentFormat);
             JuggernautOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#8C004DFF>Juggernaut</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-            WerewolfOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#A86629FF>Maul</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
             MutantOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#b6eb5e>Mutant</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             PlaguebearerOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#E6FFB3FF>Plaguebearer</color>", 0f, 0f, 100f, 10f,
@@ -1013,6 +1002,8 @@ namespace TownOfUsEdited.CustomOption
             GlitchOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#00FF00FF>The Glitch</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
             VampireOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#262626FF>Vampire</color>", 0f, 0f, 100f, 10f,
+                PercentFormat);
+            WerewolfOn = new CustomNumberOption(num++, MultiMenu.neutral, "<color=#A86629FF>Werewolf</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
             ImpostorGameSettings =
@@ -1041,7 +1032,7 @@ namespace TownOfUsEdited.CustomOption
                 PercentFormat);
             FreezerOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Freezer</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
-            SpiritOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Spirit</color>", 0f, 0f, 100f, 10f,
+            WraithOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Wraith</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
             ImpostorKillingRoles = new CustomHeaderOption(num++, MultiMenu.imposter, "Impostor Killing Roles");
@@ -1154,7 +1145,7 @@ namespace TownOfUsEdited.CustomOption
 
             GameModeSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Game Mode Settings");
-            GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] {"Classic", "Role List", "Battle Royale", "Cultist", "Werewolf", "Chaos" }, 1);
+            GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] {"Classic", "Role List", "Battle Royale", "Chaos" }, 1);
 
             ClassicSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Classic Game Mode Settings");
@@ -1170,7 +1161,6 @@ namespace TownOfUsEdited.CustomOption
                 new CustomNumberOption(num++, MultiMenu.main, "Min Neutral Killing Roles", 1, 0, 5, 1);
             MaxNeutralKillingRoles =
                 new CustomNumberOption(num++, MultiMenu.main, "Max Neutral Killing Roles", 1, 0, 5, 1);
-
 
             RoleListSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Role List Settings");
@@ -1298,79 +1288,58 @@ namespace TownOfUsEdited.CustomOption
 
             BattleRoyaleSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Battle Royale Settings");
-            BattleRoyaleKillCD = new CustomNumberOption(num++, MultiMenu.main, "Players Kill Cooldown", 5f, 0f, 60f, 2.5f, CooldownFormat);
-            BattleRoyaleStartingCD = new CustomNumberOption(num++, MultiMenu.main, "Game Start Cooldowns", 15f, 0f, 60f, 2.5f, CooldownFormat);
+            BattleRoyaleKillCD = new CustomNumberOption(num++, MultiMenu.main, "Players Kill Cooldown", 5f, 5f, 60f, 2.5f, CooldownFormat);
+            BattleRoyaleStartingCD = new CustomNumberOption(num++, MultiMenu.main, "Game Start Cooldowns", 15f, 5f, 60f, 2.5f, CooldownFormat);
             BattleDisableVent = new CustomToggleOption(num++, MultiMenu.main, "Disable Vents", false);
 
-            WerewolfSettings =
-                new CustomHeaderOption(num++, MultiMenu.main, "Werewolf Settings");
-            RampageCD =
-                new CustomNumberOption(num++, MultiMenu.main, "Werewolves Rampage Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            WerewolfKillCD =
-                new CustomNumberOption(num++, MultiMenu.main, "Werewolves Kill Cooldown", 10f, 5f, 60f, 2.5f, CooldownFormat);
-            BasicWerewolfOn = new CustomNumberOption(num++, MultiMenu.main, "Basic <color=#A86629FF>Werewolf</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            VillagerOn = new CustomNumberOption(num++, MultiMenu.main, "Basic <color=#adf34b>Villager</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            BlackWolfOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#4c4c4c>Black Wolf</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            WerewolfChameleonOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#068c38>Chameleon</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            GuardOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#0095ff>Guard</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            WerewolfMayorOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#704FA8FF>Mayor</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            WerewolfParanoïacOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#0a7eae>Paranoïac</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            WerewolfProsecutorOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#B38000FF>Prosecutor</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            WerewolfSeerOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#FFCC80FF>Seer</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            WerewolfSheriffOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#FFFF00FF>Sheriff</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            SorcererOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#9210ff>Sorcerer</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            SoulCatcherOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#7b7781>Soul Catcher</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            TalkativeWolfOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#ffa750>Talkative Wolf</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
-            WhiteWolfOn = new CustomNumberOption(num++, MultiMenu.main, "<color=#ffffff>White Wolf</color> Chance", 0f, 0f, 100f, 10f,
-                PercentFormat);
+            BetterSkeldSettings =
+                new CustomHeaderOption(num++, MultiMenu.map, "Better Skeld Settings");
+            BSVentImprovements = new CustomToggleOption(num++, MultiMenu.map, "Better Skeld Vent Layout", false);
 
-            MapSettings = new CustomHeaderOption(num++, MultiMenu.main, "Map Settings");
-            RandomMapEnabled = new CustomToggleOption(num++, MultiMenu.main, "Choose Random Map", false);
-            RandomMapSkeld = new CustomNumberOption(num++, MultiMenu.main, "Skeld Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapMira = new CustomNumberOption(num++, MultiMenu.main, "Mira Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapPolus = new CustomNumberOption(num++, MultiMenu.main, "Polus Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapAirship = new CustomNumberOption(num++, MultiMenu.main, "Airship Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapFungle = new CustomNumberOption(num++, MultiMenu.main, "Fungle Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapSubmerged = new CustomNumberOption(num++, MultiMenu.main, "Submerged Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapLevelImpostor = new CustomNumberOption(num++, MultiMenu.main, "Level Impostor Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            SmallMapHalfVision = new CustomToggleOption(num++, MultiMenu.main, "Half Vision On Skeld/Mira HQ", false);
-            AutoAdjustCooldowns = new CustomToggleOption(num++, MultiMenu.main, "Auto Adjust Cooldowns And Tasks", false);
-            SmallMapDecreasedCooldown =
-                new CustomNumberOption(num++, MultiMenu.main, "Mira HQ Decreased Cooldowns", 0f, 0f, 7.5f, 2.5f, CooldownFormat);
-            LargeMapIncreasedCooldown =
-                new CustomNumberOption(num++, MultiMenu.main, "Airship/Submerged Increased Cooldowns", 0f, 0f, 7.5f, 2.5f, CooldownFormat);
-            SmallMapIncreasedShortTasks =
-                 new CustomNumberOption(num++, MultiMenu.main, "Skeld/Mira HQ Increased Short Tasks", 0, 0, 5, 1);
-            SmallMapIncreasedLongTasks =
-                 new CustomNumberOption(num++, MultiMenu.main, "Skeld/Mira HQ Increased Long Tasks", 0, 0, 3, 1);
-            LargeMapDecreasedShortTasks =
-                 new CustomNumberOption(num++, MultiMenu.main, "Airship/Submerged Decreased Short Tasks", 0, 0, 5, 1);
-            LargeMapDecreasedLongTasks =
-                 new CustomNumberOption(num++, MultiMenu.main, "Airship/Submerged Decreased Long Tasks", 0, 0, 3, 1);
-
-            BetterMapSettings =
-                new CustomHeaderOption(num++, MultiMenu.main, "Better Map Settings");
-            VentImprovements = new CustomToggleOption(num++, MultiMenu.main, "Better Polus Vent Layout", false);
-            VitalsLab = new CustomToggleOption(num++, MultiMenu.main, "Vitals Moved To Lab", false);
-            ColdTempDeathValley = new CustomToggleOption(num++, MultiMenu.main, "Cold Temp Moved To Death Valley", false);
+            BetterPolusSettings =
+                new CustomHeaderOption(num++, MultiMenu.map, "Better Polus Settings");
+            VentImprovements = new CustomToggleOption(num++, MultiMenu.map, "Better Polus Vent Layout", false);
+            VitalsLab = new CustomToggleOption(num++, MultiMenu.map, "Vitals Moved To Lab", false);
+            ColdTempDeathValley = new CustomToggleOption(num++, MultiMenu.map, "Cold Temp Moved To Death Valley", false);
             WifiChartCourseSwap =
-                new CustomToggleOption(num++, MultiMenu.main, "Reboot Wifi And Chart Course Swapped", false);
+                new CustomToggleOption(num++, MultiMenu.map, "Reboot Wifi And Chart Course Swapped", false);
             MoveToiletVent =
-                new CustomToggleOption(num++, MultiMenu.main, "Move Toilet Vent", false);
-            AirshipPolusDoors = new CustomToggleOption(num++, MultiMenu.main, "Airship Doors Are Polus Doors", false);
+                new CustomToggleOption(num++, MultiMenu.map, "Move Toilet Vent", false);
+
+            BetterAirshipSettings =
+                new CustomHeaderOption(num++, MultiMenu.map, "Better Airship Settings");
+            BAMoveAdmin =
+                 new CustomStringOption(num++, MultiMenu.map, "Move Admin Table", new[] { "Don't Move", "Cockpit", "Main Hall" });
+            BAMoveElectrical =
+                 new CustomStringOption(num++, MultiMenu.map, "Move Electrical Outlet", new[] { "Don't Move", "Vault", "Electrical" });
+            AirshipPolusDoors = new CustomToggleOption(num++, MultiMenu.map, "Airship Doors Are Polus Doors", false);
+            BAMoveVitals = new CustomToggleOption(num++, MultiMenu.map, "Move Airship Vitals", false);
+            BAMoveFuel = new CustomToggleOption(num++, MultiMenu.map, "Move Airship Fuel", false);
+            BAMoveDivert = new CustomToggleOption(num++, MultiMenu.map, "Move Divert Power", false);
+
+            MapSettings = new CustomHeaderOption(num++, MultiMenu.map, "Map Settings");
+            RandomMapEnabled = new CustomToggleOption(num++, MultiMenu.map, "Choose Random Map", false);
+            RandomMapSkeld = new CustomNumberOption(num++, MultiMenu.map, "Skeld Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapMira = new CustomNumberOption(num++, MultiMenu.map, "Mira Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapPolus = new CustomNumberOption(num++, MultiMenu.map, "Polus Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapAirship = new CustomNumberOption(num++, MultiMenu.map, "Airship Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapFungle = new CustomNumberOption(num++, MultiMenu.map, "Fungle Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapSubmerged = new CustomNumberOption(num++, MultiMenu.map, "Submerged Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapLevelImpostor = new CustomNumberOption(num++, MultiMenu.map, "Level Impostor Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            SmallMapHalfVision = new CustomToggleOption(num++, MultiMenu.map, "Half Vision On Skeld/Mira HQ", false);
+            AutoAdjustCooldowns = new CustomToggleOption(num++, MultiMenu.map, "Auto Adjust Cooldowns And Tasks", false);
+            SmallMapDecreasedCooldown =
+                new CustomNumberOption(num++, MultiMenu.map, "Mira HQ Decreased Cooldowns", 0f, 0f, 7.5f, 2.5f, CooldownFormat);
+            LargeMapIncreasedCooldown =
+                new CustomNumberOption(num++, MultiMenu.map, "Airship/Submerged Increased Cooldowns", 0f, 0f, 7.5f, 2.5f, CooldownFormat);
+            SmallMapIncreasedShortTasks =
+                 new CustomNumberOption(num++, MultiMenu.map, "Skeld/Mira HQ Increased Short Tasks", 0, 0, 5, 1);
+            SmallMapIncreasedLongTasks =
+                 new CustomNumberOption(num++, MultiMenu.map, "Skeld/Mira HQ Increased Long Tasks", 0, 0, 3, 1);
+            LargeMapDecreasedShortTasks =
+                 new CustomNumberOption(num++, MultiMenu.map, "Airship/Submerged Decreased Short Tasks", 0, 0, 5, 1);
+            LargeMapDecreasedLongTasks =
+                 new CustomNumberOption(num++, MultiMenu.map, "Airship/Submerged Decreased Long Tasks", 0, 0, 3, 1);
 
             CustomGameSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Custom Game Settings");
@@ -1395,7 +1364,7 @@ namespace TownOfUsEdited.CustomOption
             SkipButtonDisable = new CustomStringOption(num++, MultiMenu.main, "Disable Meeting Skip Button", new[] { "No", "Emergency", "Always" });
             FirstDeathShield = new CustomToggleOption(num++, MultiMenu.main, "First Death Shield Next Game", false);
             NeutralEvilWinEndsGame = new CustomToggleOption(num++, MultiMenu.main, "Neutral Evil Win Ends Game", true);
-            CrewKillersContinue = new CustomToggleOption(num++, MultiMenu.main, "Crew Powerful Roles Continue Game", false);
+            CrewKillersContinue = new CustomToggleOption(num++, MultiMenu.main, "Crew Killing / Power Roles Continue Game", false);
 
             SabotageEffects =
                 new CustomHeaderOption(num++, MultiMenu.main, "Sabotage Effects");
@@ -1950,16 +1919,6 @@ namespace TownOfUsEdited.CustomOption
             JuggVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Juggernaut Can Vent", false);
 
-            Maul = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#A86629FF>Maul</color>");
-            RampageCooldown =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Rampage Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            RampageDuration =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Rampage Duration", 25f, 10f, 60f, 2.5f, CooldownFormat);
-            RampageKillCooldown =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Rampage Kill Cooldown", 10f, 0.5f, 15f, 0.5f, CooldownFormat);
-            WerewolfVent =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Maul Can Vent When Rampaged", false);
-
             Mutant =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#b6eb5e>Mutant</color>");
             MutantKCD =
@@ -2036,6 +1995,16 @@ namespace TownOfUsEdited.CustomOption
             VampireChat =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Vampires Have A Private Chat");
 
+            Werewolf = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#A86629FF>Werewolf</color>");
+            RampageCooldown =
+                new CustomNumberOption(num++, MultiMenu.neutral, "Rampage Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            RampageDuration =
+                new CustomNumberOption(num++, MultiMenu.neutral, "Rampage Duration", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            RampageKillCooldown =
+                new CustomNumberOption(num++, MultiMenu.neutral, "Rampage Kill Cooldown", 10f, 0.5f, 15f, 0.5f, CooldownFormat);
+            WerewolfVent =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Werewolf Can Vent When Rampaged", false);
+
             Escapist =
                 new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Escapist</color>");
             EscapeCooldown =
@@ -2103,11 +2072,11 @@ namespace TownOfUsEdited.CustomOption
             FreezeDuration =
                 new CustomNumberOption(num++, MultiMenu.imposter, "Freeze Duration", 10f, 5f, 15f, 1f, CooldownFormat);
 
-            Spirit =
-                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Spirit</color>");
-            SpiritTasksRemainingClicked =
-                 new CustomNumberOption(num++, MultiMenu.imposter, "Tasks Remaining When Spirit Can Be Clicked", 5, 1, 15, 1);
-            SpiritTasksRemainingAlert =
+            Wraith =
+                new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Wraith</color>");
+            WraithTasksRemainingClicked =
+                 new CustomNumberOption(num++, MultiMenu.imposter, "Tasks Remaining When Wraith Can Be Clicked", 5, 1, 15, 1);
+            WraithTasksRemainingAlert =
                  new CustomNumberOption(num++, MultiMenu.imposter, "Tasks Remaining When Alert Is Sent", 1, 1, 5, 1);
 
             Bomber =

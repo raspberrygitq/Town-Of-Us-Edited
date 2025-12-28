@@ -61,15 +61,14 @@ namespace FlashlightPatch
             (PlayerControl.LocalPlayer.Is(RoleEnum.Vampire) && CustomGameOptions.VampImpVision) ||
             (PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) && CustomGameOptions.SkImpVision) ||
             (PlayerControl.LocalPlayer.Is(Faction.Madmates) && CustomGameOptions.MadmateHasImpoVision) ||
-            PlayerControl.LocalPlayer.Is(RoleEnum.WhiteWolf) || PlayerControl.LocalPlayer.Is(RoleEnum.Player) ||
-            PlayerControl.LocalPlayer.Is(RoleEnum.Terrorist) || PlayerControl.LocalPlayer.Is(RoleEnum.Infectious) ||
-            PlayerControl.LocalPlayer.Is(RoleEnum.Doppelganger))
+            PlayerControl.LocalPlayer.Is(RoleEnum.Player) || PlayerControl.LocalPlayer.Is(RoleEnum.Terrorist) ||
+            PlayerControl.LocalPlayer.Is(RoleEnum.Infectious) || PlayerControl.LocalPlayer.Is(RoleEnum.Doppelganger))
             {
                 __instance.lightSource.SetupLightingForGameplay(hasFlashlight, CustomGameOptions.ImpostorFlashlightVision, __instance.TargetFlashlight.transform);
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Maul))
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf))
             {
-                var role = Role.GetRole<Maul>(PlayerControl.LocalPlayer);
+                var role = Role.GetRole<Werewolf>(PlayerControl.LocalPlayer);
                 if (role.Rampaged)
                 {
                     __instance.lightSource.SetupLightingForGameplay(hasFlashlight, CustomGameOptions.ImpostorFlashlightVision, __instance.TargetFlashlight.transform);

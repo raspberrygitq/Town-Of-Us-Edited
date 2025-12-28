@@ -15,7 +15,7 @@ namespace TownOfUsEdited.Roles
         public Snitch(PlayerControl player) : base(player)
         {
             Name = "Snitch";
-            ImpostorText = () => "Complete All Your Tasks To Discover The <color=#FF0000>Impostors</color>";
+            ImpostorText = () => "Find The <color=#FF0000>Impostors</color>!";
             TaskText = () =>
                 TasksDone
                     ? "Find the arrows pointing to the <color=#FF0000>Impostors</color>!"

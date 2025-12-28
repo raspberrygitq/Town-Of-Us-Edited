@@ -67,7 +67,7 @@ namespace TownOfUsEdited.NeutralRoles.PhantomMod
                 }
 
                 Utils.RemoveTasks(WillBePhantom);
-                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Haunter) && !PlayerControl.LocalPlayer.Is(RoleEnum.Spirit)) WillBePhantom.MyPhysics.ResetMoveState();
+                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Haunter) && !PlayerControl.LocalPlayer.Is(RoleEnum.Wraith)) WillBePhantom.MyPhysics.ResetMoveState();
 
                 WillBePhantom.gameObject.layer = LayerMask.NameToLayer("Players");
             }

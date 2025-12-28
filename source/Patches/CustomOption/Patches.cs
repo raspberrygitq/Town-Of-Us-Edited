@@ -149,17 +149,18 @@ namespace TownOfUsEdited.CustomOption
                 __instance.ChangeTab(1, false);
 
                 var settingsButton = GameObject.Find("GameSettingsButton");
-                settingsButton.transform.localPosition += new Vector3(0f, 2.1f, 0f);
-                settingsButton.transform.localScale *= 0.8f;
+                settingsButton.transform.localPosition += new Vector3(0f, 2.2f, 0f);
+                settingsButton.transform.localScale *= 0.7f;
 
                 CreateSettings(__instance, 3, "ModSettings", "Mod Settings", settingsButton, MultiMenu.main);
-                CreateSettings(__instance, 4, "CrewSettings", "Crewmate Settings", settingsButton, MultiMenu.crewmate);
-                CreateSettings(__instance, 5, "NeutralSettings", "Neutral Settings", settingsButton, MultiMenu.neutral);
-                CreateSettings(__instance, 6, "ImpSettings", "Impostor Settings", settingsButton, MultiMenu.imposter);
-                CreateSettings(__instance, 7, "CovenSettings", "Coven Settings", settingsButton, MultiMenu.coven);
-                CreateSettings(__instance, 8, "ModifierSettings", "Modifier Settings", settingsButton, MultiMenu.modifiers);
-                CreateSettings(__instance, 9, "ImportSettings", "Import Settings", settingsButton, MultiMenu.external);
-                CreateSettings(__instance, 10, "ExportSettings", "Export Settings", settingsButton, MultiMenu.external);
+                CreateSettings(__instance, 4, "MapSettings", "Maps Settings", settingsButton, MultiMenu.map);
+                CreateSettings(__instance, 5, "CrewSettings", "Crewmate Settings", settingsButton, MultiMenu.crewmate);
+                CreateSettings(__instance, 6, "NeutralSettings", "Neutral Settings", settingsButton, MultiMenu.neutral);
+                CreateSettings(__instance, 7, "ImpSettings", "Impostor Settings", settingsButton, MultiMenu.imposter);
+                CreateSettings(__instance, 8, "CovenSettings", "Coven Settings", settingsButton, MultiMenu.coven);
+                CreateSettings(__instance, 9, "ModifierSettings", "Modifier Settings", settingsButton, MultiMenu.modifiers);
+                CreateSettings(__instance, 10, "ImportSettings", "Import Settings", settingsButton, MultiMenu.external);
+                CreateSettings(__instance, 11, "ExportSettings", "Export Settings", settingsButton, MultiMenu.external);
             }
 
             internal static TextMeshPro SpawnExternalButton(GameSettingMenu __instance, GameOptionsMenu tabOptions, ref float num, string text, Action onClick)
@@ -221,7 +222,7 @@ namespace TownOfUsEdited.CustomOption
                 if (button == null && menu != MultiMenu.external)
                 {
                     button = GameObject.Instantiate(settingsButton, panel.transform);
-                    button.transform.localPosition += new Vector3(0f, -0.5f * target + 1f, 0f);
+                    button.transform.localPosition += new Vector3(0f, -0.45f * target + 0.9f, 0f);
                     button.name = name;
                     __instance.StartCoroutine(Effects.Lerp(1f, new Action<float>(p => { button.transform.FindChild("FontPlacer").GetComponentInChildren<TextMeshPro>().text = text; })));
                     var passiveButton = button.GetComponent<PassiveButton>();
@@ -519,15 +520,16 @@ namespace TownOfUsEdited.CustomOption
 
                 GameObject.Find("RolesTabs")?.Destroy();
                 var overview = GameObject.Find("OverviewTab");
-                overview.transform.localScale += new Vector3(-0.5f, 0f, 0f);
+                overview.transform.localScale += new Vector3(-0.57f, 0f, 0f);
                 overview.transform.localPosition += new Vector3(-1f, 0f, 0f);
 
                 CreateButton(__instance, 1, "ModTab", "Mod Settings", MultiMenu.main, overview);
-                CreateButton(__instance, 2, "CrewmateTab", "Crewmate Settings", MultiMenu.crewmate, overview);
-                CreateButton(__instance, 3, "NeutralTab", "Neutral Settings", MultiMenu.neutral, overview);
-                CreateButton(__instance, 4, "ImpostorTab", "Impostor Settings", MultiMenu.imposter, overview);
-                CreateButton(__instance, 5, "CovenTab", "Coven Settings", MultiMenu.coven, overview);
-                CreateButton(__instance, 6, "ModifierTab", "Modifier Settings", MultiMenu.modifiers, overview);
+                CreateButton(__instance, 2, "MapTab", "Maps Settings", MultiMenu.map, overview);
+                CreateButton(__instance, 3, "CrewmateTab", "Crewmate Settings", MultiMenu.crewmate, overview);
+                CreateButton(__instance, 4, "NeutralTab", "Neutral Settings", MultiMenu.neutral, overview);
+                CreateButton(__instance, 5, "ImpostorTab", "Impostor Settings", MultiMenu.imposter, overview);
+                CreateButton(__instance, 6, "CovenTab", "Coven Settings", MultiMenu.coven, overview);
+                CreateButton(__instance, 7, "ModifierTab", "Modifier Settings", MultiMenu.modifiers, overview);
             }
 
             public static void CreateButton(LobbyViewSettingsPane __instance, int target, string name, string text, MultiMenu menu, GameObject overview)
@@ -536,7 +538,7 @@ namespace TownOfUsEdited.CustomOption
                 if (tab == null)
                 {
                     tab = GameObject.Instantiate(overview, overview.transform.parent);
-                    tab.transform.localPosition += new Vector3(1.75f, 0f, 0f) * target;
+                    tab.transform.localPosition += new Vector3(1.5f, 0f, 0f) * target;
                     tab.name = name;
                     __instance.StartCoroutine(Effects.Lerp(1f, new Action<float>(p => { tab.transform.FindChild("FontPlacer").GetComponentInChildren<TextMeshPro>().text = text; })));
                     var pTab = tab.GetComponent<PassiveButton>();

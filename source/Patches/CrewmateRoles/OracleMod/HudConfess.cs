@@ -77,35 +77,37 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
             Utils.SetTarget(ref role.ClosestPlayer, confessButton, float.NaN, notConfessing);
 
             var renderer = role.BlessButton.graphic;
-            if (role.ClosestBlessedPlayer != null && !role.blessCoolingDown)
+            var BlessText = role.BlessButton.buttonLabelText;
+            if (role.ClosestBlessedPlayer != null)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
-                role.BlessButton.buttonLabelText.color = Palette.EnabledColor;
-                role.BlessButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+                BlessText.color = Palette.EnabledColor;
+                BlessText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
-                role.BlessButton.buttonLabelText.color = Palette.DisabledClear;
-                role.BlessButton.buttonLabelText.material.SetFloat("_Desat", 1f);
+                BlessText.color = Palette.DisabledClear;
+                BlessText.material.SetFloat("_Desat", 1f);
             }
 
             var renderer2 = confessButton.graphic;
-            if (role.ClosestPlayer != null && !role.coolingDown)
+            var ConfessText = confessButton.buttonLabelText;
+            if (role.ClosestPlayer != null)
             {
                 confessButton.graphic.color = Palette.EnabledColor;
                 confessButton.graphic.material.SetFloat("_Desat", 0f);
-                confessButton.buttonLabelText.color = Palette.EnabledColor;
-                confessButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+                ConfessText.color = Palette.EnabledColor;
+                ConfessText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 confessButton.graphic.color = Palette.DisabledClear;
                 confessButton.graphic.material.SetFloat("_Desat", 1f);
-                confessButton.buttonLabelText.color = Palette.DisabledClear;
-                confessButton.buttonLabelText.material.SetFloat("_Desat", 1f);
+                ConfessText.color = Palette.DisabledClear;
+                ConfessText.material.SetFloat("_Desat", 1f);
             }
         }
     }

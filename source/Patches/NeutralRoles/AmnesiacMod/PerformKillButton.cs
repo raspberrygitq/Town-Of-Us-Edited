@@ -174,7 +174,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                 case RoleEnum.Attacker:
                 case RoleEnum.Terrorist:
                 case RoleEnum.Pestilence:
-                case RoleEnum.Maul:
+                case RoleEnum.Werewolf:
                 case RoleEnum.Doomsayer:
                 case RoleEnum.Vampire:
                 case RoleEnum.SoulCollector:
@@ -675,9 +675,9 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                 hmRole.Cooldown = CustomGameOptions.CovenKCD;
             }
 
-            else if (role == RoleEnum.Maul)
+            else if (role == RoleEnum.Werewolf)
             {
-                var wwRole = Role.GetRole<Maul>(amnesiac);
+                var wwRole = Role.GetRole<Werewolf>(amnesiac);
                 wwRole.RampageCooldown = CustomGameOptions.RampageCd;
                 wwRole.Cooldown = CustomGameOptions.RampageKillCd;
             }

@@ -14,14 +14,7 @@ namespace TownOfUsEdited.Roles
             Faction = Faction.Crewmates;
             Alignment = Alignment.CrewmateSupport;
             AddToRoleHistory(RoleType);
-            if (CustomGameOptions.GameMode != GameMode.Werewolf)
-            {
-                UsesLeft = CustomGameOptions.MaxMeetings;
-            }
-            else
-            {
-                UsesLeft = 1;
-            }
+            UsesLeft = CustomGameOptions.MaxMeetings;
         }
         public int UsesLeft;
         public TextMeshPro UsesText;

@@ -55,12 +55,10 @@ namespace TownOfUsEdited.Patches
                 if (attackRole != null) return;
                 var terroristRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Terrorist && ((Terrorist)x).TerroristWins);
                 if (terroristRole != null) return;
-                var wwRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Maul && ((Maul)x).WerewolfWins);
+                var wwRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Werewolf && ((Werewolf)x).WerewolfWins);
                 if (wwRole != null) return;
                 var scRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.SoulCollector && ((SoulCollector)x).SCWins);
                 if (scRole != null) return;
-                var whitewolfRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.WhiteWolf && ((WhiteWolf)x).WhiteWolfWins);
-                if (whitewolfRole != null) return;
                 __instance.BackgroundBar.material.SetColor("_Color", Role.GetRole(PlayerControl.LocalPlayer).Color);
             }
         }

@@ -156,11 +156,6 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
                     playerRole.DeathReason = DeathReasons.Executed;
                     Utils.Rpc(CustomRPC.SetDeathReason, player.PlayerId, (byte)DeathReasons.Executed);
                 }
-                else if (killer.Is(RoleEnum.TalkativeWolf))
-                {
-                    playerRole.DeathReason = DeathReasons.Suicided;
-                    Utils.Rpc(CustomRPC.SetDeathReason, player.PlayerId, (byte)DeathReasons.Suicided);
-                }
                 else
                 {
                     playerRole.DeathReason = DeathReasons.Guessed;

@@ -11,8 +11,8 @@ namespace TownOfUsEdited.Roles
         public Attacker(PlayerControl player) : base(player)
         {
             Name = "Attacker";
-            ImpostorText = () => "Spread Fear Among The Players";
-            TaskText = () => "Complete Your Tasks To Become Terrorist";
+            ImpostorText = () => $"Complete Your Tasks To Become {Patches.Colors.Terrorist.ToTextColor()}Terrorist</color>";
+            TaskText = () => $"Complete tasks to become {Patches.Colors.Terrorist.ToTextColor()}Terrorist</color>";
             Color = Patches.Colors.Attacker;
             RoleType = RoleEnum.Attacker;
             AddToRoleHistory(RoleType);

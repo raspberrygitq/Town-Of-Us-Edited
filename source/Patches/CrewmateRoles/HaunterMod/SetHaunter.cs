@@ -56,7 +56,7 @@ namespace TownOfUsEdited.CrewmateRoles.HaunterMod
                 }
 
                 Utils.RemoveTasks(WillBeHaunter);
-                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Phantom) && !PlayerControl.LocalPlayer.Is(RoleEnum.Spirit)) WillBeHaunter.MyPhysics.ResetMoveState();
+                if (!PlayerControl.LocalPlayer.Is(RoleEnum.Phantom) && !PlayerControl.LocalPlayer.Is(RoleEnum.Wraith)) WillBeHaunter.MyPhysics.ResetMoveState();
 
                 WillBeHaunter.gameObject.layer = LayerMask.NameToLayer("Players");
             }

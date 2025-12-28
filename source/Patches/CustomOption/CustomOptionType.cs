@@ -11,6 +11,7 @@ namespace TownOfUsEdited.CustomOption
     public enum MultiMenu
     {
         main,
+        map,
         crewmate,
         neutral,
         imposter,

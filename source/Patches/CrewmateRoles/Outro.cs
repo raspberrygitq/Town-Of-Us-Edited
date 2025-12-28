@@ -20,18 +20,9 @@ namespace TownOfUsEdited.Patches.CrewmateRoles
             }
             if (!Role.CrewmateWins) return;
             var text = Object.Instantiate(__instance.WinText);
-            if (CustomGameOptions.GameMode != GameMode.Werewolf)
-            {
-                text.text = "Crewmates Win!";
-                text.color = Color.cyan;
-                __instance.BackgroundBar.material.color = Color.cyan;
-            }
-            else
-            {
-                text.text = "Villagers Win!";
-                text.color = Patches.Colors.Villager;
-                __instance.BackgroundBar.material.color = Patches.Colors.Villager;
-            }
+            text.text = "Crewmates Win!";
+            text.color = Color.cyan;
+            __instance.BackgroundBar.material.color = Color.cyan;
             var pos = __instance.WinText.transform.localPosition;
             pos.y = 1.5f;
             text.transform.position = pos;

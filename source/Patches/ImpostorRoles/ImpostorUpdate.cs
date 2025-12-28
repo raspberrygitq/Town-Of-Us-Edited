@@ -23,8 +23,8 @@ namespace TownOfUsEdited.ImpostorRoles.ImpostorMod
 
             if (!MeetingHud.Instance && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
             && (__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-            && CustomGameOptions.GameMode != GameMode.Chaos && CustomGameOptions.GameMode != GameMode.Werewolf
-            && (!PlayerControl.LocalPlayer.Is(RoleEnum.Spirit) || Role.GetRole<Spirit>(PlayerControl.LocalPlayer).Caught)
+            && CustomGameOptions.GameMode != GameMode.Chaos
+            && (!PlayerControl.LocalPlayer.Is(RoleEnum.Wraith) || Role.GetRole<Wraith>(PlayerControl.LocalPlayer).Caught)
             && (!PlayerControl.LocalPlayer.Is(RoleEnum.Mafioso) || aliveimp.Count <= 1)
             && PlayerControl.LocalPlayer.Data.IsImpostor())
             {
@@ -37,14 +37,10 @@ namespace TownOfUsEdited.ImpostorRoles.ImpostorMod
                 // Add red color to impostors names
                 if ((player2.Data.IsImpostor() || player2.Is(Faction.Madmates)) && (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(Faction.Madmates)) && !Utils.CommsCamouflaged() && !PlayerControl.LocalPlayer.IsHypnotised())
                 {
-                    if (CustomGameOptions.GameMode == GameMode.Werewolf)
+                    if (player2 != PlayerControl.LocalPlayer && !CustomGameOptions.ImpostorSeeRoles)
                     {
-                        if (player2 != PlayerControl.LocalPlayer && !CustomGameOptions.ImpostorSeeRoles)
-                        {
-                            player2.nameText().color = Patches.Colors.Werewolf;
-                        }
+                        player2.nameText().color = Patches.Colors.Impostor;
                     }
-                    else player2.nameText().color = Patches.Colors.Impostor;
                 }
             }
 
@@ -59,11 +55,7 @@ namespace TownOfUsEdited.ImpostorRoles.ImpostorMod
                             player3.Data.PlayerName == bubble.Cast<ChatBubble>().NameText.text &&
                             (player3.Data.IsImpostor() || player3.Is(Faction.Madmates)) && (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(Faction.Madmates)))
                         {
-                            if (CustomGameOptions.GameMode == GameMode.Werewolf)
-                            {
-                                bubble.Cast<ChatBubble>().NameText.color = Patches.Colors.Werewolf;
-                            }
-                            else bubble.Cast<ChatBubble>().NameText.color = Palette.ImpostorRed;
+                            bubble.Cast<ChatBubble>().NameText.color = Palette.ImpostorRed;
                         }
                     }
                 }
@@ -101,14 +93,10 @@ namespace TownOfUsEdited.ImpostorRoles.ImpostorMod
             {
                 if (imps.Any(x => x.PlayerId == pva.TargetPlayerId) && (PlayerControl.LocalPlayer.Data.IsImpostor() || PlayerControl.LocalPlayer.Is(Faction.Madmates)))
                 {
-                    if (CustomGameOptions.GameMode == GameMode.Werewolf)
+                    if (pva.TargetPlayerId != PlayerControl.LocalPlayer.PlayerId && !CustomGameOptions.ImpostorSeeRoles)
                     {
-                        if (pva.TargetPlayerId != PlayerControl.LocalPlayer.PlayerId && !CustomGameOptions.ImpostorSeeRoles)
-                        {
-                            pva.NameText.text = "<color=#A86629FF>" + pva.NameText.text + "</color>";
-                        }
+                        pva.NameText.text = "<color=#FF0000>" + pva.NameText.text + "</color>";
                     }
-                    else pva.NameText.text = "<color=#FF0000>" + pva.NameText.text + "</color>";
                 }
             }
         }
@@ -138,9 +126,9 @@ namespace TownOfUsEdited.ImpostorRoles.ImpostorMod
             if (PlayerControl.LocalPlayer == null) return;
             if (PlayerControl.LocalPlayer.Data == null) return;
             if (!PlayerControl.LocalPlayer.Data.IsImpostor()) return;
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(PlayerControl.LocalPlayer).Caught) return;
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(PlayerControl.LocalPlayer).Caught) return;
             if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started && AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay) return;
-            if (CustomGameOptions.GameMode == GameMode.Chaos || CustomGameOptions.GameMode == GameMode.Werewolf) return;
+            if (CustomGameOptions.GameMode == GameMode.Chaos) return;
             var aliveimp = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors) && !x.Data.IsDead).ToList();
             if (aliveimp.Count > 1 && PlayerControl.LocalPlayer.Is(RoleEnum.Mafioso) && !PlayerControl.LocalPlayer.Data.IsDead) return;
             if (MeetingHud.Instance) return;

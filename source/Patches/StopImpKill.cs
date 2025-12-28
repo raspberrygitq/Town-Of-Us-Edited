@@ -32,11 +32,6 @@ namespace TownOfUsEdited
                 if (!target.inVent) Utils.RpcMurderPlayer(PlayerControl.LocalPlayer, target);
                 return false;
             }
-            if (target.IsGuarded())
-            {
-                Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.WerewolfKillCD;
-                return false;
-            }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator) && Role.GetRole<Manipulator>(PlayerControl.LocalPlayer).UsingManipulation)
             {
                 var role = Role.GetRole<Manipulator>(PlayerControl.LocalPlayer);

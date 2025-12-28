@@ -32,12 +32,8 @@ namespace TownOfUsEdited
             var flag = false;
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Seer))
             {
+                __instance.KillButton.graphic.sprite = TownOfUsEdited.SeerSprite;
                 flag = true;
-                if (CustomGameOptions.GameMode != GameMode.Werewolf)
-                {
-                    __instance.KillButton.graphic.sprite = TownOfUsEdited.SeerSprite;
-                }
-                else __instance.KillButton.graphic.sprite = TownOfUsEdited.RevealRoleSprite;
             }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Medic))
             {
@@ -175,16 +171,6 @@ namespace TownOfUsEdited
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.ShiftButton;
                 flag = true;
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Sorcerer))
-            {
-                __instance.KillButton.graphic.sprite = TownOfUsEdited.PoisonSprite;
-                flag = true;
-            }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Guard))
-            {
-                __instance.KillButton.graphic.sprite = TownOfUsEdited.Protect2Sprite;
-                flag = true;
-            }
             else if (PlayerControl.LocalPlayer.Is(RoleEnum.Vulture))
             {
                 __instance.KillButton.graphic.sprite = TownOfUsEdited.Eat;
@@ -236,15 +222,15 @@ namespace TownOfUsEdited
                 __instance.KillButton.buttonLabelText.gameObject.SetActive(true);
                 __instance.KillButton.buttonLabelText.text = "Kill";
                 flag = PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff) || PlayerControl.LocalPlayer.Is(RoleEnum.Pestilence) ||
-                    PlayerControl.LocalPlayer.Is(RoleEnum.Maul) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut) ||
+                    PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) || PlayerControl.LocalPlayer.Is(RoleEnum.Juggernaut) ||
                     PlayerControl.LocalPlayer.Is(RoleEnum.Fighter) || PlayerControl.LocalPlayer.Is(RoleEnum.Knight) ||
                     PlayerControl.LocalPlayer.Is(RoleEnum.Mutant) || PlayerControl.LocalPlayer.Is(RoleEnum.SerialKiller) ||
                     PlayerControl.LocalPlayer.Is(Faction.Impostors) || PlayerControl.LocalPlayer.Is(RoleEnum.Troll) ||
-                    PlayerControl.LocalPlayer.Is(RoleEnum.WhiteWolf) || PlayerControl.LocalPlayer.Is(RoleEnum.Player) ||
+                    PlayerControl.LocalPlayer.Is(RoleEnum.Player) || PlayerControl.LocalPlayer.Is(RoleEnum.Doppelganger) ||
                     PlayerControl.LocalPlayer.Is(RoleEnum.Crusader) || PlayerControl.LocalPlayer.Is(RoleEnum.Avenger) ||
                     PlayerControl.LocalPlayer.Is(RoleEnum.Terrorist) || PlayerControl.LocalPlayer.Is(RoleEnum.Hunter) ||
                     PlayerControl.LocalPlayer.Is(RoleEnum.Vampire) || PlayerControl.LocalPlayer.Is(Faction.Coven) ||
-                    PlayerControl.LocalPlayer.Is(RoleEnum.Infectious) || PlayerControl.LocalPlayer.Is(RoleEnum.Doppelganger);
+                    PlayerControl.LocalPlayer.Is(RoleEnum.Infectious);
             }
             if (!PlayerControl.LocalPlayer.Is(Faction.Impostors) &&
                 GameOptionsManager.Instance.CurrentGameOptions.GameMode != GameModes.HideNSeek)
@@ -266,7 +252,7 @@ namespace TownOfUsEdited
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-1f, 0f, 0f);
             }
-            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Maul) || PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)
+            else if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf) || PlayerControl.LocalPlayer.Is(RoleEnum.Arsonist)
             || PlayerControl.LocalPlayer.Is(RoleEnum.Plumber))
             {
                 __instance.ImpostorVentButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
@@ -337,10 +323,10 @@ namespace TownOfUsEdited
                     var phantom = Role.GetRole<Phantom>(PlayerControl.LocalPlayer);
                     if (!phantom.Caught) ghostRole = true;
                 }
-                else if (PlayerControl.LocalPlayer.Is(RoleEnum.Spirit))
+                else if (PlayerControl.LocalPlayer.Is(RoleEnum.Wraith))
                 {
-                    var spirit = Role.GetRole<Spirit>(PlayerControl.LocalPlayer);
-                    if (!spirit.Caught) ghostRole = true;
+                    var wraith = Role.GetRole<Wraith>(PlayerControl.LocalPlayer);
+                    if (!wraith.Caught) ghostRole = true;
                 }
                 var ghost = RoleManager.Instance.GetRole(AmongUs.GameOptions.RoleTypes.CrewmateGhost).Cast<CrewmateGhostRole>();
                 HudManager.Instance.AbilityButton.graphic.sprite = ghost.Ability.Image;

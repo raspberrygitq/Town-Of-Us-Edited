@@ -48,8 +48,6 @@ namespace TownOfUsEdited.CrewmateRoles.PoliticianMod
             campaignButton.buttonLabelText.text = "Campaign";
             campaignButton.buttonLabelText.SetOutlineColor(Patches.Colors.Politician);
 
-            campaignButton.buttonLabelText.color = Palette.EnabledColor;
-            campaignButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             if (!role.CanCampaign) return;
 
             var notCampaigned = PlayerControl.AllPlayerControls.ToArray().Where(

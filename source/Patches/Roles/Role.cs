@@ -131,7 +131,7 @@ namespace TownOfUsEdited.Roles
 
         internal virtual bool DeadCriteria()
         {
-            if (PlayerControl.LocalPlayer.Data.IsDead && CustomGameOptions.DeadSeeRoles && CustomGameOptions.GameMode != GameMode.Werewolf) return Utils.ShowDeadBodies;
+            if (PlayerControl.LocalPlayer.Data.IsDead && CustomGameOptions.DeadSeeRoles) return Utils.ShowDeadBodies;
             return false;
         }
 
@@ -190,7 +190,7 @@ namespace TownOfUsEdited.Roles
 
         internal virtual bool RoleCriteria()
         {
-            return PlayerControl.LocalPlayer.Is(ModifierEnum.Sleuth) && Modifier.GetModifier<Sleuth>(PlayerControl.LocalPlayer).Reported.Contains(Player.PlayerId) || (Player.Data.IsDead && CustomGameOptions.GameMode == GameMode.Werewolf);
+            return PlayerControl.LocalPlayer.Is(ModifierEnum.Sleuth) && Modifier.GetModifier<Sleuth>(PlayerControl.LocalPlayer).Reported.Contains(Player.PlayerId);
         }
         internal virtual bool GuardianAngelCriteria()
         {
@@ -199,7 +199,7 @@ namespace TownOfUsEdited.Roles
 
         internal virtual bool SeerCriteria()
         {
-            return CustomGameOptions.GameMode == GameMode.Werewolf && PlayerControl.LocalPlayer.Is(RoleEnum.Seer) && Role.GetRole<Seer>(PlayerControl.LocalPlayer).Revealed.Contains(Player.PlayerId);
+            return PlayerControl.LocalPlayer.Is(RoleEnum.Seer) && Role.GetRole<Seer>(PlayerControl.LocalPlayer).Revealed.Contains(Player.PlayerId);
         }
 
         protected virtual void IntroPrefix(IntroCutscene._ShowTeam_d__38 __instance)
@@ -325,8 +325,7 @@ namespace TownOfUsEdited.Roles
                 VampireWins == true ||
                 GetRoles(RoleEnum.Mutant).Any(x => ((Mutant)x).MutantWins) == true ||
                 GetRoles(RoleEnum.Infectious).Any(x => ((Infectious)x).InfectiousWins) == true ||
-                GetRoles(RoleEnum.Maul).Any(x => ((Maul)x).WerewolfWins) == true ||
-                GetRoles(RoleEnum.WhiteWolf).Any(x => ((WhiteWolf)x).WhiteWolfWins) == true ||
+                GetRoles(RoleEnum.Werewolf).Any(x => ((Werewolf)x).WerewolfWins) == true ||
                 GetRoles(RoleEnum.SoulCollector).Any(x => ((SoulCollector)x).SCWins) == true;
         }
 
@@ -763,19 +762,6 @@ namespace TownOfUsEdited.Roles
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Impostor);
                         }
 
-                        else if (role.Faction == Faction.Impostors && CustomGameOptions.GameMode == GameMode.Werewolf)
-                        {
-                            __instance.__4__this.TeamTitle.text = "Werewolf";
-                            __instance.__4__this.TeamTitle.color = Patches.Colors.Werewolf;
-                            __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Werewolf;
-                        }
-
-                        else if (role.Faction == Faction.Crewmates && CustomGameOptions.GameMode == GameMode.Werewolf)
-                        {
-                            __instance.__4__this.TeamTitle.text = "Villager";
-                            __instance.__4__this.TeamTitle.color = Patches.Colors.Villager;
-                            __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Villager;
-                        }
                         __instance.__4__this.RoleText.text = role.Name;
                         __instance.__4__this.RoleText.color = role.Color;
                         __instance.__4__this.YouAreText.color = role.Color;
@@ -906,19 +892,6 @@ namespace TownOfUsEdited.Roles
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Impostor);
                         }
 
-                        else if (role.Faction == Faction.Impostors && CustomGameOptions.GameMode == GameMode.Werewolf)
-                        {
-                            __instance.__4__this.TeamTitle.text = "Werewolf";
-                            __instance.__4__this.TeamTitle.color = Patches.Colors.Werewolf;
-                            __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Werewolf;
-                        }
-
-                        else if (role.Faction == Faction.Crewmates && CustomGameOptions.GameMode == GameMode.Werewolf)
-                        {
-                            __instance.__4__this.TeamTitle.text = "Villager";
-                            __instance.__4__this.TeamTitle.color = Patches.Colors.Villager;
-                            __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Villager;
-                        }
                         __instance.__4__this.RoleText.text = role.Name;
                         __instance.__4__this.RoleText.color = role.Color;
                         __instance.__4__this.YouAreText.color = role.Color;
@@ -979,11 +952,7 @@ namespace TownOfUsEdited.Roles
                         }
                     }
 
-                    if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count == 1)
-                        __instance.__4__this.ImpostorText.text = "There is <color=#A86629FF>1 Werewolf</color> among us";
-                    else if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count > 1)
-                        __instance.__4__this.ImpostorText.text = $"There are <color=#A86629FF>{imps.Count} Werewolves</color> among us";
-                    else if (CustomGameOptions.GameMode == GameMode.BattleRoyale)
+                    if (CustomGameOptions.GameMode == GameMode.BattleRoyale)
                         __instance.__4__this.ImpostorText.text = "";
                     else if (PlayerControl.LocalPlayer.Is(Faction.Impostors))
                         __instance.__4__this.ImpostorText.text = "";
@@ -1117,20 +1086,6 @@ namespace TownOfUsEdited.Roles
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Impostor);
                         }
 
-                        else if (role.Faction == Faction.Impostors && CustomGameOptions.GameMode == GameMode.Werewolf)
-                        {
-                            __instance.__4__this.TeamTitle.text = "Werewolf";
-                            __instance.__4__this.TeamTitle.color = Patches.Colors.Werewolf;
-                            __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Werewolf;
-                        }
-
-                        else if (role.Faction == Faction.Crewmates && CustomGameOptions.GameMode == GameMode.Werewolf)
-                        {
-                            __instance.__4__this.TeamTitle.text = "Villager";
-                            __instance.__4__this.TeamTitle.color = Patches.Colors.Villager;
-                            __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Villager;
-                        }
-
                         __instance.__4__this.RoleText.text = role.Name;
                         __instance.__4__this.RoleText.color = role.Color;
                         __instance.__4__this.YouAreText.color = role.Color;
@@ -1192,11 +1147,7 @@ namespace TownOfUsEdited.Roles
                         }
                     }
 
-                    if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count == 1)
-                        __instance.__4__this.ImpostorText.text = "There is <color=#A86629FF>1 Werewolf</color> among us";
-                    else if (CustomGameOptions.GameMode == GameMode.Werewolf && imps.Count > 1)
-                        __instance.__4__this.ImpostorText.text = $"There are <color=#A86629FF>{imps.Count} Werewolves</color> among us";
-                    else if (CustomGameOptions.GameMode == GameMode.BattleRoyale)
+                    if (CustomGameOptions.GameMode == GameMode.BattleRoyale)
                         __instance.__4__this.ImpostorText.text = "";
                     else if (PlayerControl.LocalPlayer.Is(Faction.Impostors))
                         __instance.__4__this.ImpostorText.text = "";
@@ -1319,7 +1270,7 @@ namespace TownOfUsEdited.Roles
                 if (GameData.Instance.TotalTasks <= GameData.Instance.CompletedTasks)
                 {
                     var crews = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Crewmates) && !x.Data.Disconnected && !x.Is(RoleEnum.Haunter)).ToList();
-                    if (crews.Count != 0 && CustomGameOptions.GameMode != GameMode.Werewolf)
+                    if (crews.Count != 0)
                     {
                         if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
                         {
@@ -1396,16 +1347,6 @@ namespace TownOfUsEdited.Roles
             public static void Postfix(ref string __result, [HarmonyArgument(0)] StringNames name)
             {
                 if (ExileController.Instance == null) return;
-                if (CustomGameOptions.GameMode == GameMode.Werewolf)
-                {
-                    if (ExileController.Instance.initData.networkedPlayer == null) return;
-                    var info = ExileController.Instance.initData.networkedPlayer;
-                    var role = GetRole(info.Object);
-                    if (role == null) return;
-                    var roleName = role.Name;
-                    __result = $"{info.PlayerName} was {roleName}.";
-                    return;
-                }
                 switch (name)
                 {
                     case StringNames.NoExileTie:

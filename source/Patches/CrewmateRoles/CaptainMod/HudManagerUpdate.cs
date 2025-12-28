@@ -45,19 +45,20 @@ namespace TownOfUsEdited.CrewmateRoles.CaptainMod
             }
 
             var renderer = ZoomButton.graphic;
+            var ZoomText = ZoomButton.buttonLabelText;
             if (role.Zooming || !ZoomButton.isCoolingDown)
             {
                 renderer.color = Palette.EnabledColor;
                 renderer.material.SetFloat("_Desat", 0f);
-                ZoomButton.buttonLabelText.color = Palette.EnabledColor;
-                ZoomButton.buttonLabelText.material.SetFloat("_Desat", 0f);
+                ZoomText.color = Palette.EnabledColor;
+                ZoomText.material.SetFloat("_Desat", 0f);
             }
             else
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);
-                ZoomButton.buttonLabelText.color = Palette.DisabledClear;
-                ZoomButton.buttonLabelText.material.SetFloat("_Desat", 1f);
+                ZoomText.color = Palette.DisabledClear;
+                ZoomText.material.SetFloat("_Desat", 1f);
             }
         }
     }

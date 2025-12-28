@@ -58,10 +58,7 @@ namespace TownOfUsEdited.Roles
             if (!player.Is(Faction.Crewmates))
                 return;
 
-            if (CustomGameOptions.GameMode != GameMode.Cultist)
-            {
-                AbilityUsed = true;
-            }
+            AbilityUsed = true;
 
             Revive(target);
             Utils.Rpc(CustomRPC.ConverterRevive, PlayerControl.LocalPlayer.PlayerId, target.ParentId);

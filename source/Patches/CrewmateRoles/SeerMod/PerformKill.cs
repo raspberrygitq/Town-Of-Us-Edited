@@ -11,8 +11,6 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
         public static bool Prefix(KillButton __instance)
         {
             if (__instance != HudManager.Instance.KillButton) return true;
-            if (CustomGameOptions.GameMode != GameMode.Werewolf)
-            {
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Seer);
             if (!flag) return true;
             var role = Role.GetRole<Seer>(PlayerControl.LocalPlayer);
@@ -40,22 +38,6 @@ namespace TownOfUsEdited.CrewmateRoles.SeerMod
                 return false;
             }
             else if (interact[3] == true) return false;
-            }
-            else
-            {
-                var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Seer);
-                if (!flag) return true;
-                var role = Role.GetRole<Seer>(PlayerControl.LocalPlayer);
-                if (!PlayerControl.LocalPlayer.CanMove || role.ClosestPlayer == null) return false;
-                if (!__instance.enabled) return false;
-                var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
-                if (Vector2.Distance(role.ClosestPlayer.GetTruePosition(),
-                PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
-                if (role.ClosestPlayer == null) return false;
-                role.Revealed.Add(role.ClosestPlayer.PlayerId);
-                role.UsedReveal = true;
-                return false;
-            }
             return false;
         }
     }

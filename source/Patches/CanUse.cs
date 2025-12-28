@@ -9,7 +9,7 @@ namespace TownOfUsEdited
         public static bool Prefix(CrewmateGhostRole __instance, IUsable console, ref bool __result)
         {
             if ((__instance.Player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(__instance.Player).Caught) || (__instance.Player.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(__instance.Player).Caught)
-            || (__instance.Player.Is(RoleEnum.Spirit) && !Role.GetRole<Spirit>(__instance.Player).Caught))
+            || (__instance.Player.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(__instance.Player).Caught))
             {
                 __result = true;
                 return false;

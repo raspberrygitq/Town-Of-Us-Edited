@@ -19,12 +19,6 @@ namespace TownOfUsEdited.Patches
             HudUpdate.Zooming = false;
             HudUpdate.ZoomStart();
 
-            if (CustomGameOptions.GameMode == GameMode.Werewolf)
-            {
-                DayNightMechanic.DayCount = 0;
-                DayNightMechanic.NightCount = 1;
-            }
-
             if (CustomGameOptions.GameMode == GameMode.Chaos)
             {
                 foreach (var player in PlayerControl.AllPlayerControls)
@@ -42,24 +36,6 @@ namespace TownOfUsEdited.Patches
                 {
                     player.transform.localPosition = new Vector3(player.transform.localPosition.x, 4f, player.transform.localPosition.z);
                 }
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.TalkativeWolf))
-            {
-                var tw = Role.GetRole<TalkativeWolf>(PlayerControl.LocalPlayer);
-                tw.RampageCooldown = CustomGameOptions.InitialCooldowns;
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.BlackWolf))
-            {
-                var bw = Role.GetRole<BlackWolf>(PlayerControl.LocalPlayer);
-                bw.RampageCooldown = CustomGameOptions.InitialCooldowns;
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf))
-            {
-                var ww = Role.GetRole<Werewolf>(PlayerControl.LocalPlayer);
-                ww.RampageCooldown = CustomGameOptions.InitialCooldowns;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.BountyHunter))
@@ -422,13 +398,6 @@ namespace TownOfUsEdited.Patches
                 juggernaut.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.WhiteWolf))
-            {
-                var whitewolf = Role.GetRole<WhiteWolf>(PlayerControl.LocalPlayer);
-                whitewolf.Cooldown = CustomGameOptions.InitialCooldowns;
-                whitewolf.RampageCooldown = CustomGameOptions.InitialCooldowns;
-            }
-
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Plaguebearer))
             {
                 var plaguebearer = Role.GetRole<Plaguebearer>(PlayerControl.LocalPlayer);
@@ -453,9 +422,9 @@ namespace TownOfUsEdited.Patches
                 shifter.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Maul))
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Werewolf))
             {
-                var werewolf = Role.GetRole<Maul>(PlayerControl.LocalPlayer);
+                var werewolf = Role.GetRole<Werewolf>(PlayerControl.LocalPlayer);
                 werewolf.RampageCooldown = CustomGameOptions.InitialCooldowns;
                 werewolf.Cooldown = CustomGameOptions.InitialCooldowns;
             }

@@ -3,64 +3,97 @@
 ![LOGO](./Images/TOUE-logo.png)
 ![Roles](./Images/Roles.png)
 
-| **Impostor Roles**             | **Crewmate Roles**                | **Neutral Roles**                 | **Coven Roles**                 | **Modifiers**                 |
-|:------------------------------:|:---------------------------------:|:---------------------------------:|:-------------------------------:|:-----------------------------:|
-| [Blackmailer](#blackmailer)    | [Altruist](#altruist)             | [Amnesiac](#amnesiac)             | [Coven](#coven)                 | [Aftermath](#aftermath)       |
-| [Blinder](#blinder)            | [Astral](#astral)                 | [Arsonist](#arsonist)             | [Coven Leader](#coven-leader)   | [Bait](#bait)                 |
-| [Bomber](#bomber)              | [Aurial](#aurial)                 | [Attacker](#attacker)             | [Hex Master](#hex-master)       | [Bloodlust](#bloodlust)       |
-| [Bounty Hunter](bounty-hunter) | [Avenger](#avenger)               | [Doomsayer](#doomsayer)           | [Potion Master](#potion-master) | [Button Barry](#button-barry) |
-| [Conjurer](#conjurer)          | [Bodyguard](#bodyguard)           | [Doppelganger](#doppelganger)     | [Ritualist](#ritualist)         | [Celebrity](#celebrity)       |
-| [Converter](#converter)        | [Captain](#captain)               | [Executioner](#executioner)       | [Spiritualist](#spiritualist)   | [Diseased](#diseased)         |
-| [Escapist](#escapist)          | [Chameleon](#chameleon)           | [Guardian Angel](#guardian-angel) | [Voodoo Master](#voodoo-master) | [Disperser](#disperser)       |
-| [Freezer](#freezer)            | [Cleric](#cleric)                 | [Infectious](#infectious)         |                                 | [Double Shot](#double-shot)   |
-| [Grenadier](#grenadier)        | [Crusader](#crusader)             | [Jester](#jester)                 |                                 | [Drunk](#drunk)               |
-| [Hypnotist](#hypnotist)        | [Deputy](#deputy)                 | [Juggernaut](#juggernaut)         |                                 | [Flash](#flash)               |
-| [Janitor](#janitor)            | [Detective](#detective)           | [Maul](#maul)                     |                                 | [Frosty](#frosty)             |
-| [Mafioso](#mafioso)            | [Doctor](#doctor)                 | [Mercenary](#mercenary)           |                                 | [Giant](#giant)               |
-| [Manipulator](#manipulator)    | [Engineer](#engineer)             | [Mutant](#mutant)                 |                                 | [Lovers](#lovers)             |
-| [Miner](#miner)                | [Fighter](#fighter)               | [Phantom](#phantom)               |                                 | [Lucky](#lucky)               |
-| [Morphling](#morphling)        | [Guardian](#guardian)             | [Plaguebearer](#plaguebearer)     |                                 | [Madmate](#madmate)           |
-| [Noclip](#noclip)              | [Haunter](#haunter)               | [Serial Killer](#serial-killer)   |                                 | [Mini](#mini)                 |
-| [Poisoner](#poisoner)          | [Helper](#helper)                 | [Shifter](#shifter)               |                                 | [Motionless](#motionless)     |
-| [Reviver](#reviver)            | [Hunter](#hunter)                 | [Soul Collector](#soul-collector) |                                 | [Multitasker](#multitasker)   |
-| [Shooter](#shooter)            | [Imitator](#imitator)             | [Survivor](#survivor)             |                                 | [Radar](#radar)               |
-| [Spirit](#spirit)              | [Informant](#informant)           | [The Glitch](#the-glitch)         |                                 | [Saboteur](#saboteur)         |
-| [Swooper](#swooper)            | [Investigator](#investigator)     | [Troll](#troll)                   |                                 | [Satellite](#satellite)       |
-| [Traitor](#traitor)            | [Jailor](#jailor)                 | [Vampire](#vampire)               |                                 | [Scientist](#scientist)       |
-| [Undertaker](#undertaker)      | [Knight](#knight)                 | [Vulture](#vulture)               |                                 | [Shy](#shy)                   |
-| [Venerer](#venerer)            | [Lookout](#lookout)               |                                   |                                 | [Sixth Sense](#sixth-sense)   |
-| [Warlock](#warlock)            | [Medic](#medic)                   |                                   |                                 | [Sleuth](#sleuth)             |
-| [Witch](#witch)                | [Medium](#medium)                 |                                   |                                 | [Superstar](#superstar)       |
-|                                | [Mystic](#mystic)                 |                                   |                                 | [Tasker](#tasker)             |
-|                                | [Oracle](#oracle)                 |                                   |                                 | [Taskmaster](#taskmaster)     |
-|                                | [Paranoïac](#paranoïac)           |                                   |                                 | [Tiebreaker](#tiebreaker)     |
-|                                | [Plumber](#plumber)               |                                   |                                 | [Torch](#torch)               |
-|                                | [Politician](#politician)         |                                   |                                 | [Underdog](#underdog)         |
-|                                | [Prosecutor](#prosecutor)         |                                   |                                 | [Vengeful](#vengeful)         |
-|                                | [Seer](#seer)                     |                                   |                                 |                               |
-|                                | [Sheriff](#sheriff)               |                                   |                                 |                               |
-|                                | [Snitch](#snitch)                 |                                   |                                 |                               |
-|                                | [Spy](#spy)                       |                                   |                                 |                               |
-|                                | [Swapper](#swapper)               |                                   |                                 |                               |
-|                                | [Time Lord](#time-lord)           |                                   |                                 |                               |
-|                                | [Tracker](#tracker)               |                                   |                                 |                               |
-|                                | [Trapper](#trapper)               |                                   |                                 |                               |
-|                                | [Transporter](#transporter)       |                                   |                                 |                               |
-|                                | [Vampire Hunter](#vampire-hunter) |                                   |                                 |                               |
-|                                | [Veteran](#veteran)               |                                   |                                 |                               |
-|                                | [Vigilante](#vigilante)           |                                   |                                 |                               |
-|                                | [Warden](#warden)                 |                                   |                                 |                               |
-|                                | [Watcher](#watcher)               |                                   |                                 |                               |
-|                                |                                   |                                   |                                 |                               |
+# Roles & Modifiers
+
+### Crewmate Roles
+
+| **Crewmate Investigative**   | **Crewmate Ghost**   | **Crewmate Killing**             | **Crewmate Power**       | **Crewmate Protective** | **Crewmate Support**       |
+|:----------------------------:|:--------------------:|:--------------------------------:|:------------------------:|:-----------------------:|:--------------------------:|
+| [Astral](#astral)            | [Guardian](#guardian)| [Avenger](#avenger)              | [Jailor](#jailor)        | [Altruist](#altruist)   | [Engineer](#engineer)      |
+| [Aurial](#aurial)            | [Haunter](#haunter)  | [Deputy](#deputy)                | [Politician](#politician)| [Bodyguard](#bodyguard) | [Imitator](#imitator)      |
+| [Captain](#captain)          | [Helper](#helper)    | [Fighter](#fighter)              | [Prosecutor](#prosecutor)| [Cleric](#cleric)       | [Medium](#medium)          |
+| [Chameleon](#chameleon)      |                      | [Hunter](#hunter)                | [Swapper](#swapper)      | [Crusader](#crusader)   | [Paranoïac](#paranoïac)    |
+| [Detective](#detective)      |                      | [Knight](#knignt)                |                          | [Doctor](#doctor)       | [Plumber](#plumber)        |
+| [Informant](#informant)      |                      | [Sheriff](#sheriff)              |                          | [Medic](#medic)         | [Time Lord](#time-lord)    |
+| [Investigator](#investigator)|                      | [Vampire Hunter](#vampire-hunter)|                          | [Oracle](#oracle)       | [Transporter](#transporter)|
+| [Lookout](#lookout)          |                      | [Veteran](#veteran)              |                          | [Warden](#warden)       |                            |
+| [Mystic](#mystic)            |                      | [Vigilante](#vigilante)          |                          |                         |                            |
+| [Seer](#seer)                |                      |                                  |                          |                         |                            |
+| [Snitch](#snitch)            |                      |                                  |                          |                         |                            |
+| [Spy](#spy)                  |                      |                                  |                          |                         |                            |
+| [Tracker](#tracker)          |                      |                                  |                          |                         |                            |
+| [Watcher](#watcher)          |                      |                                  |                          |                         |                            |
+|                              |                      |                                  |                          |                         |                            |
+
+### Impostor Roles
+
+| **Impostor Concealing** | **Impostor Ghost** | **Impostor Killing**           | **Impostor Support**       |
+|:-----------------------:|:------------------:|:------------------------------:|:--------------------------:|
+| [Escapist](#escapist)   | [Blinder](#blinder)| [Bomber](#bomber)              | [Blackmailer](#blackmailer)|
+| [Grenadier](#grenadier) | [Freezer](#freezer)| [Bounty Hunter](#bounty-hunter)| [Converter](#converter)    |
+| [Morphling](#morphling) | [Wraith](#wraith)  | [Conjurer](#conjurer)          | [Hypnotist](#hypnotist)    |
+| [Noclip](#noclip)       |                    | [Manipulator](#manipulator)    | [Janitor](#janitor)        |
+| [Swooper](#swooper)     |                    | [Poisoner](#poisoner)          | [Mafioso](#mafioso)        |
+| [Venerer](#venerer)     |                    | [Shooter](#shooter)            | [Miner](#miner)            |
+|                         |                    | [Traitor](#traitor)            | [Reviver](#reviver)        |
+|                         |                    | [Warlock](#warlock)            | [Undertaker](#undertaker)  |
+|                         |                    | [Witch](#witch)                |                            |
+|                         |                    |                                |                            |
+
+### Neutral Roles
+
+| **Neutral Benign**               | **Neutral Evil**           | **Neutral Killing**              |
+|:--------------------------------:|:--------------------------:|:--------------------------------:|
+| [Amnesiac](#amnesiac)            | [Doomsayer](#doomsayer)    | [Arsonist](#arsonist)            |
+| [Guardian Angel](#guardian-angel)| [Executioner](#executioner)| [Attacker](#attacker)            |
+| [Mercenary](#mercenary)          | [Jester](#jester)          | [Doppelganger](#doppelganger)    |
+| [Shifter](#shifter)              | [Phantom](#phantom)        | [Infectious](#infectious)        |
+| [Survivor](#survivor)            | [Troll](#troll)            | [Juggernaut](#juggernaut)        |
+|                                  | [Vulture](#vulture)        | [Mutant](#mutant)                |
+|                                  |                            | [Plaguebearer](#plaguebearer)    |
+|                                  |                            | [Serial Killer](#serial-killer)  |
+|                                  |                            | [Soul Collector](#soul-collector)|
+|                                  |                            | [The Glitch](#the-glitch)        |
+|                                  |                            | [Vampire](#vampire)              |
+|                                  |                            | [Werewolf](#werewolf)            |
+|                                  |                            |                                  |
+
+### Modifiers
+
+| **Crewmate Modifiers**     | **Global Modifiers**         | **Impostor Modifiers**     |
+|:--------------------------:|:----------------------------:|:--------------------------:|
+| [Aftermath](#aftermath)    | [Button Barry](#button-barry)| [Bloodlust](#bloodlust)    |
+| [Bait](#bait)              | [Drunk](#drunk)              | [Disperser](#disperser)    |
+| [Celebrity](#celebrity)    | [Flash](#flash)              | [Double Shot](#double-shot)|
+| [Diseased](#diseased)      | [Giant](#giant)              | [Lucky](#lucky)            |
+| [Frosty](#frosty)          | [Lovers](#lovers)            | [Saboteur](#saboteur)      |
+| [Madmate](#madmate)        | [Mini](#mini)                | [Tasker](#tasker)          |
+| [Multitasker](#multitasker)| [Motionless](#motionless)    | [Underdog](#underdog)      |
+| [Taskmaster](#taskmaster)  | [Radar](#radar)              |                            |
+| [Torch](#torch)            | [Satellite](#satellite)      |                            |
+| [Vengeful](#vengeful)      | [Scientist](#scientist)      |                            |
+|                            | [Shy](#shy)                  |                            |
+|                            | [Sixth Sense](#sixth-sense)  |                            |
+|                            | [Sleuth](#sleuth)            |                            |
+|                            | [Superstar](#superstar)      |                            |
+|                            | [Tiebreaker](#tiebreaker)    |                            |
+|                            |                              |                            |
 
 -----------------------
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
+|  17.1.0 | v2.2.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.2.0/ToUEG-Steam.v2.2.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.2.0/ToUEG-Epic.v2.2.0.zip) |
 |  17.1.0 | v2.1.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.1.1/ToUEG-Steam.v2.1.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.1.1/ToUEG-Epic.v2.1.1.zip) |
 |  17.1.0 | v2.1.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.1.0/ToUEG-Steam.v2.1.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.1.0/ToUEG-Epic.v2.1.0.zip) |
 |  17.1.0 | v2.0.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.0.0/ToUEG-Steam.v2.0.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.0.0/ToUEG-Epic.v2.0.0.zip) |
 |  17.1.0 | v1.7.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.1/ToUEG-Steam.v1.7.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.1/ToUEG-Epic.v1.7.1.zip) |
+
+<details>
+    <summary>Archive Version</summary>
+
+| Among Us - Version| Mod Version | Steam Link | Epic Games link |
+|----------|-------------|-----------------|-----------------|
 |  17.0.1 | v1.7.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.0/ToUEG-Steam.v1.7.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.7.0/ToUEG-Epic.v1.7.0.zip) |
 |  17.0.0 | v1.6.2 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.6.2/ToUEG-Steam.v1.6.2.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.6.2/ToUEG-Epic.v1.6.2.zip) |
 |  17.0.0 | v1.6.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.6.1/ToUEG-Steam.v1.6.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.6.1/ToUEG-Epic.v1.6.1.zip) |
@@ -82,8 +115,7 @@
 |  16.0.5 - 16.1.0 | v1.2.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.2.0/ToUE-Steam.v1.2.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.2.0/ToUE-Epic.v1.2.0.zip) |
 |  16.0.5 - 16.1.0 | v1.1.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.1.1/ToUE-Steam.v1.1.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.1.1/ToUE-Epic.v1.1.1.zip) |
 |  16.0.5 - 16.1.0 | v1.1.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.1.0/ToUE-Steam.v1.1.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v1.1.0/ToUE-Epic.v1.1.0.zip) |
-
-
+</details>
 
 -----------------------
 # Installation
@@ -1159,24 +1191,6 @@ The stage of the Infection grows by one after each meeting.
 | Infectious Can Vent | Whether the Infectious can use the Vents | Toggle | False |
 
 -----------------------
-## Maul
-### **Team: Neutral**
-
-The Maul is a Neutral role with their own win condition.\
-Although the Maul has a kill button, they can't use it unless they are Rampaged.\
-Once the Maul rampages they gain Impostor vision and the ability to kill.\
-However, unlike most killers their kill cooldown is really short.\
-The Maul needs to be the last killer alive to win the game.
-### Game Options
-| Name | Description | Type | Default |
-|----------|:-------------:|:------:|:------:|
-| Maul | The percentage probability of the Maul appearing | Percentage | 0% |
-| Rampage Cooldown | The cooldown of the Maul's Rampage button | Time | 25s |
-| Rampage Duration | The duration of the Maul's Rampage | Time | 25s |
-| Rampage Kill Cooldown | The cooldown of the Maul's Kill button | Time | 10s |
-| Maul can Vent when Rampaged | Whether the Maul can Vent when Rampaged | Toggle | False |
-
------------------------
 ## Mutant
 ### **Team: Neutral**
 
@@ -1310,6 +1324,24 @@ The Vampire can also perform regular kills.
 | Can Convert Neutral Evil Roles | Whether Neutral Evil Roles can be turned into Vampires | Toggle | False |
 
 -----------------------
+## Werewolf
+### **Team: Neutral**
+
+The Werewolf is a Neutral role with their own win condition.\
+Although the Werewolf has a kill button, they can't use it unless they are Rampaged.\
+Once the Werewolf rampages they gain Impostor vision and the ability to kill.\
+However, unlike most killers their kill cooldown is really short.\
+The Werewolf needs to be the last killer alive to win the game.
+### Game Options
+| Name | Description | Type | Default |
+|----------|:-------------:|:------:|:------:|
+| Werewolf | The percentage probability of the Werewolf appearing | Percentage | 0% |
+| Rampage Cooldown | The cooldown of the Werewolf's Rampage button | Time | 25s |
+| Rampage Duration | The duration of the Werewolf's Rampage | Time | 25s |
+| Rampage Kill Cooldown | The cooldown of the Werewolf's Kill button | Time | 10s |
+| Werewolf can Vent when Rampaged | Whether the Werewolf can Vent when Rampaged | Toggle | False |
+
+
 # Impostor Roles
 ## Impostor
 ### **Team: Impostors**
@@ -1548,7 +1580,7 @@ This will reset their Kill Cooldown but will also allow them to kill multiple ti
 ## Traitor
 ### **Team: Impostors**
 
-If all Impostors die before a certain point in the game, a random crewmate is selected to become the Traitor.\
+If all Impostors die before a certain point in the game, a Non-Imp / Coven is selected to become the Traitor.\
 The Traitor has no additional abilities and their job is simply to avenge the dead Impostors.\
 Once this player has turned into the Traitor their alliance sits with the Impostors.\
 The Traitor is offered a choice of up to 3 Impostor roles when they initially change roles.
@@ -2155,7 +2187,7 @@ When they are the only remaining Impostor, they will have their kill cooldown sh
 # Game Mode Settings
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
-| Game Mode | What game mode the next game will be | Classic / Role List / Battle Royale / Cultist / Chaos / Werewolf | Classic |
+| Game Mode | What game mode the next game will be | Classic / Role List / Battle Royale / Chaos | Role List |
 
 -----------------------
 # Classic Game Mode Settings
@@ -2207,21 +2239,21 @@ Auto adjustments will be made if there are not enough crewmates or impostors to 
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Unique Roles  | Whether all roles can appear a maximum of 1 time | Toggle | True |
-| Slot 1 | What role type can appear in Slot 1 | See Above for Buckets | Random Impostor |
-| Slot 2 | What role type can appear in Slot 2 | See Above for Buckets | Random Crewmate |
-| Slot 3 | What role type can appear in Slot 3 | See Above for Buckets | Random Crewmate |
-| Slot 4 | What role type can appear in Slot 4 | See Above for Buckets | Random Crewmate |
-| Slot 5 | What role type can appear in Slot 5 | See Above for Buckets | Random Crewmate |
-| Slot 6 | What role type can appear in Slot 6 | See Above for Buckets | Random Crewmate |
-| Slot 7 | What role type can appear in Slot 7 | See Above for Buckets | Random Crewmate |
-| Slot 8 | What role type can appear in Slot 8 | See Above for Buckets | Random Crewmate |
-| Slot 9 | What role type can appear in Slot 9 | See Above for Buckets | Random Crewmate |
-| Slot 10 | What role type can appear in Slot 10 | See Above for Buckets | Random Impostor |
-| Slot 11 | What role type can appear in Slot 11 | See Above for Buckets | Random Crewmate |
-| Slot 12 | What role type can appear in Slot 12 | See Above for Buckets | Random Crewmate |
-| Slot 13 | What role type can appear in Slot 13 | See Above for Buckets | Random Crewmate |
-| Slot 14 | What role type can appear in Slot 14 | See Above for Buckets | Random Crewmate |
-| Slot 15 | What role type can appear in Slot 15 | See Above for Buckets | Random Crewmate |
+| Slot 1 | What role type can appear in Slot 1 | See Above for Buckets | Non-Imp / Coven |
+| Slot 2 | What role type can appear in Slot 2 | See Above for Buckets | Non-Imp / Coven |
+| Slot 3 | What role type can appear in Slot 3 | See Above for Buckets | Non-Imp / Coven |
+| Slot 4 | What role type can appear in Slot 4 | See Above for Buckets | Non-Imp / Coven |
+| Slot 5 | What role type can appear in Slot 5 | See Above for Buckets | Non-Imp / Coven |
+| Slot 6 | What role type can appear in Slot 6 | See Above for Buckets | Non-Imp / Coven |
+| Slot 7 | What role type can appear in Slot 7 | See Above for Buckets | Non-Imp / Coven |
+| Slot 8 | What role type can appear in Slot 8 | See Above for Buckets | Non-Imp / Coven |
+| Slot 9 | What role type can appear in Slot 9 | See Above for Buckets | Non-Imp / Coven |
+| Slot 10 | What role type can appear in Slot 10 | See Above for Buckets | Non-Imp / Coven |
+| Slot 11 | What role type can appear in Slot 11 | See Above for Buckets | Non-Imp / Coven |
+| Slot 12 | What role type can appear in Slot 12 | See Above for Buckets | Non-Imp / Coven |
+| Slot 13 | What role type can appear in Slot 13 | See Above for Buckets | Non-Imp / Coven |
+| Slot 14 | What role type can appear in Slot 14 | See Above for Buckets | Non-Imp / Coven |
+| Slot 15 | What role type can appear in Slot 15 | See Above for Buckets | Non-Imp / Coven |
 
 -----------------------
 # Battle Royale Settings
@@ -2232,40 +2264,6 @@ In the Battle Royale gamemode, everyone can kill, the last player standing wins!
 | Kill Cooldown | The Kill Cooldown for this gamemode | Time | 5s |
 | Game Start Cooldown | The Kill Cooldown when the game start | Time | 15s |
 | Disable Vents | Whether Venting should be allowed | Toggle | False |
-
------------------------
-# Cultist Settings
-The cultist game mode has only one Impostor which will be the [Converter](#converter).\
-There will be no Neutral and Coven Roles.\
-The Converter has an unlimited amount of Convertions in this game mode.\
-Their goal is to Convert as much players as possible to [Madmates](#madmate) to help them killing the rest.\
-But if the Converter gets killed / ejected, all Madmates lose too making it a priority for them to protect the Converter.
-
------------------------
-# Werewolf Settings
-The werewolf's game mode goal is to recreate the classic Werewolf game into Among Us.\
-Therefore, in this game mode, Impostors are replaced with Werewolves, there is no emergency meetings, we can only report and there are special roles only used in this game mode.\
-The Werewolves can only kill when Transformed which will reveal them as Werewolves when someone sees them but they will have a short kill cooldown.
-
-| Name | Description | Type | Default |
-|----------|:-------------:|:------:|:------:|
-| Werewolves Rampage Cooldown | The Rampage Cooldown for werewolves | Time | 25s |
-| Werewolves Kill Cooldown | The Kill Cooldown for this gamemode | Time | 10s |
-| Basic Werewolf Chance | The Chance to have a Werewolf | Percentage | 0% |
-| Basic Villager Chance | The Chance to have a Villager | Percentage | 0% |
-| Black Wolf Chance | The Chance to have a Black Wolf | Percentage | 0% |
-| Black Wolf Chance | The Chance to have a Black Wolf | Percentage | 0% |
-| Chameleon Chance | The Chance to have a Chameleon | Percentage | 0% |
-| Guard Chance | The Chance to have a Guard | Percentage | 0% |
-| Mayor Chance | The Chance to have a Mayor | Percentage | 0% |
-| Paranoïac Chance | The Chance to have a Paranoïac | Percentage | 0% |
-| Prosecutor Chance | The Chance to have a Prosecutor | Percentage | 0% |
-| Seer Chance | The Chance to have a Seer | Percentage | 0% |
-| Sheriff Chance | The Chance to have a Sheriff | Percentage | 0% |
-| Sorcerer Chance | The Chance to have a Sorcerer | Percentage | 0% |
-| Soul Catcher Chance | The Chance to have a Soul Catcher | Percentage | 0% |
-| Talkative Wolf Chance | The Chance to have a Talkative Wolf | Percentage | 0% |
-| White Wolf Chance | The Chance to have a White Wolf | Percentage | 0% |
 
 -----------------------
 # Chaos Settings

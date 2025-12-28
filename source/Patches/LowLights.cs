@@ -75,17 +75,16 @@ namespace TownOfUsEdited
                 (player._object.Is(RoleEnum.Vampire) && CustomGameOptions.VampImpVision) ||
                 (player._object.Is(RoleEnum.SerialKiller) && CustomGameOptions.SkImpVision) ||
                 (player._object.Is(Faction.Madmates) && CustomGameOptions.MadmateHasImpoVision)||
-                player._object.Is(RoleEnum.WhiteWolf) || player._object.Is(RoleEnum.Player) ||
-                player._object.Is(RoleEnum.Terrorist) || player._object.Is(Faction.Coven) ||
-                player._object.Is(RoleEnum.Infectious) || player._object.Is(RoleEnum.Doppelganger) ||
-                player._object.Is(ModifierEnum.Torch))
+                player._object.Is(RoleEnum.Player) || player._object.Is(RoleEnum.Terrorist) || 
+                player._object.Is(Faction.Coven) || player._object.Is(RoleEnum.Infectious) || 
+                player._object.Is(RoleEnum.Doppelganger) || player._object.Is(ModifierEnum.Torch))
             {
                 __result = __instance.MaxLightRadius * GameOptionsManager.Instance.currentNormalGameOptions.ImpostorLightMod;
                 return false;
             }
-            else if (player._object.Is(RoleEnum.Maul))
+            else if (player._object.Is(RoleEnum.Werewolf))
             {
-                var role = Role.GetRole<Maul>(player._object);
+                var role = Role.GetRole<Werewolf>(player._object);
                 if (role.Rampaged)
                 {
                     __result = __instance.MaxLightRadius * GameOptionsManager.Instance.currentNormalGameOptions.ImpostorLightMod;

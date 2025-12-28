@@ -37,7 +37,7 @@ namespace TownOfUsEdited
         Mystic,
         Plaguebearer,
         Pestilence,
-        Maul,
+        Werewolf,
         Detective,
         Imitator,
         Doomsayer,
@@ -99,7 +99,7 @@ namespace TownOfUsEdited
         BountyHunter,
         Assassin,
         Reviver,
-        Spirit,
+        Wraith,
         Blinder,
         Freezer,
         Hypnotist,
@@ -115,15 +115,6 @@ namespace TownOfUsEdited
 
         Crewmate,
         Impostor,
-
-        Werewolf,
-        Villager,
-        Sorcerer,
-        SoulCatcher,
-        BlackWolf,
-        WhiteWolf,
-        Guard,
-        TalkativeWolf,
 
         None
     }

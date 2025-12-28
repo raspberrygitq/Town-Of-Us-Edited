@@ -29,6 +29,9 @@ namespace TownOfUsEdited.NeutralRoles.TrollMod
             // Set Button's visibility
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
 
+            // Set Cooldown to 0
+            __instance.KillButton.SetCoolDown(0f, 10f);
+
             // Set the closest player for the Button's targeting
 
             Utils.SetTarget(ref troll.ClosestPlayer, __instance.KillButton, float.NaN);

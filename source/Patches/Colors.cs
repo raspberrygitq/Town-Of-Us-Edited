@@ -38,11 +38,6 @@ namespace TownOfUsEdited.Patches
         public readonly static Color Jailor = new Color(0.65f, 0.65f, 0.65f, 1f);
         public readonly static Color Fighter = new Color32(147, 88, 230, 255);
         public readonly static Color Paranoïac = new Color32(10, 126, 174, 255);
-        public readonly static Color Villager = new Color32(173, 243, 75, 255);
-        public readonly static Color Sorcerer = new Color32(146, 16, 255, 255);
-        public readonly static Color SoulCatcher = new Color32(123, 119, 129, 255);
-        public readonly static Color WhiteWolf = Color.white;
-        public readonly static Color Guard = new Color32(0, 149, 255, 255);
         public readonly static Color Avenger = new Color32(33, 111, 1, 255);
         public readonly static Color Astral = new Color32(167, 3, 174, 255);
         public readonly static Color Bodyguard = new Color32(37, 91, 201, 255);
@@ -88,8 +83,6 @@ namespace TownOfUsEdited.Patches
 
         //Imposter Colors
         public readonly static Color Impostor = Palette.ImpostorRed;
-        public readonly static Color BlackWolf = new Color32(76, 76, 76, 255);
-        public readonly static Color TalkativeWolf = new Color32(255, 167, 80, 255);
 
         //Coven
         public readonly static Color Coven = new Color32(191, 95, 255, 255);

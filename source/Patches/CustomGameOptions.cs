@@ -27,8 +27,6 @@ namespace TownOfUsEdited
         Classic,
         RoleList,
         BattleRoyale,
-        Cultist,
-        Werewolf,
         Chaos
     }
     public enum AdminDeadPlayers
@@ -115,7 +113,7 @@ namespace TownOfUsEdited
         public static int HunterOn => (int)Generate.HunterOn.Get();
         public static int VigilanteOn => (int)Generate.VigilanteOn.Get();
         public static int HaunterOn => (int)Generate.HaunterOn.Get();
-        public static int SpiritOn => (int)Generate.SpiritOn.Get();
+        public static int WraithOn => (int)Generate.WraithOn.Get();
         public static int BlinderOn => (int)Generate.BlinderOn.Get();
         public static int FreezerOn => (int)Generate.FreezerOn.Get();
         public static int HelperOn => (int)Generate.HelperOn.Get();
@@ -397,8 +395,8 @@ namespace TownOfUsEdited
         public static int HaunterTasksRemainingAlert => (int)Generate.HaunterTasksRemainingAlert.Get();
         public static bool HaunterRevealsNeutrals => Generate.HaunterRevealsNeutrals.Get();
         public static HaunterCanBeClickedBy HaunterCanBeClickedBy => (HaunterCanBeClickedBy)Generate.HaunterCanBeClickedBy.Get();
-        public static int SpiritTasksRemainingClicked => (int)Generate.SpiritTasksRemainingClicked.Get();
-        public static int SpiritTasksRemainingAlert => (int)Generate.SpiritTasksRemainingAlert.Get();
+        public static int WraithTasksRemainingClicked => (int)Generate.WraithTasksRemainingClicked.Get();
+        public static int WraithTasksRemainingAlert => (int)Generate.WraithTasksRemainingAlert.Get();
         public static float GrenadeCd => Generate.GrenadeCooldown.Get();
         public static float GrenadeDuration => Generate.GrenadeDuration.Get();
         public static bool GrenadierVent => Generate.GrenadierVent.Get();
@@ -570,6 +568,12 @@ namespace TownOfUsEdited
         public static bool ColdTempDeathValley => Generate.ColdTempDeathValley.Get();
         public static bool WifiChartCourseSwap => Generate.WifiChartCourseSwap.Get();
         public static bool MoveToiletVent => Generate.MoveToiletVent.Get();
+        public static bool BSVentImprovements => Generate.BSVentImprovements.Get();
+        public static int BAMoveAdmin => (int)Generate.BAMoveAdmin.Get();
+        public static int BAMoveElectrical => (int)Generate.BAMoveElectrical.Get();
+        public static bool BAMoveVitals => Generate.BAMoveVitals.Get();
+        public static bool BAMoveFuel => Generate.BAMoveFuel.Get();
+        public static bool BAMoveDivert => Generate.BAMoveDivert.Get();
         public static bool AirshipPolusDoors => Generate.AirshipPolusDoors.Get();
         public static bool RandomMapEnabled => Generate.RandomMapEnabled.Get();
         public static float RandomMapSkeld => Generate.RandomMapSkeld.Get();
@@ -606,22 +610,6 @@ namespace TownOfUsEdited
         public static float InvisDelay => Generate.InvisDelay.Get();
         public static float TransformInvisDuration => Generate.TransformInvisDuration.Get();
         public static float FinalTransparency => Generate.FinalTransparency.Get();
-        public static float RampageCD => Generate.RampageCD.Get();
-        public static float WerewolfKillCD => Generate.WerewolfKillCD.Get();
-        public static int SorcererOn => (int)Generate.SorcererOn.Get();
-        public static int BasicWerewolfOn => (int)Generate.BasicWerewolfOn.Get();
-        public static int VillagerOn => (int)Generate.VillagerOn.Get();
-        public static int WerewolfSeerOn => (int)Generate.WerewolfSeerOn.Get();
-        public static int WerewolfProsecutorOn => (int)Generate.WerewolfProsecutorOn.Get();
-        public static int WerewolfParanoïacOn => (int)Generate.WerewolfParanoïacOn.Get();
-        public static int WerewolfMayorOn => (int)Generate.WerewolfMayorOn.Get();
-        public static int SoulCatcherOn => (int)Generate.SoulCatcherOn.Get();
-        public static int GuardOn => (int)Generate.GuardOn.Get();
-        public static int WerewolfChameleonOn => (int)Generate.WerewolfChameleonOn.Get();
-        public static int BlackWolfOn => (int)Generate.BlackWolfOn.Get();
-        public static int WhiteWolfOn => (int)Generate.WhiteWolfOn.Get();
-        public static int TalkativeWolfOn => (int)Generate.TalkativeWolfOn.Get();
-        public static int WerewolfSheriffOn => (int)Generate.WerewolfSheriffOn.Get();
         public static float BattleRoyaleKillCD => Generate.BattleRoyaleKillCD.Get();
         public static float BattleRoyaleStartingCD => Generate.BattleRoyaleStartingCD.Get();
         public static bool BattleDisableVent => Generate.BattleDisableVent.Get();

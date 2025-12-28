@@ -32,12 +32,6 @@ namespace TownOfUsEdited
             var role = Role.GetRole(__instance.HauntTarget);
             var modifiers = Modifier.GetModifiers(__instance.HauntTarget);
 
-            if (CustomGameOptions.GameMode == GameMode.Werewolf)
-            {
-                __instance.FilterText.text = "Village Member";
-                return false;
-            }
-
             if (modifiers.Length == 0) __instance.FilterText.text = role.Name;
             else
             {

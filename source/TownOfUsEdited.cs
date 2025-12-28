@@ -7,6 +7,7 @@ using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Reactor;
 using Reactor.Networking.Attributes;
+using Reactor.Utilities;
 using Reactor.Utilities.Extensions;
 using System;
 using System.IO;
@@ -32,9 +33,8 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "2.1.1";
-        public const string BasicCompilation = "1.1.5";
-        public static System.Version Version = System.Version.Parse(VersionString);
+        public const string VersionString = "2.2.0";
+        public static Version Version = Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
         public const int MaxPlayers = 35;
@@ -61,8 +61,6 @@ namespace TownOfUsEdited
         public static Sprite Spell;
         public static Sprite Bounty;
         public static Sprite Curse;
-        public static Sprite Protect2Sprite;
-        public static Sprite WerewolfConvertSprite;
         public static Sprite StoreSprite;
         public static Sprite ManipulateSprite;
         public static Sprite JailSprite;
@@ -106,7 +104,6 @@ namespace TownOfUsEdited
         public static Sprite DarkerSprite;
         public static Sprite InfectSprite;
         public static Sprite RampageSprite;
-        public static Sprite UnRampageSprite;
         public static Sprite TrapSprite;
         public static Sprite TrackSprite;
         public static Sprite InspectSprite;
@@ -121,7 +118,6 @@ namespace TownOfUsEdited
         public static Sprite BiteSprite;
         public static Sprite StakeSprite;
         public static Sprite RevealSprite;
-        public static Sprite RevealRoleSprite;
         public static Sprite ConfessSprite;
         public static Sprite NoAbilitySprite;
         public static Sprite CamouflageSprite;
@@ -157,6 +153,7 @@ namespace TownOfUsEdited
         public static Sprite NoclipSprite;
         public static Sprite AdminSprite;
         public static Sprite JailCellSprite;
+        public static Sprite CrusadeSprite;
 
         public static Sprite ToUBanner;
         public static Sprite UpdateTOUButton;
@@ -181,12 +178,13 @@ namespace TownOfUsEdited
         public static ConfigEntry<bool> ShowWelcomeMessage { get; set; }
         public static ConfigEntry<bool> HideDevStatus { get; set; }
         public static ConfigEntry<bool> DisableTelemetry { get; set; }
+        public static ConfigEntry<bool> DontShowCosmeticsInGame { get; set; }
 
         public static string RuntimeLocation;
         public override void Load()
         {
             RuntimeLocation = Path.GetDirectoryName(Assembly.GetAssembly(typeof(TownOfUsEdited)).Location);
-
+            ReactorCredits.Register<TownOfUsEdited>(ReactorCredits.AlwaysShow);
             System.Console.WriteLine("000.000.000.000/000000000000000000");
 
             _harmony = new Harmony("com.lekillerdesgames.townofusedited");
@@ -231,8 +229,6 @@ namespace TownOfUsEdited
             Spell = CreateSprite("TownOfUsEdited.Resources.Spell.png");
             Curse = CreateSprite("TownOfUsEdited.Resources.Curse.png");
             Bounty = CreateSprite("TownOfUsEdited.Resources.Bounty.png");
-            Protect2Sprite = CreateSprite("TownOfUsEdited.Resources.Protect2.png");
-            WerewolfConvertSprite = CreateSprite("TownOfUsEdited.Resources.WerewolfConvert.png");
             StoreSprite = CreateSprite("TownOfUsEdited.Resources.Store.png");
             ManipulateSprite = CreateSprite("TownOfUsEdited.Resources.ManipulateButton.png");
             JailSprite = CreateSprite("TownOfUsEdited.Resources.JailButton.png");
@@ -288,7 +284,6 @@ namespace TownOfUsEdited
             BiteSprite = CreateSprite("TownOfUsEdited.Resources.Bite.png");
             StakeSprite = CreateSprite("TownOfUsEdited.Resources.Stake.png");
             RevealSprite = CreateSprite("TownOfUsEdited.Resources.Reveal.png");
-            RevealRoleSprite = CreateSprite("TownOfUsEdited.Resources.RevealRoles.png");
             ConfessSprite = CreateSprite("TownOfUsEdited.Resources.Confess.png");
             NoAbilitySprite = CreateSprite("TownOfUsEdited.Resources.NoAbility.png");
             CamouflageSprite = CreateSprite("TownOfUsEdited.Resources.Camouflage.png");
@@ -310,6 +305,7 @@ namespace TownOfUsEdited
             NoclipSprite = CreateSprite("TownOfUsEdited.Resources.Noclip.png");
             AdminSprite = CreateSprite("TownOfUsEdited.Resources.Admin.png");
             JailCellSprite = CreateSprite("TownOfUsEdited.Resources.JailCell.png");
+            CrusadeSprite = CreateSprite("TownOfUsEdited.Resources.Crusade.png");
 
             ToUBanner = CreateSprite("TownOfUsEdited.Resources.TownOfUsEditedBanner.png");
             UpdateTOUButton = CreateSprite("TownOfUsEdited.Resources.UpdateToUButton.png");
@@ -328,12 +324,13 @@ namespace TownOfUsEdited
 
             // RegisterInIl2CppAttribute.Register();
 
-            DeadSeeGhosts = Config.Bind("Settings", "Dead See Other Ghosts", true, "Whether you see other dead players' ghosts while your dead");
+            DeadSeeGhosts = Config.Bind("Settings", "Dead See Other Ghosts", true, "Whether you see other dead players ghosts while your dead");
             SeeSettingNotifier = Config.Bind("Settings", "See Setting Notifier", true, "Whether you see setting changes in lobby at bottom left");
             DisableLobbyMusic = Config.Bind("Settings", "Disable Lobby Music", false, "Whether you want to disable the lobby Music in-game (can be changed in-game with settings)");
             Force4Columns = Config.Bind("Settings", "Force 4 Columns", false, "Always display 4 columns in meeting, vitals & shapeshifter.");
             ShowWelcomeMessage = Config.Bind("Settings", "Show Welcome Message", true, "Show welcome message after creating a lobby.");
             HideDevStatus = Config.Bind("Settings", "Hide Special Status", false, "Toggle this to hide your special status when launching if you have one. You will still have access to your special perks.");
+            DontShowCosmeticsInGame = Config.Bind("Settings", "Dont Show Cosmetics In Game (Client Only)", false, "Don't show any cosmetics in-game (only client-side)");
             DisableTelemetry = Config.Bind("Other", "Disable Telemetry", true, "Prevent the game from collecting analytics and sending them to Innersloth");
 
             _harmony.PatchAll();

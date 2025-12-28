@@ -71,25 +71,23 @@ namespace TownOfUsEdited.Patches
                 role == "Conjurer" || role == "Converter" || role == "Coven" || role == "CovenLeader" ||
                 role == "Crewmate" || role == "Crusader" || role == "Deputy" || role == "Detective" ||
                 role == "Doctor" || role == "Doomsayer" || role == "Doppelganger" || role == "Engineer" ||
-                role == "Escapist" || role == "Executioner" || role == "Fighter" || role == "Glitch"
-                || role == "Grenadier" || role == "Guard" || role == "GuardianAngel" || role == "Impostor"
-                || role == "HexMaster" || role == "Hunter" || role == "Hypnotist" || role == "Imitator"
+                role == "Escapist" || role == "Executioner" || role == "Fighter" || role == "Glitch" || 
+                role == "Grenadier" || role == "GuardianAngel" || role == "Impostor" || 
+                role == "HexMaster" || role == "Hunter" || role == "Hypnotist" || role == "Imitator"
                 || role == "Infectious" || role == "Informant" || role == "Investigator" || role == "Jailor"
                 || role == "Janitor" || role == "Jester" || role == "Juggernaut" || role == "Knight"
-                || role == "Mafioso" || role == "Manipulator" || role == "Maul"
-                || role == "Mayor" || role == "Medic" || role == "Medium" || role == "Miner"
-                || role == "Morphling" || role == "Mutant" || role == "Mystic" || role == "Noclip" || role == "Oracle"
+                || role == "Lookout" || role == "Mafioso" || role == "Manipulator" || role == "Mayor" 
+                || role == "Medic" || role == "Medium" || role == "Miner" || role == "Morphling"
+                || role == "Mutant" || role == "Mystic" || role == "Noclip" || role == "Oracle"
                 || role == "Paranoïac" || role == "Plaguebearer" || role == "Poisoner" || role == "Politician"
                 || role == "PotionMaster" || role == "Prosecutor" || role == "Reviver" || role == "Ritualist"
                 || role == "Seer" || role == "SerialKiller" || role == "Sheriff" || role == "Shifter"
-                || role == "Shooter" || role == "Snitch" || role == "SoulCollector"
-                || role == "SoulCatcher" || role == "BlackWolf" || role == "Spiritualist" || role == "Spy"
-                || role == "Survivor" || role == "Swapper" || role == "Swooper" || role == "TalkativeWolf"
+                || role == "Shooter" || role == "Snitch" || role == "SoulCollector" || role == "Spiritualist"
+                || role == "Spy" || role == "Survivor" || role == "Swapper" || role == "Swooper" 
                 || role == "TimeLord" || role == "Tracker" || role == "Transporter" || role == "Trapper"
                 || role == "Troll" || role == "Undertaker" || role == "Vampire" || role == "Vigilante"
-                || role == "Villager" || role == "Vulture" || role == "Warden" || role == "Warlock"
-                || role == "Werewolf" || role == "WhiteWolf" || role == "Witch" || role == "Sorcerer"
-                || role == "Veteran" || role == "VoodooMaster" || role == "Lookout";
+                || role == "Vulture" || role == "Warden" || role == "Warlock" || role == "Watcher" 
+                || role == "Werewolf" || role == "Witch" || role == "Veteran" || role == "VoodooMaster";
             }
             public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl sourcePlayer , ref string chatText)
             {
@@ -268,7 +266,7 @@ namespace TownOfUsEdited.Patches
                 {
                     if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                     {
-                        chatText = "<b><size=3>UP</size></b>\n\nThe command \"/up\" allows you to choose any role in the game.\nThe host can freely enable / disable this command whenever they want using settings.\nBut, this command only works in Classic / Werewolf gamemodes. It also won't apply if the selected role isn't turned on by the host.\nAll players can see which roles have been chosen during the game using \"/allup\".\nTo use this command, you need to make sure to type the name of the role correctly and without space, the role must have a maj (ex: SerialKiller, Sheriff...).";
+                        chatText = "<b><size=3>UP</size></b>\n\nThe command \"/up\" allows you to choose any role in the game.\nThe host can freely enable / disable this command whenever they want using settings.\nBut, this command only works in Classic gamemodes. It also won't apply if the selected role isn't turned on by the host.\nAll players can see which roles have been chosen during the game using \"/allup\".\nTo use this command, you need to make sure to type the name of the role correctly and without space, the role must have a maj (ex: SerialKiller, Sheriff...).";
                         system = true;
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
@@ -296,9 +294,9 @@ namespace TownOfUsEdited.Patches
                             chatText = "You can only use this command in lobby!";
                             error = true;
                         }
-                        else if (CustomGameOptions.GameMode != GameMode.Classic && CustomGameOptions.GameMode != GameMode.Werewolf)
+                        else if (CustomGameOptions.GameMode != GameMode.Classic)
                         {
-                            chatText = "This command can only be used on Classic / Werewolf gamemodes.";
+                            chatText = "This command can only be used on Classic gamemodes.";
                             error = true;
                         }
                         else if (CheckRole(chatText[4..]))
@@ -753,7 +751,7 @@ namespace TownOfUsEdited.Patches
                 ColorMapping.Add("\n<b>Impostor Ghost</b>\n", Palette.ImpostorRed);
                 if (CustomGameOptions.BlinderOn > 0) ColorMapping.Add("Blinder", Colors.Impostor);
                 if (CustomGameOptions.FreezerOn > 0) ColorMapping.Add("Freezer", Colors.Impostor);
-                if (CustomGameOptions.SpiritOn > 0) ColorMapping.Add("Spirit", Colors.Impostor);
+                if (CustomGameOptions.WraithOn > 0) ColorMapping.Add("Wraith", Colors.Impostor);
                 ColorMapping.Add("\n<b>Impostor Killing</b>\n", Palette.ImpostorRed);
                 if (CustomGameOptions.AssassinOn > 0 && CustomGameOptions.AssassinImpostorRole) ColorMapping.Add("Assassin", Colors.Impostor);
                 if (CustomGameOptions.BomberOn > 0) ColorMapping.Add("Bomber", Colors.Impostor);

@@ -31,7 +31,7 @@ using TownOfUsEdited.ImpostorRoles.BlinderMod;
 using TownOfUsEdited.ImpostorRoles.ConverterMod;
 using TownOfUsEdited.ImpostorRoles.FreezerMod;
 using TownOfUsEdited.ImpostorRoles.MinerMod;
-using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.ImpostorRoles.WraithMod;
 using TownOfUsEdited.ImpostorRoles.TraitorMod;
 using TownOfUsEdited.ImpostorRoles.WitchMod;
 using TownOfUsEdited.Modifiers.AssassinMod;
@@ -51,7 +51,6 @@ using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
 using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
 using TownOfUsEdited.Roles;
 using TownOfUsEdited.Roles.Modifiers;
-using TownOfUsEdited.WerewolfRoles.TalkativeWolfMod.ChatPatch;
 using UnityEngine;
 using AllowExtraVotes = TownOfUsEdited.CrewmateRoles.ProsecutorMod.AllowExtraVotes;
 using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
@@ -1000,18 +999,7 @@ namespace TownOfUsEdited
                 }
             }
 
-            if (CustomGameOptions.GameMode == GameMode.Cultist)
-            {
-                impRoles.Clear();
-                ImpostorRoles.Clear();
-                ImpostorRoles.Add((typeof(Converter), 100, true));
-                ImpostorRoles.SortRoles(1);
-                impRoles.AddRange(ImpostorRoles);
-                coven.Clear();
-                CrewmateRoles.SortRoles(crewmates.Count);
-                crewRoles.AddRange(CrewmateRoles);
-            }
-            else if (CustomGameOptions.GameMode == GameMode.Classic)
+            if (CustomGameOptions.GameMode == GameMode.Classic)
             {
                 // Roles have already been sorted for Classic mode.
                 // So just add in the neutral roles.
@@ -1206,137 +1194,6 @@ namespace TownOfUsEdited
             }
         }
 
-        private static void GenEachRoleWerewolf(List<NetworkedPlayerInfo> infected, int impsCount)
-        {
-            var crewmates = Utils.GetPlayers(infected);
-            var impostors = new List<PlayerControl>();
-            // I do not shuffle impostors/crewmates because roles should be shuffled before they are assigned to them anyway.
-            // Assigning shuffled roles across a shuffled list may mess with the statistics? I dunno, I didn't major in math.
-            // One Fisher-Yates shuffle should have statistically equal permutation probability on its own, anyway.
-
-            var crewRoles = new List<(Type, int, bool)>();
-            var impRoles = new List<(Type, int, bool)>();
-
-            //Crew Roles
-            if (CustomGameOptions.VillagerOn > 0) crewRoles.Add((typeof(Villager), CustomGameOptions.VillagerOn, true));
-            if (CustomGameOptions.SorcererOn > 0) crewRoles.Add((typeof(Sorcerer), CustomGameOptions.SorcererOn, true));
-            if (CustomGameOptions.WerewolfSeerOn > 0) crewRoles.Add((typeof(Seer), CustomGameOptions.WerewolfSeerOn, true));
-            if (CustomGameOptions.WerewolfProsecutorOn > 0) crewRoles.Add((typeof(Prosecutor), CustomGameOptions.WerewolfProsecutorOn, true));
-            if (CustomGameOptions.WerewolfMayorOn > 0) crewRoles.Add((typeof(Mayor), CustomGameOptions.WerewolfMayorOn, true));
-            if (CustomGameOptions.SoulCatcherOn > 0) crewRoles.Add((typeof(SoulCatcher), CustomGameOptions.SoulCatcherOn, true));
-            if (CustomGameOptions.WerewolfChameleonOn > 0) crewRoles.Add((typeof(Chameleon), CustomGameOptions.ChameleonOn, true));
-            if (CustomGameOptions.GuardOn > 0) crewRoles.Add((typeof(Guard), CustomGameOptions.GuardOn, true));
-            if (CustomGameOptions.WerewolfSheriffOn > 0) crewRoles.Add((typeof(Sheriff), CustomGameOptions.WerewolfSheriffOn, true));
-            if (CustomGameOptions.WerewolfParanoïacOn > 0) crewRoles.Add((typeof(Paranoïac), CustomGameOptions.WerewolfParanoïacOn, true));
-
-            //Neutral Roles (Added to Crew list since there's only one)
-            if (CustomGameOptions.WhiteWolfOn > 0) crewRoles.Add((typeof(WhiteWolf), CustomGameOptions.WhiteWolfOn, true));
-
-            //Impo Roles
-            if (CustomGameOptions.BlackWolfOn > 0) impRoles.Add((typeof(BlackWolf), CustomGameOptions.BlackWolfOn, true));
-            if (CustomGameOptions.BasicWerewolfOn > 0) impRoles.Add((typeof(Werewolf), CustomGameOptions.BasicWerewolfOn, true));
-            if (CustomGameOptions.TalkativeWolfOn > 0) impRoles.Add((typeof(TalkativeWolf), CustomGameOptions.TalkativeWolfOn, true));
-
-            // Generate Spectator role for host
-            if (CustomGameOptions.SpectateHost)
-            {
-                foreach (var player in PlayerControl.AllPlayerControls)
-                {
-                    if (player.Data == GameData.Instance.GetHost())
-                    {
-                        Role.GenRole<Role>(typeof(Spectator), player);
-                        crewmates.Remove(player);
-                    }
-                }
-            }
-
-            if (CustomGameOptions.SpectateHost)
-            {
-                if (Upped.Keys.Any(x => x.Data == GameData.Instance.GetHost()))
-                {
-                    Upped.Remove(Upped.Keys.FirstOrDefault(x => x.Data == GameData.Instance.GetHost()));
-                }
-            }
-
-            var uppedPlayers = Upped;
-
-            while (uppedPlayers.Count > 0 && CustomGameOptions.GameMode == GameMode.Werewolf && CustomGameOptions.AllowUp)
-            {
-                var players = Upped.Keys.ToArray();
-                foreach (var pc in players)
-                {
-                    Upped.TryGetValue(pc, out var roleName);
-                    var newRoleCrew = CrewmateRoles.Any(x => x.Item1.Name == roleName);
-                    if (newRoleCrew)
-                    {
-                        Role.GenRole<Role>(CrewmateRoles.FirstOrDefault(x => x.Item1.Name == roleName).Item1, pc);
-                        uppedPlayers.Remove(pc);
-                        CrewmateRoles.Remove(CrewmateRoles.FirstOrDefault(x => x.Item1.Name == roleName));
-                        crewmates.Remove(pc);
-                    }
-                    else if (roleName == "Villager")
-                    {
-                        Role.GenRole<Role>(typeof(Villager), pc);
-                        uppedPlayers.Remove(pc);
-                        crewmates.Remove(pc);
-                    }
-                    var newRoleImpo = ImpostorRoles.Any(x => x.Item1.Name == roleName);
-                    if (newRoleImpo)
-                    {
-                        Role.GenRole<Role>(ImpostorRoles.FirstOrDefault(x => x.Item1.Name == roleName).Item1, pc);
-                        uppedPlayers.Remove(pc);
-                        ImpostorRoles.Remove(ImpostorRoles.FirstOrDefault(x => x.Item1.Name == roleName));
-                        crewmates.Remove(pc);
-                        impsCount--;
-                    }
-                    else if (roleName == "Werewolf")
-                    {
-                        Role.GenRole<Role>(typeof(Werewolf), pc);
-                        uppedPlayers.Remove(pc);
-                        crewmates.Remove(pc);
-                        impsCount--;
-                    }
-                    if (uppedPlayers.ContainsKey(pc))
-                    {
-                        uppedPlayers.Remove(pc);
-                    }
-                }
-            }
-            while (impsCount > 0 && crewmates.Count > 0)
-            {
-                var rand = UnityEngine.Random.RandomRangeInt(0, crewmates.Count);
-                var pc = crewmates[rand];
-                impostors.Add(pc);
-                crewmates.Remove(pc);
-                impsCount -= 1;
-            }
-
-            crewRoles.SortRoles(crewmates.Count);
-            impRoles.SortRoles(impostors.Count);
-
-            // Shuffle roles before handing them out.
-            // This should ensure a statistically equal chance of all permutations of roles.
-            crewRoles.Shuffle();
-            impRoles.Shuffle();
-
-            // Hand out appropriate roles to crewmates and impostors.
-            foreach (var (type, _, unique) in crewRoles)
-            {
-                Role.GenRole<Role>(type, crewmates);
-            }
-            foreach (var (type, _, unique) in impRoles)
-            {
-                Role.GenRole<Role>(type, impostors);
-            }
-
-            // Assign villager / werewolf roles to anyone who did not receive a role.
-            foreach (var crewmate in crewmates)
-                Role.GenRole<Role>(typeof(Villager), crewmate);
-
-            foreach (var impostor in impostors)
-                Role.GenRole<Role>(typeof(Werewolf), impostor);
-        }
-
         private static void GenEachRoleChaos(List<NetworkedPlayerInfo> infected)
         {
             var players = Utils.GetPlayers(infected);
@@ -1467,7 +1324,7 @@ namespace TownOfUsEdited
                                 Role.ImpostorWins = false;
                                 Role.CrewmateWins = false;
                                 Role.ForceGameEnd = false;
-                                SetSpirit.WillBeSpirit = null;
+                                SetWraith.WillBeWraith = null;
                                 SetBlinder.WillBeBlinder = null;
                                 SetFreezer.WillBeFreezer = null;
                                 SetGuardian.WillBeGuardian = null;
@@ -1589,13 +1446,6 @@ namespace TownOfUsEdited
                                 Bite.Convert(newVamp);
                                 break;
 
-                            case CustomRPC.WerewolfConvert:
-                                var blackwolf = Utils.PlayerById(reader.ReadByte());
-                                var blackwolfRole = Role.GetRole<BlackWolf>(blackwolf);
-                                var newwolf = Utils.PlayerById(reader.ReadByte());
-                                blackwolfRole.Convert(newwolf);
-                                break;
-
                             case CustomRPC.SKConvert:
                                 var newsk = Utils.PlayerById(reader.ReadByte());
                                 SerialKiller.Convert(newsk);
@@ -1617,19 +1467,6 @@ namespace TownOfUsEdited
                                 crusRole.CrusadedPlayer = null;
                                 break;
 
-                            case CustomRPC.UpdateGuard:
-                                var guard = Utils.PlayerById(reader.ReadByte());
-                                var guardRole = Role.GetRole<Guard>(guard);
-                                guardRole.ProtectedPlayer = null;
-                                break;
-
-                            case CustomRPC.SetGuard:
-                                var guardPlayer = Utils.PlayerById(reader.ReadByte());
-                                var guardedPlayer = Utils.PlayerById(reader.ReadByte());
-                                var guardRole1 = Role.GetRole<Guard>(guardPlayer);
-                                guardRole1.ProtectedPlayer = guardedPlayer;
-                                break;
-
                             case CustomRPC.DoctorPopUp:
                                 var revivedPlayer = Utils.PlayerById(reader.ReadByte());
                                 if (PlayerControl.LocalPlayer == revivedPlayer)
@@ -1645,21 +1482,10 @@ namespace TownOfUsEdited
                                 jailorRole1.JailedPlayer = jailedPlayer;
                                 break;
 
-                            case CustomRPC.SpiritKill:
-                                var spiritPlayer1 = Utils.PlayerById(reader.ReadByte());
+                            case CustomRPC.WraithKill:
+                                var wraithPlayer1 = Utils.PlayerById(reader.ReadByte());
                                 var toDie6 = Utils.PlayerById(reader.ReadByte());
-                                Utils.MurderPlayer(spiritPlayer1, toDie6, false);
-                                break;
-
-                            case CustomRPC.SetTalkativeWord:
-                                var word = reader.ReadString();
-                                ChatPatch.Word = word;
-                                var impos = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(Faction.Impostors)).ToArray();
-                                foreach (var impPlayer in impos)
-                                {
-                                    var playerResults = $"Today's word is {word}, if the Talkative Wolf doesn't say it before the day ends, he will die!";
-                                    if (!string.IsNullOrWhiteSpace(playerResults) && impPlayer == PlayerControl.LocalPlayer) HudManager.Instance.Chat.AddChat(impPlayer, playerResults);
-                                }
+                                Utils.MurderPlayer(wraithPlayer1, toDie6, false);
                                 break;
 
                             case CustomRPC.SetCrusade:
@@ -1803,24 +1629,6 @@ namespace TownOfUsEdited
                                         }
                                         break;
                                 }
-                                break;
-
-                            case CustomRPC.WerewolfRampage:
-                                readByte = reader.ReadByte();
-                                var seekerPlayer1 = Utils.PlayerById(readByte);
-                                var werewolf = Role.GetRole<Werewolf>(seekerPlayer1);
-                                seekerPlayer1.MyPhysics.SetBodyType(PlayerBodyTypes.Seeker);
-                                if (werewolf.Rampaged == true && MeetingHud.Instance)
-                                {
-                                    seekerPlayer1.MyPhysics.SetBodyType(PlayerBodyTypes.Normal);
-                                    werewolf.Rampaged = false;
-                                }
-                                break;
-
-                            case CustomRPC.WerewolfUnRampage:
-                                readByte = reader.ReadByte();
-                                var SeekerPlayer1 = Utils.PlayerById(readByte);
-                                SeekerPlayer1.MyPhysics.SetBodyType(PlayerBodyTypes.Normal);
                                 break;
 
                             case CustomRPC.SetSwaps:
@@ -1968,10 +1776,6 @@ namespace TownOfUsEdited
                                 break;
                             case CustomRPC.CovenWin:
                                 Role.CovenWins = true;
-                                break;
-                            case CustomRPC.WhiteWolfWin:
-                                var whitewolf = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.WhiteWolf);
-                                ((WhiteWolf)whitewolf)?.Wins();
                                 break;
                             case CustomRPC.MutantWin:
                                 var Mutant = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Mutant);
@@ -2310,8 +2114,8 @@ namespace TownOfUsEdited
                                 ((SoulCollector)soulCollector)?.Wins();
                                 break;
                             case CustomRPC.WerewolfWin:
-                                var theWerewolfTheRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Maul);
-                                ((Maul)theWerewolfTheRole)?.Wins();
+                                var theWerewolfTheRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Werewolf);
+                                ((Werewolf)theWerewolfTheRole)?.Wins();
                                 break;
                             case CustomRPC.PlaguebearerWin:
                                 var thePlaguebearerTheRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Plaguebearer);
@@ -2358,24 +2162,6 @@ namespace TownOfUsEdited
                                         Coroutines.Start(
                                             global::TownOfUsEdited.CrewmateRoles.AltruistMod.Coroutine.AltruistRevive(body,
                                                 altruistRole));
-                                    }
-
-                                break;
-                            case CustomRPC.SorcererRevive:
-                                var sorcererPlayer = Utils.PlayerById(reader.ReadByte());
-                                var sorcererRole = Role.GetRole<Sorcerer>(sorcererPlayer);
-                                var targetbody1 = reader.ReadByte();
-                                var theDeadBodies3 = Object.FindObjectsOfType<DeadBody>();
-                                foreach (var body in theDeadBodies3)
-                                    if (body.ParentId == targetbody1)
-                                    {
-                                        if (body.ParentId == PlayerControl.LocalPlayer.PlayerId)
-                                            Coroutines.Start(Utils.FlashCoroutine(sorcererRole.Color,
-                                                1f, 0.5f));
-
-                                        Coroutines.Start(
-                                            global::TownOfUsEdited.WerewolfRoles.SorcererMod.Coroutine.SorcererRevive(body,
-                                                sorcererRole));
                                     }
 
                                 break;
@@ -2580,9 +2366,9 @@ namespace TownOfUsEdited
                                 readByte = reader.ReadByte();
                                 SetGuardian.WillBeGuardian = Utils.PlayerById(readByte);
                                 break;
-                            case CustomRPC.SetSpirit:
+                            case CustomRPC.SetWraith:
                                 readByte = reader.ReadByte();
-                                SetSpirit.WillBeSpirit = Utils.PlayerById(readByte);
+                                SetWraith.WillBeWraith = Utils.PlayerById(readByte);
                                 break;
                             case CustomRPC.SetBlinder:
                                 readByte = reader.ReadByte();
@@ -2598,11 +2384,11 @@ namespace TownOfUsEdited
                                 if (PlayerControl.LocalPlayer == haunterPlayer) HudManager.Instance.AbilityButton.gameObject.SetActive(true);
                                 haunterPlayer.Exiled();
                                 break;
-                            case CustomRPC.CatchSpirit:
-                                var spiritPlayer = Utils.PlayerById(reader.ReadByte());
-                                Role.GetRole<Spirit>(spiritPlayer).Caught = true;
-                                if (PlayerControl.LocalPlayer == spiritPlayer) HudManager.Instance.AbilityButton.gameObject.SetActive(true);
-                                spiritPlayer.Exiled();
+                            case CustomRPC.CatchWraith:
+                                var wraithPlayer = Utils.PlayerById(reader.ReadByte());
+                                Role.GetRole<Wraith>(wraithPlayer).Caught = true;
+                                if (PlayerControl.LocalPlayer == wraithPlayer) HudManager.Instance.AbilityButton.gameObject.SetActive(true);
+                                wraithPlayer.Exiled();
                                 break;
                             case CustomRPC.SetTraitor:
                                 readByte = reader.ReadByte();
@@ -2775,10 +2561,6 @@ namespace TownOfUsEdited
                                 jailorRole2.JailedPlayer = null;
                                 jailorRole2.JailCell.Destroy();
                                 AssassinKill.MurderPlayer(executed, killer3);
-                                break;
-                            case CustomRPC.TalkWolfDie:
-                                var talkwolf = Utils.PlayerById(reader.ReadByte());
-                                AssassinKill.MurderPlayer(talkwolf, talkwolf);
                                 break;
                             case CustomRPC.SendCustomChat:
                                 var sender = Utils.PlayerById(reader.ReadByte());
@@ -3087,11 +2869,11 @@ namespace TownOfUsEdited
 
                 // Get Impostors Count
                 int __result = 0;
-                if (CustomGameOptions.GameMode == GameMode.Cultist || CustomGameOptions.GameMode == GameMode.Chaos)
+                if (CustomGameOptions.GameMode == GameMode.Chaos)
                 {
                     __result = 1;
                 }
-                else if ((CustomGameOptions.CovenReplaceImps && CustomGameOptions.GameMode != GameMode.Cultist && CustomGameOptions.GameMode != GameMode.Chaos && CustomGameOptions.GameMode != GameMode.Werewolf) || CustomGameOptions.GameMode == GameMode.BattleRoyale)
+                else if ((CustomGameOptions.CovenReplaceImps && CustomGameOptions.GameMode != GameMode.Chaos) || CustomGameOptions.GameMode == GameMode.BattleRoyale)
                 {
                     __result = 0;
                 }
@@ -3164,7 +2946,7 @@ namespace TownOfUsEdited
                 Role.ImpostorWins = false;
                 Role.CrewmateWins = false;
                 Role.ForceGameEnd = false;
-                SetSpirit.WillBeSpirit = null;
+                SetWraith.WillBeWraith = null;
                 SetFreezer.WillBeFreezer = null;
                 SetBlinder.WillBeBlinder = null;
                 SetGuardian.WillBeGuardian = null;
@@ -3225,8 +3007,7 @@ namespace TownOfUsEdited
                     TraitorOn = false;
                 }
 
-                if (CustomGameOptions.GameMode == GameMode.Classic || CustomGameOptions.GameMode == GameMode.Cultist
-                || CustomGameOptions.GameMode == GameMode.RoleList)
+                if (CustomGameOptions.GameMode == GameMode.Classic || CustomGameOptions.GameMode == GameMode.RoleList)
                 {
                     #region Crewmate Roles
                     if (CustomGameOptions.CrewmateOn > 0)
@@ -3418,7 +3199,7 @@ namespace TownOfUsEdited
                         NeutralKillingRoles.Add((typeof(Attacker), CustomGameOptions.AttackerOn, true));
 
                     if (CustomGameOptions.WerewolfOn > 0)
-                        NeutralKillingRoles.Add((typeof(Maul), CustomGameOptions.WerewolfOn, true));
+                        NeutralKillingRoles.Add((typeof(Werewolf), CustomGameOptions.WerewolfOn, true));
 
                     if (CustomGameOptions.VampireOn > 0)
                         NeutralKillingRoles.Add((typeof(Vampire), CustomGameOptions.VampireOn, true));
@@ -3575,7 +3356,7 @@ namespace TownOfUsEdited
                     if (Check(CustomGameOptions.ButtonBarryOn) && GameOptionsManager.Instance.currentNormalGameOptions.NumEmergencyMeetings > 0)
                         GlobalModifiers.Add((typeof(ButtonBarry), CustomGameOptions.ButtonBarryOn));
 
-                    if (Check(CustomGameOptions.LoversOn) && CustomGameOptions.GameMode != GameMode.Cultist)
+                    if (Check(CustomGameOptions.LoversOn))
                         GlobalModifiers.Add((typeof(Lover), CustomGameOptions.LoversOn));
 
                     if (Check(CustomGameOptions.SleuthOn))
@@ -3845,8 +3626,7 @@ namespace TownOfUsEdited
                     }
                 }
 
-                if (CustomGameOptions.GameMode == GameMode.Werewolf) GenEachRoleWerewolf(infected.ToList(), __result);
-                else if (CustomGameOptions.GameMode == GameMode.BattleRoyale) GenEachRoleBattleRoyale(infected.ToList());
+                if (CustomGameOptions.GameMode == GameMode.BattleRoyale) GenEachRoleBattleRoyale(infected.ToList());
                 else if (CustomGameOptions.GameMode == GameMode.Chaos) GenEachRoleChaos(infected.ToList());
                 else GenEachRole(infected.ToList(), __result);
 

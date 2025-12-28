@@ -1,6 +1,5 @@
 using HarmonyLib;
 using System.Linq;
-using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -24,28 +23,14 @@ namespace TownOfUsEdited.Patches.ImpostorRoles
             PoolablePlayer[] array = Object.FindObjectsOfType<PoolablePlayer>();
             foreach (var player in array)
             {
-                if (CustomGameOptions.GameMode == GameMode.Werewolf)
-                {
-                    player.NameText().text = "<color=#A86629FF>" + player.NameText().text + "</color>";
-                    player.SetBodyType(PlayerBodyTypes.Seeker);
-                }
-                else if (CustomGameOptions.GameMode == GameMode.Chaos)
+                if (CustomGameOptions.GameMode == GameMode.Chaos)
                 {
                     player.SetBodyType(PlayerBodyTypes.Seeker);
                 }
             }
-            if (CustomGameOptions.GameMode != GameMode.Werewolf)
-            {
-                text.text = "Impostors Win!";
-                text.color = Palette.ImpostorRed;
-                __instance.BackgroundBar.material.color = Palette.ImpostorRed;
-            }
-            else
-            {
-                text.text = "Werewolves Win!";
-                text.color = Patches.Colors.Werewolf;
-                __instance.BackgroundBar.material.color = Patches.Colors.Werewolf;
-            }
+            text.text = "Impostors Win!";
+            text.color = Palette.ImpostorRed;
+            __instance.BackgroundBar.material.color = Palette.ImpostorRed;
             var pos = __instance.WinText.transform.localPosition;
             pos.y = 1.5f;
             text.transform.position = pos;

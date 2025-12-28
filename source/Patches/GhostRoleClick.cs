@@ -27,16 +27,16 @@ namespace TownOfUsEdited
                     Utils.Rpc(CustomRPC.CatchPhantom, role.Player.PlayerId);
                 }
             }
-            else if (__instance.Is(RoleEnum.Spirit))
+            else if (__instance.Is(RoleEnum.Wraith))
             {
                 if (PlayerControl.LocalPlayer.Data.IsImpostor()) return;
                 else if (PlayerControl.LocalPlayer.Is(Faction.Madmates)) return;
-                if (tasksLeft <= CustomGameOptions.SpiritTasksRemainingClicked && nearghost)
+                if (tasksLeft <= CustomGameOptions.WraithTasksRemainingClicked && nearghost)
                 {
-                    var role = Role.GetRole<Spirit>(__instance);
+                    var role = Role.GetRole<Wraith>(__instance);
                     role.Caught = true;
                     role.Player.Exiled();
-                    Utils.Rpc(CustomRPC.CatchSpirit, role.Player.PlayerId);
+                    Utils.Rpc(CustomRPC.CatchWraith, role.Player.PlayerId);
                 }
             }
             else if (__instance.Is(RoleEnum.Haunter))

@@ -42,6 +42,12 @@ namespace TownOfUsEdited.CustomOption
                 Title = "Show Welcome Message",
                 OnClick = () => { return TownOfUsEdited.ShowWelcomeMessage.Value = !TownOfUsEdited.ShowWelcomeMessage.Value; },
                 DefaultValue = TownOfUsEdited.ShowWelcomeMessage.Value
+            },
+            new()
+            {
+                Title = "Don't Show Cosmetics In Game (Client Only)",
+                OnClick = () => { return TownOfUsEdited.DontShowCosmeticsInGame.Value = !TownOfUsEdited.DontShowCosmeticsInGame.Value; },
+                DefaultValue = TownOfUsEdited.DontShowCosmeticsInGame.Value
             }
         };
 

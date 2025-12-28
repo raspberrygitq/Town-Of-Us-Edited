@@ -2,7 +2,7 @@ using AmongUs.GameOptions;
 using HarmonyLib;
 using System;
 using TownOfUsEdited.CrewmateRoles.HaunterMod;
-using TownOfUsEdited.ImpostorRoles.SpiritMod;
+using TownOfUsEdited.ImpostorRoles.WraithMod;
 using TownOfUsEdited.NeutralRoles.PhantomMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
@@ -44,13 +44,13 @@ namespace TownOfUsEdited.Patches
                     var phantom = Role.GetRole<Phantom>(PlayerControl.LocalPlayer);
                     if (phantom.Caught) dead = true;
                 }
-                else if (PlayerControl.LocalPlayer.Is(RoleEnum.Spirit))
+                else if (PlayerControl.LocalPlayer.Is(RoleEnum.Wraith))
                 {
-                    var spirit = Role.GetRole<Spirit>(PlayerControl.LocalPlayer);
-                    if (spirit.Caught) dead = true;
+                    var wraith = Role.GetRole<Wraith>(PlayerControl.LocalPlayer);
+                    if (wraith.Caught) dead = true;
                 }
                 else if (PlayerControl.LocalPlayer == SetHaunter.WillBeHaunter || PlayerControl.LocalPlayer == SetPhantom.WillBePhantom
-                || PlayerControl.LocalPlayer == SetSpirit.WillBeSpirit) dead = false;
+                || PlayerControl.LocalPlayer == SetWraith.WillBeWraith) dead = false;
                 // this works because if they are already haunter/phantom the code before it will run
                 else dead = true;
             }
