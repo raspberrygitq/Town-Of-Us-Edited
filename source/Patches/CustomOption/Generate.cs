@@ -1293,53 +1293,53 @@ namespace TownOfUsEdited.CustomOption
             BattleDisableVent = new CustomToggleOption(num++, MultiMenu.main, "Disable Vents", false);
 
             BetterSkeldSettings =
-                new CustomHeaderOption(num++, MultiMenu.map, "Better Skeld Settings");
-            BSVentImprovements = new CustomToggleOption(num++, MultiMenu.map, "Better Skeld Vent Layout", false);
+                new CustomHeaderOption(num++, MultiMenu.main, "Better Skeld Settings");
+            BSVentImprovements = new CustomToggleOption(num++, MultiMenu.main, "Better Skeld Vent Layout", false);
 
             BetterPolusSettings =
-                new CustomHeaderOption(num++, MultiMenu.map, "Better Polus Settings");
-            VentImprovements = new CustomToggleOption(num++, MultiMenu.map, "Better Polus Vent Layout", false);
-            VitalsLab = new CustomToggleOption(num++, MultiMenu.map, "Vitals Moved To Lab", false);
-            ColdTempDeathValley = new CustomToggleOption(num++, MultiMenu.map, "Cold Temp Moved To Death Valley", false);
+                new CustomHeaderOption(num++, MultiMenu.main, "Better Polus Settings");
+            VentImprovements = new CustomToggleOption(num++, MultiMenu.main, "Better Polus Vent Layout", false);
+            VitalsLab = new CustomToggleOption(num++, MultiMenu.main, "Vitals Moved To Lab", false);
+            ColdTempDeathValley = new CustomToggleOption(num++, MultiMenu.main, "Cold Temp Moved To Death Valley", false);
             WifiChartCourseSwap =
-                new CustomToggleOption(num++, MultiMenu.map, "Reboot Wifi And Chart Course Swapped", false);
+                new CustomToggleOption(num++, MultiMenu.main, "Reboot Wifi And Chart Course Swapped", false);
             MoveToiletVent =
-                new CustomToggleOption(num++, MultiMenu.map, "Move Toilet Vent", false);
+                new CustomToggleOption(num++, MultiMenu.main, "Move Toilet Vent", false);
 
             BetterAirshipSettings =
-                new CustomHeaderOption(num++, MultiMenu.map, "Better Airship Settings");
+                new CustomHeaderOption(num++, MultiMenu.main, "Better Airship Settings");
             BAMoveAdmin =
-                 new CustomStringOption(num++, MultiMenu.map, "Move Admin Table", new[] { "Don't Move", "Cockpit", "Main Hall" });
+                 new CustomStringOption(num++, MultiMenu.main, "Move Admin Table", new[] { "Don't Move", "Cockpit", "Main Hall" });
             BAMoveElectrical =
-                 new CustomStringOption(num++, MultiMenu.map, "Move Electrical Outlet", new[] { "Don't Move", "Vault", "Electrical" });
-            AirshipPolusDoors = new CustomToggleOption(num++, MultiMenu.map, "Airship Doors Are Polus Doors", false);
-            BAMoveVitals = new CustomToggleOption(num++, MultiMenu.map, "Move Airship Vitals", false);
-            BAMoveFuel = new CustomToggleOption(num++, MultiMenu.map, "Move Airship Fuel", false);
-            BAMoveDivert = new CustomToggleOption(num++, MultiMenu.map, "Move Divert Power", false);
+                 new CustomStringOption(num++, MultiMenu.main, "Move Electrical Outlet", new[] { "Don't Move", "Vault", "Electrical" });
+            AirshipPolusDoors = new CustomToggleOption(num++, MultiMenu.main, "Airship Doors Are Polus Doors", false);
+            BAMoveVitals = new CustomToggleOption(num++, MultiMenu.main, "Move Airship Vitals", false);
+            BAMoveFuel = new CustomToggleOption(num++, MultiMenu.main, "Move Airship Fuel", false);
+            BAMoveDivert = new CustomToggleOption(num++, MultiMenu.main, "Move Divert Power", false);
 
-            MapSettings = new CustomHeaderOption(num++, MultiMenu.map, "Map Settings");
-            RandomMapEnabled = new CustomToggleOption(num++, MultiMenu.map, "Choose Random Map", false);
-            RandomMapSkeld = new CustomNumberOption(num++, MultiMenu.map, "Skeld Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapMira = new CustomNumberOption(num++, MultiMenu.map, "Mira Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapPolus = new CustomNumberOption(num++, MultiMenu.map, "Polus Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapAirship = new CustomNumberOption(num++, MultiMenu.map, "Airship Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapFungle = new CustomNumberOption(num++, MultiMenu.map, "Fungle Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapSubmerged = new CustomNumberOption(num++, MultiMenu.map, "Submerged Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            RandomMapLevelImpostor = new CustomNumberOption(num++, MultiMenu.map, "Level Impostor Chance", 0f, 0f, 100f, 10f, PercentFormat);
-            SmallMapHalfVision = new CustomToggleOption(num++, MultiMenu.map, "Half Vision On Skeld/Mira HQ", false);
-            AutoAdjustCooldowns = new CustomToggleOption(num++, MultiMenu.map, "Auto Adjust Cooldowns And Tasks", false);
+            MapSettings = new CustomHeaderOption(num++, MultiMenu.main, "Map Settings");
+            RandomMapEnabled = new CustomToggleOption(num++, MultiMenu.main, "Choose Random Map", false);
+            RandomMapSkeld = new CustomNumberOption(num++, MultiMenu.main, "Skeld Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapMira = new CustomNumberOption(num++, MultiMenu.main, "Mira Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapPolus = new CustomNumberOption(num++, MultiMenu.main, "Polus Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapAirship = new CustomNumberOption(num++, MultiMenu.main, "Airship Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapFungle = new CustomNumberOption(num++, MultiMenu.main, "Fungle Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapSubmerged = new CustomNumberOption(num++, MultiMenu.main, "Submerged Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            RandomMapLevelImpostor = new CustomNumberOption(num++, MultiMenu.main, "Level Impostor Chance", 0f, 0f, 100f, 10f, PercentFormat);
+            SmallMapHalfVision = new CustomToggleOption(num++, MultiMenu.main, "Half Vision On Skeld/Mira HQ", false);
+            AutoAdjustCooldowns = new CustomToggleOption(num++, MultiMenu.main, "Auto Adjust Cooldowns And Tasks", false);
             SmallMapDecreasedCooldown =
-                new CustomNumberOption(num++, MultiMenu.map, "Mira HQ Decreased Cooldowns", 0f, 0f, 7.5f, 2.5f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.main, "Mira HQ Decreased Cooldowns", 0f, 0f, 7.5f, 2.5f, CooldownFormat);
             LargeMapIncreasedCooldown =
-                new CustomNumberOption(num++, MultiMenu.map, "Airship/Submerged Increased Cooldowns", 0f, 0f, 7.5f, 2.5f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.main, "Airship/Submerged Increased Cooldowns", 0f, 0f, 7.5f, 2.5f, CooldownFormat);
             SmallMapIncreasedShortTasks =
-                 new CustomNumberOption(num++, MultiMenu.map, "Skeld/Mira HQ Increased Short Tasks", 0, 0, 5, 1);
+                 new CustomNumberOption(num++, MultiMenu.main, "Skeld/Mira HQ Increased Short Tasks", 0, 0, 5, 1);
             SmallMapIncreasedLongTasks =
-                 new CustomNumberOption(num++, MultiMenu.map, "Skeld/Mira HQ Increased Long Tasks", 0, 0, 3, 1);
+                 new CustomNumberOption(num++, MultiMenu.main, "Skeld/Mira HQ Increased Long Tasks", 0, 0, 3, 1);
             LargeMapDecreasedShortTasks =
-                 new CustomNumberOption(num++, MultiMenu.map, "Airship/Submerged Decreased Short Tasks", 0, 0, 5, 1);
+                 new CustomNumberOption(num++, MultiMenu.main, "Airship/Submerged Decreased Short Tasks", 0, 0, 5, 1);
             LargeMapDecreasedLongTasks =
-                 new CustomNumberOption(num++, MultiMenu.map, "Airship/Submerged Decreased Long Tasks", 0, 0, 3, 1);
+                 new CustomNumberOption(num++, MultiMenu.main, "Airship/Submerged Decreased Long Tasks", 0, 0, 3, 1);
 
             CustomGameSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Custom Game Settings");
