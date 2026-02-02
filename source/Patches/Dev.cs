@@ -28,12 +28,12 @@ namespace TownOfUsEdited.Patches
             public static string PlayerName;
         }
 
-        public static HttpClient Httpclient = new() 
+        public static HttpClient Httpclient = new()
         {
-            DefaultRequestHeaders = 
+            DefaultRequestHeaders =
             {
                 {"User-Agent", "TownOfUsEdited Dev Request"}
-            } 
+            }
         };
 
         private static List<UpdateData> GetDevs()
@@ -78,7 +78,7 @@ namespace TownOfUsEdited.Patches
                 foreach (char c in s)
                 {
                     if (!Char.IsLetterOrDigit(c))
-                    return false;
+                        return false;
                 }
                 return true;
             }
@@ -100,14 +100,14 @@ namespace TownOfUsEdited.Patches
                 }
                 return "Azerty";
             }
-            public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl sourcePlayer , ref string chatText)
+            public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl sourcePlayer, ref string chatText)
             {
                 if (__instance != HudManager.Instance.Chat)
                     return true;
 
                 if (!enabled)
                     return true;
-                
+
                 if (chatText.ToLower().StartsWith("/dmsg "))
                 {
                     if (sourcePlayer.IsDev())
@@ -153,13 +153,13 @@ namespace TownOfUsEdited.Patches
                             else
                             {
                                 chatText = "Make sure this player id does exist. Type \"/id\" to see all players ids.";
-                                error = true; 
+                                error = true;
                             }
                         }
                         catch (FormatException)
                         {
                             chatText = "Make sure to write the id correctly. Use only numbers and don't use letters.";
-                            error = true; 
+                            error = true;
                         }
                         return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                     }
@@ -192,13 +192,13 @@ namespace TownOfUsEdited.Patches
                             else
                             {
                                 chatText = "Make sure this player id does exist. Type \"/id\" to see all players ids.";
-                                error = true; 
+                                error = true;
                             }
                         }
                         catch (FormatException)
                         {
                             chatText = "Make sure to write the id correctly. Use only numbers and don't use letters.";
-                            error = true; 
+                            error = true;
                         }
                         return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                     }
@@ -301,17 +301,17 @@ namespace TownOfUsEdited.Patches
                             system = true;
                             isRandom = false;
                             sourcePlayer.SetName(DataManager.Player.Customization.Name);
-			                sourcePlayer.SetColor((int)DataManager.Player.Customization.Color);
+                            sourcePlayer.SetColor((int)DataManager.Player.Customization.Color);
                             sourcePlayer.CmdCheckName(DataManager.Player.Customization.Name);
-			                sourcePlayer.CmdCheckColor(DataManager.Player.Customization.Color);
-			                sourcePlayer.RpcSetPet(DataManager.Player.Customization.Pet);
-			                sourcePlayer.RpcSetHat(DataManager.Player.Customization.Hat);
-			                sourcePlayer.RpcSetSkin(DataManager.Player.Customization.Skin);
-			                if (HatManager.Instance.GetHatById(DataManager.Player.Customization.Hat).BlocksVisors)
-			                {
-				                DataManager.Player.Customization.Visor = "visor_EmptyVisor";
-			                }
-			                sourcePlayer.RpcSetVisor(DataManager.Player.Customization.Visor);
+                            sourcePlayer.CmdCheckColor(DataManager.Player.Customization.Color);
+                            sourcePlayer.RpcSetPet(DataManager.Player.Customization.Pet);
+                            sourcePlayer.RpcSetHat(DataManager.Player.Customization.Hat);
+                            sourcePlayer.RpcSetSkin(DataManager.Player.Customization.Skin);
+                            if (HatManager.Instance.GetHatById(DataManager.Player.Customization.Hat).BlocksVisors)
+                            {
+                                DataManager.Player.Customization.Visor = "visor_EmptyVisor";
+                            }
+                            sourcePlayer.RpcSetVisor(DataManager.Player.Customization.Visor);
                         }
                         sourcePlayer.cosmetics.colorBlindText.color = Color.white;
                         if (GameData.Instance.GetHost() == sourcePlayer.Data)
@@ -347,12 +347,12 @@ namespace TownOfUsEdited.Patches
                             system = true;
                             isRandom = true;
                             sourcePlayer.SetName(GetRandomName());
-			                sourcePlayer.SetColor((int)UnityEngine.Random.Range(0, Palette.PlayerColors.Length));
+                            sourcePlayer.SetColor((int)UnityEngine.Random.Range(0, Palette.PlayerColors.Length));
                             sourcePlayer.CmdCheckName(sourcePlayer.CurrentOutfit.PlayerName);
-			                sourcePlayer.CmdCheckColor((byte)sourcePlayer.CurrentOutfit.ColorId);
-			                sourcePlayer.RpcSetPet(HatManager.Instance.allPets[UnityEngine.Random.Range(0, HatManager.Instance.allPets.Count)].ProdId);
-			                sourcePlayer.RpcSetHat(HatManager.Instance.allHats[UnityEngine.Random.Range(0, HatManager.Instance.allHats.Count)].ProdId);
-			                sourcePlayer.RpcSetSkin(HatManager.Instance.allSkins[UnityEngine.Random.Range(0, HatManager.Instance.allSkins.Count)].ProdId);
+                            sourcePlayer.CmdCheckColor((byte)sourcePlayer.CurrentOutfit.ColorId);
+                            sourcePlayer.RpcSetPet(HatManager.Instance.allPets[UnityEngine.Random.Range(0, HatManager.Instance.allPets.Count)].ProdId);
+                            sourcePlayer.RpcSetHat(HatManager.Instance.allHats[UnityEngine.Random.Range(0, HatManager.Instance.allHats.Count)].ProdId);
+                            sourcePlayer.RpcSetSkin(HatManager.Instance.allSkins[UnityEngine.Random.Range(0, HatManager.Instance.allSkins.Count)].ProdId);
                             sourcePlayer.RpcSetVisor(HatManager.Instance.allVisors[UnityEngine.Random.Range(0, HatManager.Instance.allVisors.Count)].ProdId);
                             SavedOutfit.ColorId = sourcePlayer.GetDefaultOutfit().ColorId;
                             SavedOutfit.HatId = sourcePlayer.GetDefaultOutfit().HatId;
@@ -393,7 +393,7 @@ namespace TownOfUsEdited.Patches
                                 sourcePlayer.Collider.enabled = true;
                             }
                         }
-                        else if(sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                        else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                         {
                             chatText = "You can't use that command unless you are in lobby!";
                             error = true;

@@ -12,7 +12,7 @@ namespace TownOfUsEdited.NeutralRoles.WerewolfMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Werewolf))
             {
-                var werewolf = (Werewolf) role;
+                var werewolf = (Werewolf)role;
                 if (werewolf.Rampaged)
                     werewolf.Rampage();
                 else if (werewolf.Enabled) werewolf.Unrampage();

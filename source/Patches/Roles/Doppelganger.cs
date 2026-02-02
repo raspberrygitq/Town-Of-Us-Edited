@@ -83,14 +83,14 @@ namespace TownOfUsEdited.Roles
                 }
             }
             DeadBody deadBody2 = Object.Instantiate<DeadBody>(GameManager.Instance.deadBodyPrefab[0]);
-		    deadBody2.enabled = false;
-		    deadBody2.ParentId = (TransformedPlayer != null) ? TransformedPlayer.PlayerId : doppel.PlayerId;
+            deadBody2.enabled = false;
+            deadBody2.ParentId = (TransformedPlayer != null) ? TransformedPlayer.PlayerId : doppel.PlayerId;
             Bodies.Add(deadBody2);
             foreach (SpriteRenderer b in deadBody2.bodyRenderers)
-		    {
-			    PlayerMaterial.SetColors((TransformedPlayer != null) ? TransformedPlayer.GetDefaultOutfit().ColorId : doppel.GetDefaultOutfit().ColorId, b);
-		    }
-			PlayerMaterial.SetColors((TransformedPlayer != null) ? TransformedPlayer.GetDefaultOutfit().ColorId : doppel.GetDefaultOutfit().ColorId, deadBody2.bloodSplatter);
+            {
+                PlayerMaterial.SetColors((TransformedPlayer != null) ? TransformedPlayer.GetDefaultOutfit().ColorId : doppel.GetDefaultOutfit().ColorId, b);
+            }
+            PlayerMaterial.SetColors((TransformedPlayer != null) ? TransformedPlayer.GetDefaultOutfit().ColorId : doppel.GetDefaultOutfit().ColorId, deadBody2.bloodSplatter);
             var position = target.GetTruePosition();
             Vector2 vector = new Vector2(position.x, position.y + 0.1616f);
             deadBody2.enabled = true;

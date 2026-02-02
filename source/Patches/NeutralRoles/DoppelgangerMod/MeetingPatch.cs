@@ -88,7 +88,7 @@ namespace TownOfUsEdited.NeutralRoles.DoppelgangerMod
                         if (__instance.Player.transform.localScale != ChatBubble.PlayerNotificationScale) __instance.NameText.color = Color.white; // Sometimes its green for some reason
                         __instance.NameText.ForceMeshUpdate(true, true);
                         __instance.Xmark.enabled = false;
-			            __instance.Background.color = Palette.White;
+                        __instance.Background.color = Palette.White;
                         if (MeetingHud.Instance)
                         {
                             if (doppelVoted)
@@ -123,12 +123,12 @@ namespace TownOfUsEdited.NeutralRoles.DoppelgangerMod
                     {
                         if (player == role.Player && doppelchat)
                         {
-		                    __instance.playerInfo = role.TransformedPlayer.Data;
+                            __instance.playerInfo = role.TransformedPlayer.Data;
                             __instance.Player.UpdateFromPlayerData(role.TransformedPlayer.Data, PlayerOutfitType.Default, PlayerMaterial.MaskType.ScrollingUI, false, null, true);
-		                    __instance.Player.ToggleName(false);
-		                    __instance.maskLayer = 51 + __instance.PoolIndex;
-		                    __instance.SetMaskLayer();
-		                    __instance.SetColorblindText();
+                            __instance.Player.ToggleName(false);
+                            __instance.maskLayer = 51 + __instance.PoolIndex;
+                            __instance.SetMaskLayer();
+                            __instance.SetColorblindText();
                             doppelCosmeticsUpdated = true;
                             return false;
                         }
@@ -150,13 +150,13 @@ namespace TownOfUsEdited.NeutralRoles.DoppelgangerMod
                     if (role == null || role.Player == null || role.Player.Data.Disconnected ||
                     role.Player.Data.IsDead || role.TransformedPlayer == null) return true;
                     if (__instance.playerInfo != null && __instance.playerInfo == role.TransformedPlayer.Data)
-		            {
+                    {
                         __instance.Player.UpdateFromPlayerData(role.TransformedPlayer.Data, PlayerOutfitType.Default, PlayerMaterial.MaskType.ScrollingUI, false, null, true);
-			            __instance.SetMaskLayer();
-			            __instance.SetColorblindText();
-		            }
-		            __instance.ColorBlindName.enabled = DataManager.Settings.Accessibility.ColorBlindMode;
-		            __instance.ColorBlindName.text = __instance.Player.ColorBlindName;
+                        __instance.SetMaskLayer();
+                        __instance.SetColorblindText();
+                    }
+                    __instance.ColorBlindName.enabled = DataManager.Settings.Accessibility.ColorBlindMode;
+                    __instance.ColorBlindName.text = __instance.Player.ColorBlindName;
                     return false;
                 }
                 return true;
@@ -183,7 +183,7 @@ namespace TownOfUsEdited.NeutralRoles.DoppelgangerMod
                     if (role == null || role.Player == null || role.Player.Data.Disconnected ||
                     role.Player.Data.IsDead || role.TransformedPlayer == null) return true;
                 }
-                
+
                 if (sourcePlayer.Is(RoleEnum.Doppelganger))
                 {
                     doppelchat = true;
@@ -208,14 +208,14 @@ namespace TownOfUsEdited.NeutralRoles.DoppelgangerMod
                     if (playerInfo == role.TransformedPlayer.Data)
                     {
                         __instance.Background.sprite = ShipStatus.Instance.CosmeticsCache.GetNameplate(playerInfo.DefaultOutfit.NamePlateId).Image;
-		                __instance.PlayerIcon.UpdateFromPlayerData(role.TransformedPlayer.Data, PlayerOutfitType.Default, PlayerMaterial.MaskType.ComplexUI, false, null, true);
-		                __instance.PlayerIcon.ToggleName(false);
-		                __instance.NameText.text = playerInfo.PlayerName;
-		                __instance.LevelNumberText.text = ProgressionManager.FormatVisualLevel(playerInfo.PlayerLevel);
-		                PlayerMaterial.SetColors((int)DataManager.Player.Customization.Color, __instance.ThumbsDown);
-		                __instance.ColorBlindName.enabled = DataManager.Settings.Accessibility.ColorBlindMode;
-		                __instance.ColorBlindName.text = __instance.PlayerIcon.ColorBlindName;
-		                __instance.SetColorblindText();
+                        __instance.PlayerIcon.UpdateFromPlayerData(role.TransformedPlayer.Data, PlayerOutfitType.Default, PlayerMaterial.MaskType.ComplexUI, false, null, true);
+                        __instance.PlayerIcon.ToggleName(false);
+                        __instance.NameText.text = playerInfo.PlayerName;
+                        __instance.LevelNumberText.text = ProgressionManager.FormatVisualLevel(playerInfo.PlayerLevel);
+                        PlayerMaterial.SetColors((int)DataManager.Player.Customization.Color, __instance.ThumbsDown);
+                        __instance.ColorBlindName.enabled = DataManager.Settings.Accessibility.ColorBlindMode;
+                        __instance.ColorBlindName.text = __instance.PlayerIcon.ColorBlindName;
+                        __instance.SetColorblindText();
                         return false;
                     }
                 }
@@ -238,20 +238,20 @@ namespace TownOfUsEdited.NeutralRoles.DoppelgangerMod
                         bool flag = target == null;
                         var targetPlayer = Utils.PlayerByData(target);
                         if (target != null && targetPlayer == role.TransformedPlayer) target = role.OldTransformed.Data;
-		                UnityTelemetry.Instance.WriteMeetingStarted(flag);
-		                DebugAnalytics.Instance.Analytics.MeetingStarted(role.TransformedPlayer.Data, target != null);
-		                ShipStatus.Instance.StartMeeting(role.TransformedPlayer, target);
+                        UnityTelemetry.Instance.WriteMeetingStarted(flag);
+                        DebugAnalytics.Instance.Analytics.MeetingStarted(role.TransformedPlayer.Data, target != null);
+                        ShipStatus.Instance.StartMeeting(role.TransformedPlayer, target);
                         doppelStartedMeeting = true;
-		                if (__instance.AmOwner)
-		                {
-			                if (flag)
-			                {
-				                __instance.RemainingEmergencies--;
-				                DataManager.Player.Stats.IncrementStat(StatID.EmergenciesCalled);
-				                return false;
-			                }
-			                DataManager.Player.Stats.IncrementStat(StatID.BodiesReported);
-		                }
+                        if (__instance.AmOwner)
+                        {
+                            if (flag)
+                            {
+                                __instance.RemainingEmergencies--;
+                                DataManager.Player.Stats.IncrementStat(StatID.EmergenciesCalled);
+                                return false;
+                            }
+                            DataManager.Player.Stats.IncrementStat(StatID.BodiesReported);
+                        }
                         return false;
                     }
                     else return true;

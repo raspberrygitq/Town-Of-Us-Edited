@@ -16,7 +16,7 @@ namespace TownOfUsEdited.ImpostorRoles.WarlockMod
             if (!PlayerControl.LocalPlayer.Is(RoleEnum.Warlock)) return;
             foreach (var role in Role.GetRoles(RoleEnum.Warlock))
             {
-                var warlock = (Warlock) role;
+                var warlock = (Warlock)role;
                 if (warlock.Charging)
                     warlock.ChargePercent = warlock.ChargeUpTimer();
                 else if (warlock.UsingCharge)

@@ -11,7 +11,7 @@ namespace TownOfUsEdited.BattleRoyale.PlayerMod
     {
         public static void Postfix(EndGameManager __instance)
         {
-            var role = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Player && ((Player) x).PlayerWins);
+            var role = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Player && ((Player)x).PlayerWins);
             if (role == null) return;
             PoolablePlayer[] array = Object.FindObjectsOfType<PoolablePlayer>();
             foreach (var player in array)

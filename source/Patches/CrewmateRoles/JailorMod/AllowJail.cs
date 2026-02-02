@@ -14,7 +14,7 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
         [HarmonyPatch(typeof(PlayerVoteArea), nameof(PlayerVoteArea.VoteForMe))]
         public static class VoteForMe
         {
-            
+
             public static bool Prefix(PlayerVoteArea __instance)
             {
                 if (!PlayerControl.LocalPlayer.Is(RoleEnum.Jailor)) return true;

@@ -12,7 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.CaptainMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Captain))
             {
-                var cap = (Captain) role;
+                var cap = (Captain)role;
                 if (cap.Zooming)
                     cap.ZoomAbility();
                 else if (cap.ZoomEnabled) cap.UnZoomAbility();

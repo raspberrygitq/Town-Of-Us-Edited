@@ -15,7 +15,7 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
     {
         public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => StartImitate.ExileControllerPostfix(__instance.__4__this);
     }
-    
+
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
     public class StartImitate
     {
@@ -100,7 +100,7 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
             else if (imitatorRole == RoleEnum.Bodyguard) new Bodyguard(imi);
             else if (imitatorRole == RoleEnum.Fighter) new Fighter(imi);
 
-            
+
             else if (imitatorRole == RoleEnum.Snitch)
             {
                 var snitch = new Snitch(imi);

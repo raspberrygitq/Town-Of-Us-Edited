@@ -2,8 +2,8 @@
 
 namespace TownOfUsEdited.Patches
 {
-    class Colors {
-
+    class Colors
+    {
         // Crew Colors
         public readonly static Color Crewmate = Palette.CrewmateBlue;
         public readonly static Color Mayor = new Color(0.44f, 0.31f, 0.66f, 1f);

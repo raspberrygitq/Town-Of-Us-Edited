@@ -50,7 +50,7 @@ namespace TownOfUsEdited.Roles
         public void GetPotion()
         {
             var random = new System.Random();
-            var randomPotion = new List<string>{"Speed", "Strength", "Invisibility", "Shield"};
+            var randomPotion = new List<string> { "Speed", "Strength", "Invisibility", "Shield" };
             int index = random.Next(randomPotion.Count);
             var chosenPotion = randomPotion[index];
             randomPotion.RemoveAt(index);

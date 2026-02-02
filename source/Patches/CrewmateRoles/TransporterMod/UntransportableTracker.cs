@@ -45,7 +45,7 @@ namespace TownOfUsEdited.CrewmateRoles.TransporterMod
             }
         }
 
-        [HarmonyPatch(typeof(MovingPlatformBehaviour), nameof(MovingPlatformBehaviour.Use), new Type[] {})]
+        [HarmonyPatch(typeof(MovingPlatformBehaviour), nameof(MovingPlatformBehaviour.Use), new Type[] { })]
         public class SavePlatformPlayer
         {
             public static void Prefix(MovingPlatformBehaviour __instance)
@@ -62,7 +62,7 @@ namespace TownOfUsEdited.CrewmateRoles.TransporterMod
             }
         }
 
-        [HarmonyPatch(typeof(ZiplineBehaviour), nameof(ZiplineBehaviour.Use), new Type[] { typeof(PlayerControl), typeof(bool)})]
+        [HarmonyPatch(typeof(ZiplineBehaviour), nameof(ZiplineBehaviour.Use), new Type[] { typeof(PlayerControl), typeof(bool) })]
         public class SaveZiplinePlayer
         {
             public static void Prefix(ZiplineBehaviour __instance, [HarmonyArgument(0)] PlayerControl player, [HarmonyArgument(1)] bool fromTop)

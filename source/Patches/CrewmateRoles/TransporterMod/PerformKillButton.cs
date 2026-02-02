@@ -28,7 +28,8 @@ namespace TownOfUsEdited.CrewmateRoles.TransporterMod
                 {
                     PlayerMenu.singleton.Menu.ForceClose();
                 }
-                catch {
+                catch
+                {
                     role.TransportPlayer1 = null;
                     role.TransportPlayer2 = null;
                     List<byte> transportTargets = new List<byte>();

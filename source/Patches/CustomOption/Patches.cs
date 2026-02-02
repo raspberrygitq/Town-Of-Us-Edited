@@ -541,7 +541,8 @@ namespace TownOfUsEdited.CustomOption
                     __instance.StartCoroutine(Effects.Lerp(1f, new Action<float>(p => { tab.transform.FindChild("FontPlacer").GetComponentInChildren<TextMeshPro>().text = text; })));
                     var pTab = tab.GetComponent<PassiveButton>();
                     pTab.OnClick.RemoveAllListeners();
-                    pTab.OnClick.AddListener((System.Action)(() => {
+                    pTab.OnClick.AddListener((System.Action)(() =>
+                    {
                         __instance.ChangeTab((StringNames)target);
                     }));
                     pTab.SelectButton(false);

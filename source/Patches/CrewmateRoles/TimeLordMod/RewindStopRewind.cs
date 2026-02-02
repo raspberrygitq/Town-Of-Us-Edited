@@ -12,7 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.TimeLord))
             {
-                var tl = (TimeLord) role;
+                var tl = (TimeLord)role;
                 if (tl.UsingRewind)
                     tl.Rewind();
                 else if (tl.Rewinding)

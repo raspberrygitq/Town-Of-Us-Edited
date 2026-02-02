@@ -18,7 +18,7 @@ public class RainbowUtils
     public static Color Fire => new HSBColor(PP(0f, 0.17f, 0.4f), 1, 1).ToColor();
     public static Color FireShadow => Shadow(Fire);
 
-    public static StringNames RainbowString = CustomStringName.CreateAndRegister("Rainbow"); 
+    public static StringNames RainbowString = CustomStringName.CreateAndRegister("Rainbow");
 
     public static float PP(float min, float max, float mul)
     {

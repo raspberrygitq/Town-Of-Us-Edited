@@ -12,7 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.LookoutMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Lookout))
             {
-                var lookout = (Lookout) role;
+                var lookout = (Lookout)role;
                 if (lookout.UsingWatch)
                     lookout.StartWatching();
                 else if (lookout.Enabled) lookout.StopWatching();

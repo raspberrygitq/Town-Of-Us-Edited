@@ -64,7 +64,8 @@ namespace TownOfUsEdited.ImpostorRoles.DoctorMod
                 if (newPos.y > -7f)
                 {
                     newPos.z = 0.0208f;
-                } else
+                }
+                else
                 {
                     newPos.z = -0.0273f;
                 }

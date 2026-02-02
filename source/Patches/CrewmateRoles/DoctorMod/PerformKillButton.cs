@@ -18,35 +18,35 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             var role = Role.GetRole<Doctor>(PlayerControl.LocalPlayer);
             if (__instance == ReviveButton)
             {
-            var flag2 = __instance.isCoolingDown;
-            if (flag2) return false;
-            if (!__instance.enabled) return false;
-            if (role.CanRevive() != true && CustomGameOptions.GameMode != GameMode.Chaos) return false;
-            var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
-            if (role.Cooldown > 0 && CustomGameOptions.GameMode != GameMode.Chaos)
-                return false;
-            if (!role.ButtonUsable && CustomGameOptions.GameMode != GameMode.Chaos)
-                return false;
-            if (role == null)
-                return false;
-            if (role.CurrentTarget == null)
-                return false;
-            if (Vector2.Distance(role.CurrentTarget.TruePosition,
-                PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
-            var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
-            if (!abilityUsed) return false;
-            var playerId = role.CurrentTarget.ParentId;
-            var player = Utils.PlayerById(playerId);
-            if (player.IsInfected() || role.Player.IsInfected())
-            {
-                foreach (var pb in Role.GetRoles(RoleEnum.Plaguebearer)) ((Plaguebearer)pb).RpcSpreadInfection(player, role.Player);
-            }
+                var flag2 = __instance.isCoolingDown;
+                if (flag2) return false;
+                if (!__instance.enabled) return false;
+                if (role.CanRevive() != true && CustomGameOptions.GameMode != GameMode.Chaos) return false;
+                var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
+                if (role.Cooldown > 0 && CustomGameOptions.GameMode != GameMode.Chaos)
+                    return false;
+                if (!role.ButtonUsable && CustomGameOptions.GameMode != GameMode.Chaos)
+                    return false;
+                if (role == null)
+                    return false;
+                if (role.CurrentTarget == null)
+                    return false;
+                if (Vector2.Distance(role.CurrentTarget.TruePosition,
+                    PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
+                var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
+                if (!abilityUsed) return false;
+                var playerId = role.CurrentTarget.ParentId;
+                var player = Utils.PlayerById(playerId);
+                if (player.IsInfected() || role.Player.IsInfected())
+                {
+                    foreach (var pb in Role.GetRoles(RoleEnum.Plaguebearer)) ((Plaguebearer)pb).RpcSpreadInfection(player, role.Player);
+                }
 
-            Utils.Rpc(CustomRPC.DoctorRevive, PlayerControl.LocalPlayer.PlayerId, playerId);
+                Utils.Rpc(CustomRPC.DoctorRevive, PlayerControl.LocalPlayer.PlayerId, playerId);
 
-            DocRevive.DoctorRevive(role.CurrentTarget, role);
-            role.UsesLeft--;
-            role.Cooldown = CustomGameOptions.DocReviveCooldown;
+                DocRevive.DoctorRevive(role.CurrentTarget, role);
+                role.UsesLeft--;
+                role.Cooldown = CustomGameOptions.DocReviveCooldown;
             }
             else if (__instance == role.DragDropButton)
             {

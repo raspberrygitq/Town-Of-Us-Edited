@@ -25,7 +25,7 @@ namespace TownOfUsEdited.CrewmateRoles.InvestigatorMod
             _velocity = player.gameObject.GetComponent<Rigidbody2D>().velocity;
 
             Player = player;
-            _time = (int) Time.time;
+            _time = (int)Time.time;
             Color = Palette.PlayerColors[player.GetDefaultOutfit().ColorId];
             if (RainbowUtils.IsRainbow(player.GetDefaultOutfit().ColorId)) IsRainbow = true;
             if (Grey || (player.Is(RoleEnum.Venerer) && Roles.Role.GetRole<Venerer>(player).IsCamouflaged))
@@ -104,7 +104,7 @@ namespace TownOfUsEdited.CrewmateRoles.InvestigatorMod
             Color = new Color(Color.r, Color.g, Color.b, alpha);
             _spriteRenderer.color = Color;
 
-            if (_time + (int) Duration < currentTime)
+            if (_time + (int)Duration < currentTime)
             {
                 Destroy();
                 return true;

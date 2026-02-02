@@ -37,7 +37,7 @@ namespace TownOfUsEdited.NeutralRoles.TrollMod
             Utils.SetTarget(ref troll.ClosestPlayer, __instance.KillButton, float.NaN);
 
             return;
-            
+
         }
     }
 }

@@ -43,7 +43,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
                 role.UsesText.text = role.UsesLeft + "";
             }
 
-             // Check if the game state allows the KillButton to be active
+            // Check if the game state allows the KillButton to be active
             bool isKillButtonActive = __instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled;
             isKillButtonActive = isKillButtonActive && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead;
             isKillButtonActive = isKillButtonActive && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
@@ -58,10 +58,10 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
                     AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
                     && !player.Data.Disconnected);
 
-             role.StoreButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            role.StoreButton.buttonLabelText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                   && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                   && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                   AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             role.StoreButton.buttonLabelText.text = "Store";
             role.StoreButton.buttonLabelText.SetOutlineColor(Palette.ImpostorRed);

@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace TownOfUsEdited.Patches {
+namespace TownOfUsEdited.Patches
+{
     [HarmonyPatch(typeof(LobbyBehaviour), nameof(LobbyBehaviour.Start))]
-    static class LobbyBehaviourPatch {
+    static class LobbyBehaviourPatch
+    {
         [HarmonyPostfix]
-        public static void Postfix() {
+        public static void Postfix()
+        {
             // Fix Killed When Zooming As Captain
             FixScreen.UnZoomFix();
             // Clear upped Players list
@@ -44,7 +47,7 @@ namespace TownOfUsEdited.Patches {
     }
 
     [HarmonyPatch(typeof(LobbyBehaviour), nameof(LobbyBehaviour.Update))]
-    public class LobbyBehaviourUpdate 
+    public class LobbyBehaviourUpdate
     {
         public static void Postfix(LobbyBehaviour __instance)
         {

@@ -142,7 +142,7 @@ namespace TownOfUsEdited
                         trans.UsesText.color = Palette.DisabledClear;
                         trans.UsesText.material.SetFloat("_Desat", 1f);
                     }
-                     else if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
+                    else if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
                     {
                         var merc = Role.GetRole<Mercenary>(PlayerControl.LocalPlayer);
                         merc.UsesText.color = Palette.DisabledClear;
@@ -220,7 +220,7 @@ namespace TownOfUsEdited
                         glitch.HackButton.graphic.material.SetFloat("_Desat", 1f);
                     }
 
-                    var disableTimer = (DateTime.UtcNow - tickDictionary[PlayerControl.LocalPlayer.PlayerId]).TotalMilliseconds/1000;
+                    var disableTimer = (DateTime.UtcNow - tickDictionary[PlayerControl.LocalPlayer.PlayerId]).TotalMilliseconds / 1000;
                     if (MeetingHud.Instance || disableTimer > duration || PlayerControl.LocalPlayer?.Data.IsDead != false || AmongUsClient.Instance.GameState != InnerNetClient.GameStates.Started)
                     {
                         HudManager.Instance.KillButton.enabled = true;
@@ -250,7 +250,7 @@ namespace TownOfUsEdited
             }
         }
 
-        [HarmonyPatch(typeof(MovingPlatformBehaviour), nameof(MovingPlatformBehaviour.Use), new Type[] {})]
+        [HarmonyPatch(typeof(MovingPlatformBehaviour), nameof(MovingPlatformBehaviour.Use), new Type[] { })]
         public class SavePlatformPlayer
         {
             public static void Prefix(MovingPlatformBehaviour __instance)
@@ -259,7 +259,7 @@ namespace TownOfUsEdited
             }
         }
 
-        [HarmonyPatch(typeof(ZiplineBehaviour), nameof(ZiplineBehaviour.Use), new Type[] { typeof(PlayerControl), typeof(bool)})]
+        [HarmonyPatch(typeof(ZiplineBehaviour), nameof(ZiplineBehaviour.Use), new Type[] { typeof(PlayerControl), typeof(bool) })]
         public class SaveZiplinePlayer
         {
             public static void Prefix(ZiplineBehaviour __instance, [HarmonyArgument(0)] PlayerControl player, [HarmonyArgument(1)] bool fromTop)

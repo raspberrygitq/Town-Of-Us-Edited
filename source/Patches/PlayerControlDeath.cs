@@ -170,7 +170,7 @@ namespace TownOfUsEdited.Patches
                         RoleManager.Instance.SetRole(player, RoleTypes.Crewmate);
                         Murder.KilledPlayers.Remove(
                             Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == lover.PlayerId));
-                        
+
                         if (PlayerControl.LocalPlayer == lover)
                         {
                             lover.myTasks.RemoveAt(1);

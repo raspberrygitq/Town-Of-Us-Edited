@@ -14,20 +14,19 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             if (!flag) return true;
             var role = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
             if (__instance != HudManager.Instance.KillButton) return true;
-            if (!PlayerControl.LocalPlayer.CanMove) return false;
+            if (!PlayerControl.LocalPlayer.CanMove || role.ClosestPlayer == null) return false;
             if (role.Cooldown > 0) return false;
             if (!__instance.enabled) return false;
             var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
             if (Vector2.Distance(role.ClosestPlayer.GetTruePosition(),
                 PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
             if (role.ClosestPlayer == null) return false;
-            if (role.JailedPlayer != null) return false;
 
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
             if (interact[4] == true)
             {
-                role.JailedPlayer = role.ClosestPlayer;
-                role.Cooldown = CustomGameOptions.JailCD;
+                var host = AmongUsClient.Instance.AmHost ? (byte)2 : (byte)0;
+                if (AmongUsClient.Instance.AmHost) role.JailedPlayer = role.ClosestPlayer;
                 Utils.Rpc(CustomRPC.SetJail, PlayerControl.LocalPlayer.PlayerId, role.ClosestPlayer.PlayerId);
             }
             if (interact[0] == true)

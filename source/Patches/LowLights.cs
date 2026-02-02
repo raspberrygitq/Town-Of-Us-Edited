@@ -46,21 +46,21 @@ namespace TownOfUsEdited
             foreach (var infectious in Role.GetRoles(RoleEnum.Infectious))
             {
                 var infectiousRole = (Infectious)infectious;
-                if (playerRole != null  && playerRole.InfectionState > 2 && infectiousRole.Infected.Contains(player.PlayerId)
+                if (playerRole != null && playerRole.InfectionState > 2 && infectiousRole.Infected.Contains(player.PlayerId)
                 && !infectiousRole.Player.Data.IsDead && !player._object.Is(RoleEnum.Infectious))
                 {
                     if (!player._object.Is(Faction.Crewmates))
                     {
-                        __result = __instance.MaxLightRadius * GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod/2;
+                        __result = __instance.MaxLightRadius * GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod / 2;
                     }
                     else if (player._object.Is(RoleEnum.Mayor))
                     {
-                        __result = Mathf.Lerp(__instance.MinLightRadius, __instance.MaxLightRadius/3, t) *
+                        __result = Mathf.Lerp(__instance.MinLightRadius, __instance.MaxLightRadius / 3, t) *
                             GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod;
                     }
                     else
                     {
-                        __result = Mathf.Lerp(__instance.MinLightRadius, __instance.MaxLightRadius/2, t) *
+                        __result = Mathf.Lerp(__instance.MinLightRadius, __instance.MaxLightRadius / 2, t) *
                             GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod;
                     }
                     return false;
@@ -74,9 +74,9 @@ namespace TownOfUsEdited
                 player._object.Is(RoleEnum.Arsonist) || player._object.Is(RoleEnum.SoulCollector) ||
                 (player._object.Is(RoleEnum.Vampire) && CustomGameOptions.VampImpVision) ||
                 (player._object.Is(RoleEnum.SerialKiller) && CustomGameOptions.SkImpVision) ||
-                (player._object.Is(Faction.Madmates) && CustomGameOptions.MadmateHasImpoVision)||
-                player._object.Is(RoleEnum.Player) || player._object.Is(RoleEnum.Terrorist) || 
-                player._object.Is(Faction.Coven) || player._object.Is(RoleEnum.Infectious) || 
+                (player._object.Is(Faction.Madmates) && CustomGameOptions.MadmateHasImpoVision) ||
+                player._object.Is(RoleEnum.Player) || player._object.Is(RoleEnum.Terrorist) ||
+                player._object.Is(Faction.Coven) || player._object.Is(RoleEnum.Infectious) ||
                 player._object.Is(RoleEnum.Doppelganger) || player._object.Is(ModifierEnum.Torch))
             {
                 __result = __instance.MaxLightRadius * GameOptionsManager.Instance.currentNormalGameOptions.ImpostorLightMod;
@@ -107,7 +107,7 @@ namespace TownOfUsEdited
                 var role = Role.GetRole<Mayor>(player._object);
                 if (role.Revealed)
                 {
-                    __result = Mathf.Lerp(__instance.MinLightRadius, __instance.MaxLightRadius/2, t) *
+                    __result = Mathf.Lerp(__instance.MinLightRadius, __instance.MaxLightRadius / 2, t) *
                        GameOptionsManager.Instance.currentNormalGameOptions.CrewLightMod;
                     return false;
                 }

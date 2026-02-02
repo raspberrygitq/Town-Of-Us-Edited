@@ -43,15 +43,15 @@ namespace TownOfUsEdited.Patches
                 if (PlayerControl.LocalPlayer.Data.IsDead && PlayerControl.LocalPlayer.Is(RoleEnum.Phantom))
                 {
                     if (!Role.GetRole<Phantom>(PlayerControl.LocalPlayer).Caught) __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(false);
-                    else  __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(true);
+                    else __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(true);
                 }
                 if (PlayerControl.LocalPlayer.Data.IsDead && PlayerControl.LocalPlayer.Is(RoleEnum.Wraith))
                 {
                     if (!Role.GetRole<Wraith>(PlayerControl.LocalPlayer).Caught) __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(false);
-                    else  __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(true);
+                    else __instance.MapButton.transform.parent.Find(__instance.MapButton.name + "(Clone)").gameObject.SetActive(true);
                 }
             }
-                
+
         }
     }
 
@@ -150,7 +150,7 @@ namespace TownOfUsEdited.Patches
         private static FieldInfo getSubElevatorSystem;
 
         private static Type SubmarineElevatorSystem;
-        private static FieldInfo UpperDeckIsTargetFloor; 
+        private static FieldInfo UpperDeckIsTargetFloor;
 
         private static FieldInfo SubmergedInstance;
         private static FieldInfo SubmergedElevators;
@@ -214,7 +214,7 @@ namespace TownOfUsEdited.Patches
             if (!elevator.Item1) return;
             bool CurrentFloor = (bool)UpperDeckIsTargetFloor.GetValue(getSubElevatorSystem.GetValue(elevator.Item2)); //true is top, false is bottom
             bool PlayerFloor = player.transform.position.y > -7f; //true is top, false is bottom
-            
+
             if (CurrentFloor != PlayerFloor)
             {
                 ChangeFloor(CurrentFloor);
@@ -282,7 +282,7 @@ namespace TownOfUsEdited.Patches
             while (HudManager.Instance.PlayerCam.transform.Find("SpawnInMinigame(Clone)") != null)
             {
                 yield return null;
-            }       
+            }
             next();
         }
 
@@ -368,7 +368,7 @@ namespace TownOfUsEdited.Patches
                         else player.Collider.enabled = false;
                         Transform transform = __instance.transform;
                         Vector3 position = transform.position;
-                        position.z = position.y/1000;
+                        position.z = position.y / 1000;
 
                         transform.position = position;
                         __instance.myPlayer.gameObject.layer = 8;
@@ -441,7 +441,7 @@ namespace TownOfUsEdited.Patches
             }
             catch (System.NullReferenceException)
             {
-                
+
             }
 
         }
@@ -452,7 +452,7 @@ namespace TownOfUsEdited.Patches
         }
     }
 
-     public static class LevelImpostorCompatibility
+    public static class LevelImpostorCompatibility
     {
         public const string LiGuid = "com.DigiWorm.LevelImposter";
 

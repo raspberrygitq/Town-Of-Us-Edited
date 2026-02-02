@@ -16,7 +16,7 @@ namespace TownOfUsEdited.CrewmateRoles.ClericMod
             if (!PlayerControl.LocalPlayer.CanMove) return false;
             var role = Role.GetRole<Cleric>(PlayerControl.LocalPlayer);
             if (!__instance.isActiveAndEnabled || __instance.isCoolingDown) return false;
-            
+
             if (__instance == role.CleanseButton)
             {
                 if (role.Cooldown <= 0)

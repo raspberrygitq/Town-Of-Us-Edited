@@ -1,4 +1,4 @@
-﻿﻿using HarmonyLib;
+﻿using HarmonyLib;
 using System.Linq;
 using TownOfUsEdited.Extensions;
 using UnityEngine;

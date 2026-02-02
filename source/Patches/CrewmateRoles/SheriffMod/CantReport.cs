@@ -30,8 +30,9 @@ namespace TownOfUsEdited.CrewmateRoles.SheriffMod
                     if (Vector2.Distance(truePosition, component.TruePosition) <= __instance.MaxReportDistance)
                     {
                         var matches = Murder.KilledPlayers.FirstOrDefault(x => x.PlayerId == component.ParentId);
-                        if (matches != null && matches.KillerId != PlayerControl.LocalPlayer.PlayerId) { 
-                            if (!PhysicsHelpers.AnythingBetween(__instance.Collider, truePosition, component.TruePosition, Constants.ShipOnlyMask, false)) flag2 = true; 
+                        if (matches != null && matches.KillerId != PlayerControl.LocalPlayer.PlayerId)
+                        {
+                            if (!PhysicsHelpers.AnythingBetween(__instance.Collider, truePosition, component.TruePosition, Constants.ShipOnlyMask, false)) flag2 = true;
                         }
                     }
                 }

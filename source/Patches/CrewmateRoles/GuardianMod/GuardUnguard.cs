@@ -12,7 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.GuardianMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Guardian))
             {
-                var guardian = (Guardian) role;
+                var guardian = (Guardian)role;
                 if (guardian.Guarding)
                     guardian.Guard();
                 else if (guardian.Enabled) guardian.UnGuard();

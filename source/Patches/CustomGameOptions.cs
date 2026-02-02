@@ -419,7 +419,7 @@ namespace TownOfUsEdited
         public static int MaxAlerts => (int)Generate.MaxAlerts.Get();
         public static float WatchCD => Generate.WatchCooldown.Get();
         public static float WatchDuration => Generate.WatchDuration.Get();
-        public static bool WatchedKnows => Generate.WatchedKnows.Get(); 
+        public static bool WatchedKnows => Generate.WatchedKnows.Get();
         public static bool LookoutUseVitals => Generate.LookoutUseVitals.Get();
         public static float UpdateInterval => Generate.UpdateInterval.Get();
         public static float TrackCd => Generate.TrackCooldown.Get();
@@ -484,7 +484,7 @@ namespace TownOfUsEdited
         public static int MaxTraps => (int)Generate.MaxTraps.Get();
         public static float MinAmountOfTimeInTrap => Generate.MinAmountOfTimeInTrap.Get();
         public static float TrapSize => Generate.TrapSize.Get();
-        public static int MinAmountOfPlayersInTrap => (int) Generate.MinAmountOfPlayersInTrap.Get();
+        public static int MinAmountOfPlayersInTrap => (int)Generate.MinAmountOfPlayersInTrap.Get();
         public static float ExamineCd => Generate.ExamineCooldown.Get();
         public static bool DetectiveReportOn => Generate.DetectiveReportOn.Get();
         public static float DetectiveRoleDuration => Generate.DetectiveRoleDuration.Get();
@@ -502,7 +502,7 @@ namespace TownOfUsEdited
         public static float EscapeCd => Generate.EscapeCooldown.Get();
         public static bool EscapistVent => Generate.EscapistVent.Get();
         public static float DetonateDelay => Generate.DetonateDelay.Get();
-        public static int MaxKillsInDetonation => (int) Generate.MaxKillsInDetonation.Get();
+        public static int MaxKillsInDetonation => (int)Generate.MaxKillsInDetonation.Get();
         public static float DetonateRadius => Generate.DetonateRadius.Get();
         public static float BodyguardRadius => Generate.BodyguardRadius.Get();
         public static bool BomberVent => Generate.BomberVent.Get();

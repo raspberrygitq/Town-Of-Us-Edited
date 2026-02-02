@@ -19,14 +19,14 @@ namespace TownOfUsEdited.Patches.NeutralRoles.DoppelgangerMod
 
             var role = Role.GetRole<Doppelganger>(PlayerControl.LocalPlayer);
             var killbutton = HudManager.Instance.KillButton;
-            
+
             if (role.ClosestPlayer == null)
                 return false;
-            
+
             if (__instance == killbutton)
             {
                 if (role.Cooldown > 0)
-                return false;
+                    return false;
 
                 if (PlayerControl.LocalPlayer.IsControlled() && role.ClosestPlayer.Is(Faction.Coven))
                 {

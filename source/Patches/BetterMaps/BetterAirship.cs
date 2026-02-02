@@ -22,7 +22,7 @@ public static class BetterAirship
                 var adminTable = UObject.FindObjectOfType<MapConsole>();
                 var mapFloating = GameObject.Find("Cockpit/cockpit_mapfloating");
 
-                if ((int)CustomGameOptions.BAMoveAdmin == 1)
+                if (CustomGameOptions.BAMoveAdmin == 1)
                 {
                     adminTable.transform.position = new(-17.269f, 1.375f);
                     adminTable.transform.rotation = Quaternion.Euler(new(0, 0, 350.316f));
@@ -32,7 +32,7 @@ public static class BetterAirship
                     mapFloating.transform.rotation = Quaternion.Euler(new(0, 0, 350));
                     mapFloating.transform.localScale = new(1, 1, 1);
                 }
-                else if ((int)CustomGameOptions.BAMoveAdmin == 2)
+                else if (CustomGameOptions.BAMoveAdmin == 2)
                 {
                     //New Admin
                     adminTable.transform.position = new(5.078f, 3.4f, 1);
@@ -46,7 +46,7 @@ public static class BetterAirship
             {
                 var electrical = GameObject.Find("GapRoom/task_lightssabotage (gap)");
 
-                if ((int)CustomGameOptions.BAMoveElectrical == 1)
+                if (CustomGameOptions.BAMoveElectrical == 1)
                 {
                     electrical.transform.position = new(-8.817f, 13.184f);
                     electrical.transform.localScale = new(0.909f, 0.818f, 1);
@@ -57,7 +57,7 @@ public static class BetterAirship
                     supportElectrical.transform.position = new(-8.792f, 13.242f);
                     supportElectrical.transform.localScale = new(1, 1, 1);
                 }
-                else if ((int)CustomGameOptions.BAMoveElectrical == 2)
+                else if (CustomGameOptions.BAMoveElectrical == 2)
                     electrical.transform.position = new(19.339f, -3.665f);
             }
 

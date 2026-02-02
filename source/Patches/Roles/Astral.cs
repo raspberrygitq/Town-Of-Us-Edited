@@ -61,22 +61,22 @@ namespace TownOfUsEdited.Roles
             if (amOwner)
             {
                 try
+                {
+                    if (Minigame.Instance)
                     {
-                        if (Minigame.Instance)
-                        {
-                            Minigame.Instance.Close();
-                            Minigame.Instance.Close();
-                        }
+                        Minigame.Instance.Close();
+                        Minigame.Instance.Close();
+                    }
 
-                        if (MapBehaviour.Instance)
-                        {
-                            MapBehaviour.Instance.Close();
-                            MapBehaviour.Instance.Close();
-                        }
-                    }
-                    catch
+                    if (MapBehaviour.Instance)
                     {
+                        MapBehaviour.Instance.Close();
+                        MapBehaviour.Instance.Close();
                     }
+                }
+                catch
+                {
+                }
                 hudManager.ShadowQuad.gameObject.SetActive(false);
                 player.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
                 player.RpcSetScanner(false);
@@ -140,9 +140,9 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.Chat.gameObject.SetActive(true);
                     MeetingHud.Instance.amDead = false;
-		            MeetingHud.Instance.SkipVoteButton.AmDead = false;
-		            MeetingHud.Instance.Glass.sprite = default;
-		            MeetingHud.Instance.Glass.color = Palette.White;
+                    MeetingHud.Instance.SkipVoteButton.AmDead = false;
+                    MeetingHud.Instance.Glass.sprite = default;
+                    MeetingHud.Instance.Glass.color = Palette.White;
                     if (CustomGameOptions.SkipButtonDisable == DisableSkipButtonMeetings.No)
                     {
                         MeetingHud.Instance.SkipVoteButton.gameObject.SetActive(true);

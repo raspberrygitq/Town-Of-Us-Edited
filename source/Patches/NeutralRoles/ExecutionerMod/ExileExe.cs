@@ -22,7 +22,7 @@ namespace TownOfUsEdited.NeutraleRoles.ExecutionerMod
             var exiled = __instance.initData?.networkedPlayer;
             if (exiled == null) return;
             var player = exiled.Object;
-            
+
             foreach (var role in Role.GetRoles(RoleEnum.Troll))
             {
                 if (((Troll)role).TrolledPlayer != null && player.PlayerId == ((Troll)role).TrolledPlayer.PlayerId && ((Troll)role).UsedTroll)

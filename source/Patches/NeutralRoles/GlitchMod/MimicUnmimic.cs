@@ -10,7 +10,7 @@ namespace TownOfUsEdited.NeutralRoles.GlitchMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Glitch))
             {
-                var glitch = (Glitch) role;
+                var glitch = (Glitch)role;
                 if (glitch.IsUsingMimic)
                     Utils.Morph(glitch.Player, glitch.MimicTarget);
                 else if (glitch.Enabled)

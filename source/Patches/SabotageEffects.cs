@@ -63,7 +63,7 @@ namespace TownOfUsEdited
             bool hasReactor = true;
             bool hasSeismic = true;
             bool hasHeli = true;
-            try 
+            try
             {
                 reactor = ShipStatus.Instance.Systems[SystemTypes.Reactor].Cast<ReactorSystemType>();
             }
@@ -71,7 +71,7 @@ namespace TownOfUsEdited
             {
                 hasReactor = false;
             }
-            try 
+            try
             {
                 seismic = ShipStatus.Instance.Systems[SystemTypes.Laboratory].Cast<ReactorSystemType>();
             }

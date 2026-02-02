@@ -12,15 +12,15 @@ namespace TownOfUsEdited.CovenRoles.HexMasterMod
         {
             var hexed = role.Hexed;
             if (!role.Player.Data.IsDead && hexed != null)
-            foreach (PlayerVoteArea pva in __instance.playerStates)
-            {
-                if (hexed.Any(x => x == pva.TargetPlayerId))
+                foreach (PlayerVoteArea pva in __instance.playerStates)
                 {
-                    var player = Utils.PlayerById(pva.TargetPlayerId);
-                    if (!player.Data.IsDead)
-                    pva.NameText.text = "<color=#bf5fff>乂 </color>" + pva.NameText.text;
+                    if (hexed.Any(x => x == pva.TargetPlayerId))
+                    {
+                        var player = Utils.PlayerById(pva.TargetPlayerId);
+                        if (!player.Data.IsDead)
+                            pva.NameText.text = "<color=#bf5fff>乂 </color>" + pva.NameText.text;
+                    }
                 }
-            }
         }
 
         public static void Postfix(HudManager __instance)
@@ -37,8 +37,8 @@ namespace TownOfUsEdited.CovenRoles.HexMasterMod
                     {
                         player.nameText().text = "<color=#bf5fff>乂 </color>" + player.nameText().text;
                     }
-                } 
-            }  
+                }
+            }
             if (!MeetingHud.Instance) return;
             foreach (var hexmaster in Role.GetRoles(RoleEnum.HexMaster))
             {

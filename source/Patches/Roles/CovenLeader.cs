@@ -88,7 +88,7 @@ namespace TownOfUsEdited.Roles
             }
 
             if (StartImitate.ImitatingPlayers.Contains(PlayerControl.LocalPlayer.PlayerId)) StartImitate.ImitatingPlayers.Remove(PlayerControl.LocalPlayer.PlayerId);
-            
+
             if (newcoven.Is(RoleEnum.GuardianAngel))
             {
                 var ga = Role.GetRole<GuardianAngel>(newcoven);
@@ -99,7 +99,7 @@ namespace TownOfUsEdited.Roles
             {
                 var chamRole = Role.GetRole<Chameleon>(newcoven);
                 if (chamRole.IsSwooped)
-                chamRole.UnSwoop();
+                    chamRole.UnSwoop();
                 Utils.Rpc(CustomRPC.ChameleonUnSwoop, newcoven.PlayerId);
             }
 
@@ -274,8 +274,8 @@ namespace TownOfUsEdited.Roles
                     var swooperRole = Role.GetRole<Swooper>(PlayerControl.LocalPlayer);
                     if (swooperRole.IsSwooped)
                     {
-                    swooperRole.UnSwoop();
-                    Utils.Rpc(CustomRPC.UnSwoop, PlayerControl.LocalPlayer.PlayerId);
+                        swooperRole.UnSwoop();
+                        Utils.Rpc(CustomRPC.UnSwoop, PlayerControl.LocalPlayer.PlayerId);
                     }
                     swooperRole.Enabled = false;
                     swooperRole.Cooldown = CustomGameOptions.SwoopCd;
@@ -360,7 +360,7 @@ namespace TownOfUsEdited.Roles
                 role.IncorrectAssassinKills = killsList.IncorrectAssassinKills;
                 role.RegenTask();
             }
-            
+
             PlayerControl_Die.CheckEnd();
         }
     }

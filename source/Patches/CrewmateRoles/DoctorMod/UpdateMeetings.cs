@@ -30,7 +30,7 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                 return true;
             }
             [HarmonyPatch(typeof(QuickChatMenu), nameof(QuickChatMenu.CanSend), MethodType.Getter)]
-            
+
             public static bool Prefix(ref bool __result)
             {
                 if (CustomGameOptions.GameMode == GameMode.Chaos) return true;
@@ -43,8 +43,8 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                         if (!PlayerControl.LocalPlayer.Data.IsDead && player.PlayerId == PlayerControl.LocalPlayer.PlayerId &&
                         (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay))
                         {
-                        __result = false;
-                        return false;
+                            __result = false;
+                            return false;
                         }
                     }
                 }
@@ -91,7 +91,7 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                             {
                                 __instance.sendRateMessageText.gameObject.SetActive(true);
                                 __instance.sendRateMessageText.color = Patches.Colors.Doctor;
-			                    __instance.sendRateMessageText.text = "You have been resurected, you can no longer chat.";
+                                __instance.sendRateMessageText.text = "You have been resurected, you can no longer chat.";
                             }
                         }
                     }

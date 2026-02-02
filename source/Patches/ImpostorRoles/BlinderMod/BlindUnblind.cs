@@ -12,7 +12,7 @@ namespace TownOfUsEdited.ImpostorRoles.BlinderMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Blinder))
             {
-                var blinder = (Blinder) role;
+                var blinder = (Blinder)role;
                 if (blinder.Blinding)
                     blinder.Blind();
                 else if (blinder.Enabled) blinder.UnBlind();

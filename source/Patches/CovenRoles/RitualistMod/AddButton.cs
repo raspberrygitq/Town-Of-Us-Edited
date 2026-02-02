@@ -30,7 +30,7 @@ namespace TownOfUsEdited.CovenRoles.RitualistMod
                 player.Data.IsDead ||
                 player.Data.Disconnected
             )
-            return true;
+                return true;
             var role = Role.GetRole(player);
             return role != null && role.Criteria();
         }
@@ -47,7 +47,7 @@ namespace TownOfUsEdited.CovenRoles.RitualistMod
 
             var confirmButton = voteArea.Buttons.transform.GetChild(0).gameObject;
             var parent = confirmButton.transform.parent.parent;
-            
+
             var nameText = Object.Instantiate(voteArea.NameText, voteArea.transform);
             voteArea.NameText.transform.localPosition = new Vector3(0.55f, 0.12f, -0.1f);
             nameText.transform.localPosition = new Vector3(0.55f, -0.12f, -0.1f);
@@ -195,7 +195,7 @@ namespace TownOfUsEdited.CovenRoles.RitualistMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Ritualist))
             {
-                var ritualist = (Ritualist) role;
+                var ritualist = (Ritualist)role;
                 ritualist.Guesses.Clear();
                 ritualist.Buttons.Clear();
                 ritualist.GuessedThisMeeting = false;

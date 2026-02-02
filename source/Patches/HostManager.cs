@@ -17,7 +17,7 @@ namespace TownOfUsEdited.Patches
 
             if (LobbyBehaviour.Instance || AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started
             || AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.NotJoined) yield break;
-            
+
             DestroyableSingleton<EndGameNavigation>.Instance.NextGame();
 
             yield break;
@@ -95,9 +95,9 @@ namespace TownOfUsEdited.Patches
             {
                 if (!AmongUsClient.Instance.AmHost) return false;
                 if (__instance.startState != GameStartManager.StartingStates.NotStarting)
-		        {
-			        return false;
-		        }
+                {
+                    return false;
+                }
                 __instance.ReallyBegin(false);
                 return false;
             }
@@ -110,19 +110,19 @@ namespace TownOfUsEdited.Patches
             public static void Postfix()
             {
                 if (!GameData.Instance)
-		        {
-			        return;
-		        }
-		        if (!GameManager.Instance)
-		        {
-			        return;
-		        }
+                {
+                    return;
+                }
+                if (!GameManager.Instance)
+                {
+                    return;
+                }
                 if (!LobbyBehaviour.Instance) return;
                 if (!AmongUsClient.Instance.AmHost) return;
                 if (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started) return;
                 if (GameStartManager.Instance.startState != GameStartManager.StartingStates.NotStarting) return;
                 if (GameStartManager.Instance.StartButton && GameStartManager.Instance.StartButtonGlyph.spriteRenderer.color == Palette.DisabledClear)
-		        {
+                {
                     GameStartManager.Instance.StartButtonGlyph.spriteRenderer.color = Palette.EnabledColor;
                     GameStartManager.Instance.StartButton.SetButtonEnableState(true);
                     GameStartManager.Instance.StartButton.ChangeButtonText(TranslationController.Instance.GetString(StringNames.StartLabel, string.Empty));

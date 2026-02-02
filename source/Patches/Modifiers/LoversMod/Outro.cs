@@ -13,7 +13,7 @@ namespace TownOfUsEdited.Modifiers.LoversMod
     {
         public static void Postfix(EndGameManager __instance)
         {
-            
+
             TextMeshPro text;
             Vector3 pos;
             if (Role.NobodyWins)
@@ -26,7 +26,7 @@ namespace TownOfUsEdited.Modifiers.LoversMod
                 pos = __instance.WinText.transform.localPosition;
                 pos.y = 1.5f;
                 text.transform.position = pos;
-//				text.scale = 0.5f;
+                //				text.scale = 0.5f;
                 return;
             }
 
@@ -39,7 +39,7 @@ namespace TownOfUsEdited.Modifiers.LoversMod
                 if (Role.GetRoles(RoleEnum.Vulture).Any(x => ((Vulture)x).VultureWins)) return;
             }
             if (!Modifier.AllModifiers.Where(x => x.ModifierType == ModifierEnum.Lover)
-                .Any(x => ((Lover) x).LoveCoupleWins)) return;
+                .Any(x => ((Lover)x).LoveCoupleWins)) return;
 
             PoolablePlayer[] array = Object.FindObjectsOfType<PoolablePlayer>();
             if (array[0] != null)
@@ -69,7 +69,7 @@ namespace TownOfUsEdited.Modifiers.LoversMod
             pos = __instance.WinText.transform.localPosition;
             pos.y = 1.5f;
             text.transform.position = pos;
-//			text.scale = 1f;
+            //			text.scale = 1f;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace TownOfUsEdited.CrewmateRoles.FighterMod
             else Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton);
 
             return;
-            
+
         }
     }
 }

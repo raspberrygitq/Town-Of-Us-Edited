@@ -21,8 +21,8 @@ namespace TownOfUsEdited.CovenRoles.VoodooMasterModMod
                     {
                         votearea.Buttons.SetActive(false);
                     }
-		            if (__instance.state == MeetingHud.VoteStates.NotVoted)
-		            {
+                    if (__instance.state == MeetingHud.VoteStates.NotVoted)
+                    {
                         if (__instance.lastSecond == 1 && role.Voted && !MeetingHud.Instance.DidVote(PlayerControl.LocalPlayer.PlayerId))
                         {
                             __instance.CmdCastVote(PlayerControl.LocalPlayer.PlayerId, role.VotedFor);
@@ -64,7 +64,7 @@ namespace TownOfUsEdited.CovenRoles.VoodooMasterModMod
                 if (role.VoodooPlayer != null && role.VoodooPlayer == PlayerControl.LocalPlayer && !role.Player.Data.IsDead
                 && !role.Player.Data.Disconnected && !PlayerControl.LocalPlayer.Data.IsDead)
                 {
-                    
+
                     var message = "A <color=#bf5fff>Voodoo Master</color> cast a spell on you, you can not vote and will be forced to vote for whoever the Voodoo Master votes.";
                     HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, message, false);
                 }

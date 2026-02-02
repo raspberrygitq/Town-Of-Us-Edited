@@ -26,7 +26,7 @@ namespace TownOfUsEdited.Roles
         {
             Name = "The Glitch";
             Color = Patches.Colors.Glitch;
-            
+
             HackButton = null;
             MimicButton = null;
             KillTarget = null;

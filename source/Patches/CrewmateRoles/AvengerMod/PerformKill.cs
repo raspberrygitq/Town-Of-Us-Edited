@@ -34,7 +34,7 @@ namespace TownOfUsEdited.CrewmateRoles.AvengerMod
                         if (deadPlayer.KillerId == PlayerControl.LocalPlayer.PlayerId ||
                         killerplayer.Data.IsDead || ((killerplayer.Is(Faction.Impostors) || killerplayer.Is(Faction.Madmates)) &&
                         PlayerControl.LocalPlayer.Is(Faction.Madmates)))
-                        return false;
+                            return false;
                     }
                 }
                 var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);

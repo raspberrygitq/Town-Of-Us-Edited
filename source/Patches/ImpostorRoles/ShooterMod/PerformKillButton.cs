@@ -15,8 +15,8 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
             var role = Role.GetRole<Shooter>(PlayerControl.LocalPlayer);
 
             var killButton = HudManager.Instance.KillButton;
-  
-            if (__instance == role.StoreButton) 
+
+            if (__instance == role.StoreButton)
             {
                 if (!role.ButtonUsable) return false;
                 if (!__instance.isActiveAndEnabled) return false;

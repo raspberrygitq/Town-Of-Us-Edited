@@ -31,7 +31,8 @@ namespace TownOfUsEdited.CustomOption
             {
                 if (option.Type == CustomOptionType.Header) continue;
 
-                if (writer.Position > 1000) {
+                if (writer.Position > 1000)
+                {
                     AmongUsClient.Instance.FinishRpcImmediately(writer);
                     writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId,
                         254, SendOption.Reliable, RecipientId);

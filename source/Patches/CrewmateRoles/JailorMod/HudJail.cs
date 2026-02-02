@@ -43,21 +43,13 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
 
             var notJailed = PlayerControl.AllPlayerControls.ToArray().Where(x => x != role.JailedPlayer).ToList();
 
-            if (role.JailedPlayer == null)
-            {
-                if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, notJailed);
-                else if (role.Player.IsLover() && role.Player.Is(Faction.Madmates) && !CustomGameOptions.MadmateKillEachOther) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Impostors) && x != role.JailedPlayer).ToList());
-                else if (role.Player.Is(Faction.Madmates) && !CustomGameOptions.MadmateKillEachOther) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors) && x != role.JailedPlayer).ToList());
-                else if (role.Player.IsLover()) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && x != role.JailedPlayer).ToList());
-                else Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, notJailed);
-            }
-            else
-            {
-                jailButton.SetTarget(null);
-                role.ClosestPlayer = null;
-            }
+            if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, notJailed);
+            else if (role.Player.IsLover() && role.Player.Is(Faction.Madmates) && !CustomGameOptions.MadmateKillEachOther) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(Faction.Impostors) && x != role.JailedPlayer).ToList());
+            else if (role.Player.Is(Faction.Madmates) && !CustomGameOptions.MadmateKillEachOther) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(Faction.Impostors) && x != role.JailedPlayer).ToList());
+            else if (role.Player.IsLover()) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && x != role.JailedPlayer).ToList());
+            else Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, notJailed);
 
-            if (role.JailedPlayer == null && role.ClosestPlayer != null && role.CanJail)
+            if (role.ClosestPlayer != null && role.CanJail)
             {
                 jailButton.graphic.color = Palette.EnabledColor;
                 jailButton.graphic.material.SetFloat("_Desat", 0f);

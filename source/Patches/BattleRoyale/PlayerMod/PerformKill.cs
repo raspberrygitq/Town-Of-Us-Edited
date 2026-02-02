@@ -19,14 +19,14 @@ namespace TownOfUsEdited.Patches.BattleRoyale.PlayerMod
 
             var player = Role.GetRole<Player>(PlayerControl.LocalPlayer);
             var killbutton = HudManager.Instance.KillButton;
-            
+
             if (player.ClosestPlayer == null)
                 return false;
-            
+
             if (__instance == killbutton)
             {
                 if (player.Cooldown > 0)
-                return false;
+                    return false;
 
                 // Kill the closest player
                 player.Kill(player.ClosestPlayer);

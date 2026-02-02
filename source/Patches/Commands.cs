@@ -27,40 +27,40 @@ namespace TownOfUsEdited.Patches
                 var Instance = HudManager.Instance.Chat;
                 ChatBubble pooledBubble = Instance.GetPooledBubble();
                 try
-		        {
-			        pooledBubble.transform.SetParent(Instance.scroller.Inner);
-			        pooledBubble.transform.localScale = Vector3.one;
-			        bool flag = srcPlayer == PlayerControl.LocalPlayer;
-			        if (flag)
-			        {
-				        pooledBubble.SetRight();
-			        }
-			        else
-			        {
-				        pooledBubble.SetLeft();
-			        }
+                {
+                    pooledBubble.transform.SetParent(Instance.scroller.Inner);
+                    pooledBubble.transform.localScale = Vector3.one;
+                    bool flag = srcPlayer == PlayerControl.LocalPlayer;
+                    if (flag)
+                    {
+                        pooledBubble.SetRight();
+                    }
+                    else
+                    {
+                        pooledBubble.SetLeft();
+                    }
                     var data2 = srcPlayer.Data;
                     pooledBubble.name = Id;
-			        pooledBubble.SetCosmetics(data2);
-			        Instance.SetChatBubbleName(pooledBubble, data2, false, false, PlayerNameColor.Get(data2), null);
-			        pooledBubble.SetText(chatText);
-			        pooledBubble.AlignChildren();
-			        Instance.AlignAllBubbles();
-			        if (!Instance.IsOpenOrOpening && Instance.notificationRoutine == null)
-			        {
-				        Instance.notificationRoutine = Instance.StartCoroutine(Instance.BounceDot());
-			        }
-			        if (!flag && !Instance.IsOpenOrOpening)
-			        {
-				        SoundManager.Instance.PlaySound(Instance.messageSound, false, 1f, null).pitch = 0.5f + (float)srcPlayer.PlayerId / 15f;
-				        Instance.chatNotification.SetUp(srcPlayer, chatText);
-			        }
-		        }
-		        catch (Exception message)
-		        {
+                    pooledBubble.SetCosmetics(data2);
+                    Instance.SetChatBubbleName(pooledBubble, data2, false, false, PlayerNameColor.Get(data2), null);
+                    pooledBubble.SetText(chatText);
+                    pooledBubble.AlignChildren();
+                    Instance.AlignAllBubbles();
+                    if (!Instance.IsOpenOrOpening && Instance.notificationRoutine == null)
+                    {
+                        Instance.notificationRoutine = Instance.StartCoroutine(Instance.BounceDot());
+                    }
+                    if (!flag && !Instance.IsOpenOrOpening)
+                    {
+                        SoundManager.Instance.PlaySound(Instance.messageSound, false, 1f, null).pitch = 0.5f + (float)srcPlayer.PlayerId / 15f;
+                        Instance.chatNotification.SetUp(srcPlayer, chatText);
+                    }
+                }
+                catch (Exception message)
+                {
                     PluginSingleton<TownOfUsEdited>.Instance.Log.LogError($"Error forcing send message: {message.ToString()}");
-			        Instance.chatBubblePool.Reclaim(pooledBubble);
-		        }
+                    Instance.chatBubblePool.Reclaim(pooledBubble);
+                }
             }
             public static bool CheckRole(string role)
             {
@@ -71,25 +71,25 @@ namespace TownOfUsEdited.Patches
                 role == "Conjurer" || role == "Converter" || role == "Coven" || role == "CovenLeader" ||
                 role == "Crewmate" || role == "Crusader" || role == "Deputy" || role == "Detective" ||
                 role == "Doctor" || role == "Doomsayer" || role == "Doppelganger" || role == "Engineer" ||
-                role == "Escapist" || role == "Executioner" || role == "Fighter" || role == "Glitch" || 
-                role == "Grenadier" || role == "GuardianAngel" || role == "Impostor" || 
+                role == "Escapist" || role == "Executioner" || role == "Fighter" || role == "Glitch" ||
+                role == "Grenadier" || role == "GuardianAngel" || role == "Impostor" ||
                 role == "HexMaster" || role == "Hunter" || role == "Hypnotist" || role == "Imitator"
                 || role == "Infectious" || role == "Informant" || role == "Investigator" || role == "Jailor"
                 || role == "Janitor" || role == "Jester" || role == "Juggernaut" || role == "Knight"
-                || role == "Lookout" || role == "Mafioso" || role == "Manipulator" || role == "Mayor" 
+                || role == "Lookout" || role == "Mafioso" || role == "Manipulator" || role == "Mayor"
                 || role == "Medic" || role == "Medium" || role == "Miner" || role == "Morphling"
                 || role == "Mutant" || role == "Mystic" || role == "Noclip" || role == "Oracle"
                 || role == "Paranoïac" || role == "Plaguebearer" || role == "Poisoner" || role == "Politician"
                 || role == "PotionMaster" || role == "Prosecutor" || role == "Reviver" || role == "Ritualist"
                 || role == "Seer" || role == "SerialKiller" || role == "Sheriff" || role == "Shifter"
                 || role == "Shooter" || role == "Snitch" || role == "SoulCollector" || role == "Spiritualist"
-                || role == "Spy" || role == "Survivor" || role == "Swapper" || role == "Swooper" 
+                || role == "Spy" || role == "Survivor" || role == "Swapper" || role == "Swooper"
                 || role == "TimeLord" || role == "Tracker" || role == "Transporter" || role == "Trapper"
                 || role == "Troll" || role == "Undertaker" || role == "Vampire" || role == "Vigilante"
-                || role == "Vulture" || role == "Warden" || role == "Warlock" || role == "Watcher" 
+                || role == "Vulture" || role == "Warden" || role == "Warlock" || role == "Watcher"
                 || role == "Werewolf" || role == "Witch" || role == "Veteran" || role == "VoodooMaster";
             }
-            public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl sourcePlayer , ref string chatText)
+            public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl sourcePlayer, ref string chatText)
             {
                 if (__instance != HudManager.Instance.Chat)
                     return true;
@@ -116,7 +116,7 @@ namespace TownOfUsEdited.Patches
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby" + 
+                            $"/limit [number] - Set a player limit in the lobby" +
                             $"</size>";
                         system = true;
                     }
@@ -471,7 +471,7 @@ namespace TownOfUsEdited.Patches
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
-                
+
                 if (chatText.ToLower().StartsWith("/death"))
                 {
                     if ((AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
@@ -865,7 +865,7 @@ namespace TownOfUsEdited.Patches
                     __instance.NameText.color = Palette.Orange;
                     __instance.NameText.ForceMeshUpdate(true, true);
                     __instance.Xmark.enabled = false;
-			        __instance.Background.color = Palette.White;
+                    __instance.Background.color = Palette.White;
                     __instance.votedMark.enabled = false;
                     host = false;
                     return false;
@@ -876,7 +876,7 @@ namespace TownOfUsEdited.Patches
                     __instance.NameText.color = Palette.ImpostorRed;
                     __instance.NameText.ForceMeshUpdate(true, true);
                     __instance.Xmark.enabled = true;
-			        __instance.Background.color = Palette.White;
+                    __instance.Background.color = Palette.White;
                     __instance.votedMark.enabled = false;
                     error = false;
                     return false;
@@ -887,7 +887,7 @@ namespace TownOfUsEdited.Patches
                     __instance.NameText.color = Palette.CrewmateBlue;
                     __instance.NameText.ForceMeshUpdate(true, true);
                     __instance.Xmark.enabled = false;
-			        __instance.Background.color = Palette.White;
+                    __instance.Background.color = Palette.White;
                     __instance.votedMark.enabled = false;
                     system = false;
                     return false;
@@ -898,7 +898,7 @@ namespace TownOfUsEdited.Patches
                     __instance.NameText.color = Palette.Blue;
                     __instance.NameText.ForceMeshUpdate(true, true);
                     __instance.Xmark.enabled = true;
-			        __instance.Background.color = Palette.White;
+                    __instance.Background.color = Palette.White;
                     __instance.votedMark.enabled = false;
                     noaccess = false;
                     return false;

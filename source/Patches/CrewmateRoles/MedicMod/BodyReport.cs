@@ -37,7 +37,7 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
                 Killer = Utils.PlayerById(killer.KillerId),
                 Reporter = __instance,
                 Body = Utils.PlayerById(killer.PlayerId),
-                KillAge = (float) (DateTime.UtcNow - killer.KillTime).TotalMilliseconds
+                KillAge = (float)(DateTime.UtcNow - killer.KillTime).TotalMilliseconds
             };
 
             //System.Console.WriteLine("FIVEF");

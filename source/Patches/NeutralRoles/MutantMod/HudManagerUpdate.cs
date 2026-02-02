@@ -49,7 +49,7 @@ namespace TownOfUsEdited.NeutralRoles.MutantMod
             }
             else __instance.KillButton.SetCoolDown(role.KillTimer(), CustomGameOptions.TransformKCD);
         }
-        public static void UpdateTransformButton (HudManager __instance)
+        public static void UpdateTransformButton(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;

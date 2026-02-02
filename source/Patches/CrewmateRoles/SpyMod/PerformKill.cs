@@ -1,12 +1,12 @@
 using HarmonyLib;
 using TownOfUsEdited.Roles;
 
-namespace TownOfUsEdited.CrewmateRoles.SpyMod 
+namespace TownOfUsEdited.CrewmateRoles.SpyMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
-    public class PerformKill 
+    public class PerformKill
     {
-        public static bool Prefix(KillButton __instance) 
+        public static bool Prefix(KillButton __instance)
         {
             if (__instance != HudManager.Instance.KillButton) return true;
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Spy);
@@ -17,7 +17,7 @@ namespace TownOfUsEdited.CrewmateRoles.SpyMod
             MapOptions mapOptions = GameManager.Instance.GetMapOptions();
             mapOptions.IncludeDeadBodies = true;
             mapOptions.AllowMovementWhileMapOpen = true;
-            mapOptions.Mode = (MapOptions.Modes) 2;
+            mapOptions.Mode = (MapOptions.Modes)2;
             HudManager.Instance.ToggleMapVisible(mapOptions);
 
             return false;

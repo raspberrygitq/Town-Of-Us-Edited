@@ -12,15 +12,15 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
         {
             var cursed = role.CursedList;
             if (!role.Player.Data.IsDead && cursed != null)
-            foreach (PlayerVoteArea pva in __instance.playerStates)
-            {
-                if (cursed.Any(x => x == pva.TargetPlayerId))
+                foreach (PlayerVoteArea pva in __instance.playerStates)
                 {
-                    var player = Utils.PlayerById(pva.TargetPlayerId);
-                    if (!player.Data.IsDead)
-                    pva.NameText.text = "<color=#FF0000>† </color>" + pva.NameText.text;
+                    if (cursed.Any(x => x == pva.TargetPlayerId))
+                    {
+                        var player = Utils.PlayerById(pva.TargetPlayerId);
+                        if (!player.Data.IsDead)
+                            pva.NameText.text = "<color=#FF0000>† </color>" + pva.NameText.text;
+                    }
                 }
-            }
         }
 
         public static void Postfix(HudManager __instance)
@@ -36,8 +36,8 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
                     {
                         player.nameText().text = "<color=#FF0000>† </color>" + player.nameText().text;
                     }
-                } 
-            }  
+                }
+            }
             if (!MeetingHud.Instance) return;
             foreach (var witch in Role.GetRoles(RoleEnum.Witch))
             {

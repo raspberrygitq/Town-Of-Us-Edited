@@ -8,7 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace TownOfUsEdited
 {
     [HarmonyPatch]
-    
+
     public class PrefabLoader
     {
         [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.Awake))]

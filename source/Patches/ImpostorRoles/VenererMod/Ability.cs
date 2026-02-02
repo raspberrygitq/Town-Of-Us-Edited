@@ -12,7 +12,7 @@ namespace TownOfUsEdited.ImpostorRoles.VenererMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Venerer))
             {
-                var venerer = (Venerer) role;
+                var venerer = (Venerer)role;
                 if (venerer.IsCamouflaged)
                     venerer.Ability();
                 else if (venerer.Enabled) venerer.StopAbility();

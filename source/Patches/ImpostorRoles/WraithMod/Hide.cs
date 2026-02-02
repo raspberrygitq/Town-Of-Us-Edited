@@ -13,7 +13,7 @@ namespace TownOfUsEdited.ImpostorRoles.WraithMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Wraith))
             {
-                var wraith = (Wraith) role;
+                var wraith = (Wraith)role;
                 if (wraith.Player == null || wraith.Player.Data.Disconnected) return;
                 var caught = wraith.Caught;
                 if (!caught)

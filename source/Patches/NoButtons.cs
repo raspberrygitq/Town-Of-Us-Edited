@@ -24,7 +24,7 @@ namespace TownOfUsEdited.Patches
         public static void Postfix()
         {
             if (LobbyBehaviour.Instance) return;
-            if (!CustomGameOptions.JesterButton) 
+            if (!CustomGameOptions.JesterButton)
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Jester)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;
             if (!CustomGameOptions.ExecutionerButton)
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.Executioner)) PlayerControl.LocalPlayer.RemainingEmergencies = 0;

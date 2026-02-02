@@ -304,10 +304,10 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
             {
                 var imitatorRole = Role.GetRole<Imitator>(PlayerControl.LocalPlayer);
                 if (!meetingHud.playerStates[PlayerControl.LocalPlayer.PlayerId].DidVote)
-                if (MeetingHud.Instance.state != MeetingHud.VoteStates.Results && MeetingHud.Instance.state != MeetingHud.VoteStates.Proceeding)
-                {
-                    AddButtonImitator.GenButton(imitatorRole, voteArea, true);
-                }
+                    if (MeetingHud.Instance.state != MeetingHud.VoteStates.Results && MeetingHud.Instance.state != MeetingHud.VoteStates.Proceeding)
+                    {
+                        AddButtonImitator.GenButton(imitatorRole, voteArea, true);
+                    }
             }
 
             if (AmongUsClient.Instance.AmHost) meetingHud.CheckForEndVoting();

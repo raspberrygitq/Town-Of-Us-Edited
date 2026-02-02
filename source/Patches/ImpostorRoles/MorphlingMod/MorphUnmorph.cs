@@ -10,7 +10,7 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Morphling))
             {
-                var morphling = (Morphling) role;
+                var morphling = (Morphling)role;
                 if (morphling.Morphed)
                     morphling.Morph();
                 else if (morphling.Enabled) morphling.Unmorph();

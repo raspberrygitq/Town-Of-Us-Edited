@@ -12,7 +12,7 @@ namespace TownOfUsEdited.ImpostorRoles.SwooperMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Swooper))
             {
-                var swooper = (Swooper) role;
+                var swooper = (Swooper)role;
                 if (swooper.IsSwooped)
                     swooper.Swoop();
                 else if (swooper.Enabled) swooper.UnSwoop();

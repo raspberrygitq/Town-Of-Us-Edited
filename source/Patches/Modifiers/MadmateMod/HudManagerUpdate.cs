@@ -26,7 +26,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
             else if (!PlayerControl.LocalPlayer.Is(RoleEnum.Engineer) && !PlayerControl.LocalPlayer.Is(RoleEnum.Doctor) && !PlayerControl.LocalPlayer.Is(RoleEnum.Paranoïac)
             && !PlayerControl.LocalPlayer.Is(RoleEnum.Plumber))
             {
-                __instance.ImpostorVentButton .transform.localPosition = new Vector3(-1f, 1f, 0f);
+                __instance.ImpostorVentButton.transform.localPosition = new Vector3(-1f, 1f, 0f);
             }
         }
     }

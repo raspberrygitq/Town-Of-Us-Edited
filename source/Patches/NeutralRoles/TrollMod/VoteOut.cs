@@ -37,10 +37,12 @@ namespace TownOfUsEdited.NeutralRoles.TrollMod
                     role.DeathReason = DeathReasons.Victorious;
 
                     byte[] toKill = MeetingHud.Instance.playerStates.Where(x => !Utils.PlayerById(x.TargetPlayerId).Is(RoleEnum.Pestilence) && x.VotedFor == ((Troll)role).TrolledPlayer.PlayerId).Select(x => x.TargetPlayerId).ToArray();
-                    var pk = new PlayerMenu((x) => {
+                    var pk = new PlayerMenu((x) =>
+                    {
                         Utils.RpcMultiMurderPlayer(((Troll)role).Player, x);
                         role.PauseEndCrit = false;
-                    }, (y) => {
+                    }, (y) =>
+                    {
                         return toKill.Contains(y.PlayerId);
                     });
                     Coroutines.Start(pk.Open(3f));

@@ -99,7 +99,7 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
                     break;
             }
 
-            
+
 
             return false;
         }
@@ -186,9 +186,9 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
             if (MeetingHud.Instance) return;
 
             __result = new MapOptions
-		    {
-			    Mode = MapOptions.Modes.Sabotage
-		    };
+            {
+                Mode = MapOptions.Modes.Sabotage
+            };
         }
     }
 }

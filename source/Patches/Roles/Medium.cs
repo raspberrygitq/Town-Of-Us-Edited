@@ -10,9 +10,9 @@ namespace TownOfUsEdited.Roles
         public bool coolingDown => Cooldown > 0f;
 
         public Dictionary<byte, ArrowBehaviour> MediatedPlayers = new Dictionary<byte, ArrowBehaviour>();
-        
+
         public static Sprite Arrow => TownOfUsEdited.Arrow;
-        
+
         public Medium(PlayerControl player) : base(player)
         {
             Name = "Medium";

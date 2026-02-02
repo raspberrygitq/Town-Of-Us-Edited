@@ -10,4 +10,4 @@ namespace TownOfUsEdited.Patches.CustomHats.Patches
             HatLoader.LoadHatsRoutine();
         }
     }
-}   
+}

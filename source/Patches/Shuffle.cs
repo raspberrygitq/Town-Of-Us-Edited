@@ -15,9 +15,9 @@ namespace TownOfUsEdited
         }
 
         public static int RandomIdx<T>(this IList<T> self)
-	    {
-		    return UnityEngine.Random.Range(0, self.Count);
-	    }
+        {
+            return UnityEngine.Random.Range(0, self.Count);
+        }
 
         public static T TakeFirst<T>(this List<T> list)
         {

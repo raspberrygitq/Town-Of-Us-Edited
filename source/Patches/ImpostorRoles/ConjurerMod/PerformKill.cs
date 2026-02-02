@@ -10,7 +10,6 @@ namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
 {
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKillButton
-
     {
         public static bool Prefix(KillButton __instance)
         {
@@ -74,7 +73,7 @@ namespace TownOfUsEdited.ImpostorRoles.ConjurerMod
                         if (modifier.KilledThisRound >= 2) Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
                         else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
                     }
-                    else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown; 
+                    else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown;
                     return false;
                 }
             }

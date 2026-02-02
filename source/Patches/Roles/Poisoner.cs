@@ -74,7 +74,7 @@ namespace TownOfUsEdited.Roles
 
             // Kill Check
             if (PoisonedPlayer != null && !PoisonedPlayer.Is(RoleEnum.Pestilence) && !PoisonedPlayer.IsOnAlert()
-                && !PoisonedPlayer.HasPotionShield() && !PoisonedPlayer.IsProtected() && !PoisonedPlayer.IsBarriered() && !PoisonedPlayer.IsGuarded() 
+                && !PoisonedPlayer.HasPotionShield() && !PoisonedPlayer.IsProtected() && !PoisonedPlayer.IsBarriered() && !PoisonedPlayer.IsGuarded()
                 && !PoisonedPlayer.IsShielded() && PoisonedPlayer != ShowShield.FirstRoundShielded)
             {
                 Utils.Rpc(CustomRPC.PoisonKill, PlayerControl.LocalPlayer.PlayerId, true); // Successed Kill

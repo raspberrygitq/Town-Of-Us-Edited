@@ -31,7 +31,7 @@ namespace TownOfUsEdited.Roles
             var utcNow = DateTime.UtcNow;
             var timeSpan = utcNow - StartChargeTime;
             var num = CustomGameOptions.ChargeUpDuration * 1000f;
-            var result = (float)timeSpan.TotalMilliseconds/num * 100f;
+            var result = (float)timeSpan.TotalMilliseconds / num * 100f;
             if (result > 100f) result = 100f;
             return Convert.ToInt32(Math.Round(result));
         }

@@ -39,8 +39,8 @@ namespace TownOfUsEdited.CrewmateRoles.SpyMod
                 renderer.material.SetFloat("_Desat", 0f);
                 AdminText.color = Palette.EnabledColor;
                 AdminText.material.SetFloat("_Desat", 0f);
-            } 
-            else 
+            }
+            else
             {
                 renderer.color = Palette.DisabledClear;
                 renderer.material.SetFloat("_Desat", 1f);

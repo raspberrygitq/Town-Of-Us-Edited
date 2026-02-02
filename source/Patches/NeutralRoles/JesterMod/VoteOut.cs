@@ -55,7 +55,7 @@ namespace TownOfUsEdited.NeutralRoles.JesterMod
                     return toKill.Contains(y.PlayerId);
                 });
                 Coroutines.Start(pk.Open(3f));
-            }        
+            }
         }
         public static void Postfix(ExileController __instance) => ExileControllerPostfix(__instance);
 

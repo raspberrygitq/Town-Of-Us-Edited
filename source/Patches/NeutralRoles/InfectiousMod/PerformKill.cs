@@ -52,7 +52,7 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
                     Utils.Interact(role.ClosestPlayer, PlayerControl.LocalPlayer, true);
                     return false;
                 }
-                
+
                 Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer, true);
             }
             return false;

@@ -12,7 +12,7 @@ namespace TownOfUsEdited.NeutralRoles.SurvivorMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Survivor))
             {
-                var surv = (Survivor) role;
+                var surv = (Survivor)role;
                 if (surv.Vesting)
                     surv.Vest();
                 else if (surv.Enabled) surv.UnVest();

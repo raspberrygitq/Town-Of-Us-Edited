@@ -67,7 +67,7 @@ namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
                 hudManager.ShadowQuad.gameObject.SetActive(false);
                 player.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
                 player.RpcSetScanner(false);
-                
+
                 if (player.Is(AbilityEnum.Assassin))
                 {
                     var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
@@ -242,10 +242,10 @@ namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
             {
                 var imitatorRole = Role.GetRole<Imitator>(PlayerControl.LocalPlayer);
                 if (!meetingHud.playerStates[PlayerControl.LocalPlayer.PlayerId].DidVote)
-                if (MeetingHud.Instance.state != MeetingHud.VoteStates.Results && MeetingHud.Instance.state != MeetingHud.VoteStates.Proceeding)
-                {
-                    AddButtonImitator.GenButton(imitatorRole, voteArea, true);
-                }
+                    if (MeetingHud.Instance.state != MeetingHud.VoteStates.Results && MeetingHud.Instance.state != MeetingHud.VoteStates.Proceeding)
+                    {
+                        AddButtonImitator.GenButton(imitatorRole, voteArea, true);
+                    }
             }
 
             if (AmongUsClient.Instance.AmHost) meetingHud.CheckForEndVoting();

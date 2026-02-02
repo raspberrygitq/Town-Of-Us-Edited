@@ -79,7 +79,7 @@ namespace TownOfUsEdited.Roles
                     return ShipStatus.Instance.FastRooms[SystemTypes.Medical].roomArea.OverlapPoint(PlayerControl.LocalPlayer.GetTruePosition());
                 }
             }
-            
+
         }
     }
 }

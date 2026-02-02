@@ -1,6 +1,6 @@
 ﻿namespace TownOfUsEdited.Extensions
 {
-    public enum CustomPlayerOutfitType 
+    public enum CustomPlayerOutfitType
     {
         Default,
         Morph,

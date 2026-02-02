@@ -31,7 +31,7 @@ namespace TownOfUsEdited.NeutralRoles.GlitchMod
             {
                 if (death.KillerId == PlayerControl.LocalPlayer.PlayerId && death.PlayerId == __instance.ParentId &&
                     PlayerControl.LocalPlayer.Is(RoleEnum.SoulCollector)) return false;
-                if (death.KillerId == PlayerControl.LocalPlayer.PlayerId && death.PlayerId == __instance.ParentId && 
+                if (death.KillerId == PlayerControl.LocalPlayer.PlayerId && death.PlayerId == __instance.ParentId &&
                     ((PlayerControl.LocalPlayer.Is(RoleEnum.Sheriff) && !CustomGameOptions.SheriffBodyReport) ||
                     (PlayerControl.LocalPlayer.Is(RoleEnum.Hunter) && !CustomGameOptions.HunterBodyReport)))
                     return false;

@@ -14,7 +14,7 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
         public static bool cosmeticsUpdated = false;
         public static bool nameUpdated = false;
         public static bool StartedMeeting = false;
-        
+
         [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
         public class ReviverUpdate
         {
@@ -93,7 +93,7 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
                         }
                         __instance.NameText.ForceMeshUpdate(true, true);
                         __instance.Xmark.enabled = false;
-			            __instance.Background.color = Palette.White;
+                        __instance.Background.color = Palette.White;
                         if (MeetingHud.Instance)
                         {
                             if (voted)
@@ -132,12 +132,12 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
                     {
                         if (player == role.Player && reviverchat)
                         {
-		                    __instance.playerInfo = role.RevivedPlayer.Data;
+                            __instance.playerInfo = role.RevivedPlayer.Data;
                             __instance.Player.UpdateFromPlayerData(role.RevivedPlayer.Data, PlayerOutfitType.Default, PlayerMaterial.MaskType.ScrollingUI, false, null, true);
-		                    __instance.Player.ToggleName(false);
-		                    __instance.maskLayer = 51 + __instance.PoolIndex;
-		                    __instance.SetMaskLayer();
-		                    __instance.SetColorblindText();
+                            __instance.Player.ToggleName(false);
+                            __instance.maskLayer = 51 + __instance.PoolIndex;
+                            __instance.SetMaskLayer();
+                            __instance.SetColorblindText();
                             cosmeticsUpdated = true;
                             return false;
                         }
@@ -159,13 +159,13 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
                     if (role == null || role.Player == null || role.Player.Data.Disconnected ||
                     role.Player.Data.IsDead || role.UsedRevive == false) return true;
                     if (__instance.playerInfo != null && __instance.playerInfo == role.RevivedPlayer.Data)
-		            {
+                    {
                         __instance.Player.UpdateFromPlayerData(role.RevivedPlayer.Data, PlayerOutfitType.Default, PlayerMaterial.MaskType.ScrollingUI, false, null, true);
-			            __instance.SetMaskLayer();
-			            __instance.SetColorblindText();
-		            }
-		            __instance.ColorBlindName.enabled = DataManager.Settings.Accessibility.ColorBlindMode;
-		            __instance.ColorBlindName.text = __instance.Player.ColorBlindName;
+                        __instance.SetMaskLayer();
+                        __instance.SetColorblindText();
+                    }
+                    __instance.ColorBlindName.enabled = DataManager.Settings.Accessibility.ColorBlindMode;
+                    __instance.ColorBlindName.text = __instance.Player.ColorBlindName;
                     return false;
                 }
                 return true;
@@ -192,7 +192,7 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
                     if (role == null || role.Player == null || role.Player.Data.Disconnected ||
                     role.Player.Data.IsDead || role.UsedRevive == false) return true;
                 }
-                
+
                 if (sourcePlayer.Is(RoleEnum.Reviver))
                 {
                     reviverchat = true;
@@ -217,14 +217,14 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
                     if (playerInfo == role.RevivedPlayer.Data)
                     {
                         __instance.Background.sprite = ShipStatus.Instance.CosmeticsCache.GetNameplate(playerInfo.DefaultOutfit.NamePlateId).Image;
-		                __instance.PlayerIcon.UpdateFromPlayerData(role.RevivedPlayer.Data, PlayerOutfitType.Default, PlayerMaterial.MaskType.ComplexUI, false, null, true);
-		                __instance.PlayerIcon.ToggleName(false);
-		                __instance.NameText.text = playerInfo.PlayerName;
-		                __instance.LevelNumberText.text = ProgressionManager.FormatVisualLevel(playerInfo.PlayerLevel);
-		                PlayerMaterial.SetColors((int)DataManager.Player.Customization.Color, __instance.ThumbsDown);
-		                __instance.ColorBlindName.enabled = DataManager.Settings.Accessibility.ColorBlindMode;
-		                __instance.ColorBlindName.text = __instance.PlayerIcon.ColorBlindName;
-		                __instance.SetColorblindText();
+                        __instance.PlayerIcon.UpdateFromPlayerData(role.RevivedPlayer.Data, PlayerOutfitType.Default, PlayerMaterial.MaskType.ComplexUI, false, null, true);
+                        __instance.PlayerIcon.ToggleName(false);
+                        __instance.NameText.text = playerInfo.PlayerName;
+                        __instance.LevelNumberText.text = ProgressionManager.FormatVisualLevel(playerInfo.PlayerLevel);
+                        PlayerMaterial.SetColors((int)DataManager.Player.Customization.Color, __instance.ThumbsDown);
+                        __instance.ColorBlindName.enabled = DataManager.Settings.Accessibility.ColorBlindMode;
+                        __instance.ColorBlindName.text = __instance.PlayerIcon.ColorBlindName;
+                        __instance.SetColorblindText();
                         return false;
                     }
                 }
@@ -245,20 +245,20 @@ namespace TownOfUsEdited.ImpostorRoles.ReviverMod
                     if (__instance == reviver.Player)
                     {
                         bool flag = target == null;
-		                UnityTelemetry.Instance.WriteMeetingStarted(flag);
-		                DebugAnalytics.Instance.Analytics.MeetingStarted(role.RevivedPlayer.Data, target != null);
-		                ShipStatus.Instance.StartMeeting(role.RevivedPlayer, target);
+                        UnityTelemetry.Instance.WriteMeetingStarted(flag);
+                        DebugAnalytics.Instance.Analytics.MeetingStarted(role.RevivedPlayer.Data, target != null);
+                        ShipStatus.Instance.StartMeeting(role.RevivedPlayer, target);
                         StartedMeeting = true;
-		                if (__instance.AmOwner)
-		                {
-			                if (flag)
-			                {
-				                __instance.RemainingEmergencies--;
-				                DataManager.Player.Stats.IncrementStat(StatID.EmergenciesCalled);
-				                return false;
-			                }
-			                DataManager.Player.Stats.IncrementStat(StatID.BodiesReported);
-		                }
+                        if (__instance.AmOwner)
+                        {
+                            if (flag)
+                            {
+                                __instance.RemainingEmergencies--;
+                                DataManager.Player.Stats.IncrementStat(StatID.EmergenciesCalled);
+                                return false;
+                            }
+                            DataManager.Player.Stats.IncrementStat(StatID.BodiesReported);
+                        }
                         return false;
                     }
                     else return true;

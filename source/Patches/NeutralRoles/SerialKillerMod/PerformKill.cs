@@ -19,11 +19,11 @@ namespace TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod
 
             var sk = Role.GetRole<SerialKiller>(PlayerControl.LocalPlayer);
             var killbutton = HudManager.Instance.KillButton;
-            
+
             if (sk.ClosestPlayer == null)
                 return false;
-                
-            if (__instance == sk.skconvertButton) 
+
+            if (__instance == sk.skconvertButton)
             {
                 if (sk.ConvertCooldown > 0)
                     return false;
@@ -39,11 +39,11 @@ namespace TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod
                     return false;
                 }
             }
-            
+
             if (__instance == killbutton)
             {
                 if (sk.Cooldown > 0)
-                return false;
+                    return false;
 
                 if (PlayerControl.LocalPlayer.IsControlled() && sk.ClosestPlayer.Is(Faction.Coven))
                 {

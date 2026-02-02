@@ -40,7 +40,7 @@ namespace TownOfUsEdited.ImpostorRoles.MinerMod
         {
             var ventPrefab = Object.FindObjectOfType<Vent>();
             var vent = Object.Instantiate(ventPrefab, ventPrefab.transform.parent);
-            
+
             vent.Id = ventId;
             vent.transform.position = new Vector3(position.x, position.y, zAxis);
 

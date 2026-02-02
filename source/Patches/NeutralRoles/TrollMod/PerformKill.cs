@@ -19,10 +19,10 @@ namespace TownOfUsEdited.Patches.NeutralRoles.TrollMod
 
             var troll = Role.GetRole<Troll>(PlayerControl.LocalPlayer);
             var killbutton = HudManager.Instance.KillButton;
-            
+
             if (troll.ClosestPlayer == null)
                 return false;
-            
+
             if (__instance == killbutton)
             {
                 var interact = Utils.Interact(PlayerControl.LocalPlayer, troll.ClosestPlayer);

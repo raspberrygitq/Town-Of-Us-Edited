@@ -39,7 +39,7 @@ namespace TownOfUsEdited.BattleRoyale.PlayerMod
             Utils.SetTarget(ref playerRole.ClosestPlayer, __instance.KillButton, float.NaN);
 
             return;
-            
+
         }
     }
 }

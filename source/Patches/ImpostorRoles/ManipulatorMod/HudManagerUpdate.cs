@@ -177,8 +177,8 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
                 }
                 manipVector.Normalize();
                 if (Input.GetKeyDown(KeyCode.Escape))
-		        {
-			        if (Minigame.Instance)
+                {
+                    if (Minigame.Instance)
                     {
                         Minigame.Instance.Close();
                     }
@@ -213,7 +213,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ManipulatorMod
                     role.ManipulatedPlayer.MyPhysics.body.velocity = vel;
                     Utils.Rpc(CustomRPC.SyncManipMovement, role.ManipulatedPlayer.PlayerId, vel.x, vel.y);
                 }
-                
+
                 return false;
             }
         }

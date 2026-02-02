@@ -294,7 +294,7 @@ namespace TownOfUsEdited.Roles
         {
             foreach (var role in AllRoles)
             {
-                return 
+                return
                     CustomGameOptions.NeutralEvilWinEndsGame && !role.PauseEndCrit &&
                     (GetRoles(RoleEnum.Jester).Any(x => ((Jester)x).VotedOut) == true ||
                     GetRoles(RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut) == true ||
@@ -311,7 +311,7 @@ namespace TownOfUsEdited.Roles
         }
         public static bool NeutralKillingWin()
         {
-            return 
+            return
                 GetRoles(RoleEnum.Juggernaut).Any(x => ((Juggernaut)x).JuggernautWins) == true ||
                 GetRoles(RoleEnum.Glitch).Any(x => ((Glitch)x).GlitchWins) == true ||
                 GetRoles(RoleEnum.Player).Any(x => ((Player)x).PlayerWins) == true ||
@@ -404,7 +404,7 @@ namespace TownOfUsEdited.Roles
 
             foreach (var role in GetRoles(RoleEnum.GuardianAngel))
             {
-                var ga = (GuardianAngel) role;
+                var ga = (GuardianAngel)role;
                 if (Player == ga.target && ((Player == PlayerControl.LocalPlayer && CustomGameOptions.GATargetKnows)
                     || (PlayerControl.LocalPlayer.Data.IsDead && !ga.Player.Data.IsDead)))
                 {
@@ -414,7 +414,7 @@ namespace TownOfUsEdited.Roles
 
             foreach (var role in GetRoles(RoleEnum.Executioner))
             {
-                var exe = (Executioner) role;
+                var exe = (Executioner)role;
                 if (Player == exe.target && PlayerControl.LocalPlayer.Data.IsDead && !exe.Player.Data.IsDead)
                 {
                     PlayerName += "<color=#8C4005FF> X</color>";
@@ -423,7 +423,7 @@ namespace TownOfUsEdited.Roles
 
             foreach (var role in GetRoles(RoleEnum.Troll))
             {
-                var troll = (Troll) role;
+                var troll = (Troll)role;
                 if (Player == troll.TrolledPlayer && (PlayerControl.LocalPlayer.Data.IsDead || PlayerControl.LocalPlayer == role.Player))
                 {
                     PlayerName += "<color=#c27d5aFF> T</color>";
@@ -526,7 +526,7 @@ namespace TownOfUsEdited.Roles
                 Player.myTasks.ToArray()[0].Cast<ImportantTextTask>().Text =
                     $"{ColorString}Role: {Name} (Press F2 for Role infos)\n{TaskText()}</color>";
             }
-            
+
             if (Player.Data.IsDead && !CreateDeadTask)
             {
                 Player.myTasks.ToArray()[1].Cast<ImportantTextTask>().Text = deadText;
@@ -591,7 +591,7 @@ namespace TownOfUsEdited.Roles
 
             return null;
         }
-        
+
         public static T GetRole<T>(PlayerControl player) where T : Role
         {
             return GetRole(player) as T;
@@ -724,7 +724,7 @@ namespace TownOfUsEdited.Roles
                         {
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = PlayerControl.LocalPlayer.KillSfx;
                         }
-                        
+
                         if (role.Alignment == Alignment.CrewmateSupport && role.Faction != Faction.Madmates)
                         {
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Engineer);
@@ -854,7 +854,7 @@ namespace TownOfUsEdited.Roles
                         {
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = PlayerControl.LocalPlayer.KillSfx;
                         }
-                        
+
                         if (role.Alignment == Alignment.CrewmateSupport && role.Faction != Faction.Madmates)
                         {
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Engineer);
@@ -1040,7 +1040,7 @@ namespace TownOfUsEdited.Roles
                         {
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = PlayerControl.LocalPlayer.KillSfx;
                         }
-                        
+
                         if (role.Alignment == Alignment.CrewmateSupport && role.Faction != Faction.Madmates)
                         {
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Engineer);
@@ -1374,40 +1374,40 @@ namespace TownOfUsEdited.Roles
                         return;
                     case StringNames.ImpostorsRemainP:
                     case StringNames.ImpostorsRemainS:
-                    {
-                        var imps = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                        var covens = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Coven) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
-                        string text = "";
-                        if (imps.Count > 0)
                         {
-                            if (imps.Count > 1)
+                            var imps = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Impostors) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
+                            var covens = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Is(Faction.Coven) && !x.Data.IsDead && !x.Data.Disconnected).ToList();
+                            string text = "";
+                            if (imps.Count > 0)
                             {
-                                text = $"{imps.Count} Impostors Remain.";
-                            }
-                            else text = $"{imps.Count} Impostor Remains.";
-                        }
-                        if (covens.Count > 0)
-                        {
-                            if (imps.Count <= 0)
-                            {
-                                if (covens.Count > 1)
+                                if (imps.Count > 1)
                                 {
-                                    text = $"{covens.Count} Coven Members Remain.";
+                                    text = $"{imps.Count} Impostors Remain.";
                                 }
-                                else text = $"{covens.Count} Coven Member Remains.";
+                                else text = $"{imps.Count} Impostor Remains.";
                             }
-                            else
+                            if (covens.Count > 0)
                             {
-                                if (covens.Count > 1)
+                                if (imps.Count <= 0)
                                 {
-                                    text += $"\nAnd {covens.Count} Coven Members Remain.";
+                                    if (covens.Count > 1)
+                                    {
+                                        text = $"{covens.Count} Coven Members Remain.";
+                                    }
+                                    else text = $"{covens.Count} Coven Member Remains.";
                                 }
-                                else text += $"\nAnd {covens.Count} Coven Member Remains.";
+                                else
+                                {
+                                    if (covens.Count > 1)
+                                    {
+                                        text += $"\nAnd {covens.Count} Coven Members Remain.";
+                                    }
+                                    else text += $"\nAnd {covens.Count} Coven Member Remains.";
+                                }
                             }
+                            __result = text;
+                            return;
                         }
-                        __result = text;
-                        return;
-                    }
                     case StringNames.ExileTextPN:
                     case StringNames.ExileTextSN:
                     case StringNames.ExileTextPP:
@@ -1426,7 +1426,7 @@ namespace TownOfUsEdited.Roles
                                 else if (!reviver.UsedRevive && info.Object.PlayerId == reviver.Player.PlayerId)
                                 {
                                     reviver.UsedRevive = true;
-                                }       
+                                }
                             }
                             if (role == null) return;
                             var roleName = role.RoleType == RoleEnum.Glitch ? role.Name : $"The {role.Name}";
@@ -1468,7 +1468,7 @@ namespace TownOfUsEdited.Roles
                             loverFlag,
                             player
                         );
-                        if(role.ColorCriteria())
+                        if (role.ColorCriteria())
                             player.NameText.color = role.Color;
                         player.NameText.enableWordWrapping = false;
                     }

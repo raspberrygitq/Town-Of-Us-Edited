@@ -384,7 +384,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
             if (CustomGameOptions.NewVampCanAssassin) Ability.AbilityDictionary.Remove(oldVamp.PlayerId);
 
             PlayerControl_Die.CheckEnd();
-            return; 
+            return;
         }
     }
 }

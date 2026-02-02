@@ -17,18 +17,18 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ReviverMod
                 return false;
 
             var role = Role.GetRole<Reviver>(PlayerControl.LocalPlayer);
-            
+
             if (role.CurrentTarget == null)
                 return false;
 
             var player = Utils.PlayerById(role.CurrentTarget.ParentId);
             if (player.Is(RoleEnum.Reviver)) return false;
-                
-            if (__instance == role.ReviveButton) 
+
+            if (__instance == role.ReviveButton)
             {
                 if (role.CurrentTarget.IsDouble())
                     return false;
-                    
+
                 if (!__instance.isActiveAndEnabled) return false;
                 var maxDistance = LegacyGameOptions.KillDistances[GameOptionsManager.Instance.currentNormalGameOptions.KillDistance];
 

@@ -21,7 +21,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.MutantMod
 
             var role = Role.GetRole<Mutant>(PlayerControl.LocalPlayer);
             var killbutton = HudManager.Instance.KillButton;
-                
+
             if (__instance == role.TransformButton)
             {
                 if (role.TransformButton.graphic.sprite == TownOfUsEdited.TransformSprite)
@@ -55,14 +55,14 @@ namespace TownOfUsEdited.Patches.NeutralRoles.MutantMod
                     return false;
                 }
             }
-            
+
             if (__instance == killbutton)
             {
                 if (role.ClosestPlayer == null)
                     return false;
 
                 if (role.Cooldown > 0)
-                return false;
+                    return false;
 
                 // Kill the closest player
                 role.Kill(role.ClosestPlayer);

@@ -1,4 +1,4 @@
-﻿﻿﻿using Reactor.Localization.Utilities;
+﻿using Reactor.Localization.Utilities;
 using UnityEngine;
 
 namespace TownOfUsEdited.RainbowMod

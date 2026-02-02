@@ -14,33 +14,33 @@ namespace TownOfUsEdited.Patches
             var role = Role.GetRole(PlayerControl.LocalPlayer);
             if (role == null) return true;
             if (__instance.IsOpen)
-		    {
-			    __instance.Close();
-			    return false;
-		    }
-		    if (!PlayerControl.LocalPlayer.CanMove && !MeetingHud.Instance)
-		    {
-			    return false;
-		    }
-		    PlayerControl.LocalPlayer.SetPlayerMaterialColors(__instance.HerePoint);
-		    if (PlayerControl.LocalPlayer.isTrackingPlayer)
-		    {
-			    if (PlayerControl.LocalPlayer.trackedPlayer.Data.Disconnected)
-			    {
-				    __instance.TrackedHerePoint.gameObject.SetActive(false);
-			    }
-			    else
-			    {
-				    __instance.SetTrackedHerePointColor(PlayerControl.LocalPlayer.trackedPlayerColorID);
-				    __instance.TrackedHerePoint.gameObject.SetActive(true);
-				    __instance.UpdateTrackedPosition();
-			    }
-		    }
-		    __instance.GenericShow();
-		    __instance.taskOverlay.Show();
+            {
+                __instance.Close();
+                return false;
+            }
+            if (!PlayerControl.LocalPlayer.CanMove && !MeetingHud.Instance)
+            {
+                return false;
+            }
+            PlayerControl.LocalPlayer.SetPlayerMaterialColors(__instance.HerePoint);
+            if (PlayerControl.LocalPlayer.isTrackingPlayer)
+            {
+                if (PlayerControl.LocalPlayer.trackedPlayer.Data.Disconnected)
+                {
+                    __instance.TrackedHerePoint.gameObject.SetActive(false);
+                }
+                else
+                {
+                    __instance.SetTrackedHerePointColor(PlayerControl.LocalPlayer.trackedPlayerColorID);
+                    __instance.TrackedHerePoint.gameObject.SetActive(true);
+                    __instance.UpdateTrackedPosition();
+                }
+            }
+            __instance.GenericShow();
+            __instance.taskOverlay.Show();
             __instance.ColorControl.baseColor = role.Color;
-		    __instance.ColorControl.SetColor(role.Color);
-			HudManager.Instance.SetHudActive(false);
+            __instance.ColorControl.SetColor(role.Color);
+            HudManager.Instance.SetHudActive(false);
             return false;
         }
     }
@@ -56,26 +56,26 @@ namespace TownOfUsEdited.Patches
             var role = Role.GetRole(PlayerControl.LocalPlayer);
             if (role == null) return true;
             if (__instance.IsOpen)
-		    {
-			    __instance.Close();
-			    return false;
-		    }
-		    if (!PlayerControl.LocalPlayer.CanMove && !MeetingHud.Instance)
-		    {
-			    return false;
-		    }
-		    if (__instance.specialInputHandler != null)
-		    {
-			    __instance.specialInputHandler.disableVirtualCursor = true;
-		    }
-		    PlayerControl.LocalPlayer.SetPlayerMaterialColors(__instance.HerePoint);
-		    __instance.GenericShow();
-		    __instance.infectedOverlay.gameObject.SetActive(true);
-		    __instance.ColorControl.baseColor = role.Color;
-		    __instance.ColorControl.SetColor(role.Color);
-		    __instance.taskOverlay.Show();
-		    HudManager.Instance.SetHudActive(false);
-		    ConsoleJoystick.SetMode_Sabotage();
+            {
+                __instance.Close();
+                return false;
+            }
+            if (!PlayerControl.LocalPlayer.CanMove && !MeetingHud.Instance)
+            {
+                return false;
+            }
+            if (__instance.specialInputHandler != null)
+            {
+                __instance.specialInputHandler.disableVirtualCursor = true;
+            }
+            PlayerControl.LocalPlayer.SetPlayerMaterialColors(__instance.HerePoint);
+            __instance.GenericShow();
+            __instance.infectedOverlay.gameObject.SetActive(true);
+            __instance.ColorControl.baseColor = role.Color;
+            __instance.ColorControl.SetColor(role.Color);
+            __instance.taskOverlay.Show();
+            HudManager.Instance.SetHudActive(false);
+            ConsoleJoystick.SetMode_Sabotage();
             return false;
         }
     }

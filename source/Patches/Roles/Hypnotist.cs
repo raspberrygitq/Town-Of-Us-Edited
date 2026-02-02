@@ -8,7 +8,7 @@ namespace TownOfUsEdited.Roles
     public class Hypnotist : Role
     {
         public KillButton _hypnotiseButton;
-        
+
         public PlayerControl ClosestPlayer;
         public List<byte> HypnotisedPlayers = new List<byte>();
         public bool HysteriaActive;
@@ -132,7 +132,7 @@ namespace TownOfUsEdited.Roles
                 else if (CamouflageUnCamouflage.IsCamoed) continue;
                 foreach (var doppel in Role.GetRoles(RoleEnum.Doppelganger))
                 {
-                    var doppelRole = (Doppelganger) doppel;
+                    var doppelRole = (Doppelganger)doppel;
                     if (doppelRole.Players.Contains(player.PlayerId)) continue;
                 }
                 player.SetOutfit(CustomPlayerOutfitType.Default);

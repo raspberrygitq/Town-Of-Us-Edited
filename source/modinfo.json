@@ -1,0 +1,17 @@
+{
+  "Name": "Town Of Us Edited",
+  "Description": "Town Of Us Edited, but with 100+ roles",
+  "Tags": [
+    "roles",
+    "mods"
+  ],
+  "Icon": "TownOfUsEdited.Resources.Icon.png",
+  "License": "GPLv3",
+  "Authors": [
+    "le killer",
+    "gitq"
+  ],
+  "Links": {
+    "Source": "https://github.com/raspberrygitq/Town-Of-Us-Edited"
+  }
+}

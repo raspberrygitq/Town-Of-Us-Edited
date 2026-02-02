@@ -23,7 +23,7 @@ namespace TownOfUsEdited.Roles
         private KillButton _cleanseButton;
         public PlayerControl ClosestPlayer;
         public PlayerControl Barriered;
-        public Dictionary<byte, List<EffectType>> CleansedPlayers =  new Dictionary<byte, List<EffectType>>();
+        public Dictionary<byte, List<EffectType>> CleansedPlayers = new Dictionary<byte, List<EffectType>>();
         public float TimeRemaining;
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;

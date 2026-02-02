@@ -12,7 +12,7 @@ namespace TownOfUsEdited.ImpostorRoles.ManipulatorMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Manipulator))
             {
-                var manip = (Manipulator) role;
+                var manip = (Manipulator)role;
                 if (manip.UsingManipulation)
                     manip.StartManipulation();
                 else if (manip.Enabled) manip.StopManipulation();

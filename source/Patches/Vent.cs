@@ -14,12 +14,12 @@ namespace TownOfUsEdited
         [HarmonyPatch(nameof(HudManager.Update))]
         public static void Postfix(HudManager __instance)
         {
-            if(__instance.ImpostorVentButton == null || __instance.ImpostorVentButton.gameObject == null || __instance.ImpostorVentButton.IsNullOrDestroyed())
+            if (__instance.ImpostorVentButton == null || __instance.ImpostorVentButton.gameObject == null || __instance.ImpostorVentButton.IsNullOrDestroyed())
                 return;
 
             bool active = PlayerControl.LocalPlayer != null && VentPatches.CanVent(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer.CachedPlayerData) && !MeetingHud.Instance;
-            if(active != __instance.ImpostorVentButton.gameObject.active)
-            __instance.ImpostorVentButton.gameObject.SetActive(active);
+            if (active != __instance.ImpostorVentButton.gameObject.active)
+                __instance.ImpostorVentButton.gameObject.SetActive(active);
         }
     }
 
@@ -62,21 +62,21 @@ namespace TownOfUsEdited
                 || CustomGameOptions.GameMode == GameMode.Chaos)
                 return false;
 
-            if (player.Is(RoleEnum.Engineer) || player.Is(RoleEnum.Coven) || player.Is(RoleEnum.CovenLeader) || 
+            if (player.Is(RoleEnum.Engineer) || player.Is(RoleEnum.Coven) || player.Is(RoleEnum.CovenLeader) ||
                 player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.Spiritualist) || player.Is(RoleEnum.VoodooMaster) ||
                 (player.Is(RoleEnum.PotionMaster) && Role.GetRole<PotionMaster>(player).UsingPotion && Role.GetRole<PotionMaster>(player).Potion == "Strength") ||
                 player.Is(Faction.Madmates) || player.Is(RoleEnum.Paranoïac) ||
-                (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) || 
+                (player.Is(RoleEnum.Glitch) && CustomGameOptions.GlitchVent) ||
                 (player.Is(RoleEnum.Juggernaut) && CustomGameOptions.JuggVent) ||
-                (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) || 
+                (player.Is(RoleEnum.Pestilence) && CustomGameOptions.PestVent) ||
                 (player.Is(RoleEnum.Jester) && CustomGameOptions.JesterVent) ||
-                (player.Is(RoleEnum.Vampire) && CustomGameOptions.VampVent) || 
+                (player.Is(RoleEnum.Vampire) && CustomGameOptions.VampVent) ||
                 (player.Is(RoleEnum.SerialKiller) && CustomGameOptions.SerialKillerVent) ||
-                (player.Is(RoleEnum.Player) && !CustomGameOptions.BattleDisableVent) || 
+                (player.Is(RoleEnum.Player) && !CustomGameOptions.BattleDisableVent) ||
                 (player.Is(RoleEnum.Terrorist) && CustomGameOptions.TerroristVent) ||
-                (player.Is(RoleEnum.Vulture) && CustomGameOptions.VultureVent) || 
+                (player.Is(RoleEnum.Vulture) && CustomGameOptions.VultureVent) ||
                 (player.Is(RoleEnum.Infectious) && CustomGameOptions.InfectiousVent) ||
-                (player.Is(RoleEnum.Doppelganger) && CustomGameOptions.DoppelVent) || 
+                (player.Is(RoleEnum.Doppelganger) && CustomGameOptions.DoppelVent) ||
                 (player.Is(RoleEnum.SoulCollector) && CustomGameOptions.SCVent) ||
                 (player.Is(RoleEnum.Arsonist) && CustomGameOptions.ArsoVent) ||
                 (player.Is(RoleEnum.HexMaster) && CustomGameOptions.HexMasterVent))
@@ -147,7 +147,7 @@ namespace TownOfUsEdited
                     canUse &= (double)num <= (double)__instance.UsableDistance;
                 else
                     canUse = ((canUse ? 1 : 0) & ((double)num > (double)__instance.UsableDistance ? 0 : (!PhysicsHelpers.AnythingBetween(playerControl.Collider, (Vector2)center, (Vector2)position, Constants.ShipOnlyMask, false) ? 1 : 0))) != 0;
-                
+
             }
 
             __result = num;

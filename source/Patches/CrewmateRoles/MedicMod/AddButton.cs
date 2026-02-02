@@ -18,16 +18,19 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
         private static bool IsExempt(PlayerVoteArea voteArea)
         {
             var player = Utils.PlayerById(voteArea.TargetPlayerId);
-            if (player == null || player.Data.Disconnected) {
+            if (player == null || player.Data.Disconnected)
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
 
         public static void GenButton(Medic role, PlayerVoteArea voteArea)
         {
-            
+
             var targetId = voteArea.TargetPlayerId;
             if (IsExempt(voteArea))
             {
@@ -39,9 +42,12 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
 
             PlayerControl playerControl = PlayerControl.AllPlayerControls.ToArray().FirstOrDefault(p => p.PlayerId == voteArea.TargetPlayerId);
 
-            if (role.LightDarkColors[playerControl.GetDefaultOutfit().ColorId] == "lighter") {
+            if (role.LightDarkColors[playerControl.GetDefaultOutfit().ColorId] == "lighter")
+            {
                 renderer.sprite = LighterSprite;
-            } else {
+            }
+            else
+            {
                 renderer.sprite = DarkerSprite;
             }
             newButton.transform.position = colorButton.transform.position - new Vector3(-0.8f, 0.2f, -2f);
@@ -68,7 +74,7 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Medic))
             {
-                var medic = (Medic) role;
+                var medic = (Medic)role;
                 medic.Buttons.Clear();
             }
             if (CustomGameOptions.MedicReportColorDuration == 0) return;
@@ -77,11 +83,11 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
             var medicrole = Role.GetRole<Medic>(PlayerControl.LocalPlayer);
             foreach (var voteArea in __instance.playerStates)
             {
-                try 
+                try
                 {
                     GenButton(medicrole, voteArea);
-                } 
-                catch 
+                }
+                catch
                 {
                 }
             }

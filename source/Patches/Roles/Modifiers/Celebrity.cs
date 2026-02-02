@@ -31,7 +31,7 @@ namespace TownOfUsEdited.Roles.Modifiers
 
         public void PrintMessage()
         {
-            var milliSeconds = (float) (DateTime.UtcNow - DeathTime).TotalMilliseconds;
+            var milliSeconds = (float)(DateTime.UtcNow - DeathTime).TotalMilliseconds;
             Message += $"{Math.Round(milliSeconds / 1000)} seconds ago.";
             MessageShown = true;
             Utils.Rpc(CustomRPC.CelebDied, Message);

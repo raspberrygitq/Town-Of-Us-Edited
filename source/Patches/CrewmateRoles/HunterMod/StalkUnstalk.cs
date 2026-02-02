@@ -12,7 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.VeteranMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Hunter))
             {
-                var hunter = (Hunter) role;
+                var hunter = (Hunter)role;
                 if (hunter.Stalking)
                     hunter.Stalk();
                 else if (hunter.Enabled) hunter.StopStalking();

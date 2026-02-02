@@ -46,10 +46,10 @@ namespace TownOfUsEdited.CrewmateRoles.KnightMod
             __instance.KillButton.gameObject.SetActive(isKillButtonActive);
 
             //Set Uses Text's visibility
-             knight.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
-                    && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
-                    && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
-                    AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
+            knight.UsesText.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
+                   && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead
+                   && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||
+                   AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay));
 
             // Set KillButton's cooldown
             if (knight.ButtonUsable)
@@ -67,7 +67,7 @@ namespace TownOfUsEdited.CrewmateRoles.KnightMod
             }
 
             return;
-            
+
         }
     }
 }

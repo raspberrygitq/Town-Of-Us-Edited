@@ -42,7 +42,7 @@ namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
             role.DragDropButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
 
             role.DragDropButton.buttonLabelText.text = role.DragDropButton.graphic.sprite == TownOfUsEdited.DropSprite ? "Drop" : "Drag";
-            
+
             if (role.DragDropButton.graphic.sprite == TownOfUsEdited.DragSprite)
             {
                 var data = PlayerControl.LocalPlayer.Data;

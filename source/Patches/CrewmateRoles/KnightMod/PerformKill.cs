@@ -18,27 +18,27 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.KnightMod
                 return false;
 
             var knight = Role.GetRole<Knight>(PlayerControl.LocalPlayer);
-            
+
             if (knight.ClosestPlayer == null)
                 return false;
 
-                if (!knight.ButtonUsable)
+            if (!knight.ButtonUsable)
                 return false;
 
-                if (__instance.isCoolingDown)
+            if (__instance.isCoolingDown)
                 return false;
 
-                if (!__instance.isActiveAndEnabled)
+            if (!__instance.isActiveAndEnabled)
                 return false;
 
-                if (PlayerControl.LocalPlayer.IsControlled() && knight.ClosestPlayer.Is(Faction.Coven))
-                {
-                    Utils.Interact(knight.ClosestPlayer, PlayerControl.LocalPlayer, true);
-                    return false;
-                }
+            if (PlayerControl.LocalPlayer.IsControlled() && knight.ClosestPlayer.Is(Faction.Coven))
+            {
+                Utils.Interact(knight.ClosestPlayer, PlayerControl.LocalPlayer, true);
+                return false;
+            }
 
-                // Kill the closest player
-                knight.Kill(knight.ClosestPlayer);
+            // Kill the closest player
+            knight.Kill(knight.ClosestPlayer);
 
             return false;
         }

@@ -150,7 +150,7 @@ namespace TownOfUsEdited.Roles
             }
 
             if (StartImitate.ImitatingPlayers.Contains(PlayerControl.LocalPlayer.PlayerId)) StartImitate.ImitatingPlayers.Remove(PlayerControl.LocalPlayer.PlayerId);
-            
+
             if (newsk.Is(RoleEnum.GuardianAngel))
             {
                 var ga = Role.GetRole<GuardianAngel>(newsk);
@@ -161,7 +161,7 @@ namespace TownOfUsEdited.Roles
             {
                 var chamRole = Role.GetRole<Chameleon>(newsk);
                 if (chamRole.IsSwooped)
-                chamRole.UnSwoop();
+                    chamRole.UnSwoop();
                 Utils.Rpc(CustomRPC.ChameleonUnSwoop, newsk.PlayerId);
             }
 
@@ -334,8 +334,8 @@ namespace TownOfUsEdited.Roles
                     var swooperRole = Role.GetRole<Swooper>(PlayerControl.LocalPlayer);
                     if (swooperRole.IsSwooped)
                     {
-                    swooperRole.UnSwoop();
-                    Utils.Rpc(CustomRPC.UnSwoop, PlayerControl.LocalPlayer.PlayerId);
+                        swooperRole.UnSwoop();
+                        Utils.Rpc(CustomRPC.UnSwoop, PlayerControl.LocalPlayer.PlayerId);
                     }
                     swooperRole.Enabled = false;
                     swooperRole.Cooldown = CustomGameOptions.SwoopCd;

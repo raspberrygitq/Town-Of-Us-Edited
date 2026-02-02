@@ -133,7 +133,7 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                 role.UsesText.material.SetFloat("_Desat", 1f);
             }
         }
-        public static void UpdateDragButton (HudManager __instance)
+        public static void UpdateDragButton(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
             if (PlayerControl.LocalPlayer == null) return;
@@ -182,7 +182,7 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
                            (!AmongUsClient.Instance || !AmongUsClient.Instance.IsGameOver) &&
                            PlayerControl.LocalPlayer.CanMove;
                 var allocs = Physics2D.OverlapCircleAll(truePosition, maxDistance,
-                    LayerMask.GetMask(new[] {"Players", "Ghost"}));
+                    LayerMask.GetMask(new[] { "Players", "Ghost" }));
                 var dragButton = role.DragDropButton;
                 DeadBody closestBody = null;
                 var closestDistance = float.MaxValue;

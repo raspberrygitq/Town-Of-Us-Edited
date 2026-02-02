@@ -180,11 +180,11 @@ namespace TownOfUsEdited.Patches.Modifiers.LoversMod
         }
 
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSendChat))]
-		public static class SendChat
-		{
-			public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] ref string chatText)
-			{
-				if (LoversChatButton == null) return true;
+        public static class SendChat
+        {
+            public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] ref string chatText)
+            {
+                if (LoversChatButton == null) return true;
                 if (!LoversChatButton.isActiveAndEnabled) return true;
                 if (!LoversChatButton.IsOpenOrOpening) return true;
                 if (!__instance.AmOwner) return true;
@@ -203,13 +203,13 @@ namespace TownOfUsEdited.Patches.Modifiers.LoversMod
                 }
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, chatText, "LoversChat");
                 return false;
-			}
-		}
+            }
+        }
 
         [HarmonyPatch(typeof(ChatController), nameof(ChatController.AddChat))]
-		public static class AddChat
-		{
-			public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl srcPlayer, [HarmonyArgument(1)] string chatText, [HarmonyArgument(2)] bool censor)
+        public static class AddChat
+        {
+            public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl srcPlayer, [HarmonyArgument(1)] string chatText, [HarmonyArgument(2)] bool censor)
             {
                 if (LoversChatButton == null) return true;
                 if (!LoversChatButton.isActiveAndEnabled) return true;
@@ -231,9 +231,9 @@ namespace TownOfUsEdited.Patches.Modifiers.LoversMod
         }
 
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSendQuickChat))]
-		public static class SendQuickChat
-		{
-			public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] QuickChatPhraseBuilderResult data)
+        public static class SendQuickChat
+        {
+            public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] QuickChatPhraseBuilderResult data)
             {
                 if (LoversChatButton == null) return true;
                 if (!LoversChatButton.isActiveAndEnabled) return true;
@@ -255,7 +255,7 @@ namespace TownOfUsEdited.Patches.Modifiers.LoversMod
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, text, "LoversChat");
                 return false;
             }
-		}
+        }
 
         [HarmonyPatch(typeof(ChatBubble), nameof(ChatBubble.SetText))]
         public class ChatColor

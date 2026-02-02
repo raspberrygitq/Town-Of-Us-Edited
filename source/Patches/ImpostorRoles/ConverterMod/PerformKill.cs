@@ -20,11 +20,11 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ConverterMod
                 return false;
 
             var role = Role.GetRole<Converter>(PlayerControl.LocalPlayer);
-            
+
             if (role.CurrentTarget == null)
                 return false;
-                
-            if (__instance == role.ConvertButton) 
+
+            if (__instance == role.ConvertButton)
             {
                 if (role.Cooldown > 0)
                     return false;
@@ -34,7 +34,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ConverterMod
 
                 if (Vector2.Distance(role.CurrentTarget.TruePosition,
                     PlayerControl.LocalPlayer.GetTruePosition()) > maxDistance) return false;
-                
+
                 var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
                 if (!abilityUsed) return false;
 

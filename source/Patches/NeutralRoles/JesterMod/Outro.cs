@@ -12,7 +12,7 @@ namespace TownOfUsEdited.NeutralRoles.JesterMod
         public static void Postfix(EndGameManager __instance)
         {
             if (!CustomGameOptions.NeutralEvilWinEndsGame) return;
-            var role = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Jester && ((Jester) x).VotedOut);
+            var role = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Jester && ((Jester)x).VotedOut);
             if (role == null) return;
             PoolablePlayer[] array = Object.FindObjectsOfType<PoolablePlayer>();
             foreach (var player in array) player.NameText().text = role.ColorString + player.NameText().text + "</color>";

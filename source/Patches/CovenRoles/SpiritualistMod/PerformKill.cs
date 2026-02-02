@@ -15,17 +15,17 @@ namespace TownOfUsEdited.Patches.CovenRoles.SpiritualistMod
                 return false;
 
             var role = Role.GetRole<Spiritualist>(PlayerControl.LocalPlayer);
-            
+
             if (PlayerControl.LocalPlayer.Data.IsDead)
                 return false;
 
             if (__instance == role.ControlButton)
             {
                 if (role.KillCooldown > 0)
-                return false;
+                    return false;
 
                 if (role.ClosestPlayer == null)
-                return false;
+                    return false;
 
                 role.Control(role.ClosestPlayer);
                 Utils.Rpc(CustomRPC.SpiritualistControl, PlayerControl.LocalPlayer.PlayerId, role.ClosestPlayer.PlayerId);

@@ -33,7 +33,7 @@ namespace TownOfUsEdited
                             playerInfo._object.Is(RoleEnum.Terrorist) || playerInfo._object.Is(RoleEnum.Vulture) ||
                             playerInfo._object.Is(Faction.Coven) || playerInfo._object.Is(RoleEnum.Infectious) ||
                             playerInfo._object.Is(RoleEnum.Doppelganger) || playerInfo._object.Is(Faction.Impostors) ||
-                            playerInfo._object.Is(RoleEnum.Mercenary) || playerInfo._object.Is(RoleEnum.Spectator) || 
+                            playerInfo._object.Is(RoleEnum.Mercenary) || playerInfo._object.Is(RoleEnum.Spectator) ||
                             (playerInfo._object.Is(ModifierEnum.Lover) && !Modifier.GetModifier<Lover>(playerInfo._object).OtherLover.Player.Is(Faction.Crewmates))
                         ))
                         for (var j = 0; j < playerInfo.Tasks.Count; j++)

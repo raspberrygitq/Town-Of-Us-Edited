@@ -30,8 +30,8 @@ namespace TownOfUsEdited.Roles
 
             foreach (var cam in Camera.allCameras)
             {
-            if (cam?.gameObject.name == "UI Camera")
-            cam.orthographicSize = size;
+                if (cam?.gameObject.name == "UI Camera")
+                    cam.orthographicSize = size;
             }
 
             ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height, Screen.width, Screen.height, Screen.fullScreen);
@@ -53,11 +53,11 @@ namespace TownOfUsEdited.Roles
             }
 
             ResolutionManager.ResolutionChanged.Invoke((float)Screen.width / Screen.height, Screen.width, Screen.height, Screen.fullScreen);
-    
+
             ZoomEnabled = false;
             Cooldown = CustomGameOptions.ZoomCooldown;
             if (!PlayerControl.LocalPlayer.Data.IsDead)
-            HudManager.Instance.ShadowQuad.gameObject.SetActive(true);
+                HudManager.Instance.ShadowQuad.gameObject.SetActive(true);
         }
         public float ZoomTimer()
         {

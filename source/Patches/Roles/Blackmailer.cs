@@ -5,7 +5,7 @@ namespace TownOfUsEdited.Roles
     public class Blackmailer : Role
     {
         public KillButton _blackmailButton;
-        
+
         public PlayerControl ClosestPlayer;
         public PlayerControl Blackmailed;
         public float Cooldown;

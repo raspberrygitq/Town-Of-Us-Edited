@@ -1,4 +1,4 @@
-﻿﻿using HarmonyLib;
+﻿using HarmonyLib;
 using System.Linq;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
@@ -64,7 +64,8 @@ namespace TownOfUsEdited.Patches
             var bodies = UnityEngine.Object.FindObjectsOfType<DeadBody>();
             foreach (var body in bodies)
             {
-                try {
+                try
+                {
                     var matches = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.Disconnected && x.Is(RoleEnum.Reviver) && Role.GetRole<Reviver>(x).UsedRevive && x.PlayerId == body.ParentId).ToList();
                     if (matches != null)
                     {
@@ -97,7 +98,9 @@ namespace TownOfUsEdited.Patches
                             }
                         }
                     }
-                } catch {
+                }
+                catch
+                {
                 }
             }
         }

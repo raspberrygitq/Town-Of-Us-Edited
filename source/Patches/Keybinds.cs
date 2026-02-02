@@ -1,4 +1,4 @@
-﻿﻿using HarmonyLib;
+﻿using HarmonyLib;
 using Rewired;
 using Rewired.Data;
 using System.Linq;

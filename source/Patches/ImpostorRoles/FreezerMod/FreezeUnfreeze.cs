@@ -12,7 +12,7 @@ namespace TownOfUsEdited.ImpostorRoles.FreezerMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Freezer))
             {
-                var freezer = (Freezer) role;
+                var freezer = (Freezer)role;
                 if (freezer.Freezing)
                     freezer.Freeze();
                 else if (freezer.Enabled) freezer.UnFreeze();

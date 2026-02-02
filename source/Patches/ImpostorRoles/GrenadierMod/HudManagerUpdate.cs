@@ -85,7 +85,7 @@ namespace TownOfUsEdited.ImpostorRoles.GrenadierMod
                 return;
             }
 
-            if (!role.coolingDown) 
+            if (!role.coolingDown)
             {
                 role.FlashButton.graphic.color = Palette.EnabledColor;
                 role.FlashButton.graphic.material.SetFloat("_Desat", 0f);

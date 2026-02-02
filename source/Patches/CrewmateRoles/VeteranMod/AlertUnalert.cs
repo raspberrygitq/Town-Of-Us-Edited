@@ -12,7 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.VeteranMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Veteran))
             {
-                var veteran = (Veteran) role;
+                var veteran = (Veteran)role;
                 if (veteran.OnAlert)
                     veteran.Alert();
                 else if (veteran.Enabled) veteran.UnAlert();

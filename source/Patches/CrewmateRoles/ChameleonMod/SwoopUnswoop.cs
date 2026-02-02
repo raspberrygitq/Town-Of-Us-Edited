@@ -12,7 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.ChameleonMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Chameleon))
             {
-                var chameleon = (Chameleon) role;
+                var chameleon = (Chameleon)role;
                 if (chameleon.IsSwooped)
                     chameleon.Swoop();
                 else if (chameleon.Enabled) chameleon.UnSwoop();

@@ -77,7 +77,7 @@ namespace TownOfUsEdited
                 Button.transform.SetParent(GameObject.Find("RightPanel").transform);
                 var pos = Button.GetComponent<AspectPosition>();
                 pos.Alignment = AspectPosition.EdgeAlignments.LeftBottom;
-                pos.DistanceFromEdge = new Vector3(1.5f, 1f + 0.5f*_pos, 0f);
+                pos.DistanceFromEdge = new Vector3(1.5f, 1f + 0.5f * _pos, 0f);
 
                 //Add onClick event to run the update on button click
                 passiveButton.OnClick.AddListener((Action)(() =>
@@ -123,12 +123,12 @@ namespace TownOfUsEdited
         private static Task UpdateTOUTask = null;
         private static Task UpdateSubmergedTask = null;
         public static GenericPopup InfoPopup;
-        public static HttpClient Httpclient = new() 
+        public static HttpClient Httpclient = new()
         {
-            DefaultRequestHeaders = 
+            DefaultRequestHeaders =
             {
                 {"User-Agent", "TownOfUsEdited Updater"}
-            } 
+            }
         };
 
         public static void LaunchUpdater()
@@ -225,7 +225,7 @@ namespace TownOfUsEdited
                 {
                     githubURI = "https://api.github.com/repos/SubmergedAmongUs/Submerged/releases/latest";
                 }
-                var response = await  Httpclient.GetAsync(new Uri(githubURI), HttpCompletionOption.ResponseContentRead);
+                var response = await Httpclient.GetAsync(new Uri(githubURI), HttpCompletionOption.ResponseContentRead);
 
                 if (response.StatusCode != HttpStatusCode.OK || response.Content == null)
                 {
@@ -308,7 +308,7 @@ namespace TownOfUsEdited
             }
             try
             {
-                var response = await  Httpclient.GetAsync(new System.Uri(downloadDLL), HttpCompletionOption.ResponseContentRead);
+                var response = await Httpclient.GetAsync(new System.Uri(downloadDLL), HttpCompletionOption.ResponseContentRead);
                 if (response.StatusCode != HttpStatusCode.OK || response.Content == null)
                 {
                     PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("Server returned no data: " + response.StatusCode.ToString());
@@ -350,7 +350,7 @@ namespace TownOfUsEdited
         public static void setPopupText(string message)
         {
             if (InfoPopup == null) return;
-            
+
             if (InfoPopup.TextAreaTMP != null)
             {
                 InfoPopup.TextAreaTMP.text = message;

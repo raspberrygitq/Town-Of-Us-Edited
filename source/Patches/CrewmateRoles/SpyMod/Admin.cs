@@ -23,7 +23,7 @@ namespace TownOfUsEdited.CrewmateRoles.SpyMod
             area.UpdateCount(colorMapping.Count);
             var icons = area.myIcons.ToArray();
             colorMapping.Sort();
-            for (var i = 0;i < colorMapping.Count;i++)
+            for (var i = 0; i < colorMapping.Count; i++)
             {
                 var icon = icons[i];
                 var sprite = icon.GetComponent<SpriteRenderer>();

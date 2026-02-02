@@ -110,51 +110,51 @@ namespace TownOfUsEdited
             madmate.Faction = Faction.Madmates;
             if (!madmate.Name.Contains("Mad"))
             {
-            madmate.Name = "Mad " + madmate.Name;
+                madmate.Name = "Mad " + madmate.Name;
             }
             if (Madmate.Is(RoleEnum.Vigilante))
             {
-            madmate.TaskText = () => "Guess the roles of <color=#00FFFF>Crewmates</color> mid-meeting to kill them!";
-            var vigiRole = Role.GetRole<Vigilante>(Madmate);
-            var ColorMapping = new Dictionary<string, Color>();
-            if (CustomGameOptions.AssassinCrewmateGuess) ColorMapping.Add("Crewmate", Colors.Crewmate);
-            if (CustomGameOptions.ChameleonOn > 0) ColorMapping.Add("Chameleon", Colors.Chameleon);
-            if (CustomGameOptions.SheriffOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Sheriff)) ColorMapping.Add("Sheriff", Colors.Sheriff);
-            if (CustomGameOptions.KnightOn > 0) ColorMapping.Add("Knight", Colors.Knight);
-            if (CustomGameOptions.FighterOn > 0) ColorMapping.Add("Fighter", Colors.Fighter);
-            if (CustomGameOptions.JailorOn > 0) ColorMapping.Add("Jailor", Colors.Jailor);
-            if (CustomGameOptions.DeputyOn > 0) ColorMapping.Add("Deputy", Colors.Deputy);
-            if (CustomGameOptions.EngineerOn > 0) ColorMapping.Add("Engineer", Colors.Engineer);
-            if (CustomGameOptions.InformantOn > 0) ColorMapping.Add("Informant", Colors.Informant);
-            if (CustomGameOptions.SwapperOn > 0) ColorMapping.Add("Swapper", Colors.Swapper);
-            if (CustomGameOptions.AvengerOn > 0) ColorMapping.Add("Avenger", Colors.Avenger);
-            if (CustomGameOptions.InvestigatorOn > 0) ColorMapping.Add("Investigator", Colors.Investigator);
-            if (CustomGameOptions.MedicOn > 0) ColorMapping.Add("Medic", Colors.Medic);
-            if (CustomGameOptions.AstralOn > 0) ColorMapping.Add("Astral", Colors.Astral);
-            if (CustomGameOptions.LookoutOn > 0) ColorMapping.Add("Lookout", Colors.Lookout);
-            if (CustomGameOptions.SeerOn > 0) ColorMapping.Add("Seer", Colors.Seer);
-            if (CustomGameOptions.SpyOn > 0) ColorMapping.Add("Spy", Colors.Spy);
-            if (CustomGameOptions.SnitchOn > 0) ColorMapping.Add("Snitch", Colors.Snitch);
-            if (CustomGameOptions.AltruistOn > 0) ColorMapping.Add("Altruist", Colors.Altruist);
-            if (CustomGameOptions.VigilanteOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Vigilante)) ColorMapping.Add("Vigilante", Colors.Vigilante);
-            if (CustomGameOptions.VeteranOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Veteran)) ColorMapping.Add("Veteran", Colors.Veteran);
-            if (CustomGameOptions.HunterOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Hunter)) ColorMapping.Add("Hunter", Colors.Hunter);
-            if (CustomGameOptions.TrackerOn > 0) ColorMapping.Add("Tracker", Colors.Tracker);
-            if (CustomGameOptions.TrapperOn > 0) ColorMapping.Add("Trapper", Colors.Trapper);
-            if (CustomGameOptions.TransporterOn > 0) ColorMapping.Add("Transporter", Colors.Transporter);
-            if (CustomGameOptions.MediumOn > 0) ColorMapping.Add("Medium", Colors.Medium);
-            if (CustomGameOptions.MysticOn > 0) ColorMapping.Add("Mystic", Colors.Mystic);
-            if (CustomGameOptions.CaptainOn > 0) ColorMapping.Add("Captain", Colors.Captain);
-            if (CustomGameOptions.ParanoïacOn > 0) ColorMapping.Add("Paranoïac", Colors.Paranoïac);
-            if (CustomGameOptions.DetectiveOn > 0) ColorMapping.Add("Detective", Colors.Detective);
-            if (CustomGameOptions.ImitatorOn > 0) ColorMapping.Add("Imitator", Colors.Imitator);
-            if (CustomGameOptions.VampireHunterOn > 0) ColorMapping.Add("Vampire Hunter", Colors.VampireHunter);
-            if (CustomGameOptions.ProsecutorOn > 0) ColorMapping.Add("Prosecutor", Colors.Prosecutor);
-            if (CustomGameOptions.OracleOn > 0) ColorMapping.Add("Oracle", Colors.Oracle);
-            if (CustomGameOptions.AurialOn > 0) ColorMapping.Add("Aurial", Colors.Aurial);
-            if (CustomGameOptions.WatcherOn > 0) ColorMapping.Add("Watcher", Colors.Lookout);
+                madmate.TaskText = () => "Guess the roles of <color=#00FFFF>Crewmates</color> mid-meeting to kill them!";
+                var vigiRole = Role.GetRole<Vigilante>(Madmate);
+                var ColorMapping = new Dictionary<string, Color>();
+                if (CustomGameOptions.AssassinCrewmateGuess) ColorMapping.Add("Crewmate", Colors.Crewmate);
+                if (CustomGameOptions.ChameleonOn > 0) ColorMapping.Add("Chameleon", Colors.Chameleon);
+                if (CustomGameOptions.SheriffOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Sheriff)) ColorMapping.Add("Sheriff", Colors.Sheriff);
+                if (CustomGameOptions.KnightOn > 0) ColorMapping.Add("Knight", Colors.Knight);
+                if (CustomGameOptions.FighterOn > 0) ColorMapping.Add("Fighter", Colors.Fighter);
+                if (CustomGameOptions.JailorOn > 0) ColorMapping.Add("Jailor", Colors.Jailor);
+                if (CustomGameOptions.DeputyOn > 0) ColorMapping.Add("Deputy", Colors.Deputy);
+                if (CustomGameOptions.EngineerOn > 0) ColorMapping.Add("Engineer", Colors.Engineer);
+                if (CustomGameOptions.InformantOn > 0) ColorMapping.Add("Informant", Colors.Informant);
+                if (CustomGameOptions.SwapperOn > 0) ColorMapping.Add("Swapper", Colors.Swapper);
+                if (CustomGameOptions.AvengerOn > 0) ColorMapping.Add("Avenger", Colors.Avenger);
+                if (CustomGameOptions.InvestigatorOn > 0) ColorMapping.Add("Investigator", Colors.Investigator);
+                if (CustomGameOptions.MedicOn > 0) ColorMapping.Add("Medic", Colors.Medic);
+                if (CustomGameOptions.AstralOn > 0) ColorMapping.Add("Astral", Colors.Astral);
+                if (CustomGameOptions.LookoutOn > 0) ColorMapping.Add("Lookout", Colors.Lookout);
+                if (CustomGameOptions.SeerOn > 0) ColorMapping.Add("Seer", Colors.Seer);
+                if (CustomGameOptions.SpyOn > 0) ColorMapping.Add("Spy", Colors.Spy);
+                if (CustomGameOptions.SnitchOn > 0) ColorMapping.Add("Snitch", Colors.Snitch);
+                if (CustomGameOptions.AltruistOn > 0) ColorMapping.Add("Altruist", Colors.Altruist);
+                if (CustomGameOptions.VigilanteOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Vigilante)) ColorMapping.Add("Vigilante", Colors.Vigilante);
+                if (CustomGameOptions.VeteranOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Veteran)) ColorMapping.Add("Veteran", Colors.Veteran);
+                if (CustomGameOptions.HunterOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Hunter)) ColorMapping.Add("Hunter", Colors.Hunter);
+                if (CustomGameOptions.TrackerOn > 0) ColorMapping.Add("Tracker", Colors.Tracker);
+                if (CustomGameOptions.TrapperOn > 0) ColorMapping.Add("Trapper", Colors.Trapper);
+                if (CustomGameOptions.TransporterOn > 0) ColorMapping.Add("Transporter", Colors.Transporter);
+                if (CustomGameOptions.MediumOn > 0) ColorMapping.Add("Medium", Colors.Medium);
+                if (CustomGameOptions.MysticOn > 0) ColorMapping.Add("Mystic", Colors.Mystic);
+                if (CustomGameOptions.CaptainOn > 0) ColorMapping.Add("Captain", Colors.Captain);
+                if (CustomGameOptions.ParanoïacOn > 0) ColorMapping.Add("Paranoïac", Colors.Paranoïac);
+                if (CustomGameOptions.DetectiveOn > 0) ColorMapping.Add("Detective", Colors.Detective);
+                if (CustomGameOptions.ImitatorOn > 0) ColorMapping.Add("Imitator", Colors.Imitator);
+                if (CustomGameOptions.VampireHunterOn > 0) ColorMapping.Add("Vampire Hunter", Colors.VampireHunter);
+                if (CustomGameOptions.ProsecutorOn > 0) ColorMapping.Add("Prosecutor", Colors.Prosecutor);
+                if (CustomGameOptions.OracleOn > 0) ColorMapping.Add("Oracle", Colors.Oracle);
+                if (CustomGameOptions.AurialOn > 0) ColorMapping.Add("Aurial", Colors.Aurial);
+                if (CustomGameOptions.WatcherOn > 0) ColorMapping.Add("Watcher", Colors.Lookout);
 
-            vigiRole.SortedColorMapping = ColorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+                vigiRole.SortedColorMapping = ColorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
             }
             else if (Madmate.Is(RoleEnum.Crewmate))
             {
@@ -265,46 +265,46 @@ namespace TownOfUsEdited
             }
             if (Crewmate.Is(RoleEnum.Vigilante))
             {
-            crewmate.TaskText = () => "Guess the roles of <color=#FF0000>Impostors</color> mid-meeting to kill them!";
-            var vigiRole = Role.GetRole<Vigilante>(Crewmate);
-            var ColorMapping = new Dictionary<string, Color>();
-            if (CustomGameOptions.AssassinCrewmateGuess) ColorMapping.Remove("Crewmate");
-            if (CustomGameOptions.ChameleonOn > 0) ColorMapping.Remove("Chameleon");
-            if (CustomGameOptions.SheriffOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Sheriff)) ColorMapping.Remove("Sheriff");
-            if (CustomGameOptions.KnightOn > 0) ColorMapping.Remove("Knight");
-            if (CustomGameOptions.FighterOn > 0) ColorMapping.Remove("Fighter");
-            if (CustomGameOptions.JailorOn > 0) ColorMapping.Remove("Jailor");
-            if (CustomGameOptions.DeputyOn > 0) ColorMapping.Remove("Deputy");
-            if (CustomGameOptions.EngineerOn > 0) ColorMapping.Remove("Engineer");
-            if (CustomGameOptions.InformantOn > 0) ColorMapping.Remove("Informant");
-            if (CustomGameOptions.SwapperOn > 0) ColorMapping.Remove("Swapper");
-            if (CustomGameOptions.AvengerOn > 0) ColorMapping.Remove("Avenger");
-            if (CustomGameOptions.InvestigatorOn > 0) ColorMapping.Remove("Investigator");
-            if (CustomGameOptions.MedicOn > 0) ColorMapping.Remove("Medic");
-            if (CustomGameOptions.AstralOn > 0) ColorMapping.Remove("Astral");
-            if (CustomGameOptions.LookoutOn > 0) ColorMapping.Remove("Lookout");
-            if (CustomGameOptions.SeerOn > 0) ColorMapping.Remove("Seer");
-            if (CustomGameOptions.SpyOn > 0) ColorMapping.Remove("Spy");
-            if (CustomGameOptions.SnitchOn > 0) ColorMapping.Remove("Snitch");
-            if (CustomGameOptions.AltruistOn > 0) ColorMapping.Remove("Altruist");
-            if (CustomGameOptions.VigilanteOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Vigilante)) ColorMapping.Remove("Vigilante");
-            if (CustomGameOptions.VeteranOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Veteran)) ColorMapping.Remove("Veteran");
-            if (CustomGameOptions.HunterOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Hunter)) ColorMapping.Remove("Hunter");
-            if (CustomGameOptions.TrackerOn > 0) ColorMapping.Remove("Tracker");
-            if (CustomGameOptions.TrapperOn > 0) ColorMapping.Remove("Trapper");
-            if (CustomGameOptions.TransporterOn > 0) ColorMapping.Remove("Transporter");
-            if (CustomGameOptions.MediumOn > 0) ColorMapping.Remove("Medium");
-            if (CustomGameOptions.MysticOn > 0) ColorMapping.Remove("Mystic");
-            if (CustomGameOptions.CaptainOn > 0) ColorMapping.Remove("Captain");
-            if (CustomGameOptions.ParanoïacOn > 0) ColorMapping.Remove("Paranoïac");
-            if (CustomGameOptions.DetectiveOn > 0) ColorMapping.Remove("Detective");
-            if (CustomGameOptions.ImitatorOn > 0) ColorMapping.Remove("Imitator");
-            if (CustomGameOptions.VampireHunterOn > 0) ColorMapping.Remove("Vampire Hunter");
-            if (CustomGameOptions.ProsecutorOn > 0) ColorMapping.Remove("Prosecutor");
-            if (CustomGameOptions.OracleOn > 0) ColorMapping.Remove("Oracle");
-            if (CustomGameOptions.AurialOn > 0) ColorMapping.Remove("Aurial");
-            if (CustomGameOptions.WatcherOn > 0) ColorMapping.Remove("Watcher");
-            vigiRole.SortedColorMapping = ColorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+                crewmate.TaskText = () => "Guess the roles of <color=#FF0000>Impostors</color> mid-meeting to kill them!";
+                var vigiRole = Role.GetRole<Vigilante>(Crewmate);
+                var ColorMapping = new Dictionary<string, Color>();
+                if (CustomGameOptions.AssassinCrewmateGuess) ColorMapping.Remove("Crewmate");
+                if (CustomGameOptions.ChameleonOn > 0) ColorMapping.Remove("Chameleon");
+                if (CustomGameOptions.SheriffOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Sheriff)) ColorMapping.Remove("Sheriff");
+                if (CustomGameOptions.KnightOn > 0) ColorMapping.Remove("Knight");
+                if (CustomGameOptions.FighterOn > 0) ColorMapping.Remove("Fighter");
+                if (CustomGameOptions.JailorOn > 0) ColorMapping.Remove("Jailor");
+                if (CustomGameOptions.DeputyOn > 0) ColorMapping.Remove("Deputy");
+                if (CustomGameOptions.EngineerOn > 0) ColorMapping.Remove("Engineer");
+                if (CustomGameOptions.InformantOn > 0) ColorMapping.Remove("Informant");
+                if (CustomGameOptions.SwapperOn > 0) ColorMapping.Remove("Swapper");
+                if (CustomGameOptions.AvengerOn > 0) ColorMapping.Remove("Avenger");
+                if (CustomGameOptions.InvestigatorOn > 0) ColorMapping.Remove("Investigator");
+                if (CustomGameOptions.MedicOn > 0) ColorMapping.Remove("Medic");
+                if (CustomGameOptions.AstralOn > 0) ColorMapping.Remove("Astral");
+                if (CustomGameOptions.LookoutOn > 0) ColorMapping.Remove("Lookout");
+                if (CustomGameOptions.SeerOn > 0) ColorMapping.Remove("Seer");
+                if (CustomGameOptions.SpyOn > 0) ColorMapping.Remove("Spy");
+                if (CustomGameOptions.SnitchOn > 0) ColorMapping.Remove("Snitch");
+                if (CustomGameOptions.AltruistOn > 0) ColorMapping.Remove("Altruist");
+                if (CustomGameOptions.VigilanteOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Vigilante)) ColorMapping.Remove("Vigilante");
+                if (CustomGameOptions.VeteranOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Veteran)) ColorMapping.Remove("Veteran");
+                if (CustomGameOptions.HunterOn > 0 || (CustomGameOptions.VampireHunterOn > 0 && CustomGameOptions.BecomeOnVampDeaths == BecomeEnum.Hunter)) ColorMapping.Remove("Hunter");
+                if (CustomGameOptions.TrackerOn > 0) ColorMapping.Remove("Tracker");
+                if (CustomGameOptions.TrapperOn > 0) ColorMapping.Remove("Trapper");
+                if (CustomGameOptions.TransporterOn > 0) ColorMapping.Remove("Transporter");
+                if (CustomGameOptions.MediumOn > 0) ColorMapping.Remove("Medium");
+                if (CustomGameOptions.MysticOn > 0) ColorMapping.Remove("Mystic");
+                if (CustomGameOptions.CaptainOn > 0) ColorMapping.Remove("Captain");
+                if (CustomGameOptions.ParanoïacOn > 0) ColorMapping.Remove("Paranoïac");
+                if (CustomGameOptions.DetectiveOn > 0) ColorMapping.Remove("Detective");
+                if (CustomGameOptions.ImitatorOn > 0) ColorMapping.Remove("Imitator");
+                if (CustomGameOptions.VampireHunterOn > 0) ColorMapping.Remove("Vampire Hunter");
+                if (CustomGameOptions.ProsecutorOn > 0) ColorMapping.Remove("Prosecutor");
+                if (CustomGameOptions.OracleOn > 0) ColorMapping.Remove("Oracle");
+                if (CustomGameOptions.AurialOn > 0) ColorMapping.Remove("Aurial");
+                if (CustomGameOptions.WatcherOn > 0) ColorMapping.Remove("Watcher");
+                vigiRole.SortedColorMapping = ColorMapping.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
             }
             else if (Crewmate.Is(RoleEnum.Crewmate))
             {
@@ -1047,12 +1047,12 @@ namespace TownOfUsEdited
                         if (player.Is(RoleEnum.SerialKiller))
                         {
                             var sk = Role.GetRole<SerialKiller>(player);
-                            sk.Cooldown = CustomGameOptions.SerialKillerKCD;                
+                            sk.Cooldown = CustomGameOptions.SerialKillerKCD;
                         }
                         else if (player.Is(RoleEnum.Doppelganger))
                         {
                             var doppel = Role.GetRole<Doppelganger>(player);
-                            doppel.Cooldown = CustomGameOptions.DoppelKCD;                
+                            doppel.Cooldown = CustomGameOptions.DoppelKCD;
                         }
                         else if (player.Is(RoleEnum.Glitch))
                         {
@@ -1162,12 +1162,12 @@ namespace TownOfUsEdited
                 if (player.Is(RoleEnum.SerialKiller))
                 {
                     var sk = Role.GetRole<SerialKiller>(player);
-                    sk.Cooldown = CustomGameOptions.SerialKillerKCD;                
+                    sk.Cooldown = CustomGameOptions.SerialKillerKCD;
                 }
                 else if (player.Is(RoleEnum.Doppelganger))
                 {
                     var doppel = Role.GetRole<Doppelganger>(player);
-                    doppel.Cooldown = CustomGameOptions.DoppelKCD;                
+                    doppel.Cooldown = CustomGameOptions.DoppelKCD;
                 }
                 else if (player.Is(RoleEnum.Glitch))
                 {
@@ -1246,31 +1246,31 @@ namespace TownOfUsEdited
                 {
                     if (!MeetingHud.Instance)
                     {
-                    if (Vector2.Distance(player.GetTruePosition(),
-                    role.Player.GetTruePosition()) < CustomGameOptions.BodyguardRadius && bodyguards != null
-                    && target != role.Player && !player.Is(RoleEnum.Crusader) && !target.IsCrusaded() && (!role.Player.Is(ModifierEnum.Madmate) || !player.Is(Faction.Impostors))
-                    && !player.Is(RoleEnum.Bodyguard))
-                    {
-                        Utils.Interact(role.Player, player, true);
-                        Utils.Interact(player, role.Player, true);
-                        role.DeathReason = DeathReasons.Suicided;
-                        Utils.Rpc(CustomRPC.SetDeathReason, role.Player.PlayerId, (byte)DeathReasons.Suicided);
-                        bodyguardprotect = true;
-                        role.Protected = true;
-                    }
+                        if (Vector2.Distance(player.GetTruePosition(),
+                        role.Player.GetTruePosition()) < CustomGameOptions.BodyguardRadius && bodyguards != null
+                        && target != role.Player && !player.Is(RoleEnum.Crusader) && !target.IsCrusaded() && (!role.Player.Is(ModifierEnum.Madmate) || !player.Is(Faction.Impostors))
+                        && !player.Is(RoleEnum.Bodyguard))
+                        {
+                            Utils.Interact(role.Player, player, true);
+                            Utils.Interact(player, role.Player, true);
+                            role.DeathReason = DeathReasons.Suicided;
+                            Utils.Rpc(CustomRPC.SetDeathReason, role.Player.PlayerId, (byte)DeathReasons.Suicided);
+                            bodyguardprotect = true;
+                            role.Protected = true;
+                        }
                     }
                 }
                 if (target.IsCrusaded())
                 {
-                   var crusaders = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Crusader && !x.Player.Data.IsDead && !x.Player.Data.Disconnected).Cast<Crusader>();
-                   foreach (var role in crusaders)
-                   {
+                    var crusaders = Role.AllRoles.Where(x => x.RoleType == RoleEnum.Crusader && !x.Player.Data.IsDead && !x.Player.Data.Disconnected).Cast<Crusader>();
+                    foreach (var role in crusaders)
+                    {
                         if (role.CrusadedPlayer == target && (!role.Player.Is(ModifierEnum.Madmate) || !player.Is(Faction.Impostors)))
                         {
                             Utils.Interact(role.Player, player, true);
                             crusaderprotect = true;
                         }
-                   } 
+                    }
                 }
                 if (bodyguardprotect != true && crusaderprotect != true)
                 {
@@ -1407,7 +1407,7 @@ namespace TownOfUsEdited
                 num = distBetweenPlayers;
                 result = player;
             }
-            
+
             return result;
         }
         public static void SetTarget(
@@ -2155,11 +2155,11 @@ namespace TownOfUsEdited
 
         public static IEnumerator BaitReportDelay(PlayerControl killer, PlayerControl target)
         {
-            var extraDelay = Random.RandomRangeInt(0, (int) (100 * (CustomGameOptions.BaitMaxDelay - CustomGameOptions.BaitMinDelay) + 1));
+            var extraDelay = Random.RandomRangeInt(0, (int)(100 * (CustomGameOptions.BaitMaxDelay - CustomGameOptions.BaitMinDelay) + 1));
             if (CustomGameOptions.BaitMaxDelay <= CustomGameOptions.BaitMinDelay)
                 yield return new WaitForSeconds(CustomGameOptions.BaitMaxDelay + 0.01f);
             else
-                yield return new WaitForSeconds(CustomGameOptions.BaitMinDelay + 0.01f + extraDelay/100f);
+                yield return new WaitForSeconds(CustomGameOptions.BaitMinDelay + 0.01f + extraDelay / 100f);
             var bodies = Object.FindObjectsOfType<DeadBody>();
             if (AmongUsClient.Instance.AmHost)
             {
@@ -2271,67 +2271,67 @@ namespace TownOfUsEdited
         {
             //Modified vanilla code from ShipStatus.Begin
             IGameOptions currentGameOptions = GameOptionsManager.Instance.CurrentGameOptions;
-		    HashSet<TaskTypes> hashSet = new HashSet<TaskTypes>();
-		    List<byte> list = new List<byte>(10);
-		    List<NormalPlayerTask> list2 = Enumerable.ToList<NormalPlayerTask>(ShipStatus.Instance.CommonTasks);
-		    list2.Shuffle();
-		    list2.ForEach(delegate(NormalPlayerTask t)
-		    {
-			    t.Length = NormalPlayerTask.TaskLength.Common;
-		    });
-		    int @int = currentGameOptions.GetInt(Int32OptionNames.NumCommonTasks);
-		    for (int i = 0; i < @int; i++)
-		    {
-			    if (list2.Count == 0)
-			    {
-				    Debug.LogWarning("Not enough common tasks");
-				    break;
-			    }
-			    int index = list2.RandomIdx<NormalPlayerTask>();
-			    list.Add((byte)list2[index].Index);
-			    list2.RemoveAt(index);
-		    }
-		    List<NormalPlayerTask> list3 = Enumerable.ToList<NormalPlayerTask>(ShipStatus.Instance.LongTasks);
-		    list3.ForEach(delegate(NormalPlayerTask t)
-		    {
-			    t.Length = NormalPlayerTask.TaskLength.Long;
-		    });
-		    list3.Shuffle();
+            HashSet<TaskTypes> hashSet = new HashSet<TaskTypes>();
+            List<byte> list = new List<byte>(10);
+            List<NormalPlayerTask> list2 = Enumerable.ToList<NormalPlayerTask>(ShipStatus.Instance.CommonTasks);
+            list2.Shuffle();
+            list2.ForEach(delegate (NormalPlayerTask t)
+            {
+                t.Length = NormalPlayerTask.TaskLength.Common;
+            });
+            int @int = currentGameOptions.GetInt(Int32OptionNames.NumCommonTasks);
+            for (int i = 0; i < @int; i++)
+            {
+                if (list2.Count == 0)
+                {
+                    Debug.LogWarning("Not enough common tasks");
+                    break;
+                }
+                int index = list2.RandomIdx<NormalPlayerTask>();
+                list.Add((byte)list2[index].Index);
+                list2.RemoveAt(index);
+            }
+            List<NormalPlayerTask> list3 = Enumerable.ToList<NormalPlayerTask>(ShipStatus.Instance.LongTasks);
+            list3.ForEach(delegate (NormalPlayerTask t)
+            {
+                t.Length = NormalPlayerTask.TaskLength.Long;
+            });
+            list3.Shuffle();
             int int5 = currentGameOptions.GetInt(Int32OptionNames.NumLongTasks);
             for (int i = 0; i < @int5; i++)
-		    {
-			    if (list3.Count == 0)
-			    {
-				    Debug.LogWarning("Not enough long tasks");
-				    break;
-			    }
-			    int index = list3.RandomIdx<NormalPlayerTask>();
-			    list.Add((byte)list3[index].Index);
-			    list3.RemoveAt(index);
-		    }
-		    List<NormalPlayerTask> list4 = Enumerable.ToList<NormalPlayerTask>(ShipStatus.Instance.ShortTasks);
-		    list4.ForEach(delegate(NormalPlayerTask t)
-		    {
-			    t.Length = NormalPlayerTask.TaskLength.Short;
-		    });
-		    list4.Shuffle();
+            {
+                if (list3.Count == 0)
+                {
+                    Debug.LogWarning("Not enough long tasks");
+                    break;
+                }
+                int index = list3.RandomIdx<NormalPlayerTask>();
+                list.Add((byte)list3[index].Index);
+                list3.RemoveAt(index);
+            }
+            List<NormalPlayerTask> list4 = Enumerable.ToList<NormalPlayerTask>(ShipStatus.Instance.ShortTasks);
+            list4.ForEach(delegate (NormalPlayerTask t)
+            {
+                t.Length = NormalPlayerTask.TaskLength.Short;
+            });
+            list4.Shuffle();
             int int6 = currentGameOptions.GetInt(Int32OptionNames.NumShortTasks);
             for (int i = 0; i < @int6; i++)
-		    {
-			    if (list4.Count == 0)
-			    {
-				    Debug.LogWarning("Not enough short tasks");
-				    break;
-			    }
-			    int index = list4.RandomIdx<NormalPlayerTask>();
-			    list.Add((byte)list4[index].Index);
-			    list4.RemoveAt(index);
-		    }
-			if (playerById.Object && !playerById.Object.GetComponent<DummyBehaviour>().enabled)
-			{
-				byte[] taskTypeIds = list.ToArray();
-				playerById.SetTasks(taskTypeIds);
-			}
+            {
+                if (list4.Count == 0)
+                {
+                    Debug.LogWarning("Not enough short tasks");
+                    break;
+                }
+                int index = list4.RandomIdx<NormalPlayerTask>();
+                list.Add((byte)list4[index].Index);
+                list4.RemoveAt(index);
+            }
+            if (playerById.Object && !playerById.Object.GetComponent<DummyBehaviour>().enabled)
+            {
+                byte[] taskTypeIds = list.ToArray();
+                playerById.SetTasks(taskTypeIds);
+            }
         }
 
         public static void DestroyAll(this IEnumerable<Component> listie)
@@ -2431,19 +2431,24 @@ namespace TownOfUsEdited
                 }
             }
         }
-      
+
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.StartMeeting))]
-        class StartMeetingPatch {
-            public static void Prefix(PlayerControl __instance, [HarmonyArgument(0)]NetworkedPlayerInfo meetingTarget) {
+        class StartMeetingPatch
+        {
+            public static void Prefix(PlayerControl __instance, [HarmonyArgument(0)] NetworkedPlayerInfo meetingTarget)
+            {
                 voteTarget = meetingTarget;
             }
         }
 
         [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Update))]
-        class MeetingHudUpdatePatch {
-            static void Postfix(MeetingHud __instance) {
+        class MeetingHudUpdatePatch
+        {
+            static void Postfix(MeetingHud __instance)
+            {
                 // Deactivate skip Button if skipping on emergency meetings is disabled 
-                if ((voteTarget == null && CustomGameOptions.SkipButtonDisable == DisableSkipButtonMeetings.Emergency) || (CustomGameOptions.SkipButtonDisable == DisableSkipButtonMeetings.Always)) {
+                if ((voteTarget == null && CustomGameOptions.SkipButtonDisable == DisableSkipButtonMeetings.Emergency) || (CustomGameOptions.SkipButtonDisable == DisableSkipButtonMeetings.Always))
+                {
                     __instance.SkipVoteButton.gameObject.SetActive(false);
                 }
             }
@@ -2850,7 +2855,7 @@ namespace TownOfUsEdited
             }
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator))
             {
-                var Manipulator= Role.GetRole<Manipulator>(PlayerControl.LocalPlayer);
+                var Manipulator = Role.GetRole<Manipulator>(PlayerControl.LocalPlayer);
                 Manipulator.Cooldown = CustomGameOptions.ManipulateCD;
                 Manipulator.IsManipulating = false;
                 Manipulator.ManipulatedPlayer = null;

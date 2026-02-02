@@ -3,7 +3,7 @@ namespace TownOfUsEdited.Roles
     public class Altruist : Role
     {
         public DeadBody CurrentTarget;
-        
+
         public Altruist(PlayerControl player) : base(player)
         {
             Name = "Altruist";

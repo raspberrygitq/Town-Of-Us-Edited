@@ -9,7 +9,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited
-{    
+{
     public class InfectionStateUpdate
     {
 
@@ -71,22 +71,22 @@ namespace TownOfUsEdited
                 if (amOwner)
                 {
                     try
+                    {
+                        if (Minigame.Instance)
                         {
-                            if (Minigame.Instance)
-                            {
-                                Minigame.Instance.Close();
-                                Minigame.Instance.Close();
-                            }
+                            Minigame.Instance.Close();
+                            Minigame.Instance.Close();
+                        }
 
-                            if (MapBehaviour.Instance)
-                            {
-                                MapBehaviour.Instance.Close();
-                                MapBehaviour.Instance.Close();
-                            }
-                        }
-                        catch
+                        if (MapBehaviour.Instance)
                         {
+                            MapBehaviour.Instance.Close();
+                            MapBehaviour.Instance.Close();
                         }
+                    }
+                    catch
+                    {
+                    }
                     hudManager.ShadowQuad.gameObject.SetActive(false);
                     player.nameText().GetComponent<MeshRenderer>().material.SetInt("_Mask", 0);
                     player.RpcSetScanner(false);

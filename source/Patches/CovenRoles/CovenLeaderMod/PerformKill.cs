@@ -19,10 +19,10 @@ namespace TownOfUsEdited.Patches.CovenRoles.CovenLeaderMod
             if (__instance == role.RecruitButton)
             {
                 if (role.KillCooldown > 0)
-                return false;
+                    return false;
 
                 if (role.ClosestPlayer == null)
-                return false;
+                    return false;
 
                 role.Recruit(role.ClosestPlayer);
             }

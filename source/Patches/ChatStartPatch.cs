@@ -25,13 +25,13 @@ namespace TownOfUsEdited.Patches
             && PlayerControl.LocalPlayer.GetDefaultOutfit().PlayerName != DevFeatures.SavedOutfit.PlayerName)
             {
                 PlayerControl.LocalPlayer.SetName(DevFeatures.SavedOutfit.PlayerName);
-			    PlayerControl.LocalPlayer.SetColor(DevFeatures.SavedOutfit.ColorId);
+                PlayerControl.LocalPlayer.SetColor(DevFeatures.SavedOutfit.ColorId);
                 PlayerControl.LocalPlayer.CmdCheckName(DevFeatures.SavedOutfit.PlayerName);
-			    PlayerControl.LocalPlayer.CmdCheckColor((byte)DevFeatures.SavedOutfit.ColorId);
-			    PlayerControl.LocalPlayer.RpcSetPet(DevFeatures.SavedOutfit.PetId);
-			    PlayerControl.LocalPlayer.RpcSetHat(DevFeatures.SavedOutfit.HatId);
-			    PlayerControl.LocalPlayer.RpcSetSkin(DevFeatures.SavedOutfit.SkinId);
-			    PlayerControl.LocalPlayer.RpcSetVisor(DevFeatures.SavedOutfit.VisorId);
+                PlayerControl.LocalPlayer.CmdCheckColor((byte)DevFeatures.SavedOutfit.ColorId);
+                PlayerControl.LocalPlayer.RpcSetPet(DevFeatures.SavedOutfit.PetId);
+                PlayerControl.LocalPlayer.RpcSetHat(DevFeatures.SavedOutfit.HatId);
+                PlayerControl.LocalPlayer.RpcSetSkin(DevFeatures.SavedOutfit.SkinId);
+                PlayerControl.LocalPlayer.RpcSetVisor(DevFeatures.SavedOutfit.VisorId);
             }
         }
     }

@@ -12,7 +12,7 @@ namespace TownOfUsEdited.CrewmateRoles.HelperMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Helper))
             {
-                var helper = (Helper) role;
+                var helper = (Helper)role;
                 if (helper.OnAlert)
                     helper.Alert();
                 else if (helper.Enabled) helper.UnAlert();

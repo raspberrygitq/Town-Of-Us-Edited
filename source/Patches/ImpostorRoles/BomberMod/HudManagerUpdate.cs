@@ -68,7 +68,7 @@ namespace TownOfUsEdited.ImpostorRoles.BomberMod
             if (role.PlantButton.graphic.sprite == TownOfUsEdited.PlantSprite) role.PlantButton.SetCoolDown(role.KillCooldown,
                 GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown);
             else role.PlantButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.DetonateDelay);
-            
+
             role.PlantButton.graphic.SetCooldownNormalizedUvs();
         }
     }

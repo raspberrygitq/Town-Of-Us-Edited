@@ -187,7 +187,7 @@ namespace TownOfUsEdited
         CheckForStatus,
         ReceiveStatusCheck,
         SyncCustomStatus,
-        
+
         RemoveAllBodies,
 
         SubmergedFixOxygen,

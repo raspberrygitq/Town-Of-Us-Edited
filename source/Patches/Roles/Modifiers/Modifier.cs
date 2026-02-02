@@ -66,13 +66,13 @@ namespace TownOfUsEdited.Roles.Modifiers
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != typeof(Modifier)) return false;
-            return Equals((Modifier) obj);
+            return Equals((Modifier)obj);
         }
 
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Player, (int) ModifierType);
+            return HashCode.Combine(Player, (int)ModifierType);
         }
 
 

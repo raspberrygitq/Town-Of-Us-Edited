@@ -13,7 +13,7 @@ namespace TownOfUsEdited.CrewmateRoles.ClericMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Cleric))
             {
-                var cler = (Cleric) role;
+                var cler = (Cleric)role;
                 if (cler.Barriered != null)
                 {
                     cler.TimeRemaining -= Time.deltaTime;

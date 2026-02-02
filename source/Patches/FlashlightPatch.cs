@@ -14,25 +14,25 @@ namespace FlashlightPatch
         public static bool Prefix(ref bool __result)
         {
             if (LobbyBehaviour.Instance != null)
-		    {
+            {
                 __result = false;
-			    return false;
-		    }
-		    if (PlayerControl.LocalPlayer.Data.IsDead)
-		    {
+                return false;
+            }
+            if (PlayerControl.LocalPlayer.Data.IsDead)
+            {
                 __result = false;
-			    return false;
-		    }
+                return false;
+            }
             if (CustomGameOptions.FlashlightMode)
             {
                 __result = true;
                 return false;
             }
-		    if (GameOptionsManager.Instance.CurrentGameOptions.GameMode != GameModes.HideNSeek && !CustomGameOptions.FlashlightMode)
-		    {
+            if (GameOptionsManager.Instance.CurrentGameOptions.GameMode != GameModes.HideNSeek && !CustomGameOptions.FlashlightMode)
+            {
                 __result = false;
-			    return false;
-		    }
+                return false;
+            }
             GameOptionsManager.Instance.CurrentGameOptions.TryGetBool(BoolOptionNames.UseFlashlight, out bool result);
             __result = result;
             return false;
@@ -95,7 +95,7 @@ namespace FlashlightPatch
                 var role = Role.GetRole<Mayor>(PlayerControl.LocalPlayer);
                 if (role.Revealed)
                 {
-                    __instance.lightSource.SetupLightingForGameplay(hasFlashlight, CustomGameOptions.CrewmateFlashlightVision/2, __instance.TargetFlashlight.transform);
+                    __instance.lightSource.SetupLightingForGameplay(hasFlashlight, CustomGameOptions.CrewmateFlashlightVision / 2, __instance.TargetFlashlight.transform);
                 }
             }
             else

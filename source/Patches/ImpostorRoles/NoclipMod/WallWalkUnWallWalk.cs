@@ -5,7 +5,7 @@ namespace TownOfUsEdited.ImpostorRoles.NoclipMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     [HarmonyPriority(Priority.Last)]
-   
+
     public class WallWalkUnWallWalk
     {
         [HarmonyPriority(Priority.Last)]

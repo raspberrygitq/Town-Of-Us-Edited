@@ -10,7 +10,7 @@ namespace TownOfUsEdited.ChooseImpGhostRole
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.BeginForGameplay))]
     public class PickImpRole
     {
-        public static List<string> GhostRoles = new List<string>{};
+        public static List<string> GhostRoles = new List<string> { };
         public static bool ranlist = false;
 
         public static void Postfix(ExileController __instance)

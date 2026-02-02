@@ -9,13 +9,16 @@ using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
-namespace TownOfUsEdited.Patches {
+namespace TownOfUsEdited.Patches
+{
 
-    static class AdditionalTempData {
+    static class AdditionalTempData
+    {
         public static List<PlayerRoleInfo> playerRoles = new List<PlayerRoleInfo>();
         public static List<Winners> otherWinners = new List<Winners>();
 
-        public static void clear() {
+        public static void clear()
+        {
             playerRoles.Clear();
             otherWinners.Clear();
         }
@@ -35,7 +38,8 @@ namespace TownOfUsEdited.Patches {
 
 
     [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.OnGameEnd))]
-    public class OnGameEndPatch {
+    public class OnGameEndPatch
+    {
 
         public static void Postfix(AmongUsClient __instance, [HarmonyArgument(0)] EndGameResult endGameResult)
         {
@@ -164,7 +168,7 @@ namespace TownOfUsEdited.Patches {
                     else if (role.Value == RoleEnum.Watcher) { playerRole += "<color=#" + Patches.Colors.Lookout.ToHtmlStringRGBA() + ">Watcher</color> > "; }
                 }
                 if (!playerRole.IsNullOrWhiteSpace()) playerRole = playerRole.Remove(playerRole.Length - 3);
-                
+
                 if (playerControl.Is(Faction.Madmates)) playerRole += " (<color=#" + Patches.Colors.Impostor.ToHtmlStringRGBA() + ">Madmate</color>)";
                 if (playerControl.Is(ModifierEnum.Giant)) playerRole += " (<color=#" + Patches.Colors.Giant.ToHtmlStringRGBA() + ">Giant</color>)";
                 if (playerControl.Is(ModifierEnum.Mini)) playerRole += " (<color=#" + Patches.Colors.Mini.ToHtmlStringRGBA() + ">Mini</color>)";
@@ -281,7 +285,7 @@ namespace TownOfUsEdited.Patches {
                 var player = Role.GetRole(playerControl);
                 if (playerControl.Is(RoleEnum.Phantom) || (playerControl.Is(Faction.Crewmates) && !playerControl.Is(RoleEnum.Spectator)))
                 {
-                    if ((player.TotalTasks - player.TasksLeft)/player.TotalTasks == 1) playerRole += " | Tasks: <color=#" + Color.green.ToHtmlStringRGBA() + $">{player.TotalTasks - player.TasksLeft}/{player.TotalTasks}</color>";
+                    if ((player.TotalTasks - player.TasksLeft) / player.TotalTasks == 1) playerRole += " | Tasks: <color=#" + Color.green.ToHtmlStringRGBA() + $">{player.TotalTasks - player.TasksLeft}/{player.TotalTasks}</color>";
                     else playerRole += $" | Tasks: {player.TotalTasks - player.TasksLeft}/{player.TotalTasks}";
                 }
                 if (player.Kills > 0 && !playerControl.Is(Faction.Crewmates))
@@ -388,12 +392,12 @@ namespace TownOfUsEdited.Patches {
 
             var position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f, Camera.main.nearClipPlane));
             GameObject roleSummary = UnityEngine.Object.Instantiate(__instance.WinText.gameObject);
-            roleSummary.transform.position = new Vector3(__instance.Navigation.ExitButton.transform.position.x + 0.1f, position.y - 0.1f, -14f); 
+            roleSummary.transform.position = new Vector3(__instance.Navigation.ExitButton.transform.position.x + 0.1f, position.y - 0.1f, -14f);
             roleSummary.transform.localScale = new Vector3(1f, 1f, 1f);
 
             var roleSummaryText = new StringBuilder();
             roleSummaryText.AppendLine("End game summary:");
-            foreach (var data in AdditionalTempData.playerRoles) 
+            foreach (var data in AdditionalTempData.playerRoles)
             {
                 var role = string.Join(" ", data.Role);
                 roleSummaryText.AppendLine($"{data.PlayerName} - {role}");
@@ -419,7 +423,7 @@ namespace TownOfUsEdited.Patches {
             roleSummaryTextMesh.fontSizeMin = 1f;
             roleSummaryTextMesh.fontSizeMax = 1f;
             roleSummaryTextMesh.fontSize = 1f;
-             
+
             var roleSummaryTextMeshRectTransform = roleSummaryTextMesh.GetComponent<RectTransform>();
             roleSummaryTextMeshRectTransform.anchoredPosition = new Vector2(position.x + 3.5f, position.y - 0.1f);
             roleSummaryTextMesh.text = roleSummaryText.ToString();

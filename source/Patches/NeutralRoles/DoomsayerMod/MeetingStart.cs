@@ -38,7 +38,7 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
                 return $"You observe that {player.GetDefaultOutfit().PlayerName} has an unusual obsession with dead bodies";
             else if (player.Is(RoleEnum.Investigator) || player.Is(RoleEnum.Swooper) || player.Is(RoleEnum.Tracker)
                 || player.Is(RoleEnum.VampireHunter) || player.Is(RoleEnum.Venerer) || player.Is(RoleEnum.Werewolf)
-                || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Mutant) || player.Is(RoleEnum.BountyHunter) 
+                || player.Is(RoleEnum.Hunter) || player.Is(RoleEnum.Mutant) || player.Is(RoleEnum.BountyHunter)
                 || player.Is(RoleEnum.Noclip) || player.Is(RoleEnum.Watcher))
                 return $"You observe that {player.GetDefaultOutfit().PlayerName} is well trained in hunting down prey";
             else if (player.Is(RoleEnum.Arsonist) || player.Is(RoleEnum.Miner) || player.Is(RoleEnum.Plaguebearer) || player.Is(RoleEnum.Hypnotist)

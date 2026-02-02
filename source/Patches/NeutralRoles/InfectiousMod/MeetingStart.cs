@@ -15,7 +15,7 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
                 {
                     var infectiousRole = (Infectious)infectious;
                     var playerRole = Role.GetRole(player);
-                    if (!player.Data.IsDead && playerRole != null && playerRole.InfectionState != 0 
+                    if (!player.Data.IsDead && playerRole != null && playerRole.InfectionState != 0
                     && playerRole.InfectionState > 0 && playerRole.InfectionState != 4
                     && infectiousRole.Infected.Contains(player.PlayerId) && !infectiousRole.Player.Data.IsDead
                     && !player.Is(RoleEnum.Infectious))

@@ -33,12 +33,14 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "2.2.0";
+        public const string VersionString = "2.2.1";
         public static Version Version = Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
         public const int MaxPlayers = 35;
         public const int MaxImpostors = MaxPlayers / 2;
+
+        public static bool IsDevBuild => false;
 
         public static AssetLoader bundledAssets;
 
@@ -353,7 +355,6 @@ namespace TownOfUsEdited
         {
             var pixelsPerUnit = 100f;
             var pivot = new Vector2(0.5f, 0.5f);
-
             var assembly = Assembly.GetExecutingAssembly();
             var tex = AmongUsExtensions.CreateEmptyTexture();
             var imageStream = assembly.GetManifestResourceStream(name);
@@ -368,7 +369,7 @@ namespace TownOfUsEdited
         public static void LoadImage(Texture2D tex, byte[] data, bool markNonReadable)
         {
             _iCallLoadImage ??= IL2CPP.ResolveICall<DLoadImage>("UnityEngine.ImageConversion::LoadImage");
-            var il2CPPArray = (Il2CppStructArray<byte>) data;
+            var il2CPPArray = (Il2CppStructArray<byte>)data;
             _iCallLoadImage.Invoke(tex.Pointer, il2CPPArray.Pointer, markNonReadable);
         }
 

@@ -12,7 +12,7 @@ namespace TownOfUsEdited.CovenRoles.PotionMasterMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.PotionMaster))
             {
-                var pm = (PotionMaster) role;
+                var pm = (PotionMaster)role;
                 if (pm.UsingPotion)
                     pm.UsePotion();
                 else if (pm.Enabled) pm.StopPotion();

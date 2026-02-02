@@ -38,7 +38,7 @@ namespace TownOfUsEdited.Roles.Modifiers
             List<PlayerControl> crewmates = new List<PlayerControl>();
             List<PlayerControl> impostors = new List<PlayerControl>();
 
-            foreach(var player in canHaveModifiers)
+            foreach (var player in canHaveModifiers)
             {
                 if (player.Is(Faction.Impostors) || (player.Is(Faction.NeutralKilling) && CustomGameOptions.NeutralLovers) ||
                 (player.Is(Faction.Coven) && CustomGameOptions.CovenLovers))
@@ -108,7 +108,7 @@ namespace TownOfUsEdited.Roles.Modifiers
 
         public void Win()
         {
-            if (CustomGameOptions.NeutralEvilWinEndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Jester).Any(x => ((Jester) x).VotedOut)) return;
+            if (CustomGameOptions.NeutralEvilWinEndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Jester).Any(x => ((Jester)x).VotedOut)) return;
             LoveCoupleWins = true;
             OtherLover.LoveCoupleWins = true;
             if (AmongUsClient.Instance.AmHost) Utils.EndGame();

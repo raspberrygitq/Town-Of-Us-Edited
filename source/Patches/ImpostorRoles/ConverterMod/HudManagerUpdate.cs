@@ -121,7 +121,7 @@ namespace TownOfUsEdited.ImpostorRoles.ConverterMod
             converter.ConvertButton.buttonLabelText.material.SetFloat("_Desat", 1f);
 
             return;
-            
+
         }
     }
 }

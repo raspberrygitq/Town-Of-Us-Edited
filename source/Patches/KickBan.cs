@@ -15,7 +15,7 @@ namespace TownOfUsEdited.Patches
             writer.WritePacked(targetClientId);
             {
                 writer.StartMessage(byte.MaxValue);
-                writer.Write((byte) ReactorGameDataFlag.SetKickReason);
+                writer.Write((byte)ReactorGameDataFlag.SetKickReason);
                 writer.Write(reason);
                 writer.EndMessage();
             }
@@ -34,7 +34,7 @@ namespace TownOfUsEdited.Patches
             writer.WritePacked(targetClientId);
             {
                 writer.StartMessage(byte.MaxValue);
-                writer.Write((byte) ReactorGameDataFlag.SetKickReason);
+                writer.Write((byte)ReactorGameDataFlag.SetKickReason);
                 writer.Write(reason);
                 writer.EndMessage();
             }

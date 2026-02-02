@@ -52,7 +52,7 @@ namespace TownOfUsEdited.ImpostorRoles.BlinderMod
             else role.BlindButton.SetCoolDown(role.BlindTimer(), CustomGameOptions.BlindCD);
             Utils.SetTarget(ref role.ClosestPlayer, role.BlindButton, float.NaN, notimps);
             role.BlindButton.graphic.SetCooldownNormalizedUvs();
-            
+
             var labelrender = role.BlindButton.buttonLabelText;
             if (role.ClosestPlayer != null || role.Blinding)
             {

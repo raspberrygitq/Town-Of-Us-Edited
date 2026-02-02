@@ -77,7 +77,7 @@ namespace TownOfUsEdited.NeutralRoles.SerialKillerMod
             else if (PlayerControl.LocalPlayer.IsLover() && CustomGameOptions.ImpLoverKillTeammate) Utils.SetTarget(ref sk.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover()).ToList());
             else if (PlayerControl.LocalPlayer.IsLover()) Utils.SetTarget(ref sk.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !x.Is(RoleEnum.SerialKiller)).ToList());
             else Utils.SetTarget(ref sk.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Is(RoleEnum.SerialKiller)).ToList());
-            
+
             sk.skconvertButton.SetCoolDown(sk.SKTimer(), CustomGameOptions.SerialKillerKCD);
             sk.skconvertButton.graphic.SetCooldownNormalizedUvs();
         }

@@ -698,13 +698,13 @@ namespace TownOfUsEdited.Patches
                     Scroller.ScrollToTop();
                 }
 
-		        if (__instance.Hierarchy.Count == 1)
-		        {
-			        ControllerManager.Instance.SetBackButton(__instance.BackButton);
-			        return false;
-		        }
+                if (__instance.Hierarchy.Count == 1)
+                {
+                    ControllerManager.Instance.SetBackButton(__instance.BackButton);
+                    return false;
+                }
 
-		        ControllerManager.Instance.SetBackButton(__instance.FolderBackButton);
+                ControllerManager.Instance.SetBackButton(__instance.FolderBackButton);
                 return false;
             }
         }

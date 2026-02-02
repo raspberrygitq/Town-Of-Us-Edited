@@ -176,7 +176,7 @@ namespace TownOfUsEdited
             if ((player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(player).Caught) || (player.Is(RoleEnum.Haunter) && !Role.GetRole<Haunter>(player).Caught) || (player.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(player).Caught))
             {
                 __instance.IsDirty = true;
-		        __instance.StartCoroutine(__instance.UsePlatform(player));
+                __instance.StartCoroutine(__instance.UsePlatform(player));
                 return false;
             }
             return true;
@@ -266,7 +266,7 @@ namespace TownOfUsEdited
             if (flag)
             {
                 __instance.zipline.Use(__instance.atTop, __instance);
-		        __instance.CoolDown = __instance.MaxCoolDown;
+                __instance.CoolDown = __instance.MaxCoolDown;
             }
             return false;
         }
@@ -276,7 +276,7 @@ namespace TownOfUsEdited
     public class ZiplineConsoleCheck
     {
         public static bool Prefix([HarmonyArgument(0)] PlayerControl target,
-        [HarmonyArgument(1)] ZiplineBehaviour ziplineBehaviour,  [HarmonyArgument(2)] bool fromTop)
+        [HarmonyArgument(1)] ZiplineBehaviour ziplineBehaviour, [HarmonyArgument(2)] bool fromTop)
         {
             if (target != null && !MeetingHud.Instance && target.Data != null && !target.inMovingPlat)
             {
@@ -372,7 +372,7 @@ namespace TownOfUsEdited
     }
     #endregion
 
-     #region global::PetPos
+    #region global::PetPos
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.SetPetPosition))]
     public class PetPos
     {

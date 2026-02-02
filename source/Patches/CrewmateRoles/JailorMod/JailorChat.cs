@@ -162,10 +162,10 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.JailorMod
         }
 
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSendChat))]
-		public static class SendChat
-		{
-			public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] ref string chatText)
-			{
+        public static class SendChat
+        {
+            public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] ref string chatText)
+            {
                 if (JailorChatButton == null) return true;
                 if (!JailorChatButton.isActiveAndEnabled) return true;
                 if (!JailorChatButton.IsOpenOrOpening) return true;
@@ -185,13 +185,13 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.JailorMod
                 }
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, chatText, "JailorChat");
                 return false;
-			}
-		}
+            }
+        }
 
         [HarmonyPatch(typeof(ChatController), nameof(ChatController.AddChat))]
-		public static class AddChat
-		{
-			public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl srcPlayer, [HarmonyArgument(1)] string chatText, [HarmonyArgument(2)] bool censor)
+        public static class AddChat
+        {
+            public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl srcPlayer, [HarmonyArgument(1)] string chatText, [HarmonyArgument(2)] bool censor)
             {
                 if (JailorChatButton == null) return true;
                 if (!JailorChatButton.isActiveAndEnabled) return true;
@@ -213,9 +213,9 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.JailorMod
         }
 
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSendQuickChat))]
-		public static class SendQuickChat
-		{
-			public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] QuickChatPhraseBuilderResult data)
+        public static class SendQuickChat
+        {
+            public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] QuickChatPhraseBuilderResult data)
             {
                 if (JailorChatButton == null) return true;
                 if (!JailorChatButton.isActiveAndEnabled) return true;
@@ -237,7 +237,7 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.JailorMod
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, text, "JailorChat");
                 return false;
             }
-		}
+        }
 
         [HarmonyPatch(typeof(ChatBubble), nameof(ChatBubble.SetText))]
         public class ChatColor

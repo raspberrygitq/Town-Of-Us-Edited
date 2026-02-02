@@ -60,7 +60,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
                     player.Data.IsDead ||
                     player.Data.Disconnected
                 )
-                return true;
+                    return true;
             }
             else
             {
@@ -69,7 +69,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
                     player.Data.IsDead ||
                     player.Data.Disconnected
                 )
-                return true;
+                    return true;
             }
             var role = Role.GetRole(player);
             return role != null && role.Criteria();
@@ -87,7 +87,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
 
             var confirmButton = voteArea.Buttons.transform.GetChild(0).gameObject;
             var parent = confirmButton.transform.parent.parent;
-            
+
             var nameText = Object.Instantiate(voteArea.NameText, voteArea.transform);
             voteArea.NameText.transform.localPosition = new Vector3(0.55f, 0.12f, -0.1f);
             nameText.transform.localPosition = new Vector3(0.55f, -0.12f, -0.1f);
@@ -261,7 +261,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
         {
             foreach (var role in Ability.GetAbilities(AbilityEnum.Assassin))
             {
-                var assassin = (Assassin) role;
+                var assassin = (Assassin)role;
                 assassin.Guesses.Clear();
                 assassin.Buttons.Clear();
                 assassin.GuessedThisMeeting = false;

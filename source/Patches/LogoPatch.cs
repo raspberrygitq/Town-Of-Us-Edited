@@ -6,7 +6,8 @@ namespace TownOfUsEdited
     [HarmonyPatch(typeof(MainMenuManager), nameof(MainMenuManager.Start))]
     public static class LogoPatch
     {
-        static void Postfix(PingTracker __instance) {
+        static void Postfix(PingTracker __instance)
+        {
             var touLogo = new GameObject("bannerLogo_TownOfUsEdited");
             touLogo.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
 

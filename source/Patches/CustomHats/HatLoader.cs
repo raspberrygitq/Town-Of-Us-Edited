@@ -25,7 +25,7 @@ namespace TownOfUsEdited.Patches.CustomHats
 
         internal static IEnumerator LoadHats()
         {
-            
+
             try
             {
                 var hatBehaviours = DiscoverHatBehaviours();

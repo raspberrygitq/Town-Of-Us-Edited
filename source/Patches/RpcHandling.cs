@@ -205,7 +205,7 @@ namespace TownOfUsEdited
             }
 
             while (impsCount > 0 && crewmates.Count > 0)
-            {   
+            {
                 var rand = UnityEngine.Random.RandomRangeInt(0, crewmates.Count);
                 var pc = crewmates[rand];
                 impostors.Add(pc);
@@ -224,7 +224,7 @@ namespace TownOfUsEdited
                 var factions = new List<string>() { "Benign", "Evil", "Killing" };
 
                 // Crew must always start out outnumbering neutrals, so subtract roles until that can be guaranteed.
-                while (Math.Ceiling((double)crewmates.Count/2) <= benign + evil + killing)
+                while (Math.Ceiling((double)crewmates.Count / 2) <= benign + evil + killing)
                 {
                     bool canSubtractBenign = canSubtract(benign, CustomGameOptions.MinNeutralBenignRoles);
                     bool canSubtractEvil = canSubtract(evil, CustomGameOptions.MinNeutralEvilRoles);
@@ -232,7 +232,7 @@ namespace TownOfUsEdited
                     bool canSubtractNone = !canSubtractBenign && !canSubtractEvil && !canSubtractKilling;
 
                     factions.Shuffle();
-                    switch(factions.First())
+                    switch (factions.First())
                     {
                         case "Benign":
                             if (benign > 0 && (canSubtractBenign || canSubtractNone))
@@ -276,7 +276,7 @@ namespace TownOfUsEdited
                 }
 
                 // Crew must always start out outnumbering coven, so subtract roles until that can be guaranteed.
-                while (Math.Ceiling((double)crewmates.Count/2) <= covenCount)
+                while (Math.Ceiling((double)crewmates.Count / 2) <= covenCount)
                 {
                     bool canSubtractCoven = canSubtract(covenCount, CustomGameOptions.MinCoven);
                     bool canSubtractNone = !canSubtractCoven;
@@ -878,7 +878,7 @@ namespace TownOfUsEdited
                     var addedRole = SelectRole(randomCrewRoles);
                     crewRoles.Add(addedRole);
                     randomCrewRoles.Remove(addedRole);
-                     if (addedRole.Item2 >= 100) addedRole.Item2 -= 5;
+                    if (addedRole.Item2 >= 100) addedRole.Item2 -= 5;
                     if (addedRole.Item2 > 0 && !addedRole.Item3) randomCrewRoles.Add(addedRole);
                     buckets.Remove(RoleOptions.CrewRandom);
                 }
@@ -1882,7 +1882,7 @@ namespace TownOfUsEdited
                                         break;
                                 }
                                 break;
-                             case CustomRPC.Confess:
+                            case CustomRPC.Confess:
                                 var oracle = Role.GetRole<Oracle>(Utils.PlayerById(reader.ReadByte()));
                                 oracle.Confessor = Utils.PlayerById(reader.ReadByte());
                                 var faction = reader.ReadInt32();
@@ -2053,7 +2053,7 @@ namespace TownOfUsEdited
                             case CustomRPC.TurnGhost:
                                 var astral = Utils.PlayerById(reader.ReadByte());
                                 var astralRole = Role.GetRole<Astral>(astral);
-                                astralRole.Die(astral); 
+                                astralRole.Die(astral);
                                 astralRole.TimeRemaining = CustomGameOptions.GhostDuration;
                                 break;
                             case CustomRPC.Vest:
@@ -3608,7 +3608,7 @@ namespace TownOfUsEdited
                         if (CustomGameOptions.NoclipOn > 0)
                             ImpostorConcealingRoles.Add((typeof(Noclip), CustomGameOptions.NoclipOn, false || CustomGameOptions.UniqueRoles));
 
-                         // Coven
+                        // Coven
                         if (CustomGameOptions.CovenOn > 0)
                             CovenSupportRoles.Add((typeof(Coven), CustomGameOptions.CovenOn, false || CustomGameOptions.UniqueRoles));
                         if (CustomGameOptions.RitualistOn > 0)

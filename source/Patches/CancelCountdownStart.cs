@@ -16,24 +16,24 @@ namespace TownOfUsEdited.Patches
         {
             CancelStartButton = Object.Instantiate(__instance.StartButton, __instance.transform);
             CancelStartButton.name = "CancelButton";
-            
+
             var cancelLabel = CancelStartButton.buttonText;
             cancelLabel.gameObject.GetComponent<TextTranslatorTMP>()?.OnDestroy();
             cancelLabel.text = "Cancel";
-            
+
             var cancelButtonInactiveRenderer = CancelStartButton.inactiveSprites.GetComponent<SpriteRenderer>();
             cancelButtonInactiveRenderer.color = new(0.8f, 0f, 0f, 1f);
-            
+
             var cancelButtonActiveRenderer = CancelStartButton.activeSprites.GetComponent<SpriteRenderer>();
             cancelButtonActiveRenderer.color = Color.red;
-            
+
             var cancelButtonInactiveShine = CancelStartButton.inactiveSprites.transform.Find("Shine");
-            
+
             if (cancelButtonInactiveShine)
                 cancelButtonInactiveShine.gameObject.SetActive(false);
 
             CancelStartButton.activeTextColor = CancelStartButton.inactiveTextColor = Color.white;
-            
+
             CancelStartButton.OnClick = new();
             CancelStartButton.OnClick.AddListener((UnityEngine.Events.UnityAction)(() =>
             {

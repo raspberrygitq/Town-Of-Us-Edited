@@ -1,15 +1,58 @@
-﻿using Discord;
+﻿using BepInEx.Unity.IL2CPP;
+using Discord;
 using HarmonyLib;
+using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
 namespace TownOfUsEdited.Patches
 {
     [HarmonyPatch]
     public class DiscordStatus
     {
-        [HarmonyPatch(typeof(ActivityManager), nameof(ActivityManager.UpdateActivity))]
+        private const long ClientId = 1455654056029585683;
+        private const uint SteamAppId = 945360;
+        private static string ModInfo = $"Town Of Us Edited v{TownOfUsEdited.VersionString}" + (TownOfUsEdited.IsDevBuild && !TownOfUsEdited.VersionTag.Contains("beta") ? " (DEV)" : string.Empty);
+        private static string _smallIcon = "???";
+
         [HarmonyPrefix]
-        public static void Prefix([HarmonyArgument(0)] Activity activity)
+        [HarmonyPatch(typeof(DiscordManager), nameof(DiscordManager.Start))]
+        public static bool DiscordManagerStartPrefix(DiscordManager __instance)
         {
-            activity.Details = $"Town of Us Edited v{TownOfUsEdited.VersionString}";
+            DiscordManager.ClientId = ClientId;
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                return true;
+            }
+
+            InitializeDiscord(__instance);
+            return false;
+        }
+
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(ActivityManager), nameof(ActivityManager.UpdateActivity))]
+        public static void ActivityManagerUpdateActivityPrefix(ActivityManager __instance, [HarmonyArgument(0)] Activity activity)
+        {
+            var modCount = $"{IL2CPPChainloader.Instance.Plugins.Count} Mods";
+            activity.Details = (string.IsNullOrEmpty(activity.Details)) ? ModInfo : ModInfo + " | " + activity.Details;
+            activity.State = (string.IsNullOrEmpty(activity.State)) ? modCount : $"{modCount} | {activity.State}";
+            activity.Assets.LargeImage = "icon";
+            activity.Assets.SmallImage = _smallIcon;
+        }
+
+        private static void InitializeDiscord(DiscordManager __instance)
+        {
+            __instance.presence = new Discord.Discord(ClientId, 1UL);
+            var activityManager = __instance.presence.GetActivityManager();
+
+            activityManager.RegisterSteam(SteamAppId);
+            activityManager.add_OnActivityJoin((Action<string>)__instance.HandleJoinRequest);
+            SceneManager.add_sceneLoaded((Action<Scene, LoadSceneMode>)((scene, _) =>
+            {
+                __instance.OnSceneChange(scene.name);
+            }));
+            __instance.SetInMenus();
         }
     }
 }

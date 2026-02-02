@@ -9,7 +9,7 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class HudManagerUpdate
     {
-        
+
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -69,7 +69,7 @@ namespace TownOfUsEdited.NeutralRoles.InfectiousMod
             if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton);
             else if (role.Player.IsLover()) Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover()).ToList());
             else Utils.SetTarget(ref role.ClosestPlayer, __instance.KillButton);
-            
+
             if ((CamouflageUnCamouflage.IsCamoed && CustomGameOptions.CamoCommsKillAnyone) || PlayerControl.LocalPlayer.IsHypnotised()) Utils.SetTarget(ref role.ClosestPlayerInfect, role.InfectButton, float.NaN, notinfected);
             else if (role.Player.IsLover()) Utils.SetTarget(ref role.ClosestPlayerInfect, role.InfectButton, float.NaN, PlayerControl.AllPlayerControls.ToArray().Where(x => !x.IsLover() && !role.Infected.Contains(x.PlayerId)).ToList());
             else Utils.SetTarget(ref role.ClosestPlayerInfect, role.InfectButton, float.NaN, notinfected);

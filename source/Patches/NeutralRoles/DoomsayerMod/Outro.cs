@@ -13,7 +13,7 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
         {
             if (!CustomGameOptions.NeutralEvilWinEndsGame) return;
             var role = Role.AllRoles.FirstOrDefault(x =>
-                x.RoleType == RoleEnum.Doomsayer && ((Doomsayer) x).WonByGuessing);
+                x.RoleType == RoleEnum.Doomsayer && ((Doomsayer)x).WonByGuessing);
             if (role == null) return;
             PoolablePlayer[] array = Object.FindObjectsOfType<PoolablePlayer>();
             foreach (var player in array) player.NameText().text = role.ColorString + player.NameText().text + "</color>";

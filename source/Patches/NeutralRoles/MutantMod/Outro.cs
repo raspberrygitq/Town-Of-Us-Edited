@@ -19,7 +19,7 @@ namespace TownOfUsEdited.NeutralRoles.MutantMod
                 if (Role.GetRoles(RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing)) return;
                 if (Role.GetRoles(RoleEnum.Vulture).Any(x => ((Vulture)x).VultureWins)) return;
             }
-            var role = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Mutant && ((Mutant) x).MutantWins);
+            var role = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Mutant && ((Mutant)x).MutantWins);
             if (role == null) return;
             PoolablePlayer[] array = Object.FindObjectsOfType<PoolablePlayer>();
             foreach (var player in array)

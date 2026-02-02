@@ -114,7 +114,7 @@ namespace TownOfUsEdited.CrewmateRoles.SwapperMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.Swapper))
             {
-                var swapper = (Swapper) role;
+                var swapper = (Swapper)role;
                 swapper.ListOfActives.Clear();
                 swapper.Buttons.Clear();
             }

@@ -158,11 +158,11 @@ namespace TownOfUsEdited.Patches.NeutralRoles.VampireMod
         }
 
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSendChat))]
-		public static class SendChat
-		{
-			public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] ref string chatText)
-			{
-				if (VampireChatButton == null) return true;
+        public static class SendChat
+        {
+            public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] ref string chatText)
+            {
+                if (VampireChatButton == null) return true;
                 if (!VampireChatButton.isActiveAndEnabled) return true;
                 if (!VampireChatButton.IsOpenOrOpening) return true;
                 if (!__instance.AmOwner) return true;
@@ -181,13 +181,13 @@ namespace TownOfUsEdited.Patches.NeutralRoles.VampireMod
                 }
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, chatText, "VampChat");
                 return false;
-			}
-		}
+            }
+        }
 
         [HarmonyPatch(typeof(ChatController), nameof(ChatController.AddChat))]
-		public static class AddChat
-		{
-			public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl srcPlayer, [HarmonyArgument(1)] string chatText, [HarmonyArgument(2)] bool censor)
+        public static class AddChat
+        {
+            public static bool Prefix(ChatController __instance, [HarmonyArgument(0)] PlayerControl srcPlayer, [HarmonyArgument(1)] string chatText, [HarmonyArgument(2)] bool censor)
             {
                 if (VampireChatButton == null) return true;
                 if (!VampireChatButton.isActiveAndEnabled) return true;
@@ -209,9 +209,9 @@ namespace TownOfUsEdited.Patches.NeutralRoles.VampireMod
         }
 
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.RpcSendQuickChat))]
-		public static class SendQuickChat
-		{
-			public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] QuickChatPhraseBuilderResult data)
+        public static class SendQuickChat
+        {
+            public static bool Prefix(PlayerControl __instance, [HarmonyArgument(0)] QuickChatPhraseBuilderResult data)
             {
                 if (VampireChatButton == null) return true;
                 if (!VampireChatButton.isActiveAndEnabled) return true;
@@ -233,7 +233,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.VampireMod
                 Utils.Rpc(CustomRPC.SendCustomChat, __instance.PlayerId, text, "VampChat");
                 return false;
             }
-		}
+        }
 
         [HarmonyPatch(typeof(ChatBubble), nameof(ChatBubble.SetText))]
         public class ChatColor

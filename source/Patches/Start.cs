@@ -67,7 +67,7 @@ namespace TownOfUsEdited.Patches
                 var playerRole = Role.GetRole<Player>(PlayerControl.LocalPlayer);
                 playerRole.Cooldown = CustomGameOptions.BattleRoyaleStartingCD;
             }
-            
+
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Jailor))
             {
                 var jailor = Role.GetRole<Jailor>(PlayerControl.LocalPlayer);
@@ -178,7 +178,7 @@ namespace TownOfUsEdited.Patches
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Cleric))
             {
-                var cleric = Role.GetRole<Cleric> (PlayerControl.LocalPlayer);
+                var cleric = Role.GetRole<Cleric>(PlayerControl.LocalPlayer);
                 cleric.Cooldown = CustomGameOptions.InitialCooldowns;
             }
 
@@ -243,7 +243,7 @@ namespace TownOfUsEdited.Patches
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Manipulator))
             {
-                var Manipulator= Role.GetRole<Manipulator>(PlayerControl.LocalPlayer);
+                var Manipulator = Role.GetRole<Manipulator>(PlayerControl.LocalPlayer);
                 Manipulator.Cooldown = CustomGameOptions.InitialCooldowns;
                 Manipulator.IsManipulating = false;
                 Manipulator.ManipulatedPlayer = null;
@@ -370,7 +370,7 @@ namespace TownOfUsEdited.Patches
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Glitch))
             {
-                var glitch = Role.GetRole< Glitch> (PlayerControl.LocalPlayer);
+                var glitch = Role.GetRole<Glitch>(PlayerControl.LocalPlayer);
                 glitch.MimicCooldown = CustomGameOptions.InitialCooldowns;
                 glitch.HackCooldown = CustomGameOptions.InitialCooldowns;
                 glitch.Cooldown = CustomGameOptions.InitialCooldowns;

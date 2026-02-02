@@ -1145,7 +1145,7 @@ namespace TownOfUsEdited.CustomOption
 
             GameModeSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Game Mode Settings");
-            GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] {"Classic", "Role List", "Battle Royale", "Chaos" }, 1);
+            GameMode = new CustomStringOption(num++, MultiMenu.main, "Game Mode", new[] { "Classic", "Role List", "Battle Royale", "Chaos" }, 1);
 
             ClassicSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Classic Game Mode Settings");
@@ -1350,7 +1350,7 @@ namespace TownOfUsEdited.CustomOption
             StartMinutes = new CustomNumberOption(num++, MultiMenu.main, "Time In Minutes Before Starting", 2, 1, 5, 1);
             AllowUp = new CustomToggleOption(num++, MultiMenu.main, "Allow Usage Of \"/up\"", false);
             FlashlightMode = new CustomToggleOption(num++, MultiMenu.main, "Toggle Flashlight Vision", false);
-            CrewmateFlashlightVision = new CustomNumberOption(num++, MultiMenu.main, "Crewmate Flashlight Size", 0.3f, 0.1f, 0.5f, 0.1f , MultiplierFormat);
+            CrewmateFlashlightVision = new CustomNumberOption(num++, MultiMenu.main, "Crewmate Flashlight Size", 0.3f, 0.1f, 0.5f, 0.1f, MultiplierFormat);
             ImpostorFlashlightVision = new CustomNumberOption(num++, MultiMenu.main, "Impostor Flashlight Size", 0.4f, 0.1f, 0.5f, 0.1f, MultiplierFormat);
             ImpostorSeeRoles = new CustomToggleOption(num++, MultiMenu.main, "Impostors Can See The Roles Of Their Team", false);
             CovenSeeRoles = new CustomToggleOption(num++, MultiMenu.main, "Covens Can See The Roles Of Their Team", false);
@@ -1431,7 +1431,7 @@ namespace TownOfUsEdited.CustomOption
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Ghost Ability Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             GhostDuration =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Ghost Time Duration", 5f, 3f, 15f, 1f, CooldownFormat);
-            
+
             Aurial =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#B34D99FF>Aurial</color>");
             AuraInnerRadius =
@@ -1699,7 +1699,7 @@ namespace TownOfUsEdited.CustomOption
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#006600FF>Medic</color>");
             ShowShielded =
                 new CustomStringOption(num++, MultiMenu.crewmate, "Show Shielded Player",
-                    new[] { "Self", "Medic", "Self+Medic"}, 1);
+                    new[] { "Self", "Medic", "Self+Medic" }, 1);
             WhoGetsNotification =
                 new CustomStringOption(num++, MultiMenu.crewmate, "Who Gets Murder Attempt Indicator",
                     new[] { "Medic", "Shielded", "Nobody" });
@@ -1708,7 +1708,7 @@ namespace TownOfUsEdited.CustomOption
             MedicReportColorDuration =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Time Where Medic Will Have Color Type", 15f, 0f, 60f, 2.5f,
                     CooldownFormat);
-            
+
             Oracle =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#BF00BFFF>Oracle</color>");
             ConfessCooldown =
@@ -1938,7 +1938,7 @@ namespace TownOfUsEdited.CustomOption
             PestVent =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Pestilence Can Vent", false);
 
-            SerialKiller = 
+            SerialKiller =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#0c20d5>Serial Killer</color>");
             SerialKillerKCD =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Serial Killer Kill Cooldown", 25f, 10f, 60f, 5f, CooldownFormat);
@@ -2192,10 +2192,10 @@ namespace TownOfUsEdited.CustomOption
             VoodooMasterOn = new CustomNumberOption(num++, MultiMenu.coven, "<color=#bf5fff>Voodoo Master</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
 
-            HexMaster = 
+            HexMaster =
                 new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Hex Master</color>");
             HexMasterVent = new CustomToggleOption(num++, MultiMenu.coven, "Hex Master Can Vent", false);
-            
+
             Ritualist =
                 new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Ritualist</color>");
             RitualistKills = new CustomNumberOption(num++, MultiMenu.coven, "Number Of Ritualist Kills", 1, 1, 15, 1);

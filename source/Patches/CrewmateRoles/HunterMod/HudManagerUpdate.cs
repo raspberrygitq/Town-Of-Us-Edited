@@ -82,7 +82,7 @@ namespace TownOfUsEdited.CrewmateRoles.HunterMod
             if (role.Stalking) role.StalkButton.SetCoolDown(role.StalkDuration, CustomGameOptions.HunterStalkDuration);
             else if (role.StalkUsable) role.StalkButton.SetCoolDown(role.StalkTimer(), CustomGameOptions.HunterStalkCd);
             else role.StalkButton.SetCoolDown(0f, CustomGameOptions.HunterStalkCd);
-            
+
             role.StalkButton.graphic.SetCooldownNormalizedUvs();
 
             role.StalkButton.buttonLabelText.text = role.Stalking ? "Stalking" : "Stalk";

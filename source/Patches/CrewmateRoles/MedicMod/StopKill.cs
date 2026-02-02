@@ -30,9 +30,9 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
 
             var player = Utils.PlayerById(playerId);
             foreach (var role in Role.GetRoles(RoleEnum.Medic))
-                if (((Medic) role).ShieldedPlayer.PlayerId == playerId)
+                if (((Medic)role).ShieldedPlayer.PlayerId == playerId)
                 {
-                    ((Medic) role).ShieldedPlayer = null;
+                    ((Medic)role).ShieldedPlayer = null;
                 }
 
             player.myRend().material.SetColor("_VisorColor", Palette.VisorColor);

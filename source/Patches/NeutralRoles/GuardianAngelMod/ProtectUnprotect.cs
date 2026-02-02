@@ -12,7 +12,7 @@ namespace TownOfUsEdited.NeutralRoles.GuardianAngelMod
         {
             foreach (var role in Role.GetRoles(RoleEnum.GuardianAngel))
             {
-                var ga = (GuardianAngel) role;
+                var ga = (GuardianAngel)role;
                 if (ga.Protecting)
                     ga.Protect();
                 else if (ga.Enabled) ga.UnProtect();
