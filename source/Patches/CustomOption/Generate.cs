@@ -255,6 +255,12 @@ namespace TownOfUsEdited.CustomOption
         public static CustomStringOption Slot13;
         public static CustomStringOption Slot14;
         public static CustomStringOption Slot15;
+        public static CustomStringOption Slot16;
+        public static CustomStringOption Slot17;
+        public static CustomStringOption Slot18;
+        public static CustomStringOption Slot19;
+        public static CustomStringOption Slot20;
+        public static CustomStringOption Slot21;
 
         public static CustomHeaderOption BattleRoyaleSettings;
         public static CustomNumberOption BattleRoyaleKillCD;
@@ -1285,6 +1291,54 @@ namespace TownOfUsEdited.CustomOption
                 "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
                 "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
                 "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
+            Slot16 = new CustomStringOption(num++, MultiMenu.main, "Slot 16", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
+            Slot17 = new CustomStringOption(num++, MultiMenu.main, "Slot 17", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
+            Slot18 = new CustomStringOption(num++, MultiMenu.main, "Slot 18", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
+            Slot19 = new CustomStringOption(num++, MultiMenu.main, "Slot 19", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
+            Slot20 = new CustomStringOption(num++, MultiMenu.main, "Slot 20", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
+            Slot21 = new CustomStringOption(num++, MultiMenu.main, "Slot 21", new[] { "<color=#66FFFFFF>Crew</color> Investigative",
+                "<color=#66FFFFFF>Crew</color> Killing", "<color=#66FFFFFF>Crew</color> Power", "<color=#66FFFFFF>Crew</color> Protective", "<color=#66FFFFFF>Crew</color> Support",
+                "Common <color=#66FFFFFF>Crew</color>", "Special <color=#66FFFFFF>Crew</color>", "Random <color=#66FFFFFF>Crew</color>", "<color=#999999FF>Neutral</color> Benign",
+                "<color=#999999FF>Neutral</color> Evil", "<color=#999999FF>Neutral</color> Killing", "Common <color=#999999FF>Neutral</color>",
+                "Random <color=#999999FF>Neutral</color>", "<color=#FF0000FF>Imp</color> Concealing", "<color=#FF0000FF>Imp</color> Killing",
+                "<color=#FF0000FF>Imp</color> Support", "Common <color=#FF0000FF>Imp</color>", "Random <color=#FF0000FF>Imp</color>",
+                "<color=#bf5fff>Coven</color> Killing", "<color=#bf5fff>Coven</color> Support", "Common <color=#bf5fff>Coven</color>",
+                "Random <color=#bf5fff>Coven</color>", "Non-<color=#FF0000FF>Imp</color> / <color=#bf5fff>Coven</color>", "Any" }, 22);
 
             BattleRoyaleSettings =
                 new CustomHeaderOption(num++, MultiMenu.main, "Battle Royale Settings");
@@ -1856,7 +1910,7 @@ namespace TownOfUsEdited.CustomOption
             Phantom =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#662962FF>Phantom</color>");
             PhantomTasksRemaining =
-                 new CustomNumberOption(num++, MultiMenu.neutral, "Tasks Remaining When Phantom Can Be Clicked", 5, 1, 15, 1);
+                new CustomNumberOption(num++, MultiMenu.neutral, "Tasks Remaining When Phantom Can Be Clicked", 5, 1, 15, 1);
             PhantomSpook =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Phantom Spooks Player On Victory", true);
 

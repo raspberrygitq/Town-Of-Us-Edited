@@ -217,6 +217,12 @@ namespace TownOfUsEdited
         public static RoleOptions Slot13 => (RoleOptions)Generate.Slot13.Get();
         public static RoleOptions Slot14 => (RoleOptions)Generate.Slot14.Get();
         public static RoleOptions Slot15 => (RoleOptions)Generate.Slot15.Get();
+        public static RoleOptions Slot16 => (RoleOptions)Generate.Slot16.Get();
+        public static RoleOptions Slot17 => (RoleOptions)Generate.Slot17.Get();
+        public static RoleOptions Slot18 => (RoleOptions)Generate.Slot18.Get();
+        public static RoleOptions Slot19 => (RoleOptions)Generate.Slot19.Get();
+        public static RoleOptions Slot20 => (RoleOptions)Generate.Slot20.Get();
+        public static RoleOptions Slot21 => (RoleOptions)Generate.Slot21.Get();
         public static bool UniqueRoles => Generate.UniqueRoles.Get();
         public static float SerialKillerKCD => Generate.SerialKillerKCD.Get();
         public static bool SerialKillerCanConvert => Generate.SerialKillerCanConvert.Get();

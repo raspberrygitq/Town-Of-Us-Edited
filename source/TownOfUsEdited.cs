@@ -33,14 +33,11 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "2.2.1";
+        public const string VersionString = "2.3.0";
         public static Version Version = Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
         public const int MaxPlayers = 35;
-        public const int MaxImpostors = MaxPlayers / 2;
-
-        public static bool IsDevBuild => false;
 
         public static AssetLoader bundledAssets;
 

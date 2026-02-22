@@ -24,6 +24,8 @@ internal static class GenericPatches
     [HarmonyPatch(typeof(GameStartManager), nameof(GameStartManager.Update))]
     public static class GameStartManagerUpdatePatch
     {
+        private static string fixDummyCounterColor = string.Empty;
+
         [HarmonyPostfix]
         [HarmonyPatch(typeof(CreateGameOptions), nameof(CreateGameOptions.Show))]
         public static void CreateGameOptionsShowPostfix(CreateGameOptions __instance)
@@ -33,6 +35,41 @@ internal static class GenericPatches
             {
                 numberOption.ValidRange.max = TownOfUsEdited.MaxPlayers;
             }
+        }
+
+        public static void Prefix(GameStartManager __instance)
+        {
+            if (GameData.Instance == null || __instance.LastPlayerCount == GameData.Instance.PlayerCount)
+            {
+                return;
+            }
+
+            if (__instance.LastPlayerCount > __instance.MinPlayers)
+            {
+                fixDummyCounterColor = "<color=#00FF00FF>";
+            }
+            else if (__instance.LastPlayerCount == __instance.MinPlayers)
+            {
+                fixDummyCounterColor = "<color=#FFFF00FF>";
+            }
+            else
+            {
+                fixDummyCounterColor = "<color=#FF0000FF>";
+            }
+        }
+
+        public static void Postfix(GameStartManager __instance)
+        {
+            if (string.IsNullOrEmpty(fixDummyCounterColor) ||
+                GameData.Instance == null ||
+                GameManager.Instance == null ||
+                GameManager.Instance.LogicOptions == null)
+            {
+                return;
+            }
+
+            __instance.PlayerCounter.text = $"{fixDummyCounterColor}{GameData.Instance.PlayerCount}/{GameManager.Instance.LogicOptions.MaxPlayers}";
+            fixDummyCounterColor = string.Empty;
         }
     }
 
@@ -82,21 +119,6 @@ internal static class GenericPatches
                 TryAdjustOptionsRecommendations(__instance);
             }
             catch { }
-        }
-    }
-
-    [HarmonyPatch(typeof(GameOptionsMenu), nameof(GameOptionsMenu.Initialize))]
-    public static class GameOptionsMenu_Initialize
-    {
-        public static void Postfix(GameOptionsMenu __instance)
-        {
-            var numberOptions = __instance.GetComponentsInChildren<NumberOption>();
-
-            var impostorsOption = numberOptions.FirstOrDefault(o => o.Title == StringNames.GameNumImpostors);
-            if (impostorsOption != null)
-            {
-                impostorsOption.ValidRange = new FloatRange(1, TownOfUsEdited.MaxImpostors);
-            }
         }
     }
 }
