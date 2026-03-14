@@ -1,8 +1,8 @@
-﻿using HarmonyLib;
+﻿using AmongUs.GameOptions;
+using HarmonyLib;
+using System.Collections.Generic;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using AmongUs.GameOptions;
-using System.Collections.Generic;
 
 namespace TownOfUsEdited.CrewmateRoles.WatcherMod
 {

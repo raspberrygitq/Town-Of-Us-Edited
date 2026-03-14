@@ -24,8 +24,6 @@ namespace TownOfUsEdited.CrewmateRoles.DeputyMod
 {
     public class AddButtonDeputy
     {
-        private static Sprite ShootSprite => TownOfUsEdited.ShootSprite;
-
         private static bool IsExempt(PlayerVoteArea voteArea)
         {
             if (voteArea.AmDead) return true;
@@ -60,7 +58,7 @@ namespace TownOfUsEdited.CrewmateRoles.DeputyMod
             var renderer = newButton.GetComponent<SpriteRenderer>();
             var passive = newButton.GetComponent<PassiveButton>();
 
-            renderer.sprite = ShootSprite;
+            renderer.sprite = TownOfUsEdited.ShootSprite;
             newButton.transform.position = confirmButton.transform.position - new Vector3(0.75f, 0f, 0f);
             newButton.transform.localScale *= 0.8f;
             newButton.layer = 5;

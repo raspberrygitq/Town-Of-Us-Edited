@@ -11,7 +11,6 @@ namespace TownOfUsEdited.Modifiers.SuperstarMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class ArrowUpdate
     {
-        public static Sprite Arrow => TownOfUsEdited.Arrow;
         public static Dictionary<byte, ArrowBehaviour> BodyArrows = new Dictionary<byte, ArrowBehaviour>();
 
         public static void DestroyArrow(byte targetPlayerId)
@@ -61,7 +60,7 @@ namespace TownOfUsEdited.Modifiers.SuperstarMod
                             var arrow = gameObj.AddComponent<ArrowBehaviour>();
                             gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                             var renderer = gameObj.AddComponent<SpriteRenderer>();
-                            renderer.sprite = Arrow;
+                            renderer.sprite = TownOfUsEdited.Arrow;
                             arrow.image = renderer;
                             gameObj.layer = 5;
                             BodyArrows.Add(body.ParentId, arrow);

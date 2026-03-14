@@ -9,8 +9,6 @@ namespace TownOfUsEdited.ImpostorRoles.BomberMod
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class Plant
     {
-        public static Sprite PlantSprite => TownOfUsEdited.PlantSprite;
-        public static Sprite DetonateSprite => TownOfUsEdited.DetonateSprite;
         public static bool Prefix(KillButton __instance)
         {
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Bomber);
@@ -26,7 +24,7 @@ namespace TownOfUsEdited.ImpostorRoles.BomberMod
                 if (flag2) return false;
                 if (role.Player.inVent) return false;
                 if (!__instance.isActiveAndEnabled) return false;
-                if (role.PlantButton.graphic.sprite == PlantSprite)
+                if (role.PlantButton.graphic.sprite == TownOfUsEdited.PlantSprite)
                 {
                     var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
                     if (!abilityUsed) return false;
@@ -35,7 +33,7 @@ namespace TownOfUsEdited.ImpostorRoles.BomberMod
                     pos.y -= 0.2727f;
                     pos.z += 0.001f;
                     role.DetonatePoint = pos;
-                    role.PlantButton.graphic.sprite = DetonateSprite;
+                    role.PlantButton.graphic.sprite = TownOfUsEdited.DetonateSprite;
                     role.TimeRemaining = CustomGameOptions.DetonateDelay;
                     role.PlantButton.SetCoolDown(role.TimeRemaining, CustomGameOptions.DetonateDelay);
                     if (PlayerControl.LocalPlayer.Is(ModifierEnum.Underdog))

@@ -10,7 +10,6 @@ namespace TownOfUsEdited.Roles
     public class Aurial : Role
     {
         public Dictionary<(Vector3, int), ArrowBehaviour> SenseArrows = new Dictionary<(Vector3, int), ArrowBehaviour>();
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public Aurial(PlayerControl player) : base(player)
         {
             Name = "Aurial";
@@ -30,7 +29,7 @@ namespace TownOfUsEdited.Roles
             var arrow = gameObj.AddComponent<ArrowBehaviour>();
             gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
             var renderer = gameObj.AddComponent<SpriteRenderer>();
-            renderer.sprite = Sprite;
+            renderer.sprite = TownOfUsEdited.Arrow;
             int colourID = player.GetDefaultOutfit().ColorId;
             if (CheckRange(player, CustomGameOptions.AuraInnerRadius) && !CamouflageUnCamouflage.IsCamoed)
             {

@@ -8,8 +8,6 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
     [HarmonyPatch(typeof(HudManager))]
     public class HudExamine
     {
-        public static Sprite ExamineSprite => TownOfUsEdited.ExamineSprite;
-
         [HarmonyPatch(nameof(HudManager.Update))]
         public static void Postfix(HudManager __instance)
         {
@@ -27,7 +25,7 @@ namespace TownOfUsEdited.CrewmateRoles.DetectiveMod
                 role.ExamineButton.gameObject.SetActive(false);
             }
 
-            role.ExamineButton.graphic.sprite = ExamineSprite;
+            role.ExamineButton.graphic.sprite = TownOfUsEdited.ExamineSprite;
             role.ExamineButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
 
             if (PlayerControl.LocalPlayer.Data.IsDead) role.ExamineButton.SetTarget(null);

@@ -74,7 +74,6 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                 }
             }
         }
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static void TurnImp(PlayerControl player)
         {
             if (player.Is(RoleEnum.Warden))
@@ -261,7 +260,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                     var arrow = gameObj.AddComponent<ArrowBehaviour>();
                     gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                     var renderer = gameObj.AddComponent<SpriteRenderer>();
-                    renderer.sprite = Sprite;
+                    renderer.sprite = TownOfUsEdited.Arrow;
                     arrow.image = renderer;
                     gameObj.layer = 5;
                     snitchRole.SnitchArrows.Add(player.PlayerId, arrow);
@@ -272,7 +271,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                     var arrow = gameObj.AddComponent<ArrowBehaviour>();
                     gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                     var renderer = gameObj.AddComponent<SpriteRenderer>();
-                    renderer.sprite = Sprite;
+                    renderer.sprite = TownOfUsEdited.Arrow;
                     arrow.image = renderer;
                     gameObj.layer = 5;
                     snitchRole.ImpArrows.Add(arrow);
@@ -288,7 +287,7 @@ namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
                     var arrow = gameObj.AddComponent<ArrowBehaviour>();
                     gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                     var renderer = gameObj.AddComponent<SpriteRenderer>();
-                    renderer.sprite = Sprite;
+                    renderer.sprite = TownOfUsEdited.Arrow;
                     arrow.image = renderer;
                     gameObj.layer = 5;
                     haunterRole.ImpArrows.Add(arrow);

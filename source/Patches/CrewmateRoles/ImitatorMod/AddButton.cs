@@ -11,9 +11,6 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
     public class AddButtonImitator
     {
         private static int _mostRecentId;
-        private static Sprite ActiveSprite => TownOfUsEdited.ImitateSelectSprite;
-        public static Sprite DisabledSprite => TownOfUsEdited.ImitateDeselectSprite;
-
         private static bool IsExempt(PlayerVoteArea voteArea)
         {
             var player = Utils.PlayerById(voteArea.TargetPlayerId);
@@ -44,7 +41,7 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
             var renderer = newButton.GetComponent<SpriteRenderer>();
             var passive = newButton.GetComponent<PassiveButton>();
 
-            renderer.sprite = DisabledSprite;
+            renderer.sprite = TownOfUsEdited.ImitateDeselectSprite;
             newButton.transform.position = confirmButton.transform.position - new Vector3(0.75f, 0f, 0f);
             newButton.transform.localScale *= 0.8f;
             newButton.layer = 5;
@@ -85,19 +82,19 @@ namespace TownOfUsEdited.CrewmateRoles.ImitatorMod
                 }
                 if (index == int.MaxValue) return;
                 if (role.ListOfActives.Count(x => x.Item2) == 1 &&
-                    role.Buttons[index].GetComponent<SpriteRenderer>().sprite == DisabledSprite)
+                    role.Buttons[index].GetComponent<SpriteRenderer>().sprite == TownOfUsEdited.ImitateDeselectSprite)
                 {
                     int active = 0;
                     for (var i = 0; i < role.ListOfActives.Count; i++) if (role.ListOfActives[i].Item2) active = i;
 
                     role.Buttons[active].GetComponent<SpriteRenderer>().sprite =
-                        role.ListOfActives[active].Item2 ? DisabledSprite : ActiveSprite;
+                        role.ListOfActives[active].Item2 ? TownOfUsEdited.ImitateDeselectSprite : TownOfUsEdited.ImitateSelectSprite;
 
                     role.ListOfActives[active] = (role.ListOfActives[active].Item1, !role.ListOfActives[active].Item2);
                 }
 
                 role.Buttons[index].GetComponent<SpriteRenderer>().sprite =
-                    role.ListOfActives[index].Item2 ? DisabledSprite : ActiveSprite;
+                    role.ListOfActives[index].Item2 ? TownOfUsEdited.ImitateDeselectSprite : TownOfUsEdited.ImitateSelectSprite;
 
                 role.ListOfActives[index] = (role.ListOfActives[index].Item1, !role.ListOfActives[index].Item2);
 

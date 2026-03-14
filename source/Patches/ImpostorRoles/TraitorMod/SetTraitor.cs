@@ -24,8 +24,6 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
     public class SetTraitor
     {
         public static PlayerControl WillBeTraitor;
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
-
         public static void ExileControllerPostfix(ExileController __instance)
         {
             var exiled = __instance.initData?.networkedPlayer?.Object;
@@ -238,7 +236,7 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
                     var arrow = gameObj.AddComponent<ArrowBehaviour>();
                     gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                     var renderer = gameObj.AddComponent<SpriteRenderer>();
-                    renderer.sprite = Sprite;
+                    renderer.sprite = TownOfUsEdited.Arrow;
                     arrow.image = renderer;
                     gameObj.layer = 5;
                     snitchRole.SnitchArrows.Add(player.PlayerId, arrow);
@@ -249,7 +247,7 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
                     var arrow = gameObj.AddComponent<ArrowBehaviour>();
                     gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                     var renderer = gameObj.AddComponent<SpriteRenderer>();
-                    renderer.sprite = Sprite;
+                    renderer.sprite = TownOfUsEdited.Arrow;
                     arrow.image = renderer;
                     gameObj.layer = 5;
                     snitchRole.ImpArrows.Add(arrow);
@@ -265,7 +263,7 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
                     var arrow = gameObj.AddComponent<ArrowBehaviour>();
                     gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                     var renderer = gameObj.AddComponent<SpriteRenderer>();
-                    renderer.sprite = Sprite;
+                    renderer.sprite = TownOfUsEdited.Arrow;
                     arrow.image = renderer;
                     gameObj.layer = 5;
                     haunterRole.ImpArrows.Add(arrow);

@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using Reactor.Utilities;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.JailorMod
 {

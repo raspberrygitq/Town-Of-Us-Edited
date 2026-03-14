@@ -11,8 +11,6 @@ namespace TownOfUsEdited.CrewmateRoles.SnitchMod
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CompleteTask))]
     public class CompleteTask
     {
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
-
         public static void Postfix(PlayerControl __instance)
         {
             if (!__instance.Is(RoleEnum.Snitch)) return;
@@ -44,7 +42,7 @@ namespace TownOfUsEdited.CrewmateRoles.SnitchMod
                             var arrow = gameObj.AddComponent<ArrowBehaviour>();
                             gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                             var renderer = gameObj.AddComponent<SpriteRenderer>();
-                            renderer.sprite = Sprite;
+                            renderer.sprite = TownOfUsEdited.Arrow;
                             arrow.image = renderer;
                             gameObj.layer = 5;
                             role.ImpArrows.Add(arrow);
@@ -66,7 +64,7 @@ namespace TownOfUsEdited.CrewmateRoles.SnitchMod
                                 var arrow = gameObj.AddComponent<ArrowBehaviour>();
                                 gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                                 var renderer = gameObj.AddComponent<SpriteRenderer>();
-                                renderer.sprite = Sprite;
+                                renderer.sprite = TownOfUsEdited.Arrow;
                                 arrow.image = renderer;
                                 gameObj.layer = 5;
                                 role.SnitchArrows.Add(imp.PlayerId, arrow);

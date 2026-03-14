@@ -12,9 +12,6 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
     [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.Start))]
     public class AddButton
     {
-        private static Sprite LighterSprite => TownOfUsEdited.LighterSprite;
-        public static Sprite DarkerSprite => TownOfUsEdited.DarkerSprite;
-
         private static bool IsExempt(PlayerVoteArea voteArea)
         {
             var player = Utils.PlayerById(voteArea.TargetPlayerId);
@@ -44,11 +41,11 @@ namespace TownOfUsEdited.CrewmateRoles.MedicMod
 
             if (role.LightDarkColors[playerControl.GetDefaultOutfit().ColorId] == "lighter")
             {
-                renderer.sprite = LighterSprite;
+                renderer.sprite = TownOfUsEdited.LighterSprite;
             }
             else
             {
-                renderer.sprite = DarkerSprite;
+                renderer.sprite = TownOfUsEdited.DarkerSprite;
             }
             newButton.transform.position = colorButton.transform.position - new Vector3(-0.8f, 0.2f, -2f);
             newButton.transform.localScale *= 0.8f;

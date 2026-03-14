@@ -18,10 +18,6 @@ namespace TownOfUsEdited.Roles
 {
     public class Glitch : Role, IVisualAlteration
     {
-        public static Sprite MimicSprite = TownOfUsEdited.MimicSprite;
-        public static Sprite HackSprite = TownOfUsEdited.HackSprite;
-        public static Sprite LockSprite = TownOfUsEdited.LockSprite;
-
         public Glitch(PlayerControl owner) : base(owner)
         {
             Name = "The Glitch";
@@ -249,7 +245,7 @@ namespace TownOfUsEdited.Roles
                             {
                                 lockImg[0] = new GameObject();
                                 var lockImgR = lockImg[0].AddComponent<SpriteRenderer>();
-                                lockImgR.sprite = LockSprite;
+                                lockImgR.sprite = TownOfUsEdited.LockSprite;
                             }
 
                             lockImg[0].layer = 5;
@@ -265,7 +261,7 @@ namespace TownOfUsEdited.Roles
                             {
                                 lockImg[1] = new GameObject();
                                 var lockImgR = lockImg[1].AddComponent<SpriteRenderer>();
-                                lockImgR.sprite = LockSprite;
+                                lockImgR.sprite = TownOfUsEdited.LockSprite;
                             }
 
                             lockImg[1].transform.position = new Vector3(
@@ -280,7 +276,7 @@ namespace TownOfUsEdited.Roles
                             {
                                 lockImg[2] = new GameObject();
                                 var lockImgR = lockImg[2].AddComponent<SpriteRenderer>();
-                                lockImgR.sprite = LockSprite;
+                                lockImgR.sprite = TownOfUsEdited.LockSprite;
                             }
 
                             lockImg[2].transform.position =
@@ -441,7 +437,7 @@ namespace TownOfUsEdited.Roles
                     __gInstance.ButtonLabels.Add(__gInstance.HackText);
                 }
 
-                __gInstance.HackButton.graphic.sprite = HackSprite;
+                __gInstance.HackButton.graphic.sprite = TownOfUsEdited.HackSprite;
 
                 __gInstance.HackButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !__gInstance.Player.Data.IsDead
@@ -552,7 +548,7 @@ namespace TownOfUsEdited.Roles
                     __gInstance.ButtonLabels.Add(__gInstance.MimicText);
                 }
 
-                __gInstance.MimicButton.graphic.sprite = MimicSprite;
+                __gInstance.MimicButton.graphic.sprite = TownOfUsEdited.MimicSprite;
 
                 __gInstance.MimicButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !__gInstance.Player.Data.IsDead

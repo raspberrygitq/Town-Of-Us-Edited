@@ -7,9 +7,6 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite SampleSprite => TownOfUsEdited.SampleSprite;
-
-
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -23,13 +20,13 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
             {
                 role.MorphButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.MorphButton.graphic.enabled = true;
-                role.MorphButton.graphic.sprite = SampleSprite;
+                role.MorphButton.graphic.sprite = TownOfUsEdited.SampleSprite;
                 role.MorphButton.gameObject.SetActive(false);
             }
 
-            if (role.MorphButton.graphic.sprite != SampleSprite && role.MorphButton.graphic.sprite != MorphSprite)
+            if (role.MorphButton.graphic.sprite != TownOfUsEdited.SampleSprite && role.MorphButton.graphic.sprite != MorphSprite)
             {
-                role.MorphButton.graphic.sprite = SampleSprite;
+                role.MorphButton.graphic.sprite = TownOfUsEdited.SampleSprite;
                 role.MorphButton.buttonLabelText.text = "Sample";
             }
 
@@ -47,7 +44,7 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
 
             role.MorphButton.transform.localPosition = new Vector3(-2f, 1f, 0f);
             role.MorphButton.graphic.SetCooldownNormalizedUvs();
-            if (role.MorphButton.graphic.sprite == SampleSprite)
+            if (role.MorphButton.graphic.sprite == TownOfUsEdited.SampleSprite)
             {
                 role.MorphButton.buttonLabelText.text = "Sample";
                 role.MorphButton.SetCoolDown(0f, 1f);

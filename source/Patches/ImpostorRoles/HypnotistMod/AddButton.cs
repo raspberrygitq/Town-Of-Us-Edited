@@ -9,8 +9,6 @@ namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
 {
     public class AddHysteriaButton
     {
-        public static Sprite HysteriaSprite => TownOfUsEdited.HysteriaSprite;
-
         public static void GenButton(Hypnotist role, int index)
         {
             var confirmButton = MeetingHud.Instance.playerStates[index].Buttons.transform.GetChild(0).gameObject;
@@ -19,7 +17,7 @@ namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
             var renderer = newButton.GetComponent<SpriteRenderer>();
             var passive = newButton.GetComponent<PassiveButton>();
 
-            renderer.sprite = HysteriaSprite;
+            renderer.sprite = TownOfUsEdited.HysteriaSprite;
             newButton.transform.position = confirmButton.transform.position - new Vector3(0.75f, 0f, 0f);
             newButton.transform.localScale *= 0.8f;
             newButton.layer = 5;

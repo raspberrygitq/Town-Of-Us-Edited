@@ -8,11 +8,7 @@ namespace TownOfUsEdited.Roles
     {
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
-
         public Dictionary<byte, ArrowBehaviour> MediatedPlayers = new Dictionary<byte, ArrowBehaviour>();
-
-        public static Sprite Arrow => TownOfUsEdited.Arrow;
-
         public Medium(PlayerControl player) : base(player)
         {
             Name = "Medium";
@@ -52,7 +48,8 @@ namespace TownOfUsEdited.Roles
             {
                 gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                 var renderer = gameObj.AddComponent<SpriteRenderer>();
-                renderer.sprite = Arrow;
+                renderer.sprite = TownOfUsEdited.Arrow;
+                renderer.color = Patches.Colors.Medium;
                 arrow.image = renderer;
                 gameObj.layer = 5;
                 arrow.target = Utils.PlayerById(playerId).transform.position;

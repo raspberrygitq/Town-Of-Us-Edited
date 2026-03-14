@@ -101,11 +101,7 @@ internal static class GenericPatches
     {
         public static void Postfix(GameOptionsManager __instance)
         {
-            try
-            {
-                TryAdjustOptionsRecommendations(__instance);
-            }
-            catch { }
+            TryAdjustOptionsRecommendations(__instance);
         }
     }
 
@@ -114,11 +110,7 @@ internal static class GenericPatches
     {
         public static void Postfix(GameOptionsManager __instance)
         {
-            try
-            {
-                TryAdjustOptionsRecommendations(__instance);
-            }
-            catch { }
+            TryAdjustOptionsRecommendations(__instance);
         }
     }
 }

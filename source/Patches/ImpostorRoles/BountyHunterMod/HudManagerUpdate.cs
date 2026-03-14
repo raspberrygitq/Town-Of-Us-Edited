@@ -10,7 +10,6 @@ namespace TownOfUsEdited.ImpostorRoles.BountyHunterMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite Arrow => TownOfUsEdited.Arrow;
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -82,7 +81,7 @@ namespace TownOfUsEdited.ImpostorRoles.BountyHunterMod
                         var arrow = gameObj.AddComponent<ArrowBehaviour>();
                         gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                         var renderer2 = gameObj.AddComponent<SpriteRenderer>();
-                        renderer2.sprite = Arrow;
+                        renderer2.sprite = TownOfUsEdited.Arrow;
                         arrow.image = renderer2;
                         gameObj.layer = 5;
                         role.TargetArrow.Add(role.BountyTarget.PlayerId, arrow);

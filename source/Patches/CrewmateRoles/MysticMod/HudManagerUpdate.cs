@@ -10,8 +10,6 @@ namespace TownOfUsEdited.CrewmateRoles.MysticMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite Arrow => TownOfUsEdited.Arrow;
-
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -42,7 +40,8 @@ namespace TownOfUsEdited.CrewmateRoles.MysticMod
                         var arrow = gameObj.AddComponent<ArrowBehaviour>();
                         gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                         var renderer = gameObj.AddComponent<SpriteRenderer>();
-                        renderer.sprite = Arrow;
+                        renderer.sprite = TownOfUsEdited.Arrow;
+                        renderer.color = Patches.Colors.Mystic;
                         arrow.image = renderer;
                         gameObj.layer = 5;
                         role.BodyArrows.Add(body.ParentId, arrow);

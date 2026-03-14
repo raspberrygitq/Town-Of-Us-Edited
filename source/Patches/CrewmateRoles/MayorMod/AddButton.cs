@@ -16,8 +16,6 @@ namespace TownOfUsEdited.CrewmateRoles.MayorMod
 {
     public class AddRevealButton
     {
-        public static Sprite RevealSprite => TownOfUsEdited.RevealSprite;
-
         public static void GenButton(Mayor role, int index)
         {
             var confirmButton = MeetingHud.Instance.playerStates[index].Buttons.transform.GetChild(0).gameObject;
@@ -26,7 +24,7 @@ namespace TownOfUsEdited.CrewmateRoles.MayorMod
             var renderer = newButton.GetComponent<SpriteRenderer>();
             var passive = newButton.GetComponent<PassiveButton>();
 
-            renderer.sprite = RevealSprite;
+            renderer.sprite = TownOfUsEdited.RevealSprite;
             newButton.transform.position = confirmButton.transform.position - new Vector3(0.75f, 0f, 0f);
             newButton.transform.localScale *= 0.8f;
             newButton.layer = 5;

@@ -86,7 +86,7 @@ namespace TownOfUsEdited.CrewmateRoles.SwapperMod
                 var swapper = Role.GetRole<Swapper>(PlayerControl.LocalPlayer);
                 foreach (var button in swapper.Buttons.Where(button => button != null))
                 {
-                    if (button.GetComponent<SpriteRenderer>().sprite == AddButton.DisabledSprite)
+                    if (button.GetComponent<SpriteRenderer>().sprite == TownOfUsEdited.SwapperSwitchDisabled)
                         button.SetActive(false);
 
                     button.GetComponent<PassiveButton>().OnClick = new Button.ButtonClickedEvent();

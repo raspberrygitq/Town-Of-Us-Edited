@@ -7,8 +7,6 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite SampleSprite => TownOfUsEdited.SampleSprite;
-
         public static bool Prefix(KillButton __instance)
         {
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Morphling);
@@ -22,7 +20,7 @@ namespace TownOfUsEdited.ImpostorRoles.MorphlingMod
             if (__instance == role.MorphButton)
             {
                 if (!__instance.isActiveAndEnabled) return false;
-                if (role.MorphButton.graphic.sprite == SampleSprite)
+                if (role.MorphButton.graphic.sprite == TownOfUsEdited.SampleSprite)
                 {
                     if (target == null) return false;
                     var interact = Utils.Interact(PlayerControl.LocalPlayer, target);

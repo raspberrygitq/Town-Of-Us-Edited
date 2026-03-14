@@ -8,8 +8,6 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
     [HarmonyPatch(typeof(HudManager))]
     public class HudConfess
     {
-        public static Sprite Bless => TownOfUsEdited.BlessSprite;
-
         [HarmonyPatch(nameof(HudManager.Update))]
         public static void Postfix(HudManager __instance)
         {
@@ -35,7 +33,7 @@ namespace TownOfUsEdited.CrewmateRoles.OracleMod
                 .Where(x => x != role.Blessed)
                 .ToList();
 
-            role.BlessButton.graphic.sprite = Bless;
+            role.BlessButton.graphic.sprite = TownOfUsEdited.BlessSprite;
             role.BlessButton.transform.localPosition = new Vector3(-2f, 0f, 0f);
 
             role.BlessButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)

@@ -1,7 +1,7 @@
 using HarmonyLib;
+using System.Collections.Generic;
 using UnityEngine;
 using UObject = UnityEngine.Object;
-using System.Collections.Generic;
 
 namespace TownOfUsEdited.Patches.BetterMaps;
 

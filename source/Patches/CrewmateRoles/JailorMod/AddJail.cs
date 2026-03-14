@@ -128,8 +128,6 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                 UpdateButton(jailRole, __instance);
             }
         }
-        public static Sprite CellSprite => TownOfUsEdited.InJailSprite;
-
         public static void GenCell(Jailor role, PlayerVoteArea voteArea)
         {
             var confirmButton = voteArea.Buttons.transform.GetChild(0).gameObject;
@@ -138,7 +136,7 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             var jailCell = Object.Instantiate(confirmButton, voteArea.transform);
             var cellRenderer = jailCell.GetComponent<SpriteRenderer>();
             var passive = jailCell.GetComponent<PassiveButton>();
-            cellRenderer.sprite = CellSprite;
+            cellRenderer.sprite = TownOfUsEdited.InJailSprite;
             jailCell.transform.localPosition = new Vector3(-0.95f, 0f, -2f);
             jailCell.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             jailCell.layer = 5;

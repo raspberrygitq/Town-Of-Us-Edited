@@ -17,7 +17,6 @@ namespace TownOfUsEdited.CrewmateRoles.AltruistMod
     public class Coroutine
     {
         public static Dictionary<PlayerControl, ArrowBehaviour> Revived = new();
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static void StopDragging(byte playerId)
         {
             foreach (var role in Role.GetRoles(RoleEnum.Undertaker))
@@ -203,7 +202,7 @@ namespace TownOfUsEdited.CrewmateRoles.AltruistMod
                 var Arrow = gameObj.AddComponent<ArrowBehaviour>();
                 gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                 var renderer = gameObj.AddComponent<SpriteRenderer>();
-                renderer.sprite = Sprite;
+                renderer.sprite = TownOfUsEdited.Arrow;
                 Arrow.image = renderer;
                 gameObj.layer = 5;
                 Revived.Add(player, Arrow);

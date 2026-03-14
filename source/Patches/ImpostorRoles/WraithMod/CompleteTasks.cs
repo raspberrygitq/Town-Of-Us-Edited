@@ -9,7 +9,6 @@ namespace TownOfUsEdited.ImpostorRoles.WraithMod
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.CompleteTask))]
     public class CompleteTask
     {
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static void Postfix(PlayerControl __instance)
         {
             if (!__instance.Is(RoleEnum.Wraith)) return;
@@ -33,7 +32,7 @@ namespace TownOfUsEdited.ImpostorRoles.WraithMod
                     var arrow = gameObj.AddComponent<ArrowBehaviour>();
                     gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                     var renderer = gameObj.AddComponent<SpriteRenderer>();
-                    renderer.sprite = Sprite;
+                    renderer.sprite = TownOfUsEdited.Arrow;
                     arrow.image = renderer;
                     gameObj.layer = 5;
                     role.Arrows.Add(arrow);

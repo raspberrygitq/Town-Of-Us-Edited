@@ -158,7 +158,7 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
             if (player.IsLover() && CustomGameOptions.BothLoversDie)
             {
                 var otherLover = Modifier.GetModifier<Lover>(player).OtherLover.Player;
-                if (!otherLover.Is(RoleEnum.Pestilence)) MurderPlayer(otherLover, witch, false);
+                if (!otherLover.Data.IsDead && !otherLover.Is(RoleEnum.Pestilence)) MurderPlayer(otherLover, witch, false);
             }
 
             if (checkLover == true)

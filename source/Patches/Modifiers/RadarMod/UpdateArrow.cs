@@ -10,7 +10,6 @@ namespace TownOfUsEdited.Modifiers.RadarMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class UpdateArrow
     {
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -32,7 +31,7 @@ namespace TownOfUsEdited.Modifiers.RadarMod
                 var arrow = gameObj.AddComponent<ArrowBehaviour>();
                 gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                 var renderer = gameObj.AddComponent<SpriteRenderer>();
-                renderer.sprite = Sprite;
+                renderer.sprite = TownOfUsEdited.Arrow;
                 renderer.color = Colors.Radar;
                 arrow.image = renderer;
                 gameObj.layer = 5;

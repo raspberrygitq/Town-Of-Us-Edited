@@ -9,7 +9,6 @@ namespace TownOfUsEdited.CrewmateRoles.TrackerMod
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite Sprite => TownOfUsEdited.Arrow;
         public static bool Prefix(KillButton __instance)
         {
             if (__instance != HudManager.Instance.KillButton) return true;
@@ -32,7 +31,7 @@ namespace TownOfUsEdited.CrewmateRoles.TrackerMod
                 var arrow = gameObj.AddComponent<ArrowBehaviour>();
                 gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                 var renderer = gameObj.AddComponent<SpriteRenderer>();
-                renderer.sprite = Sprite;
+                renderer.sprite = TownOfUsEdited.Arrow;
                 if (!CamouflageUnCamouflage.IsCamoed)
                 {
                     if (RainbowUtils.IsRainbow(target.GetDefaultOutfit().ColorId))

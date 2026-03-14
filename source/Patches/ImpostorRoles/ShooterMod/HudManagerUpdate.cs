@@ -7,7 +7,6 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite StoreSprite => TownOfUsEdited.StoreSprite;
         public static void Postfix(HudManager __instance)
         {
             var player = PlayerControl.LocalPlayer;
@@ -23,7 +22,7 @@ namespace TownOfUsEdited.Patches.ImpostorRoles.ShooterMod
                 role.StoreButton = Object.Instantiate(__instance.KillButton, __instance.KillButton.transform.parent);
                 role.StoreButton.graphic.enabled = true;
                 role.StoreButton.gameObject.SetActive(false);
-                role.StoreButton.graphic.sprite = StoreSprite;
+                role.StoreButton.graphic.sprite = TownOfUsEdited.StoreSprite;
             }
 
             if (role.UsesText == null)

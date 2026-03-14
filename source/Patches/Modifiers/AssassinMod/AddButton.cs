@@ -16,11 +16,6 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
 {
     public class AddButtonAssassin
     {
-        private static Sprite CycleBackSprite => TownOfUsEdited.CycleBackSprite;
-        private static Sprite CycleForwardSprite => TownOfUsEdited.CycleForwardSprite;
-
-        private static Sprite GuessSprite => TownOfUsEdited.GuessSprite;
-
         private static bool IsExempt(PlayerVoteArea voteArea)
         {
             if (voteArea.AmDead) return true;
@@ -95,7 +90,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
 
             var cycleBack = Object.Instantiate(confirmButton, voteArea.transform);
             var cycleRendererBack = cycleBack.GetComponent<SpriteRenderer>();
-            cycleRendererBack.sprite = CycleBackSprite;
+            cycleRendererBack.sprite = TownOfUsEdited.CycleBackSprite;
             cycleBack.transform.localPosition = new Vector3(-0.5f, 0.15f, -2f);
             cycleBack.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             cycleBack.layer = 5;
@@ -110,7 +105,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
 
             var cycleForward = Object.Instantiate(confirmButton, voteArea.transform);
             var cycleRendererForward = cycleForward.GetComponent<SpriteRenderer>();
-            cycleRendererForward.sprite = CycleForwardSprite;
+            cycleRendererForward.sprite = TownOfUsEdited.CycleForwardSprite;
             cycleForward.transform.localPosition = new Vector3(-0.2f, 0.15f, -2f);
             cycleForward.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             cycleForward.layer = 5;
@@ -125,7 +120,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
 
             var guess = Object.Instantiate(confirmButton, voteArea.transform);
             var guessRenderer = guess.GetComponent<SpriteRenderer>();
-            guessRenderer.sprite = GuessSprite;
+            guessRenderer.sprite = TownOfUsEdited.GuessSprite;
             guess.transform.localPosition = new Vector3(-0.35f, -0.15f, -2f);
             guess.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             guess.layer = 5;

@@ -10,8 +10,6 @@ namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite Hypnotise => TownOfUsEdited.HypnotiseSprite;
-
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -47,7 +45,7 @@ namespace TownOfUsEdited.ImpostorRoles.HypnotistMod
 
             if (PlayerControl.LocalPlayer.Data.IsDead || role.HysteriaActive) role.HypnotiseButton.SetTarget(null);
 
-            role.HypnotiseButton.graphic.sprite = Hypnotise;
+            role.HypnotiseButton.graphic.sprite = TownOfUsEdited.HypnotiseSprite;
             role.HypnotiseButton.gameObject.SetActive((__instance.UseButton.isActiveAndEnabled || __instance.PetButton.isActiveAndEnabled)
                     && !MeetingHud.Instance && !PlayerControl.LocalPlayer.Data.IsDead && !role.HysteriaActive
                     && (AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started ||

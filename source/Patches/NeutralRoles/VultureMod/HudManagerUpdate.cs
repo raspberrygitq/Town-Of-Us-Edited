@@ -11,7 +11,6 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public class HudManagerUpdate
     {
-        public static Sprite Arrow => TownOfUsEdited.Arrow;
         public static void Postfix(HudManager __instance)
         {
             if (PlayerControl.AllPlayerControls.Count <= 1) return;
@@ -92,7 +91,7 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
                         var arrow = gameObj.AddComponent<ArrowBehaviour>();
                         gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                         var renderer = gameObj.AddComponent<SpriteRenderer>();
-                        renderer.sprite = Arrow;
+                        renderer.sprite = TownOfUsEdited.Arrow;
                         arrow.image = renderer;
                         gameObj.layer = 5;
                         role.BodyArrows.Add(body.ParentId, arrow);

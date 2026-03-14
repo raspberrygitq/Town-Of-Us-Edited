@@ -10,9 +10,6 @@ namespace TownOfUsEdited.CrewmateRoles.SwapperMod
     public class AddButton
     {
         private static int _mostRecentId;
-        private static Sprite ActiveSprite => TownOfUsEdited.SwapperSwitch;
-        public static Sprite DisabledSprite => TownOfUsEdited.SwapperSwitchDisabled;
-
         private static bool IsExempt(PlayerVoteArea voteArea)
         {
             if (voteArea.AmDead) return true;
@@ -42,7 +39,7 @@ namespace TownOfUsEdited.CrewmateRoles.SwapperMod
             var renderer = newButton.GetComponent<SpriteRenderer>();
             var passive = newButton.GetComponent<PassiveButton>();
 
-            renderer.sprite = DisabledSprite;
+            renderer.sprite = TownOfUsEdited.SwapperSwitchDisabled;
             newButton.transform.position = confirmButton.transform.position - new Vector3(0.75f, 0f, 0f);
             newButton.transform.localScale *= 0.8f;
             newButton.layer = 5;
@@ -71,10 +68,10 @@ namespace TownOfUsEdited.CrewmateRoles.SwapperMod
                 }
                 if (index == int.MaxValue) return;
                 if (role.ListOfActives.Count(x => x.Item2) == 2 &&
-                    role.Buttons[index].GetComponent<SpriteRenderer>().sprite == DisabledSprite) return;
+                    role.Buttons[index].GetComponent<SpriteRenderer>().sprite == TownOfUsEdited.SwapperSwitchDisabled) return;
 
                 role.Buttons[index].GetComponent<SpriteRenderer>().sprite =
-                    role.ListOfActives[index].Item2 ? DisabledSprite : ActiveSprite;
+                    role.ListOfActives[index].Item2 ? TownOfUsEdited.SwapperSwitchDisabled : TownOfUsEdited.SwapperSwitch;
 
                 role.ListOfActives[index] = (role.ListOfActives[index].Item1, !role.ListOfActives[index].Item2);
 
