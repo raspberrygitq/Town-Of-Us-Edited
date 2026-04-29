@@ -1,3 +1,4 @@
+using LibCpp2IL.Elf;
 using System;
 using TownOfUsEdited.Extensions;
 using static TownOfUsEdited.Roles.Role;
@@ -25,7 +26,7 @@ namespace TownOfUsEdited.Roles.Modifiers
             DeathTime = DateTime.UtcNow;
             Room = Room == string.Empty ? "Outside/Hallway" : Room;
             if (Player == killer) Message = $"The Celebrity, {Player.GetDefaultOutfit().PlayerName}, was killed!\nLocation: {Room}\nDeath: By Suicide\nTime: ";
-            else Message = $"The Celebrity, {Player.GetDefaultOutfit().PlayerName}, was killed!\nLocation: {Room}\nDeath: By {GetRole(killer).Name.ToString()}\nTime: ";
+            else Message = $"The Celebrity, {Player.GetDefaultOutfit().PlayerName}, was killed!\nLocation: {Room}\nDeath: By <b>{GetRole(killer).Name.ToString().Color(GetRole(killer).Color)}</b>\nTime: ";
             if (MeetingHud.Instance) PrintMessage();
         }
 

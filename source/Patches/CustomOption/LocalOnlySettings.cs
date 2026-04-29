@@ -16,38 +16,38 @@ namespace TownOfUsEdited.CustomOption
             new()
             {
                 Title = "Other Ghosts Visible When Dead",
-                OnClick = () => { return TownOfUsEdited.DeadSeeGhosts.Value = !TownOfUsEdited.DeadSeeGhosts.Value; },
-                DefaultValue = TownOfUsEdited.DeadSeeGhosts.Value
+                OnClick = () => { return TownOfUsEditedConfig.DeadSeeGhosts.Value = !TownOfUsEditedConfig.DeadSeeGhosts.Value; },
+                DefaultValue = TownOfUsEditedConfig.DeadSeeGhosts.Value
             },
             new()
             {
                 Title = "See Setting Changes In Lobby",
-                OnClick = () => { return TownOfUsEdited.SeeSettingNotifier.Value = !TownOfUsEdited.SeeSettingNotifier.Value; },
-                DefaultValue = TownOfUsEdited.SeeSettingNotifier.Value
+                OnClick = () => { return TownOfUsEditedConfig.SeeSettingNotifier.Value = !TownOfUsEditedConfig.SeeSettingNotifier.Value; },
+                DefaultValue = TownOfUsEditedConfig.SeeSettingNotifier.Value
             },
             new()
             {
                 Title = "Disable Lobby Music",
-                OnClick = () => { return TownOfUsEdited.DisableLobbyMusic.Value = !TownOfUsEdited.DisableLobbyMusic.Value; },
-                DefaultValue = TownOfUsEdited.DisableLobbyMusic.Value
+                OnClick = () => { return TownOfUsEditedConfig.DisableLobbyMusic.Value = !TownOfUsEditedConfig.DisableLobbyMusic.Value; },
+                DefaultValue = TownOfUsEditedConfig.DisableLobbyMusic.Value
             },
             new()
             {
                 Title = "Force 4 Columns",
-                OnClick = () => { return TownOfUsEdited.Force4Columns.Value = !TownOfUsEdited.Force4Columns.Value; },
-                DefaultValue = TownOfUsEdited.Force4Columns.Value
+                OnClick = () => { return TownOfUsEditedConfig.Force4Columns.Value = !TownOfUsEditedConfig.Force4Columns.Value; },
+                DefaultValue = TownOfUsEditedConfig.Force4Columns.Value
             },
             new()
             {
                 Title = "Show Welcome Message",
-                OnClick = () => { return TownOfUsEdited.ShowWelcomeMessage.Value = !TownOfUsEdited.ShowWelcomeMessage.Value; },
-                DefaultValue = TownOfUsEdited.ShowWelcomeMessage.Value
+                OnClick = () => { return TownOfUsEditedConfig.ShowWelcomeMessage.Value = !TownOfUsEditedConfig.ShowWelcomeMessage.Value; },
+                DefaultValue = TownOfUsEditedConfig.ShowWelcomeMessage.Value
             },
             new()
             {
                 Title = "Don't Show Cosmetics In Game (Client Only)",
-                OnClick = () => { return TownOfUsEdited.DontShowCosmeticsInGame.Value = !TownOfUsEdited.DontShowCosmeticsInGame.Value; },
-                DefaultValue = TownOfUsEdited.DontShowCosmeticsInGame.Value
+                OnClick = () => { return TownOfUsEditedConfig.DontShowCosmeticsInGame.Value = !TownOfUsEditedConfig.DontShowCosmeticsInGame.Value; },
+                DefaultValue = TownOfUsEditedConfig.DontShowCosmeticsInGame.Value
             }
         };
 

@@ -55,7 +55,7 @@ namespace TownOfUsEdited.Patches
         }
         public static void UpdateLobbyMusic(LobbyBehaviour __instance)
         {
-            if (TownOfUsEdited.DisableLobbyMusic.Value && SoundManager.Instance.soundPlayers.ToArray().Any(x => x.Name == "MapTheme"))
+            if (TownOfUsEditedConfig.DisableLobbyMusic.Value && SoundManager.Instance.soundPlayers.ToArray().Any(x => x.Name == "MapTheme"))
             {
                 SoundManager.Instance.StopSound(__instance.MapTheme);
                 if (SoundManager.Instance.soundPlayers.ToArray().Any(x => x.Name == "MapTheme"))
@@ -72,7 +72,7 @@ namespace TownOfUsEdited.Patches
                 }
                 PluginSingleton<TownOfUsEdited>.Instance.Log.LogInfo("Stopped Lobby Music");
             }
-            else if (!TownOfUsEdited.DisableLobbyMusic.Value && !SoundManager.Instance.soundPlayers.ToArray().Any(x => x.Name == "MapTheme"))
+            else if (!TownOfUsEditedConfig.DisableLobbyMusic.Value && !SoundManager.Instance.soundPlayers.ToArray().Any(x => x.Name == "MapTheme"))
             {
                 SoundManager.Instance.CrossFadeSound("MapTheme", __instance.MapTheme, 0.07f, 1.5f);
                 PluginSingleton<TownOfUsEdited>.Instance.Log.LogInfo("Started Lobby Music");

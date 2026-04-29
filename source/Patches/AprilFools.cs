@@ -40,7 +40,8 @@ namespace TownOfUsEdited.Patches
             {0, "Off"},
             {1, "Horse"},
             {2, "Long"},
-            {3, "Long Horse"}
+            {3, "Long Horse"},
+            {4, "Classic"}
         };
 
         [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
@@ -122,7 +123,7 @@ namespace TownOfUsEdited.Patches
                 passive.OnClick.AddListener((Action)(() =>
                 {
                     int num = CurrentMode + 1;
-                    CurrentMode = num > 3 ? 0 : num;
+                    CurrentMode = num > 4 ? 0 : num;
                     var text = aprilfoolstoggle.transform.GetChild(0).GetChild(0).GetComponent<TextMeshPro>();
                     text.text = $"April fools mode: {Modes[CurrentMode]}";
                 }));
@@ -168,6 +169,9 @@ namespace TownOfUsEdited.Patches
                 case 3:
                     bodyType = PlayerBodyTypes.LongSeeker;
                     break;
+                case 4:
+                    bodyType = PlayerBodyTypes.Classic;
+                    break;
             }
         }
 
@@ -186,6 +190,9 @@ namespace TownOfUsEdited.Patches
                     return false;
                 case 3:
                     __result = PlayerBodyTypes.LongSeeker;
+                    return false;
+                case 4:
+                    __result = PlayerBodyTypes.Classic;
                     return false;
                 default:
                     return true;

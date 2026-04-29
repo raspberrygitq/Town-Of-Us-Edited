@@ -64,7 +64,7 @@ namespace TownOfUsEdited.Patches
                 if (data != null)
                 {
                     Data = data.FirstOrDefault();
-                    DevStatus.hidden = TownOfUsEdited.HideDevStatus.Value;
+                    DevStatus.hidden = TownOfUsEditedConfig.HideDevStatus.Value;
                     System.Console.WriteLine("Received Custom Status Infos");
                 }
             }

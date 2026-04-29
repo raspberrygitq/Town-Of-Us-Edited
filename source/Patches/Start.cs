@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Patches
 {
-    [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__35), nameof(IntroCutscene._CoBegin_d__35.MoveNext))]
+    [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__35), "MoveNext")]
     public static class Start
     {
         public static void Postfix(IntroCutscene._CoBegin_d__35 __instance)

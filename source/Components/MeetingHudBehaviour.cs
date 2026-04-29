@@ -18,7 +18,7 @@ public class MeetingHudBehaviour : MonoBehaviour
 
     public void Start()
     {
-        if (Targets.Count() < 16 && !TownOfUsEdited.Force4Columns.Value) return;
+        if (Targets.Count() < 16 && !TownOfUsEditedConfig.Force4Columns.Value) return;
         var i = 0;
         foreach (var button in Targets)
         {

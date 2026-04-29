@@ -330,6 +330,7 @@ namespace TownOfUsEdited
                 if (PlayerControl.LocalPlayer == Crewmate)
                 {
                     var role = new Sheriff(PlayerControl.LocalPlayer);
+                    role.Kills = oldRole.Kills;
                     role.CorrectKills = killsList.CorrectKills;
                     role.IncorrectKills = killsList.IncorrectKills;
                     role.CorrectAssassinKills = killsList.CorrectAssassinKills;
@@ -339,6 +340,7 @@ namespace TownOfUsEdited
                 else
                 {
                     var role = new Sheriff(Crewmate);
+                    role.Kills = oldRole.Kills;
                     role.CorrectKills = killsList.CorrectKills;
                     role.IncorrectKills = killsList.IncorrectKills;
                     role.CorrectAssassinKills = killsList.CorrectAssassinKills;

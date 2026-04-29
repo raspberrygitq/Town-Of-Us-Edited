@@ -10,10 +10,10 @@ using Random = UnityEngine.Random;
 
 namespace TownOfUsEdited.CrewmateRoles.HaunterMod
 {
-    [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
+    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn
     {
-        public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => SetHaunter.ExileControllerPostfix(__instance.__4__this);
+        public static void Postfix(AirshipExileController __instance) => SetHaunter.ExileControllerPostfix(__instance);
     }
 
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
@@ -35,6 +35,7 @@ namespace TownOfUsEdited.CrewmateRoles.HaunterMod
                 {
                     var role = new Haunter(PlayerControl.LocalPlayer);
                     role.formerRole = oldRole.RoleType;
+                    role.Kills = oldRole.Kills;
                     role.CorrectKills = killsList.CorrectKills;
                     role.IncorrectKills = killsList.IncorrectKills;
                     role.CorrectAssassinKills = killsList.CorrectAssassinKills;
@@ -46,6 +47,7 @@ namespace TownOfUsEdited.CrewmateRoles.HaunterMod
                 {
                     var role = new Haunter(WillBeHaunter);
                     role.formerRole = oldRole.RoleType;
+                    role.Kills = oldRole.Kills;
                     role.CorrectKills = killsList.CorrectKills;
                     role.IncorrectKills = killsList.IncorrectKills;
                     role.CorrectAssassinKills = killsList.CorrectAssassinKills;

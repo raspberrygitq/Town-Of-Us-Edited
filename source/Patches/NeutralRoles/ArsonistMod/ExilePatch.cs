@@ -7,10 +7,10 @@ using UnityEngine;
 
 namespace TownOfUsEdited.NeutralRoles.ArsonistMod
 {
-    [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
+    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn
     {
-        public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => SetLastKillerBool.ExileControllerPostfix(__instance.__4__this);
+        public static void Postfix(AirshipExileController __instance) => SetLastKillerBool.ExileControllerPostfix(__instance);
     }
 
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]

@@ -25,7 +25,7 @@ public static class DontShowCosmeticsInGame_PlayerControl_FixedUpdate_Postfix
 {
     public static void Postfix(PlayerControl __instance)
     {
-        if (!TownOfUsEdited.DontShowCosmeticsInGame.Value) return;
+        if (!TownOfUsEditedConfig.DontShowCosmeticsInGame.Value) return;
         __instance.SetHat("", 0);
         __instance.SetSkin("", 0);
         __instance.SetVisor("", 0);

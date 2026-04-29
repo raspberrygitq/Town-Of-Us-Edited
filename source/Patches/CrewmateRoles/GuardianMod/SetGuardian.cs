@@ -7,10 +7,10 @@ using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.CrewmateRoles.GuardianMod
 {
-    [HarmonyPatch(typeof(AirshipExileController._WrapUpAndSpawn_d__11), nameof(AirshipExileController._WrapUpAndSpawn_d__11.MoveNext))]
+    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn
     {
-        public static void Postfix(AirshipExileController._WrapUpAndSpawn_d__11 __instance) => SetGuardian.ExileControllerPostfix(__instance.__4__this);
+        public static void Postfix(AirshipExileController __instance) => SetGuardian.ExileControllerPostfix(__instance);
     }
 
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
@@ -32,6 +32,7 @@ namespace TownOfUsEdited.CrewmateRoles.GuardianMod
                 {
                     var role = new Guardian(PlayerControl.LocalPlayer);
                     role.formerRole = oldRole.RoleType;
+                    role.Kills = oldRole.Kills;
                     role.CorrectKills = killsList.CorrectKills;
                     role.IncorrectKills = killsList.IncorrectKills;
                     role.CorrectAssassinKills = killsList.CorrectAssassinKills;
@@ -43,6 +44,7 @@ namespace TownOfUsEdited.CrewmateRoles.GuardianMod
                 {
                     var role = new Guardian(WillBeGuardian);
                     role.formerRole = oldRole.RoleType;
+                    role.Kills = oldRole.Kills;
                     role.CorrectKills = killsList.CorrectKills;
                     role.IncorrectKills = killsList.IncorrectKills;
                     role.CorrectAssassinKills = killsList.CorrectAssassinKills;

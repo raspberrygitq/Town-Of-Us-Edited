@@ -339,6 +339,7 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
             if (PlayerControl.LocalPlayer == newVamp)
             {
                 var role = new Vampire(PlayerControl.LocalPlayer);
+                role.Kills = oldRole.Kills;
                 role.CorrectKills = killsList.CorrectKills;
                 role.IncorrectKills = killsList.IncorrectKills;
                 role.CorrectAssassinKills = killsList.CorrectAssassinKills;
@@ -350,6 +351,7 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
             else
             {
                 var role = new Vampire(newVamp);
+                role.Kills = oldRole.Kills;
                 role.CorrectKills = killsList.CorrectKills;
                 role.IncorrectKills = killsList.IncorrectKills;
                 role.CorrectAssassinKills = killsList.CorrectAssassinKills;

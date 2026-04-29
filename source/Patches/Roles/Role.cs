@@ -446,7 +446,7 @@ namespace TownOfUsEdited.Roles
             {
                 if ((PlayerControl.LocalPlayer.Data.IsDead && CustomGameOptions.SeeTasksWhenDead) || (MeetingHud.Instance && CustomGameOptions.SeeTasksDuringMeeting) || (!PlayerControl.LocalPlayer.Data.IsDead && !MeetingHud.Instance && CustomGameOptions.SeeTasksDuringRound))
                 {
-                    PlayerName += $" <size=75%>({TotalTasks - TasksLeft}/{TotalTasks})</size>";
+                    PlayerName += $" ({TotalTasks - TasksLeft}/{TotalTasks})";
                 }
             }
 
@@ -456,7 +456,7 @@ namespace TownOfUsEdited.Roles
 
             Player.nameText().transform.localPosition = new Vector3(0f, 0.15f, -0.5f);
 
-            return $"<size=75%>{Name}</size>\n{Palette.White.ToTextColor()}{PlayerName}</color>";
+            return PlayerName + "\n" + $"<size=75%>{Name}</size>";
         }
 
         public static bool operator ==(Role a, Role b)
@@ -646,7 +646,7 @@ namespace TownOfUsEdited.Roles
                 }
             }
 
-            [HarmonyPatch(typeof(IntroCutscene._ShowTeam_d__38), nameof(IntroCutscene._ShowTeam_d__38.MoveNext))]
+            [HarmonyPatch(typeof(IntroCutscene._ShowTeam_d__38), "MoveNext")]
             public static class IntroCutscene_ShowTeam__d_MoveNext
             {
                 public static void Prefix(IntroCutscene._ShowTeam_d__38 __instance)
@@ -795,7 +795,7 @@ namespace TownOfUsEdited.Roles
                 }
             }
 
-            [HarmonyPatch(typeof(IntroCutscene._ShowRole_d__41), nameof(IntroCutscene._ShowRole_d__41.MoveNext))]
+            [HarmonyPatch(typeof(IntroCutscene._ShowRole_d__41), "MoveNext")]
             public static class IntroCutscene_ShowRole_d__41
             {
                 public static void Postfix(IntroCutscene._ShowRole_d__41 __instance)
@@ -995,7 +995,7 @@ namespace TownOfUsEdited.Roles
                 }
             }
 
-            [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__35), nameof(IntroCutscene._CoBegin_d__35.MoveNext))]
+            [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__35), "MoveNext")]
             public static class IntroCutscene_CoBegin_d__29
             {
                 public static void Postfix(IntroCutscene._CoBegin_d__35 __instance)
@@ -1197,7 +1197,7 @@ namespace TownOfUsEdited.Roles
             }
         }
 
-        [HarmonyPatch(typeof(PlayerControl._CoSetTasks_d__103), nameof(PlayerControl._CoSetTasks_d__103.MoveNext))]
+        [HarmonyPatch(typeof(PlayerControl._CoSetTasks_d__103), "MoveNext")]
         public static class PlayerControl_SetTasks
         {
             public static void Postfix(PlayerControl._CoSetTasks_d__103 __instance)

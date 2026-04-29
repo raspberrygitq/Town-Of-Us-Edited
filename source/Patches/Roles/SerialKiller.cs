@@ -405,6 +405,7 @@ namespace TownOfUsEdited.Roles
             if (PlayerControl.LocalPlayer == newsk)
             {
                 var role = new SerialKiller(PlayerControl.LocalPlayer);
+                role.Kills = oldRole.Kills;
                 role.CorrectKills = killsList.CorrectKills;
                 role.IncorrectKills = killsList.IncorrectKills;
                 role.CorrectAssassinKills = killsList.CorrectAssassinKills;
@@ -417,6 +418,7 @@ namespace TownOfUsEdited.Roles
                 newsk.Data.Role.TeamType = RoleTeamTypes.Crewmate;
                 RoleManager.Instance.SetRole(newsk, RoleTypes.Crewmate);
                 var role = new SerialKiller(newsk);
+                role.Kills = oldRole.Kills;
                 role.CorrectKills = killsList.CorrectKills;
                 role.IncorrectKills = killsList.IncorrectKills;
                 role.CorrectAssassinKills = killsList.CorrectAssassinKills;

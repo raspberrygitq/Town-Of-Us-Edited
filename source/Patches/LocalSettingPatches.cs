@@ -25,7 +25,7 @@ namespace TownOfUsEdited.Patches
                 if (player.Is(RoleEnum.Phantom) && !Role.GetRole<Phantom>(player).Caught) continue;
                 if (player.Is(RoleEnum.Wraith) && !Role.GetRole<Wraith>(player).Caught) continue;
 
-                bool show = TownOfUsEdited.DeadSeeGhosts.Value;
+                bool show = TownOfUsEditedConfig.DeadSeeGhosts.Value;
                 var bodyforms = player.gameObject.transform.GetChild(1).gameObject;
 
                 foreach (var form in bodyforms.GetAllChilds())

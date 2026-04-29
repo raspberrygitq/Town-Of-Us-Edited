@@ -345,6 +345,7 @@ namespace TownOfUsEdited.Roles
             if (PlayerControl.LocalPlayer == newcoven)
             {
                 var role = new Coven(PlayerControl.LocalPlayer);
+                role.Kills = oldRole.Kills;
                 role.CorrectKills = killsList.CorrectKills;
                 role.IncorrectKills = killsList.IncorrectKills;
                 role.CorrectAssassinKills = killsList.CorrectAssassinKills;
@@ -354,6 +355,7 @@ namespace TownOfUsEdited.Roles
             else
             {
                 var role = new Coven(newcoven);
+                role.Kills = oldRole.Kills;
                 role.CorrectKills = killsList.CorrectKills;
                 role.IncorrectKills = killsList.IncorrectKills;
                 role.CorrectAssassinKills = killsList.CorrectAssassinKills;
