@@ -83,6 +83,8 @@
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
+|  17.3.0 | v2.3.2 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.2/TouEdited-v2.3.2-x86-steam-itch.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.2/TouEdited-v2.3.2-x64-epic-msstore.zip) |
+|  17.0.0 - 17.2.2 | v2.3.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.1/ToUEG-Steam.v2.3.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.1/ToUEG-Epic.v2.3.1.zip) |
 |  17.0.0 - 17.2.1 | v2.3.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.0/ToUEG-Steam.v2.3.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.0/ToUEG-Epic.v2.3.0.zip) |
 |  17.1.0 - 17.2.0 | v2.2.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.2.1/ToUEG-Steam.v2.2.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.2.1/ToUEG-Epic.v2.2.1.zip) |
 |  17.1.0 | v2.2.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.2.0/ToUEG-Steam.v2.2.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.2.0/ToUEG-Epic.v2.2.0.zip) |
@@ -1836,7 +1838,6 @@ Then, the next meeting, that player will be unable to vote and will be forced to
 
 -----------------------
 
-
 # Modifiers
 Modifiers are added on top of players' roles.
 ## Aftermath
@@ -2256,6 +2257,12 @@ Auto adjustments will be made if there are not enough crewmates or impostors to 
 | Slot 13 | What role type can appear in Slot 13 | See Above for Buckets | Non-Imp / Coven |
 | Slot 14 | What role type can appear in Slot 14 | See Above for Buckets | Non-Imp / Coven |
 | Slot 15 | What role type can appear in Slot 15 | See Above for Buckets | Non-Imp / Coven |
+| Slot 16 | What role type can appear in Slot 15 | See Above for Buckets | Non-Imp / Coven |
+| Slot 17 | What role type can appear in Slot 15 | See Above for Buckets | Non-Imp / Coven |
+| Slot 18 | What role type can appear in Slot 15 | See Above for Buckets | Non-Imp / Coven |
+| Slot 19 | What role type can appear in Slot 15 | See Above for Buckets | Non-Imp / Coven |
+| Slot 20 | What role type can appear in Slot 15 | See Above for Buckets | Non-Imp / Coven |
+| Slot 21 | What role type can appear in Slot 15 | See Above for Buckets | Non-Imp / Coven |
 
 -----------------------
 # Battle Royale Settings
@@ -2400,9 +2407,6 @@ button used for vanilla role abilities - all impostor abilities like blackmail, 
 LB & RB - either of these will trigger button barry or disperse modifiers <br>
 RT - used for the glitch's hack ability <br>
 LT - used for the glitch's mimic ability <br>
-## Custom Emotes and Animations!
-The mod includes a little menu allowing you to express your emotions in game through emotes.\
-There are also a few animations for some roles like morphling and swooper!
 
 ## And much more!
 
@@ -2427,7 +2431,9 @@ Flix - For button arts creation.\
 [BryBry16](https://github.com/Brybry16/BetterPolus) - For the code used for Better Polus.\
 [Stellar Roles](https://github.com/Mr-Fluuff/StellarRolesAU) - For some code used for Manipulator and Motionless.\
 [Mira API](https://github.com/All-Of-Us-Mods/MiraAPI) - For some code used for Freeplay features.\
-[Alexejhero](https://github.com/SubmergedAmongUs/Submerged) - For the Submerged map.
+[Alexejhero](https://github.com/SubmergedAmongUs/Submerged) - For the Submerged map.\
+[TownOfUs-WYGON](https://github.com/wygon/Town-Of-Us-WYGON) - For the Noclip role.\
+[TownOfUsMira Unity](https://github.com/AU-Avengers/TownOfUs-Mira-Unity) - For the Sprite.\
 
 #
 <p align="center">This mod is not affiliated with Among Us or Innersloth LLC, and the content contained therein is not endorsed or otherwise sponsored by Innersloth LLC. Portions of the materials contained herein are property of Innersloth LLC.</p>
