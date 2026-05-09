@@ -384,8 +384,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                                  || role == RoleEnum.Doppelganger)
                         {
                             if (other.Is(AbilityEnum.Assassin)) Ability.AbilityDictionary.Remove(other.PlayerId);
-                            if (CustomGameOptions.ShiftTurnNeutAssassin
-                            && !CustomGameOptions.AssassinImpostorRole) new Assassin(shifter);
+                            if (CustomGameOptions.ShiftTurnNeutAssassin) new Assassin(shifter);
                         }
                     }
                     else
@@ -401,8 +400,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                                  || role == RoleEnum.Doppelganger)
                         {
                             if (other.Is(AbilityEnum.Assassin)) Ability.AbilityDictionary.Remove(other.PlayerId);
-                            if (CustomGameOptions.ShiftTurnNeutAssassin
-                            && !CustomGameOptions.AssassinImpostorRole) new Assassin(shifter);
+                            if (CustomGameOptions.ShiftTurnNeutAssassin) new Assassin(shifter);
                         }
                     }
                 }
@@ -449,8 +447,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                     {
                         Ability.AbilityDictionary.Remove(other.PlayerId);
                     }
-                    if (CustomGameOptions.ShiftTurnImpAssassin
-                    && !CustomGameOptions.AssassinImpostorRole) new Assassin(shifter);
+                    if (CustomGameOptions.ShiftTurnImpAssassin) new Assassin(shifter);
                 }
                 else
                 {
@@ -474,8 +471,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                     {
                         Ability.AbilityDictionary.Remove(other.PlayerId);
                     }
-                    if (CustomGameOptions.ShiftTurnImpAssassin
-                    && !CustomGameOptions.AssassinImpostorRole) new Assassin(shifter);
+                    if (CustomGameOptions.ShiftTurnImpAssassin) new Assassin(shifter);
                 }
                 if (shifter.Is(RoleEnum.Poisoner))
                 {
@@ -580,6 +576,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 var prosRole = Role.GetRole<Prosecutor>(shifter);
                 prosRole.Prosecuted = false;
+                prosRole.MaxProsecutes = CustomGameOptions.MaxProsecutes;
                 HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
@@ -595,6 +592,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 var vigiRole = Role.GetRole<Vigilante>(shifter);
                 vigiRole.RemainingKills = CustomGameOptions.VigilanteKills;
+                vigiRole.SafeShots = CustomGameOptions.VigilanteSafeShots;
                 HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 

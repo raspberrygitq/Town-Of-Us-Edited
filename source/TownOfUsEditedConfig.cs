@@ -12,7 +12,7 @@ public static class TownOfUsEditedConfig
     public static ConfigEntry<bool> HideDevStatus { get; set; }
     public static ConfigEntry<bool> DontShowCosmeticsInGame { get; set; }
 
-    public static void Bind(ConfigFile config) 
+    public static void Bind(ConfigFile config)
     {
         DeadSeeGhosts = config.Bind("Settings", "Dead See Other Ghosts", true, "Whether you see other dead players ghosts while your dead");
         SeeSettingNotifier = config.Bind("Settings", "See Setting Notifier", true, "Whether you see setting changes in lobby at bottom left");

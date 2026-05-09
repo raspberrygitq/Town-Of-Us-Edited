@@ -157,14 +157,23 @@ namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
                 }
                 else if (!toDie.Is(RoleEnum.Pestilence) && !toDie.IsBlessed())
                 {
-                    VigilanteKill.RpcMurderPlayer(toDie, PlayerControl.LocalPlayer);
-                    role.RemainingKills--;
-                    ShowHideButtonsVigi.HideSingle(role, targetId, toDie == role.Player);
-                    if (toDie.IsLover() && CustomGameOptions.BothLoversDie)
+                    if (toDie == role.Player && role.SafeShots > 0)
                     {
-                        var playerModifier = Modifier.GetModifier<Lover>(voteArea);
-                        var lover = playerModifier.OtherLover.Player;
-                        if (!lover.Is(RoleEnum.Pestilence)) ShowHideButtonsVigi.HideSingle(role, lover.PlayerId, false);
+                        role.SafeShots--;
+                        Coroutines.Start(Utils.FlashCoroutine(Color.red, 1f));
+                        ShowHideButtonsVigi.HideSingle(role, targetId, false, true);
+                    }
+                    else
+                    {
+                        VigilanteKill.RpcMurderPlayer(toDie, PlayerControl.LocalPlayer);
+                        role.RemainingKills--;
+                        ShowHideButtonsVigi.HideSingle(role, targetId, toDie == role.Player);
+                        if (toDie.IsLover() && CustomGameOptions.BothLoversDie)
+                        {
+                            var playerModifier = Modifier.GetModifier<Lover>(voteArea);
+                            var lover = playerModifier.OtherLover.Player;
+                            if (!lover.Is(RoleEnum.Pestilence)) ShowHideButtonsVigi.HideSingle(role, lover.PlayerId, false);
+                        }
                     }
                 }
                 else

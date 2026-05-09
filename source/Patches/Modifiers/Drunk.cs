@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using TownOfUsEdited.Roles.Modifiers;
 
-namespace TownOfUsEdited.Modifiers.DrunkMod
+namespace TownOfUsEdited.Modifiers
 {
     public class DrunkPatch
     {

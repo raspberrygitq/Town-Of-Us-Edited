@@ -26,12 +26,7 @@ namespace TownOfUsEdited.CovenRoles.RitualistMod
             }
         }
 
-        public static void HideSingle(
-            Ritualist role,
-            byte targetId,
-            bool killedSelf,
-            bool doubleshot = false
-        )
+        public static void HideSingle(Ritualist role, byte targetId, bool killedSelf, bool doubleshot = false)
         {
             if (
                 (killedSelf ||
@@ -41,10 +36,7 @@ namespace TownOfUsEdited.CovenRoles.RitualistMod
             ) HideButtons(role);
             else HideTarget(role, targetId);
         }
-        public static void HideTarget(
-            Ritualist role,
-            byte targetId
-        )
+        public static void HideTarget(Ritualist role, byte targetId)
         {
             if (role.Buttons.ContainsKey(targetId))
             {
@@ -65,6 +57,13 @@ namespace TownOfUsEdited.CovenRoles.RitualistMod
                     x => x.TargetPlayerId == targetId);
                 voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
             }
+        }
+
+        public static void Prefix(MeetingHud __instance)
+        {
+            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Ritualist)) return;
+            var ritualist = Role.GetRole<Ritualist>(PlayerControl.LocalPlayer);
+            if (!CustomGameOptions.RitualistGuessAfterVoting) HideButtons(ritualist);
         }
     }
 }

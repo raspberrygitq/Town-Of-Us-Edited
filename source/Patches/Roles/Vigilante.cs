@@ -31,6 +31,7 @@ namespace TownOfUsEdited.Roles
             AddToRoleHistory(RoleType);
 
             RemainingKills = CustomGameOptions.VigilanteKills;
+            SafeShots = CustomGameOptions.VigilanteSafeShots;
 
             ColorMapping.Add("Impostor", Colors.Impostor);
             if (CustomGameOptions.JanitorOn > 0) ColorMapping.Add("Janitor", Colors.Impostor);
@@ -40,7 +41,7 @@ namespace TownOfUsEdited.Roles
             if (CustomGameOptions.PoisonerOn > 0) ColorMapping.Add("Poisoner", Colors.Impostor);
             if (CustomGameOptions.ShooterOn > 0) ColorMapping.Add("Shooter", Colors.Impostor);
             if (CustomGameOptions.MorphlingOn > 0) ColorMapping.Add("Morphling", Colors.Impostor);
-            if (CustomGameOptions.AssassinOn > 0 && CustomGameOptions.AssassinImpostorRole) ColorMapping.Add("Assassin", Colors.Impostor);
+            if (CustomGameOptions.AssassinOn > 0) ColorMapping.Add("Assassin", Colors.Impostor);
             if (CustomGameOptions.MinerOn > 0) ColorMapping.Add("Miner", Colors.Impostor);
             if (CustomGameOptions.SwooperOn > 0) ColorMapping.Add("Swooper", Colors.Impostor);
             if (CustomGameOptions.UndertakerOn > 0) ColorMapping.Add("Undertaker", Colors.Impostor);
@@ -121,6 +122,8 @@ namespace TownOfUsEdited.Roles
         public bool GuessedThisMeeting { get; set; } = false;
 
         public int RemainingKills { get; set; }
+
+        public int SafeShots { get; set; }
 
         public List<string> PossibleGuesses => SortedColorMapping.Keys.ToList();
     }

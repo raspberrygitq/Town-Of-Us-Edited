@@ -376,12 +376,12 @@ namespace TownOfUsEdited
         public static NumAssassins NumberOfImpostorAssassins => (NumAssassins)Generate.NumberOfImpostorAssassins.Get();
         public static NumAssassins NumberOfNeutralAssassins => (NumAssassins)Generate.NumberOfNeutralAssassins.Get();
         public static bool AmneTurnImpAssassin => Generate.AmneTurnImpAssassin.Get();
-        public static bool AssassinImpostorRole => Generate.AssassinImpostorRole.Get();
         public static bool AmneTurnNeutAssassin => Generate.AmneTurnNeutAssassin.Get();
         public static bool ShiftTurnImpAssassin => Generate.ShiftTurnImpAssassin.Get();
         public static bool ShiftTurnNeutAssassin => Generate.ShiftTurnNeutAssassin.Get();
         public static bool TraitorCanAssassin => Generate.TraitorCanAssassin.Get();
         public static bool AssassinMultiKill => Generate.AssassinMultiKill.Get();
+        public static bool AssassinGuessAfterVoting => Generate.AssassinGuessAfterVoting.Get();
         public static float UnderdogKillBonus => Generate.UnderdogKillBonus.Get();
         public static bool UnderdogIncreasedKC => Generate.UnderdogIncreasedKC.Get();
         public static float ReducedSaboCD => Generate.ReducedSaboCooldown.Get();
@@ -397,6 +397,8 @@ namespace TownOfUsEdited
         public static bool VigilanteGuessLovers => Generate.VigilanteGuessLovers.Get();
         public static int VigilanteKills => (int)Generate.VigilanteKills.Get();
         public static bool VigilanteMultiKill => Generate.VigilanteMultiKill.Get();
+        public static int VigilanteSafeShots => (int)Generate.VigilanteSafeShots.Get();
+        public static bool VigilanteGuessAfterVoting => Generate.VigilanteGuessAfterVoting.Get();
         public static int HaunterTasksRemainingClicked => (int)Generate.HaunterTasksRemainingClicked.Get();
         public static int HaunterTasksRemainingAlert => (int)Generate.HaunterTasksRemainingAlert.Get();
         public static bool HaunterRevealsNeutrals => Generate.HaunterRevealsNeutrals.Get();
@@ -438,6 +440,7 @@ namespace TownOfUsEdited
         public static bool TransporterVitals => Generate.TransporterVitals.Get();
         public static float RewindCooldown => Generate.RewindCooldown.Get();
         public static float RewindDuration => Generate.RewindDuration.Get();
+        public static float RewindSpeed => Generate.RewindSpeed.Get();
         public static bool TimeLordVitals => Generate.TimeLordVitals.Get();
         public static bool RememberArrows => Generate.RememberArrows.Get();
         public static float RememberArrowDelay => Generate.RememberArrowDelay.Get();
@@ -523,9 +526,11 @@ namespace TownOfUsEdited
         public static int MaxStore => (int)Generate.MaxStore.Get();
         public static float ObserveCooldown => Generate.ObserveCooldown.Get();
         public static int DoomsayerGuessesToWin => (int)Generate.DoomsayerGuessesToWin.Get();
+        public static bool DoomsayerGuessAfterVoting => Generate.DoomsayerGuessAfterVoting.Get();
         public static bool HexMasterVent => Generate.HexMasterVent.Get();
         public static int RitualistKills => (int)Generate.RitualistKills.Get();
         public static bool RitualistMultiKill => Generate.RitualistMultiKill.Get();
+        public static bool RitualistGuessAfterVoting => Generate.RitualistGuessAfterVoting.Get();
         public static bool RitualistGuessNeutralBenign => Generate.RitualistGuessNeutralBenign.Get();
         public static bool RitualistGuessNeutralEvil => Generate.RitualistGuessNeutralEvil.Get();
         public static bool RitualistGuessNeutralKilling => Generate.RitualistGuessNeutralKilling.Get();
@@ -549,6 +554,7 @@ namespace TownOfUsEdited
         public static bool SelfKillAfterFinalStake => Generate.SelfKillAfterFinalStake.Get();
         public static BecomeEnum BecomeOnVampDeaths => (BecomeEnum)Generate.BecomeOnVampDeaths.Get();
         public static bool ProsDiesOnIncorrectPros => Generate.ProsDiesOnIncorrectPros.Get();
+        public static int MaxProsecutes => (int)Generate.MaxProsecutes.Get();
         public static float ChargeUpDuration => Generate.ChargeUpDuration.Get();
         public static float ChargeUseDuration => Generate.ChargeUseDuration.Get();
         public static float ConfessCd => Generate.ConfessCooldown.Get();
@@ -597,10 +603,8 @@ namespace TownOfUsEdited
         public static int SmallMapIncreasedLongTasks => (int)Generate.SmallMapIncreasedLongTasks.Get();
         public static int LargeMapDecreasedShortTasks => (int)Generate.LargeMapDecreasedShortTasks.Get();
         public static int LargeMapDecreasedLongTasks => (int)Generate.LargeMapDecreasedLongTasks.Get();
-        public static DisableSkipButtonMeetings SkipButtonDisable =>
-            (DisableSkipButtonMeetings)Generate.SkipButtonDisable.Get();
-        public static GameMode GameMode =>
-            (GameMode)Generate.GameMode.Get();
+        public static DisableSkipButtonMeetings SkipButtonDisable => (DisableSkipButtonMeetings)Generate.SkipButtonDisable.Get();
+        public static GameMode GameMode => (GameMode)Generate.GameMode.Get();
         public static bool CamoCommsKillAnyone => Generate.CamoCommsKillAnyone.Get();
         public static bool CrewKillersContinue => Generate.CrewKillersContinue.Get();
         public static float HypnotiseCd => Generate.HypnotiseCooldown.Get();

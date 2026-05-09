@@ -361,8 +361,7 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                 role.RegenTask(); // To see Vampire task text with mci fr fr
             }
 
-            if (CustomGameOptions.NewVampCanAssassin
-            && !CustomGameOptions.AssassinImpostorRole) new Roles.Modifiers.Assassin(newVamp);
+            if (CustomGameOptions.NewVampCanAssassin) new Roles.Modifiers.Assassin(newVamp);
 
             PlayerControl_Die.CheckEnd();
         }

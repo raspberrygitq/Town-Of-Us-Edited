@@ -644,6 +644,8 @@ During meetings, the Vigilante can choose to kill someone by guessing their role
 | Vigilante | The percentage probability of the Vigilante appearing | Percentage | 0% |
 | Vigilante Kill | The number of kill the Vigilante can do with his ability | Number | 1 |
 | Vigilante Multiple Kill  | Whether the Vigilante can kill more than once per meeting | Toggle | False |
+| Number Of Vigilante Safe Shots | The number of safe shots | Number | 1 |
+| Vigilante Can Guess After Voting | The Vigilante can make a guess after the vote | Toggle | False |
 | Vigilante Guess Neutral Benign  | Whether the Vigilante can Guess Neutral Benign roles | Toggle | False |
 | Vigilante Guess Neutral Evil  | Whether the Vigilante can Guess Neutral Evil roles | Toggle | False |
 | Vigilante Guess Neutral Killing  | Whether the Vigilante can Guess Neutral Killing roles | Toggle | False |
@@ -686,6 +688,7 @@ The Prosecutor is a Crewmate that can once per game prosecute a player which res
 | Name | Description | Type | Default |
 |----------|:-------------:|:------:|:------:|
 | Prosecutor | The percentage probability of the Prosecutor appearing | Percentage | 0% |
+| Max Prosecutions | The number of prosecutions | Number | 1 |
 | Prosecutor Dies When They Exile A Crewmate | Whether the Prosecutor also gets exiled when they exile a Crewmate | Toggle | False |
 
 -----------------------
@@ -1048,6 +1051,7 @@ They have an additional observe ability that hints towards certain player's role
 |----------|:-------------:|:------:|:------:|
 | Doomsayer | The percentage probability of the Doomsayer appearing | Percentage | 0% |
 | Observe Cooldown | The Cooldown of the Doomsayer's Observe button | Time | 25s |
+| Doomsayer Can Guess After Voting | The Doomsayer can make a guess after the vote | Toggle | False |
 | Number Of Doomsayer Guesses Required To Win  | The number of people the Doomsayer has to guess the role of to win | Number | 3 |
 | (Experienced) Doomsayer Can't Observe | The Doomsayer doesn't have the observe feature | Toggle | False |
 
@@ -1806,6 +1810,7 @@ If the Ritualists guesses incorrectly, he will die instead.
 | Ritualist | The percentage probability of the Ritualist appearing | Percentage | 0% |
 | Number Of Ritualist Kills | The number of kills that the ritualist can perform using the meeting time | Number | 1 |
 | Ritualist Can Kill More Than Once Per Meeting | Whether the Ritualist can kill multiple players during the same meeting | Toggle | False |
+| Ritualist Can Guess After Voting | The Ritualist can make a guess after the vote | Toggle | False |
 | Ritualist Guess Impostor Roles | Whether the Ritualist can guess the roles of the Impostors | Toggle | False |
 | Ritualist Guess Neutral Benign Roles | Whether the Ritualist can guess the Neutral Benign Roles | Toggle | False |
 | Ritualist Guess Neutral Killing Roles | Whether the Ritualist can guess the Neutral Killing Roles | Toggle | False |
@@ -2382,6 +2387,7 @@ If they guess wrong, they die instead.
 | Assassin Guess Crewmate | Whether the Assassin can Guess "Crewmate" | Toggle | False |
 | Assassin Multiple Kill  | Whether the Assassin can kill more than once per meeting | Toggle | False |
 | Assassin Guess Neutral Benign  | Whether the Assassin can Guess Neutral Benign roles | Toggle | False |
+| Assassin Can Guess After Voting | The Assassin can make a guess after the vote | Toggle | False |
 | Assassin Guess Neutral Evil  | Whether the Assassin can Guess Neutral Evil roles | Toggle | False |
 | Assassin Guess Neutral Killing  | Whether the Assassin can Guess Neutral Killing roles | Toggle | False |
 | Assassin Guess Impostors  | Whether the Assassin can Guess Impostor roles | Toggle | False |

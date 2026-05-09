@@ -237,7 +237,8 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                             speedFactor = appearance.SpeedFactor;
                         }
                     }
-                    PlayerControl.LocalPlayer.MyPhysics.body.velocity = playerVector2 * PlayerControl.LocalPlayer.MyPhysics.TrueSpeed * speedFactor;
+                    var rewindMultiplier = CustomGameOptions.RewindSpeed;
+                    PlayerControl.LocalPlayer.MyPhysics.body.velocity = playerVector2 * PlayerControl.LocalPlayer.MyPhysics.TrueSpeed * speedFactor * rewindMultiplier;
                 }
                 else
                 {

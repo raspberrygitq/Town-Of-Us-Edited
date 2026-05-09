@@ -32,23 +32,17 @@ namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
             }
         }
 
-        public static void HideSingle(
-            Vigilante role,
-            byte targetId,
-            bool killedSelf
-        )
+        public static void HideSingle(Vigilante role, byte targetId, bool killedSelf, bool safeshots = false)
         {
             if (
-                killedSelf ||
+                (killedSelf ||
                 role.RemainingKills == 0 ||
-                (!CustomGameOptions.VigilanteMultiKill)
+                (!CustomGameOptions.VigilanteMultiKill))
+                && safeshots == false
             ) HideButtonsVigi(role);
             else HideTarget(role, targetId);
         }
-        public static void HideTarget(
-            Vigilante role,
-            byte targetId
-        )
+        public static void HideTarget(Vigilante role, byte targetId)
         {
             if (role.Buttons.ContainsKey(targetId))
             {
@@ -69,6 +63,13 @@ namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
                     x => x.TargetPlayerId == targetId);
                 voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
             }
+        }
+
+        public static void Prefix(MeetingHud __instance)
+        {
+            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Vigilante)) return;
+            var vigilante = Role.GetRole<Vigilante>(PlayerControl.LocalPlayer);
+            if (!CustomGameOptions.VigilanteGuessAfterVoting) HideButtonsVigi(vigilante);
         }
     }
 }

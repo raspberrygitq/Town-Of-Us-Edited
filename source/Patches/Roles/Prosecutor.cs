@@ -15,10 +15,14 @@ namespace TownOfUsEdited.Roles
             StartProsecute = false;
             Prosecuted = false;
             ProsecuteThisMeeting = false;
+            MaxProsecutes = CustomGameOptions.MaxProsecutes;
+            ProsecutesRemaining = MaxProsecutes;
         }
         public bool ProsecuteThisMeeting { get; set; }
         public bool Prosecuted { get; set; }
         public bool StartProsecute { get; set; }
+        public int MaxProsecutes { get; set; }
+        public int ProsecutesRemaining { get; set; }
         public PlayerControl ProsecutedPlayer;
         public PlayerVoteArea Prosecute { get; set; }
     }

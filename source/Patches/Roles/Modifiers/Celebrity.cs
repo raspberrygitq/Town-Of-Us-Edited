@@ -1,4 +1,3 @@
-using LibCpp2IL.Elf;
 using System;
 using TownOfUsEdited.Extensions;
 using static TownOfUsEdited.Roles.Role;

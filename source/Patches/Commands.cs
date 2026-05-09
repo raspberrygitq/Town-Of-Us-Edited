@@ -65,7 +65,7 @@ namespace TownOfUsEdited.Patches
             public static bool CheckRole(string role)
             {
                 return role == "Chameleon" || role == "Altruist" || role == "Amnesiac" || role == "Arsonist" ||
-                (role == "Assassin" && CustomGameOptions.AssassinImpostorRole) || role == "Astral" ||
+                role == "Assassin" || role == "Astral" ||
                 role == "Attacker" || role == "Aurial" || role == "Avenger" || role == "Blackmailer" ||
                 role == "Bodyguard" || role == "Bomber" || role == "BountyHunter" || role == "Captain" ||
                 role == "Conjurer" || role == "Converter" || role == "Coven" || role == "CovenLeader" ||
@@ -753,7 +753,7 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.FreezerOn > 0) ColorMapping.Add("Freezer", Colors.Impostor);
                 if (CustomGameOptions.WraithOn > 0) ColorMapping.Add("Wraith", Colors.Impostor);
                 ColorMapping.Add("\n<b>Impostor Killing</b>\n", Palette.ImpostorRed);
-                if (CustomGameOptions.AssassinOn > 0 && CustomGameOptions.AssassinImpostorRole) ColorMapping.Add("Assassin", Colors.Impostor);
+                if (CustomGameOptions.AssassinOn > 0) ColorMapping.Add("Assassin", Colors.Impostor);
                 if (CustomGameOptions.BomberOn > 0) ColorMapping.Add("Bomber", Colors.Impostor);
                 if (CustomGameOptions.BountyHunterOn > 0) ColorMapping.Add("Bounty Hunter", Colors.Impostor);
                 if (CustomGameOptions.ConjurerOn > 0) ColorMapping.Add("Conjurer", Colors.Impostor);

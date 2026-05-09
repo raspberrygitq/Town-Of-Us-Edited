@@ -25,19 +25,12 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
             }
         }
 
-        public static void HideSingle(
-            Doomsayer role,
-            byte targetId,
-            bool killedSelf
-        )
+        public static void HideSingle(Doomsayer role, byte targetId, bool killedSelf)
         {
             if (killedSelf) HideButtonsDoom(role);
             else HideTarget(role, targetId);
         }
-        public static void HideTarget(
-            Doomsayer role,
-            byte targetId
-        )
+        public static void HideTarget(Doomsayer role, byte targetId)
         {
             if (role.Buttons.ContainsKey(targetId))
             {
@@ -58,6 +51,13 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
                     x => x.TargetPlayerId == targetId);
                 voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
             }
+        }
+
+        public static void Prefix(MeetingHud __instance)
+        {
+            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Doomsayer)) return;
+            var doomsayer = Role.GetRole<Doomsayer>(PlayerControl.LocalPlayer);
+            if (!CustomGameOptions.DoomsayerGuessAfterVoting) HideButtonsDoom(doomsayer);
         }
     }
 }

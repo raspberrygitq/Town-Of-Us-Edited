@@ -265,8 +265,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                         mercenary.Bribed.Add(amnesiac.PlayerId);
                         if (PlayerControl.LocalPlayer == amnesiac) mercenary.Alert = true;
                         mercenary.RegenTask();
-                        if (CustomGameOptions.AmneTurnNeutAssassin
-                        && !CustomGameOptions.AssassinImpostorRole) new Assassin(amnesiac);
+                        if (CustomGameOptions.AmneTurnNeutAssassin) new Assassin(amnesiac);
                         if (other.Is(AbilityEnum.Assassin)) Ability.AbilityDictionary.Remove(other.PlayerId);
                     }
                 }
@@ -289,8 +288,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                         player.nameText().color = Patches.Colors.Impostor;
                     }
                 }
-                if (CustomGameOptions.AmneTurnImpAssassin
-                && !CustomGameOptions.AssassinImpostorRole) new Assassin(amnesiac);
+                if (CustomGameOptions.AmneTurnImpAssassin) new Assassin(amnesiac);
             }
 
             if (role == RoleEnum.Snitch)
@@ -384,6 +382,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
             {
                 var prosRole = Role.GetRole<Prosecutor>(amnesiac);
                 prosRole.Prosecuted = false;
+                prosRole.MaxProsecutes = CustomGameOptions.MaxProsecutes;
                 HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
@@ -391,6 +390,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
             {
                 var vigiRole = Role.GetRole<Vigilante>(amnesiac);
                 vigiRole.RemainingKills = CustomGameOptions.VigilanteKills;
+                vigiRole.SafeShots = CustomGameOptions.VigilanteSafeShots;
                 HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 

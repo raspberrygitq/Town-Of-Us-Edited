@@ -26,12 +26,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
             }
         }
 
-        public static void HideSingle(
-            Assassin role,
-            byte targetId,
-            bool killedSelf,
-            bool doubleshot = false
-        )
+        public static void HideSingle(Assassin role, byte targetId, bool killedSelf, bool doubleshot = false)
         {
             if (
                 (killedSelf ||
@@ -41,10 +36,7 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
             ) HideButtons(role);
             else HideTarget(role, targetId);
         }
-        public static void HideTarget(
-            Assassin role,
-            byte targetId
-        )
+        public static void HideTarget(Assassin role, byte targetId)
         {
             if (role.Buttons.ContainsKey(targetId))
             {
@@ -65,6 +57,13 @@ namespace TownOfUsEdited.Modifiers.AssassinMod
                     x => x.TargetPlayerId == targetId);
                 voteArea.NameText.transform.localPosition = new Vector3(0.3384f, 0.0311f, -0.1f);
             }
+        }
+
+        public static void Prefix(MeetingHud __instance)
+        {
+            if (!PlayerControl.LocalPlayer.Is(AbilityEnum.Assassin)) return;
+            var assassin = Ability.GetAbility<Assassin>(PlayerControl.LocalPlayer);
+            if (!CustomGameOptions.AssassinGuessAfterVoting) HideButtons(assassin);
         }
     }
 }

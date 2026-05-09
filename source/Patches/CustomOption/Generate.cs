@@ -308,6 +308,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption RitualistGuessImpostors;
         public static CustomToggleOption RitualistGuessModifiers;
         public static CustomToggleOption RitualistGuessLovers;
+        public static CustomToggleOption RitualistGuessAfterVoting;
 
         public static CustomHeaderOption PotionMaster;
         public static CustomNumberOption PotionCD;
@@ -393,6 +394,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomHeaderOption TimeLord;
         public static CustomNumberOption RewindCooldown;
         public static CustomNumberOption RewindDuration;
+        public static CustomNumberOption RewindSpeed;
         public static CustomToggleOption TimeLordVitals;
 
         public static CustomHeaderOption Transporter;
@@ -507,10 +509,9 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption NoclipVent;
 
         public static CustomHeaderOption Assassin;
+        public static CustomNumberOption AssassinOn;
         public static CustomStringOption NumberOfImpostorAssassins;
         public static CustomStringOption NumberOfNeutralAssassins;
-        public static CustomToggleOption AssassinImpostorRole;
-        public static CustomNumberOption AssassinOn;
         public static CustomToggleOption AmneTurnImpAssassin;
         public static CustomToggleOption AmneTurnNeutAssassin;
         public static CustomToggleOption TraitorCanAssassin;
@@ -524,6 +525,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption AssassinGuessCoven;
         public static CustomToggleOption AssassinGuessModifiers;
         public static CustomToggleOption AssassinGuessLovers;
+        public static CustomToggleOption AssassinGuessAfterVoting;
 
         public static CustomHeaderOption Underdog;
         public static CustomNumberOption UnderdogKillBonus;
@@ -538,12 +540,14 @@ namespace TownOfUsEdited.CustomOption
         public static CustomHeaderOption Vigilante;
         public static CustomNumberOption VigilanteKills;
         public static CustomToggleOption VigilanteMultiKill;
+        public static CustomNumberOption VigilanteSafeShots;
         public static CustomToggleOption VigilanteGuessNeutralBenign;
         public static CustomToggleOption VigilanteGuessNeutralEvil;
         public static CustomToggleOption VigilanteGuessNeutralKilling;
         public static CustomToggleOption VigilanteGuessCoven;
         public static CustomToggleOption VigilanteGuessLovers;
         public static CustomToggleOption VigilanteGuessImpModifiers;
+        public static CustomToggleOption VigilanteGuessAfterVoting;
 
         public static CustomHeaderOption Haunter;
         public static CustomNumberOption HaunterTasksRemainingClicked;
@@ -706,6 +710,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption ObserveCooldown;
         public static CustomNumberOption DoomsayerGuessesToWin;
         public static CustomToggleOption DoomsayerCantObserve;
+        public static CustomToggleOption DoomsayerGuessAfterVoting;
 
         public static CustomHeaderOption Vampire;
         public static CustomNumberOption BiteCooldown;
@@ -728,6 +733,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption MaxMeetings;
 
         public static CustomHeaderOption Prosecutor;
+        public static CustomNumberOption MaxProsecutes;
         public static CustomToggleOption ProsDiesOnIncorrectPros;
 
         public static CustomHeaderOption Warlock;
@@ -1434,11 +1440,10 @@ namespace TownOfUsEdited.CustomOption
             SeeTasksWhenDead = new CustomToggleOption(num++, MultiMenu.main, "See Tasks When Dead", true);
 
             Assassin = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin Ability</color>");
-            NumberOfImpostorAssassins = new CustomStringOption(num++, MultiMenu.imposter, "Impostor Assassins Count", new[] { "None", "1", "All" }, 2);
-            NumberOfNeutralAssassins = new CustomStringOption(num++, MultiMenu.imposter, "Neutral Assassins Count", new[] { "None", "1", "All" }, 2);
-            AssassinImpostorRole = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin is an Impostor Role", false);
             AssassinOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin</color>", 0f, 0f, 100f, 10f,
                 PercentFormat);
+            NumberOfImpostorAssassins = new CustomStringOption(num++, MultiMenu.imposter, "Impostor Assassins Count", new[] { "None", "1", "All" }, 2);
+            NumberOfNeutralAssassins = new CustomStringOption(num++, MultiMenu.imposter, "Neutral Assassins Count", new[] { "None", "1", "All" }, 2);
             AmneTurnImpAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Amnesiac Turned Impostor Gets Ability", false);
             AmneTurnNeutAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Amnesiac Turned Neutral Killing Gets Ability", false);
             ShiftTurnImpAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Shifter Turned Impostor Gets Ability", false);
@@ -1446,6 +1451,7 @@ namespace TownOfUsEdited.CustomOption
             TraitorCanAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Traitor Gets Ability", false);
             AssassinKills = new CustomNumberOption(num++, MultiMenu.imposter, "Number Of Assassin Kills", 1, 1, 15, 1);
             AssassinMultiKill = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Kill More Than Once Per Meeting", false);
+            AssassinGuessAfterVoting = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess After Voting", false);
             AssassinCrewmateGuess = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess \"Crewmate\"", false);
             AssassinGuessNeutralBenign = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Neutral Benign Roles", false);
             AssassinGuessNeutralEvil = new CustomToggleOption(num++, MultiMenu.imposter, "Assassin Can Guess Neutral Evil Roles", false);
@@ -1684,6 +1690,8 @@ namespace TownOfUsEdited.CustomOption
             Vigilante = new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#FFFF99FF>Vigilante</color>");
             VigilanteKills = new CustomNumberOption(num++, MultiMenu.crewmate, "Number Of Vigilante Kills", 1, 1, 15, 1);
             VigilanteMultiKill = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Kill More Than Once Per Meeting", false);
+            VigilanteSafeShots = new CustomNumberOption(num++, MultiMenu.crewmate, "Number Of Vigilante Safe Shots", 1, 1, 5, 1);
+            VigilanteGuessAfterVoting = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess After Voting", false);
             VigilanteGuessNeutralBenign = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Neutral Benign Roles", false);
             VigilanteGuessNeutralEvil = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Neutral Evil Roles", false);
             VigilanteGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.crewmate, "Vigilante Can Guess Neutral Killing Roles", false);
@@ -1705,6 +1713,8 @@ namespace TownOfUsEdited.CustomOption
 
             Prosecutor =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#B38000FF>Prosecutor</color>");
+            MaxProsecutes =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Max Prosecutions", 1, 1, 5, 1);
             ProsDiesOnIncorrectPros =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Prosecutor Dies When They Exile A Crewmate", false);
 
@@ -1817,6 +1827,8 @@ namespace TownOfUsEdited.CustomOption
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Rewind Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
             RewindDuration =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Rewind Duration", 5f, 2f, 15f, 1f, CooldownFormat);
+            RewindSpeed =
+                new CustomNumberOption(num++, MultiMenu.crewmate, "Rewind Speed", 1f, 1f, 5f, 0.25f, MultiplierFormat);
             TimeLordVitals =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Time Lord Can Use Vitals", false);
 
@@ -1884,6 +1896,7 @@ namespace TownOfUsEdited.CustomOption
             Doomsayer = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#00FF80FF>Doomsayer</color>");
             ObserveCooldown =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Observe Cooldown", 25f, 10f, 60f, 2.5f, CooldownFormat);
+            DoomsayerGuessAfterVoting = new CustomToggleOption(num++, MultiMenu.neutral, "Doomsayer Can Guess After Voting", false);
             DoomsayerGuessesToWin = new CustomNumberOption(num++, MultiMenu.neutral, "Number Of Doomsayer Kills To Win", 3, 1, 5, 1);
             DoomsayerCantObserve = new CustomToggleOption(num++, MultiMenu.neutral, "(Experienced) Doomsayer can't observe", false);
 
@@ -2253,11 +2266,12 @@ namespace TownOfUsEdited.CustomOption
             Ritualist =
                 new CustomHeaderOption(num++, MultiMenu.coven, "<color=#bf5fff>Ritualist</color>");
             RitualistKills = new CustomNumberOption(num++, MultiMenu.coven, "Number Of Ritualist Kills", 1, 1, 15, 1);
-            RitualistGuessImpostors = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Kill More Than Once Per Meeting", false);
-            RitualistGuessImpostors = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Guess Impostor Roles", false);
+            RitualistMultiKill = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Kill More Than Once Per Meeting", false);
+            RitualistGuessAfterVoting = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Guess After Voting", false);
             RitualistGuessNeutralBenign = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Guess Neutral Benign Roles", false);
             RitualistGuessNeutralEvil = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Guess Neutral Evil Roles", false);
             RitualistGuessNeutralKilling = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Guess Neutral Killing Roles", false);
+            RitualistGuessImpostors = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Guess Impostor Roles", false);
             RitualistGuessModifiers = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Guess Crewmates Modifiers", false);
             RitualistGuessLovers = new CustomToggleOption(num++, MultiMenu.coven, "Ritualist Can Guess Lovers", false);
 

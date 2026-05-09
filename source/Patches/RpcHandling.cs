@@ -3238,7 +3238,7 @@ namespace TownOfUsEdited
                     if (CustomGameOptions.MorphlingOn > 0)
                         ImpostorRoles.Add((typeof(Morphling), CustomGameOptions.MorphlingOn, false));
 
-                    if (CustomGameOptions.AssassinOn > 0 && CustomGameOptions.AssassinImpostorRole)
+                    if (CustomGameOptions.AssassinOn > 0)
                         ImpostorRoles.Add((typeof(Roles.Assassin), CustomGameOptions.AssassinOn, false));
 
                     if (CustomGameOptions.BlackmailerOn > 0)
@@ -3566,7 +3566,7 @@ namespace TownOfUsEdited
                         if (CustomGameOptions.MorphlingOn > 0)
                             ImpostorConcealingRoles.Add((typeof(Morphling), CustomGameOptions.MorphlingOn, false || CustomGameOptions.UniqueRoles));
 
-                        if (CustomGameOptions.AssassinOn > 0 && CustomGameOptions.AssassinImpostorRole)
+                        if (CustomGameOptions.AssassinOn > 0)
                             ImpostorKillingRoles.Add((typeof(Roles.Assassin), CustomGameOptions.AssassinOn, false || CustomGameOptions.UniqueRoles));
 
                         if (CustomGameOptions.BlackmailerOn > 0)

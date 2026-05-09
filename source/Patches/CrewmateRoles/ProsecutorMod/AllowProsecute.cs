@@ -103,7 +103,13 @@ namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
                         }
                         UpdateProsecuted(VotedPlayer);
                         MeetingHud.Instance.gameObject.SetActive(true);
-                        prosecutor.Prosecuted = true;
+
+                        prosecutor.ProsecutesRemaining = Mathf.Max(0, prosecutor.ProsecutesRemaining - 1);
+                        if (prosecutor.ProsecutesRemaining <= 0)
+                        {
+                            prosecutor.Prosecuted = true;
+                        }
+
                         if (VotedPlayer.Is(Faction.Crewmates) && CustomGameOptions.ProsDiesOnIncorrectPros && !role.Player.Is(Faction.Madmates))
                         {
                             KillButtonTarget.DontRevive = prosecutor.Player.PlayerId;

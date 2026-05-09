@@ -427,8 +427,7 @@ namespace TownOfUsEdited.Roles
             }
 
             Role.GetRole<SerialKiller>(newsk).Converted = true;
-            if (CustomGameOptions.NewSKCanGuess
-            && !CustomGameOptions.AssassinImpostorRole && !newsk.Is(AbilityEnum.Assassin)) new Roles.Modifiers.Assassin(newsk);
+            if (CustomGameOptions.NewSKCanGuess && !newsk.Is(AbilityEnum.Assassin)) new Roles.Modifiers.Assassin(newsk);
 
             PlayerControl_Die.CheckEnd();
         }

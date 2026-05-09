@@ -220,7 +220,7 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
                 }
             }
 
-            if (CustomGameOptions.TraitorCanAssassin && !CustomGameOptions.AssassinImpostorRole) new Assassin(player);
+            if (CustomGameOptions.TraitorCanAssassin) new Assassin(player);
 
             if (PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
@@ -291,7 +291,7 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
             if (CustomGameOptions.WarlockOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Warlock)) role.CanBeRoles.Add(RoleEnum.Warlock);
             if (CustomGameOptions.VenererOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Venerer)) role.CanBeRoles.Add(RoleEnum.Venerer);
             if (CustomGameOptions.HypnotistOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Hypnotist)) role.CanBeRoles.Add(RoleEnum.Hypnotist);
-            if (CustomGameOptions.AssassinOn > 0 && CustomGameOptions.AssassinImpostorRole && !role.CanBeRoles.Contains(RoleEnum.Assassin)) role.CanBeRoles.Add(RoleEnum.Assassin);
+            if (CustomGameOptions.AssassinOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Assassin)) role.CanBeRoles.Add(RoleEnum.Assassin);
             if (CustomGameOptions.WitchOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Witch)) role.CanBeRoles.Add(RoleEnum.Witch);
             if (CustomGameOptions.PoisonerOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Poisoner)) role.CanBeRoles.Add(RoleEnum.Poisoner);
             if (CustomGameOptions.ShooterOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Shooter)) role.CanBeRoles.Add(RoleEnum.Shooter);
