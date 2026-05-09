@@ -613,6 +613,7 @@ namespace TownOfUsEdited
             {
                 var pros = Role.GetRole<Prosecutor>(player);
                 if (!pros.Prosecuted) return true;
+                if (pros.ProsecutesRemaining > 0) return true;
             }
             else if (player.Is(RoleEnum.Veteran))
             {
