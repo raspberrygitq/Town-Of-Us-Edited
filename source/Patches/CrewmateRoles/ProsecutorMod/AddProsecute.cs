@@ -10,7 +10,7 @@ namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
         public static void UpdateButton(Prosecutor role, MeetingHud __instance)
         {
             var skip = __instance.SkipVoteButton;
-            role.Prosecute.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !skip.voteComplete && !role.StartProsecute && !role.Prosecuted && !PlayerControl.LocalPlayer.IsJailed());
+            role.Prosecute.gameObject.SetActive(!PlayerControl.LocalPlayer.Data.IsDead && !skip.voteComplete && !role.StartProsecute && !role.Prosecuted && !role.Player.IsJailed());
             role.Prosecute.voteComplete = skip.voteComplete;
             role.Prosecute.GetComponent<SpriteRenderer>().enabled = skip.GetComponent<SpriteRenderer>().enabled;
             role.Prosecute.GetComponent<SpriteRenderer>().color = role.Color;
@@ -23,8 +23,7 @@ namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
             role.Prosecute = Object.Instantiate(skip, skip.transform.parent);
             role.Prosecute.Parent = __instance;
             role.Prosecute.SetTargetPlayerId(251);
-            role.Prosecute.transform.localPosition = skip.transform.localPosition +
-                                                   new Vector3(0f, -0.17f, 0f);
+            role.Prosecute.transform.localPosition = skip.transform.localPosition + new Vector3(0f, -0.17f, 0f);
             skip.transform.localPosition += new Vector3(0f, 0.20f, 0f);
             UpdateButton(role, __instance);
         }

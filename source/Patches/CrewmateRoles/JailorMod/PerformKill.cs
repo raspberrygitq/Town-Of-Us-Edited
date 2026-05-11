@@ -25,8 +25,8 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
             var interact = Utils.Interact(PlayerControl.LocalPlayer, role.ClosestPlayer);
             if (interact[4] == true)
             {
-                var host = AmongUsClient.Instance.AmHost ? (byte)2 : (byte)0;
-                if (AmongUsClient.Instance.AmHost) role.JailedPlayer = role.ClosestPlayer;
+                role.JailedPlayer = role.ClosestPlayer;
+                role.Cooldown = CustomGameOptions.JailCD;
                 Utils.Rpc(CustomRPC.SetJail, PlayerControl.LocalPlayer.PlayerId, role.ClosestPlayer.PlayerId);
             }
             if (interact[0] == true)

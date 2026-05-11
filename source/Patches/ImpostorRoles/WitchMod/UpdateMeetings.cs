@@ -40,7 +40,7 @@ namespace TownOfUsEdited.ImpostorRoles.WitchMod
                         var exiled = __instance.initData?.networkedPlayer?.Object;
                         var player = Utils.PlayerById(playerid);
                         if (exiled == role.Player) return;
-                        if (!player.Data.IsDead && !player.Is(RoleEnum.Pestilence))
+                        if (!player.Data.IsDead && !player.Is(RoleEnum.Pestilence) && !player.IsBlessed())
                         {
                             MurderPlayer(player, role.Player, true);
                             Utils.Rpc(CustomRPC.WitchMurder, player.PlayerId, role.Player.PlayerId, true);
