@@ -7,7 +7,7 @@ namespace TownOfUsEdited.Roles
         public Jailor(PlayerControl owner) : base(owner)
         {
             Name = "Jailor";
-            ImpostorText = () => "Jail and execute the <color=#FF1919FF>Impostors</color>";
+            ImpostorText = () => "Jail and execute the evildoers";
             TaskText = () => $"Execute evildoers but not {Palette.CrewmateBlue.ToTextColor()}Crewmates</color>";
             Color = Patches.Colors.Jailor;
             Cooldown = CustomGameOptions.JailCD;
@@ -15,6 +15,8 @@ namespace TownOfUsEdited.Roles
             AddToRoleHistory(RoleType);
             Faction = Faction.Crewmates;
             Alignment = Alignment.CrewmatePower;
+
+            Executes = CustomGameOptions.MaxExecutes;
         }
         public PlayerVoteArea Jailed { get; set; }
         public GameObject JailCell = new GameObject();
@@ -23,6 +25,7 @@ namespace TownOfUsEdited.Roles
         public bool CanJail = true;
         public PlayerControl ClosestPlayer;
         public PlayerControl JailedPlayer;
+        public int Executes { get; set; }
 
         public float JailTimer()
         {

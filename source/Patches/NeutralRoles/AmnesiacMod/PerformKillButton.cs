@@ -475,6 +475,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
             {
                 var jailRole = Role.GetRole<Jailor>(amnesiac);
                 jailRole.Cooldown = CustomGameOptions.JailCD;
+                jailRole.Executes = CustomGameOptions.MaxExecutes;
                 jailRole.JailedPlayer = null;
             }
 

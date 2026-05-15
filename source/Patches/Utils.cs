@@ -603,6 +603,7 @@ namespace TownOfUsEdited
             {
                 var jailor = Role.GetRole<Jailor>(player);
                 if (jailor.CanJail) return true;
+                if (jailor.Executes > 0) return true;
             }
             else if (player.Is(RoleEnum.Deputy))
             {

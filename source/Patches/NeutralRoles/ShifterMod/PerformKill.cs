@@ -663,6 +663,7 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 var jailRole = Role.GetRole<Jailor>(shifter);
                 jailRole.Cooldown = CustomGameOptions.JailCD;
+                jailRole.Executes = CustomGameOptions.MaxExecutes;
                 jailRole.JailedPlayer = null;
             }
 

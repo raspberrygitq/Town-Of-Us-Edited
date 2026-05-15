@@ -105,6 +105,12 @@ namespace TownOfUsEdited.Patches
                         12 => Generate.Slot13.Get(),
                         13 => Generate.Slot14.Get(),
                         14 => Generate.Slot15.Get(),
+                        15 => Generate.Slot16.Get(),
+                        16 => Generate.Slot17.Get(),
+                        17 => Generate.Slot18.Get(),
+                        18 => Generate.Slot19.Get(),
+                        19 => Generate.Slot20.Get(),
+                        20 => Generate.Slot21.Get(),
                         _ => -1
                     };
 

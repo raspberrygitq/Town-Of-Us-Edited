@@ -38,6 +38,11 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                             AssassinKill.MurderPlayer(PlayerControl.LocalPlayer, PlayerControl.LocalPlayer);
                             Utils.Rpc(CustomRPC.Execution, PlayerControl.LocalPlayer.PlayerId, PlayerControl.LocalPlayer.PlayerId);
                         }
+                        role.Executes--;
+                        if (role.Executes <= 0)
+                        {
+                            role.CanJail = false;
+                        }
                         if (role.JailedPlayer.Is(Faction.Crewmates) && !PlayerControl.LocalPlayer.Is(Faction.Madmates) && !role.Player.Data.IsDead)
                         {
                             role.CanJail = false;

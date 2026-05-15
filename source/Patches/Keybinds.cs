@@ -98,13 +98,16 @@ namespace TownOfUsEdited
                 {
                     if (Role.GetRole<Ritualist>(role.Player).RemainingKills == 0) return;
                 }
-                var players = __instance.playerStates.Where(x => (guesser as IGuesser).Buttons[x.TargetPlayerId] != (null, null, null, null)
-                                                                  && x.TargetPlayerId != role.Player.PlayerId).ToList();
+
+                var buttonsDict = (guesser as IGuesser).Buttons;
+                var players = __instance.playerStates.Where(x => buttonsDict.ContainsKey(x.TargetPlayerId) 
+                                                && buttonsDict[x.TargetPlayerId] != (null, null, null, null)
+                                                && x.TargetPlayerId != role.Player.PlayerId).ToList();
 
                 if (ReInput.players.GetPlayer(0).GetButtonDown("ToU cycle players"))
                 {
                     HighlightedPlayer = players[PlayerIndex];
-                    PlayerIndex = PlayerIndex == players.Count - 1 ? 0 : PlayerIndex + 1;
+                    PlayerIndex = (PlayerIndex + 1) % players.Count;
                 }
 
                 if (!HighlightedPlayer) return;
