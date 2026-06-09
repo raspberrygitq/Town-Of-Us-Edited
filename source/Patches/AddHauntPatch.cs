@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using TownOfUsEdited.CrewmateRoles.HaunterMod;
 using TownOfUsEdited.ImpostorRoles.WraithMod;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.NeutralRoles.PhantomMod;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

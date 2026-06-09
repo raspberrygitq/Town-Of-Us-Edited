@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

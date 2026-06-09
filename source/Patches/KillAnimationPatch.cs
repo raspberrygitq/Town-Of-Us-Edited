@@ -2,7 +2,7 @@ using HarmonyLib;
 
 namespace TownOfUsEdited.Patches
 {
-    [HarmonyPatch(typeof(OverlayKillAnimation._CoShow_d__21), "MoveNext")]
+    [HarmonyPatch(typeof(OverlayKillAnimation._CoShow_d__21), nameof(OverlayKillAnimation._CoShow_d__21.MoveNext))]
     public class KillAnimationPatches
     {
         public static void Postfix(bool __result)

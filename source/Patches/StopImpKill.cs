@@ -64,7 +64,7 @@ namespace TownOfUsEdited
                 }
                 else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Lucky))
                 {
-                    var num = Random.RandomRange(1f, 60f);
+                    var num = Random.RandomRange(CustomGameOptions.MinLuckyCd, CustomGameOptions.MaxLuckyCd);
                     Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
                 }
                 return false;

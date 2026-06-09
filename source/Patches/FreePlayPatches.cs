@@ -23,12 +23,12 @@ using TownOfUsEdited.ImpostorRoles.BlinderMod;
 using TownOfUsEdited.ImpostorRoles.ConverterMod;
 using TownOfUsEdited.ImpostorRoles.FreezerMod;
 using TownOfUsEdited.ImpostorRoles.WraithMod;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
 using Assassin = TownOfUsEdited.Roles.Assassin;
-using Assassin2 = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin2 = TownOfUsEdited.Modifiers.Assassin;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Patches

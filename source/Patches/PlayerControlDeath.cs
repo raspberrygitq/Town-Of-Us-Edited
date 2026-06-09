@@ -8,6 +8,7 @@ using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.CrewmateRoles.TimeLordMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.ImpostorRoles.TraitorMod;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Patches.CovenRoles;
 using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
 using TownOfUsEdited.Patches.ImpostorRoles;
@@ -15,7 +16,6 @@ using TownOfUsEdited.Patches.Modifiers.LoversMod;
 using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
 using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.Patches

@@ -9,7 +9,7 @@ using TownOfUsEdited.Modifiers.AssassinMod;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using static TownOfUsEdited.Roles.Modifiers.Madmate;
+using static TownOfUsEdited.Modifiers.Madmate;
 
 namespace TownOfUsEdited.Patches.Modifiers.MadmateMod
 {

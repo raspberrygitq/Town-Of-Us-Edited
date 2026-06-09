@@ -1,6 +1,6 @@
 using HarmonyLib;
 using TownOfUsEdited.Extensions;
-using TownOfUsEdited.Roles.Modifiers;
+using TownOfUsEdited.Modifiers;
 
 namespace TownOfUsEdited
 {

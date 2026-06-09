@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using System.Linq;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited.Patches.Modifiers.MotionlessMod
 {

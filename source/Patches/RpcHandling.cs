@@ -34,6 +34,7 @@ using TownOfUsEdited.ImpostorRoles.MinerMod;
 using TownOfUsEdited.ImpostorRoles.TraitorMod;
 using TownOfUsEdited.ImpostorRoles.WitchMod;
 using TownOfUsEdited.ImpostorRoles.WraithMod;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Modifiers.AssassinMod;
 using TownOfUsEdited.NeutralRoles.DoomsayerMod;
 using TownOfUsEdited.NeutralRoles.ExecutionerMod;
@@ -50,10 +51,9 @@ using TownOfUsEdited.Patches.NeutralRoles;
 using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
 using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using AllowExtraVotes = TownOfUsEdited.CrewmateRoles.ProsecutorMod.AllowExtraVotes;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin = TownOfUsEdited.Modifiers.Assassin;
 using KillButtonTarget = TownOfUsEdited.CrewmateRoles.AltruistMod.KillButtonTarget;
 using Object = UnityEngine.Object;
 using PerformKill = TownOfUsEdited.Patches.NeutralRoles.ShifterMod.PerformKill;
@@ -2885,11 +2885,14 @@ namespace TownOfUsEdited
                 }
                 else if (CustomGameOptions.GameMode == GameMode.RoleList)
                 {
-                    List<RoleOptions> buckets = [CustomGameOptions.Slot1, CustomGameOptions.Slot2, CustomGameOptions.Slot3, CustomGameOptions.Slot4];
+                    List<RoleOptions> buckets = [CustomGameOptions.Slot1];
                     List<RoleOptions> impBuckets = [RoleOptions.ImpConceal, RoleOptions.ImpKilling, RoleOptions.ImpSupport, RoleOptions.ImpCommon, RoleOptions.ImpRandom];
                     var anySlots = 0;
                     var players = GameData.Instance.PlayerCount;
 
+                    if (players > 1) buckets.Add(CustomGameOptions.Slot2);
+                    if (players > 2) buckets.Add(CustomGameOptions.Slot3);
+                    if (players > 3) buckets.Add(CustomGameOptions.Slot4);
                     if (players > 4) buckets.Add(CustomGameOptions.Slot5);
                     if (players > 5) buckets.Add(CustomGameOptions.Slot6);
                     if (players > 6) buckets.Add(CustomGameOptions.Slot7);

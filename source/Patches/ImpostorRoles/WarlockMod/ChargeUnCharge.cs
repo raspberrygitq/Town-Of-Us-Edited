@@ -1,7 +1,7 @@
 using HarmonyLib;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Modifiers.UnderdogMod;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.ImpostorRoles.WarlockMod
@@ -37,7 +37,7 @@ namespace TownOfUsEdited.ImpostorRoles.WarlockMod
                         }
                         else if (warlock.Player.Is(ModifierEnum.Lucky) && PlayerControl.LocalPlayer == warlock.Player)
                         {
-                            var num = Random.RandomRange(1f, 60f);
+                            var num = Random.RandomRange(CustomGameOptions.MinLuckyCd, CustomGameOptions.MaxLuckyCd);
                             Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
                         }
                         else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Bloodlust) && PlayerControl.LocalPlayer == warlock.Player)

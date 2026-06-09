@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using System.Linq;
 using TownOfUsEdited.Extensions;
-using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited.Modifiers.UnderdogMod
 {

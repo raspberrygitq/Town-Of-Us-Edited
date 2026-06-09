@@ -9,6 +9,7 @@
         Blind,
         Flash,
         Hypnosis,
-        Infection
+        Infection,
+        Spell
     }
 }

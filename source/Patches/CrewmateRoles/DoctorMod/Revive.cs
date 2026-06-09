@@ -2,9 +2,9 @@ using AmongUs.GameOptions;
 using Reactor.Utilities.Extensions;
 using System.Linq;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.DoctorMod

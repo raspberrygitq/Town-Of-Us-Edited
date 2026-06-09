@@ -21,7 +21,7 @@ using UnityEngine;
 
 namespace TownOfUsEdited
 {
-    [BepInPlugin(Id, "Town Of Us Edited", VersionString)]
+    [BepInPlugin(Id, "Town Of Us: Edited", VersionString)]
     [BepInDependency(ReactorPlugin.Id)]
     [BepInDependency(SubmergedCompatibility.SUBMERGED_GUID, BepInDependency.DependencyFlags.SoftDependency)]
     [ReactorModFlags(Reactor.Networking.ModFlags.RequireOnAllClients)]
@@ -29,11 +29,9 @@ namespace TownOfUsEdited
     public class TownOfUsEdited : BasePlugin
     {
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "2.4.2";
+        public const string VersionString = "2.5.0";
         public static Version Version = Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
-
-        public const int MaxPlayers = 35;
 
         public static AssetLoader bundledAssets;
 
@@ -296,7 +294,7 @@ namespace TownOfUsEdited
             JailCellSprite = CreateSprite("TownOfUsEdited.Resources.JailCell.png");
             CrusadeSprite = CreateSprite("TownOfUsEdited.Resources.Crusade.png");
 
-            ToUBanner = CreateSprite("TownOfUsEdited.Resources.TownOfUsEditedBanner.png");
+            ToUBanner = CreateSprite("TownOfUsEdited.Resources.TownOfUsEditedBanner.png", 125f);
             UpdateTOUButton = CreateSprite("TownOfUsEdited.Resources.UpdateToUButton.png");
             UpdateSubmergedButton = CreateSprite("TownOfUsEdited.Resources.UpdateSubmergedButton.png");
 
@@ -323,9 +321,8 @@ namespace TownOfUsEdited
             ServerManager.DefaultRegions = new Il2CppReferenceArray<IRegionInfo>(new IRegionInfo[0]);
         }
 
-        public static Sprite CreateSprite(string name)
+        public static Sprite CreateSprite(string name, float pixelsPerUnit = 100f)
         {
-            var pixelsPerUnit = 100f;
             var pivot = new Vector2(0.5f, 0.5f);
             var assembly = Assembly.GetExecutingAssembly();
             var tex = AmongUsExtensions.CreateEmptyTexture();

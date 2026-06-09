@@ -3,7 +3,6 @@ using HarmonyLib;
 using System;
 using System.Linq;
 using TownOfUsEdited.Extensions;
-using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited.Modifiers.ShyMod
 {

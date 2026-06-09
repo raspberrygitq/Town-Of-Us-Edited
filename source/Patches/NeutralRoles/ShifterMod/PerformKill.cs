@@ -9,10 +9,10 @@ using TownOfUsEdited.CrewmateRoles.SnitchMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.ImpostorRoles.BomberMod;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin = TownOfUsEdited.Modifiers.Assassin;
 
 namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
 {

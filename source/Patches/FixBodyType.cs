@@ -17,6 +17,7 @@ namespace TownOfUsEdited.Patches
             else if (AprilFoolsPatches.CurrentMode == 1) __result = PlayerBodyTypes.Horse;
             else if (AprilFoolsPatches.CurrentMode == 2) __result = PlayerBodyTypes.Long;
             else if (AprilFoolsPatches.CurrentMode == 3) __result = PlayerBodyTypes.LongSeeker;
+            else if (AprilFoolsPatches.CurrentMode == 4) __result = PlayerBodyTypes.Classic;
             else __result = PlayerBodyTypes.Normal;
             return false;
         }

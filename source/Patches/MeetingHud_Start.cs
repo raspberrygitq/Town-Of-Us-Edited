@@ -1,5 +1,6 @@
 using HarmonyLib;
 using Reactor.Utilities.Extensions;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Patches.CovenRoles;
 using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
@@ -8,7 +9,6 @@ using TownOfUsEdited.Patches.Modifiers.LoversMod;
 using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
 using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

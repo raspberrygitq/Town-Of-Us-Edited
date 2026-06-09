@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.Extensions
@@ -195,7 +195,7 @@ namespace TownOfUsEdited.Extensions
         }
         public static Texture2D CreateEmptyTexture(int width = 0, int height = 0)
         {
-            return new Texture2D(width, height, TextureFormat.RGBA32, Texture.GenerateAllMips, false);
+            return new Texture2D(width, height, TextureFormat.RGBA32, Texture.GenerateAllMips, false, false);
         }
 
         private static class CastExtension<T> where T : Il2CppObjectBase

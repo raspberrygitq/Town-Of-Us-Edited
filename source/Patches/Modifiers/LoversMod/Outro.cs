@@ -3,7 +3,6 @@ using System.Linq;
 using TMPro;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.Modifiers.LoversMod

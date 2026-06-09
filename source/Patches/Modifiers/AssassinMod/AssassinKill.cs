@@ -12,10 +12,8 @@ using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
 using TownOfUsEdited.NeutralRoles.DoomsayerMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 
 namespace TownOfUsEdited.Modifiers.AssassinMod
 {

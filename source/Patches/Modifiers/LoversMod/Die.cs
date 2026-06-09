@@ -3,7 +3,6 @@ using System;
 using TownOfUsEdited.CrewmateRoles.AltruistMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited.Modifiers.LoversMod
 {

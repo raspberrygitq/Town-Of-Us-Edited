@@ -3,13 +3,13 @@ using System;
 using System.Linq;
 using TownOfUsEdited.CovenRoles.RitualistMod;
 using TownOfUsEdited.CrewmateRoles.VigilanteMod;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Modifiers.AssassinMod;
 using TownOfUsEdited.NeutralRoles.DoomsayerMod;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin = TownOfUsEdited.Modifiers.Assassin;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.CrewmateRoles.MayorMod

@@ -311,6 +311,14 @@ namespace TownOfUsEdited.Patches
                     }
                 }
             }
+            if (effects.Contains(EffectType.Spell))
+            {
+                foreach (var witch in Role.GetRoles(RoleEnum.Witch))
+                {
+                    var witchRole = (Witch)witch;
+                    if (witchRole.CursedList.Contains(id)) witchRole.CursedList.Remove(id);
+                }
+            }
         }
     }
 }

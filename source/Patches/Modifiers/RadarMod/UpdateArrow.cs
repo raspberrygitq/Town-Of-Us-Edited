@@ -2,7 +2,6 @@ using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using TownOfUsEdited.Patches;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.Modifiers.RadarMod

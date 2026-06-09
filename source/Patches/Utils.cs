@@ -21,11 +21,11 @@ using TownOfUsEdited.CrewmateRoles.VampireHunterMod;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.ImpostorRoles.BomberMod;
 using TownOfUsEdited.ImpostorRoles.TraitorMod;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Patches.NeutralRoles;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using static TownOfUsEdited.Roles.Glitch;
 using Object = UnityEngine.Object;
@@ -2088,7 +2088,7 @@ namespace TownOfUsEdited
 
                 if (target.Is(ModifierEnum.Diseased) && killer.Is(ModifierEnum.Lucky))
                 {
-                    var num = Random.RandomRange(1f, 60f);
+                    var num = Random.RandomRange(CustomGameOptions.MinLuckyCd, CustomGameOptions.MaxLuckyCd);
                     Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num * CustomGameOptions.DiseasedMultiplier;
                     return;
                 }
@@ -2121,7 +2121,7 @@ namespace TownOfUsEdited
 
                 if (killer.Is(ModifierEnum.Lucky))
                 {
-                    var num = Random.RandomRange(1f, 60f);
+                    var num = Random.RandomRange(CustomGameOptions.MinLuckyCd, CustomGameOptions.MaxLuckyCd);
                     Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
                     return;
                 }
@@ -2934,7 +2934,7 @@ namespace TownOfUsEdited
                 }
                 else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Lucky))
                 {
-                    var num = Random.RandomRange(1f, 60f);
+                    var num = Random.RandomRange(CustomGameOptions.MinLuckyCd, CustomGameOptions.MaxLuckyCd);
                     poisoner.Cooldown = num;
                 }
                 else poisoner.Cooldown = CustomGameOptions.PoisonCD;
@@ -3036,7 +3036,7 @@ namespace TownOfUsEdited
             }
             if (PlayerControl.LocalPlayer.Is(ModifierEnum.Lucky) && !PlayerControl.LocalPlayer.Is(RoleEnum.Poisoner))
             {
-                var num = Random.RandomRange(1f, 60f);
+                var num = Random.RandomRange(CustomGameOptions.MinLuckyCd, CustomGameOptions.MaxLuckyCd);
                 Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
             }
             #endregion

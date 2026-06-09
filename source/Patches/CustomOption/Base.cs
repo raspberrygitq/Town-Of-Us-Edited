@@ -13,7 +13,6 @@ namespace TownOfUsEdited.CustomOption
 
         public Func<object, string> Format;
         public string Name;
-
         public StringNames StringName;
 
         protected internal CustomOption(int id, MultiMenu menu, string name, CustomOptionType type, object defaultValue,
@@ -86,8 +85,7 @@ namespace TownOfUsEdited.CustomOption
 
             if (HudManager.InstanceExists && Type != CustomOptionType.Header && Notify && TownOfUsEditedConfig.SeeSettingNotifier.Value)
             {
-                HudManager.Instance.Notifier.
-                    AddSettingsChangeMessage(StringName, ToString(), HudManager.Instance.Notifier.lastMessageKey != (int)StringName);
+                HudManager.Instance.Notifier.AddSettingsChangeMessage(StringName, ToString(), HudManager.Instance.Notifier.lastMessageKey != (int)StringName);
             }
         }
     }

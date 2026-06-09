@@ -6,10 +6,8 @@ using TMPro;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Modifiers.AssassinMod

@@ -1,6 +1,5 @@
 using HarmonyLib;
 using TMPro;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.Modifiers.DisperserMod

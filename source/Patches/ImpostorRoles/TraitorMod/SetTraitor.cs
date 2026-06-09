@@ -9,7 +9,7 @@ using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin = TownOfUsEdited.Modifiers.Assassin;
 using Assassin2 = TownOfUsEdited.Roles.Assassin;
 
 namespace TownOfUsEdited.ImpostorRoles.TraitorMod

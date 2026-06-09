@@ -848,6 +848,10 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption TransformInvisDuration;
         public static CustomNumberOption FinalTransparency;
 
+        public static CustomHeaderOption Lucky;
+        public static CustomNumberOption MinLuckyCd;
+        public static CustomNumberOption MaxLuckyCd;
+
         public static Func<object, string> PercentFormat { get; } = value => $"{value:0}%";
         private static Func<object, string> CooldownFormat { get; } = value => $"{value:0.0#}s";
         private static Func<object, string> MultiplierFormat { get; } = value => $"{value:0.0#}x";
@@ -1719,7 +1723,7 @@ namespace TownOfUsEdited.CustomOption
             MaxProsecutes =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Max Prosecutions", 1, 1, 5, 1);
             ProsDiesOnIncorrectPros =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Prosecutor Dies When They Exile A Crewmate", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Prosecutor Dies When They Exile A Crewmate");
 
             Swapper =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#66E666FF>Swapper</color>");
@@ -2326,6 +2330,10 @@ namespace TownOfUsEdited.CustomOption
             ImpLoverKillTeammate = new CustomToggleOption(num++, MultiMenu.modifiers, "Impostor Lover Can Kill Teammate", false);
             LoversChat =
                 new CustomToggleOption(num++, MultiMenu.modifiers, "Lovers Have A Private Chat");
+
+            Lucky = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Lucky</color>");
+            MinLuckyCd = new CustomNumberOption(num++, MultiMenu.modifiers, "Minimum Kill Cooldown", 10f, 0f, 30f, 1f, CooldownFormat);
+            MaxLuckyCd = new CustomNumberOption(num++, MultiMenu.modifiers, "Maximum Kill Cooldown", 50f, 30f, 60f, 1f, CooldownFormat);
 
             Satellite = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#0099CCFF>Satellite</color>");
             DetectDuration = new CustomNumberOption(num++, MultiMenu.modifiers, "Broadcast Duration", 10f, 1f, 15f, 1f, CooldownFormat);

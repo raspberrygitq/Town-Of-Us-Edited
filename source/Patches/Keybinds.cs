@@ -3,8 +3,8 @@ using Rewired;
 using Rewired.Data;
 using System.Linq;
 using TownOfUsEdited.Roles;
-using Ability = TownOfUsEdited.Roles.Modifiers.Ability;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Ability = TownOfUsEdited.Modifiers.Ability;
+using Assassin = TownOfUsEdited.Modifiers.Assassin;
 using Assassin2 = TownOfUsEdited.Roles.Assassin;
 
 namespace TownOfUsEdited
@@ -100,7 +100,7 @@ namespace TownOfUsEdited
                 }
 
                 var buttonsDict = (guesser as IGuesser).Buttons;
-                var players = __instance.playerStates.Where(x => buttonsDict.ContainsKey(x.TargetPlayerId) 
+                var players = __instance.playerStates.Where(x => buttonsDict.ContainsKey(x.TargetPlayerId)
                                                 && buttonsDict[x.TargetPlayerId] != (null, null, null, null)
                                                 && x.TargetPlayerId != role.Player.PlayerId).ToList();
 

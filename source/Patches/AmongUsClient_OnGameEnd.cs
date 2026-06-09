@@ -1,8 +1,8 @@
 using HarmonyLib;
 using Il2CppSystem.Collections.Generic;
 using System.Linq;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 
 namespace TownOfUsEdited
 {

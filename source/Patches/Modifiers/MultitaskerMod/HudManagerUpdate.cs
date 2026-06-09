@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace TownOfUsEdited.Modifiers
+namespace TownOfUsEdited.Modifiers.MultitaskerMod
 {
     [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
     public static class Multitasker

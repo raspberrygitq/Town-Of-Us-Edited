@@ -6,7 +6,7 @@ using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
 using TownOfUsEdited.Patches;
 using static TownOfUsEdited.CrewmateRoles.MedicMod.StopKill;
-using static TownOfUsEdited.Roles.Modifiers.Madmate;
+using static TownOfUsEdited.Modifiers.Madmate;
 
 namespace TownOfUsEdited
 {
@@ -639,5 +639,7 @@ namespace TownOfUsEdited
         public static float WatcherCooldown => (float)Generate.WatcherCooldown.Get();
         public static bool LoResetOnNewRound => Generate.LoResetOnNewRound.Get();
         public static int MaxWatches => (int)Generate.MaxWatches.Get();
+        public static float MinLuckyCd => Generate.MinLuckyCd.Get();
+        public static float MaxLuckyCd => Generate.MaxLuckyCd.Get();
     }
 }

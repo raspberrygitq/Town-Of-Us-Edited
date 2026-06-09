@@ -3,7 +3,7 @@ using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using System.Linq;
 using TownOfUsEdited.Roles;
 
-namespace TownOfUsEdited.ImpostorRoles.AstralMod
+namespace TownOfUsEdited.CrewmateRoles.AstralMod
 {
     public class MeetingUpdate
     {

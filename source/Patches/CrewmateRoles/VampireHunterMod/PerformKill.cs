@@ -3,9 +3,9 @@ using HarmonyLib;
 using Reactor.Utilities;
 using TownOfUsEdited.CrewmateRoles.SnitchMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod

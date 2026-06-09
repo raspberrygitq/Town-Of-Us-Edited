@@ -8,14 +8,14 @@ using TownOfUsEdited.CrewmateRoles.SwapperMod;
 using TownOfUsEdited.CrewmateRoles.VigilanteMod;
 using TownOfUsEdited.ImpostorRoles.BlackmailerMod;
 using TownOfUsEdited.ImpostorRoles.TraitorMod;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Modifiers.AssassinMod;
 using TownOfUsEdited.NeutralRoles.DoomsayerMod;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
-using Assassin = TownOfUsEdited.Roles.Modifiers.Assassin;
+using Assassin = TownOfUsEdited.Modifiers.Assassin;
 
 namespace TownOfUsEdited.Patches
 {

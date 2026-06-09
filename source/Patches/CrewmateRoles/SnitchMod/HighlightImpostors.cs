@@ -1,8 +1,8 @@
 using HarmonyLib;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Roles.Modifiers;
 using UnityEngine;
 
 namespace TownOfUsEdited.CrewmateRoles.SnitchMod
