@@ -116,7 +116,6 @@ namespace TownOfUsEdited.Patches
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby" +
                             $"</size>";
                         system = true;
                     }
@@ -140,7 +139,6 @@ namespace TownOfUsEdited.Patches
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby" +
                             $"</size>";
                         system = true;
                     }
@@ -164,7 +162,6 @@ namespace TownOfUsEdited.Patches
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby" +
                             $"</size>";
                         system = true;
                     }
@@ -188,7 +185,6 @@ namespace TownOfUsEdited.Patches
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby" +
                             $"</size>";
                         system = true;
                     }
@@ -212,7 +208,6 @@ namespace TownOfUsEdited.Patches
                             $"/id - See players ids\n" +
                             $"/kick [id] - Kick a player by its id\n" +
                             $"/ban [id] - Ban a player by its id\n" +
-                            $"/limit [number] - Set a player limit in the lobby" +
                             $"</size>";
                         system = true;
                     }
@@ -583,64 +578,6 @@ namespace TownOfUsEdited.Patches
                         system = true;
                         ActiveModifiersMessage();
                         return false;
-                    }
-                    return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
-                }
-
-                if (chatText.ToLower().StartsWith("/limit "))
-                {
-                    if ((AmongUsClient.Instance.GameState == InnerNet.InnerNetClient.GameStates.Started || AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay) && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                    {
-                        if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                        {
-                            chatText = "You cannot use this command during the game!";
-                            error = true;
-                        }
-                        return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
-                    }
-                    if (GameData.Instance.GetHost() == sourcePlayer.Data && sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                    {
-                        string[] args = chatText.Split(' ');
-                        if (args.Length > 1 && int.TryParse(args[1], out int newLimit))
-                        {
-                            if (newLimit >= 4 && newLimit <= 35)
-                            {
-                                try
-                                {
-                                    GameOptionsManager.Instance.CurrentGameOptions.SetInt(Int32OptionNames.MaxPlayers, newLimit);
-                                    if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                                    {
-                                        chatText = $"Player limit has been set for: <color=#D91919FF><b>{newLimit}</b></color>";
-                                        system = true;
-                                    }
-                                }
-                                catch { }
-                            }
-                            else
-                            {
-                                if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                                {
-                                    chatText = "The /limit command has a range of 4 - 35!";
-                                    error = true;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                            {
-                                chatText = "Use /limit [number]. Example: /limit 20.";
-                                error = true;
-                            }
-                        }
-                    }
-                    else if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                    {
-                        if (sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId)
-                        {
-                            chatText = "You don't have access to this command!";
-                            noaccess = true;
-                        }
                     }
                     return sourcePlayer.PlayerId == PlayerControl.LocalPlayer.PlayerId;
                 }
