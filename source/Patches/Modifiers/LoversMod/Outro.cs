@@ -2,6 +2,7 @@ using HarmonyLib;
 using System.Linq;
 using TMPro;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -29,14 +30,12 @@ namespace TownOfUsEdited.Modifiers.LoversMod
                 return;
             }
 
-            if (CustomGameOptions.NeutralEvilWinEndsGame)
-            {
-                if (Role.GetRoles(RoleEnum.Jester).Any(x => ((Jester)x).VotedOut)) return;
-                if (Role.GetRoles(RoleEnum.Troll).Any(x => ((Troll)x).TrolledVotedOut)) return;
-                if (Role.GetRoles(RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut)) return;
-                if (Role.GetRoles(RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing)) return;
-                if (Role.GetRoles(RoleEnum.Vulture).Any(x => ((Vulture)x).VultureWins)) return;
-            }
+            if (Role.GetRoles(RoleEnum.Jester).Any(x => ((Jester)x).VotedOut) && CustomGameOptions.JesterWin == WinEndsGame.EndsGame) return;
+            if (Role.GetRoles(RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut) && CustomGameOptions.ExecutionerWin == WinEndsGame.EndsGame) return;
+            if (Role.GetRoles(RoleEnum.Troll).Any(x => ((Troll)x).TrolledVotedOut) && CustomGameOptions.TrollWin == WinEndsGame.EndsGame) return;
+            if (Role.GetRoles(RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing) && CustomGameOptions.DoomsayerWinEndsGame) return;
+            if (Role.GetRoles(RoleEnum.Vulture).Any(x => ((Vulture)x).VultureWins) && CustomGameOptions.VultureWinEndsGame) return;
+
             if (!Modifier.AllModifiers.Where(x => x.ModifierType == ModifierEnum.Lover)
                 .Any(x => ((Lover)x).LoveCoupleWins)) return;
 
@@ -53,7 +52,7 @@ namespace TownOfUsEdited.Modifiers.LoversMod
             {
                 array[1].SetFlipX(false);
                 array[1].gameObject.transform.position =
-                    array[0].gameObject.transform.position + new Vector3(1.2f, 0f, 0f);
+                array[0].gameObject.transform.position + new Vector3(1.2f, 0f, 0f);
                 array[1].cosmetics.skin.transform.localScale = new Vector3(-1, 1, 1);
                 array[1].gameObject.transform.localScale *= 0.92f;
                 array[1].cosmetics.hat.transform.position += new Vector3(0.1f, 0f, 0f);

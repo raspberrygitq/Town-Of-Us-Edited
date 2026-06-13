@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿/*
+using HarmonyLib;
 using InnerNet;
 using System;
 
@@ -81,3 +82,4 @@ public static class LongBoiPatches
         return false;
     }
 }
+*/

@@ -12,7 +12,6 @@ namespace TownOfUsEdited.Patches
     {
         public static float Radius = 0.2233912f;
         public static float Offset = 0.3636057f;
-        public static GameObject heh;
 
         [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
         [HarmonyPostfix]

@@ -12,7 +12,6 @@ using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using Assassin = TownOfUsEdited.Modifiers.Assassin;
 
 namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
 {
@@ -588,11 +587,6 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
             {
                 var grenadeRole = Role.GetRole<Grenadier>(amnesiac);
                 grenadeRole.Cooldown = CustomGameOptions.GrenadeCd;
-            }
-
-            else if (role == RoleEnum.Assassin)
-            {
-                new Assassin(amnesiac);
             }
 
             else if (role == RoleEnum.Morphling)

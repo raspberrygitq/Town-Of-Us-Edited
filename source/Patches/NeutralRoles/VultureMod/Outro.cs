@@ -11,7 +11,7 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
     {
         public static void Postfix(EndGameManager __instance)
         {
-            if (!CustomGameOptions.NeutralEvilWinEndsGame) return;
+            if (!CustomGameOptions.VultureWinEndsGame) return;
             var role = Role.AllRoles.FirstOrDefault(x =>
                 x.RoleType == RoleEnum.Vulture && ((Vulture)x).VultureWins);
             if (role == null) return;

@@ -85,7 +85,6 @@ namespace TownOfUsEdited.Roles
             if (CustomGameOptions.HypnotistOn > 0) ColorMapping.Add("Hypnotist", Colors.Impostor);
             if (CustomGameOptions.WitchOn > 0) ColorMapping.Add("Witch", Colors.Impostor);
             if (CustomGameOptions.MorphlingOn > 0) ColorMapping.Add("Morphling", Colors.Impostor);
-            if (CustomGameOptions.AssassinOn > 0) ColorMapping.Add("Assassin", Colors.Impostor);
             if (CustomGameOptions.MinerOn > 0) ColorMapping.Add("Miner", Colors.Impostor);
             if (CustomGameOptions.SwooperOn > 0) ColorMapping.Add("Swooper", Colors.Impostor);
             if (CustomGameOptions.UndertakerOn > 0) ColorMapping.Add("Undertaker", Colors.Impostor);
@@ -158,7 +157,7 @@ namespace TownOfUsEdited.Roles
             if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
             {
                 WonByGuessing = true;
-                if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame)
+                if (AmongUsClient.Instance.AmHost && CustomGameOptions.DoomsayerWinEndsGame)
                 {
                     Coroutines.Start(WaitForEnd());
                     PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Doomsayer Win");

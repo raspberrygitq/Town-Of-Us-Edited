@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
@@ -109,7 +110,11 @@ namespace TownOfUsEdited.Modifiers
 
         public void Win()
         {
-            if (CustomGameOptions.NeutralEvilWinEndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Jester).Any(x => ((Jester)x).VotedOut)) return;
+            if (CustomGameOptions.JesterWin == WinEndsGame.EndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Jester).Any(x => ((Jester)x).VotedOut)) return;
+            if (CustomGameOptions.ExecutionerWin == WinEndsGame.EndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut)) return;
+            if (CustomGameOptions.TrollWin == WinEndsGame.EndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Troll).Any(x => ((Troll)x).TrolledVotedOut)) return;
+            if (CustomGameOptions.DoomsayerWinEndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing)) return;
+            if (CustomGameOptions.VultureWinEndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Vulture).Any(x => ((Vulture)x).VultureWins)) return;
             LoveCoupleWins = true;
             OtherLover.LoveCoupleWins = true;
             if (AmongUsClient.Instance.AmHost) Utils.EndGame();

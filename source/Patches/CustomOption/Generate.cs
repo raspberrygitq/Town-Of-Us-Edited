@@ -205,9 +205,6 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption StartMinutes;
         public static CustomToggleOption AllowUp;
         public static CustomToggleOption SpectateHost;
-        public static CustomToggleOption FlashlightMode;
-        public static CustomNumberOption CrewmateFlashlightVision;
-        public static CustomNumberOption ImpostorFlashlightVision;
 
         public static CustomHeaderOption BetterSkeldSettings;
         public static CustomToggleOption BSVentImprovements;
@@ -408,9 +405,10 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption JesterVent;
         public static CustomToggleOption JesterImpVision;
         public static CustomToggleOption JesterHaunt;
+        public static CustomStringOption JesterWin;
 
         public static CustomHeaderOption Troll;
-        public static CustomToggleOption TrollHaunts;
+        public static CustomStringOption TrollWin;
 
         public static CustomHeaderOption Vulture;
         public static CustomNumberOption VultureCooldown;
@@ -419,6 +417,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption VultureArrow;
         public static CustomNumberOption VultureArrowDelay;
         public static CustomNumberOption VultureBodies;
+        public static CustomToggleOption VultureWinEndsGame;
 
         public static CustomHeaderOption TheGlitch;
         public static CustomNumberOption MimicCooldownOption;
@@ -469,10 +468,11 @@ namespace TownOfUsEdited.CustomOption
         public static CustomStringOption OnTargetDead;
         public static CustomToggleOption ExecutionerButton;
         public static CustomToggleOption ExecutionerTorment;
+        public static CustomStringOption ExecutionerWin;
 
         public static CustomHeaderOption Phantom;
         public static CustomNumberOption PhantomTasksRemaining;
-        public static CustomToggleOption PhantomSpook;
+        public static CustomToggleOption PhantomWinEndsGame;
 
         public static CustomHeaderOption Snitch;
         public static CustomToggleOption SnitchSeesNeutrals;
@@ -510,7 +510,6 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption NoclipVent;
 
         public static CustomHeaderOption Assassin;
-        public static CustomNumberOption AssassinOn;
         public static CustomStringOption NumberOfImpostorAssassins;
         public static CustomStringOption NumberOfNeutralAssassins;
         public static CustomToggleOption AmneTurnImpAssassin;
@@ -712,6 +711,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption DoomsayerGuessesToWin;
         public static CustomToggleOption DoomsayerCantObserve;
         public static CustomToggleOption DoomsayerGuessAfterVoting;
+        public static CustomToggleOption DoomsayerWinEndsGame;
 
         public static CustomHeaderOption Vampire;
         public static CustomNumberOption BiteCooldown;
@@ -1414,9 +1414,6 @@ namespace TownOfUsEdited.CustomOption
             AutoStart = new CustomToggleOption(num++, MultiMenu.main, "Auto Start As Host", false);
             StartMinutes = new CustomNumberOption(num++, MultiMenu.main, "Time In Minutes Before Starting", 2, 1, 5, 1);
             AllowUp = new CustomToggleOption(num++, MultiMenu.main, "Allow Usage Of \"/up\"", false);
-            FlashlightMode = new CustomToggleOption(num++, MultiMenu.main, "Toggle Flashlight Vision", false);
-            CrewmateFlashlightVision = new CustomNumberOption(num++, MultiMenu.main, "Crewmate Flashlight Size", 0.3f, 0.1f, 0.5f, 0.1f, MultiplierFormat);
-            ImpostorFlashlightVision = new CustomNumberOption(num++, MultiMenu.main, "Impostor Flashlight Size", 0.4f, 0.1f, 0.5f, 0.1f, MultiplierFormat);
             ImpostorSeeRoles = new CustomToggleOption(num++, MultiMenu.main, "Impostors Can See The Roles Of Their Team", false);
             CovenSeeRoles = new CustomToggleOption(num++, MultiMenu.main, "Covens Can See The Roles Of Their Team", false);
             DeadSeeRoles =
@@ -1445,8 +1442,6 @@ namespace TownOfUsEdited.CustomOption
             SeeTasksWhenDead = new CustomToggleOption(num++, MultiMenu.main, "See Tasks When Dead", true);
 
             Assassin = new CustomHeaderOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin Ability</color>");
-            AssassinOn = new CustomNumberOption(num++, MultiMenu.imposter, "<color=#FF0000FF>Assassin</color>", 0f, 0f, 100f, 10f,
-                PercentFormat);
             NumberOfImpostorAssassins = new CustomStringOption(num++, MultiMenu.imposter, "Impostor Assassins Count", new[] { "None", "1", "All" }, 2);
             NumberOfNeutralAssassins = new CustomStringOption(num++, MultiMenu.imposter, "Neutral Assassins Count", new[] { "None", "1", "All" }, 2);
             AmneTurnImpAssassin = new CustomToggleOption(num++, MultiMenu.imposter, "Amnesiac Turned Impostor Gets Ability", false);
@@ -1624,15 +1619,15 @@ namespace TownOfUsEdited.CustomOption
             FighterKCD =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Fighter Kill Cooldown", 25f, 10f, 40f, 2.5f, CooldownFormat);
             FighterKillsNB =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Fighter Can Kill Neutral Benign", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Fighter Can Kill Neutral Benign");
             FighterKillsNE =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Fighter Can Kill Neutral Evil", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Fighter Can Kill Neutral Evil");
             FighterKillsNK =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Fighter Can Kill Neutral Killing", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Fighter Can Kill Neutral Killing");
             FighterKillsMadmate =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Fighter Can Kill Madmate", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Fighter Can Kill Madmate");
             FighterKillsCoven =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Fighter Can Kill Coven Roles", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Fighter Can Kill Coven Roles");
 
             Hunter =
                new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#29AB87FF>Hunter</color>");
@@ -1659,15 +1654,15 @@ namespace TownOfUsEdited.CustomOption
             SheriffKillOther =
                 new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Miskill Kills Crewmate", false);
             SheriffKillsNB =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Neutral Benign", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Neutral Benign");
             SheriffKillsNE =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Neutral Evil", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Neutral Evil");
             SheriffKillsNK =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Neutral Killing", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Neutral Killing");
             SheriffKillsMad =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Madmate", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Madmate");
             SheriffKillsCoven =
-                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Coven Roles", false);
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Kills Coven Roles");
             SheriffKillCd =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Sheriff Kill Cooldown", 25f, 10f, 40f, 2.5f, CooldownFormat);
             SheriffBodyReport = new CustomToggleOption(num++, MultiMenu.crewmate, "Sheriff Can Report Who They've Killed");
@@ -1906,6 +1901,7 @@ namespace TownOfUsEdited.CustomOption
             DoomsayerGuessAfterVoting = new CustomToggleOption(num++, MultiMenu.neutral, "Doomsayer Can Guess After Voting", false);
             DoomsayerGuessesToWin = new CustomNumberOption(num++, MultiMenu.neutral, "Number Of Doomsayer Kills To Win", 3, 1, 5, 1);
             DoomsayerCantObserve = new CustomToggleOption(num++, MultiMenu.neutral, "(Experienced) Doomsayer can't observe", false);
+            DoomsayerWinEndsGame = new CustomToggleOption(num++, MultiMenu.neutral, "Doomsayer Win Ends Game");
 
             Executioner =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#8C4005FF>Executioner</color>");
@@ -1913,8 +1909,9 @@ namespace TownOfUsEdited.CustomOption
                 new[] { "Crew", "Amnesiac", "Mercenary", "Shifter", "Survivor", "Jester" }, 5);
             ExecutionerButton =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Executioner Can Button", true);
-            ExecutionerTorment =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Executioner Torments Player On Victory", true);
+            ExecutionerWin =
+                new CustomStringOption(num++, MultiMenu.neutral, "Executioner Win",
+                new[] { "Ends Game", "Nothing", "Torments" });
 
             Jester =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#FFBFCCFF>Jester</color>");
@@ -1924,20 +1921,22 @@ namespace TownOfUsEdited.CustomOption
                 new CustomToggleOption(num++, MultiMenu.neutral, "Jester Can Hide In Vents", false);
             JesterImpVision =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Jester Has Impostor Vision", false);
-            JesterHaunt =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Jester Haunts Player On Victory", true);
+            JesterWin =
+                new CustomStringOption(num++, MultiMenu.neutral, "Jester Win",
+                new[] { "Ends Game", "Nothing", "Haunts" });
 
             Phantom =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#662962FF>Phantom</color>");
             PhantomTasksRemaining =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Tasks Remaining When Phantom Can Be Clicked", 5, 1, 15, 1);
-            PhantomSpook =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Phantom Spooks Player On Victory", true);
+            PhantomWinEndsGame =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Phantom Win Ends Game");
 
             Troll =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#c27d5a>Troll</color>");
-            TrollHaunts =
-                new CustomToggleOption(num++, MultiMenu.neutral, "Troll Haunts Player On Victory", true);
+            TrollWin =
+                new CustomStringOption(num++, MultiMenu.neutral, "Troll Win",
+                new[] { "Ends Game", "Nothing", "Haunts" });
 
             Vulture =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#916e6e>Vulture</color>");
@@ -1953,6 +1952,7 @@ namespace TownOfUsEdited.CustomOption
                 new CustomNumberOption(num++, MultiMenu.neutral, "Time After Death Arrow Appears", 5f, 0f, 15f, 1f, CooldownFormat);
             VultureBodies =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Number Of Bodies Eaten To Win", 3, 1, 5, 1);
+            VultureWinEndsGame = new CustomToggleOption(num++, MultiMenu.neutral, "Vulture Win Ends Game");
 
             Arsonist = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#FF4D00FF>Arsonist</color>");
             DouseCooldown =

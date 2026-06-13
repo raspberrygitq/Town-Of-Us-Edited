@@ -1,6 +1,7 @@
 using HarmonyLib;
 using System.Linq;
 using TownOfUsEdited.Modifiers;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited.Patches
@@ -10,20 +11,43 @@ namespace TownOfUsEdited.Patches
     {
         public static void Postfix(EndGameManager __instance)
         {
-            if (CustomGameOptions.NeutralEvilWinEndsGame) return;
             var neWin = false;
             var doomRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Doomsayer && ((Doomsayer)x).WonByGuessing && ((Doomsayer)x).Player == PlayerControl.LocalPlayer);
-            if (doomRole != null) neWin = true;
+            if (doomRole != null)
+            {
+                if (CustomGameOptions.DoomsayerWinEndsGame) return;
+                else neWin = true;
+            }
             var vultureRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Vulture && ((Vulture)x).VultureWins && ((Vulture)x).Player == PlayerControl.LocalPlayer);
-            if (vultureRole != null) neWin = true;
+            if (vultureRole != null)
+            {
+                if (CustomGameOptions.VultureWinEndsGame) return;
+                else neWin = true;
+            }
             var exeRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Executioner && ((Executioner)x).TargetVotedOut && ((Executioner)x).Player == PlayerControl.LocalPlayer);
-            if (exeRole != null) neWin = true;
+            if (exeRole != null)
+            {
+                if (CustomGameOptions.ExecutionerWin == WinEndsGame.EndsGame) return;
+                else neWin = true;
+            }
             var jestRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Jester && ((Jester)x).VotedOut && ((Jester)x).Player == PlayerControl.LocalPlayer);
-            if (jestRole != null) neWin = true;
+            if (jestRole != null)
+            {
+                if (CustomGameOptions.JesterWin == WinEndsGame.EndsGame) return;
+                else neWin = true;
+            }
             var trollRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Troll && ((Troll)x).TrolledVotedOut && ((Troll)x).Player == PlayerControl.LocalPlayer);
-            if (trollRole != null) neWin = true;
+            if (trollRole != null)
+            {
+                if (CustomGameOptions.TrollWin == WinEndsGame.EndsGame) return;
+                else neWin = true;
+            }
             var phantomRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Phantom && ((Phantom)x).CompletedTasks && ((Phantom)x).Player == PlayerControl.LocalPlayer);
-            if (phantomRole != null) neWin = true;
+            if (phantomRole != null)
+            {
+                if (CustomGameOptions.PhantomWinEndsGame) return;
+                else neWin = true;
+            }
             if (neWin)
             {
                 __instance.WinText.text = "</color><color=#008DFFFF>Victory";

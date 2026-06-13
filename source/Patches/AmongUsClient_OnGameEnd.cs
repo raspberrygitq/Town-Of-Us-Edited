@@ -2,6 +2,7 @@ using HarmonyLib;
 using Il2CppSystem.Collections.Generic;
 using System.Linq;
 using TownOfUsEdited.Modifiers;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited
@@ -38,124 +39,121 @@ namespace TownOfUsEdited
                 return;
             }
 
-            if (CustomGameOptions.NeutralEvilWinEndsGame)
+            foreach (var role in Role.AllRoles)
             {
-                foreach (var role in Role.AllRoles)
-                {
-                    var type = role.RoleType;
+                var type = role.RoleType;
 
-                    if (type == RoleEnum.Jester)
+                if (type == RoleEnum.Jester && CustomGameOptions.JesterWin == WinEndsGame.EndsGame)
+                {
+                    var jester = (Jester)role;
+                    if (jester.VotedOut)
                     {
-                        var jester = (Jester)role;
-                        if (jester.VotedOut)
+                        EndGameResult.CachedWinners = new List<CachedPlayerData>();
+                        var jestData = new CachedPlayerData(jester.Player.Data);
+                        jestData.IsDead = false;
+                        if (PlayerControl.LocalPlayer != jester.Player) jestData.IsYou = false;
+                        EndGameResult.CachedWinners.Add(jestData);
+                        if (jester.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
                         {
-                            EndGameResult.CachedWinners = new List<CachedPlayerData>();
-                            var jestData = new CachedPlayerData(jester.Player.Data);
-                            jestData.IsDead = false;
-                            if (PlayerControl.LocalPlayer != jester.Player) jestData.IsYou = false;
-                            EndGameResult.CachedWinners.Add(jestData);
-                            if (jester.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
-                            {
-                                var loverModifier = Modifier.GetModifier<Lover>(jester.Player);
-                                var otherLover = loverModifier.OtherLover;
-                                var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
-                                if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
-                                EndGameResult.CachedWinners.Add(otherLoverData);
-                            }
-                            return;
+                            var loverModifier = Modifier.GetModifier<Lover>(jester.Player);
+                            var otherLover = loverModifier.OtherLover;
+                            var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
+                            if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
+                            EndGameResult.CachedWinners.Add(otherLoverData);
                         }
+                        return;
                     }
-                    else if (type == RoleEnum.Executioner)
+                }
+                else if (type == RoleEnum.Executioner && CustomGameOptions.ExecutionerWin == WinEndsGame.EndsGame)
+                {
+                    var executioner = (Executioner)role;
+                    if (executioner.TargetVotedOut)
                     {
-                        var executioner = (Executioner)role;
-                        if (executioner.TargetVotedOut)
+                        EndGameResult.CachedWinners = new List<CachedPlayerData>();
+                        var exeData = new CachedPlayerData(executioner.Player.Data);
+                        if (PlayerControl.LocalPlayer != executioner.Player) exeData.IsYou = false;
+                        EndGameResult.CachedWinners.Add(exeData);
+                        if (executioner.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
                         {
-                            EndGameResult.CachedWinners = new List<CachedPlayerData>();
-                            var exeData = new CachedPlayerData(executioner.Player.Data);
-                            if (PlayerControl.LocalPlayer != executioner.Player) exeData.IsYou = false;
-                            EndGameResult.CachedWinners.Add(exeData);
-                            if (executioner.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
-                            {
-                                var loverModifier = Modifier.GetModifier<Lover>(executioner.Player);
-                                var otherLover = loverModifier.OtherLover;
-                                var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
-                                if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
-                                EndGameResult.CachedWinners.Add(otherLoverData);
-                            }
-                            return;
+                            var loverModifier = Modifier.GetModifier<Lover>(executioner.Player);
+                            var otherLover = loverModifier.OtherLover;
+                            var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
+                            if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
+                            EndGameResult.CachedWinners.Add(otherLoverData);
                         }
+                        return;
                     }
-                    else if (type == RoleEnum.Doomsayer)
+                }
+                else if (type == RoleEnum.Doomsayer)
+                {
+                    var doom = (Doomsayer)role;
+                    if (doom.WonByGuessing && CustomGameOptions.DoomsayerWinEndsGame)
                     {
-                        var doom = (Doomsayer)role;
-                        if (doom.WonByGuessing)
+                        EndGameResult.CachedWinners = new List<CachedPlayerData>();
+                        var doomData = new CachedPlayerData(doom.Player.Data);
+                        if (PlayerControl.LocalPlayer != doom.Player) doomData.IsYou = false;
+                        EndGameResult.CachedWinners.Add(doomData);
+                        if (doom.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
                         {
-                            EndGameResult.CachedWinners = new List<CachedPlayerData>();
-                            var doomData = new CachedPlayerData(doom.Player.Data);
-                            if (PlayerControl.LocalPlayer != doom.Player) doomData.IsYou = false;
-                            EndGameResult.CachedWinners.Add(doomData);
-                            if (doom.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
-                            {
-                                var loverModifier = Modifier.GetModifier<Lover>(doom.Player);
-                                var otherLover = loverModifier.OtherLover;
-                                var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
-                                if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
-                                EndGameResult.CachedWinners.Add(otherLoverData);
-                            }
-                            return;
+                            var loverModifier = Modifier.GetModifier<Lover>(doom.Player);
+                            var otherLover = loverModifier.OtherLover;
+                            var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
+                            if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
+                            EndGameResult.CachedWinners.Add(otherLoverData);
                         }
+                        return;
                     }
-                    else if (type == RoleEnum.Vulture)
+                }
+                else if (type == RoleEnum.Vulture)
+                {
+                    var vulture = (Vulture)role;
+                    if (vulture.VultureWins && CustomGameOptions.VultureWinEndsGame)
                     {
-                        var vulture = (Vulture)role;
-                        if (vulture.VultureWins)
+                        EndGameResult.CachedWinners = new List<CachedPlayerData>();
+                        var vultureData = new CachedPlayerData(vulture.Player.Data);
+                        if (PlayerControl.LocalPlayer != vulture.Player) vultureData.IsYou = false;
+                        EndGameResult.CachedWinners.Add(vultureData);
+                        if (vulture.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
                         {
-                            EndGameResult.CachedWinners = new List<CachedPlayerData>();
-                            var vultureData = new CachedPlayerData(vulture.Player.Data);
-                            if (PlayerControl.LocalPlayer != vulture.Player) vultureData.IsYou = false;
-                            EndGameResult.CachedWinners.Add(vultureData);
-                            if (vulture.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
-                            {
-                                var loverModifier = Modifier.GetModifier<Lover>(vulture.Player);
-                                var otherLover = loverModifier.OtherLover;
-                                var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
-                                if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
-                                EndGameResult.CachedWinners.Add(otherLoverData);
-                            }
-                            return;
+                            var loverModifier = Modifier.GetModifier<Lover>(vulture.Player);
+                            var otherLover = loverModifier.OtherLover;
+                            var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
+                            if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
+                            EndGameResult.CachedWinners.Add(otherLoverData);
                         }
+                        return;
                     }
-                    else if (type == RoleEnum.Troll)
+                }
+                else if (type == RoleEnum.Troll)
+                {
+                    var troll = (Troll)role;
+                    if (troll.TrolledVotedOut && CustomGameOptions.TrollWin == WinEndsGame.EndsGame)
                     {
-                        var troll = (Troll)role;
-                        if (troll.TrolledVotedOut)
+                        EndGameResult.CachedWinners = new List<CachedPlayerData>();
+                        var trollData = new CachedPlayerData(troll.Player.Data);
+                        if (PlayerControl.LocalPlayer != troll.Player) trollData.IsYou = false;
+                        EndGameResult.CachedWinners.Add(trollData);
+                        if (troll.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
                         {
-                            EndGameResult.CachedWinners = new List<CachedPlayerData>();
-                            var trollData = new CachedPlayerData(troll.Player.Data);
-                            if (PlayerControl.LocalPlayer != troll.Player) trollData.IsYou = false;
-                            EndGameResult.CachedWinners.Add(trollData);
-                            if (troll.Player.IsLover() && CustomGameOptions.NeutralEvilWinsLover)
-                            {
-                                var loverModifier = Modifier.GetModifier<Lover>(troll.Player);
-                                var otherLover = loverModifier.OtherLover;
-                                var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
-                                if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
-                                EndGameResult.CachedWinners.Add(otherLoverData);
-                            }
-                            return;
+                            var loverModifier = Modifier.GetModifier<Lover>(troll.Player);
+                            var otherLover = loverModifier.OtherLover;
+                            var otherLoverData = new CachedPlayerData(otherLover.Player.Data);
+                            if (PlayerControl.LocalPlayer != otherLover.Player) otherLoverData.IsYou = false;
+                            EndGameResult.CachedWinners.Add(otherLoverData);
                         }
+                        return;
                     }
-                    else if (type == RoleEnum.Phantom)
+                }
+                else if (type == RoleEnum.Phantom)
+                {
+                    var phantom = (Phantom)role;
+                    if (phantom.CompletedTasks && CustomGameOptions.PhantomWinEndsGame)
                     {
-                        var phantom = (Phantom)role;
-                        if (phantom.CompletedTasks)
-                        {
-                            EndGameResult.CachedWinners = new List<CachedPlayerData>();
-                            var phantomData = new CachedPlayerData(phantom.Player.Data);
-                            if (PlayerControl.LocalPlayer != phantom.Player) phantomData.IsYou = false;
-                            EndGameResult.CachedWinners.Add(phantomData);
-                            return;
-                        }
+                        EndGameResult.CachedWinners = new List<CachedPlayerData>();
+                        var phantomData = new CachedPlayerData(phantom.Player.Data);
+                        if (PlayerControl.LocalPlayer != phantom.Player) phantomData.IsYou = false;
+                        EndGameResult.CachedWinners.Add(phantomData);
+                        return;
                     }
                 }
             }
@@ -225,6 +223,8 @@ namespace TownOfUsEdited
                         EndGameResult.CachedWinners.Add(crewData);
                     }
                 }
+
+
             }
 
             if (Role.SKWins)

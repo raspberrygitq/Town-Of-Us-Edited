@@ -127,28 +127,4 @@ namespace TownOfUsEdited.Patches
             }
         }
     }
-
-    [HarmonyPatch(typeof(IntroCutscene), nameof(IntroCutscene.OnDestroy))]
-    internal static class HideRoleListInIntroCutscene
-    {
-        private static void Postfix()
-        {
-            if (DisplayRoleList.RoleListTextComp)
-            {
-                DisplayRoleList.RoleListTextComp.enabled = false;
-            }
-        }
-    }
-
-    [HarmonyPatch(typeof(LobbyBehaviour), nameof(LobbyBehaviour.Start))]
-    internal static class RevealRoleListInLobby
-    {
-        private static void Postfix()
-        {
-            if (DisplayRoleList.RoleListTextComp)
-            {
-                DisplayRoleList.RoleListTextComp.enabled = true;
-            }
-        }
-    }
 }

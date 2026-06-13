@@ -15,7 +15,6 @@ using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
-using Assassin = TownOfUsEdited.Modifiers.Assassin;
 
 namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
 {
@@ -51,7 +50,7 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
             {
                 doom.Wins();
                 Utils.Rpc(CustomRPC.DoomsayerWin, doom.Player.PlayerId);
-                if (!CustomGameOptions.NeutralEvilWinEndsGame)
+                if (!CustomGameOptions.DoomsayerWinEndsGame)
                 {
                     MurderPlayer(doom.Player, doomsayer, true, false);
                     doom.DeathReason = DeathReasons.Victorious;

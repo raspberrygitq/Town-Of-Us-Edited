@@ -1,10 +1,10 @@
 using HarmonyLib;
+using TownOfUsEdited.CrewmateRoles.JailorMod;
+using TownOfUsEdited.Modifiers.LoversMod;
+using TownOfUsEdited.NeutralRoles.SerialKillerMod;
+using TownOfUsEdited.NeutralRoles.VampireMod;
 using TownOfUsEdited.Patches.CovenRoles;
-using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
 using TownOfUsEdited.Patches.ImpostorRoles;
-using TownOfUsEdited.Patches.Modifiers.LoversMod;
-using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
-using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
 
 namespace TownOfUsEdited.Patches
 {

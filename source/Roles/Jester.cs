@@ -1,5 +1,6 @@
 using Il2CppSystem.Collections.Generic;
 using Reactor.Utilities;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 
 namespace TownOfUsEdited.Roles
 {
@@ -33,7 +34,7 @@ namespace TownOfUsEdited.Roles
             if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
             {
                 VotedOut = true;
-                if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame)
+                if (AmongUsClient.Instance.AmHost && CustomGameOptions.JesterWin == WinEndsGame.EndsGame)
                 {
                     Coroutines.Start(WaitForEnd());
                     PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Jester Win");

@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUsEdited.Patches.Modifiers.LoversMod
+namespace TownOfUsEdited.Modifiers.LoversMod
 {
     public class LoversChat
     {
@@ -61,11 +61,11 @@ namespace TownOfUsEdited.Patches.Modifiers.LoversMod
                     Object.Destroy(bubble.gameObject);
                 }
                 LoversChatButton.chatBubblePool.activeChildren.Clear();
-                LoversChatButton.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().color = Colors.Lovers;
-                LoversChatButton.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().color = Colors.Lovers;
-                LoversChatButton.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().color = Colors.Lovers;
+                LoversChatButton.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().color = Patches.Colors.Lovers;
+                LoversChatButton.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().color = Patches.Colors.Lovers;
+                LoversChatButton.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().color = Patches.Colors.Lovers;
                 var container = LoversChatButton.chatScreen.transform.Find("ChatScreenContainer");
-                container.transform.FindChild("Background").GetComponent<SpriteRenderer>().color = Colors.Lovers;
+                container.transform.FindChild("Background").GetComponent<SpriteRenderer>().color = Patches.Colors.Lovers;
             }
             if (!Background)
             {
@@ -265,8 +265,8 @@ namespace TownOfUsEdited.Patches.Modifiers.LoversMod
                 if (LobbyBehaviour.Instance) return;
                 if ((LoversChatButton != null && LoversChatButton.isActiveAndEnabled && LoversChatButton.chatBubblePool.activeChildren.Contains(__instance)) || (__instance.TextArea.text.Contains("[Lovers Chat]") && PlayerControl.LocalPlayer.Data.IsDead))
                 {
-                    __instance.Background.color = Colors.Lovers;
-                    __instance.NameText.color = Colors.Lovers;
+                    __instance.Background.color = Patches.Colors.Lovers;
+                    __instance.NameText.color = Patches.Colors.Lovers;
                 }
             }
         }

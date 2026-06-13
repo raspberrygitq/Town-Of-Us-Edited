@@ -3,9 +3,7 @@ using Rewired;
 using Rewired.Data;
 using System.Linq;
 using TownOfUsEdited.Roles;
-using Ability = TownOfUsEdited.Modifiers.Ability;
-using Assassin = TownOfUsEdited.Modifiers.Assassin;
-using Assassin2 = TownOfUsEdited.Roles.Assassin;
+using TownOfUsEdited.Modifiers;
 
 namespace TownOfUsEdited
 {
@@ -81,10 +79,10 @@ namespace TownOfUsEdited
                 else player.SetHighlighted(false);
             }
 
-            if (role is Vigilante || role.Player.Is(AbilityEnum.Assassin) || role.Player.Is(RoleEnum.Doomsayer) || role.Player.Is(RoleEnum.Assassin) || role.Player.Is(RoleEnum.Ritualist))
+            if (role is Vigilante || role.Player.Is(AbilityEnum.Assassin) || role.Player.Is(RoleEnum.Doomsayer) || role.Player.Is(RoleEnum.Ritualist))
             {
                 dynamic guesser = role is Vigilante ? Role.GetRole<Vigilante>(role.Player) : Ability.GetAbility<Assassin>(role.Player);
-                if (guesser == null) guesser = role is Doomsayer ? Role.GetRole<Doomsayer>(role.Player) : Role.GetRole<Assassin2>(role.Player);
+                if (guesser == null) guesser = Role.GetRole<Doomsayer>(role.Player);
                 if (guesser == null) guesser = Role.GetRole<Ritualist>(PlayerControl.LocalPlayer);
                 if (role is Vigilante)
                 {

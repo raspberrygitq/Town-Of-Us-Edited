@@ -7,9 +7,6 @@ namespace TownOfUsEdited.ImpostorRoles.EscapistMod
     [HarmonyPatch(typeof(KillButton), nameof(KillButton.DoClick))]
     public class PerformKill
     {
-        public static Sprite MarkSprite => TownOfUsEdited.MarkSprite;
-        public static Sprite EscapeSprite => TownOfUsEdited.EscapeSprite;
-
         public static bool Prefix(KillButton __instance)
         {
             var flag = PlayerControl.LocalPlayer.Is(RoleEnum.Escapist);
@@ -21,12 +18,12 @@ namespace TownOfUsEdited.ImpostorRoles.EscapistMod
             {
                 if (role.Player.inVent) return false;
                 if (!__instance.isActiveAndEnabled) return false;
-                if (role.EscapeButton.graphic.sprite == MarkSprite)
+                if (role.EscapeButton.graphic.sprite == TownOfUsEdited.MarkSprite)
                 {
                     var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
                     if (!abilityUsed) return false;
                     role.EscapePoint = PlayerControl.LocalPlayer.transform.position;
-                    role.EscapeButton.graphic.sprite = EscapeSprite;
+                    role.EscapeButton.graphic.sprite = TownOfUsEdited.EscapeSprite;
                     HudManager.Instance.KillButton.SetTarget(null);
                     if (role.Cooldown < 5f)
                         role.Cooldown = 5f;

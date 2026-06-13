@@ -9,7 +9,6 @@ using TownOfUsEdited.NeutralRoles.DoomsayerMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
-using Assassin = TownOfUsEdited.Modifiers.Assassin;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.CrewmateRoles.MayorMod

@@ -14,7 +14,6 @@ using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
-using Assassin = TownOfUsEdited.Modifiers.Assassin;
 
 namespace TownOfUsEdited.CrewmateRoles.VigilanteMod
 {

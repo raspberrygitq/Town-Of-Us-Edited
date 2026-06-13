@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUsEdited.Patches.CrewmateRoles.JailorMod
+namespace TownOfUsEdited.CrewmateRoles.JailorMod
 {
     public class JailorChat
     {
@@ -74,11 +74,11 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.JailorMod
                     Object.Destroy(bubble.gameObject);
                 }
                 JailorChatButton.chatBubblePool.activeChildren.Clear();
-                JailorChatButton.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().color = Colors.Jailor;
-                JailorChatButton.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().color = Colors.Jailor;
-                JailorChatButton.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().color = Colors.Jailor;
+                JailorChatButton.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().color = Patches.Colors.Jailor;
+                JailorChatButton.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().color = Patches.Colors.Jailor;
+                JailorChatButton.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().color = Patches.Colors.Jailor;
                 var container = JailorChatButton.chatScreen.transform.Find("ChatScreenContainer");
-                container.transform.FindChild("Background").GetComponent<SpriteRenderer>().color = Colors.Jailor;
+                container.transform.FindChild("Background").GetComponent<SpriteRenderer>().color = Patches.Colors.Jailor;
             }
             if (!Background)
             {
@@ -247,8 +247,8 @@ namespace TownOfUsEdited.Patches.CrewmateRoles.JailorMod
                 if (LobbyBehaviour.Instance) return;
                 if ((JailorChatButton != null && JailorChatButton.isActiveAndEnabled && JailorChatButton.chatBubblePool.activeChildren.Contains(__instance)) || (__instance.TextArea.text.Contains("[Jailor Chat]") && PlayerControl.LocalPlayer.Data.IsDead))
                 {
-                    __instance.Background.color = Colors.Jailor;
-                    __instance.NameText.color = Colors.Jailor;
+                    __instance.Background.color = Patches.Colors.Jailor;
+                    __instance.NameText.color = Patches.Colors.Jailor;
                     var srcPlayer = Utils.PlayerByData(__instance.playerInfo);
                     if (srcPlayer == PlayerControl.LocalPlayer) return;
                     if (srcPlayer.Is(RoleEnum.Jailor))

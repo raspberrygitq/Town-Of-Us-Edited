@@ -60,7 +60,7 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
                  || player.Is(RoleEnum.Terrorist))
                 return $"You observe that {player.GetDefaultOutfit().PlayerName} is capable of performing relentless attacks";
             else if (player.Is(RoleEnum.Witch) || player.Is(RoleEnum.Manipulator) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Conjurer)
-            || player.Is(RoleEnum.Assassin) || player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.HexMaster) || player.Is(RoleEnum.VoodooMaster))
+            || player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.HexMaster) || player.Is(RoleEnum.VoodooMaster))
                 return $"You observe that {player.GetDefaultOutfit().PlayerName} is associated with dark powers";
             else if (player.Is(RoleEnum.Crewmate) || player.Is(RoleEnum.Impostor) || player.Is(RoleEnum.Coven))
                 return $"You observe that {player.GetDefaultOutfit().PlayerName} appears to have a basic role";
@@ -106,8 +106,8 @@ namespace TownOfUsEdited.NeutralRoles.DoomsayerMod
                  || player.Is(RoleEnum.Terrorist))
                 return "(Bomber, Fighter, Jailor, Juggernaut, Knight, Poisoner, Sheriff, Shooter, Terrorist, Vigilante or Warlock)";
             else if (player.Is(RoleEnum.Witch) || player.Is(RoleEnum.Manipulator) || player.Is(RoleEnum.Pestilence) || player.Is(RoleEnum.Conjurer)
-            || player.Is(RoleEnum.Assassin) || player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.HexMaster) || player.Is(RoleEnum.VoodooMaster))
-                return "(Assassin, Conjurer, Hex Master, Manipulator, Pestilence, Ritualist, Voodoo Master or Witch)";
+            || player.Is(RoleEnum.Ritualist) || player.Is(RoleEnum.HexMaster) || player.Is(RoleEnum.VoodooMaster))
+                return "(Conjurer, Hex Master, Manipulator, Pestilence, Ritualist, Voodoo Master or Witch)";
             else if (player.Is(RoleEnum.Crewmate) || player.Is(RoleEnum.Impostor) || player.Is(RoleEnum.Coven))
                 return "(Coven, Crewmate or Impostor)";
             else return "Error";

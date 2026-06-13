@@ -52,7 +52,7 @@ namespace TownOfUsEdited.Roles
             if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
             {
                 VultureWins = true;
-                if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame)
+                if (AmongUsClient.Instance.AmHost && CustomGameOptions.VultureWinEndsGame)
                 {
                     Coroutines.Start(WaitForEnd());
                     PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Vulture Win");

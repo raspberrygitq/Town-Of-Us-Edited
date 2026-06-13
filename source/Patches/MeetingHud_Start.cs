@@ -1,13 +1,13 @@
 using HarmonyLib;
 using Reactor.Utilities.Extensions;
+using TownOfUsEdited.CrewmateRoles.JailorMod;
 using TownOfUsEdited.Modifiers;
+using TownOfUsEdited.Modifiers.LoversMod;
+using TownOfUsEdited.NeutralRoles.SerialKillerMod;
+using TownOfUsEdited.NeutralRoles.VampireMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Patches.CovenRoles;
-using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
 using TownOfUsEdited.Patches.ImpostorRoles;
-using TownOfUsEdited.Patches.Modifiers.LoversMod;
-using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
-using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;

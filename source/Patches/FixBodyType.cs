@@ -14,10 +14,10 @@ namespace TownOfUsEdited.Patches
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode != GameModes.Normal) return true;
             else if (CustomGameOptions.GameMode == GameMode.Chaos && player.Is(Faction.Impostors)) __result = PlayerBodyTypes.Seeker;
             else if (player.Is(RoleEnum.Mutant) && Role.GetRole<Mutant>(player).IsTransformed == true) __result = PlayerBodyTypes.Seeker;
-            else if (AprilFoolsPatches.CurrentMode == 1) __result = PlayerBodyTypes.Horse;
-            else if (AprilFoolsPatches.CurrentMode == 2) __result = PlayerBodyTypes.Long;
-            else if (AprilFoolsPatches.CurrentMode == 3) __result = PlayerBodyTypes.LongSeeker;
-            else if (AprilFoolsPatches.CurrentMode == 4) __result = PlayerBodyTypes.Classic;
+            //          else if (AprilFoolsPatches.CurrentMode == 1) __result = PlayerBodyTypes.Horse;
+            //          else if (AprilFoolsPatches.CurrentMode == 2) __result = PlayerBodyTypes.Long;
+            //          else if (AprilFoolsPatches.CurrentMode == 3) __result = PlayerBodyTypes.LongSeeker;
+            //          else if (AprilFoolsPatches.CurrentMode == 4) __result = PlayerBodyTypes.Classic;
             else __result = PlayerBodyTypes.Normal;
             return false;
         }

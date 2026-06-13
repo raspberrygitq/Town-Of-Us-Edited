@@ -27,8 +27,6 @@ using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
-using Assassin = TownOfUsEdited.Roles.Assassin;
-using Assassin2 = TownOfUsEdited.Modifiers.Assassin;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Patches
@@ -386,7 +384,6 @@ namespace TownOfUsEdited.Patches
             else if (role == typeof(Blinder)) newRole = new Blinder(PlayerControl.LocalPlayer);
             else if (role == typeof(Freezer)) newRole = new Freezer(PlayerControl.LocalPlayer);
             else if (role == typeof(Wraith)) newRole = new Wraith(PlayerControl.LocalPlayer);
-            else if (role == typeof(Assassin)) newRole = new Assassin(PlayerControl.LocalPlayer);
             else if (role == typeof(Escapist)) newRole = new Escapist(PlayerControl.LocalPlayer);
             else if (role == typeof(Grenadier)) newRole = new Grenadier(PlayerControl.LocalPlayer);
             else if (role == typeof(Morphling)) newRole = new Morphling(PlayerControl.LocalPlayer);
@@ -480,10 +477,6 @@ namespace TownOfUsEdited.Patches
             {
                 var wraithRole = Role.GetRole<Wraith>(PlayerControl.LocalPlayer);
                 wraithRole.Fade();
-            }
-            else if (role == typeof(Assassin))
-            {
-                new Assassin2(PlayerControl.LocalPlayer);
             }
 
             if (!spawn) newRole.RegenTask();
@@ -590,10 +583,10 @@ namespace TownOfUsEdited.Patches
                     typeof(Lookout), typeof(Mystic), typeof(Seer), typeof(Snitch), typeof(Spy), typeof(Tracker),
                     typeof(Trapper), typeof(Watcher), typeof(Avenger), typeof(Deputy), typeof(Fighter), typeof(Hunter),
                     typeof(Knight), typeof(Sheriff), typeof(VampireHunter), typeof(Veteran), typeof(Vigilante),
-                    typeof(Jailor), typeof(Mayor), typeof(Politician), typeof(Prosecutor), typeof(Swapper), typeof(TimeLord),
+                    typeof(Jailor), typeof(Mayor), typeof(Politician), typeof(Prosecutor), typeof(Swapper),
                     typeof(Altruist), typeof(Bodyguard), typeof(Cleric), typeof(Crusader), typeof(Doctor), typeof(Medic),
                     typeof(Oracle), typeof(Warden), typeof(Engineer), typeof(Imitator),
-                    typeof(Medium), typeof(Paranoïac), typeof(Plumber), typeof(Transporter) ];
+                    typeof(Medium), typeof(Paranoïac), typeof(Plumber), typeof(TimeLord), typeof(Transporter) ];
                     while (Roles.Count > 0)
                     {
                         Type role = Roles[0];
@@ -614,7 +607,7 @@ namespace TownOfUsEdited.Patches
                 }
                 if (taskFolder.FolderName == "Impostor Roles")
                 {
-                    List<Type> Roles = [ typeof(Impostor), typeof(Blinder), typeof(Freezer), typeof(Wraith), typeof(Assassin), typeof(Escapist), typeof(Grenadier),
+                    List<Type> Roles = [ typeof(Impostor), typeof(Blinder), typeof(Freezer), typeof(Wraith), typeof(Escapist), typeof(Grenadier),
                     typeof(Morphling), typeof(Noclip), typeof(Swooper), typeof(Venerer), typeof(Bomber), typeof(BountyHunter), typeof(Conjurer),
                     typeof(Manipulator), typeof(Poisoner), typeof(Shooter), typeof(Traitor), typeof(Warlock), typeof(Witch), typeof(Blackmailer),
                     typeof(Converter), typeof(Hypnotist), typeof(Janitor), typeof(Mafioso), typeof(Miner), typeof(Reviver),
@@ -792,7 +785,6 @@ namespace TownOfUsEdited.Patches
                     else if (__instance.Text.text.Contains("Be_Blinder.exe")) __instance.FileImage.color = Colors.Impostor;
                     else if (__instance.Text.text.Contains("Be_Freezer.exe")) __instance.FileImage.color = Colors.Impostor;
                     else if (__instance.Text.text.Contains("Be_Wraith.exe")) __instance.FileImage.color = Colors.Impostor;
-                    else if (__instance.Text.text.Contains("Be_Assassin.exe")) __instance.FileImage.color = Colors.Impostor;
                     else if (__instance.Text.text.Contains("Be_Escapist.exe")) __instance.FileImage.color = Colors.Impostor;
                     else if (__instance.Text.text.Contains("Be_Grenadier.exe")) __instance.FileImage.color = Colors.Impostor;
                     else if (__instance.Text.text.Contains("Be_Morphling.exe")) __instance.FileImage.color = Colors.Impostor;

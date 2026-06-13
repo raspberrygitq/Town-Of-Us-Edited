@@ -26,10 +26,10 @@ namespace TownOfUsEdited.NeutralRoles.PhantomMod
                     if (AmongUsClient.Instance.AmHost)
                     {
                         Utils.Rpc(CustomRPC.PhantomWin, role.Player.PlayerId);
-                        if (!CustomGameOptions.NeutralEvilWinEndsGame)
+                        if (!CustomGameOptions.PhantomWinEndsGame)
                         {
                             role.Caught = true;
-                            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Phantom) || !CustomGameOptions.PhantomSpook) return;
+                            if (!PlayerControl.LocalPlayer.Is(RoleEnum.Phantom)) return;
                             byte[] toKill = MeetingHud.Instance.playerStates.Where(x => !Utils.PlayerById(x.TargetPlayerId).Is(RoleEnum.Pestilence)).Select(x => x.TargetPlayerId).ToArray();
                             role.PauseEndCrit = true;
                             var pk = new PlayerMenu((x) =>

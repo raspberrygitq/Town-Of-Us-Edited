@@ -9,8 +9,7 @@ using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using Assassin = TownOfUsEdited.Modifiers.Assassin;
-using Assassin2 = TownOfUsEdited.Roles.Assassin;
+using TownOfUsEdited.Modifiers;
 
 namespace TownOfUsEdited.ImpostorRoles.TraitorMod
 {
@@ -291,7 +290,6 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
             if (CustomGameOptions.WarlockOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Warlock)) role.CanBeRoles.Add(RoleEnum.Warlock);
             if (CustomGameOptions.VenererOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Venerer)) role.CanBeRoles.Add(RoleEnum.Venerer);
             if (CustomGameOptions.HypnotistOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Hypnotist)) role.CanBeRoles.Add(RoleEnum.Hypnotist);
-            if (CustomGameOptions.AssassinOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Assassin)) role.CanBeRoles.Add(RoleEnum.Assassin);
             if (CustomGameOptions.WitchOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Witch)) role.CanBeRoles.Add(RoleEnum.Witch);
             if (CustomGameOptions.PoisonerOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Poisoner)) role.CanBeRoles.Add(RoleEnum.Poisoner);
             if (CustomGameOptions.ShooterOn > 0 && !role.CanBeRoles.Contains(RoleEnum.Shooter)) role.CanBeRoles.Add(RoleEnum.Shooter);
@@ -336,11 +334,6 @@ namespace TownOfUsEdited.ImpostorRoles.TraitorMod
             else if (selectedRole == RoleEnum.Warlock) new Warlock(traitor);
             else if (selectedRole == RoleEnum.Venerer) new Venerer(traitor);
             else if (selectedRole == RoleEnum.Hypnotist) new Hypnotist(traitor);
-            else if (selectedRole == RoleEnum.Assassin)
-            {
-                new Assassin(traitor);
-                new Assassin2(traitor);
-            }
             else if (selectedRole == RoleEnum.Witch) new Witch(traitor);
             else if (selectedRole == RoleEnum.Poisoner) new Poisoner(traitor);
             else if (selectedRole == RoleEnum.Shooter) new Shooter(traitor);

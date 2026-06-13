@@ -2,6 +2,7 @@ using Il2CppSystem.Collections.Generic;
 using Reactor.Utilities;
 using System.Linq;
 using TownOfUsEdited.ImpostorRoles.TraitorMod;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using UnityEngine;
 
 namespace TownOfUsEdited.Roles
@@ -40,7 +41,7 @@ namespace TownOfUsEdited.Roles
             if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
             {
                 TargetVotedOut = true;
-                if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame)
+                if (AmongUsClient.Instance.AmHost && CustomGameOptions.ExecutionerWin == WinEndsGame.EndsGame)
                 {
                     Coroutines.Start(WaitForEnd());
                     PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Executioner Win");

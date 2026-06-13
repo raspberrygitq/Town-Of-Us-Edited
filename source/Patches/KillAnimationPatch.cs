@@ -1,10 +1,16 @@
 using HarmonyLib;
+using System.Reflection;
+using TownOfUsEdited.Utilities;
 
 namespace TownOfUsEdited.Patches
 {
-    [HarmonyPatch(typeof(OverlayKillAnimation._CoShow_d__21), nameof(OverlayKillAnimation._CoShow_d__21.MoveNext))]
+    [HarmonyPatch]
     public class KillAnimationPatches
     {
+        public static MethodBase TargetMethod()
+        {
+            return StateMachineWrapper<OverlayKillAnimation>.GetStateMachineMoveNext(nameof(OverlayKillAnimation.CoShow))!;
+        }
         public static void Postfix(bool __result)
         {
             if (MeetingHud.Instance)

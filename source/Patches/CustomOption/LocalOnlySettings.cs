@@ -1,5 +1,6 @@
 using HarmonyLib;
 using System;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -50,6 +51,25 @@ namespace TownOfUsEdited.CustomOption
 
         private static ToggleButtonBehaviour buttonPrefab;
         private static Vector3? _origin;
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(MainMenuManager), nameof(MainMenuManager.Start))]
+        public static void MainMenuManager_StartPostfix(MainMenuManager __instance)
+        {
+            if (!Directory.Exists(TownOfUsEdited.DataPath))
+            {
+                Directory.CreateDirectory(TownOfUsEdited.DataPath);
+            }
+            // Prefab for the title
+            var go = new GameObject("TitleText");
+            var tmp = go.AddComponent<TextMeshPro>();
+            tmp.fontSize = 4;
+            tmp.alignment = TextAlignmentOptions.Center;
+            tmp.transform.localPosition += Vector3.left * 0.2f;
+            titleText = Object.Instantiate(tmp);
+            titleText.gameObject.SetActive(false);
+            Object.DontDestroyOnLoad(titleText);
+        }
 
         [HarmonyPatch(typeof(OptionsMenuBehaviour), nameof(OptionsMenuBehaviour.Start))]
         [HarmonyPostfix]

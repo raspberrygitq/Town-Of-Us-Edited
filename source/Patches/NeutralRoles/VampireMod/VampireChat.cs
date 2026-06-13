@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUsEdited.Patches.NeutralRoles.VampireMod
+namespace TownOfUsEdited.NeutralRoles.VampireMod
 {
     public class VampireChat
     {
@@ -60,11 +60,11 @@ namespace TownOfUsEdited.Patches.NeutralRoles.VampireMod
                     Object.Destroy(bubble.gameObject);
                 }
                 VampireChatButton.chatBubblePool.activeChildren.Clear();
-                VampireChatButton.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().color = Colors.Vampire;
-                VampireChatButton.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().color = Colors.Vampire;
-                VampireChatButton.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().color = Colors.Vampire;
+                VampireChatButton.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().color = Patches.Colors.Vampire;
+                VampireChatButton.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().color = Patches.Colors.Vampire;
+                VampireChatButton.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().color = Patches.Colors.Vampire;
                 var container = VampireChatButton.chatScreen.transform.Find("ChatScreenContainer");
-                container.transform.FindChild("Background").GetComponent<SpriteRenderer>().color = Colors.Vampire;
+                container.transform.FindChild("Background").GetComponent<SpriteRenderer>().color = Patches.Colors.Vampire;
             }
             if (!Background)
             {
@@ -243,8 +243,8 @@ namespace TownOfUsEdited.Patches.NeutralRoles.VampireMod
                 if (LobbyBehaviour.Instance) return;
                 if ((VampireChatButton != null && VampireChatButton.isActiveAndEnabled && VampireChatButton.chatBubblePool.activeChildren.Contains(__instance)) || (__instance.TextArea.text.Contains("[Vampire Chat]") && PlayerControl.LocalPlayer.Data.IsDead))
                 {
-                    __instance.Background.color = Colors.Vampire;
-                    __instance.NameText.color = Colors.Vampire;
+                    __instance.Background.color = Patches.Colors.Vampire;
+                    __instance.NameText.color = Patches.Colors.Vampire;
                     __instance.TextArea.color = Color.white;
                 }
             }

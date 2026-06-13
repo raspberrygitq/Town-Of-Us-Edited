@@ -6,7 +6,7 @@ using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUsEdited.NeutraleRoles.ExecutionerMod
+namespace TownOfUsEdited.NeutralRoles.ExecutionerMod
 {
     [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
     public static class AirshipExileController_WrapUpAndSpawn
@@ -32,7 +32,7 @@ namespace TownOfUsEdited.NeutraleRoles.ExecutionerMod
             }
 
             foreach (var role in Role.GetRoles(RoleEnum.Executioner))
-                if (player.PlayerId == ((Executioner)role).target.PlayerId && !CustomGameOptions.NeutralEvilWinEndsGame)
+                if (player.PlayerId == ((Executioner)role).target.PlayerId && CustomGameOptions.ExecutionerWin != WinEndsGame.EndsGame)
                 {
                     KillButtonTarget.DontRevive = role.Player.PlayerId;
                     role.Player.Exiled();

@@ -11,20 +11,17 @@ namespace TownOfUsEdited.Patches
 {
     public class AssetLoader
     {
-        public static string[] AssetBundles = { "trappershader", "soundvision", "touebundle" };
-
         public AssetLoader() { Initialize(); }
 
         public void Initialize()
         {
-            Array.ForEach(AssetBundles, x =>
+            var arch = OperatingSystem.IsAndroid() ? "android" : "win";
+            var bundle = $"tour-assets-{arch}.bundle";
+            var b = loadBundle(bundle);
+            bundles.Add(b.name, b);
+            b.GetAllAssetNames().ToList().ForEach(y =>
             {
-                var b = loadBundle(x);
-                bundles.Add(b.name, b);
-                b.GetAllAssetNames().ToList().ForEach(y =>
-                {
-                    objectname_to_bundle.Add(ConvertToBaseName(y), x);
-                });
+                objectname_to_bundle.Add(ConvertToBaseName(y), bundle);
             });
         }
 
@@ -48,14 +45,9 @@ namespace TownOfUsEdited.Patches
             return asset;
         }
 
-        public static Dictionary<string, AssetBundle> bundles = new Dictionary<string, AssetBundle>();
+        private Dictionary<string, AssetBundle> bundles = new Dictionary<string, AssetBundle>();
         private Dictionary<string, string> objectname_to_bundle = new Dictionary<string, string>();
         private Dictionary<string, UnityObject> loadedObjects = new Dictionary<string, UnityObject>();
-
-        public static TMPro.TMP_SpriteAsset LoadSpriteAsset(AssetBundle bundle, string name)
-        {
-            return bundle.LoadAsset<TMPro.TMP_SpriteAsset>(name);
-        }
 
         public T Get<T>(string name) where T : UnityObject
         {

@@ -344,10 +344,6 @@ namespace TownOfUsEdited.Roles
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Hypnotist</color>, you can use your ability to hypnotize other players.\nOnce enough people are hypnotized, you can release Mass Hysteria making hypnotized players see all other players as either themselves, camouflaged or invisible.");
                 }
-                if (pc.Is(RoleEnum.Assassin))
-                {
-                    HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Assassin</color>, you can guess the roles of players during the meeting to kill them.\nHowever, if your guess is wrong, you die instead.");
-                }
                 if (pc.Is(RoleEnum.Swooper))
                 {
                     HudManager.Instance.ShowPopUp("You are the <color=#FF0000FF>Swooper</color>, you can turn invisible to kill without getting caught.");
@@ -790,10 +786,6 @@ namespace TownOfUsEdited.Roles
             else if (role == "Hypnotist")
             {
                 return "The <color=#FF0000FF>Hypnotist</color> is an Impostor role which can hypnotise players.\nThen, during the meeting, the Hypnotist can release mass hysteria making hypnotised players see other players as either camouflaged, invisible or themselves.";
-            }
-            else if (role == "Assassin")
-            {
-                return "The <color=#FF0000FF>Assassin</color> is an either an Impostor role or an ability for killers depending on the settings.\nThe Assassin can guess the role of the players during the meeting, instantly killing them.\nHowever, if the Assassin guesses incorrectly, it will die instead.";
             }
             else if (role == "Swooper")
             {

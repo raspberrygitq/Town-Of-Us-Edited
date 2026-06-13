@@ -1726,7 +1726,9 @@ namespace TownOfUsEdited
                 if (killer.Is(RoleEnum.Fighter) && !killer.Is(Faction.Madmates))
                 {
                     var fighter = Role.GetRole<Fighter>(killer);
-                    if (target.Is(RoleEnum.Doomsayer) || target.Is(Faction.Impostors) || target.Is(Faction.NeutralKilling))
+                    if (target.Is(Faction.Impostors) || target.Is(Faction.NeutralKilling) ||
+                        target.Is(Faction.NeutralEvil) || target.Is(Faction.NeutralBenign) ||
+                        target.Is(Faction.Coven) || target.Is(Faction.Madmates))
                     {
                         fighter.CorrectKills += 1;
                     }
@@ -1739,7 +1741,9 @@ namespace TownOfUsEdited
                 if (killer.Is(RoleEnum.Avenger) && !killer.Is(Faction.Madmates))
                 {
                     var avenger = Role.GetRole<Avenger>(killer);
-                    if (target.Is(RoleEnum.Doomsayer) || target.Is(Faction.Impostors) || target.Is(Faction.NeutralKilling))
+                    if (target.Is(Faction.Impostors) || target.Is(Faction.NeutralKilling) ||
+                        target.Is(Faction.NeutralEvil) || target.Is(Faction.NeutralBenign) ||
+                        target.Is(Faction.Coven) || target.Is(Faction.Madmates))
                     {
                         avenger.CorrectKills += 1;
                     }

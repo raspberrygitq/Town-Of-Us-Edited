@@ -1,7 +1,7 @@
 using HarmonyLib;
 using TownOfUsEdited.Roles;
 
-namespace TownOfUsEdited.NeutraleRoles.ShifterMod
+namespace TownOfUsEdited.NeutralRoles.ShifterMod
 {
     [HarmonyPatch(typeof(HudManager))]
     public class HudManagerUpdate

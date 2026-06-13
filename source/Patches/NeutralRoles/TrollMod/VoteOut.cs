@@ -2,6 +2,7 @@ using HarmonyLib;
 using Reactor.Utilities;
 using System;
 using System.Linq;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Patches.NeutralRoles;
 using TownOfUsEdited.Roles;
@@ -31,7 +32,7 @@ namespace TownOfUsEdited.NeutralRoles.TrollMod
                 {
                     ((Troll)role).Wins();
 
-                    if (CustomGameOptions.NeutralEvilWinEndsGame || !CustomGameOptions.TrollHaunts) return;
+                    if (CustomGameOptions.TrollWin != WinEndsGame.Kills) return;
                     if (PlayerControl.LocalPlayer != player) return;
                     role.PauseEndCrit = true;
                     role.DeathReason = DeathReasons.Victorious;

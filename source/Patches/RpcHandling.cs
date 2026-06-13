@@ -19,6 +19,7 @@ using TownOfUsEdited.CrewmateRoles.GuardianMod;
 using TownOfUsEdited.CrewmateRoles.HaunterMod;
 using TownOfUsEdited.CrewmateRoles.HelperMod;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
+using TownOfUsEdited.CrewmateRoles.JailorMod;
 using TownOfUsEdited.CrewmateRoles.MayorMod;
 using TownOfUsEdited.CrewmateRoles.MedicMod;
 using TownOfUsEdited.CrewmateRoles.SwapperMod;
@@ -36,24 +37,21 @@ using TownOfUsEdited.ImpostorRoles.WitchMod;
 using TownOfUsEdited.ImpostorRoles.WraithMod;
 using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Modifiers.AssassinMod;
+using TownOfUsEdited.Modifiers.LoversMod;
 using TownOfUsEdited.NeutralRoles.DoomsayerMod;
 using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
 using TownOfUsEdited.NeutralRoles.PhantomMod;
+using TownOfUsEdited.NeutralRoles.SerialKillerMod;
 using TownOfUsEdited.NeutralRoles.VampireMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Patches.CovenRoles;
-using TownOfUsEdited.Patches.CrewmateRoles.JailorMod;
 using TownOfUsEdited.Patches.ImpostorRoles;
-using TownOfUsEdited.Patches.Modifiers.LoversMod;
 using TownOfUsEdited.Patches.Modifiers.MadmateMod;
 using TownOfUsEdited.Patches.NeutralRoles;
-using TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod;
-using TownOfUsEdited.Patches.NeutralRoles.VampireMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using AllowExtraVotes = TownOfUsEdited.CrewmateRoles.ProsecutorMod.AllowExtraVotes;
-using Assassin = TownOfUsEdited.Modifiers.Assassin;
 using KillButtonTarget = TownOfUsEdited.CrewmateRoles.AltruistMod.KillButtonTarget;
 using Object = UnityEngine.Object;
 using PerformKill = TownOfUsEdited.Patches.NeutralRoles.ShifterMod.PerformKill;
@@ -1033,26 +1031,26 @@ namespace TownOfUsEdited
             // Hand out appropriate roles to crewmates, impostors & coven.
             foreach (var (type, _, unique) in crewRoles)
             {
-                Role.GenRole<Role>(type, crewmates);
+                Role.GenRole<Role>(type, crewmates, true);
             }
             foreach (var (type, _, unique) in impRoles)
             {
-                Role.GenRole<Role>(type, impostors);
+                Role.GenRole<Role>(type, impostors, false);
             }
             foreach (var (type, _, unique) in covenRoles)
             {
-                Role.GenRole<Role>(type, coven);
+                Role.GenRole<Role>(type, coven, false);
             }
 
             // Assign vanilla roles to anyone who did not receive a role.
             foreach (var crewmate in crewmates)
-                Role.GenRole<Role>(typeof(Crewmate), crewmate);
+                Role.GenRole<Role>(typeof(Crewmate), crewmate, true);
 
             foreach (var impostor in impostors)
-                Role.GenRole<Role>(typeof(Impostor), impostor);
+                Role.GenRole<Role>(typeof(Impostor), impostor, false);
 
             foreach (var player in coven)
-                Role.GenRole<Role>(typeof(Coven), player);
+                Role.GenRole<Role>(typeof(Coven), player, false);
 
             // Hand out assassin ability to killers according to the settings.
             var canHaveAbility = PlayerControl.AllPlayerControls.ToArray().Where(player => player.Is(Faction.Impostors)).ToList();
@@ -2339,10 +2337,10 @@ namespace TownOfUsEdited
                             case CustomRPC.PhantomWin:
                                 var phantomWinner = Role.GetRole<Phantom>(Utils.PlayerById(reader.ReadByte()));
                                 phantomWinner.CompletedTasks = true;
-                                if (!CustomGameOptions.NeutralEvilWinEndsGame)
+                                if (!CustomGameOptions.PhantomWinEndsGame)
                                 {
                                     phantomWinner.Caught = true;
-                                    if (!PlayerControl.LocalPlayer.Is(RoleEnum.Phantom) || !CustomGameOptions.PhantomSpook || MeetingHud.Instance) return;
+                                    if (!PlayerControl.LocalPlayer.Is(RoleEnum.Phantom) || MeetingHud.Instance) return;
                                     byte[] toKill = MeetingHud.Instance.playerStates.Where(x => !Utils.PlayerById(x.TargetPlayerId).Is(RoleEnum.Pestilence)).Select(x => x.TargetPlayerId).ToArray();
                                     Role.GetRole(PlayerControl.LocalPlayer).PauseEndCrit = true;
                                     var pk = new PlayerMenu((x) =>
@@ -2858,13 +2856,8 @@ namespace TownOfUsEdited
         [HarmonyPatch(typeof(RoleManager), nameof(RoleManager.SelectRoles))]
         public static class RpcSetRole
         {
-            public static bool Prefix()
+            public static void Postfix()
             {
-                if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started)
-                {
-                    AmongUsClient.Instance.DisconnectWithReason("You were kicked for cheating, please stop.");
-                    return false;
-                }
                 PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("RPC SET ROLE");
                 var infected = GameData.Instance.AllPlayers.ToArray();
                 foreach (var data in infected)
@@ -3009,7 +3002,7 @@ namespace TownOfUsEdited
                     Utils.Rpc(CustomRPC.Start, byte.MaxValue);
                 }
 
-                if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return true;
+                if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return;
 
                 if (CustomGameOptions.GameMode == GameMode.Classic || CustomGameOptions.GameMode == GameMode.RoleList)
                 {
@@ -3221,6 +3214,7 @@ namespace TownOfUsEdited
 
                     if (CustomGameOptions.JuggernautOn > 0)
                         NeutralKillingRoles.Add((typeof(Juggernaut), CustomGameOptions.JuggernautOn, true));
+
                     #endregion
                     #region Impostor Roles
                     if (CustomGameOptions.ImpostorOn > 0)
@@ -3240,9 +3234,6 @@ namespace TownOfUsEdited
 
                     if (CustomGameOptions.MorphlingOn > 0)
                         ImpostorRoles.Add((typeof(Morphling), CustomGameOptions.MorphlingOn, false));
-
-                    if (CustomGameOptions.AssassinOn > 0)
-                        ImpostorRoles.Add((typeof(Roles.Assassin), CustomGameOptions.AssassinOn, false));
 
                     if (CustomGameOptions.BlackmailerOn > 0)
                         ImpostorRoles.Add((typeof(Blackmailer), CustomGameOptions.BlackmailerOn, true));
@@ -3569,9 +3560,6 @@ namespace TownOfUsEdited
                         if (CustomGameOptions.MorphlingOn > 0)
                             ImpostorConcealingRoles.Add((typeof(Morphling), CustomGameOptions.MorphlingOn, false || CustomGameOptions.UniqueRoles));
 
-                        if (CustomGameOptions.AssassinOn > 0)
-                            ImpostorKillingRoles.Add((typeof(Roles.Assassin), CustomGameOptions.AssassinOn, false || CustomGameOptions.UniqueRoles));
-
                         if (CustomGameOptions.BlackmailerOn > 0)
                             ImpostorSupportRoles.Add((typeof(Blackmailer), CustomGameOptions.BlackmailerOn, false || CustomGameOptions.UniqueRoles));
 
@@ -3645,7 +3633,6 @@ namespace TownOfUsEdited
                 else if (CustomGameOptions.GameMode == GameMode.Chaos) GenEachRoleChaos(infected.ToList());
                 else GenEachRole(infected.ToList(), __result);
 
-                return false;
             }
         }
     }

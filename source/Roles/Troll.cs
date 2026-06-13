@@ -1,5 +1,6 @@
 using Il2CppSystem.Collections.Generic;
 using Reactor.Utilities;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 
 namespace TownOfUsEdited.Roles
 {
@@ -43,7 +44,7 @@ namespace TownOfUsEdited.Roles
             if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
             {
                 TrolledVotedOut = true;
-                if (AmongUsClient.Instance.AmHost && CustomGameOptions.NeutralEvilWinEndsGame)
+                if (AmongUsClient.Instance.AmHost && CustomGameOptions.TrollWin == WinEndsGame.EndsGame)
                 {
                     Coroutines.Start(WaitForEnd());
                     PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("GAME OVER REASON: Troll Win");

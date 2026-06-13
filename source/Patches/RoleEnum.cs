@@ -97,7 +97,6 @@ namespace TownOfUsEdited
         Witch,
         Conjurer,
         BountyHunter,
-        Assassin,
         Reviver,
         Wraith,
         Blinder,

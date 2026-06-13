@@ -1,20 +1,26 @@
 using HarmonyLib;
 using Hazel;
+using Il2CppInterop.Runtime.InteropTypes;
+using System.Reflection;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
 using TownOfUsEdited.Roles;
+using TownOfUsEdited.Utilities;
 using UnityEngine;
-using Assassin = TownOfUsEdited.Modifiers.Assassin;
 using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.Patches
 {
-    [HarmonyPatch(typeof(IntroCutscene._CoBegin_d__35), nameof(IntroCutscene._CoBegin_d__35.MoveNext))]
+    [HarmonyPatch]
     public static class Start
     {
-        public static void Postfix(IntroCutscene._CoBegin_d__35 __instance)
+        public static MethodBase TargetMethod()
+        {
+            return StateMachineWrapper<IntroCutscene>.GetStateMachineMoveNext(nameof(IntroCutscene.CoBegin))!;
+        }
+        public static void Postfix(Il2CppObjectBase __instance)
         {
             HudUpdate.Zooming = false;
             HudUpdate.ZoomStart();
@@ -228,11 +234,6 @@ namespace TownOfUsEdited.Patches
             if (PlayerControl.LocalPlayer.Data.IsImpostor())
             {
                 Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = CustomGameOptions.InitialCooldowns;
-            }
-
-            if (PlayerControl.LocalPlayer.Is(RoleEnum.Assassin) && !PlayerControl.LocalPlayer.Is(AbilityEnum.Assassin))
-            {
-                new Assassin(PlayerControl.LocalPlayer);
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Blackmailer))

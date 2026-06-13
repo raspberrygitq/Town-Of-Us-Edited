@@ -2,6 +2,7 @@ using HarmonyLib;
 using Reactor.Utilities;
 using System;
 using System.Linq;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Patches.NeutralRoles;
 using TownOfUsEdited.Roles;
@@ -39,7 +40,7 @@ namespace TownOfUsEdited.NeutralRoles.JesterMod
             {
                 ((Jester)role).Wins();
 
-                if (CustomGameOptions.NeutralEvilWinEndsGame || !CustomGameOptions.JesterHaunt) return;
+                if (CustomGameOptions.JesterWin != WinEndsGame.Kills) return;
                 if (PlayerControl.LocalPlayer != player) return;
                 role.DeathReason = DeathReasons.Victorious;
                 Utils.Rpc(CustomRPC.SetDeathReason, player.PlayerId, (byte)DeathReasons.Guessed);

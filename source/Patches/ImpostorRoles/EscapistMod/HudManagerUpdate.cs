@@ -51,11 +51,15 @@ namespace TownOfUsEdited.ImpostorRoles.EscapistMod
 
             if (role.EscapeButton.isCoolingDown)
             {
+                role.EscapeButton.graphic.color = Palette.DisabledClear;
+                role.EscapeButton.graphic.material.SetFloat("_Desat", 1f);
                 role.EscapeButton.buttonLabelText.color = Palette.DisabledClear;
                 role.EscapeButton.buttonLabelText.material.SetFloat("_Desat", 1f);
             }
             else
             {
+                role.EscapeButton.graphic.color = Palette.EnabledColor;
+                role.EscapeButton.graphic.material.SetFloat("_Desat", 0f);
                 role.EscapeButton.buttonLabelText.color = Palette.EnabledColor;
                 role.EscapeButton.buttonLabelText.material.SetFloat("_Desat", 0f);
             }

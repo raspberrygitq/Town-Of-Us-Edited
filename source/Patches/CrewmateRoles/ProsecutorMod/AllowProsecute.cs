@@ -17,7 +17,6 @@ using TownOfUsEdited.NeutralRoles.DoomsayerMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using UnityEngine.UI;
-using Assassin = TownOfUsEdited.Modifiers.Assassin;
 
 namespace TownOfUsEdited.CrewmateRoles.ProsecutorMod
 {

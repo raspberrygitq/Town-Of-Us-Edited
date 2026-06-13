@@ -12,7 +12,6 @@ using TownOfUsEdited.ImpostorRoles.BomberMod;
 using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using Assassin = TownOfUsEdited.Modifiers.Assassin;
 
 namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
 {
@@ -31,10 +30,8 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             var flag2 = __instance.isCoolingDown;
             if (flag2) return false;
             if (!__instance.enabled) return false;
-            if (role == null)
-                return false;
-            if (role.ClosestPlayer == null)
-                return false;
+            if (role == null) return false;
+            if (role.ClosestPlayer == null) return false;
             var playerId = role.ClosestPlayer.PlayerId;
             var player = Utils.PlayerById(playerId);
             var abilityUsed = Utils.AbilityUsed(PlayerControl.LocalPlayer);
@@ -795,11 +792,6 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 var grenadeRole = Role.GetRole<Grenadier>(shifter);
                 grenadeRole.Cooldown = CustomGameOptions.GrenadeCd;
-            }
-
-            else if (role == RoleEnum.Assassin)
-            {
-                new Assassin(shifter);
             }
 
             else if (role == RoleEnum.Morphling)

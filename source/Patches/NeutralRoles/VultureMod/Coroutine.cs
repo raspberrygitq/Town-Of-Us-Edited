@@ -40,7 +40,7 @@ namespace TownOfUsEdited.NeutralRoles.VultureMod
             {
                 role.Wins();
                 Utils.Rpc(CustomRPC.VultureWin, role.Player.PlayerId);
-                if (!CustomGameOptions.NeutralEvilWinEndsGame)
+                if (!CustomGameOptions.VultureWinEndsGame)
                 {
                     Utils.Interact(role.Player, role.Player, true);
                     role.DeathReason = DeathReasons.Victorious;

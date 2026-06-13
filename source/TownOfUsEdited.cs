@@ -28,8 +28,9 @@ namespace TownOfUsEdited
     [BepInIncompatibility("MalumMenu")]
     public class TownOfUsEdited : BasePlugin
     {
+        public static string DataPath => Path.GetFullPath("edited_presets", Application.persistentDataPath);
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "2.5.0";
+        public const string VersionString = "3.0.0";
         public static Version Version = Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
@@ -157,11 +158,9 @@ namespace TownOfUsEdited
         public static Sprite ZoomPlusActiveButton;
         public static Sprite ZoomMinusActiveButton;
         public static Sprite NextButton;
-        public static Sprite heh;
+        public static Sprite NextButtonActive;
 
         public static Vector3 ButtonPosition { get; private set; } = new Vector3(2.6f, 0.7f, -9f);
-
-        private static DLoadImage _iCallLoadImage;
 
         private Harmony _harmony;
 
@@ -180,129 +179,131 @@ namespace TownOfUsEdited
 
             bundledAssets = new();
 
-            PlaceHolder = CreateSprite("TownOfUsEdited.Resources.Placeholder.png");
-            SwitchRole = CreateSprite("TownOfUsEdited.Resources.SwitchRole.png");
-            heh = CreateSprite("TownOfUsEdited.Resources.heh.png");
-            WatchSprite = CreateSprite("TownOfUsEdited.Resources.Watch.png");
-            BlessSprite = CreateSprite("TownOfUsEdited.Resources.Bless.png");
-            FlushSprite = CreateSprite("TownOfUsEdited.Resources.Flush.png");
-            BlockSprite = CreateSprite("TownOfUsEdited.Resources.Block.png");
-            BarricadeSprite = CreateSprite("TownOfUsEdited.Resources.Barricade.png");
-            BlindSprite = CreateSprite("TownOfUsEdited.Resources.Blind.png");
-            GuardSprite = CreateSprite("TownOfUsEdited.Resources.Guard.png");
-            BribeSprite = CreateSprite("TownOfUsEdited.Resources.Bribe.png");
-            BarrierSprite = CreateSprite("TownOfUsEdited.Resources.Barrier.png");
-            CleanseSprite = CreateSprite("TownOfUsEdited.Resources.Cleanse.png");
-            DetectSprite = CreateSprite("TownOfUsEdited.Resources.Detect.png");
-            ShootSprite = CreateSprite("TownOfUsEdited.Resources.Shoot.png");
-            CampSprite = CreateSprite("TownOfUsEdited.Resources.Camp.png");
-            ChameleonSwoop = CreateSprite("TownOfUsEdited.Resources.ChameleonSwoop.png");
-            JanitorClean = CreateSprite("TownOfUsEdited.Resources.Clean.png");
-            Voodoo = CreateSprite("TownOfUsEdited.Resources.Voodoo.png");
-            Potion = CreateSprite("TownOfUsEdited.Resources.Potion.png");
-            Drink = CreateSprite("TownOfUsEdited.Resources.Drink.png");
-            SabotageCoven = CreateSprite("TownOfUsEdited.Resources.SabotageCoven.png");
-            Recruit = CreateSprite("TownOfUsEdited.Resources.Recruit.png");
-            SpiritualistControl = CreateSprite("TownOfUsEdited.Resources.Control.png");
-            Hex = CreateSprite("TownOfUsEdited.Resources.Hex.png");
-            HexBomb = CreateSprite("TownOfUsEdited.Resources.HexBomb.png");
-            Freeze = CreateSprite("TownOfUsEdited.Resources.Freeze.png");
-            Blind = CreateSprite("TownOfUsEdited.Resources.Blind.png");
-            Rewind = CreateSprite("TownOfUsEdited.Resources.Rewind.png");
-            Eat = CreateSprite("TownOfUsEdited.Resources.Eat.png");
-            Dissociate = CreateSprite("TownOfUsEdited.Resources.Dissociate.png");
-            Avenge = CreateSprite("TownOfUsEdited.Resources.Avenge.png");
-            TrackSprite = CreateSprite("TownOfUsEdited.Resources.Track.png");
-            Spell = CreateSprite("TownOfUsEdited.Resources.Spell.png");
-            Curse = CreateSprite("TownOfUsEdited.Resources.Curse.png");
-            Bounty = CreateSprite("TownOfUsEdited.Resources.Bounty.png");
-            StoreSprite = CreateSprite("TownOfUsEdited.Resources.Store.png");
-            ManipulateSprite = CreateSprite("TownOfUsEdited.Resources.ManipulateButton.png");
-            JailSprite = CreateSprite("TownOfUsEdited.Resources.JailButton.png");
-            PoisonSprite = CreateSprite("TownOfUsEdited.Resources.Poison.png");
-            ShiftButton = CreateSprite("TownOfUsEdited.Resources.Shift.png");
-            DocReviveButton = CreateSprite("TownOfUsEdited.Resources.DocReviveButton.png");
-            CapZoomButton = CreateSprite("TownOfUsEdited.Resources.CapZoom.png");
-            EngineerFix = CreateSprite("TownOfUsEdited.Resources.Engineer.png");
-            SwapperSwitch = CreateSprite("TownOfUsEdited.Resources.SwapperSwitch.png");
-            SwapperSwitchDisabled = CreateSprite("TownOfUsEdited.Resources.SwapperSwitchDisabled.png");
-            Footprint = CreateSprite("TownOfUsEdited.Resources.Footprint.png");
-            MedicSprite = CreateSprite("TownOfUsEdited.Resources.Medic.png");
-            SeerSprite = CreateSprite("TownOfUsEdited.Resources.Seer.png");
-            SampleSprite = CreateSprite("TownOfUsEdited.Resources.Sample.png");
-            Arrow = CreateSprite("TownOfUsEdited.Resources.Arrow.png");
-            MineSprite = CreateSprite("TownOfUsEdited.Resources.Mine.png");
-            DouseSprite = CreateSprite("TownOfUsEdited.Resources.Douse.png");
-            IgniteSprite = CreateSprite("TownOfUsEdited.Resources.Ignite.png");
-            ReviveSprite = CreateSprite("TownOfUsEdited.Resources.Revive.png");
-            ButtonSprite = CreateSprite("TownOfUsEdited.Resources.Button.png");
-            DisperseSprite = CreateSprite("TownOfUsEdited.Resources.Disperse.png");
-            DragSprite = CreateSprite("TownOfUsEdited.Resources.Drag.png");
-            DropSprite = CreateSprite("TownOfUsEdited.Resources.Drop.png");
-            TransformSprite = CreateSprite("TownOfUsEdited.Resources.Transform.png");
-            UnTransformSprite = CreateSprite("TownOfUsEdited.Resources.UnTransform.png");
-            CycleBackSprite = CreateSprite("TownOfUsEdited.Resources.CycleBack.png");
-            CycleForwardSprite = CreateSprite("TownOfUsEdited.Resources.CycleForward.png");
-            GuessSprite = CreateSprite("TownOfUsEdited.Resources.Guess.png");
-            FlashSprite = CreateSprite("TownOfUsEdited.Resources.Flash.png");
-            AlertSprite = CreateSprite("TownOfUsEdited.Resources.Alert.png");
-            RememberSprite = CreateSprite("TownOfUsEdited.Resources.Remember.png");
-            PlantSprite = CreateSprite("TownOfUsEdited.Resources.Plant.png");
-            DetonateSprite = CreateSprite("TownOfUsEdited.Resources.Detonate.png");
-            TransportSprite = CreateSprite("TownOfUsEdited.Resources.Transport.png");
-            MediateSprite = CreateSprite("TownOfUsEdited.Resources.Mediate.png");
-            VestSprite = CreateSprite("TownOfUsEdited.Resources.Vest.png");
-            BlackmailSprite = CreateSprite("TownOfUsEdited.Resources.Blackmail.png");
-            BlackmailLetterSprite = CreateSprite("TownOfUsEdited.Resources.BlackmailLetter.png");
-            BlackmailOverlaySprite = CreateSprite("TownOfUsEdited.Resources.BlackmailOverlay.png");
-            LighterSprite = CreateSprite("TownOfUsEdited.Resources.Lighter.png");
-            DarkerSprite = CreateSprite("TownOfUsEdited.Resources.Darker.png");
-            InfectSprite = CreateSprite("TownOfUsEdited.Resources.Infect.png");
-            RampageSprite = CreateSprite("TownOfUsEdited.Resources.Rampage.png");
-            TrapSprite = CreateSprite("TownOfUsEdited.Resources.Trap.png");
-            InspectSprite = CreateSprite("TownOfUsEdited.Resources.Inspect.png");
-            ExamineSprite = CreateSprite("TownOfUsEdited.Resources.Examine.png");
-            EscapeSprite = CreateSprite("TownOfUsEdited.Resources.Mark.png");
-            MarkSprite = CreateSprite("TownOfUsEdited.Resources.Mark.png");
-            Revive2Sprite = CreateSprite("TownOfUsEdited.Resources.Revive2.png");
-            ImitateSelectSprite = CreateSprite("TownOfUsEdited.Resources.ImitateSelect.png");
-            ImitateDeselectSprite = CreateSprite("TownOfUsEdited.Resources.ImitateDeselect.png");
-            ObserveSprite = CreateSprite("TownOfUsEdited.Resources.Observe.png");
-            BiteSprite = CreateSprite("TownOfUsEdited.Resources.Bite.png");
-            StakeSprite = CreateSprite("TownOfUsEdited.Resources.Stake.png");
-            RevealSprite = CreateSprite("TownOfUsEdited.Resources.Reveal.png");
-            ConfessSprite = CreateSprite("TownOfUsEdited.Resources.Confess.png");
-            NoAbilitySprite = CreateSprite("TownOfUsEdited.Resources.NoAbility.png");
-            CamouflageSprite = CreateSprite("TownOfUsEdited.Resources.Camouflage.png");
-            CamoSprintSprite = CreateSprite("TownOfUsEdited.Resources.CamoSprint.png");
-            CamoSprintFreezeSprite = CreateSprite("TownOfUsEdited.Resources.CamoSprintFreeze.png");
-            HackSprite = CreateSprite("TownOfUsEdited.Resources.Hack.png");
-            MimicSprite = CreateSprite("TownOfUsEdited.Resources.Mimic.png");
-            LockSprite = CreateSprite("TownOfUsEdited.Resources.Lock.png");
-            SKConvertSprite = CreateSprite("TownOfUsEdited.Resources.SKConvert.png");
-            StalkSprite = CreateSprite("TownOfUsEdited.Resources.Stalk.png");
-            CrimeSceneSprite = CreateSprite("TownOfUsEdited.Resources.CrimeScene.png");
-            CampaignSprite = CreateSprite("TownOfUsEdited.Resources.Campaign.png");
-            FortifySprite = CreateSprite("TownOfUsEdited.Resources.Fortify.png");
-            HypnotiseSprite = CreateSprite("TownOfUsEdited.Resources.Hypnotise.png");
-            HysteriaSprite = CreateSprite("TownOfUsEdited.Resources.Hysteria.png");
-            InJailSprite = CreateSprite("TownOfUsEdited.Resources.InJail.png");
-            ReapSprite = CreateSprite("TownOfUsEdited.Resources.Reap.png");
-            SoulSprite = CreateSprite("TownOfUsEdited.Resources.Soul.png");
-            NoclipSprite = CreateSprite("TownOfUsEdited.Resources.Noclip.png");
-            AdminSprite = CreateSprite("TownOfUsEdited.Resources.Admin.png");
-            JailCellSprite = CreateSprite("TownOfUsEdited.Resources.JailCell.png");
-            CrusadeSprite = CreateSprite("TownOfUsEdited.Resources.Crusade.png");
+            var shortPath = $"TownOfUsEdited.Resources";
 
-            ToUBanner = CreateSprite("TownOfUsEdited.Resources.TownOfUsEditedBanner.png", 125f);
-            UpdateTOUButton = CreateSprite("TownOfUsEdited.Resources.UpdateToUButton.png");
-            UpdateSubmergedButton = CreateSprite("TownOfUsEdited.Resources.UpdateSubmergedButton.png");
+            PlaceHolder = CreateSprite($"{shortPath}.Placeholder.png");
+            SwitchRole = CreateSprite($"{shortPath}.SwitchRole.png");
+            WatchSprite = CreateSprite($"{shortPath}.Watch.png");
+            BlessSprite = CreateSprite($"{shortPath}.Bless.png");
+            FlushSprite = CreateSprite($"{shortPath}.Flush.png");
+            BlockSprite = CreateSprite($"{shortPath}.Block.png");
+            BarricadeSprite = CreateSprite($"{shortPath}.Barricade.png");
+            BlindSprite = CreateSprite($"{shortPath}.Blind.png");
+            GuardSprite = CreateSprite($"{shortPath}.Guard.png");
+            BribeSprite = CreateSprite($"{shortPath}.Bribe.png");
+            BarrierSprite = CreateSprite($"{shortPath}.Barrier.png");
+            CleanseSprite = CreateSprite($"{shortPath}.Cleanse.png");
+            DetectSprite = CreateSprite($"{shortPath}.Detect.png");
+            ShootSprite = CreateSprite($"{shortPath}.Shoot.png");
+            CampSprite = CreateSprite($"{shortPath}.Camp.png");
+            ChameleonSwoop = CreateSprite($"{shortPath}.ChameleonSwoop.png");
+            JanitorClean = CreateSprite($"{shortPath}.Clean.png");
+            Voodoo = CreateSprite($"{shortPath}.Voodoo.png");
+            Potion = CreateSprite($"{shortPath}.Potion.png");
+            Drink = CreateSprite($"{shortPath}.Drink.png");
+            SabotageCoven = CreateSprite($"{shortPath}.SabotageCoven.png");
+            Recruit = CreateSprite($"{shortPath}.Recruit.png");
+            SpiritualistControl = CreateSprite($"{shortPath}.Control.png");
+            Hex = CreateSprite($"{shortPath}.Hex.png");
+            HexBomb = CreateSprite($"{shortPath}.HexBomb.png");
+            Freeze = CreateSprite($"{shortPath}.Freeze.png");
+            Blind = CreateSprite($"{shortPath}.Blind.png");
+            Rewind = CreateSprite($"{shortPath}.Rewind.png");
+            Eat = CreateSprite($"{shortPath}.Eat.png");
+            Dissociate = CreateSprite($"{shortPath}.Dissociate.png");
+            Avenge = CreateSprite($"{shortPath}.Avenge.png");
+            TrackSprite = CreateSprite($"{shortPath}.Track.png");
+            Spell = CreateSprite($"{shortPath}.Spell.png");
+            Curse = CreateSprite($"{shortPath}.Curse.png");
+            Bounty = CreateSprite($"{shortPath}.Bounty.png");
+            StoreSprite = CreateSprite($"{shortPath}.Store.png");
+            ManipulateSprite = CreateSprite($"{shortPath}.ManipulateButton.png");
+            JailSprite = CreateSprite($"{shortPath}.JailButton.png");
+            PoisonSprite = CreateSprite($"{shortPath}.Poison.png");
+            ShiftButton = CreateSprite($"{shortPath}.Shift.png");
+            DocReviveButton = CreateSprite($"{shortPath}.DocReviveButton.png");
+            CapZoomButton = CreateSprite($"{shortPath}.CapZoom.png");
+            EngineerFix = CreateSprite($"{shortPath}.Engineer.png");
+            SwapperSwitch = CreateSprite($"{shortPath}.SwapperSwitch.png");
+            SwapperSwitchDisabled = CreateSprite($"{shortPath}.SwapperSwitchDisabled.png");
+            Footprint = CreateSprite($"{shortPath}.Footprint.png");
+            MedicSprite = CreateSprite($"{shortPath}.Medic.png");
+            SeerSprite = CreateSprite($"{shortPath}.Seer.png");
+            SampleSprite = CreateSprite($"{shortPath}.Sample.png");
+            Arrow = CreateSprite($"{shortPath}.Arrow.png");
+            MineSprite = CreateSprite($"{shortPath}.Mine.png");
+            DouseSprite = CreateSprite($"{shortPath}.Douse.png");
+            IgniteSprite = CreateSprite($"{shortPath}.Ignite.png");
+            ReviveSprite = CreateSprite($"{shortPath}.Revive.png");
+            ButtonSprite = CreateSprite($"{shortPath}.Button.png");
+            DisperseSprite = CreateSprite($"{shortPath}.Disperse.png");
+            DragSprite = CreateSprite($"{shortPath}.Drag.png");
+            DropSprite = CreateSprite($"{shortPath}.Drop.png");
+            TransformSprite = CreateSprite($"{shortPath}.Transform.png");
+            UnTransformSprite = CreateSprite($"{shortPath}.UnTransform.png");
+            CycleBackSprite = CreateSprite($"{shortPath}.CycleBack.png");
+            CycleForwardSprite = CreateSprite($"{shortPath}.CycleForward.png");
+            GuessSprite = CreateSprite($"{shortPath}.Guess.png");
+            FlashSprite = CreateSprite($"{shortPath}.Flash.png");
+            AlertSprite = CreateSprite($"{shortPath}.Alert.png");
+            RememberSprite = CreateSprite($"{shortPath}.Remember.png");
+            PlantSprite = CreateSprite($"{shortPath}.Plant.png");
+            DetonateSprite = CreateSprite($"{shortPath}.Detonate.png");
+            TransportSprite = CreateSprite($"{shortPath}.Transport.png");
+            MediateSprite = CreateSprite($"{shortPath}.Mediate.png");
+            VestSprite = CreateSprite($"{shortPath}.Vest.png");
+            BlackmailSprite = CreateSprite($"{shortPath}.Blackmail.png");
+            BlackmailLetterSprite = CreateSprite($"{shortPath}.BlackmailLetter.png");
+            BlackmailOverlaySprite = CreateSprite($"{shortPath}.BlackmailOverlay.png");
+            LighterSprite = CreateSprite($"{shortPath}.Lighter.png");
+            DarkerSprite = CreateSprite($"{shortPath}.Darker.png");
+            InfectSprite = CreateSprite($"{shortPath}.Infect.png");
+            RampageSprite = CreateSprite($"{shortPath}.Rampage.png");
+            TrapSprite = CreateSprite($"{shortPath}.Trap.png");
+            InspectSprite = CreateSprite($"{shortPath}.Inspect.png");
+            ExamineSprite = CreateSprite($"{shortPath}.Examine.png");
+            EscapeSprite = CreateSprite($"{shortPath}.Mark.png");
+            MarkSprite = CreateSprite($"{shortPath}.Mark.png");
+            Revive2Sprite = CreateSprite($"{shortPath}.Revive2.png");
+            ImitateSelectSprite = CreateSprite($"{shortPath}.ImitateSelect.png");
+            ImitateDeselectSprite = CreateSprite($"{shortPath}.ImitateDeselect.png");
+            ObserveSprite = CreateSprite($"{shortPath}.Observe.png");
+            BiteSprite = CreateSprite($"{shortPath}.Bite.png");
+            StakeSprite = CreateSprite($"{shortPath}.Stake.png");
+            RevealSprite = CreateSprite($"{shortPath}.Reveal.png");
+            ConfessSprite = CreateSprite($"{shortPath}.Confess.png");
+            NoAbilitySprite = CreateSprite($"{shortPath}.NoAbility.png");
+            CamouflageSprite = CreateSprite($"{shortPath}.Camouflage.png");
+            CamoSprintSprite = CreateSprite($"{shortPath}.CamoSprint.png");
+            CamoSprintFreezeSprite = CreateSprite($"{shortPath}.CamoSprintFreeze.png");
+            HackSprite = CreateSprite($"{shortPath}.Hack.png");
+            MimicSprite = CreateSprite($"{shortPath}.Mimic.png");
+            LockSprite = CreateSprite($"{shortPath}.Lock.png");
+            SKConvertSprite = CreateSprite($"{shortPath}.SKConvert.png");
+            StalkSprite = CreateSprite($"{shortPath}.Stalk.png");
+            CrimeSceneSprite = CreateSprite($"{shortPath}.CrimeScene.png");
+            CampaignSprite = CreateSprite($"{shortPath}.Campaign.png");
+            FortifySprite = CreateSprite($"{shortPath}.Fortify.png");
+            HypnotiseSprite = CreateSprite($"{shortPath}.Hypnotise.png");
+            HysteriaSprite = CreateSprite($"{shortPath}.Hysteria.png");
+            InJailSprite = CreateSprite($"{shortPath}.InJail.png");
+            ReapSprite = CreateSprite($"{shortPath}.Reap.png");
+            SoulSprite = CreateSprite($"{shortPath}.Soul.png");
+            NoclipSprite = CreateSprite($"{shortPath}.Noclip.png");
+            AdminSprite = CreateSprite($"{shortPath}.Admin.png");
+            JailCellSprite = CreateSprite($"{shortPath}.JailCell.png");
+            CrusadeSprite = CreateSprite($"{shortPath}.Crusade.png");
 
-            ZoomPlusButton = CreateSprite("TownOfUsEdited.Resources.Plus.png");
-            ZoomMinusButton = CreateSprite("TownOfUsEdited.Resources.Minus.png");
-            ZoomPlusActiveButton = CreateSprite("TownOfUsEdited.Resources.PlusActive.png");
-            ZoomMinusActiveButton = CreateSprite("TownOfUsEdited.Resources.MinusActive.png");
-            NextButton = CreateSprite("TownOfUsEdited.Resources.NextButton.png");
+            ToUBanner = CreateSprite($"{shortPath}.TownOfUsEditedBanner.png", 125f);
+            UpdateTOUButton = CreateSprite($"{shortPath}.UpdateToUButton.png");
+            UpdateSubmergedButton = CreateSprite($"{shortPath}.UpdateSubmergedButton.png");
+
+            ZoomPlusButton = CreateSprite($"{shortPath}.Plus.png");
+            ZoomMinusButton = CreateSprite($"{shortPath}.Minus.png");
+            ZoomPlusActiveButton = CreateSprite($"{shortPath}.PlusActive.png");
+            ZoomMinusActiveButton = CreateSprite($"{shortPath}.MinusActive.png");
+            NextButton = CreateSprite($"{shortPath}.NextButton.png");
+            NextButtonActive = CreateSprite($"{shortPath}.NextButtonActive.png");
 
             PalettePatch.Load();
             ClassInjector.RegisterTypeInIl2Cpp<RainbowBehaviour>();
@@ -324,22 +325,33 @@ namespace TownOfUsEdited
         public static Sprite CreateSprite(string name, float pixelsPerUnit = 100f)
         {
             var pivot = new Vector2(0.5f, 0.5f);
+
             var assembly = Assembly.GetExecutingAssembly();
-            var tex = AmongUsExtensions.CreateEmptyTexture();
-            var imageStream = assembly.GetManifestResourceStream(name);
-            var img = imageStream.ReadFully();
-            LoadImage(tex, img, true);
-            tex.DontDestroy();
-            var sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), pivot, pixelsPerUnit);
+            var tex = LoadTextureFromResourcePath(name, assembly);
+            var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), pixelsPerUnit);
+            sprite.name = name;
             sprite.DontDestroy();
             return sprite;
         }
-
-        public static void LoadImage(Texture2D tex, byte[] data, bool markNonReadable)
+        public static Texture2D LoadTextureFromResourcePath(string resourcePath, Assembly assembly)
         {
-            _iCallLoadImage ??= IL2CPP.ResolveICall<DLoadImage>("UnityEngine.ImageConversion::LoadImage");
-            var il2CPPArray = (Il2CppStructArray<byte>)data;
-            _iCallLoadImage.Invoke(tex.Pointer, il2CPPArray.Pointer, markNonReadable);
+            var tex = new Texture2D(1, 1, TextureFormat.ARGB32, false)
+            {
+                wrapMode = TextureWrapMode.Clamp,
+            };
+            var myStream = assembly.GetManifestResourceStream(resourcePath);
+            if (myStream != null)
+            {
+                var buttonTexture = myStream.ReadFully();
+                tex.LoadImage(buttonTexture, false);
+            }
+            else
+            {
+                throw new ArgumentException($"Resource not found: {resourcePath}");
+            }
+
+            tex.name = resourcePath;
+            return tex;
         }
 
         private delegate bool DLoadImage(IntPtr tex, IntPtr data, bool markNonReadable);

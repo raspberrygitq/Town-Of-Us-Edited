@@ -3,6 +3,7 @@ using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
+using Il2CppInterop.Runtime.InteropTypes;
 using Reactor.Utilities;
 using System;
 using System.Collections;
@@ -10,14 +11,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using TownOfUsEdited.Roles;
+using TownOfUsEdited.Utilities;
 using UnityEngine;
 
 namespace TownOfUsEdited.Patches
 {
-    [HarmonyPatch(typeof(IntroCutscene._ShowRole_d__41), nameof(IntroCutscene._ShowRole_d__41.MoveNext))]
+    [HarmonyPatch]
     public static class SubmergedStartPatch
     {
-        public static void Postfix(IntroCutscene._ShowRole_d__41 __instance)
+        public static MethodBase TargetMethod()
+        {
+            return StateMachineWrapper<IntroCutscene>.GetStateMachineMoveNext(nameof(IntroCutscene.ShowRole))!;
+        }
+        public static void Postfix(Il2CppObjectBase __instance)
         {
             if (SubmergedCompatibility.isSubmerged())
             {

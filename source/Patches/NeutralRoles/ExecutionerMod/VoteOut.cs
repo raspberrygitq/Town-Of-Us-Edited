@@ -10,12 +10,6 @@ using Object = UnityEngine.Object;
 
 namespace TownOfUsEdited.NeutralRoles.ExecutionerMod
 {
-    [HarmonyPatch(typeof(AirshipExileController), nameof(AirshipExileController.WrapUpAndSpawn))]
-    public static class AirshipExileController_WrapUpAndSpawn
-    {
-        public static void Postfix(AirshipExileController __instance) => MeetingExiledEnd.ExileControllerPostfix(__instance);
-    }
-
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
     internal class MeetingExiledEnd
     {
@@ -38,7 +32,7 @@ namespace TownOfUsEdited.NeutralRoles.ExecutionerMod
                 {
                     ((Executioner)role).Wins();
 
-                    if (CustomGameOptions.NeutralEvilWinEndsGame || !CustomGameOptions.ExecutionerTorment) return;
+                    if (CustomGameOptions.ExecutionerWin != WinEndsGame.Kills) return;
                     if (PlayerControl.LocalPlayer != ((Executioner)role).Player) return;
                     role.PauseEndCrit = true;
 

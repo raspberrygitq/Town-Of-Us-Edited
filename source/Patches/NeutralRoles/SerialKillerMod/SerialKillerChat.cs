@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod
+namespace TownOfUsEdited.NeutralRoles.SerialKillerMod
 {
     public class SerialKillerChat
     {
@@ -60,11 +60,11 @@ namespace TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod
                     Object.Destroy(bubble.gameObject);
                 }
                 SerialKillerChatButton.chatBubblePool.activeChildren.Clear();
-                SerialKillerChatButton.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().color = Colors.SerialKiller;
-                SerialKillerChatButton.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().color = Colors.SerialKiller;
-                SerialKillerChatButton.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().color = Colors.SerialKiller;
+                SerialKillerChatButton.chatButton.transform.Find("Inactive").GetComponent<SpriteRenderer>().color = Patches.Colors.SerialKiller;
+                SerialKillerChatButton.chatButton.transform.Find("Active").GetComponent<SpriteRenderer>().color = Patches.Colors.SerialKiller;
+                SerialKillerChatButton.chatButton.transform.Find("Selected").GetComponent<SpriteRenderer>().color = Patches.Colors.SerialKiller;
                 var container = SerialKillerChatButton.chatScreen.transform.Find("ChatScreenContainer");
-                container.transform.FindChild("Background").GetComponent<SpriteRenderer>().color = Colors.SerialKiller;
+                container.transform.FindChild("Background").GetComponent<SpriteRenderer>().color = Patches.Colors.SerialKiller;
             }
             if (!Background)
             {
@@ -243,8 +243,8 @@ namespace TownOfUsEdited.Patches.NeutralRoles.SerialKillerMod
                 if (LobbyBehaviour.Instance) return;
                 if ((SerialKillerChatButton != null && SerialKillerChatButton.isActiveAndEnabled && SerialKillerChatButton.chatBubblePool.activeChildren.Contains(__instance)) || (__instance.TextArea.text.Contains("[Serial Killer Chat]") && PlayerControl.LocalPlayer.Data.IsDead))
                 {
-                    __instance.Background.color = Colors.SerialKiller;
-                    __instance.NameText.color = Colors.SerialKiller;
+                    __instance.Background.color = Patches.Colors.SerialKiller;
+                    __instance.NameText.color = Patches.Colors.SerialKiller;
                     __instance.TextArea.color = Color.white;
                 }
             }

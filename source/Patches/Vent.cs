@@ -28,6 +28,8 @@ namespace TownOfUsEdited
     {
         public static bool CanVent(PlayerControl player, NetworkedPlayerInfo playerInfo)
         {
+            if (player == null || playerInfo == null) return false;
+
             if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return false;
 
             if (PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected).ToList().Count <= 2 && !player.Is(RoleEnum.Haunter) && !player.Is(RoleEnum.Phantom) && !player.Is(RoleEnum.Wraith)

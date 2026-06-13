@@ -57,7 +57,7 @@ namespace TownOfUsEdited.CustomOption
                     {
                         var tab = SettingsUpdate.Tabs[tabNum].GetComponent<GameOptionsMenu>();
                         tab.settingsContainer.DestroyChildren();
-                        var files = Directory.GetFiles(Application.persistentDataPath, "*.txt").Select(x => Path.GetFileNameWithoutExtension(x).Split('/')[^1].Split('\\')[^1]).ToList();
+                        var files = Directory.GetFiles(TownOfUsEdited.DataPath, "*.txt").Select(x => Path.GetFileNameWithoutExtension(x).Split('/')[^1].Split('\\')[^1]).ToList();
                         float num = 1.5f;
                         if (tabNum == 6)
                         {
@@ -333,7 +333,7 @@ namespace TownOfUsEdited.CustomOption
 
                 try
                 {
-                    var path = Path.Combine(Application.persistentDataPath, $"{preset}.txt");
+                    var path = Path.Combine(TownOfUsEdited.DataPath, $"{preset}.txt");
                     text = File.ReadAllText(path);
                 }
                 catch
@@ -394,13 +394,13 @@ namespace TownOfUsEdited.CustomOption
                     builder.AppendLine(option.Value.ToString());
                 }
 
-                var text = Path.Combine(Application.persistentDataPath, "Saved Settings 1.txt");
+                var text = Path.Combine(TownOfUsEdited.DataPath, "Saved Settings 1.txt");
                 var i = 1;
 
                 while (File.Exists(text))
                 {
                     i++;
-                    text = Path.Combine(Application.persistentDataPath, $"Saved Settings {i}.txt");
+                    text = Path.Combine(TownOfUsEdited.DataPath, $"Saved Settings {i}.txt");
                 }
 
                 try
@@ -428,7 +428,7 @@ namespace TownOfUsEdited.CustomOption
 
                 try
                 {
-                    var path = Path.Combine(Application.persistentDataPath, $"{preset}.txt");
+                    var path = Path.Combine(TownOfUsEdited.DataPath, $"{preset}.txt");
                     File.WriteAllText(path, builder.ToString());
                     Coroutines.Start(TabPatches.Flash(__instance, ExportText, Color.green));
                 }
@@ -585,7 +585,6 @@ namespace TownOfUsEdited.CustomOption
 
                     else
                     {
-                        var playerCount = GameOptionsManager.Instance.currentNormalGameOptions.MaxPlayers;
                         if (option.Name.StartsWith("Slot "))
                         {
                             continue;
