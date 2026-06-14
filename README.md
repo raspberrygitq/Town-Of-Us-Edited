@@ -83,6 +83,11 @@
 # Releases
 | Among Us - Version| Mod Version | Steam Link | Epic Games link |
 |----------|-------------|-----------------|-----------------|
+|  17.4.0 | v3.0.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v3.0.0/TouEdited-v3.0.0-x86-steam-itch.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v3.0.0/TouEdited-v3.0.0-x64-epic-msstore.zip) |
+|  17.4.0 | v2.5.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.5.0/TouEdited-v2.5.0-x86-steam-itch.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.5.0/TouEdited-v2.5.0-x64-epic-msstore.zip) |
+|  17.3.0 | v2.4.2 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.4.2/TouEdited-v2.4.2-x86-steam-itch.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.4.2/TouEdited-v2.4.2-x64-epic-msstore.zip) |
+|  17.3.0 | v2.4.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.4.1/TouEdited-v2.4.1-x86-steam-itch.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.4.1/TouEdited-v2.4.1-x64-epic-msstore.zip) |
+|  17.3.0 | v2.4.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.4.0/TouEdited-v2.4.0-x86-steam-itch.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.4.0/TouEdited-v2.4.0-x64-epic-msstore.zip) |
 |  17.3.0 | v2.3.2 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.2/TouEdited-v2.3.2-x86-steam-itch.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.2/TouEdited-v2.3.2-x64-epic-msstore.zip) |
 |  17.0.0 - 17.2.2 | v2.3.1 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.1/ToUEG-Steam.v2.3.1.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.1/ToUEG-Epic.v2.3.1.zip) |
 |  17.0.0 - 17.2.1 | v2.3.0 | [Download for Steam](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.0/ToUEG-Steam.v2.3.0.zip) | [Download for Epic Games](https://github.com/raspberrygitq/Town-Of-Us-Edited/releases/download/v2.3.0/ToUEG-Epic.v2.3.0.zip) |
@@ -2376,8 +2381,6 @@ If they guess wrong, they die instead.
 |----------|:-------------:|:------:|:------:|
 | Number of Impostor Assassins | How many Impostors can Assassinate | Number | 1 |
 | Number of Neutral Killing Assassins | How many Neutral Killers can Assassinate | Number | 1 |
-| Assassin is an Impostor Role | Whether the Assassin should be an Impostor Role instead of an ability | Toggle | False |
-| Assassin Spawn Chance | The percentage probability of the Assassin appearing | Percentage | 0% |
 | Amnesiac Turned Impostor Can Assassinate | Whether former Amnesiacs now Impostor can Assassinate | Toggle | False |
 | Amnesiac Turned Neutral Killing Can Assassinate | Whether former Amnesiacs now Neutral Killers can Assassinate | Toggle | False |
 | Shifter Turned Impostor Can Assassinate | Whether former Shifters now Impostor can Assassinate | Toggle | False |
