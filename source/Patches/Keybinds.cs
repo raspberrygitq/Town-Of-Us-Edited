@@ -2,8 +2,8 @@
 using Rewired;
 using Rewired.Data;
 using System.Linq;
-using TownOfUsEdited.Roles;
 using TownOfUsEdited.Modifiers;
+using TownOfUsEdited.Roles;
 
 namespace TownOfUsEdited
 {

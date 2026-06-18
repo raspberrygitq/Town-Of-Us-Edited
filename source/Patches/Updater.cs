@@ -254,10 +254,10 @@ namespace TownOfUsEdited
                 else if (updateType == "Submerged")
                 {
                     //account for broken version
-                    if (Patches.SubmergedCompatibility.Version == null) HasSubmergedUpdate = true;
+                    if (SubmergedCompatibility.Version == null) HasSubmergedUpdate = true;
                     else
                     {
-                        diff = Patches.SubmergedCompatibility.Version.CompareTo(SemanticVersioning.Version.Parse(tagname.Replace("v", ""))); ;
+                        diff = SubmergedCompatibility.Version.CompareTo(SemanticVersioning.Version.Parse(tagname.Replace("v", ""))); ;
                         if (diff < 0)
                         { // Submerged update required
                             HasSubmergedUpdate = true;

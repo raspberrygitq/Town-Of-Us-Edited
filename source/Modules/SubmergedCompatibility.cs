@@ -14,7 +14,7 @@ using TownOfUsEdited.Roles;
 using TownOfUsEdited.Utilities;
 using UnityEngine;
 
-namespace TownOfUsEdited.Patches
+namespace TownOfUsEdited.Modules
 {
     [HarmonyPatch]
     public static class SubmergedStartPatch
@@ -25,6 +25,10 @@ namespace TownOfUsEdited.Patches
         }
         public static void Postfix(Il2CppObjectBase __instance)
         {
+            var wrapper = new StateMachineWrapper<IntroCutscene>(__instance);
+
+            if (wrapper.State != 1) return;
+
             if (SubmergedCompatibility.isSubmerged())
             {
                 Coroutines.Start(SubmergedCompatibility.waitStart(SubmergedCompatibility.resetTimers));

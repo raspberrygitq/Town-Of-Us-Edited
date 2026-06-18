@@ -113,9 +113,9 @@ namespace TownOfUsEdited.Roles
             var usedPosition = new Vector2(position.x, position.y + 0.3636f);
             player.transform.position = new Vector2(usedPosition.x, usedPosition.y);
 
-            if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
+            if (SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
-                Patches.SubmergedCompatibility.ChangeFloor(player.transform.position.y > -7);
+                SubmergedCompatibility.ChangeFloor(player.transform.position.y > -7);
             }
 
             if (revived.Any(x => x.AmOwner))

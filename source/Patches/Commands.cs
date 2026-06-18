@@ -64,7 +64,7 @@ namespace TownOfUsEdited.Patches
             public static bool CheckRole(string role)
             {
                 return role == "Chameleon" || role == "Altruist" || role == "Amnesiac" || role == "Arsonist" ||
-                role == "Astral" ||role == "Attacker" || role == "Aurial" || role == "Avenger" || role == "Blackmailer" ||
+                role == "Astral" || role == "Attacker" || role == "Aurial" || role == "Avenger" || role == "Blackmailer" ||
                 role == "Bodyguard" || role == "Bomber" || role == "BountyHunter" || role == "Captain" ||
                 role == "Conjurer" || role == "Converter" || role == "Coven" || role == "CovenLeader" ||
                 role == "Crewmate" || role == "Crusader" || role == "Deputy" || role == "Detective" ||

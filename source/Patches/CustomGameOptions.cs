@@ -352,6 +352,7 @@ namespace TownOfUsEdited
         public static bool CovenReplaceImps => Generate.CovenReplaceImps.Get();
         public static float CovenKCD => Generate.CovenKCD.Get();
         public static bool ParallelMedScans => Generate.ParallelMedScans.Get();
+        public static bool MedscanWalk => Generate.MedscanWalk.Get();
         public static int MaxFixes => (int)Generate.MaxFixes.Get();
         public static int MaxMeetings => (int)Generate.MaxMeetings.Get();
         public static float ReviveDuration => Generate.ReviveDuration.Get();
@@ -591,7 +592,7 @@ namespace TownOfUsEdited
         public static float RandomMapPolus => Generate.RandomMapPolus.Get();
         public static float RandomMapAirship => Generate.RandomMapAirship.Get();
         public static float RandomMapFungle => Generate.RandomMapFungle.Get();
-        public static float RandomMapSubmerged => Patches.SubmergedCompatibility.Loaded ? Generate.RandomMapSubmerged.Get() : 0f;
+        public static float RandomMapSubmerged => SubmergedCompatibility.Loaded ? Generate.RandomMapSubmerged.Get() : 0f;
         public static float RandomMapLevelImpostor => RandomMap.LevelImpLoaded ? Generate.RandomMapLevelImpostor.Get() : 0f;
         public static bool SmallMapHalfVision => Generate.SmallMapHalfVision.Get();
         public static bool AutoAdjustCooldowns => Generate.AutoAdjustCooldowns.Get();
@@ -638,5 +639,6 @@ namespace TownOfUsEdited
         public static int MaxWatches => (int)Generate.MaxWatches.Get();
         public static float MinLuckyCd => Generate.MinLuckyCd.Get();
         public static float MaxLuckyCd => Generate.MaxLuckyCd.Get();
+        public static bool HideVentAnimationNotInVision => Generate.HideVentAnimationNotInVision.Get();
     }
 }

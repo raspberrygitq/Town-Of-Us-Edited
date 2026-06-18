@@ -1,7 +1,6 @@
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
-using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Reactor;
@@ -13,7 +12,6 @@ using System.IO;
 using System.Reflection;
 using TownOfUsEdited.CrewmateRoles.DetectiveMod;
 using TownOfUsEdited.CustomOption;
-using TownOfUsEdited.Extensions;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.RainbowMod;
@@ -30,7 +28,7 @@ namespace TownOfUsEdited
     {
         public static string DataPath => Path.GetFullPath("edited_presets", Application.persistentDataPath);
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "3.0.0";
+        public const string VersionString = "3.0.1";
         public static Version Version = Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
@@ -168,7 +166,9 @@ namespace TownOfUsEdited
         public override void Load()
         {
             RuntimeLocation = Path.GetDirectoryName(Assembly.GetAssembly(typeof(TownOfUsEdited)).Location);
+
             ReactorCredits.Register<TownOfUsEdited>(ReactorCredits.AlwaysShow);
+
             System.Console.WriteLine("000.000.000.000/000000000000000000");
             System.Console.WriteLine(Constants.GetBroadcastVersion());
             System.Console.WriteLine($"{Constants.Year}.{Constants.Month}.{Constants.Day}");
@@ -179,7 +179,7 @@ namespace TownOfUsEdited
 
             bundledAssets = new();
 
-            var shortPath = $"TownOfUsEdited.Resources";
+            var shortPath = "TownOfUsEdited.Resources";
 
             PlaceHolder = CreateSprite($"{shortPath}.Placeholder.png");
             SwitchRole = CreateSprite($"{shortPath}.SwitchRole.png");

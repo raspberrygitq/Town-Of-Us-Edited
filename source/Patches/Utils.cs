@@ -106,10 +106,11 @@ namespace TownOfUsEdited
         {
             var madmate = Role.GetRole(Madmate);
             madmate.oldColor = madmate.Color;
+            madmate.Color = Palette.ImpostorRed;
             madmate.Faction = Faction.Madmates;
             if (!madmate.Name.Contains("Mad"))
             {
-                madmate.Name = madmate.Name + $" {Palette.ImpostorRed.ToTextColor()}(Mad)";
+                madmate.Name = "Mad " + madmate.Name;
             }
             if (Madmate.Is(RoleEnum.Vigilante))
             {
@@ -2425,20 +2426,6 @@ namespace TownOfUsEdited
             AmongUsClient.Instance.FinishRpcImmediately(writer);
         }
 
-        [HarmonyPatch(typeof(MedScanMinigame), nameof(MedScanMinigame.FixedUpdate))]
-        class MedScanMinigameFixedUpdatePatch
-        {
-            static void Prefix(MedScanMinigame __instance)
-            {
-                if (CustomGameOptions.ParallelMedScans)
-                {
-                    //Allows multiple medbay scans at once
-                    __instance.medscan.CurrentUser = PlayerControl.LocalPlayer.PlayerId;
-                    __instance.medscan.UsersList.Clear();
-                }
-            }
-        }
-
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.StartMeeting))]
         class StartMeetingPatch
         {
@@ -2480,58 +2467,6 @@ namespace TownOfUsEdited
                 dict.TryAdd(keySelector(item), valueSelector(item));
 
             return dict;
-        }
-
-        public static string GetRegionName(IRegionInfo? region = null, bool shorten = true)
-        {
-            region ??= ServerManager.Instance.CurrentRegion;
-
-            string name = region.Name;
-
-            if (AmongUsClient.Instance.NetworkMode != NetworkModes.OnlineGame)
-            {
-                name = "Local Game";
-                return name;
-            }
-
-            if (AmongUsClient.Instance.GameId == LobbyJoin.GameId && LobbyJoin.TempRegion != null)
-            {
-                region = LobbyJoin.TempRegion;
-                name = LobbyJoin.TempRegion.Name;
-            }
-
-            if (shorten)
-            {
-                if (region.PingServer.EndsWith("among.us", StringComparison.Ordinal))
-                {
-                    // Official Server
-                    if (name == "North America") name = "NA";
-                    else if (name == "Europe") name = "EU";
-                    else if (name == "Asia") name = "AS";
-
-                    return name;
-                }
-
-                var Ip = region.Servers.FirstOrDefault()?.Ip ?? string.Empty;
-
-                if (Ip.Contains("aumods.us", StringComparison.Ordinal)
-                    || Ip.Contains("duikbo.at", StringComparison.Ordinal))
-                {
-                    // Official Modded Server
-                    if (Ip.Contains("au-eu")) name = "MEU";
-                    else if (Ip.Contains("au-as")) name = "MAS";
-                    else if (Ip.Contains("www.")) name = "MNA";
-
-                    return name;
-                }
-
-                if (name.Contains("nikocat233", StringComparison.OrdinalIgnoreCase))
-                {
-                    name = name.Replace("nikocat233", "Niko233", StringComparison.OrdinalIgnoreCase);
-                }
-            }
-
-            return name;
         }
 
         public static void ResetCustomTimers()

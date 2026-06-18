@@ -27,7 +27,7 @@ namespace TownOfUsEdited.CrewmateRoles.SpyMod
             {
                 var icon = icons[i];
                 var sprite = icon.GetComponent<SpriteRenderer>();
-                if (Patches.SubmergedCompatibility.Loaded) sprite.color = new Color(1, 1, 1, 1);
+                if (SubmergedCompatibility.Loaded) sprite.color = new Color(1, 1, 1, 1);
                 if (sprite != null)
                 {
                     if (isSpy) PlayerMaterial.SetColors(colorMapping[i], sprite);

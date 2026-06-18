@@ -243,7 +243,7 @@ namespace TownOfUsEdited.Roles
             foreach (var vult in GetRoles(RoleEnum.Vulture))
             {
                 var vultureRole = (Vulture)vult;
-                if (vultureRole.VultureWins && CustomGameOptions.VultureWinEndsGame) return;
+                if (vultureRole.EatToWin && CustomGameOptions.VultureWinEndsGame) return;
             }
 
             VampireWins = true;
@@ -278,7 +278,7 @@ namespace TownOfUsEdited.Roles
             foreach (var vult in GetRoles(RoleEnum.Vulture))
             {
                 var vultureRole = (Vulture)vult;
-                if (vultureRole.VultureWins && CustomGameOptions.VultureWinEndsGame) return;
+                if (vultureRole.EatToWin && CustomGameOptions.VultureWinEndsGame) return;
             }
 
             SKWins = true;
@@ -303,7 +303,7 @@ namespace TownOfUsEdited.Roles
                     GetRoles(RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut && CustomGameOptions.ExecutionerWin == WinEndsGame.EndsGame) == true ||
                     GetRoles(RoleEnum.Troll).Any(x => ((Troll)x).TrolledVotedOut && CustomGameOptions.TrollWin == WinEndsGame.EndsGame) == true ||
                     GetRoles(RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing && CustomGameOptions.DoomsayerWinEndsGame) == true ||
-                    GetRoles(RoleEnum.Vulture).Any(x => ((Vulture)x).VultureWins && CustomGameOptions.VultureWinEndsGame) == true ||
+                    GetRoles(RoleEnum.Vulture).Any(x => ((Vulture)x).EatToWin && CustomGameOptions.VultureWinEndsGame) == true ||
                     GetRoles(RoleEnum.Phantom).Any(x => ((Phantom)x).CompletedTasks && CustomGameOptions.PhantomWinEndsGame) == true);
             }
             return false;
@@ -536,25 +536,16 @@ namespace TownOfUsEdited.Roles
             }
         }
 
-        public static T Gen<T>(Type type, PlayerControl player, CustomRPC rpc, bool? isCrew = null)
+        public static T Gen<T>(Type type, PlayerControl player, CustomRPC rpc)
         {
-            if (isCrew.HasValue)
-            {
-                player.RpcSetRole(isCrew.Value ? RoleTypes.Crewmate : RoleTypes.Impostor);
-            }
             var role = (T)Activator.CreateInstance(type, new object[] { player });
 
             Utils.Rpc(rpc, player.PlayerId);
             return role;
         }
 
-        public static T GenRole<T>(Type type, PlayerControl player, bool? isCrew = null)
+        public static T GenRole<T>(Type type, PlayerControl player)
         {
-            if (isCrew.HasValue)
-            {
-                player.RpcSetRole(isCrew.Value ? RoleTypes.Crewmate : RoleTypes.Impostor);
-            }
-
             if (player.Data.Disconnected) return default;
 
             var role = (T)Activator.CreateInstance(type, new object[] { player });
@@ -573,14 +564,9 @@ namespace TownOfUsEdited.Roles
             return modifier;
         }
 
-        public static T GenRole<T>(Type type, List<PlayerControl> players, bool? isCrew = null)
+        public static T GenRole<T>(Type type, List<PlayerControl> players)
         {
             var player = players[Random.RandomRangeInt(0, players.Count)];
-
-            if (isCrew.HasValue)
-            {
-                player.RpcSetRole(isCrew.Value ? RoleTypes.Crewmate : RoleTypes.Impostor);
-            }
 
             var role = GenRole<T>(type, player);
             players.Remove(player);
@@ -658,13 +644,9 @@ namespace TownOfUsEdited.Roles
                 }
             }
 
-            [HarmonyPatch]
+            [HarmonyPatch(typeof(IntroCutscene._ShowTeam_d__38), nameof(IntroCutscene._ShowTeam_d__38.MoveNext))]
             public static class IntroCutscene_ShowTeam__d_MoveNext
             {
-                public static MethodBase TargetMethod()
-                {
-                    return StateMachineWrapper<IntroCutscene>.GetStateMachineMoveNext(nameof(IntroCutscene.ShowTeam))!;
-                }
                 public static void Prefix(IntroCutscene._ShowTeam_d__38 __instance)
                 {
                     var role = GetRole(PlayerControl.LocalPlayer);
@@ -682,59 +664,57 @@ namespace TownOfUsEdited.Roles
                         __instance.teamToShow = impTeam;
                     }
                 }
-                public static void Postfix(Il2CppObjectBase __instance)
+                public static void Postfix(IntroCutscene._ShowTeam_d__38 __instance)
                 {
-                    var wrapper = new StateMachineWrapper<IntroCutscene>(__instance);
-
-                    var cutscene = wrapper.Instance;
                     var role = GetRole(PlayerControl.LocalPlayer);
+                    // var alpha = __instance.__4__this.RoleText.color.a;
                     if (role != null && !role.Hidden)
                     {
                         if (CustomGameOptions.GameMode == GameMode.BattleRoyale)
                         {
-                            cutscene.TeamTitle.text = "Battle Royale";
-                            cutscene.TeamTitle.color = Patches.Colors.Player;
-                            cutscene.BackgroundBar.material.color = role.Color;
+                            __instance.__4__this.TeamTitle.text = "Battle Royale";
+                            __instance.__4__this.TeamTitle.color = Patches.Colors.Player;
+                            __instance.__4__this.BackgroundBar.material.color = role.Color;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Impostor);
                         }
 
                         if (role.Faction == Faction.Impostors)
                         {
-                            cutscene.TeamTitle.text = "Impostor";
-                            cutscene.TeamTitle.color = Palette.ImpostorRed;
-                            cutscene.BackgroundBar.material.color = Palette.ImpostorRed;
+                            __instance.__4__this.TeamTitle.text = "Impostor";
+                            __instance.__4__this.TeamTitle.color = Palette.ImpostorRed;
+                            __instance.__4__this.BackgroundBar.material.color = Palette.ImpostorRed;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Impostor);
                         }
 
                         if (role.Faction == Faction.Crewmates)
                         {
-                            cutscene.TeamTitle.text = "Crewmate";
-                            cutscene.TeamTitle.color = Palette.CrewmateBlue;
-                            cutscene.BackgroundBar.material.color = Palette.CrewmateBlue;
+                            __instance.__4__this.TeamTitle.text = "Crewmate";
+                            __instance.__4__this.TeamTitle.color = Palette.CrewmateBlue;
+                            __instance.__4__this.BackgroundBar.material.color = Palette.CrewmateBlue;
                         }
 
                         if (role.Faction == Faction.NeutralEvil)
                         {
-                            cutscene.TeamTitle.text = "Neutral";
-                            cutscene.TeamTitle.color = Color.gray;
-                            cutscene.BackgroundBar.material.color = Color.gray;
+                            __instance.__4__this.TeamTitle.text = "Neutral";
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
                             var sound = GameManagerCreator.Instance.HideAndSeekManagerPrefab.FinalHideAlertSFX;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = Object.Instantiate(sound, HudManager.Instance.transform.parent);
                         }
 
                         if (role.Faction == Faction.NeutralBenign)
                         {
-                            cutscene.TeamTitle.text = "Neutral";
-                            cutscene.TeamTitle.color = Color.gray;
-                            cutscene.BackgroundBar.material.color = Color.gray;
+                            __instance.__4__this.TeamTitle.text = "Neutral";
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Shapeshifter);
                         }
 
                         if (role.Faction == Faction.Coven)
                         {
-                            cutscene.TeamTitle.text = "Coven";
-                            cutscene.TeamTitle.color = Patches.Colors.Coven;
-                            cutscene.BackgroundBar.material.color = Patches.Colors.Coven;
+                            __instance.__4__this.TeamTitle.text = "Coven";
+                            __instance.__4__this.TeamTitle.color = Patches.Colors.Coven;
+                            __instance.__4__this.BackgroundBar.material.color = Patches.Colors.Coven;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Viper);
                         }
 
@@ -766,25 +746,25 @@ namespace TownOfUsEdited.Roles
 
                         if (role.Faction == Faction.NeutralKilling && CustomGameOptions.GameMode != GameMode.BattleRoyale)
                         {
-                            cutscene.TeamTitle.text = "Neutral";
-                            cutscene.TeamTitle.color = Color.gray;
-                            cutscene.BackgroundBar.material.color = Color.gray;
+                            __instance.__4__this.TeamTitle.text = "Neutral";
+                            __instance.__4__this.TeamTitle.color = Color.gray;
+                            __instance.__4__this.BackgroundBar.material.color = Color.gray;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Phantom);
                         }
 
                         if (role.Player.Is(Faction.Madmates))
                         {
-                            cutscene.TeamTitle.text = "Madmate";
-                            cutscene.BackgroundBar.material.color = Palette.ImpostorRed;
-                            cutscene.TeamTitle.color = Palette.ImpostorRed;
+                            __instance.__4__this.TeamTitle.text = "Madmate";
+                            __instance.__4__this.BackgroundBar.material.color = Palette.ImpostorRed;
+                            __instance.__4__this.TeamTitle.color = Palette.ImpostorRed;
                             PlayerControl.LocalPlayer.Data.Role.IntroSound = GetIntroSound(RoleTypes.Impostor);
                         }
 
-                        cutscene.RoleText.text = role.Name;
-                        cutscene.RoleText.color = role.Color;
-                        cutscene.YouAreText.color = role.Color;
-                        cutscene.RoleBlurbText.color = role.Color;
-                        cutscene.RoleBlurbText.text = role.ImpostorText();
+                        __instance.__4__this.RoleText.text = role.Name;
+                        __instance.__4__this.RoleText.color = role.Color;
+                        __instance.__4__this.YouAreText.color = role.Color;
+                        __instance.__4__this.RoleBlurbText.color = role.Color;
+                        __instance.__4__this.RoleBlurbText.text = role.ImpostorText();
                     }
                     if (ModifierText != null)
                     {
@@ -807,7 +787,7 @@ namespace TownOfUsEdited.Roles
                         ModifierText.color = Color.white;
 
                         ModifierText.transform.position =
-                            cutscene.transform.position - new Vector3(0f, 1.6f, 0f);
+                            __instance.__4__this.transform.position - new Vector3(0f, 1.6f, 0f);
                         if (ModifierText.text != "<size=2>Modifiers: </size>") ModifierText.gameObject.SetActive(true);
                     }
                 }

@@ -149,9 +149,9 @@ namespace TownOfUsEdited.Patches
             var usedPosition = new Vector2(position.x, position.y + 0.3636f);
             player.transform.position = new Vector2(usedPosition.x, usedPosition.y);
 
-            if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
+            if (SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
-                Patches.SubmergedCompatibility.ChangeFloor(player.transform.position.y > -7);
+                SubmergedCompatibility.ChangeFloor(player.transform.position.y > -7);
             }
             foreach (DeadBody deadBody in GameObject.FindObjectsOfType<DeadBody>())
             {
@@ -182,9 +182,9 @@ namespace TownOfUsEdited.Patches
                         var usedPosition2 = new Vector2(position2.x, position2.y + 0.3636f);
                         lover.transform.position = new Vector2(usedPosition2.x, usedPosition2.y);
 
-                        if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == lover.PlayerId)
+                        if (SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == lover.PlayerId)
                         {
-                            Patches.SubmergedCompatibility.ChangeFloor(lover.transform.position.y > -7);
+                            SubmergedCompatibility.ChangeFloor(lover.transform.position.y > -7);
                         }
                         deadBody.gameObject.Destroy();
                     }

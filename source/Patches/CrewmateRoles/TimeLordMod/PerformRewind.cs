@@ -82,7 +82,7 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                 {
                     Vector3 position = undertaker.Player.transform.position;
 
-                    if (Patches.SubmergedCompatibility.isSubmerged())
+                    if (SubmergedCompatibility.isSubmerged())
                     {
                         if (position.y > -7f)
                         {
@@ -113,7 +113,7 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                 {
                     Vector3 position = doctor.Player.transform.position;
 
-                    if (Patches.SubmergedCompatibility.isSubmerged())
+                    if (SubmergedCompatibility.isSubmerged())
                     {
                         if (position.y > -7f)
                         {
@@ -176,9 +176,9 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
             var usedPosition = new Vector2(position.x, position.y + 0.3636f);
             player.transform.position = new Vector2(usedPosition.x, usedPosition.y);
 
-            if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
+            if (SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
-                Patches.SubmergedCompatibility.ChangeFloor(player.transform.position.y > -7);
+                SubmergedCompatibility.ChangeFloor(player.transform.position.y > -7);
             }
 
             if (target != null)
@@ -192,7 +192,7 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
             //System.Console.WriteLine("STOP...");
             role.StopRewind();
             if (!PlayerControl.LocalPlayer.MyPhysics.myPlayer.onLadder && !PlayerControl.LocalPlayer.inMovingPlat && !PlayerControl.LocalPlayer.inVent) PlayerControl.LocalPlayer.moveable = true;
-            Patches.SubmergedCompatibility.CheckOutOfBoundsElevator(PlayerControl.LocalPlayer);
+            SubmergedCompatibility.CheckOutOfBoundsElevator(PlayerControl.LocalPlayer);
             foreach (var playerid in Revived)
             {
                 Murder.KilledPlayers.Remove(

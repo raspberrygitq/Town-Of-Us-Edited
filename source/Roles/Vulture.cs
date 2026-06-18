@@ -27,7 +27,7 @@ namespace TownOfUsEdited.Roles
         public float Cooldown;
         public bool coolingDown => Cooldown > 0f;
         public int BodiesEaten = 0;
-        public bool VultureWins = false;
+        public bool EatToWin = false;
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__38 __instance)
         {
@@ -51,7 +51,7 @@ namespace TownOfUsEdited.Roles
         {
             if (AmongUsClient.Instance.NetworkMode != NetworkModes.FreePlay)
             {
-                VultureWins = true;
+                EatToWin = true;
                 if (AmongUsClient.Instance.AmHost && CustomGameOptions.VultureWinEndsGame)
                 {
                     Coroutines.Start(WaitForEnd());

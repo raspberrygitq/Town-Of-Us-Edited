@@ -5,7 +5,6 @@ using System.Linq;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.ImpostorRoles.BomberMod;
 using TownOfUsEdited.Modifiers.UnderdogMod;
-using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -177,7 +176,7 @@ namespace TownOfUsEdited.Modifiers
                 {
                     Vector3 position = PlayerControl.LocalPlayer.transform.position;
 
-                    if (Patches.SubmergedCompatibility.isSubmerged())
+                    if (SubmergedCompatibility.isSubmerged())
                     {
                         if (position.y > -7f)
                         {

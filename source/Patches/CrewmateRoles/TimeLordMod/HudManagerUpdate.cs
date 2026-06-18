@@ -213,9 +213,9 @@ namespace TownOfUsEdited.CrewmateRoles.TimeLordMod
                         {
                             Vent.currentVent.Use();
                         }
-                        if (Patches.SubmergedCompatibility.isSubmerged())
+                        if (SubmergedCompatibility.isSubmerged())
                         {
-                            Patches.SubmergedCompatibility.ChangeFloor(position2.y > -7);
+                            SubmergedCompatibility.ChangeFloor(position2.y > -7);
                         }
                         playerVector2 = new Vector2(-position.x, -position.y);
                         if (isDead && deathTime >= time && PlayerControl.LocalPlayer.Data.IsDead)

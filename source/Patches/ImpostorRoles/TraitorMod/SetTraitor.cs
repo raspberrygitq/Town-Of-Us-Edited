@@ -5,11 +5,11 @@ using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
 using TownOfUsEdited.CrewmateRoles.SnitchMod;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.NeutralRoles.SoulCollectorMod;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
-using TownOfUsEdited.Modifiers;
 
 namespace TownOfUsEdited.ImpostorRoles.TraitorMod
 {

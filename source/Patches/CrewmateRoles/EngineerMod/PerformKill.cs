@@ -82,7 +82,7 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
                     if (PlayerControl.LocalPlayer.AreCommsAffected()) return FixComms();
                     foreach (PlayerTask i in PlayerControl.LocalPlayer.myTasks)
                     {
-                        if (i.TaskType == Patches.SubmergedCompatibility.RetrieveOxygenMask)
+                        if (i.TaskType == SubmergedCompatibility.RetrieveOxygenMask)
                         {
                             return FixSubOxygen();
                         }
@@ -138,7 +138,7 @@ namespace TownOfUsEdited.CrewmateRoles.EngineerMod
 
         private static bool FixSubOxygen()
         {
-            Patches.SubmergedCompatibility.RepairOxygen();
+            SubmergedCompatibility.RepairOxygen();
 
             Utils.Rpc(CustomRPC.SubmergedFixOxygen, PlayerControl.LocalPlayer.NetId);
 

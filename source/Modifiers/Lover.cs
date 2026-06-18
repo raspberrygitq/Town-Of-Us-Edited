@@ -114,7 +114,7 @@ namespace TownOfUsEdited.Modifiers
             if (CustomGameOptions.ExecutionerWin == WinEndsGame.EndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Executioner).Any(x => ((Executioner)x).TargetVotedOut)) return;
             if (CustomGameOptions.TrollWin == WinEndsGame.EndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Troll).Any(x => ((Troll)x).TrolledVotedOut)) return;
             if (CustomGameOptions.DoomsayerWinEndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Doomsayer).Any(x => ((Doomsayer)x).WonByGuessing)) return;
-            if (CustomGameOptions.VultureWinEndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Vulture).Any(x => ((Vulture)x).VultureWins)) return;
+            if (CustomGameOptions.VultureWinEndsGame && Role.AllRoles.Where(x => x.RoleType == RoleEnum.Vulture).Any(x => ((Vulture)x).EatToWin)) return;
             LoveCoupleWins = true;
             OtherLover.LoveCoupleWins = true;
             if (AmongUsClient.Instance.AmHost) Utils.EndGame();

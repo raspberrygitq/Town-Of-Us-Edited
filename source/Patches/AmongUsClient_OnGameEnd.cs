@@ -107,7 +107,7 @@ namespace TownOfUsEdited
                 else if (type == RoleEnum.Vulture)
                 {
                     var vulture = (Vulture)role;
-                    if (vulture.VultureWins && CustomGameOptions.VultureWinEndsGame)
+                    if (vulture.EatToWin && CustomGameOptions.VultureWinEndsGame)
                     {
                         EndGameResult.CachedWinners = new List<CachedPlayerData>();
                         var vultureData = new CachedPlayerData(vulture.Player.Data);

@@ -1031,26 +1031,26 @@ namespace TownOfUsEdited
             // Hand out appropriate roles to crewmates, impostors & coven.
             foreach (var (type, _, unique) in crewRoles)
             {
-                Role.GenRole<Role>(type, crewmates, true);
+                Role.GenRole<Role>(type, crewmates);
             }
             foreach (var (type, _, unique) in impRoles)
             {
-                Role.GenRole<Role>(type, impostors, false);
+                Role.GenRole<Role>(type, impostors);
             }
             foreach (var (type, _, unique) in covenRoles)
             {
-                Role.GenRole<Role>(type, coven, false);
+                Role.GenRole<Role>(type, coven);
             }
 
             // Assign vanilla roles to anyone who did not receive a role.
             foreach (var crewmate in crewmates)
-                Role.GenRole<Role>(typeof(Crewmate), crewmate, true);
+                Role.GenRole<Role>(typeof(Crewmate), crewmate);
 
             foreach (var impostor in impostors)
-                Role.GenRole<Role>(typeof(Impostor), impostor, false);
+                Role.GenRole<Role>(typeof(Impostor), impostor);
 
             foreach (var player in coven)
-                Role.GenRole<Role>(typeof(Coven), player, false);
+                Role.GenRole<Role>(typeof(Coven), player);
 
             // Hand out assassin ability to killers according to the settings.
             var canHaveAbility = PlayerControl.AllPlayerControls.ToArray().Where(player => player.Is(Faction.Impostors)).ToList();
@@ -2495,7 +2495,7 @@ namespace TownOfUsEdited
                                 if (!PlayerControl.LocalPlayer.Data.IsDead) HudManager.Instance.Chat.AddChat(PlayerControl.LocalPlayer, message);
                                 break;
                             case CustomRPC.SubmergedFixOxygen:
-                                Patches.SubmergedCompatibility.RepairOxygen();
+                                SubmergedCompatibility.RepairOxygen();
                                 break;
                             case CustomRPC.SetPos:
                                 var setplayer = Utils.PlayerById(reader.ReadByte());
@@ -2860,11 +2860,6 @@ namespace TownOfUsEdited
             {
                 PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("RPC SET ROLE");
                 var infected = GameData.Instance.AllPlayers.ToArray();
-                foreach (var data in infected)
-                {
-                    var player = Utils.PlayerByData(data);
-                    player.RpcSetRole(RoleTypes.Crewmate, false);
-                }
 
                 // Get Impostors Count
                 int __result = 0;

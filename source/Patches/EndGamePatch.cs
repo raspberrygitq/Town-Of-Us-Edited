@@ -353,7 +353,7 @@ namespace TownOfUsEdited.Patches
                 if (playerControl.Is(RoleEnum.Vulture) && !CustomGameOptions.VultureWinEndsGame)
                 {
                     var vulture = Role.GetRole<Vulture>(playerControl);
-                    if (vulture.VultureWins)
+                    if (vulture.EatToWin)
                     {
                         AdditionalTempData.otherWinners.Add(new AdditionalTempData.Winners() { PlayerName = vulture.Player.Data.PlayerName, Role = RoleEnum.Vulture });
                         playerName += $"<color=#EFBF04>{playerControl.Data.PlayerName}</color>";

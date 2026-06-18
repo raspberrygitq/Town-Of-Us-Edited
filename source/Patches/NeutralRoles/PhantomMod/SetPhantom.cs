@@ -30,7 +30,7 @@ namespace TownOfUsEdited.NeutralRoles.PhantomMod
             if (exiled == WillBePhantom && exiled.Is(RoleEnum.Jester)) return;
             var doomRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Doomsayer && ((Doomsayer)x).WonByGuessing && ((Doomsayer)x).Player == WillBePhantom);
             if (doomRole != null) return;
-            var vultRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Vulture && ((Vulture)x).VultureWins && ((Vulture)x).Player == WillBePhantom);
+            var vultRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Vulture && ((Vulture)x).EatToWin && ((Vulture)x).Player == WillBePhantom);
             if (vultRole != null) return;
             var trollRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Troll && ((Troll)x).TrolledVotedOut && ((Troll)x).Player == WillBePhantom);
             if (trollRole != null) return;

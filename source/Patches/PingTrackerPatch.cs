@@ -9,7 +9,7 @@ internal static class PingTrackerPatch
     [HarmonyPriority(Priority.Last)]
     public static void Postfix(PingTracker __instance)
     {
-        var extraText = $"<align=center><size=60%><space=3em>Region: <color=#C96DFF>{Utils.GetRegionName()}</color></size></align>";
+        var extraText = $"<align=center><size=60%><space=3em>Region: <color=#C96DFF>{LobbyJoin.GetRegionName()}</color></size></align>";
         __instance.text.text += $"\r\n{extraText}";
     }
 }

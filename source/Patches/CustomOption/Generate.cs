@@ -195,9 +195,9 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption InitialCooldowns;
         public static CustomNumberOption TempSaveCdReset;
         public static CustomToggleOption ParallelMedScans;
+        public static CustomToggleOption MedscanWalk;
         public static CustomStringOption SkipButtonDisable;
         public static CustomToggleOption FirstDeathShield;
-        public static CustomToggleOption NeutralEvilWinEndsGame;
         public static CustomToggleOption CrewKillersContinue;
         public static CustomToggleOption AutoRejoin;
         public static CustomNumberOption RejoinSeconds;
@@ -205,6 +205,7 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption StartMinutes;
         public static CustomToggleOption AllowUp;
         public static CustomToggleOption SpectateHost;
+        public static CustomToggleOption HideVentAnimationNotInVision;
 
         public static CustomHeaderOption BetterSkeldSettings;
         public static CustomToggleOption BSVentImprovements;
@@ -1423,9 +1424,10 @@ namespace TownOfUsEdited.CustomOption
             TempSaveCdReset =
                 new CustomNumberOption(num++, MultiMenu.main, "Temp Save Cooldown Reset", 5f, 0f, 15f, 0.5f, CooldownFormat);
             ParallelMedScans = new CustomToggleOption(num++, MultiMenu.main, "Parallel Medbay Scans", false);
+            MedscanWalk = new CustomToggleOption(num++, MultiMenu.main, "Walk to Medscan");
             SkipButtonDisable = new CustomStringOption(num++, MultiMenu.main, "Disable Meeting Skip Button", new[] { "No", "Emergency", "Always" });
+            HideVentAnimationNotInVision = new CustomToggleOption(num++, MultiMenu.main, "Hide Vent Animations Not In Vision");
             FirstDeathShield = new CustomToggleOption(num++, MultiMenu.main, "First Death Shield Next Game", false);
-            NeutralEvilWinEndsGame = new CustomToggleOption(num++, MultiMenu.main, "Neutral Evil Win Ends Game", true);
             CrewKillersContinue = new CustomToggleOption(num++, MultiMenu.main, "Crew Killing / Power Roles Continue Game", false);
 
             SabotageEffects =

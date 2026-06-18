@@ -49,7 +49,7 @@ namespace TownOfUsEdited.ImpostorRoles.UndertakerMod
                     if (!abilityUsed) return false;
                     Vector3 position = PlayerControl.LocalPlayer.transform.position;
 
-                    if (Patches.SubmergedCompatibility.isSubmerged())
+                    if (SubmergedCompatibility.isSubmerged())
                     {
                         if (position.y > -7f)
                         {

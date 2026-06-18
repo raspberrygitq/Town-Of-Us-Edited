@@ -16,7 +16,7 @@ namespace TownOfUsEdited.Patches
         public void Initialize()
         {
             var arch = OperatingSystem.IsAndroid() ? "android" : "win";
-            var bundle = $"tour-assets-{arch}.bundle";
+            var bundle = $"toue-assets-{arch}.bundle";
             var b = loadBundle(bundle);
             bundles.Add(b.name, b);
             b.GetAllAssetNames().ToList().ForEach(y =>

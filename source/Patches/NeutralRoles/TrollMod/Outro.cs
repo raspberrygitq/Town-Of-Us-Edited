@@ -1,6 +1,7 @@
 using HarmonyLib;
 using System.Linq;
 using TownOfUsEdited.Extensions;
+using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace TownOfUsEdited.NeutralRoles.TrollMod
     {
         public static void Postfix(EndGameManager __instance)
         {
-            if (CustomGameOptions.TrollWin != ExecutionerMod.WinEndsGame.EndsGame) return;
+            if (CustomGameOptions.TrollWin != WinEndsGame.EndsGame) return;
             var role = Role.AllRoles.FirstOrDefault(x =>
                 x.RoleType == RoleEnum.Troll && ((Troll)x).TrolledVotedOut);
             if (role == null) return;

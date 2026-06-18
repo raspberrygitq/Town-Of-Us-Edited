@@ -18,7 +18,7 @@ namespace TownOfUsEdited.Patches
                 if (CustomGameOptions.DoomsayerWinEndsGame) return;
                 else neWin = true;
             }
-            var vultureRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Vulture && ((Vulture)x).VultureWins && ((Vulture)x).Player == PlayerControl.LocalPlayer);
+            var vultureRole = Role.AllRoles.FirstOrDefault(x => x.RoleType == RoleEnum.Vulture && ((Vulture)x).EatToWin && ((Vulture)x).Player == PlayerControl.LocalPlayer);
             if (vultureRole != null)
             {
                 if (CustomGameOptions.VultureWinEndsGame) return;

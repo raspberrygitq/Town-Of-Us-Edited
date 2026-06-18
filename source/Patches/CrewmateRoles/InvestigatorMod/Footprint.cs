@@ -1,5 +1,4 @@
 using TownOfUsEdited.Extensions;
-using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
 

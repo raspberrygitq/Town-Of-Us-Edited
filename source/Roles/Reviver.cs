@@ -72,7 +72,7 @@ namespace TownOfUsEdited.Roles
                 {
                     Vector3 position = undertaker.Player.transform.position;
 
-                    if (Patches.SubmergedCompatibility.isSubmerged())
+                    if (SubmergedCompatibility.isSubmerged())
                     {
                         if (position.y > -7f)
                         {
@@ -103,7 +103,7 @@ namespace TownOfUsEdited.Roles
                 {
                     Vector3 position = doctor.Player.transform.position;
 
-                    if (Patches.SubmergedCompatibility.isSubmerged())
+                    if (SubmergedCompatibility.isSubmerged())
                     {
                         if (position.y > -7f)
                         {
@@ -159,9 +159,9 @@ namespace TownOfUsEdited.Roles
 
             if (PlayerControl.LocalPlayer == player) player.myTasks.RemoveAt(1);
 
-            if (Patches.SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
+            if (SubmergedCompatibility.isSubmerged() && PlayerControl.LocalPlayer.PlayerId == player.PlayerId)
             {
-                Patches.SubmergedCompatibility.ChangeFloor(target.transform.position.y > -7);
+                SubmergedCompatibility.ChangeFloor(target.transform.position.y > -7);
             }
             if (target != null) Object.Destroy(target.gameObject);
 

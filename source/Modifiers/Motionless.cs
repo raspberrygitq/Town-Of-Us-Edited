@@ -1,4 +1,3 @@
-using TownOfUsEdited.Patches;
 using UnityEngine;
 
 namespace TownOfUsEdited.Modifiers

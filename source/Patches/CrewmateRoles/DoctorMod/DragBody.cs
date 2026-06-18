@@ -23,7 +23,7 @@ namespace TownOfUsEdited.ImpostorRoles.DoctorMod
                     {
                         Vector3 position = PlayerControl.LocalPlayer.transform.position;
 
-                        if (Patches.SubmergedCompatibility.isSubmerged())
+                        if (SubmergedCompatibility.isSubmerged())
                         {
                             if (position.y > -7f)
                             {
@@ -59,7 +59,7 @@ namespace TownOfUsEdited.ImpostorRoles.DoctorMod
             newPos.z = currentPosition.z;
 
             //WHY ARE THERE DIFFERENT LOCAL Z INDEXS FOR DIFFERENT DECALS ON DIFFERENT LEVELS?!?!?!
-            if (Patches.SubmergedCompatibility.isSubmerged())
+            if (SubmergedCompatibility.isSubmerged())
             {
                 if (newPos.y > -7f)
                 {
