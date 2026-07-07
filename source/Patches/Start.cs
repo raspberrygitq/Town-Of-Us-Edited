@@ -7,7 +7,6 @@ using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.NeutralRoles.ExecutionerMod;
 using TownOfUsEdited.NeutralRoles.GuardianAngelMod;
 using TownOfUsEdited.Roles;
-using TownOfUsEdited.Utilities;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

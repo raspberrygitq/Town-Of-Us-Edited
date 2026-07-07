@@ -1,7 +1,6 @@
 using HarmonyLib;
 using Il2CppInterop.Runtime.InteropTypes;
 using System.Reflection;
-using TownOfUsEdited.Utilities;
 
 namespace TownOfUsEdited.Patches;
 
@@ -42,7 +41,6 @@ public static class MedScanMinigameFixedUpdatePatch
         {
             return StateMachineWrapper<MedScanMinigame>.GetStateMachineMoveNext(nameof(MedScanMinigame.WalkToPad))!;
         }
-
         public static bool Prefix(Il2CppObjectBase __instance)
         {
             if (CustomGameOptions.MedscanWalk) return true;

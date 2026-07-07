@@ -2856,10 +2856,15 @@ namespace TownOfUsEdited
         [HarmonyPatch(typeof(RoleManager), nameof(RoleManager.SelectRoles))]
         public static class RpcSetRole
         {
-            public static void Postfix()
+            public static bool Prefix()
             {
                 PluginSingleton<TownOfUsEdited>.Instance.Log.LogMessage("RPC SET ROLE");
                 var infected = GameData.Instance.AllPlayers.ToArray();
+                foreach (var data in infected)
+                {
+                    var player = Utils.PlayerByData(data);
+                    player.RpcSetRole(RoleTypes.Crewmate, false);
+                }
 
                 // Get Impostors Count
                 int __result = 0;
@@ -2997,7 +3002,7 @@ namespace TownOfUsEdited
                     Utils.Rpc(CustomRPC.Start, byte.MaxValue);
                 }
 
-                if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return;
+                if (GameOptionsManager.Instance.CurrentGameOptions.GameMode == GameModes.HideNSeek) return true;
 
                 if (CustomGameOptions.GameMode == GameMode.Classic || CustomGameOptions.GameMode == GameMode.RoleList)
                 {
@@ -3628,6 +3633,7 @@ namespace TownOfUsEdited
                 else if (CustomGameOptions.GameMode == GameMode.Chaos) GenEachRoleChaos(infected.ToList());
                 else GenEachRole(infected.ToList(), __result);
 
+                return false;
             }
         }
     }

@@ -359,7 +359,7 @@ namespace TownOfUsEdited.Patches
                         playerName += $"<color=#EFBF04>{playerControl.Data.PlayerName}</color>";
                     }
                 }
-                if (playerControl.Is(RoleEnum.Troll) && CustomGameOptions.TrollWin == WinEndsGame.EndsGame)
+                if (playerControl.Is(RoleEnum.Troll) && CustomGameOptions.TrollWin != WinEndsGame.EndsGame)
                 {
                     var troll = Role.GetRole<Troll>(playerControl);
                     if (troll.TrolledVotedOut)

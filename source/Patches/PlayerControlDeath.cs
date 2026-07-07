@@ -47,7 +47,8 @@ namespace TownOfUsEdited.Patches
         {
             yield return new WaitForSeconds(0.5f);
 
-            var alives = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected && !AddHauntPatch.AssassinatedPlayers.Contains(x)).ToList();
+            var allPlayersArray = PlayerControl.AllPlayerControls.ToArray();
+            var alives = allPlayersArray.Where(x => !x.Data.IsDead && !x.Data.Disconnected && !AddHauntPatch.AssassinatedPlayers.Contains(x)).ToList();
 
             if (AmongUsClient.Instance.NetworkMode == NetworkModes.FreePlay)
             {
@@ -67,7 +68,7 @@ namespace TownOfUsEdited.Patches
 
             foreach (var role in Role.AllRoles)
             {
-                var impsAlive = PlayerControl.AllPlayerControls.ToArray().Where(x => !x.Data.IsDead && !x.Data.Disconnected && x.Data.IsImpostor()).ToList();
+                var impsAlive = allPlayersArray.Where(x => !x.Data.IsDead && !x.Data.Disconnected && x.Data.IsImpostor()).ToList();
                 var traitorIsEnd = false;
                 var modifiers = Modifier.GetModifiers(role.Player);
                 if (modifiers != null && modifiers.Length != 0)

@@ -1677,7 +1677,7 @@ namespace TownOfUsEdited.CustomOption
             CanStakeRoundOne = new CustomToggleOption(num++, MultiMenu.crewmate, "Can Stake Round One", false);
             SelfKillAfterFinalStake = new CustomToggleOption(num++, MultiMenu.crewmate, "Self Kill On Failure To Kill A Vamp With All Stakes", false);
             BecomeOnVampDeaths =
-                new CustomStringOption(num++, MultiMenu.crewmate, "What Vampire Hunter Becomes On All Vampire Deaths", new[] { "Crewmate", "Sheriff", "Veteran", "Vigilante" });
+                new CustomStringOption(num++, MultiMenu.crewmate, "What Vampire Hunter Becomes On All Vampire Deaths", new[] { "Crewmate", "Sheriff", "Veteran", "Vigilante", "Hunter" });
 
             Veteran =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#998040FF>Veteran</color>");
@@ -1849,7 +1849,7 @@ namespace TownOfUsEdited.CustomOption
             RememberArrows =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Amnesiac Gets Arrows Pointing To Dead Bodies", false);
             RememberArrowDelay =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Time After Death Arrow Appears", 5f, 0f, 15f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.neutral, "Amnesiac Time After Death Arrow Appears", 5f, 0f, 15f, 1f, CooldownFormat);
 
             GuardianAngel =
                 new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#B3FFFFFF>Guardian Angel</color>");
@@ -1951,7 +1951,7 @@ namespace TownOfUsEdited.CustomOption
             VultureArrow =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Vulture Has Arrows Poiting To Dead Bodies", true);
             VultureArrowDelay =
-                new CustomNumberOption(num++, MultiMenu.neutral, "Time After Death Arrow Appears", 5f, 0f, 15f, 1f, CooldownFormat);
+                new CustomNumberOption(num++, MultiMenu.neutral, "Vulture Time After Death Arrow Appears", 5f, 0f, 15f, 1f, CooldownFormat);
             VultureBodies =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Number Of Bodies Eaten To Win", 3, 1, 5, 1);
             VultureWinEndsGame = new CustomToggleOption(num++, MultiMenu.neutral, "Vulture Win Ends Game");

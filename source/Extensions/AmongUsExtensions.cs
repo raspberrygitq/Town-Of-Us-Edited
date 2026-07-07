@@ -91,56 +91,56 @@ namespace TownOfUsEdited.Extensions
         public static bool IsDev(this PlayerControl player)
         {
             var data = DevFeatures.Data;
-            if (player == PlayerControl.LocalPlayer) return data != null && (data.MainDev == EOSManager.Instance.FriendCode || data.Dev.Any(x => x == EOSManager.Instance.FriendCode));
+            if (player == PlayerControl.LocalPlayer) return data != null && (data.MainDev == EOSManager.Instance.FriendCode || (data.Dev?.Any(x => x == EOSManager.Instance.FriendCode) ?? false));
             else
             {
                 bool hidden = false;
                 if (player.FriendCode.StartsWith("[HIDDEN]")) hidden = true;
                 var friendCode = player.FriendCode;
                 if (hidden) friendCode = friendCode[8..];
-                return data != null && (data.MainDev == friendCode || data.Dev.Any(x => x == friendCode));
+                return data != null && (data.MainDev == friendCode || (data.Dev?.Any(x => x == friendCode) ?? false));
             }
         }
 
         public static bool IsTester(this PlayerControl player)
         {
             var data = DevFeatures.Data;
-            if (player == PlayerControl.LocalPlayer) return data != null && data.Tester.Any(x => x == EOSManager.Instance.FriendCode);
+            if (player == PlayerControl.LocalPlayer) return data != null && (data.Tester?.Any(x => x == EOSManager.Instance.FriendCode) ?? false);
             else
             {
                 bool hidden = false;
                 if (player.FriendCode.StartsWith("[HIDDEN]")) hidden = true;
                 var friendCode = player.FriendCode;
                 if (hidden) friendCode = friendCode[8..];
-                return data != null && data.Tester.Any(x => x == friendCode);
+                return data != null && (data.Tester?.Any(x => x == friendCode) ?? false);
             }
         }
 
         public static bool IsArtist(this PlayerControl player)
         {
             var data = DevFeatures.Data;
-            if (player == PlayerControl.LocalPlayer) return data != null && data.Artist.Any(x => x == EOSManager.Instance.FriendCode);
+            if (player == PlayerControl.LocalPlayer) return data != null && (data.Artist?.Any(x => x == EOSManager.Instance.FriendCode) ?? false);
             else
             {
                 bool hidden = false;
                 if (player.FriendCode.StartsWith("[HIDDEN]")) hidden = true;
                 var friendCode = player.FriendCode;
                 if (hidden) friendCode = friendCode[8..];
-                return data != null && data.Artist.Any(x => x == friendCode);
+                return data != null && (data.Artist?.Any(x => x == friendCode) ?? false);
             }
         }
 
         public static bool IsVip(this PlayerControl player)
         {
             var data = DevFeatures.Data;
-            if (player == PlayerControl.LocalPlayer) return data != null && data.Vip.Any(x => x == EOSManager.Instance.FriendCode);
+            if (player == PlayerControl.LocalPlayer) return data != null && (data.Vip?.Any(x => x == EOSManager.Instance.FriendCode) ?? false);
             else
             {
                 bool hidden = false;
                 if (player.FriendCode.StartsWith("[HIDDEN]")) hidden = true;
                 var friendCode = player.FriendCode;
                 if (hidden) friendCode = friendCode[8..];
-                return data != null && data.Vip.Any(x => x == friendCode);
+                return data != null && (data.Vip?.Any(x => x == friendCode) ?? false);
             }
         }
 

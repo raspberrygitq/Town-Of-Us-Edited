@@ -1,6 +1,5 @@
 using HarmonyLib;
 using System.Reflection;
-using TownOfUsEdited.Utilities;
 
 namespace TownOfUsEdited.Patches
 {
