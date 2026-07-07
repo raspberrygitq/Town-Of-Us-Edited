@@ -13,7 +13,6 @@ using TMPro;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.NeutralRoles.ExecutionerMod;
-using TownOfUsEdited.Utilities;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;

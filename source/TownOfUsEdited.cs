@@ -28,7 +28,7 @@ namespace TownOfUsEdited
     {
         public static string DataPath => Path.GetFullPath("edited_presets", Application.persistentDataPath);
         public const string Id = "com.lekillerdesgames.townofusedited";
-        public const string VersionString = "3.0.2";
+        public const string VersionString = "3.0.3";
         public static Version Version = Version.Parse(VersionString);
         public const string VersionTag = "<color=#00F0FF></color>";
 
