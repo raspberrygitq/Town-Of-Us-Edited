@@ -273,6 +273,13 @@ namespace TownOfUsEdited.NeutralRoles.VampireMod
                 {
                     var survRole = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);
                     UnityEngine.Object.Destroy(survRole.UsesText);
+                    UnityEngine.Object.Destroy(survRole.TimerText);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Jester))
+                {
+                    var jesterRole = Role.GetRole<Jester>(PlayerControl.LocalPlayer);
+                    UnityEngine.Object.Destroy(jesterRole.TimerText);
                 }
 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel))

@@ -316,6 +316,13 @@ namespace TownOfUsEdited.Roles
                 {
                     var survRole = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);
                     UnityEngine.Object.Destroy(survRole.UsesText);
+                    UnityEngine.Object.Destroy(survRole.TimerText);
+                }
+
+                if (PlayerControl.LocalPlayer.Is(RoleEnum.Jester))
+                {
+                    var jest = Role.GetRole<Jester>(PlayerControl.LocalPlayer);
+                    UnityEngine.Object.Destroy(jest.TimerText);
                 }
 
                 if (PlayerControl.LocalPlayer.Is(RoleEnum.GuardianAngel))

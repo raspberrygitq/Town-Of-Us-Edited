@@ -1,6 +1,7 @@
 ﻿using AmongUs.GameOptions;
 using HarmonyLib;
 using Reactor.Utilities;
+using System;
 using TownOfUsEdited.CrewmateRoles.SnitchMod;
 using TownOfUsEdited.CrewmateRoles.TrapperMod;
 using TownOfUsEdited.Modifiers;
@@ -151,6 +152,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
             {
                 var prosRole = Role.GetRole<Prosecutor>(oldVamp);
                 prosRole.Prosecuted = false;
+                prosRole.MaxProsecutes = CustomGameOptions.MaxProsecutes;
                 HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
@@ -185,6 +187,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
             {
                 var vigiRole = Role.GetRole<Vigilante>(oldVamp);
                 vigiRole.RemainingKills = CustomGameOptions.VigilanteKills;
+                vigiRole.SafeShots = CustomGameOptions.VigilanteSafeShots;
                 HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
@@ -260,6 +263,7 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
             {
                 var jailRole = Role.GetRole<Jailor>(oldVamp);
                 jailRole.Cooldown = CustomGameOptions.JailCD;
+                jailRole.Executes = CustomGameOptions.MaxExecutes;
                 jailRole.JailedPlayer = null;
             }
 
@@ -329,6 +333,16 @@ namespace TownOfUsEdited.CrewmateRoles.VampireHunterMod
                 var survRole = Role.GetRole<Survivor>(oldVamp);
                 survRole.Cooldown = CustomGameOptions.VestCd;
                 survRole.UsesLeft = CustomGameOptions.MaxVests;
+                survRole.LastMoved = DateTime.UtcNow;
+                survRole.Locations.Clear();
+            }
+
+            else if (roleEnum == RoleEnum.Jester)
+            {
+                var jesterRole = Role.GetRole<Jester>(oldVamp);
+                jesterRole.LastMoved = DateTime.UtcNow;
+                jesterRole.Locations.Clear();
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (roleEnum == RoleEnum.Mercenary)

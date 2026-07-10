@@ -47,7 +47,6 @@ namespace TownOfUsEdited.Roles
             }
         }
 
-
         public void UnSwoop()
         {
             Enabled = false;

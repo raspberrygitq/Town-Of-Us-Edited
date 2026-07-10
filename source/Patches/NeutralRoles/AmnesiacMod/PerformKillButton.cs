@@ -1,5 +1,6 @@
 using AmongUs.GameOptions;
 using HarmonyLib;
+using System;
 using System.Linq;
 using TownOfUsEdited.CrewmateRoles.ImitatorMod;
 using TownOfUsEdited.CrewmateRoles.InvestigatorMod;
@@ -559,6 +560,16 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                 var survRole = Role.GetRole<Survivor>(amnesiac);
                 survRole.Cooldown = CustomGameOptions.VestCd;
                 survRole.UsesLeft = CustomGameOptions.MaxVests;
+                survRole.LastMoved = DateTime.UtcNow;
+                survRole.Locations.Clear();
+            }
+
+            else if (role == RoleEnum.Jester)
+            {
+                var jestRole = Role.GetRole<Jester>(amnesiac);
+                jestRole.LastMoved = DateTime.UtcNow;
+                jestRole.Locations.Clear();
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.GuardianAngel)

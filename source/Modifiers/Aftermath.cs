@@ -229,7 +229,7 @@ namespace TownOfUsEdited.Modifiers
                 }
                 else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Lucky))
                 {
-                    var num = UnityEngine.Random.RandomRange(CustomGameOptions.MinLuckyCd, CustomGameOptions.MaxLuckyCd);
+                    var num = UnityEngine.Random.RandomRange(0, 60);
                     Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
                 }
                 else Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown + CustomGameOptions.DetonateDelay;

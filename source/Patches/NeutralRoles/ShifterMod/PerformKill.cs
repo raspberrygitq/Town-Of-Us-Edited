@@ -1,5 +1,6 @@
 using HarmonyLib;
 using Reactor.Utilities;
+using System;
 using System.Collections;
 using System.Linq;
 using TownOfUsEdited.CovenRoles.CovenMod;
@@ -303,6 +304,13 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
             {
                 var survRole = Role.GetRole<Survivor>(other);
                 UnityEngine.Object.Destroy(survRole.UsesText);
+                UnityEngine.Object.Destroy(survRole.TimerText);
+            }
+
+            else if (role == RoleEnum.Jester)
+            {
+                var jestRole = Role.GetRole<Jester>(other);
+                UnityEngine.Object.Destroy(jestRole.TimerText);
             }
 
             else if (role == RoleEnum.GuardianAngel)
@@ -756,6 +764,16 @@ namespace TownOfUsEdited.Patches.NeutralRoles.ShifterMod
                 var survRole = Role.GetRole<Survivor>(shifter);
                 survRole.Cooldown = CustomGameOptions.VestCd;
                 survRole.UsesLeft = CustomGameOptions.MaxVests;
+                survRole.LastMoved = DateTime.UtcNow;
+                survRole.Locations.Clear();
+            }
+
+            else if (role == RoleEnum.Jester)
+            {
+                var jesterRole = Role.GetRole<Jester>(shifter);
+                jesterRole.LastMoved = DateTime.UtcNow;
+                jesterRole.Locations.Clear();
+                HudManager.Instance.KillButton.gameObject.SetActive(false);
             }
 
             else if (role == RoleEnum.GuardianAngel)

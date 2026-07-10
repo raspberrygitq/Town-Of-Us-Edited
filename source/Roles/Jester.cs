@@ -1,6 +1,9 @@
 using Il2CppSystem.Collections.Generic;
 using Reactor.Utilities;
+using TMPro;
 using TownOfUsEdited.NeutralRoles.ExecutionerMod;
+using UnityEngine;
+using System;
 
 namespace TownOfUsEdited.Roles
 {
@@ -9,6 +12,9 @@ namespace TownOfUsEdited.Roles
         public bool VotedOut;
         public bool SpawnedAs = true;
 
+        public DateTime LastMoved;
+        public TextMeshPro TimerText;
+        public List<Vector3> Locations = new List<Vector3>();
 
         public Jester(PlayerControl player) : base(player)
         {
@@ -18,7 +24,10 @@ namespace TownOfUsEdited.Roles
             Color = Patches.Colors.Jester;
             RoleType = RoleEnum.Jester;
             AddToRoleHistory(RoleType);
-            Faction = Faction.NeutralEvil;
+            Faction = Faction.NeutralEvil; 
+            LastMoved = DateTime.UtcNow;
+            Locations.Add(Player.transform.localPosition);
+
         }
 
         protected override void IntroPrefix(IntroCutscene._ShowTeam_d__38 __instance)
@@ -44,6 +53,21 @@ namespace TownOfUsEdited.Roles
             {
                 HudManager.Instance.ShowPopUp("Normally, the game would've ended and the Jester would've won. In Freeplay, nothing happens.");
             }
+        }
+
+        public float ScatterTimer()
+        {
+            if (MeetingHud.Instance)
+            {
+                LastMoved = DateTime.UtcNow;
+                return CustomGameOptions.JestScatterTimer;
+            }
+            var utcNow = DateTime.UtcNow;
+            var timeSpan = utcNow - LastMoved;
+            var num = CustomGameOptions.JestScatterTimer * 1000f;
+            var flag2 = num - (float)timeSpan.TotalMilliseconds < 0f;
+            if (flag2) return 0;
+            return (num - (float)timeSpan.TotalMilliseconds) / 1000f;
         }
     }
 }

@@ -464,6 +464,7 @@ namespace TownOfUsEdited
         public static bool GAKnowsTargetRole => Generate.GAKnowsTargetRole.Get();
         public static int EvilTargetPercent => (int)Generate.EvilTargetPercent.Get();
         public static float MysticArrowDuration => Generate.MysticArrowDuration.Get();
+        public static bool MysticSeePopUpWhoDied => Generate.MysticSeePopUpWhoDied.Get();
         public static float BlackmailCd => Generate.BlackmailCooldown.Get();
         public static bool BlackmailInvisible => Generate.BlackmailInvisible.Get();
         public static int LatestNonVote => (int)Generate.LatestNonVote.Get();
@@ -637,8 +638,10 @@ namespace TownOfUsEdited
         public static float WatcherCooldown => (float)Generate.WatcherCooldown.Get();
         public static bool LoResetOnNewRound => Generate.LoResetOnNewRound.Get();
         public static int MaxWatches => (int)Generate.MaxWatches.Get();
-        public static float MinLuckyCd => Generate.MinLuckyCd.Get();
-        public static float MaxLuckyCd => Generate.MaxLuckyCd.Get();
         public static bool HideVentAnimationNotInVision => Generate.HideVentAnimationNotInVision.Get();
+        public static bool SurvivorScatter => Generate.SurvivorScatter.Get();
+        public static float SurvScatterTimer => Generate.SurvScatterTimer.Get();
+        public static bool JesterScatter => Generate.JesterScatter.Get();
+        public static float JestScatterTimer => Generate.JestScatterTimer.Get();
     }
 }

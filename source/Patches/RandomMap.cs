@@ -179,6 +179,8 @@ namespace TownOfUsEdited
             Generate.NoclipCooldown.Set((float)Generate.NoclipCooldown.Value + change, false);
             Generate.HunterKillCd.Set((float)Generate.HunterKillCd.Value + change, false);
             Generate.HunterStalkDuration.Set((float)Generate.HunterStalkDuration.Value + change, false);
+            Generate.SurvScatterTimer.Set((float)Generate.SurvScatterTimer.Value + change, false);
+            Generate.JestScatterTimer.Set((float)Generate.JestScatterTimer.Value + change, false);
             GameOptionsManager.Instance.currentNormalGameOptions.KillCooldown += change;
             if (change % 5 != 0)
             {

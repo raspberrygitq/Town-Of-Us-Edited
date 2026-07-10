@@ -38,12 +38,6 @@ namespace TownOfUsEdited.CustomOption
                 OnClick = () => { return TownOfUsEditedConfig.ShowWelcomeMessage.Value = !TownOfUsEditedConfig.ShowWelcomeMessage.Value; },
                 DefaultValue = TownOfUsEditedConfig.ShowWelcomeMessage.Value
             },
-            new()
-            {
-                Title = "Don't Show Cosmetics In Game (Client Only)",
-                OnClick = () => { return TownOfUsEditedConfig.DontShowCosmeticsInGame.Value = !TownOfUsEditedConfig.DontShowCosmeticsInGame.Value; },
-                DefaultValue = TownOfUsEditedConfig.DontShowCosmeticsInGame.Value
-            }
         };
 
         private static GameObject popUp;

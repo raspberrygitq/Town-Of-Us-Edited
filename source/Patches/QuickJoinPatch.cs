@@ -14,7 +14,7 @@ namespace TownOfUsEdited.Patches;
 public static class LobbyJoin
 {
     public static int GameId;
-    public static IRegionInfo? TempRegion;
+    public static IRegionInfo TempRegion;
 
     private static GameObject LobbyText;
     private static GameObject OriginalRegionText;
@@ -37,7 +37,7 @@ public static class LobbyJoin
     {
         if (ServerManager.InstanceExists)
         {
-            IRegionInfo? region;
+            IRegionInfo region;
             if (response.Region != StringNames.NoTranslation)
             {
                 region = ServerManager.DefaultRegions.FirstOrDefault(r => r.TranslateName == response.Region);
@@ -141,7 +141,7 @@ public static class LobbyJoin
         }
     }
 
-    public static string GetRegionName(IRegionInfo? region = null, bool shorten = true)
+    public static string GetRegionName(IRegionInfo region = null, bool shorten = true)
     {
         region ??= ServerManager.Instance.CurrentRegion;
 

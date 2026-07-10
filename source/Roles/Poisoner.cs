@@ -67,7 +67,7 @@ namespace TownOfUsEdited.Roles
             }
             else if (Player.Is(ModifierEnum.Lucky))
             {
-                var num = UnityEngine.Random.RandomRange(CustomGameOptions.MinLuckyCd, CustomGameOptions.MaxLuckyCd);
+                var num = Random.RandomRange(0, 60);
                 Cooldown = num;
             }
             else Cooldown = CustomGameOptions.PoisonCD;

@@ -43,8 +43,8 @@ namespace TownOfUsEdited
                         var neededVersions = RequiredVersions.Where(x => x.Value is AuSupport.Preferred)
                             .Select(y => y.Key.ToString()).ToArray();
                         var mainInfo = neededVersions.Count() > 1
-                            ? $"Town of Us {TownOfUsEdited.VersionString} requires one of the following Among Us versions: {string.Join(",", neededVersions)}!"
-                            : $"Town of Us {TownOfUsEdited.VersionString} requires Among Us v{neededVersions.First()}!";
+                            ? $"Town of Us Edited{TownOfUsEdited.VersionString} requires one of the following Among Us versions: {string.Join(",", neededVersions)}!"
+                            : $"Town of Us Edited{TownOfUsEdited.VersionString} requires Among Us v{neededVersions.First()}!";
                         string info =
                             $"ALERT\n{mainInfo}\nyou have {Application.version}\nPlease {action} Among Us!"
                             + "\nvisit Github or Discord for any help";
@@ -67,8 +67,8 @@ namespace TownOfUsEdited
                         var neededVersions = RequiredVersions.Where(x => x.Value is AuSupport.Preferred)
                             .Select(y => y.Key.ToString()).ToArray();
                         var mainInfo = neededVersions.Count() > 1
-                            ? $"Town of Us {TownOfUsEdited.VersionString} works best with the following Among Us versions: {string.Join(",", neededVersions)}."
-                            : $"Town of Us {TownOfUsEdited.VersionString} works best with Among Us v{neededVersions.First()}.";
+                            ? $"Town of Us Edited{TownOfUsEdited.VersionString} works best with the following Among Us versions: {string.Join(",", neededVersions)}."
+                            : $"Town of Us Edited{TownOfUsEdited.VersionString} works best with Among Us v{neededVersions.First()}.";
                         string info =
                             $"NOTICE\n{mainInfo}\nAmong us v{Application.version} should still work, but may have issues."
                             + "\nVisit Github or Discord for additional information";
@@ -179,7 +179,7 @@ namespace TownOfUsEdited
         {
             DefaultRequestHeaders =
             {
-                {"User-Agent", "TownOfUs Updater"}
+                {"User-Agent", "TownOfUsEdited Updater"}
             }
         };
 
@@ -193,7 +193,7 @@ namespace TownOfUsEdited
             //Only check of Submerged update if Submerged is already installed
             string codeBase = Assembly.GetExecutingAssembly().Location;
             UriBuilder uri = new(codeBase);
-            string submergedPath = Uri.UnescapeDataString(uri.Path.Replace("TownOfUs", "Submerged"));
+            string submergedPath = Uri.UnescapeDataString(uri.Path.Replace("TownOfUsEdited", "Submerged"));
             if (File.Exists(submergedPath))
             {
                 checkForUpdate("Submerged").GetAwaiter().GetResult();
@@ -207,7 +207,7 @@ namespace TownOfUsEdited
             string info = "";
             if (updateType == "TOU")
             {
-                info = "Updating Town Of Us\nPlease wait...";
+                info = "Updating Town Of Us Edited\nPlease wait...";
                 InfoPopup.Show(info);
                 if (UpdateTOUTask == null)
                 {

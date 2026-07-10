@@ -6,6 +6,7 @@ using TownOfUsEdited.Modifiers;
 using TownOfUsEdited.Patches;
 using TownOfUsEdited.Roles;
 using UnityEngine;
+using System;
 
 namespace TownOfUsEdited.CrewmateRoles.DoctorMod
 {
@@ -160,6 +161,16 @@ namespace TownOfUsEdited.CrewmateRoles.DoctorMod
             {
                 var celeb = Modifier.GetModifier<Celebrity>(player);
                 celeb.JustDied = false;
+            }
+            if (player.Is(RoleEnum.Jester))
+            {
+                var jest = Role.GetRole<Jester>(player);
+                jest.LastMoved = DateTime.UtcNow;
+            }
+            if (player.Is(RoleEnum.Survivor))
+            {
+                var surv = Role.GetRole<Survivor>(player);
+                surv.LastMoved = DateTime.UtcNow;
             }
 
             if (revived.Any(x => x.AmOwner && !x.Data.IsDead))

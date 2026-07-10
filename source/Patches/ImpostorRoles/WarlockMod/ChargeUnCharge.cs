@@ -37,7 +37,7 @@ namespace TownOfUsEdited.ImpostorRoles.WarlockMod
                         }
                         else if (warlock.Player.Is(ModifierEnum.Lucky) && PlayerControl.LocalPlayer == warlock.Player)
                         {
-                            var num = Random.RandomRange(CustomGameOptions.MinLuckyCd, CustomGameOptions.MaxLuckyCd);
+                            var num = Random.RandomRange(0, 60);
                             Role.GetRole(PlayerControl.LocalPlayer).KillCooldown = num;
                         }
                         else if (PlayerControl.LocalPlayer.Is(ModifierEnum.Bloodlust) && PlayerControl.LocalPlayer == warlock.Player)

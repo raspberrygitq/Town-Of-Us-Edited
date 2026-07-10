@@ -165,6 +165,12 @@ namespace TownOfUsEdited.Roles
             }
             if (target != null) Object.Destroy(target.gameObject);
 
+            if (player.Is(ModifierEnum.Celebrity))
+            {
+                var celeb = Modifier.GetModifier<Celebrity>(player);
+                celeb.JustDied = false;
+            }
+
             if (revived.Any(x => x.AmOwner))
                 try
                 {

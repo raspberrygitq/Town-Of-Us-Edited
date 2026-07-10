@@ -1,5 +1,6 @@
 using AmongUs.GameOptions;
 using Reactor.Utilities.Extensions;
+using Sentry.Protocol;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -182,6 +183,16 @@ namespace TownOfUsEdited.CrewmateRoles.AltruistMod
             {
                 var celeb = Modifier.GetModifier<Celebrity>(player);
                 celeb.JustDied = false;
+            }
+            if (player.Is(RoleEnum.Jester))
+            {
+                var jest = Role.GetRole<Jester>(player);
+                jest.LastMoved = DateTime.UtcNow;
+            }
+            if (player.Is(RoleEnum.Survivor))
+            {
+                var surv = Role.GetRole<Survivor>(player);
+                surv.LastMoved = DateTime.UtcNow;
             }
 
             if (revived.Any(x => x.AmOwner))

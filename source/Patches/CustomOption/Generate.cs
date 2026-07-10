@@ -405,7 +405,8 @@ namespace TownOfUsEdited.CustomOption
         public static CustomToggleOption JesterButton;
         public static CustomToggleOption JesterVent;
         public static CustomToggleOption JesterImpVision;
-        public static CustomToggleOption JesterHaunt;
+        public static CustomToggleOption JesterScatter;
+        public static CustomNumberOption JestScatterTimer;
         public static CustomStringOption JesterWin;
 
         public static CustomHeaderOption Troll;
@@ -607,6 +608,8 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption VestCd;
         public static CustomNumberOption VestDuration;
         public static CustomNumberOption MaxVests;
+        public static CustomToggleOption SurvivorScatter;
+        public static CustomNumberOption SurvScatterTimer;
 
         public static CustomHeaderOption GuardianAngel;
         public static CustomNumberOption ProtectCd;
@@ -803,6 +806,7 @@ namespace TownOfUsEdited.CustomOption
 
         public static CustomHeaderOption Mystic;
         public static CustomNumberOption MysticArrowDuration;
+        public static CustomToggleOption MysticSeePopUpWhoDied;
 
         public static CustomHeaderOption Watcher;
         public static CustomNumberOption WatcherCooldown;
@@ -848,10 +852,6 @@ namespace TownOfUsEdited.CustomOption
         public static CustomNumberOption InvisDelay;
         public static CustomNumberOption TransformInvisDuration;
         public static CustomNumberOption FinalTransparency;
-
-        public static CustomHeaderOption Lucky;
-        public static CustomNumberOption MinLuckyCd;
-        public static CustomNumberOption MaxLuckyCd;
 
         public static Func<object, string> PercentFormat { get; } = value => $"{value:0}%";
         private static Func<object, string> CooldownFormat { get; } = value => $"{value:0.0#}s";
@@ -1555,6 +1555,8 @@ namespace TownOfUsEdited.CustomOption
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#4D99E6FF>Mystic</color>");
             MysticArrowDuration =
                 new CustomNumberOption(num++, MultiMenu.crewmate, "Dead Body Arrow Duration", 0.1f, 0f, 1f, 0.05f, CooldownFormat);
+            MysticSeePopUpWhoDied =
+                new CustomToggleOption(num++, MultiMenu.crewmate, "Mystic Sees Pop Up Who Died", false);
 
             Seer =
                 new CustomHeaderOption(num++, MultiMenu.crewmate, "<color=#FFCC80FF>Seer</color>");
@@ -1896,6 +1898,10 @@ namespace TownOfUsEdited.CustomOption
                 new CustomNumberOption(num++, MultiMenu.neutral, "Vest Duration", 10f, 5f, 15f, 1f, CooldownFormat);
             MaxVests =
                 new CustomNumberOption(num++, MultiMenu.neutral, "Maximum Number Of Vests", 5, 1, 15, 1);
+            SurvivorScatter =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Survivor Scatter Mechanic Enabled", true);
+            SurvScatterTimer =
+                new CustomNumberOption(num++, MultiMenu.neutral, "Survivor Scatter Timer", 25f, 10f, 60f, 2.5f, CooldownFormat);
 
             Doomsayer = new CustomHeaderOption(num++, MultiMenu.neutral, "<color=#00FF80FF>Doomsayer</color>");
             ObserveCooldown =
@@ -1923,6 +1929,10 @@ namespace TownOfUsEdited.CustomOption
                 new CustomToggleOption(num++, MultiMenu.neutral, "Jester Can Hide In Vents", false);
             JesterImpVision =
                 new CustomToggleOption(num++, MultiMenu.neutral, "Jester Has Impostor Vision", false);
+            JesterScatter =
+                new CustomToggleOption(num++, MultiMenu.neutral, "Jester Scatter Mechanic Enabled", true);
+            JestScatterTimer =
+                new CustomNumberOption(num++, MultiMenu.neutral, "Jester Scatter Timer", 25f, 10f, 60f, 2.5f, CooldownFormat);
             JesterWin =
                 new CustomStringOption(num++, MultiMenu.neutral, "Jester Win",
                 new[] { "Ends Game", "Nothing", "Haunts" });
@@ -2332,10 +2342,6 @@ namespace TownOfUsEdited.CustomOption
             ImpLoverKillTeammate = new CustomToggleOption(num++, MultiMenu.modifiers, "Impostor Lover Can Kill Teammate", false);
             LoversChat =
                 new CustomToggleOption(num++, MultiMenu.modifiers, "Lovers Have A Private Chat");
-
-            Lucky = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#FF0000FF>Lucky</color>");
-            MinLuckyCd = new CustomNumberOption(num++, MultiMenu.modifiers, "Minimum Kill Cooldown", 10f, 0f, 30f, 1f, CooldownFormat);
-            MaxLuckyCd = new CustomNumberOption(num++, MultiMenu.modifiers, "Maximum Kill Cooldown", 50f, 30f, 60f, 1f, CooldownFormat);
 
             Satellite = new CustomHeaderOption(num++, MultiMenu.modifiers, "<color=#0099CCFF>Satellite</color>");
             DetectDuration = new CustomNumberOption(num++, MultiMenu.modifiers, "Broadcast Duration", 10f, 1f, 15f, 1f, CooldownFormat);

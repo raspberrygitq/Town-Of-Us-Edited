@@ -1,6 +1,7 @@
 using HarmonyLib;
 using Hazel;
 using Il2CppInterop.Runtime.InteropTypes;
+using System;
 using System.Reflection;
 using TownOfUsEdited.Extensions;
 using TownOfUsEdited.Modifiers;
@@ -408,12 +409,19 @@ namespace TownOfUsEdited.Patches
             {
                 var surv = Role.GetRole<Survivor>(PlayerControl.LocalPlayer);
                 surv.Cooldown = CustomGameOptions.InitialCooldowns;
+                surv.LastMoved = DateTime.UtcNow;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Mercenary))
             {
                 var merc = Role.GetRole<Mercenary>(PlayerControl.LocalPlayer);
                 merc.Cooldown = CustomGameOptions.InitialCooldowns;
+            }
+
+            if (PlayerControl.LocalPlayer.Is(RoleEnum.Jester))
+            {
+                var jest = Role.GetRole<Jester>(PlayerControl.LocalPlayer);
+                jest.LastMoved = DateTime.UtcNow;
             }
 
             if (PlayerControl.LocalPlayer.Is(RoleEnum.Shifter))
