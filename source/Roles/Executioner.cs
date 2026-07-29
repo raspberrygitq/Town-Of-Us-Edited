@@ -32,6 +32,7 @@ namespace TownOfUsEdited.Roles
         {
             var exeTeam = new List<PlayerControl>();
             exeTeam.Add(PlayerControl.LocalPlayer);
+            exeTeam.Add(target);
             __instance.teamToShow = exeTeam;
         }
 

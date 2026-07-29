@@ -1,6 +1,5 @@
 using AmongUs.GameOptions;
 using Reactor.Utilities.Extensions;
-using Sentry.Protocol;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -214,6 +213,7 @@ namespace TownOfUsEdited.CrewmateRoles.AltruistMod
                 gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                 var renderer = gameObj.AddComponent<SpriteRenderer>();
                 renderer.sprite = TownOfUsEdited.Arrow;
+                renderer.color = Colors.Altruist;
                 Arrow.image = renderer;
                 gameObj.layer = 5;
                 Revived.Add(player, Arrow);

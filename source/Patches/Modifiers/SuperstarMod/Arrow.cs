@@ -60,6 +60,7 @@ namespace TownOfUsEdited.Modifiers.SuperstarMod
                             gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                             var renderer = gameObj.AddComponent<SpriteRenderer>();
                             renderer.sprite = TownOfUsEdited.Arrow;
+                            renderer.color = Patches.Colors.Superstar;
                             arrow.image = renderer;
                             gameObj.layer = 5;
                             BodyArrows.Add(body.ParentId, arrow);

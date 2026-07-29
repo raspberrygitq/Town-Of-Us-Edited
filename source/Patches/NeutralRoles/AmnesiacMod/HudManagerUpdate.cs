@@ -78,6 +78,7 @@ namespace TownOfUsEdited.NeutralRoles.AmnesiacMod
                         gameObj.transform.parent = PlayerControl.LocalPlayer.gameObject.transform;
                         var renderer = gameObj.AddComponent<SpriteRenderer>();
                         renderer.sprite = TownOfUsEdited.Arrow;
+                        renderer.color = Patches.Colors.Amnesiac;
                         arrow.image = renderer;
                         gameObj.layer = 5;
                         role.BodyArrows.Add(body.ParentId, arrow);

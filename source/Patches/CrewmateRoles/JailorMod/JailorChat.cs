@@ -276,8 +276,8 @@ namespace TownOfUsEdited.CrewmateRoles.JailorMod
                     outfit = new NetworkedPlayerInfo.PlayerOutfit()
                     {
                         ColorId = 14,
-                        HatId = "",
-                        SkinId = "",
+                        HatId = "hat_wallcap",
+                        SkinId = "skin_Wall",
                         VisorId = "",
                         PlayerName = "Jailor",
                         PetId = ""
